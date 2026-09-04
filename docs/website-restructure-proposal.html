@@ -1,0 +1,445 @@
+<title>TEAMDEE Website Restructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Sans:wght@700;800&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#F6F5F2; --surface-2:#EDEBE6; --line:#DDD9D2;
+  --ink:#141414; --ink-2:#4A4845; --muted:#808285;
+  --orange:#FF6C00; --orange-ink:#C24F00; --orange-soft:#FFF1E6;
+  --ok:#2E7D4F; --warn:#B7791F; --bad:#B3261E;
+  --code:#F1EFEA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141414; --surface:#1D1C1B; --surface-2:#262523; --line:#33312E;
+    --ink:#F2F0EC; --ink-2:#C9C5BE; --muted:#9A9791;
+    --orange:#FF7A1A; --orange-ink:#FFA05C; --orange-soft:#2C1D10;
+    --ok:#6FCF97; --warn:#E5B04C; --bad:#F28B82; --code:#232220;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141414; --surface:#1D1C1B; --surface-2:#262523; --line:#33312E;
+  --ink:#F2F0EC; --ink-2:#C9C5BE; --muted:#9A9791;
+  --orange:#FF7A1A; --orange-ink:#FFA05C; --orange-soft:#2C1D10;
+  --ok:#6FCF97; --warn:#E5B04C; --bad:#F28B82; --code:#232220;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai","Noto Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.7;font-variant-numeric:tabular-nums}
+a{color:var(--orange-ink);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{line-height:1.25;text-wrap:balance;margin:0}
+h1{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:700;margin-top:.2rem}
+h3{font-size:1.1rem;font-weight:700}
+h4{font-size:1rem;font-weight:600}
+p{margin:0 0 .9rem}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-ink)}
+.en{font-family:"Noto Sans","Noto Sans Thai",sans-serif;font-weight:800}
+
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:3px solid var(--orange);padding:36px 0 26px}
+header.top .meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.85rem;margin-top:14px}
+header.top .lede{max-width:66ch;color:var(--ink-2);font-size:1.05rem;margin-top:14px}
+
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;padding:32px 0 80px}
+nav.toc{position:sticky;top:16px;align-self:start;font-size:.86rem}
+nav.toc .eyebrow{display:block;margin-bottom:8px}
+nav.toc ol{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+nav.toc li a{display:block;padding:5px 12px;color:var(--ink-2);border-left:2px solid transparent;margin-left:-2px}
+nav.toc li a:hover{color:var(--ink);border-left-color:var(--orange);text-decoration:none}
+@media (max-width:860px){.layout{grid-template-columns:1fr}nav.toc{position:static;border:1px solid var(--line);padding:14px;background:var(--surface)}nav.toc ol{border:0;columns:2}}
+
+section.block{padding:8px 0 40px;border-bottom:1px solid var(--line);margin-bottom:36px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+.sec-head .num{font-family:"Noto Sans",sans-serif;font-weight:800;color:var(--orange);font-size:1.1rem;min-width:2ch}
+.prose{max-width:70ch}
+
+.callout{background:var(--orange-soft);border-left:4px solid var(--orange);padding:14px 18px;margin:16px 0;max-width:78ch}
+.callout strong{color:var(--orange-ink)}
+.note{background:var(--surface);border:1px solid var(--line);padding:14px 18px;margin:16px 0;max-width:78ch;font-size:.93rem;color:var(--ink-2)}
+
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+.tbl{overflow-x:auto;margin:14px 0 20px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-weight:600;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--surface)}
+td.k{white-space:nowrap;font-weight:600}
+.pill{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.04em;padding:2px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill.bad{color:var(--bad)} .pill.warn{color:var(--warn)} .pill.ok{color:var(--ok)} .pill.info{color:var(--muted)}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:14px 0}
+.tile{background:var(--surface);padding:18px 20px;border-top:3px solid var(--line)}
+.tile.hot{border-top-color:var(--orange)}
+.tile h4{margin-bottom:6px}
+.tile p{margin:0;color:var(--ink-2);font-size:.93rem}
+.tile ul{margin:6px 0 0;padding-left:18px;color:var(--ink-2);font-size:.93rem}
+.tile li{margin:2px 0}
+
+/* sitemap tree */
+.tree{list-style:none;margin:10px 0 0;padding:0;font-size:.95rem}
+.tree>li{margin-bottom:10px}
+.tree li{position:relative;padding-left:22px}
+.tree li::before{content:"";position:absolute;left:6px;top:0;bottom:0;border-left:1px solid var(--line)}
+.tree li::after{content:"";position:absolute;left:6px;top:15px;width:11px;border-top:1px solid var(--line)}
+.tree>li::before,.tree>li::after{display:none}
+.tree>li{padding-left:0}
+.tree ul{list-style:none;margin:2px 0 0;padding:0}
+.tree code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;background:var(--code);padding:1px 6px;border-radius:3px;color:var(--ink-2)}
+.tree .node{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;padding:3px 0}
+.tree .top{font-weight:700;font-size:1rem}
+.tree .why{color:var(--muted);font-size:.85rem}
+.tag{font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:1px 7px;background:var(--orange);color:#fff;border-radius:3px}
+.tag.new{background:var(--orange)}
+.tag.keep{background:var(--muted)}
+.tag.tool{background:var(--ink);color:var(--bg)}
+
+/* wireframe stack */
+.wire{border:1px solid var(--line);background:var(--surface);padding:12px;display:grid;gap:8px}
+.wire .row{border:1px dashed var(--muted);padding:9px 12px;font-size:.88rem;background:var(--bg)}
+.wire .row b{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--orange-ink);margin-bottom:2px}
+.wire .row.cta{border-style:solid;border-color:var(--orange);background:var(--orange-soft)}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0;align-items:stretch}
+.flow .step{background:var(--surface);border:1px solid var(--line);padding:12px 14px;font-size:.9rem;position:relative}
+.flow .step b{display:block;margin-bottom:4px}
+.flow .step .who{font-size:.78rem;color:var(--muted)}
+.flow .step.hot{border-color:var(--orange);background:var(--orange-soft)}
+
+/* phases */
+.phase{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:16px 0;border-top:1px solid var(--line)}
+.phase:last-child{border-bottom:1px solid var(--line)}
+.phase .when{font-weight:700}
+.phase .when small{display:block;font-weight:400;color:var(--muted);font-size:.82rem}
+.phase ul{margin:4px 0 0;padding-left:18px}
+.phase li{margin:3px 0}
+@media (max-width:600px){.phase{grid-template-columns:1fr}}
+
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.kpi div{background:var(--surface);padding:14px 16px;border-left:3px solid var(--orange)}
+.kpi b{display:block;font-size:.8rem;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.kpi span{font-size:1rem;font-weight:600}
+
+ul.plain{padding-left:20px;margin:6px 0 12px}
+ul.plain li{margin:4px 0}
+.src{font-size:.86rem;color:var(--ink-2)}
+.src li{margin:3px 0}
+footer{padding:20px 0 50px;color:var(--muted);font-size:.82rem;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <span class="eyebrow">TEAMDEE · team-dee.com · ข้อเสนอปรับโครงสร้างเว็บไซต์</span>
+    <h1>จากเว็บ "แนะนำบริการ" สู่เว็บ "จุดปิดการขายและคลังหลักฐาน" ของ Team Identity Partner</h1>
+    <p class="lede">สำรวจเว็บ team-dee.com ประกอบกับ Brand Strategy V2, Marketing Strategy ส.ค.–ธ.ค. 2026, Content Strategy และแผน ก.ย. 2026 แล้วเสนอ sitemap ใหม่ โครงหน้า ระบบ CTA และลำดับการทำเป็น 3 เฟส ให้เว็บรับบท "All roads lead to web" ได้จริง</p>
+    <div class="meta">
+      <span>จัดทำ 4 ก.ย. 2026</span>
+      <span>สถานะ: ร่างเพื่อตัดสินใจ</span>
+      <span>ผู้เกี่ยวข้อง: CEO · Marketing Team Lead · Sales Admin Lead · เอเจนซี่เว็บ</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+<nav class="toc" aria-label="สารบัญ">
+  <span class="eyebrow">สารบัญ</span>
+  <ol>
+    <li><a href="#summary">สรุปผู้บริหาร</a></li>
+    <li><a href="#scope">สิ่งที่สำรวจและข้อจำกัด</a></li>
+    <li><a href="#audit">วิเคราะห์เว็บปัจจุบัน</a></li>
+    <li><a href="#principles">หลักออกแบบโครงสร้าง</a></li>
+    <li><a href="#sitemap">Sitemap ที่เสนอ</a></li>
+    <li><a href="#pages">โครงหน้าสำคัญ</a></li>
+    <li><a href="#conversion">ระบบ CTA และ Lead</a></li>
+    <li><a href="#guardrails">กติกาแบรนด์บนเว็บ</a></li>
+    <li><a href="#phases">แผน 3 เฟส</a></li>
+    <li><a href="#metrics">ตัวชี้วัด</a></li>
+    <li><a href="#decisions">สิ่งที่ต้องตัดสินใจ</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<section class="block" id="summary">
+  <div class="sec-head"><span class="num">1</span><h2>สรุปผู้บริหาร</h2></div>
+  <div class="prose">
+    <p>เว็บ team-dee.com ตอนนี้ทำหน้าที่ "บอกว่าเราคือใคร" ได้ แต่ยังไม่ได้ทำหน้าที่ที่กลยุทธ์ปี 2026 มอบหมายให้ นั่นคือเป็น <strong>จุดปิดการขายเดียว</strong> ที่ทุก CTA จากโซเชียลและ ads ชี้เข้ามา แล้วคัดเกรด lead ส่งต่อ LINE OA และทีมขาย พร้อมเป็น <strong>คลัง proof ถาวร</strong> ที่ HR กล้าเอาไปอ้างในที่ประชุม</p>
+    <p>ข้อเสนอหลักคือจัดโครงสร้างใหม่รอบ 3 แกน ซึ่งล้อกับ Positioning 3 ชั้นของแบรนด์โดยตรง</p>
+  </div>
+  <div class="grid3">
+    <div class="tile hot"><h4>แกน 1 · หน้าตามกลุ่มลูกค้า (Identity)</h4><p>4 หน้า persona ตามพฤติกรรมซื้อจริง โดยยกหน้า "บริษัท/องค์กรเอกชน" ขึ้นเป็นหน้าหลักแทนที่ปัจจุบันมีเพียงหน้าสถานศึกษา</p></div>
+    <div class="tile hot"><h4>แกน 2 · คลังหลักฐาน (Certainty)</h4><p>Case study ที่มีตัวเลข timeline การันตีเป็นลายลักษณ์อักษร โลโก้ลูกค้า และรีวิว รวมอยู่ที่เดียว ค้นตามกลุ่มลูกค้าได้</p></div>
+    <div class="tile hot"><h4>แกน 3 · เครื่องมือช่วยตัดสินใจ (Service)</h4><p>Budget Calculator, จองคิวผลิตโดยยังไม่สรุปแบบ, ขอชุดตัวอย่างองค์กร และฟอร์มเล่าโจทย์ที่คัดเกรด lead ในตัว</p></div>
+  </div>
+  <div class="callout"><strong>คำแนะนำสั้นที่สุด:</strong> ไม่ต้องรื้อทั้งเว็บ ให้เพิ่ม 4 สิ่งก่อนพีคพฤศจิกายน ได้แก่ หน้าองค์กรเอกชน, หน้า Case Study 3–5 ชิ้น, ฟอร์มเล่าโจทย์ที่คัดเกรด และ Budget Calculator แล้วค่อยขยายส่วนที่เหลือใน Q1 2027</div>
+</section>
+
+<section class="block" id="scope">
+  <div class="sec-head"><span class="num">2</span><h2>สิ่งที่สำรวจและข้อจำกัด</h2></div>
+  <div class="note"><strong>ข้อจำกัดสำคัญ:</strong> เครือข่ายของ session นี้ถูกตั้งค่าให้บล็อกการเข้าถึง team-dee.com โดยตรง (รวมถึง web.archive.org) ผมจึงอ่านเว็บปัจจุบันได้เฉพาะจาก <em>ข้อความที่ search engine จัดเก็บไว้</em> ของ 3 หน้าที่ถูก index ไม่ใช่จากหน้าเว็บจริง ประเด็นในหมวด "วิเคราะห์เว็บปัจจุบัน" จึงควรยืนยันอีกครั้งกับเว็บ live ก่อนสั่งงานเอเจนซี่ ส่วน repo <code>web-teamdee</code> ที่ให้มายังว่างเปล่า ไม่มีโค้ดเว็บให้ตรวจ</div>
+  <div class="grid2">
+    <div class="tile"><h4>จากเว็บ team-dee.com (ผ่าน search index)</h4>
+      <ul>
+        <li>หน้าแรก <code>/</code> — title "HOME - TEAMDEE", ข้อความ positioning, ตัวเลขโปรเจกต์/จำนวนตัว/ชนิดผ้า, กลุ่มลูกค้า, ขั้นตอน 4 ขั้น, ที่อยู่นนทบุรี, hello@team-dee.com</li>
+        <li>หน้า <code>/education/</code> — เสื้อรุ่น เสื้อคณะ กีฬาสี ยูนิฟอร์มโรงเรียน, ออกแบบ 3D ฟรี, ส่งฟรีทั่วไทย, ออกใบเสนอราคาเบิกจ่าย, แขนยาว +30 กระเป๋า +20, สั่งขั้นต่ำ 10 ตัว, Corporate Deals 200 ตัว+</li>
+        <li>หน้า <code>/size-chart/</code> — ตารางไซส์โปโล/กีฬา เด็กถึง 5XL+</li>
+      </ul></div>
+    <div class="tile"><h4>จากเอกสารภายใน (Drive + Notion)</h4>
+      <ul>
+        <li>TEAMDEE Brand Strategy Master V2 (ส.ค. 2026) และ Brand DNA v1</li>
+        <li>Marketing Strategy ส.ค.–ธ.ค. 2026 (5 เสา, 15 โปรเจกต์) และ Monthly Plan ก.ย. 2026</li>
+        <li>Content Strategy Master V1 และ Brand Storytelling (3WIN + 10 ว้าว)</li>
+        <li>Rebranding Strategy 2026 (วิเคราะห์คู่แข่ง Brand Partner)</li>
+        <li>วิเคราะห์ตลาดเสื้อทีมพิมพ์ลายไทย (ก.พ. 2026) และโครงเว็บ JD / t around ใช้เทียบเคียง</li>
+      </ul></div>
+  </div>
+</section>
+
+<section class="block" id="audit">
+  <div class="sec-head"><span class="num">3</span><h2>วิเคราะห์เว็บปัจจุบัน</h2></div>
+  <p class="prose">เทียบสิ่งที่เว็บสื่อสารกับสิ่งที่กลยุทธ์ตัดสินใจไว้แล้ว พบช่องว่าง 8 จุด เรียงตามผลกระทบต่อยอด Q4</p>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>สิ่งที่พบ</th><th>ทำไมสำคัญ</th><th>ระดับ</th></tr></thead>
+    <tbody>
+      <tr><td class="k">1</td><td>มีหน้า persona เดียวที่ถูก index คือสถานศึกษา ไม่พบหน้าสำหรับ <strong>บริษัท/องค์กรเอกชน</strong> ซึ่ง V2 กำหนดเป็น Core Engine และแคมเปญ flagship "เสื้อประจำปีบริษัท" กำลังยิง ads อยู่</td><td>Ads เสา 2 (งบ 50%) ส่ง HR มาลงหน้าที่ไม่ได้พูดกับเขาโดยตรง ทำให้ %ทัก→Lead ซึ่งเป็นคอขวดจริงของ funnel ไม่ดีขึ้น</td><td><span class="pill bad">สูง</span></td></tr>
+      <tr><td class="k">2</td><td>ไม่พบหน้า Case Study, รีวิว หรือ Logo Wall ที่เป็นหน้าแยก มีเพียงตัวเลขรวมบนหน้าแรก</td><td>Content Strategy กำหนดให้เว็บเป็น "คลัง proof ถาวร" และ Marketing Strategy ต้องการ case study 3–5 ชิ้นก่อนสิ้น ก.ย. เพื่อเลี้ยง ads</td><td><span class="pill bad">สูง</span></td></tr>
+      <tr><td class="k">3</td><td>ไม่พบเครื่องมือ Budget Calculator, จองคิวผลิต, ขอชุดตัวอย่าง หรือฟอร์มคัดเกรด lead (โปรเจกต์ ⑬ ⑭ ⑮)</td><td>CTA "ก้าวแรกที่เล็กที่สุด" ของเสาเริ่มเลยยังไม่มีปลายทางบนเว็บ ทุกอย่างยังไหลไป LINE โดยไม่มี tracking และไม่มี tag กลุ่ม</td><td><span class="pill bad">สูง</span></td></tr>
+      <tr><td class="k">4</td><td>ข้อความราคา/ขั้นต่ำขัดกับจุดยืน: หน้า education บอก "ขั้นต่ำ 10 ตัว" และ "Corporate Deals 200 ตัว+" ขณะที่ V2 ล็อก sweet spot 50–500 ตัว, ไม่เล่นงาน 10–20 ตัว และ ads คัดเฉพาะงาน 30–50 ตัว++</td><td>ดึง price-shopper งานเล็กเข้ามากินคิวเซลล์ และทำให้ "Premium-Accessible" อ่านไม่ออก</td><td><span class="pill warn">กลาง</span></td></tr>
+      <tr><td class="k">5</td><td>หน้าแรกเปิดด้วย "เสื้อพิมพ์ลาย sublimation สำหรับองค์กร ชมรม ทีมกีฬา สถานศึกษา" และไม่ปรากฏ <strong>โปโลปัก</strong> ซึ่งเป็นสินค้านำของฤดูนี้</td><td>เสี่ยงถูกอ่านเป็นแบรนด์กีฬา (คำเตือน #2 ใน V2) และประตูเข้าบัญชีองค์กรที่แผนวางไว้ไม่มีหน้ารองรับ</td><td><span class="pill warn">กลาง</span></td></tr>
+      <tr><td class="k">6</td><td>Title หน้าแรกเป็น "HOME - TEAMDEE" ขณะที่หน้า education และ size-chart มี title ที่ตั้งใจเขียนเพื่อ SEO</td><td>หน้าที่มี authority สูงสุดไม่ได้ถือ keyword หลัก ("รับผลิตเสื้อทีมองค์กร", "เสื้อประจำปีบริษัท") และ Google แสดงชื่อที่ไม่ขายอะไรเลย</td><td><span class="pill warn">กลาง</span></td></tr>
+      <tr><td class="k">7</td><td>โครงหน้าปัจจุบันเล่าจากมุม "เรามีอะไร" (ผ้า คอ ไซส์ ขั้นตอน) มากกว่ามุม "คุณกลัวอะไร เราสัญญาอะไร" ตามตาราง กลัวอะไร→เราสัญญาอะไร ของ V2</td><td>อารมณ์ "โล่งใจ" ที่ต้องเกิดใน 5 นาทีแรกไม่เกิดจากการอ่านสเปก</td><td><span class="pill warn">กลาง</span></td></tr>
+      <tr><td class="k">8</td><td>ไม่พบส่วน "คิดให้ก่อน" (guide/FAQ ที่ฟันธง) ซึ่งเป็นเสาคอนเทนต์ 25% และเป็นฐาน SEO/AEO ที่แผนบอกให้วางโครงตอนสร้างเว็บ</td><td>ไม่มีหน้ารับ traffic คำถามยาว ("งบ 60,000 ทำเสื้อ 100 คนได้อะไร") และไม่มี lead magnet ให้ดาวน์โหลด</td><td><span class="pill info">ต่ำ–กลาง</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">สิ่งที่เว็บทำได้ดีอยู่แล้วและควรรักษา: ประโยค Positioning ทางการถูกใช้ตรงตาม V2, หน้า education มีรายละเอียดที่ตอบคำถามจริง (เอกสารเบิกจ่าย ส่งตรงสถานศึกษา ราคาคงที่ทุกไซส์), และมีหน้า size-chart แยกซึ่งเป็นหน้าที่ถูกค้นหาบ่อย</div>
+</section>
+
+<section class="block" id="principles">
+  <div class="sec-head"><span class="num">4</span><h2>หลักออกแบบโครงสร้าง 6 ข้อ</h2></div>
+  <p class="prose">ทุกข้อดึงมาจากการตัดสินใจที่ล็อกแล้วในเอกสารแบรนด์และการตลาด ไม่ใช่ความชอบส่วนตัว เพื่อให้เอเจนซี่และทีมเถียงกันด้วยเอกสารเดียวกัน</p>
+  <div class="grid2">
+    <div class="tile"><h4>1 · เข้าเว็บแล้วเห็น "ตัวเอง" ภายใน 1 scroll</h4><p>เมนูและหน้าแรกแยกทางตาม 4 กลุ่มผู้ซื้อ (เอกชน / รัฐ+สถานศึกษา / ทีมกีฬา / อีเวนต์) ไม่ใช่ตามชนิดเสื้อ เพราะคนสั่งคิดจาก "งานที่ต้องจัด" ก่อน "ผ้าอะไร"</p></div>
+    <div class="tile"><h4>2 · ทุกหน้าพิสูจน์ความแน่นอนด้วยตัวเลข</h4><p>ตอบใน 5 นาที, 3D mockup ใน 24 ชม., อัปเดต 6 stage, เคลมฟรี 7 วัน, Lot 2 ราคาเดิม 30 วัน, 2,800+ องค์กร ตัวเลขเหล่านี้คือกราฟิกของแบรนด์ ต้องมีอย่างน้อย 1 ตัวในทุก section สำคัญ</p></div>
+    <div class="tile"><h4>3 · ก้าวแรกเล็ก มีหลายขนาด</h4><p>คนพร้อมต่างกัน จึงต้องมี CTA 3 ระดับเสมอ: ลองคำนวณงบ (ไม่ต้องคุย) → จองคิว/ขอตัวอย่าง (ผูกมัดเบา) → เล่าโจทย์ (พร้อมคุย) ทุกปุ่มมีปลายทางบนเว็บก่อนค่อยส่งต่อ LINE</p></div>
+    <div class="tile"><h4>4 · องค์กรนำ กีฬาตาม</h4><p>เนื้อหาหน้าแรกและผลงานต้องเป็นงานองค์กร/เอกชนอย่างน้อยครึ่ง งานกีฬาอยู่ในหน้าของตัวเองและใน portfolio แต่ไม่ครองหน้าแรก</p></div>
+    <div class="tile"><h4>5 · เว็บคัดเกรด lead แทนคน</h4><p>ฟอร์มถาม 4 ข้อคงที่ (จำนวนตัว / ประเภทงาน / เดือนใช้งาน / ชื่อองค์กร) ตรงกับนิยาม Qualified Lead ขององค์กร แล้ว tag ให้ LINE OA และ sales อัตโนมัติ</p></div>
+    <div class="tile"><h4>6 · โครงพร้อมโต แต่เปิดเท่าที่ทำได้จริง</h4><p>วาง URL และเทมเพลตเผื่อทุกกลุ่มไว้ตั้งแต่แรก แต่เปิดเฉพาะหน้าที่มีเนื้อหาจริงคุณภาพผ่านเกณฑ์ "ต่ำกว่ามาตรฐาน = ไม่ปล่อย"</p></div>
+  </div>
+</section>
+
+<section class="block" id="sitemap">
+  <div class="sec-head"><span class="num">5</span><h2>Sitemap ที่เสนอ</h2></div>
+  <p class="prose">เมนูหลัก 5 หมวด + ปุ่ม 2 ปุ่มติดขวาบนตลอดเวลา (คำนวณงบ · เล่าโจทย์) ป้าย <span class="tag new">ใหม่</span> คือหน้าที่ยังไม่มี, <span class="tag keep">คงไว้</span> คือหน้าที่มีแล้วปรับเนื้อหา, <span class="tag tool">เครื่องมือ</span> คือหน้าที่มีฟอร์ม/โปรแกรม</p>
+
+  <ul class="tree">
+    <li><span class="node top">หน้าแรก <code>/</code> <span class="tag keep">คงไว้</span></span> <span class="why">เขียน title ใหม่ให้ถือ keyword หลัก และจัดโครงใหม่ตามหมวด 6</span></li>
+
+    <li><span class="node top">สำหรับทีมของคุณ (เมนู "งานของคุณ")</span>
+      <ul>
+        <li><span class="node">บริษัท / องค์กรเอกชน <code>/corporate/</code> <span class="tag new">ใหม่</span></span> <span class="why">Core Engine · เสื้อประจำปี กีฬาสี CSR outing งานวิ่ง ก๊วนกอล์ฟ บอลบริษัท · landing ของ ads flagship</span></li>
+        <li><span class="node">หน่วยงานรัฐ รัฐวิสาหกิจ <code>/government/</code> <span class="tag new">ใหม่</span></span> <span class="why">โทน formal ขึ้น 1 ระดับ · เอกสารครบ เบิกจ่ายได้ · track record MOPH ออมสิน GLO</span></li>
+        <li><span class="node">โรงเรียน มหาวิทยาลัย <code>/education/</code> <span class="tag keep">คงไว้</span></span> <span class="why">ตัดข้อความ "ขั้นต่ำ 10 ตัว" และ "Corporate Deals" ออก ปรับเป็นภาษาความแน่นอน</span></li>
+        <li><span class="node">ทีมกีฬา ชมรม <code>/sports/</code> <span class="tag new">ใหม่</span></span> <span class="why">หัวหอกแบดมินตัน · โชว์ Creative · โทน casual ขึ้นแต่ตัวเลขเป๊ะเท่าเดิม</span></li>
+        <li><span class="node">งานอีเวนต์ ออร์แกไนเซอร์ <code>/events/</code> <span class="tag new">ใหม่</span></span> <span class="why">เปิดด้วย timeline ยืนยันเป็นลายลักษณ์อักษร + capacity · ขายให้เขาเอาไปขายต่อ</span></li>
+      </ul>
+    </li>
+
+    <li><span class="node top">สินค้าและบริการ (เมนู "ทำเสื้ออะไร")</span>
+      <ul>
+        <li><span class="node">เสื้อโปโลปักโลโก้ <code>/polo-embroidery/</code> <span class="tag new">ใหม่</span></span> <span class="why">สินค้านำฤดูนี้ · ประตูเข้าบัญชีองค์กร · ต้องมีก่อนเดือน ต.ค.</span></li>
+        <li><span class="node">เสื้อพิมพ์ลาย Sublimation <code>/sublimation/</code> <span class="tag new">ใหม่</span></span> <span class="why">แยกออกจากหน้าแรกให้ SEO จับได้ · โปโลกีฬา คอกลม เจอร์ซีย์</span></li>
+        <li><span class="node">แจ็คเก็ตทีม <code>/jacket/</code> <span class="tag new">ใหม่</span></span> <span class="why">รับ upsell script Q4 (หน้าหนาว ของขวัญปีใหม่)</span></li>
+        <li><span class="node">แคตตาล็อกอื่น <code>/catalog/</code> <span class="tag new">ใหม่</span></span> <span class="why">เบสบอล เจอร์ซีย์ เสื้อกั๊ก ผ้ากันเปื้อน · "มีขาย ไม่โปรโมท" · หน้าเดียว 2–3 รูปต่อ SKU</span></li>
+        <li><span class="node">ผ้าและทรงคอ <code>/fabrics/</code> <span class="tag new">ใหม่</span></span> <span class="why">Micro / TC / Airflow เทียบกันแบบฟันธงว่างานไหนใช้อะไร + ปุ่มขอตัวอย่างผ้าฟรี</span></li>
+        <li><span class="node">ตารางไซส์ <code>/size-chart/</code> <span class="tag keep">คงไว้</span></span> <span class="why">เพิ่มตารางเก็บไซส์ให้ดาวน์โหลด (lead magnet)</span></li>
+      </ul>
+    </li>
+
+    <li><span class="node top">ผลงานและหลักฐาน (เมนู "งานจริง")</span>
+      <ul>
+        <li><span class="node">Case Study <code>/case-studies/</code> <span class="tag new">ใหม่</span></span> <span class="why">กรองตามกลุ่มลูกค้าและประเภทงาน · แต่ละชิ้นมี โจทย์ → วิธีคิด → timeline card → ภาพหมู่วันงาน → คำพูดคนสั่ง</span></li>
+        <li><span class="node">ลูกค้าที่ไว้ใจเรา <code>/clients/</code> <span class="tag new">ใหม่</span></span> <span class="why">Logo wall (เฉพาะที่ได้รับอนุญาต) แยกเอกชน / รัฐ / สถานศึกษา + ตัวเลขสะสม</span></li>
+        <li><span class="node">รีวิว <code>/reviews/</code> <span class="tag new">ใหม่</span></span> <span class="why">ดึง Google Business Profile + แคปแชท (เบลอชื่อ) + คลิป UGC · ปิดจุดอ่อน "รีวิวอิสระ = ศูนย์"</span></li>
+        <li><span class="node">เบื้องหลังการผลิต <code>/how-we-work/</code> <span class="tag new">ใหม่</span></span> <span class="why">6 stage อัปเดต · จอคิวงาน · QC ด่านบังคับ · การันตีเป็นลายลักษณ์อักษร</span></li>
+      </ul>
+    </li>
+
+    <li><span class="node top">คิดให้ก่อน (เมนู "ก่อนสั่ง")</span>
+      <ul>
+        <li><span class="node">คู่มือและบทความ <code>/guides/</code> <span class="tag new">ใหม่</span></span> <span class="why">ทุกบทความจบด้วยการฟันธง · หัวข้อแรก: งบเท่านี้ได้อะไร, เลือกผ้า, checklist สั่งเสื้อองค์กร, เก็บไซส์ทั้งบริษัทใน 1 วัน, เอกสารเบิกจ่ายราชการ, ปฏิทินย้อนจากวันงาน</span></li>
+        <li><span class="node">คำถามที่พบบ่อย <code>/faq/</code> <span class="tag new">ใหม่</span></span> <span class="why">จัดกลุ่มตาม 4 ผู้ซื้อ · ใช้ FAQ schema เพื่อ AEO</span></li>
+        <li><span class="node">ดาวน์โหลด <code>/downloads/</code> <span class="tag tool">เครื่องมือ</span></span> <span class="why">Checklist, ตารางเก็บไซส์, แบบฟอร์มของบจัดซื้อ · แลกอีเมล/LINE = lead magnet</span></li>
+      </ul>
+    </li>
+
+    <li><span class="node top">เครื่องมือ (อยู่ในปุ่มขวาบนและท้ายทุกหน้า)</span>
+      <ul>
+        <li><span class="node">คำนวณงบเบื้องต้น <code>/tools/budget/</code> <span class="tag tool">เครื่องมือ</span></span> <span class="why">กรอกจำนวนคน + ประเภทงาน + เดือนใช้งาน → ช่วงงบ + วันที่ควรสั่ง → ปุ่ม "ขอใบเสนอราคาจากตัวเลขนี้"</span></li>
+        <li><span class="node">เล่าโจทย์มา เดี๋ยวเราคิดให้ <code>/brief/</code> <span class="tag tool">เครื่องมือ</span></span> <span class="why">ฟอร์ม 4 ข้อคัดเกรด + แนบโลโก้ → ส่งต่อ LINE OA พร้อม tag · CTA หลักของทั้งเว็บ</span></li>
+        <li><span class="node">จองคิวผลิตล่วงหน้า <code>/book-queue/</code> <span class="tag tool">เครื่องมือ</span></span> <span class="why">ล็อกคิว + ล็อกวันส่งโดยยังไม่สรุปแบบ · โชว์คิวคงเหลือจริงรายเดือน</span></li>
+        <li><span class="node">ขอชุดตัวอย่างองค์กรฟรี <code>/sample-kit/</code> <span class="tag tool">เครื่องมือ</span></span> <span class="why">โปโลปักตัวอย่าง + fabric kit ส่งถึงออฟฟิศ · เฉพาะบริษัทที่ผ่านฟอร์มคัดเกรด</span></li>
+        <li><span class="node">ลองแบบเสื้อออนไลน์ <code>/tools/design/</code> <span class="tag tool">เครื่องมือ</span></span> <span class="why">เวอร์ชันแรกทรงโปโลทรงเดียว · ปุ่ม "ขอใบเสนอราคาจากแบบนี้" · เฟส 2–3</span></li>
+      </ul>
+    </li>
+
+    <li><span class="node top">เกี่ยวกับเรา และติดต่อ</span>
+      <ul>
+        <li><span class="node">เกี่ยวกับ TEAMDEE <code>/about/</code> <span class="tag new">ใหม่</span></span> <span class="why">Origin story "ลูกค้าที่เจ็บมาก่อน" · 3WIN + 10 ว้าว · ทีมและโรงงาน · Brand Belief · ไม่ใช้ชื่อเดิมใน copy สาธารณะ</span></li>
+        <li><span class="node">ติดต่อ <code>/contact/</code> <span class="tag new">ใหม่</span></span> <span class="why">LINE OA / โทร / อีเมล / แผนที่ / เวลาทำการ 8:30–21:00 ทุกวัน · ฟอร์มสั้นเชื่อมกับ /brief/</span></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="note">รวมหน้าใหม่ราว 20 หน้า แต่ <strong>เฟสแรกเปิดแค่ 6 หน้า</strong> ที่รับใช้ยอด Q4 โดยตรง (ดูหมวด 9) หน้าที่เหลือสร้างเทมเพลตรอไว้และเปิดเมื่อมีเนื้อหาจริง</div>
+</section>
+
+<section class="block" id="pages">
+  <div class="sec-head"><span class="num">6</span><h2>โครงหน้าสำคัญ</h2></div>
+  <h3>6.1 หน้าแรก — ลำดับ section ตาม journey โล่งใจ → มั่นใจ → ภูมิใจ</h3>
+  <div class="grid2" style="align-items:start">
+    <div class="wire">
+      <div class="row"><b>Hero</b>ภาพทีมจริง 50+ คนใส่เสื้อพร้อมกันในงานจริง · headline "เสื้อทีมที่ทุกคนภูมิใจจะใส่" · sub: Team Identity Partner ช่วยคิด ช่วยจัดการ ช่วยจบงาน · ปุ่ม: เล่าโจทย์ / คำนวณงบ</div>
+      <div class="row"><b>แถบความแน่นอน</b>ตอบใน 5 นาที · 3D mockup ใน 24 ชม. · ราคารวม VAT ทุกไซส์ราคาเดียว · ส่งฟรีทั่วไทย · 2,800+ องค์กร</div>
+      <div class="row"><b>เลือกงานของคุณ</b>4 การ์ดตามกลุ่มผู้ซื้อ (เอกชนอยู่แรกและใหญ่สุด) ลิงก์ไปหน้า persona</div>
+      <div class="row"><b>สินค้านำฤดูนี้</b>โปโลปัก "เสื้อประจำปีบริษัท" + จองคิวผลิต Q4 พร้อมตัวเลขคิวคงเหลือจริง (ส่วนนี้สลับตามฤดูกาล)</div>
+      <div class="row"><b>งานจริง 3 เคส</b>Case study การ์ดแบบ timeline (จอง → อนุมัติแบบ → ส่งมอบ → วันงาน ✓) เลือกให้มีงานองค์กรอย่างน้อย 2 ใน 3</div>
+      <div class="row"><b>ทำงานกับเรายังไง</b>5 ขั้น: เล่าโจทย์ → 3D ใน 24 ชม. → ปรับแบบฟรี → ยืนยัน+ล็อกวันส่ง → รับของทันวันงาน + อัปเดต 6 stage</div>
+      <div class="row"><b>การันตีเป็นลายลักษณ์อักษร</b>เคลมฟรี 7 วัน · Lot 2 ราคาเดิม 30 วัน · ไม่บวกเพิ่มหน้างาน</div>
+      <div class="row"><b>ลูกค้าที่ไว้ใจเรา</b>Logo wall ที่ได้รับอนุญาต + รีวิวคนสั่ง 3 เสียง</div>
+      <div class="row"><b>คิดให้ก่อน</b>3 บทความฟันธงล่าสุด</div>
+      <div class="row cta"><b>CTA ปิด</b>"เล่าโจทย์มา เดี๋ยวเราคิดให้" + ทางเลือกเบากว่า: คำนวณงบ / ขอตัวอย่างผ้าฟรี</div>
+    </div>
+    <div>
+      <h3>6.2 เทมเพลตหน้า persona (ใช้ร่วมกัน 5 หน้า)</h3>
+      <div class="wire" style="margin-top:10px">
+        <div class="row"><b>Hero</b>ภาพทีมกลุ่มนั้นในบริบทจริง + headline ที่ตอบ "สิ่งที่เขากลัวที่สุด" ด้วย "สิ่งที่เราสัญญา" ตามตาราง V2</div>
+        <div class="row"><b>โจทย์ที่เจอบ่อยในกลุ่มนี้</b>3–4 occasion (เช่น เอกชน: เสื้อประจำปี / กีฬาสี / CSR / งานวิ่ง) แต่ละอันมีสินค้าแนะนำ + ช่วงงบ + ระยะเวลาที่ควรสั่ง</div>
+        <div class="row"><b>งานจริงของกลุ่มนี้</b>Case study 2–3 ชิ้นที่กรองมาแล้ว</div>
+        <div class="row"><b>สิ่งที่กลุ่มนี้ต้องใช้</b>เอกชน: รายงานสถานะให้หัวหน้า · รัฐ: เอกสารเบิกจ่าย ใบเสนอราคา 3 เจ้า · สถานศึกษา: ส่งตรงโรงเรียน · กีฬา: ดีไซน์มีลายเซ็น · อีเวนต์: timeline ลายลักษณ์อักษร</div>
+        <div class="row"><b>FAQ เฉพาะกลุ่ม</b>5–7 ข้อจากแชทจริง</div>
+        <div class="row cta"><b>CTA</b>ปุ่มหลักปรับตามกลุ่ม: เอกชน = จองคิว/ขอชุดตัวอย่าง · รัฐ = ขอใบเสนอราคาพร้อมเอกสาร · กีฬา = เล่าโจทย์ · อีเวนต์ = เช็ค capacity</div>
+      </div>
+      <h3 style="margin-top:22px">6.3 เทมเพลต Case Study (1 ชิ้น)</h3>
+      <ul class="plain">
+        <li><strong>หัว:</strong> ชื่อองค์กร (ที่อนุญาต) · ประเภทงาน · จำนวนตัว · วันงาน</li>
+        <li><strong>โจทย์จากลูกค้า</strong> 2–3 บรรทัด (คำพูดจริง เบลอชื่อคนได้)</li>
+        <li><strong>วิธีที่เราคิด</strong> โลโก้ → 3D mockup → เสื้อจริง (Before/After)</li>
+        <li><strong>Timeline card</strong> วันจอง → อนุมัติแบบ → ส่งมอบ → วันงาน ✓</li>
+        <li><strong>ภาพหมู่วันงาน</strong> + คำชมที่คนสั่งได้รับ</li>
+        <li><strong>สเปกที่ใช้</strong> ผ้า / คอ / เทคนิค → ลิงก์หน้า fabrics</li>
+        <li><strong>CTA</strong> "อยากได้แบบของทีมคุณ เล่าโจทย์มา"</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="conversion">
+  <div class="sec-head"><span class="num">7</span><h2>ระบบ CTA และการคัดเกรด Lead</h2></div>
+  <p class="prose">ทุกช่องทางชี้เข้าเว็บ เว็บคัดเกรดแล้วส่งต่อ นี่คือ "ท่อหลังบ้าน" ที่ Marketing Strategy เสา 5 อธิบายไว้ แปลงเป็นโครงหน้าเว็บได้ดังนี้</p>
+  <div class="flow">
+    <div class="step"><b>ต้นทาง</b>Facebook · IG · TikTok · LINE broadcast · Google<span class="who">ทุก CTA ชี้เข้าเว็บพร้อม UTM</span></div>
+    <div class="step"><b>หน้ารับ</b>Persona page / Case study / Guide<span class="who">มี CTA 3 ระดับทุกหน้า</span></div>
+    <div class="step hot"><b>ฟอร์ม 4 ข้อ</b>จำนวนตัว · ประเภทงาน · เดือนใช้งาน · องค์กร<span class="who">/brief/ /book-queue/ /sample-kit/ /tools/budget/ ใช้ฟอร์มเดียวกัน</span></div>
+    <div class="step"><b>คัดเกรดอัตโนมัติ</b>≥50 ตัว (หรือ ≥20,000 บาท) + องค์กร + มีวันงาน = เกรดสูง<span class="who">ตรงนิยาม Qualified Lead</span></div>
+    <div class="step"><b>ส่งต่อ</b>เกรดสูง → LINE OA tag + แจ้ง sales โทรใน 1 วัน · เกรดอื่น → nurture / catalog<span class="who">ตอบขอบคุณทันทีพร้อมขั้นถัดไป</span></div>
+  </div>
+  <div class="grid3">
+    <div class="tile"><h4>CTA ระดับ 1 · ไม่ต้องคุย</h4><p>"คำนวณงบเบื้องต้น" และ "ดาวน์โหลด checklist" สำหรับคนเพิ่งรับงานมา ยังไม่พร้อมทัก ผลลัพธ์แสดงทันทีบนหน้า แล้วค่อยถามข้อมูลติดต่อเพื่อส่งใบเสนอราคา</p></div>
+    <div class="tile"><h4>CTA ระดับ 2 · ผูกมัดเบา</h4><p>"จองคิวโดยยังไม่สรุปแบบ", "ขอตัวอย่างผ้าฟรี", "ขอชุดตัวอย่างองค์กร" คนรู้ว่าต้องสั่งแต่ยังไม่พร้อมคุยรายละเอียด ซึ่งปกติหลุดไปหาคู่แข่ง</p></div>
+    <div class="tile hot"><h4>CTA ระดับ 3 · พร้อมคุย</h4><p>"เล่าโจทย์มา เดี๋ยวเราคิดให้" ปุ่มสีส้มปุ่มเดียวบน header ทุกหน้า ไปหน้า /brief/ ที่แนบโลโก้ได้ และสัญญา "รับแบบ 3D ใน 24 ชม."</p></div>
+  </div>
+  <div class="note"><strong>กติกา CTA:</strong> หนึ่ง section มีปุ่มหลักได้ปุ่มเดียว · ทุกฟอร์มสั้นกว่า 60 วินาที · ปุ่ม LINE ยังมีทุกหน้าแต่ผ่านหน้าเว็บก่อนเพื่อเก็บ tracking · ห้ามใช้ urgency ที่ไม่มาจากกระดานคิวจริง</div>
+</section>
+
+<section class="block" id="guardrails">
+  <div class="sec-head"><span class="num">8</span><h2>กติกาแบรนด์ที่ต้องส่งให้เอเจนซี่</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>หมวด</th><th>ต้องเป็น</th><th>ห้าม</th></tr></thead>
+    <tbody>
+      <tr><td class="k">สี</td><td>พื้นขาว 55 / ส้ม #FF6C00 30 / ดำ 15 + เทา #808285 เสริม · ส้มเฉดเดียว</td><td>ส้ม #E85D24 จากเทมเพลตเก่า · gradient · พื้นดำเป็นมู้ดหลัก</td></tr>
+      <tr><td class="k">ฟอนต์</td><td>Noto Sans Thai ทุกงานไทย · GC Tenwork เฉพาะ display อังกฤษ (ต้องมี license เว็บ) · fallback Noto Sans ตัวหนา</td><td>Bai Jamjuree · ฟอนต์อื่นแทนเอง</td></tr>
+      <tr><td class="k">ภาพ</td><td>ทีมจริง งานจริง แสงสว่างสะอาด · Before/After โลโก้ → mockup → เสื้อจริง · เบื้องหลังผลิต</td><td>Stock photo · mockup ลอยบนพื้นเทาเป็น hero · โลโก้ลูกค้าที่ไม่ได้รับอนุญาต</td></tr>
+      <tr><td class="k">ภาษา</td><td>มีตัวเลขทุกคำสัญญา · ฟันธง · "หัวหน้าทีมอายุ 32 ที่เก่งจริง" · Formal ขึ้น 1 ระดับเฉพาะหน้า /government/</td><td>"น่าจะ" "ถูกที่สุด" "เร็วที่สุด" "แล้วแต่ลูกค้า" "โปรแรง" "ด่วน!!" · ชื่อ FinixSports ในทุกหน้าสาธารณะ</td></tr>
+      <tr><td class="k">ข้อความราคา</td><td>Premium-Accessible · ราคารวม VAT ทุกไซส์ราคาเดียว · ช่วงงบต่องาน 50–500 ตัว</td><td>"ขั้นต่ำ 10 ตัว" เป็นจุดขาย · เทียบราคากับคู่แข่ง · ส่วนลดแบบ commodity</td></tr>
+      <tr><td class="k">เทคนิค</td><td>GA4 + Meta Pixel + conversion event ต่อฟอร์ม · schema Organization/FAQ/Article · sitemap.xml · Core Web Vitals ผ่านบนมือถือ · ทุกฟอร์มส่ง LINE tag ผ่าน webhook</td><td>ฝัง tracking โดยไม่นิยาม event · หน้า sample/ทดสอบค้างบน production</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="block" id="phases">
+  <div class="sec-head"><span class="num">9</span><h2>แผน 3 เฟส ล้อกับปฏิทินการตลาด</h2></div>
+  <p class="prose">ลำดับความสำคัญคิวกราฟฟิกตามแผน ก.ย. คือ ads → เว็บ → case study จึงออกแบบให้เฟส 1 ใช้เนื้อหาชุดเดียวกับ ads และ case study ไม่แย่งคิวกัน</p>
+  <div class="phase">
+    <div class="when">เฟส 0<small>สัปดาห์นี้ (ก.ย. W1–2)</small></div>
+    <div><strong>ตรวจของจริงและปิดรอยรั่ว</strong>
+      <ul>
+        <li>เดิน audit เว็บ live ทุกหน้า (สิ่งที่ผมทำไม่ได้จาก session นี้) เทียบกับตารางหมวด 3 และยืนยัน/ตัดประเด็น</li>
+        <li>แก้ title/meta หน้าแรกให้ถือ keyword · ลบหน้าเทมเพลต/ทดสอบ · ตั้ง GA4 event ให้ครบก่อน ads เดือน ต.ค.</li>
+        <li>ปรับข้อความ "ขั้นต่ำ 10 ตัว" และ "Corporate Deals" บน /education/ ให้เข้ากับจุดยืน</li>
+        <li>ล็อก URL structure ทั้งหมดในหมวด 5 กับเอเจนซี่ แม้ยังไม่เปิดหน้า เพื่อไม่ต้อง redirect ทีหลัง</li>
+      </ul></div>
+  </div>
+  <div class="phase">
+    <div class="when">เฟส 1<small>ก.ย. W3 – ต.ค. (ก่อนพีค พ.ย.)</small></div>
+    <div><strong>6 หน้าที่ทำเงิน Q4</strong>
+      <ul>
+        <li><code>/corporate/</code> เป็น landing ของแคมเปญ "เสื้อประจำปีบริษัท" + <code>/polo-embroidery/</code></li>
+        <li><code>/case-studies/</code> พร้อม 3–5 ชิ้นแรก (ใช้ชุดเดียวกับที่ต้องเสร็จสิ้น ก.ย. อยู่แล้ว)</li>
+        <li><code>/brief/</code> ฟอร์มคัดเกรด + webhook ไป LINE OA และแจ้ง sales</li>
+        <li><code>/tools/budget/</code> Budget Calculator (แผนกำหนดเสร็จ ส.ค. ควรขึ้นเว็บทันที) และ <code>/book-queue/</code> พร้อมตัวเลขคิวจริง</li>
+        <li>หน้าแรกจัด section ใหม่ตาม 6.1 โดยใช้ภาพ/เคสชุดเดียวกับ ads</li>
+      </ul></div>
+  </div>
+  <div class="phase">
+    <div class="when">เฟส 2<small>พ.ย. – ธ.ค.</small></div>
+    <div><strong>ขยายหลักฐานและกลุ่มลูกค้า</strong>
+      <ul>
+        <li><code>/government/</code> <code>/sports/</code> <code>/events/</code> ด้วยเทมเพลต persona เดียวกัน</li>
+        <li><code>/sample-kit/</code> (แผนเลื่อนมา ต.ค.) · <code>/reviews/</code> เชื่อม Google Business Profile · <code>/clients/</code></li>
+        <li><code>/jacket/</code> รับ upsell script · <code>/catalog/</code> หน้าเดียว</li>
+        <li>เก็บ case study จากงานพีค พ.ย. เข้าคลังทันทีที่ส่งมอบ</li>
+      </ul></div>
+  </div>
+  <div class="phase">
+    <div class="when">เฟส 3<small>Q1 2027</small></div>
+    <div><strong>SEO/AEO และเครื่องมือขั้นสูง</strong>
+      <ul>
+        <li><code>/guides/</code> <code>/faq/</code> <code>/downloads/</code> ตามแผน SEO/AEO ปี 2027 ที่กล่องพักระบุ · เปิดด้วย 6 บทความฟันธงจากคำถามจริง</li>
+        <li><code>/tools/design/</code> ลองแบบโปโลออนไลน์ + "ขอใบเสนอราคาจากแบบนี้" (Tech moat ที่วิเคราะห์ตลาดชี้ว่ายังไม่มีใครทำครบ)</li>
+        <li>เชื่อมฟอร์มเว็บกับ CRM เต็มระบบหลัง MVP · Annual Contract page เมื่อพร้อม pilot</li>
+      </ul></div>
+  </div>
+</section>
+
+<section class="block" id="metrics">
+  <div class="sec-head"><span class="num">10</span><h2>ตัวชี้วัดว่าโครงสร้างใหม่ทำงาน</h2></div>
+  <p class="prose">วัดจากสิ่งที่เว็บควบคุมได้จริง ไม่ผูก top-of-mind ระยะยาวเข้ามาใน 5 เดือนตามกติกาแผน</p>
+  <div class="kpi">
+    <div><b>Qualified lead จากเว็บ / เดือน</b><span>ฟอร์มที่ผ่านเกณฑ์ 3 ข้อ · เป้ารวมเสา 5 คือ 80–120 lead/เดือนใน ต.ค.</span></div>
+    <div><b>อัตราเข้าหน้า → ใช้เครื่องมือ</b><span>% ผู้เข้า persona page ที่กดคำนวณงบ / จองคิว / เล่าโจทย์</span></div>
+    <div><b>เวลาตอบ lead เกรดสูง</b><span>sales โทรภายใน 1 วันตามกติกา · วัดจาก timestamp ฟอร์มถึง log โทร</span></div>
+    <div><b>สัดส่วน traffic ตาม persona</b><span>เอกชนต้องเป็นกลุ่มใหญ่สุด ถ้ากีฬานำ = สัญญาณว่าเว็บถูกอ่านเป็นแบรนด์กีฬา</span></div>
+    <div><b>Case study ถูกใช้ในดีล</b><span>จำนวนครั้งที่ sales ส่งลิงก์ case study ในแชท (นับจาก UTM ภายใน)</span></div>
+    <div><b>ผลตาม platform หลังเว็บ live</b><span>CPL Google vs Meta เพื่อทบทวนสัดส่วน 70/20/10 ในแผน ต.ค.</span></div>
+  </div>
+</section>
+
+<section class="block" id="decisions">
+  <div class="sec-head"><span class="num">11</span><h2>สิ่งที่ต้องตัดสินใจก่อนสั่งงาน</h2></div>
+  <ul class="plain">
+    <li><strong>ขั้นต่ำและราคาบนเว็บ:</strong> จะแสดง "เริ่มต้น 50 ตัว" ตรง ๆ หรือไม่แสดงขั้นต่ำเลยแต่ให้ calculator ตอบ ผมแนะนำแบบหลัง เพื่อไม่ผลักงานเล็กที่เดินเข้ามาเองแต่ก็ไม่โฆษณาให้</li>
+    <li><strong>เอเจนซี่เดิมหรือทีมใหม่:</strong> ข้อเสนอนี้เป็นการเพิ่มหน้าและเทมเพลต ทำบน CMS เดิมได้ถ้าเอเจนซี่รับงานต่อ แต่ต้องได้สิทธิ์ทีมภายในเพิ่ม case study และบทความเองโดยไม่รอคิวเอเจนซี่</li>
+    <li><strong>ที่อยู่ของเครื่องมือ:</strong> Budget Calculator และฟอร์มคัดเกรดควรอยู่บนโดเมนหลักเพื่อ tracking หรือฝังจาก webapp ภายใน ถ้าฝังต้องส่ง event กลับ GA4 ได้</li>
+    <li><strong>โลโก้ลูกค้า:</strong> ต้องมีรายชื่อองค์กรที่ได้รับอนุญาตแสดงเป็นลายลักษณ์อักษรก่อนเปิดหน้า /clients/ และ case study แต่ละชิ้น</li>
+    <li><strong>ภาษาอังกฤษ:</strong> ตอนนี้ยังไม่จำเป็น (ลูกค้าไทย ค้นหาไทย) แต่ล็อก URL เป็นอังกฤษไว้แล้วเพื่อรองรับในอนาคต</li>
+  </ul>
+  <div class="callout"><strong>ขั้นถัดไปที่เสนอ:</strong> ① ยืนยันตารางหมวด 3 กับเว็บ live ② ล็อก sitemap หมวด 5 กับเอเจนซี่ภายในสัปดาห์นี้ ③ เริ่มเฟส 1 จากหน้า /corporate/ และ /brief/ เพราะเป็น 2 หน้าที่ ads เดือน ต.ค. ต้องใช้</div>
+</section>
+
+</main>
+</div>
+
+<footer><div class="wrap">แหล่งอ้างอิงภายใน: TEAMDEE Brand Strategy Master V2 (ส.ค. 2026) · Marketing Strategy ส.ค.–ธ.ค. 2026 · Content Strategy Master V1 · Monthly Marketing Plan ก.ย. 2026 · Brand Storytelling ข้อ 1–2 · Rebranding Strategy 2026 · วิเคราะห์ตลาดเสื้อทีมพิมพ์ลายไทย (ก.พ. 2026) · เนื้อหาเว็บ team-dee.com จาก search index ณ 4 ก.ย. 2026</div></footer>
