@@ -1,0 +1,39 @@
+# [124] Elementor Footer #124 https://team-dee.com/?elementor_library=elementor-footer-124
+
+---- block 1  title=[]
+   ปรึกษาเราผ่าน LINE
+   โทร: 097-549-5941
+  LINKS: ปรึกษาเราผ่าน LINE→https://line.me/R/ti/p/@teamdee | โทร: 097-549-5941→tel:0975495941
+  [contains line.me]
+  [contains tel:]
+
+---- block 2  title=['TEAMDEE Premium Footer']
+   ยกระดับภาพลักษณ์องค์กรด้วยเสื้อผ้าคุณภาพสูง บริการครบวงจรตั้งแต่การออกแบบจนถึงกระบวนการผลิตระดับสากล
+   📍
+   109/20 ถนนเลี่ยงเมืองนนทบุรีตำบลตลาดขวัญ, Nonthaburi,Thailand, 11000
+   📞
+   097-549-5941
+   086-416-6449
+   Solutions
+   ยูนิฟอร์มองค์กร (Corporate)
+   กีฬาอาชีพ (Sports)
+   สถานศึกษา (Education)
+   เสื้อกิจกรรม (Event)
+   Techniques
+   พิมพ์ลาย (Sublimation)
+   งานปัก (Embroidery)
+   สกรีน (Screen Printing)
+   Company
+   เกี่ยวกับเรา (About Us)
+   ผลงานของเรา (Projects)
+   คำนวณราคา (Investment)
+   บทความ (Journal)
+   ติดต่อเรา (Contact Us)
+   © 2026
+   TEAMDEE STUDIO. All Rights Reserved.
+   PDPA
+   Privacy Policy
+   Terms & Conditions
+   ```eof ย!
+  LINKS: ยกระดับภาพลักษณ์องค์กรด้วยเสื้อผ้าคุณภาพสูง บริการครบวงจรตั้→/ | 097-549-5941→tel:0975495941 | 086-416-6449→tel:0864166449 | ยูนิฟอร์มองค์กร (Corporate)→https://team-dee.com/corporate/ | กีฬาอาชีพ (Sports)→https://team-dee.com/sport/ | สถานศึกษา (Education)→https://team-dee.com/education/ | เสื้อกิจกรรม (Event)→https://team-dee.com/event/ | พิมพ์ลาย (Sublimation)→https://team-dee.com/sublimation/ | งานปัก (Embroidery)→https://team-dee.com/embroidery/ | สกรีน (Screen Printing)→https://team-dee.com/screen-printing/ | เกี่ยวกับเรา (About Us)→https://team-dee.com/about-us/ | ผลงานของเรา (Projects)→https://team-dee.com/project/ | คำนวณราคา (Investment)→https://team-dee.com/calculations/ | บทความ (Journal)→https://team-dee.com/blog/ | ติดต่อเรา (Contact Us)→https://team-dee.com/contact-us/ | PDPA→https://team-dee.com/pdpa/ | Privacy Policy→https://team-dee.com/privacy-policy/ | Terms & Conditions→https://team-dee.com/terms/
+  [contains tel:]

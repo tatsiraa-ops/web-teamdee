@@ -1,0 +1,49 @@
+# [80] CONTACT US https://team-dee.com/contact-us/
+
+---- block 1  title=[]
+   GET IN TOUCH
+H1 ติดต่อสอบถาม /
+   ขอใบเสนอราคา
+   พร้อมให้คำปรึกษา แนะนำเนื้อผ้า เทคนิคการสกรีน/ปัก และประเมินราคาฟรี ไม่มีค่าใช้จ่าย ทีมงานของเราพร้อมดูแลทุกขั้นตอน
+
+---- block 2  title=[]
+   เบอร์โทรศัพท์ติดต่อ
+   097-549-5941
+   คลิกเพื่อโทรออกทันที
+   LINE Official Account
+   @teamdee
+   ปรึกษาและส่งแบบประเมินราคา
+   เวลาทำการ
+   เปิดทุกวัน (หยุดวันพฤหัสบดี)
+   เวลา 09:00 - 17:00 น.
+  LINKS: เบอร์โทรศัพท์ติดต่อ→tel:0975495941 | LINE Official Account→https://line.me/R/ti/p/@teamdee
+  [contains line.me]
+  [contains tel:]
+
+---- block 3  title=['TEAMDEE - Contact Section (SEO Clean Final)']
+H2 ติดต่อสั่งผลิตเสื้อโปโลและเสื้อยูนิฟอร์มบริษัท
+   TEAMDEE
+   ปรึกษาผู้เชี่ยวชาญของเราเพื่อประเมินราคา ขอรับชิ้นผ้าตัวอย่าง หรือออกแบบ 3D Mockup สำหรับทีมของคุณได้ฟรี
+   Direct Line
+   097-549-5941
+   086-416-6449
+   Headquarters
+   109/20 ถนนเลี่ยงเมืองนนทบุรี ตำบลตลาดขวัญNonthaburi, Thailand, 11000
+   Full Name *
+   Company
+   Phone Number *
+   Email Address
+   Project Details *
+BUTTON Send Message
+  LINKS: 097-549-5941→tel:0975495941 | 086-416-6449→tel:0864166449
+  FORMS: https://api.web3forms.com/submit POST ;   input hidden access_key ;   input hidden redirect ;   input hidden subject ;   input hidden from_name ;   input checkbox botcheck ;   input text Name ;   input text Company ;   input tel Phone ;   input email Email ;   textarea Message
+  [contains tel:]
+
+---- block 4  title=[]
+   FACTORY & OFFICE
+H2 ที่ตั้งสำนักงานและโรงงานผลิต
+   มั่นใจได้ 100% ด้วยสถานประกอบการจริง เปิดให้บริการและพร้อมต้อนรับลูกค้าที่ต้องการเข้ามาดูเนื้อผ้าตัวอย่าง หรือเยี่ยมชมผลงานสกรีนและงานปักของจริง
+H4 TEAMDEE (ทีมดี)
+   109/20 ถนนเลี่ยงเมืองนนทบุรีตำบลตลาดขวัญ อำเภอเมืองจังหวัดนนทบุรี 11000
+   นำทางด้วย Google Maps
+  LINKS: นำทางด้วย Google Maps→https://maps.app.goo.gl/C9dzb3kN3oQQLARu6

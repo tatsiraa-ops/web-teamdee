@@ -1,0 +1,292 @@
+# [12] Test Page https://team-dee.com/test-page/
+
+---- block 1  title=['TEAMDEE - High Performance Custom Apparel']
+   TEAMDEE STUDIO
+H1 UnlockThe High Performance
+H1 Explore Custom Kit
+H2 Curated
+   Collections.
+   ออกแบบมาเพื่อการเคลื่อนไหว เนื้อผ้าทอพิเศษที่ผสานเทคโนโลยีระบายอากาศขั้นสูง ให้ทีมของคุณโฟกัสกับเป้าหมาย โดยไม่ต้องกังวลเรื่องเสื้อผ้า
+   Corporate Polo
+   →
+   Executive Jacket
+   →
+   Aero Cycling
+   →
+   Running Kits
+   →
+H2 THE CUSTOM EXPERIENCE
+   01 / BASE
+H3 Select Base & Fabric
+   เลือกแพทเทิร์นเสื้อโปโลหรือเสื้อกีฬา พร้อมเทคโนโลยีเนื้อผ้าที่เหมาะกับอุตสาหกรรมของคุณ (Micro-Dry, Anti-Odor)
+   02 / DESIGN
+H3 3D Visualization
+   ปรับแต่งสี (Color Swatches) และวางตำแหน่งโลโก้ ทีมดีไซเนอร์ของเราจะขึ้นแบบ 3D Mockup ให้คุณเห็นภาพจริงก่อนผลิต
+   03 / CRAFT
+H3 Precision Crafting
+   ผลิตด้วยเทคโนโลยีระดับโลก สกรีน ซับลิเมชั่น หรือปักโลโก้ ด้วยความแม่นยำระดับมิลลิเมตร ส่งตรงถึงออฟฟิศคุณ
+  LINKS: Explore Custom Kit→#collections
+
+---- block 2  title=['TEAMDEE STUDIO - B2B Investment Calculator']
+   Design Studio Tool
+H1 Investment
+   Configurator
+   01 / Select Silhouette (ประเภทสินค้า)
+H3 Pro Polo Shirt
+   Rate starts at 450 THB
+H3 Performance T-Shirt
+   Rate starts at 250 THB
+H3 Executive Jacket
+   Rate starts at 950 THB
+H3 Aero Cycling Kit
+   Rate starts at 650 THB
+   02 / Production Volume (จำนวนผลิตเป้าหมาย)
+   50 - 100
+   Base Rate
+   101 - 300
+   10% Off
+   301 - 500
+   15% Off
+   500+
+   Corporate
+H2 Estimation Breakdown
+   Selected Model
+   Pro Polo Shirt
+   Volume Tier
+   50 - 100 ตัว
+   Base Rate / Unit
+   450 THB
+   Applied Discount
+   0%
+   Est. Rate / Unit
+   450
+   THB
+BUTTON Start Project Setup
+   * ราคาประเมินเบื้องต้นยังไม่รวมภาษีมูลค่าเพิ่ม (VAT 7%) และอาจมีการเปลี่ยนแปลงขึ้นอยู่กับจำนวนจุดสกรีน/จุดปักโลโก้ขององค์กร ทีมดีไซเนอร์จะติดต่อกลับเพื่อสรุปแบบ 3D Mockup อีกครั้ง
+
+---- block 3  title=['TEAMDEE - Infinite Logo Marquee']
+H2 TRUSTED BY OVER
+   5,000+ TEAMS
+   กว่า 5,000 องค์กรชั้นนำ มหาวิทยาลัย และทีมกีฬาระดับประเทศที่เลือกใช้บริการเรา
+   Corporate A
+   Athletic B
+   Studio C
+   Network D
+   Industry E
+   Creative F
+   Academy G
+   Synergy H
+   Corporate A
+   Athletic B
+   Studio C
+   Network D
+   Industry E
+   Creative F
+   Academy G
+   Synergy H
+
+---- block 4  title=['TEAMDEE - Why Choose Us Section']
+   THE TEAMDEE ADVANTAGE
+H2 WHY COOPERATEWITH
+   TEAMDEE
+   เราก้าวข้ามขีดจำกัดของโรงงานรับทำเสื้อผ้าแบบเดิมๆ ด้วยการผสานดีไซน์มินิมอลร่วมสมัย เข้ากับเทคโนโลยีการผลิตระดับท็อปของอุตสาหกรรมสิ่งทอ เพื่อผลลัพธ์ที่สมบูรณ์ที่สุดขององค์กรคุณ
+   01 / TECHNOLOGY
+H3 Fabric Innovation
+   หมดปัญหาเสื้อผ้าตลาดนัดทั่วไป เราพัฒนาและคัดสรรเส้นใยทอพิเศษที่เป็นลิขสิทธิ์เฉพาะ เช่น TEAMDEE Micro-Dry® และระบบจัดการความชื้น Silver Ion Anti-Odor ระบายความร้อนดีเยี่ยม ป้องกันแบคทีเรียและกลิ่นอับชื้นได้อย่างมืออาชีพ
+   02 / CRAFT
+H3 3D Studio Expert
+   ยกระดับความแม่นยำก่อนการผลิตจริง ทีมดีไซเนอร์ระดับมือโปรของเราพร้อมขึ้นรูปเสื้อผ้าจำลองด้วยระบบ 3D Virtual Mockup ช่วยให้องค์กรเห็นมิติของแพทเทิร์น ทรวดทรงสัดส่วน และตำแหน่งจุดสกรีน/จุดปักสี Pantone ได้ตรงตามบรีฟ 100%
+   03 / SUSTAINABILITY
+H3 ESG Compliance
+   ตอบโจทย์บริษัทมหาชนและองค์กรยุคใหม่ที่ให้ความสำคัญกับนโยบายความยั่งยืน เรามีคอลเลกชัน Eco-Sustainable Custom ที่ใช้เส้นใยรีไซเคิลจากขวดพลาสติก (Recycled Polyester) และกระบวนการผลิตที่เป็นมิตรต่อสิ่งแวดล้อม ยกระดับภาพลักษณ์ CSR
+   04 / EXPERIENCE
+H3 Premium Finishing
+   เพราะความเนี้ยบคือหัวใจสำคัญ ทีมงานตรวจสอบฝีเข็ม ความถี่ในการเย็บ และรอยต่อตะเข็บในระดับมิลลิเมตร พร้อมการแบรนด์ดิ้งฉลาก คอเสื้อ และป้ายแท็กระดับสากล มอบสัมผัสแห่งความลักชูรี่สปอร์ตแวร์ที่ผู้สวมใส่ในทีมรู้สึกภูมิใจและมั่นใจทุกครั้ง
+
+---- block 5  title=['TEAMDEE - Interactive Photorealistic Mockup Studio']
+   TEAMDEE PRO CUSTOMIZER
+   DRAG & DROP ENABLED
+H1 Performance Tee
+   อัปโหลดโลโก้แล้วใช้เมาส์ลากจัดวางได้เลย
+   01 / Choose Fabric Color
+   02 / Upload & Position Logo
+H4 + คลิกเพื่ออัปโหลดโลโก้
+   รองรับไฟล์ PNG พื้นใส, JPG, SVG
+   ปรับขนาดโลโก้ (Scale)
+BUTTON Save My Design
+  FORMS:   input file None ;   input range None
+
+---- block 6  title=['Fabric Innovation - TEAMDEE']
+   ENGINEERED FABRICS
+H2 The Science of High Performance
+   💧
+H3 Micro-Dry® System
+   เทคโนโลยีการถักทอเส้นใยแบบรังผึ้ง (Honey-comb structure) ที่เพิ่มพื้นที่ระบายอากาศ 30% ช่วยให้นำพาความชื้นจากผิวหนังระเหยออกได้ทันที
+   Quick-Dry / Breathable
+   🛡️
+H3 Silver Ion Anti-Odor
+   ผสานประจุเงินบริสุทธิ์ลงในเนื้อผ้า เพื่อยับยั้งการเติบโตของแบคทีเรียต้นเหตุของกลิ่นกาย แม้ต้องใส่ทำกิจกรรมกลางแจ้งตลอดทั้งวัน
+   Hygienic / Freshness
+   ♻️
+H3 Eco-Sustainable Fiber
+   ทางเลือกใหม่เพื่อองค์กรยุคใหม่ เราใช้วัสดุจากขวดพลาสติก PET รีไซเคิล 100% มาปั่นเป็นเส้นใยคุณภาพสูง ลด Carbon Footprint องค์กรคุณ
+   ESG Compliance
+
+---- block 7  title=[]
+H3 TEAMDEE
+   High performance custom apparel for teams and organizations. Engineering quality for professional teams worldwide.
+   FB
+   / IG
+   / LINE
+H5 Corporate
+H5 Pro Polo Shirt
+H5 Executive Jacket
+H5 Medical Scrubs
+H5 Technical Workwear
+H5 Performance
+H5 Cycling Kits
+H5 Running Apparel
+H5 Team Jerseys
+H5 Studio Contact
+   123/45 Bangkok, Thailand
+   Tel: +66 2 123 4567
+   contact@teamdee.com
+   © 2026 TEAMDEE STUDIO. ALL RIGHTS RESERVED.
+   Privacy Policy
+   | Terms & Conditions
+  LINKS: FB→# | IG→# | LINE→# | Pro Polo Shirt→# | Executive Jacket→# | Medical Scrubs→# | Technical Workwear→# | Cycling Kits→# | Running Apparel→# | Team Jerseys→# | contact@teamdee.com→mailto:contact@teamdee.com | Privacy Policy→# | Terms & Conditions→#
+
+---- block 8  title=[]
+   [[widget:heading]] {"title": "Pro Polo Shirt (Silo 1: Corporate) ", "align": "center", "title_color": "#000000"}
+
+---- block 9  title=['Pro Corporate Polo | TEAMDEE STUDIO']
+H1 PRO CORPORATE
+   POLO SHIRT
+   ยกระดับภาพลักษณ์องค์กร ด้วยเสื้อโปโลระดับพรีเมียม
+   THE CORPORATE STANDARD
+H2 Why Our Polo Is Different
+H3 01. Ergonomic Fit
+   แพทเทิร์นที่ออกแบบมาเพื่อการเคลื่อนไหวของพนักงานออฟฟิศ ไม่รัดตึงจนอึดอัด แต่คงความดูดีเมื่อสวมใส่
+H3 02. Branding Precision
+   งานปักโลโก้ด้วยความละเอียดสูง (High-Density) หรือสกรีนด้วยเทคโนโลยีเลเซอร์ คงสีชัด ไม่ซีดจางหลังซัก
+H3 03. Fabric Tech
+   เนื้อผ้า Micro-Dry® ลิขสิทธิ์เฉพาะ ระบายอากาศดีเยี่ยม ป้องกันกลิ่นอับ ให้พนักงานมั่นใจได้ตลอดวัน
+H2 อยากให้ทีมดูดีขึ้นไหม?
+   ปรึกษาดีไซน์เนอร์และขอรับตัวอย่างเนื้อผ้าฟรีวันนี้
+   ขอใบเสนอราคาด่วน
+  LINKS: ขอใบเสนอราคาด่วน→#
+
+---- block 10  title=['Pro Corporate Polo | TEAMDEE STUDIO']
+H1 PRO CORPORATE
+   POLO SHIRT
+   ยกระดับภาพลักษณ์องค์กร ด้วยเสื้อโปโลระดับพรีเมียมที่ใครเห็นก็ต้องทัก
+   01. ERGONOMIC DESIGN
+H2 เคลื่อนไหวอิสระ ทุกกิจกรรม
+   ลืมเสื้อโปโลทรงกล่องแบบเดิมๆ ไปได้เลย เราใช้แพทเทิร์น 3D ตัดเย็บให้เข้ากับสรีระพนักงาน ช่วยให้หยิบจับ ทำงาน หรือเคลื่อนไหวได้อย่างมั่นใจตลอดวัน
+   02. BRANDING PRECISION
+H2 โลโก้คมชัด ไม่หลุดลอก
+   เราเลือกใช้เทคโนโลยีปัก High-Density ที่เส้นด้ายหนาแน่น หรือสกรีนด้วยสีนำเข้าจากญี่ปุ่นที่ฝังลงในเนื้อผ้า รับประกันความทนทานต่อการซักนับร้อยครั้ง
+H3 Available Corporate Colors
+H2 พร้อมเปลี่ยนโฉมทีมของคุณหรือยัง?
+   รับคำปรึกษาจากทีมสไตล์ลิสต์ และขอรับตัวอย่างเนื้อผ้าฟรี
+   ขอใบเสนอราคาด่วน
+  LINKS: ขอใบเสนอราคาด่วน→#
+
+---- block 11  title=[]
+   [[widget:heading]] {"title": "Silo 2: Pro Performance\t", "align": "center", "title_color": "#000000"}
+
+---- block 12  title=['Aero Cycling Kit | TEAMDEE Pro Performance']
+   Pro Performance Series
+H1 AERO CYCLINGKIT
+H2 Engineering for Speed
+H3 01. Aero Dynamic
+   ดีไซน์เข้ารูปแบบ Race-Fit ลดแรงต้านอากาศ (Drag) ให้คุณปั่นได้เร็วขึ้นในทุกวัตต์ที่ออกแรง
+H3 02. Second-Skin Fit
+   เทคโนโลยีผ้า Compression ทอพิเศษ กระชับกล้ามเนื้อ ลดการสั่นไหวและบรรเทาความเมื่อยล้า
+H3 03. Pro-Level Chamois
+   เป้ากางเกงความหนาแน่นสูง ระบายอากาศดีเยี่ยม รองรับการปั่นระยะไกลเกินกว่า 6 ชั่วโมงโดยไม่ล้า
+H2 Custom Team Identity
+   ไม่ว่าทีมของคุณจะเป็นกลุ่มเล็กหรือทีมอาชีพ เราพร้อมเนรมิตงานกราฟิกบนชุดปั่นจักรยานแบบ Full-Sublimation สีสดคมชัด ไม่มีจำกัดจำนวนสี
+   พร้อมบริการขึ้นแบบ 3D เพื่อให้เห็นจุดวางโลโก้สปอนเซอร์อย่างแม่นยำก่อนผลิตจริง
+H2 อยากได้ Aero Kit ประจำทีม?
+   ส่งบรีฟโลโก้และจำนวน เพื่อรับใบเสนอราคาพิเศษ
+   ปรึกษาทีมดีไซน์
+  LINKS: ปรึกษาทีมดีไซน์→#
+
+---- block 13  title=[]
+   [[widget:heading]] {"title": "Silo 3: Fabric & Innovation\tTEAMDEE Micro-Dry®", "align": "center", "title_color": "#000000"}
+
+---- block 14  title=['TEAMDEE Micro-Dry® Innovation | Fabric Technology']
+   Scientific Fabric
+H1 TEAMDEEMICRO-DRY®
+H2 The Science of Comfort
+   TEAMDEE Micro-Dry® ไม่ใช่แค่ผ้า แต่คือวิศวกรรมสิ่งทอ เราพัฒนาโครงสร้างเส้นใยแบบ "Capillary Channels" ที่ทำหน้าที่คล้ายเส้นเลือดฝอย เพื่อดึงความชื้นจากผิวหนังสู่พื้นผิวผ้าภายนอกให้ระเหยได้ภายในเสี้ยววินาที
+   ผลลัพธ์คือร่างกายที่แห้งสบาย ไม่เหนียวตัว แม้ในสภาวะการทำงานหนัก หรือการแข่งขันที่ดุเดือด
+   ⚡
+H3 Instant Evaporation
+   ระเหยความชื้นเร็วกว่าผ้าคอตตอนทั่วไปถึง 3 เท่า มั่นใจได้ทุกก้าวย่าง
+   🌬️
+H3 Breathable Structure
+   โครงสร้างรังผึ้งที่ออกแบบมาให้ลมผ่านได้อิสระ ลดอุณหภูมิร่างกายในจุดที่ร้อนที่สุด
+   💎
+H3 Color Permanence
+   เทคโนโลยี Dye-Lock ทำให้สีสดเหมือนใหม่ แม้ผ่านการซักด้วยผงซักฟอกเข้มข้น
+H2 Fabric Performance Benchmark
+   Feature
+   Standard Poly
+   TEAMDEE Micro-Dry®
+   Moisture Wicking
+   Low
+   High (Instant)
+   Breathability
+   Medium
+   Maximum
+   Durability
+   Standard
+   Pro-Grade
+
+---- block 15  title=[]
+   [[widget:heading]] {"title": "Silo 4: Lookbook & Proof Case Studies", "align": "center", "title_color": "#000000"}
+
+---- block 16  title=['Case Studies | TEAMDEE STUDIO']
+   Proven Results
+H1 Project Showcase
+H2 500+
+   Projects Delivered
+H2 98%
+   Client Retention
+H2 15+
+   Industries Served
+   Corporate
+H3 Tech Firm Uniforms
+   ปรับโฉมชุดยูนิฟอร์มบริษัท IT ระดับ Global
+   Performance
+H3 Pro Cycling Team
+   ชุดปั่นจักรยานสำหรับทีมแข่งระดับมืออาชีพ
+   Industrial
+H3 Heavy Duty Uniform
+   เสื้อช็อปโรงงานมาตรฐานสากล
+H3 Your Brand Here?
+   เราพร้อมสร้างสรรค์ผลงานระดับโลกให้กับองค์กรของคุณ เริ่มต้นสร้างมาตรฐานใหม่วันนี้
+   ปรึกษาเราทันที
+  LINKS: ปรึกษาเราทันที→#
+
+---- block 17  title=[]
+   [[widget:heading]] {"title": "Silo 5 : BLOG", "align": "center", "title_color": "#000000"}
+
+---- block 18  title=['TEAMDEE Journal | Editorial & Insights']
+   Industry Insights
+H1 The Editorial
+   Fabric Guide
+H3 คู่มือเลือกผ้าสำหรับยูนิฟอร์มบริษัท (2026 Edition)
+   เจาะลึกความต่างระหว่างผ้าที่ระบายอากาศได้จริง กับผ้าตลาดนัดทั่วไป ทำไมการลงทุนเรื่องเนื้อผ้าถึงคุ้มค่าในระยะยาว
+   READ THE GUIDE
+   Innovation
+H3 ทำไม Micro-Dry® ถึงเปลี่ยนมาตรฐานชุดทำงาน?
+   เบื้องหลังวิศวกรรมเส้นใย ที่ทำให้ออฟฟิศของคุณดูโปรขึ้น และพนักงานใส่สบายขึ้น 2 เท่า
+   LEARN MORE
+   Logistics
+H3 การบริหารจัดการสต็อกชุดฟอร์มองค์กรขนาดใหญ่
+   5 เทคนิคการสั่งผลิตและจัดส่งชุดฟอร์ม ให้ไม่เกิดปัญหาของขาด หรือไซส์ไม่พอ
+   VIEW TIPS
+  LINKS: READ THE GUIDE→# | LEARN MORE→# | VIEW TIPS→#
