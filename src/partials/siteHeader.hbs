@@ -1,0 +1,137 @@
+<a class="sr-only focus:not-sr-only focus:absolute focus:z-[200] focus:left-2 focus:top-2 focus:bg-orange focus:text-ink focus:px-5 focus:py-3 focus:font-bold" href="#main">ข้ามไปเนื้อหาหลัก</a>
+
+<header class="sticky top-0 z-50 bg-paper border-b border-line relative" data-header>
+  <div class="wrap flex items-center gap-2 min-h-[76px]">
+
+    <a class="flex items-center gap-2.5 flex-none min-h-tap mr-4 xl:mr-8" href="/" aria-label="TEAMDEE หน้าแรก">
+      <span class="text-orange w-[188px] flex-none">{{> logoHorizontal}}</span>
+    </a>
+
+    <nav class="hidden lg:flex items-center" aria-label="เมนูหลัก">
+      <a class="nav-link{{#if (eq active 'home')}} is-active{{/if}}" href="/">หน้าแรก</a>
+      <div data-mega-root>
+        <button class="nav-link nav-link--btn{{#if (eq active 'products')}} is-active{{/if}}" type="button" aria-expanded="false" aria-controls="megaProducts" data-mega-btn>
+          เสื้อที่เราทำ
+          <svg class="ml-1.5 transition-transform" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-caret><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="megaProducts" class="mega" hidden data-mega-panel>
+          <div class="wrap grid grid-cols-12 gap-8 py-9">
+            <div class="col-span-5">
+              <p class="mega__head">ดูสินค้าทั้งหมด</p>
+              <ul class="grid grid-cols-2 gap-x-6">
+                {{#each products}}<li><a class="mega__link" href="/pages/product-{{this.id}}.html">{{this.name}}</a></li>{{/each}}
+              </ul>
+            </div>
+            <div class="col-span-3">
+              <p class="mega__head">เทคนิคการผลิต</p>
+              <ul>
+                <li><a class="mega__link" href="/pages/products.html#tech">พิมพ์ลาย</a></li>
+                <li><a class="mega__link" href="/pages/products.html#tech">งานปัก</a></li>
+                <li><a class="mega__link" href="/pages/products.html#tech">สกรีนฟิล์ม DFT/DTF</a></li>
+              </ul>
+              <p class="mega__head mt-6">ข้อมูลก่อนสั่ง</p>
+              <ul>
+                <li><a class="mega__link" href="/pages/size-chart.html#fabric">เนื้อผ้า {{site.fabricCount}} ชนิด</a></li>
+                <li><a class="mega__link" href="/pages/size-chart.html">แบบคอเสื้อ</a></li>
+                <li><a class="mega__link" href="/pages/size-chart.html">ตารางไซส์ XS–7XL</a></li>
+              </ul>
+            </div>
+            <div class="col-span-4">
+              <a class="plate plate-orange min-h-[210px] block" href="/pages/product-polo.html">
+                <span class="plate__tag">ขายดีที่สุด</span>
+                <span class="block">
+                  <span class="block plate__num text-[52px]">01</span>
+                  <span class="block font-bold text-[21px] mt-1">โปโลปักยูนิฟอร์ม</span>
+                  <span class="block text-[16px] mt-1">เริ่มต้น 210 บาทต่อตัว</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-mega-root>
+        <button class="nav-link nav-link--btn{{#if (eq active 'works')}} is-active{{/if}}" type="button" aria-expanded="false" aria-controls="megaWorks" data-mega-btn>
+          ผลงานจริง
+          <svg class="ml-1.5 transition-transform" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-caret><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="megaWorks" class="mega" hidden data-mega-panel>
+          <div class="wrap grid grid-cols-12 gap-8 py-9">
+            <div class="col-span-4">
+              <p class="mega__head">ดูตามกลุ่มลูกค้า</p>
+              <ul>{{#each groups}}<li><a class="mega__link" href="/pages/group-{{this.id}}.html">{{this.name}}</a></li>{{/each}}</ul>
+            </div>
+            <div class="col-span-4">
+              <p class="mega__head">แบบเสื้อและเคสงาน</p>
+              <ul><li><a class="mega__link" href="/pages/works.html">แบบเสื้อทั้งหมด {{designFilters.total}} แบบ<span class="block text-[15px] text-ink-3">เห็นหน้าหลังครบ แยกตามประเภทเสื้อ</span></a></li></ul>
+              <p class="mega__head mt-4">เคสงานล่าสุด</p>
+              <ul>
+                {{#each works}}{{#if this.home}}
+                <li><a class="mega__link" href="/pages/case-{{this.id}}.html">{{this.title}}<span class="block text-[15px] text-ink-3 tabular-nums">{{baht this.qty}} ตัว · ใช้เวลา {{this.days}} วันทำการ</span></a></li>
+                {{/if}}{{/each}}
+              </ul>
+              <a class="mega__link font-bold text-orange" href="/pages/reviews.html">ดูรูปลูกค้าใส่จริง {{customerFilters.total}} ภาพ &rarr;</a>
+            </div>
+            <div class="col-span-4">
+              <a class="plate plate-ink min-h-[210px] block" href="/pages/reviews.html">
+                <span class="plate__tag">เสียงลูกค้า</span>
+                <span class="block">
+                  <span class="block plate__num text-[52px] text-orange">{{site.clients}}</span>
+                  <span class="block font-bold text-[21px] mt-1">องค์กรและทีมที่ไว้ใจเรา</span>
+                  <span class="block text-[16px] mt-1 text-paper/80">ดูรีวิวลูกค้า &rarr;</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="nav-link{{#if (eq active 'reviews')}} is-active{{/if}}" href="/pages/reviews.html">รีวิวลูกค้า</a>
+      <a class="nav-link{{#if (eq active 'blog')}} is-active{{/if}}" href="/pages/blog.html">บทความ</a>
+      <a class="nav-link{{#if (eq active 'about')}} is-active{{/if}}" href="/pages/about.html">เกี่ยวกับเรา</a>
+    </nav>
+
+    <span class="flex-1"></span>
+
+    <div class="hidden sm:flex items-center gap-2.5">
+      <a class="btn btn-quiet btn-sm{{#if (eq active 'calculator')}} !bg-ink !text-paper{{/if}}" href="/pages/calculator.html">คำนวณราคา</a>
+      <a class="btn btn-orange btn-sm" href="/pages/brief.html">ปรึกษาฟรี</a>
+    </div>
+    <button class="lg:hidden btn btn-line btn-sm gap-2" type="button" data-menu-open aria-expanded="false" aria-controls="mobileMenu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      เมนู
+    </button>
+  </div>
+</header>
+
+<!-- เมนูมือถือ · เต็มจอ แถวใหญ่ -->
+<div id="mobileMenu" hidden class="fixed inset-0 z-[100] bg-paper lg:hidden overflow-y-auto">
+  <div class="wrap flex items-center gap-4 min-h-[80px] border-b border-line">
+    <span class="font-display font-bold text-[25px]">เมนู</span>
+    <span class="flex-1"></span>
+    <button class="btn btn-line btn-sm gap-2" type="button" data-menu-close>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      ปิด
+    </button>
+  </div>
+  <nav class="wrap pb-32" aria-label="เมนูมือถือ">
+    <a class="mnav" href="/">หน้าแรก</a>
+    <p class="mnav__head">เสื้อที่เราทำ</p>
+    {{#each products}}<a class="mnav mnav--sub" href="/pages/product-{{this.id}}.html">{{this.name}}</a>{{/each}}
+    <a class="mnav mnav--sub" href="/pages/products.html">ข้อมูลผ้า คอเสื้อ และไซส์</a>
+    <p class="mnav__head">ผลงานจริง</p>
+    {{#each groups}}<a class="mnav mnav--sub" href="/pages/group-{{this.id}}.html">{{this.name}}</a>{{/each}}
+    <a class="mnav mnav--sub" href="/pages/works.html">แบบเสื้อทั้งหมด</a>
+    <a class="mnav mnav--sub" href="/pages/reviews.html">รูปลูกค้าใส่จริง</a>
+    <p class="mnav__head">อื่นๆ</p>
+    <a class="mnav" href="/pages/reviews.html">รีวิวลูกค้า</a>
+    <a class="mnav" href="/pages/blog.html">บทความ</a>
+    <a class="mnav" href="/pages/about.html">เกี่ยวกับเรา</a>
+    <a class="mnav" href="/pages/calculator.html">คำนวณราคา</a>
+    <div class="grid gap-3 mt-7">
+      <a class="btn btn-orange btn-lg w-full" href="/pages/brief.html">ปรึกษาฟรี</a>
+      <a class="btn btn-line btn-lg w-full" href="{{site.lineUrl}}">ทักไลน์ ตอบทุกวัน 8:30–21:00</a>
+      <a class="btn btn-line btn-lg w-full" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a>
+    </div>
+  </nav>
+</div>

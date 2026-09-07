@@ -1,0 +1,119 @@
+<!-- ฮีโร่สินค้า · รูปจริงคู่ข้อความ -->
+<section class="band-ink relative overflow-hidden">
+  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+  <div class="wrap relative py-12 md:py-20">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"เสื้อที่เราทำ","item":"{{site.baseUrl}}/pages/products.html"},{"@type":"ListItem","position":3,"name":"{{item.name}}"}]}</script>
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="/pages/products.html">เสื้อที่เราทำ</a><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
+    <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center mt-8">
+      <div>
+        {{#if item.flag}}<span class="tag">ตัวขายดีที่สุดของเรา</span>{{/if}}
+        <h1 class="t-display text-[clamp(30px,4.6vw,58px)] text-paper mt-4">{{item.name}}</h1>
+        <p class="text-[19px] leading-[1.75] text-paper/75 max-w-[52ch] mt-5">{{item.lead}}</p>
+        <dl class="flex flex-wrap gap-x-10 gap-y-4 mt-8 border-t border-paper/20 pt-6">
+          <div><dt class="text-[15px] font-semibold text-paper/60">ช่วงจำนวนที่เหมาะ</dt><dd class="text-[22px] font-bold text-paper tabular-nums mt-1">{{item.qty}} ตัว</dd></div>
+          <div><dt class="text-[15px] font-semibold text-paper/60">เทคนิคหลัก</dt><dd class="text-[22px] font-bold text-paper mt-1">{{item.tech}}</dd></div>
+          <div><dt class="text-[15px] font-semibold text-paper/60">ทรงคอ</dt><dd class="text-[22px] font-bold text-paper mt-1">{{#if item.collar}}คอปก{{else}}คอกลม / คอวี{{/if}}</dd></div>
+        </dl>
+        <div class="flex flex-wrap gap-3 mt-9">
+          <a class="btn btn-orange btn-lg" href="/pages/calculator.html">คำนวณราคาตัวนี้</a>
+          <a class="btn btn-lg bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="/pages/brief.html">ปรึกษาฟรี</a>
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-plate bg-paper aspect-[3/2]">
+        <img src="{{item.img}}" alt="แบบ{{item.name}}ด้านหน้าและด้านหลัง ผลิตโดย TEAMDEE" width="820" height="546" fetchpriority="high" decoding="async" class="w-full h-full object-contain">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ราคา · ตาราง static ให้บอทอ่านได้ -->
+<section class="wrap section">
+  <div class="max-w-[68ch] mb-10">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoTag}}</span>ราคา</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">เรทราคา{{item.name}}</h2>
+    <p class="t-lead mt-4">ราคาต่อตัวรวม VAT แล้ว ทุกไซส์ราคาเดียวกัน ยิ่งสั่งเยอะราคาต่อตัวยิ่งลง</p>
+  </div>
+  <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-14 items-start">
+    <div class="overflow-x-auto border-2 border-ink rounded-card">
+      <table class="w-full min-w-[420px] text-[17px]">
+        <caption class="text-left font-bold text-[19px] px-5 py-4 border-b-2 border-ink">{{item.name}} · บาทต่อตัว รวม VAT แล้ว</caption>
+        <thead class="bg-ink text-paper"><tr>
+          <th scope="col" class="text-left font-bold px-5 py-4">จำนวนผลิต (ตัว)</th>
+          <th scope="col" class="text-right font-bold px-5 py-4">ราคาต่อตัว</th>
+        </tr></thead>
+        <tbody>
+          {{#each pricing.tiers}}
+          <tr class="border-t border-line"><td class="px-5 py-4 tabular-nums">{{this.label}}</td><td class="px-5 py-4 text-right tabular-nums font-bold">{{#if ../item.collar}}{{this.collar}}{{else}}{{this.round}}{{/if}} บาท</td></tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <p class="scroll-hint">ปัดตารางไปทางขวาเพื่อดูคอลัมน์ที่เหลือ</p>
+    <div class="bg-shell border border-line rounded-plate p-7">
+      <h3 class="text-[19px] font-bold">ตัวเลือกเพิ่มได้</h3>
+      <ul class="mt-4 divide-y divide-line">
+        {{#each pricing.options}}
+        <li class="flex items-center justify-between gap-4 py-3 text-[16px]"><span>{{this.name}}</span><span class="font-bold tabular-nums">+{{this.add}} บาท/ตัว</span></li>
+        {{/each}}
+      </ul>
+      <p class="t-xs mt-5">ราคานี้เป็นเรทกลางของต้นแบบ ใช้ประเมินงบเบื้องต้น ราคายืนยันอยู่ในใบเสนอราคาจริง</p>
+      <a class="btn btn-ink btn-lg w-full mt-6" href="/pages/calculator.html">คำนวณงบทั้งก้อน</a>
+    </div>
+  </div>
+</section>
+
+<!-- คำถามก่อนสั่ง -->
+<section class="bg-shell border-y border-line">
+  <div class="wrap section">
+    <div class="max-w-[68ch] mb-8">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามก่อนสั่ง</span>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">เรื่องที่ลูกค้าถามบ่อย</h2>
+    </div>
+    <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
+      {{#each faq.product}}
+      <div class="hs-accordion border-b border-line" id="pfaq-{{@index}}">
+        <button type="button"
+                class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-6 min-h-tap font-bold text-[19px] hover:text-orange transition-colors"
+                aria-controls="pfaq-panel-{{@index}}">
+          <span>{{this.[0]}}</span>
+          <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div id="pfaq-panel-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="pfaq-{{@index}}">
+          <p class="t-body pb-7 max-w-[62ch]">{{this.[1]}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- หมวดอื่น -->
+<section class="wrap section">
+  <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+    <h2 class="t-display text-[clamp(26px,3.2vw,40px)]">หมวดอื่นที่เราทำ</h2>
+    <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="/pages/products.html">ดูครบทั้ง 8 หมวด &rarr;</a>
+  </div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    {{#each relatedProducts}}
+    <a href="/pages/product-{{this.id}}.html" class="group flex flex-col">
+      <div class="relative overflow-hidden rounded-plate bg-paper border border-line aspect-[3/2]">
+        <img src="{{this.img}}" alt="แบบ{{this.name}}ด้านหน้าและด้านหลัง" width="820" height="546" loading="lazy" decoding="async" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.04]">
+      </div>
+      <h3 class="text-[19px] mt-3 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.name}}</h3>
+      <p class="t-xs mt-1 tabular-nums">{{this.qty}} ตัว · {{this.tech}}</p>
+    </a>
+    {{/each}}
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="band-orange">
+  <div class="wrap py-14 md:py-20 text-center">
+    <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">อยากจับผ้าจริงก่อนตัดสินใจ</h2>
+    <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[46ch] mx-auto mt-4">บอกมาว่างานอะไร ใส่บ่อยแค่ไหน เราส่งชิ้นผ้ากับชาร์ตสีให้จับของจริง ไม่มีค่าใช้จ่าย</p>
+    <div class="flex flex-wrap justify-center gap-3 mt-8">
+      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink" href="/pages/brief.html">ปรึกษาฟรี</a>
+      <a class="btn btn-lg bg-transparent text-paper border-paper/60 hover:bg-paper hover:text-ink hover:border-paper" href="/pages/calculator.html">คำนวณราคา</a>
+    </div>
+  </div>
+</section>

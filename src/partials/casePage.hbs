@@ -1,0 +1,89 @@
+<!-- ฮีโร่เคส · รูปงานจริงคู่ตัวเลข -->
+<section class="band-ink relative overflow-hidden">
+  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+  <div class="wrap relative py-12 md:py-20">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"ผลงานจริง","item":"{{site.baseUrl}}/pages/works.html"},{"@type":"ListItem","position":3,"name":"{{item.title}}"}]}</script>
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="/pages/works.html">ผลงานจริง</a><span aria-hidden="true">/</span><span aria-current="page">{{item.title}}</span></nav>
+    <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-center mt-8">
+      <div class="overflow-hidden rounded-plate bg-shell aspect-[4/3] order-last lg:order-first">
+        <img src="{{item.img}}" alt="งาน{{item.groupName}} {{item.title}}" width="900" height="675" fetchpriority="high" decoding="async" class="w-full h-full object-cover">
+      </div>
+      <div>
+        <span class="tag">{{item.groupName}}</span>
+        <h1 class="t-display text-[clamp(28px,4.2vw,52px)] text-paper mt-4">{{item.title}}</h1>
+        <dl class="grid grid-cols-3 gap-x-6 gap-y-4 mt-8 border-t border-paper/20 pt-6">
+          <div><dt class="text-[15px] font-semibold text-paper/60">จำนวนที่ผลิต</dt><dd class="text-[clamp(20px,2.2vw,26px)] font-bold text-paper tabular-nums mt-1">{{baht item.qty}} ตัว</dd></div>
+          <div><dt class="text-[15px] font-semibold text-paper/60">วันที่ต้องใช้</dt><dd class="text-[clamp(20px,2.2vw,26px)] font-bold text-paper tabular-nums mt-1">{{item.event}}</dd></div>
+          <div><dt class="text-[15px] font-semibold text-paper/60">เวลาที่ใช้จริง</dt><dd class="text-[clamp(20px,2.2vw,26px)] font-bold text-paper tabular-nums mt-1">{{item.days}} วันทำการ</dd></div>
+        </dl>
+        <p class="text-[15px] text-paper/60 mt-6">ตัวเลขในเคสนี้เป็นข้อมูลตัวอย่างของต้นแบบ และชื่อองค์กรอยู่ระหว่างขออนุญาตเผยแพร่</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- โจทย์ + สเปก -->
+<section class="wrap section">
+  <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-start">
+    <div>
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>โจทย์</span>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">ลูกค้าเอาอะไรมา</h2>
+      <p class="t-lead mt-5">{{item.brief}}</p>
+      <blockquote class="border-l-4 border-orange pl-6 mt-10">
+        <p class="text-[clamp(19px,2.2vw,24px)] font-bold leading-[1.55]">&ldquo;{{item.quote}}&rdquo;</p>
+        <footer class="t-sm mt-3">เสียงจากลูกค้า · รอยืนยันชื่อและตำแหน่งผู้พูด</footer>
+      </blockquote>
+    </div>
+    <div class="bg-shell border border-line rounded-plate p-7 lg:p-8">
+      <h3 class="text-[19px] font-bold">งานนี้ทำด้วยอะไร</h3>
+      <dl class="mt-5 divide-y divide-line">
+        {{#each item.spec}}
+        <div class="flex items-baseline justify-between gap-6 py-3.5">
+          <dt class="t-sm shrink-0">{{this.[0]}}</dt>
+          <dd class="text-[16px] font-bold text-right">{{this.[1]}}</dd>
+        </div>
+        {{/each}}
+        <div class="flex items-baseline justify-between gap-6 py-3.5">
+          <dt class="t-sm shrink-0">ระยะเวลา</dt>
+          <dd class="text-[16px] font-bold text-right tabular-nums">{{item.days}} วันทำการ นับจากยืนยันแบบถึงส่งมอบ</dd>
+        </div>
+      </dl>
+      <a class="btn btn-orange btn-lg w-full mt-6" href="/pages/brief.html">อยากได้สเปกแบบนี้ ปรึกษาฟรี</a>
+    </div>
+  </div>
+</section>
+
+{{#if related}}
+<!-- เคสใกล้เคียง -->
+<section class="bg-shell border-y border-line">
+  <div class="wrap section">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <h2 class="t-display text-[clamp(26px,3.2vw,40px)]">เคสอื่นในกลุ่ม{{item.groupName}}</h2>
+      <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="/pages/works.html">ดูผลงานทั้งหมด &rarr;</a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {{#each related}}
+      <a href="/pages/case-{{this.id}}.html" class="group flex flex-col">
+        <div class="relative overflow-hidden rounded-plate bg-shell aspect-[4/3]">
+          <img src="{{this.img}}" alt="งาน{{this.groupName}} {{this.title}}" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
+        </div>
+        <h3 class="text-[19px] mt-3 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
+        <p class="t-xs mt-1 tabular-nums">{{baht this.qty}} ตัว · งาน{{this.tech}} · {{this.days}} วันทำการ</p>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{/if}}
+
+<!-- CTA -->
+<section class="band-orange">
+  <div class="wrap py-14 md:py-20 text-center">
+    <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">อยากได้งานแบบนี้บ้าง</h2>
+    <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[46ch] mx-auto mt-4">บอกจำนวนกับวันงานมา เราจะกลับไปพร้อมช่วงราคาและตารางเวลาแบบเดียวกับเคสนี้</p>
+    <div class="flex flex-wrap justify-center gap-3 mt-8">
+      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink" href="/pages/brief.html">ปรึกษาฟรี</a>
+      <a class="btn btn-lg bg-transparent text-paper border-paper/60 hover:bg-paper hover:text-ink hover:border-paper" href="/pages/works.html">ดูเคสอื่น</a>
+    </div>
+  </div>
+</section>
