@@ -1,0 +1,266 @@
+[
+ {
+  "img": "/img/design/d01.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d01-540.webp"
+ },
+ {
+  "img": "/img/design/d02.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d02-540.webp"
+ },
+ {
+  "img": "/img/design/d03.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d03-540.webp"
+ },
+ {
+  "img": "/img/design/d04.webp",
+  "garment": "badminton",
+  "garmentName": "เสื้อแบดมินตัน",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d04-540.webp"
+ },
+ {
+  "img": "/img/design/d05.webp",
+  "garment": "tank",
+  "garmentName": "เสื้อแขนกุด บาส-วอลเลย์",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d05-540.webp"
+ },
+ {
+  "img": "/img/design/d06.webp",
+  "garment": "badminton",
+  "garmentName": "เสื้อแบดมินตัน",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d06-540.webp"
+ },
+ {
+  "img": "/img/design/d07.webp",
+  "garment": "badminton",
+  "garmentName": "เสื้อแบดมินตัน",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d07-540.webp"
+ },
+ {
+  "img": "/img/design/d08.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d08-540.webp"
+ },
+ {
+  "img": "/img/design/d09.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d09-540.webp"
+ },
+ {
+  "img": "/img/design/d10.webp",
+  "garment": "tank",
+  "garmentName": "เสื้อแขนกุด บาส-วอลเลย์",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d10-540.webp"
+ },
+ {
+  "img": "/img/design/d11.webp",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d11-540.webp"
+ },
+ {
+  "img": "/img/design/d12.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d12-540.webp"
+ },
+ {
+  "img": "/img/design/d13.webp",
+  "garment": "running",
+  "garmentName": "เสื้อวิ่ง",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d13-540.webp"
+ },
+ {
+  "img": "/img/design/d14.webp",
+  "garment": "running",
+  "garmentName": "เสื้อวิ่ง",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d14-540.webp"
+ },
+ {
+  "img": "/img/design/d15.webp",
+  "garment": "baseball",
+  "garmentName": "เสื้อเบสบอล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d15-540.webp"
+ },
+ {
+  "img": "/img/design/d16.webp",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d16-540.webp"
+ },
+ {
+  "img": "/img/design/d17.webp",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d17-540.webp"
+ },
+ {
+  "img": "/img/design/d18.webp",
+  "garment": "tank",
+  "garmentName": "เสื้อแขนกุด บาส-วอลเลย์",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d18-540.webp"
+ },
+ {
+  "img": "/img/design/d19.webp",
+  "garment": "badminton",
+  "garmentName": "เสื้อแบดมินตัน",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d19-540.webp"
+ },
+ {
+  "img": "/img/design/d20.webp",
+  "garment": "running",
+  "garmentName": "เสื้อวิ่ง",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d20-540.webp"
+ },
+ {
+  "img": "/img/design/d21.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d21-540.webp"
+ },
+ {
+  "img": "/img/design/d22.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d22-540.webp"
+ },
+ {
+  "img": "/img/design/d23.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d23-540.webp"
+ },
+ {
+  "img": "/img/design/d24.webp",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d24-540.webp"
+ },
+ {
+  "img": "/img/design/d25.webp",
+  "garment": "football",
+  "garmentName": "เสื้อฟุตบอล Jersey",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d25-540.webp"
+ },
+ {
+  "img": "/img/design/d26.jpg",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d26-540.jpg"
+ },
+ {
+  "img": "/img/design/d27.jpg",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d27-540.jpg"
+ },
+ {
+  "img": "/img/design/d28.jpg",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d28-540.jpg"
+ },
+ {
+  "img": "/img/design/d29.jpg",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d29-540.jpg"
+ },
+ {
+  "img": "/img/design/d30.jpg",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d30-540.jpg"
+ },
+ {
+  "img": "/img/design/d31.jpg",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d31-540.jpg"
+ },
+ {
+  "img": "/img/design/d32.jpg",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d32-540.jpg"
+ },
+ {
+  "img": "/img/design/d33.jpg",
+  "garment": "polo",
+  "garmentName": "เสื้อโปโล",
+  "tech": "print",
+  "techName": "พิมพ์ลาย",
+  "imgSmall": "/img/design/d33-540.jpg"
+ }
+]

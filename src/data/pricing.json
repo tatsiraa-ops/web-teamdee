@@ -1,0 +1,18 @@
+{
+  "vatIncluded": true,
+  "freeShipping": true,
+  "optionMax": 30,
+  "options": [
+    { "name": "แขนยาว", "add": 30 },
+    { "name": "ทรงโอเวอร์ไซส์", "add": 40 },
+    { "name": "มีกระเป๋าเสื้อ", "add": 20 }
+  ],
+  "tiers": [
+    { "label": "10 – 20", "max": 20, "round": 279, "collar": 329 },
+    { "label": "21 – 50", "max": 50, "round": 230, "collar": 280 },
+    { "label": "51 – 100", "max": 100, "round": 210, "collar": 260 },
+    { "label": "101 – 200", "max": 200, "round": 180, "collar": 230 },
+    { "label": "200 ขึ้นไป", "max": 1000000, "round": 160, "collar": 210 }
+  ],
+  "lead": { "design": 7, "confirm": 7, "ship": 3, "buffer": 5 }
+}

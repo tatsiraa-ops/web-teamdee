@@ -1,0 +1,38 @@
+[
+  {
+    "img": "/img/hero/banner-expert.jpg",
+    "w": 1920,
+    "h": 900,
+    "bg": "bg-paper",
+    "fit": "object-cover",
+    "pos": "object-center",
+    "alt": "TEAMDEE ผู้เชี่ยวชาญด้านการออกแบบและผลิตเสื้อทีมแบบครบวงจร ออกแบบฟรี รับผลิตขั้นต่ำ 10 ตัว ดูแลครบจบตั้งแต่ออกแบบจนถึงมือ"
+  },
+  {
+    "img": "/img/hero/polo-dark.jpg",
+    "w": 1600,
+    "h": 1067,
+    "bg": "bg-ink",
+    "fit": "object-cover",
+    "pos": "object-[62%_center]",
+    "alt": "เสื้อโปโล TEAMDEE ลายส้มขาว ตัดต่อแขนสองสี"
+  },
+  {
+    "img": "/img/hero/embroidery.jpg",
+    "w": 1280,
+    "h": 1600,
+    "bg": "bg-ink",
+    "fit": "object-cover",
+    "pos": "object-[center_46%]",
+    "alt": "เครื่องปักกำลังปักโลโก้ลงบนเสื้อโปโล"
+  },
+  {
+    "img": "/img/hero/factory-sign.jpg",
+    "w": 1600,
+    "h": 1067,
+    "bg": "bg-ink",
+    "fit": "object-cover",
+    "pos": "object-center",
+    "alt": "ป้ายหน้าโรงงาน TEAMDEE"
+  }
+]
