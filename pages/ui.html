@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>TEAMDEE Design Kit</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Design Kit ภายในของ TEAMDEE รวมทุกคอมโพเนนต์ที่ใช้ประกอบหน้าเว็บ ไม่ใช่หน้าสำหรับลูกค้า">
+</head>
+<body class="bg-paper">
+
+<div class="bg-orange text-ink text-[15px] py-2 font-semibold">
+  <div class="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-1">
+    <span>Design Kit ไม่ใช่หน้าเว็บจริง มีไว้ให้ตรวจก่อนประกอบเป็นสิบหน้า</span>
+    <span>ร่างที่ 6 · 6 ก.ย. 2026</span>
+  </div>
+</div>
+{{> siteHeader active="products"}}
+
+<main id="main">
+
+<!-- ============ ปกหัวเรื่อง ============ -->
+<section class="tex-streak border-b-2 border-ink">
+  <div class="wrap py-16 md:py-24 relative overflow-hidden">
+    <span class="watermark watermark--orange w-[420px] -right-16 -bottom-24 hidden md:block">{{> logo}}</span>
+    <span class="eyebrow">TEAMDEE Design Kit</span>
+    <h1 class="t-display text-[clamp(38px,6.2vw,76px)] max-w-[15ch]">ชิ้นส่วนทั้งหมด<br>ของเว็บใหม่</h1>
+    <p class="t-lead max-w-[54ch] mt-5">สี ฟอนต์ โลโก้ และเท็กซ์เจอร์ อ้างจาก brand book ตัวจริง ส่วนที่เหลือเป็นการตัดสินใจด้านดีไซน์ที่ผมเสนอ ดูแล้วชี้ได้เลยว่าชิ้นไหนไม่เอา ผมแก้เฉพาะชิ้นนั้น</p>
+    <div class="flex flex-wrap gap-2 mt-7">
+      <span class="tag tag-ink">Noto Sans Thai</span>
+      <span class="tag tag-ink">#FF6C00</span>
+      <span class="tag tag-ink">55 / 30 / 15</span>
+      <span class="tag tag-ink">Tailwind 4 + Preline 4</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap py-14">
+<div class="kit">
+
+  <!-- ============ สารบัญ ============ -->
+  <nav class="kit-toc" aria-label="สารบัญ Design Kit">
+    <p class="grp">A · แบรนด์</p>
+    <a href="#a1">แก่นแบรนด์</a>
+    <a href="#a2">เสาหลัก 4 ต้น</a>
+    <a href="#a3">บุคลิกและน้ำเสียง</a>
+    <a href="#a4">กลุ่มเป้าหมาย</a>
+    <p class="grp">B · โทเคน</p>
+    <a href="#b1">สีและสัดส่วน</a>
+    <a href="#b2">ตัวอักษร</a>
+    <a href="#b3">ระยะ มุมมน เงา</a>
+    <p class="grp">C · กราฟิกแบรนด์</p>
+    <a href="#c1">โลโก้</a>
+    <a href="#c2">เท็กซ์เจอร์</a>
+    <a href="#c3">ไอคอน</a>
+    <a href="#c4">ไอคอนเป็น graphic device</a>
+    <p class="grp">D · คอมโพเนนต์</p>
+    <a href="#d1">ปุ่ม</a>
+    <a href="#d2">ป้ายและชิป</a>
+    <a href="#d3">ฟอร์ม</a>
+    <a href="#d4">การ์ด</a>
+    <a href="#d5">ตาราง</a>
+    <a href="#d6">Accordion</a>
+    <a href="#d7">Tabs</a>
+    <a href="#d8">Dropdown</a>
+    <a href="#d9">แจ้งเตือน</a>
+    <a href="#d10">นำทาง</a>
+    <a href="#d11">สถานะว่างและกำลังโหลด</a>
+    <p class="grp">E · แพตเทิร์น</p>
+    <a href="#e1">ฮีโร่</a>
+    <a href="#e2">แถบตัวเลข</a>
+    <a href="#e3">แถวรายการ</a>
+    <a href="#e4">ขั้นตอน</a>
+    <a href="#e5">แถบปิดท้าย</a>
+    <p class="grp">F · เฉพาะธุรกิจเสื้อ</p>
+    <a href="#f1">เพลตแทนรูป</a>
+    <a href="#f2">ไซส์รัน</a>
+    <a href="#f3">ชุดสี</a>
+    <a href="#f4">ตารางสเปก</a>
+    <a href="#f5">ไทม์ไลน์ผลิต</a>
+    <a href="#f6">ตำแหน่งงาน</a>
+  </nav>
+
+  <div>
+
+  <!-- ===== A1 แก่นแบรนด์ ===== -->
+  <section class="kit-sec" id="a1">
+    <h2 class="t-display">A1 · แก่นแบรนด์</h2>
+    <p class="t-body max-w-[60ch]">ยกมาจาก brand book ตรงๆ ทุกคำ ใช้เป็นแหล่งอ้างอิงเวลาเขียนข้อความบนเว็บ ไม่ต้องคิดใหม่</p>
+    <div class="grid md:grid-cols-2 gap-4 mt-7">
+      <div class="card">
+        <p class="kit-lbl !mt-0">Positioning</p>
+        <p class="text-[21px] font-bold">{{site.positioning}}</p>
+        <p class="kit-lbl">Belief</p>
+        <p class="text-[19px]">{{site.belief}}</p>
+      </div>
+      <div class="card bg-ink text-paper border-ink">
+        <p class="kit-lbl !mt-0 !text-paper/60">Tagline</p>
+        <p class="text-[23px] font-bold text-orange">{{site.tagline}}</p>
+        <p class="kit-lbl !text-paper/60">Slogan</p>
+        <p class="text-[21px] font-bold">{{site.slogan}}</p>
+      </div>
+    </div>
+    <div class="tex-fabric rounded-plate p-8 md:p-12 mt-4 text-paper relative overflow-hidden">
+      <span class="watermark watermark--orange w-[320px] -right-10 -top-16">{{> logo}}</span>
+      <p class="kit-lbl !mt-0 !text-paper/60">Manifesto</p>
+      <p class="t-display text-[clamp(26px,4vw,44px)]">{{site.manifesto}}</p>
+      <p class="text-[18px] text-paper/80 max-w-[52ch] mt-4">เสื้อไม่ได้เป็นแค่สิ่งที่ใส่ แต่คือเครื่องมือที่ทำให้คนรู้สึก connected กันมากขึ้น TEAMDEE ไม่ใช่แค่แบรนด์ Custom Apparel แต่คือ Team Identity Brand Partner</p>
+    </div>
+  </section>
+
+  <!-- ===== A2 เสาหลัก ===== -->
+  <section class="kit-sec" id="a2">
+    <h2 class="t-display">A2 · เสาหลัก 4 ต้น</h2>
+    <p class="t-body max-w-[60ch]">ใช้เป็นหัวข้อบล็อกบนหน้าแรกหรือหน้าเกี่ยวกับเรา แต่ละต้นมีคำไทยกำกับอยู่แล้วในเล่ม</p>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-7">
+      {{#each site.pillars}}
+      <div class="card text-center py-9 relative overflow-hidden">
+        <span class="watermark w-[120px] -right-6 -bottom-6">{{> logo}}</span>
+        <p class="t-display text-[clamp(20px,2.4vw,26px)] text-orange">{{this.en}}</p>
+        <p class="t-sm mt-2">{{this.th}}</p>
+      </div>
+      {{/each}}
+    </div>
+  </section>
+
+  <!-- ===== A3 บุคลิก ===== -->
+  <section class="kit-sec" id="a3">
+    <h2 class="t-display">A3 · บุคลิกและน้ำเสียง</h2>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-7">
+      <div class="card"><p class="font-bold text-[19px]">PROFESSIONAL</p><p class="t-sm mt-1">ให้คำแนะนำชัด มีระบบ</p></div>
+      <div class="card"><p class="font-bold text-[19px]">RELIABLE</p><p class="t-sm mt-1">ทำงานตรงเวลา มั่นใจได้ เห็นกระบวนการจริง</p></div>
+      <div class="card"><p class="font-bold text-[19px]">FAST RESPONSE</p><p class="t-sm mt-1">ตอบไว ทำให้ลูกค้ารู้สึกว่าแบรนด์ดูแลอยู่</p></div>
+      <div class="card"><p class="font-bold text-[19px]">CREATIVE</p><p class="t-sm mt-1">คิดนอกกรอบ ช่วยตีความ identity ของแต่ละองค์กร</p></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4 mt-4">
+      <div class="rounded-card bg-ok-tint border border-ok/25 p-6">
+        <p class="font-bold text-ok mb-3">DO</p>
+        <ul class="space-y-2 text-[17px]">
+          <li>พูดเหมือนที่ปรึกษา ไม่ใช่โรงงานรับจ้าง</li>
+          <li>เล่าด้วยเหตุผลและผลลัพธ์จริง</li>
+          <li>ทำให้ลูกค้าเห็นภาพทีมของตัวเอง</li>
+        </ul>
+      </div>
+      <div class="rounded-card bg-alert-tint border border-alert/25 p-6">
+        <p class="font-bold text-alert mb-3">DON'T</p>
+        <ul class="space-y-2 text-[17px]">
+          <li>ไม่ใช้คำถูกที่สุด เร็วที่สุด แบบ commodity</li>
+          <li>ไม่ใช้คำเกินจริงจนขาดความน่าเชื่อถือ</li>
+          <li>ไม่พูดแต่เรื่องการผลิตจนลืมใส่ใจ identity ของลูกค้า</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== A4 กลุ่มเป้าหมาย ===== -->
+  <section class="kit-sec" id="a4">
+    <h2 class="t-display">A4 · กลุ่มเป้าหมาย</h2>
+    <p class="t-body max-w-[60ch]">สามกลุ่มตามเล่ม อายุ 25 ถึง 45 ตามที่อาร์ตระบุเพิ่ม</p>
+    <div class="grid md:grid-cols-3 gap-4 mt-7">
+      <div class="card"><p class="t-display text-[24px] text-orange">Corporate Team</p><p class="t-sm mt-2">เสื้อองค์กร เสื้อกิจกรรม staff uniform ต้องการภาพลักษณ์ที่ดูดีและมีระบบ</p></div>
+      <div class="card"><p class="t-display text-[24px] text-orange">Sports Team</p><p class="t-sm mt-2">เสื้อวิ่ง ฟุตบอล กีฬา team kit ต้องการ performance บวก identity</p></div>
+      <div class="card"><p class="t-display text-[24px] text-orange">Community &amp; Event</p><p class="t-sm mt-2">เสื้อ outing แฟนคลับ แคมเปญ เทศกาล</p></div>
+    </div>
+  </section>
+
+  <!-- ===== B1 สี ===== -->
+  <section class="kit-sec" id="b1">
+    <h2 class="t-display">B1 · สีและสัดส่วน</h2>
+    <p class="t-body max-w-[62ch]">สี่สีทางการจาก brand book หน้า 16 สัดส่วนที่เล่มกำหนดคือ 55% white space · 30% orange · 15% black</p>
+    <div class="flex h-24 rounded-plate overflow-hidden border-2 border-ink mt-7">
+      <div class="w-[55%] bg-paper flex items-end p-3 text-[15px] font-semibold">ขาว 55%</div>
+      <div class="w-[30%] bg-orange flex items-end p-3 text-[15px] font-semibold">ส้ม 30%</div>
+      <div class="w-[15%] bg-ink text-paper flex items-end p-3 text-[15px] font-semibold">ดำ 15%</div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+      <div class="card"><div class="h-20 rounded-md bg-orange mb-4"></div><p class="font-bold">ส้ม TEAMDEE</p><p class="t-xs">#FF6C00 · RGB 255,108,0 · CMYK 0,71,100,0</p></div>
+      <div class="card"><div class="h-20 rounded-md bg-grey mb-4"></div><p class="font-bold">เทา</p><p class="t-xs">#808285 · RGB 128,130,133</p></div>
+      <div class="card"><div class="h-20 rounded-md bg-ink mb-4"></div><p class="font-bold">ดำ</p><p class="t-xs">#000000</p></div>
+      <div class="card"><div class="h-20 rounded-md bg-paper border-2 border-line mb-4"></div><p class="font-bold">ขาว</p><p class="t-xs">#FFFFFF</p></div>
+    </div>
+    <p class="kit-lbl">กฎเหล็ก บนพื้นส้มใช้ตัวหนังสือดำเท่านั้น</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="rounded-card bg-ok-tint border border-ok/25 p-6">
+        <p class="font-bold text-ok mb-2">ถูก · ดำบนส้ม 6.6:1</p>
+        <div class="bg-orange text-ink rounded-md p-5 text-[19px] font-semibold">คำนวณราคาและวันที่ต้องเริ่มให้ทัน</div>
+      </div>
+      <div class="rounded-card bg-alert-tint border border-alert/25 p-6">
+        <p class="font-bold text-alert mb-2">ผิด · ขาวบนส้ม 2.9:1 อ่านไม่ออก</p>
+        <div class="bg-orange text-white rounded-md p-5 text-[19px] font-semibold">คำนวณราคาและวันที่ต้องเริ่มให้ทัน</div>
+      </div>
+    </div>
+    <p class="kit-lbl">เทาทางการ #808285 ได้ 3.85:1 บนขาว ใช้เป็นตัวหนังสือไม่ได้ ใช้เป็นกราฟิกเท่านั้น สำหรับตัวหนังสือรองใช้เทาเข้มกว่า</p>
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div class="card"><p class="text-ink-2 text-[18px]">ตัวหนังสือรอง 8.8:1</p><p class="t-xs">#4A4A4C</p></div>
+      <div class="card"><p class="text-ink-3 text-[18px]">ตัวหนังสือรองสุด 6.5:1</p><p class="t-xs">#5E5E61</p></div>
+      <div class="card"><p class="text-orange text-[18px] font-bold">ส้มเป็นตัวหนังสือ 8.2:1</p><p class="t-xs">#8A3600 ใช้แทนส้มสดเมื่อต้องเป็นตัวอักษรบนพื้นขาว</p></div>
+    </div>
+  </section>
+
+  <!-- ===== B2 ตัวอักษร ===== -->
+  <section class="kit-sec" id="b2">
+    <h2 class="t-display">B2 · ตัวอักษร</h2>
+    <p class="t-body max-w-[62ch]">Noto Sans Thai ตาม brand book หน้า 18 · Light กับ Regular ใช้กับเนื้อความ · Medium กับ SemiBold ใช้กับหัวข้อรองและ callout · Bold กับ ExtraBold ใช้กับพาดหัว ขนาดพื้นฐาน 18px ไม่มีจุดไหนเล็กกว่า 15px</p>
+    <div class="space-y-6 mt-7 border-t border-line pt-8">
+      <div><p class="t-xs mb-1">Display · 76 · Bold</p><p class="t-display text-[clamp(40px,6vw,76px)]">เสื้อทีมที่ทุกคนภูมิใจจะใส่</p></div>
+      <div><p class="t-xs mb-1">Heading 2 · 40 · Bold</p><p class="t-display text-[clamp(28px,3.6vw,40px)]">งานจริงที่ส่งมอบแล้ว</p></div>
+      <div><p class="t-xs mb-1">Heading 3 · 25 · Bold</p><h3 class="text-[25px]">เสื้อประจำปีบริษัท</h3></div>
+      <div><p class="t-xs mb-1">Lead · 19 · Regular</p><p class="t-lead max-w-[52ch]">ไม่ใช่เสื้อที่ถูกสั่งให้ใส่ เราดูแลตั้งแต่โจทย์ขององค์กร จนถึงวันที่ทุกคนใส่พร้อมกัน</p></div>
+      <div><p class="t-xs mb-1">Body · 18 · Regular · ขนาดพื้นฐาน</p><p class="t-body max-w-[60ch]">งานส่วนใหญ่ที่เราดูแลอยู่ที่ 50 ถึง 500 ตัว เพราะเป็นช่วงที่เราทำได้ดีที่สุดทั้งเรื่องราคาและเวลา</p></div>
+      <div><p class="t-xs mb-1">Small 16 · Extra small 15</p><p class="t-sm">ราคารวมภาษีมูลค่าเพิ่มแล้ว ส่งฟรีทั่วประเทศ</p><p class="t-xs mt-1">เล็กที่สุดที่ยอมให้มี ใช้กับหมายเหตุเท่านั้น</p></div>
+      <div><p class="t-xs mb-1">ตัวเลข · tabular-nums</p><p class="t-display text-[clamp(44px,7vw,88px)] tabular-nums">420 · 51 · 210</p></div>
+    </div>
+    <div class="rounded-card bg-shell border border-orange/25 p-6 mt-7">
+      <p class="font-bold mb-1">GC Tenwork ยังไม่ได้ใส่</p>
+      <p class="t-sm">เล่มระบุ GC Tenwork สำหรับพาดหัวอังกฤษสั้นๆ ข้างโลโก้ แต่ไม่มีใน Google Fonts ต้องซื้อสิทธิ์ webfont ก่อน ตอนนี้พาดหัวอังกฤษใช้ Noto Sans Thai ไปก่อน</p>
+    </div>
+  </section>
+
+  <!-- ===== B3 ระยะ มุมมน เงา ===== -->
+  <section class="kit-sec" id="b3">
+    <h2 class="t-display">B3 · ระยะ มุมมน เงา</h2>
+    <p class="kit-lbl">สเกลระยะห่าง</p>
+    <div class="flex flex-wrap items-end gap-3">
+      <div><div class="bg-orange h-6" style="width:4px"></div><p class="t-xs mt-1">4</p></div>
+      <div><div class="bg-orange h-6" style="width:8px"></div><p class="t-xs mt-1">8</p></div>
+      <div><div class="bg-orange h-6" style="width:12px"></div><p class="t-xs mt-1">12</p></div>
+      <div><div class="bg-orange h-6" style="width:16px"></div><p class="t-xs mt-1">16</p></div>
+      <div><div class="bg-orange h-6" style="width:24px"></div><p class="t-xs mt-1">24</p></div>
+      <div><div class="bg-orange h-6" style="width:32px"></div><p class="t-xs mt-1">32</p></div>
+      <div><div class="bg-orange h-6" style="width:48px"></div><p class="t-xs mt-1">48</p></div>
+      <div><div class="bg-orange h-6" style="width:64px"></div><p class="t-xs mt-1">64</p></div>
+      <div><div class="bg-orange h-6" style="width:96px"></div><p class="t-xs mt-1">96</p></div>
+    </div>
+    <p class="kit-lbl">มุมมน</p>
+    <div class="flex flex-wrap gap-4">
+      <div><div class="w-24 h-16 bg-ink" style="border-radius:8px"></div><p class="t-xs mt-1">8 · input ตาราง</p></div>
+      <div><div class="w-24 h-16 bg-ink" style="border-radius:10px"></div><p class="t-xs mt-1">10 · การ์ด</p></div>
+      <div><div class="w-24 h-16 bg-ink" style="border-radius:14px"></div><p class="t-xs mt-1">14 · เพลต</p></div>
+      <div><div class="w-24 h-16 bg-ink" style="border-radius:999px"></div><p class="t-xs mt-1">999 · ปุ่ม ชิป</p></div>
+    </div>
+    <p class="kit-lbl">เงา ใช้ชั้นเดียว ไม่ซ้อน</p>
+    <div class="flex flex-wrap gap-5">
+      <div class="w-40 h-20 bg-paper border border-line rounded-card"><p class="t-xs p-2">ไม่มีเงา ใช้เส้นแทน</p></div>
+      <div class="w-40 h-20 bg-paper rounded-card" style="box-shadow:0 2px 10px rgba(0,0,0,.07)"><p class="t-xs p-2">เงาเบา</p></div>
+      <div class="w-40 h-20 bg-paper rounded-card" style="box-shadow:0 12px 30px -10px rgba(0,0,0,.2)"><p class="t-xs p-2">เงาลอย ใช้กับเมกะเมนู</p></div>
+    </div>
+  </section>
+
+  <!-- ===== C1 โลโก้ ===== -->
+  <section class="kit-sec" id="c1">
+    <h2 class="t-display">C1 · โลโก้</h2>
+    <p class="t-body max-w-[62ch]">ไฟล์เวกเตอร์ตัวจริงจาก brand book ถอดสีที่ฝังมาออกแล้วใช้ currentColor เพื่อสลับได้ครบสามสีที่เล่มอนุญาต เส้นทุกเส้นเป็นของเดิม ไม่ได้บิดหรือยืด</p>
+    <p class="kit-lbl">แนวนอน · ใช้บนหัวเว็บและฟุตเตอร์</p>
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div class="card grid place-items-center py-10"><span class="text-orange w-[230px]">{{> logoHorizontal}}</span></div>
+      <div class="card grid place-items-center py-10 bg-ink"><span class="text-paper w-[230px]">{{> logoHorizontal}}</span></div>
+      <div class="card grid place-items-center py-10 bg-orange border-orange"><span class="text-paper w-[230px]">{{> logoHorizontal}}</span></div>
+    </div>
+    <p class="kit-lbl">ซ้อนบนล่าง และไอคอนเดี่ยว</p>
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div class="card grid place-items-center py-10"><span class="text-orange w-[150px]">{{> logoStacked}}</span></div>
+      <div class="card grid place-items-center py-10 bg-ink"><span class="text-paper w-[150px]">{{> logoStacked}}</span></div>
+      <div class="card grid place-items-center py-10"><span class="text-ink w-[120px]">{{> logo}}</span></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4 mt-4">
+      <div class="rounded-card bg-ok-tint border border-ok/25 p-6">
+        <p class="font-bold text-ok mb-2">ทำได้</p>
+        <ul class="space-y-1.5 text-[17px]"><li>เปลี่ยนสีได้สามสี ขาว ดำ ส้ม</li><li>เลือกเวอร์ชันให้เหมาะกับพื้นหลัง</li><li>เว้นพื้นที่ว่างรอบโลโก้เสมอ</li></ul>
+      </div>
+      <div class="rounded-card bg-alert-tint border border-alert/25 p-6">
+        <p class="font-bold text-alert mb-2">ห้าม</p>
+        <ul class="space-y-1.5 text-[17px]"><li>บิด ยืด เอียง หรือแยกองค์ประกอบ</li><li>ใส่ gradient glow outline หรือ texture ทับ</li><li>ใช้สีหวานหรือพาสเทลที่ขัดกับภาพลักษณ์</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== C2 เท็กซ์เจอร์ ===== -->
+  <section class="kit-sec" id="c2">
+    <h2 class="t-display">C2 · เท็กซ์เจอร์</h2>
+    <p class="t-body max-w-[62ch]">ห้าแบบ ทำด้วย CSS ล้วน ไม่ต้องโหลดรูป ใช้เป็นพื้นหลังของแถบหรือการ์ดเพื่อให้หน้าเว็บมีมิติโดยไม่ต้องพึ่งภาพถ่าย</p>
+    <p class="t-body max-w-[62ch] mt-3"><b class="text-ink">กฎการใช้</b> ริ้วห้ามวิ่งทับตัวหนังสือ ตอนเอาไปเป็นพื้นที่มีข้อความ ระบบจะเทม่านขาวไล่จางทับให้อัตโนมัติ ครึ่งซ้ายจึงเป็นพื้นสะอาดไว้วางข้อความ ครึ่งขวาปล่อยลายเต็มแรง สวอตช์ด้านบนคือลายดิบก่อนใส่ม่าน</p>
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mt-7">
+      <div><div class="tex-streak-raw h-40 rounded-card border border-line"></div><p class="t-sm mt-2 font-semibold">ริ้วส้มเฉียง</p></div>
+      <div><div class="tex-halftone h-40 rounded-card border border-line"></div><p class="t-sm mt-2 font-semibold">Halftone ส้ม</p></div>
+      <div><div class="tex-white h-40 rounded-card border border-line"></div><p class="t-sm mt-2 font-semibold">ริ้วขาว</p></div>
+      <div><div class="tex-grey h-40 rounded-card border border-line"></div><p class="t-sm mt-2 font-semibold">ริ้วเทา</p></div>
+      <div><div class="tex-fabric h-40 rounded-card"></div><p class="t-sm mt-2 font-semibold">ผ้าดำ</p></div>
+    </div>
+    <p class="kit-lbl">ตัวอย่างใช้จริง</p>
+    <div class="tex-streak rounded-plate border-2 border-ink p-8 md:p-12">
+      <span class="eyebrow">ตัวอย่าง</span>
+      <p class="t-display text-[clamp(24px,3.4vw,40px)] max-w-[18ch]">ริ้วส้มเป็นพื้นฮีโร่ แทนรูปถ่าย</p>
+      <p class="t-body max-w-[42ch] mt-3">ข้อความอยู่บนพื้นขาวสะอาด ลายไปเต็มแรงทางขวาที่ไม่มีตัวหนังสือ</p>
+    </div>
+  </section>
+
+  <!-- ===== C3 ไอคอน ===== -->
+  <section class="kit-sec" id="c3">
+    <h2 class="t-display">C3 · ไอคอน</h2>
+    <p class="t-body max-w-[64ch]">เส้นเดียวกันหมด หนา 1.9 บนกริด 24 ปลายมน ไม่ผสมไอคอนทึบกับไอคอนเส้น และไม่ใช้อีโมจิแทนไอคอนเด็ดขาด</p>
+    <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 mt-7">
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5c0-1 1-2 2-2h2l2 5-2 1a12 12 0 0 0 6 6l1-2 5 2v2c0 1-1 2-2 2A17 17 0 0 1 4 5Z"/></svg><p class="t-xs mt-3">โทร</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.4c0 4.2-4 7.6-9 7.6-.9 0-1.8-.1-2.6-.3L4 21l1.2-3.5C3.8 16.1 3 13.9 3 11.4 3 7.2 7 3.8 12 3.8s9 3.4 9 7.6Z"/></svg><p class="t-xs mt-3">ไลน์</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6ZM4 9h16M8 3v4M16 3v4"/></svg><p class="t-xs mt-3">ปฏิทิน</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18v6H3zM7 9v3M11 9v4M15 9v3M19 9v4"/></svg><p class="t-xs mt-3">ไซส์</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 5 6 3 9l3 2 1-1v10h10V10l1 1 3-2-2-3-4-2a3 3 0 0 1-6 0Z"/></svg><p class="t-xs mt-3">เสื้อ</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg><p class="t-xs mt-3">จัดส่ง</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v5h5M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5ZM9 13h6M9 17h4"/></svg><p class="t-xs mt-3">เอกสาร</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg><p class="t-xs mt-3">ถูกต้อง</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v5M12 18h.01M10.3 4.9 2.4 18.5A1.9 1.9 0 0 0 4 21.4h16a1.9 1.9 0 0 0 1.6-2.9L13.7 4.9a1.9 1.9 0 0 0-3.4 0Z"/></svg><p class="t-xs mt-3">เตือน</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM21 21l-4.3-4.3"/></svg><p class="t-xs mt-3">ค้นหา</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8L3 5Z"/></svg><p class="t-xs mt-3">ตัวกรอง</p></div>
+      <div class="card grid place-items-center py-6 text-center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><p class="t-xs mt-3">ลูกศร</p></div>
+    </div>
+    <div class="rounded-card bg-shell border border-orange/30 p-6 mt-6">
+      <p class="font-bold mb-1">ตัดหมวด 3D element ออกแล้ว</p>
+      <p class="t-sm max-w-[64ch]">brand book มี Sphere Ring Dynamic Curve Cube ซึ่งเป็นภาพเรนเดอร์ 3D จริง ผมลองทำด้วย CSS แล้วออกมาไม่ได้เรื่อง วงแหวนเป็นโดนัทเทา เส้นโค้งเป็นสี่เหลี่ยมมน ลูกบาศก์เป็นสี่เหลี่ยมผ่าครึ่ง เลยตัดทิ้งดีกว่าฝืน ถ้าจะใช้จริงต้องขอไฟล์ภาพเรนเดอร์จากคนที่ทำ brand book เป็น PNG พื้นใส แล้วค่อยเอามาวาง</p>
+    </div>
+  </section>
+
+  <!-- ===== C4 ไอคอนเป็น graphic device ===== -->
+  <section class="kit-sec" id="c4">
+    <h2 class="t-display">C4 · ไอคอนเป็น graphic device</h2>
+    <p class="t-body max-w-[62ch]">brand book ระบุว่า Icon Logo ใช้เฉพาะพื้นที่เล็กหรือเป็น graphic device สามแบบข้างล่างคือวิธีใช้ที่ไม่ผิดกฎ เพราะไม่ได้บิดหรือแยกองค์ประกอบ แค่ครอบตัดหรือลดความทึบ</p>
+    <div class="grid md:grid-cols-3 gap-4 mt-7">
+      <div class="card relative overflow-hidden min-h-[190px]">
+        <span class="watermark w-[240px] -right-12 -bottom-10">{{> logo}}</span>
+        <p class="font-bold relative">ลายน้ำมุมการ์ด</p><p class="t-sm relative mt-1">ความทึบ 6% ไม่รบกวนการอ่าน</p>
+      </div>
+      <div class="card bg-ink relative overflow-hidden min-h-[190px]">
+        <span class="watermark watermark--orange w-[260px] -left-16 -top-10">{{> logo}}</span>
+        <p class="font-bold text-paper relative">ลายน้ำส้มบนพื้นดำ</p><p class="t-sm text-paper/70 relative mt-1">ความทึบ 13%</p>
+      </div>
+      <div class="card grid place-items-center min-h-[190px] py-0 overflow-hidden">
+        <span class="text-orange w-[300px] -mb-6">{{> logo}}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== D1 ปุ่ม ===== -->
+  <section class="kit-sec" id="d1">
+    <h2 class="t-display">D1 · ปุ่ม</h2>
+    <p class="t-body max-w-[62ch]">ทรงแคปซูลทั้งหมด สูงอย่างน้อย 52px ปุ่มหลักหนึ่งอันต่อหนึ่งหน้าจอเท่านั้น</p>
+    <div class="flex flex-wrap gap-3 mt-7"><button class="btn btn-orange btn-lg">ประเมินราคา</button><button class="btn btn-ink btn-lg">ปรึกษาฟรี</button><button class="btn btn-line btn-lg">ดูเสื้อที่เราทำ</button></div>
+    <div class="flex flex-wrap gap-3 mt-3"><button class="btn btn-orange">ปกติ 52px</button><button class="btn btn-ink">ปกติ</button><button class="btn btn-line">ปกติ</button><button class="btn btn-orange btn-sm">เล็ก 48px</button><button class="btn btn-line btn-sm">เล็ก</button></div>
+    <div class="flex flex-wrap gap-3 mt-3">
+      <button class="btn btn-orange" disabled style="opacity:.45;cursor:not-allowed">ปิดใช้งาน</button>
+      <button class="btn btn-line gap-2"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>มีไอคอน</button>
+      <a class="btn btn-orange btn-lg w-full sm:w-auto" href="#d1">เต็มความกว้างบนมือถือ</a>
+    </div>
+    <div class="band-orange on-orange rounded-plate p-8 mt-4">
+      <p class="font-bold mb-4">บนพื้นส้ม</p>
+      <div class="flex flex-wrap gap-3"><button class="btn btn-ink btn-lg">ปรึกษาฟรี</button><button class="btn btn-line btn-lg">ดูผลงานจริง</button></div>
+    </div>
+  </section>
+
+  <!-- ===== D2 ป้ายและชิป ===== -->
+  <section class="kit-sec" id="d2">
+    <h2 class="t-display">D2 · ป้ายและชิป</h2>
+    <p class="kit-lbl">ป้าย</p>
+    <div class="flex flex-wrap gap-2"><span class="tag">เรือธง</span><span class="tag">100–600 ตัว</span><span class="tag tag-ink">งานเกรดหลัก</span><span class="rounded-full bg-ok-tint text-ok px-3 py-1 text-[15px] font-semibold">ส่งแล้ว</span><span class="rounded-full bg-alert-tint text-alert px-3 py-1 text-[15px] font-semibold">คิวแน่น</span></div>
+    <p class="kit-lbl">ชิปกรอง กดแล้วเป็นดำทึบ</p>
+    <div class="flex flex-wrap gap-2"><button class="chip" aria-pressed="true">เสื้อประจำปีบริษัท</button><button class="chip" aria-pressed="false">หน่วยงานราชการ</button><button class="chip" aria-pressed="false">เสื้อทีมงานออกบูท</button><button class="chip" aria-pressed="false">เสื้อทีมแข่ง</button><button class="chip" aria-pressed="false">เสื้อสถานศึกษา</button></div>
+  </section>
+
+  <!-- ===== D3 ฟอร์ม ===== -->
+  <section class="kit-sec" id="d3">
+    <h2 class="t-display">D3 · ฟอร์ม</h2>
+    <div class="grid md:grid-cols-2 gap-x-6 gap-y-6 max-w-[840px] mt-7">
+      <div><label class="label" for="k1">ทำให้กี่คน <span class="text-alert">*</span></label><input class="input" id="k1" type="number" value="400"><span class="help">ประมาณได้ ไม่ต้องเป๊ะ</span></div>
+      <div><label class="label" for="k2">งานอะไร <span class="text-alert">*</span></label><select class="input" id="k2"><option>เสื้อประจำปีบริษัท</option><option>เสื้อทีมแข่ง</option></select></div>
+      <div><label class="label" for="k3">ต้องใส่วันไหน</label><input class="input" id="k3" type="date" value="2026-12-20"></div>
+      <div><label class="label" for="k4">ช่องที่กรอกผิด</label><input class="input" id="k4" type="text" value="" style="border-color:var(--color-alert)" aria-invalid="true" aria-describedby="k4e"><span class="help" id="k4e" style="color:var(--color-alert)">ยังไม่ได้กรอกช่องนี้</span></div>
+      <div class="md:col-span-2"><label class="label" for="k5">มีอะไรอยากบอกเพิ่ม</label><textarea class="input min-h-[120px]" id="k5" placeholder="เช่น มีโลโก้อยู่แล้ว อยากได้สีตามแบรนด์"></textarea></div>
+      <div class="md:col-span-2 flex flex-wrap gap-5">
+        <label class="inline-flex items-center gap-3 text-[17px] min-h-tap cursor-pointer"><input type="checkbox" class="w-6 h-6 accent-orange" checked> ขอชิ้นผ้าตัวอย่างด้วย</label>
+        <label class="inline-flex items-center gap-3 text-[17px] min-h-tap cursor-pointer"><input type="radio" name="kr" class="w-6 h-6 accent-orange" checked> แขนสั้น</label>
+        <label class="inline-flex items-center gap-3 text-[17px] min-h-tap cursor-pointer"><input type="radio" name="kr" class="w-6 h-6 accent-orange"> แขนยาว</label>
+      </div>
+      <div class="md:col-span-2 flex flex-wrap gap-3 items-center"><button class="btn btn-orange btn-lg">ส่งโจทย์</button><span class="rounded-card bg-ok-tint text-ok px-4 py-3 text-[16px] font-semibold">ส่งแล้ว จะติดต่อกลับภายใน 1 วันทำการ</span></div>
+    </div>
+  </section>
+
+  <!-- ===== D4 การ์ด ===== -->
+  <section class="kit-sec" id="d4">
+    <h2 class="t-display">D4 · การ์ด</h2>
+    <div class="grid md:grid-cols-3 gap-4 mt-7">
+      <a href="#d4" class="card card-link"><span class="tag">คนใส่คือพนักงานทั้งบริษัท</span><h3 class="text-[22px] mt-3">เสื้อประจำปีบริษัท</h3><p class="t-sm mt-2">ใส่ได้ทั้งงานเลี้ยงและวันทำงาน เป็นงานที่เราทำบ่อยที่สุด</p><div class="flex flex-wrap gap-2 mt-4"><span class="tag">100–600 ตัว</span></div></a>
+      <a href="#d4" class="card card-link bg-orange border-orange on-orange"><span class="tag">พิเศษ</span><h3 class="text-[22px] mt-3">ไม่แน่ใจว่างานอยู่กลุ่มไหน</h3><p class="t-sm mt-2 text-ink/80">เล่ามาเลยว่าใครจะใส่ กี่คน ใช้วันไหน</p><p class="font-bold mt-4">ปรึกษาฟรี &rarr;</p></a>
+      <div class="card relative overflow-hidden"><span class="tex-halftone absolute inset-0 opacity-50" aria-hidden="true"></span><h3 class="text-[22px] relative">การ์ดพื้นเท็กซ์เจอร์</h3><p class="t-sm mt-2 relative max-w-[24ch]">ใช้ halftone เป็นพื้นตอนอยากให้บล็อกเด่นโดยไม่ใช้สีทึบ จุดไล่ไปแน่นมุมล่างขวา เว้นมุมบนซ้ายไว้ให้ตัวหนังสือ</p></div>
+    </div>
+  </section>
+
+  <!-- ===== D5 ตาราง ===== -->
+  <section class="kit-sec" id="d5">
+    <h2 class="t-display">D5 · ตาราง</h2>
+    <div class="overflow-x-auto border-2 border-ink rounded-card mt-7">
+      <table class="w-full min-w-[520px] text-[17px]">
+        <caption class="text-left px-6 py-4 font-semibold border-b border-line">เรทราคาต่อตัว รวม VAT แล้ว</caption>
+        <thead><tr class="bg-shell text-[16px]">{{#each pricing.tiers}}{{/each}}<th class="text-left font-semibold px-6 py-3 border-b-2 border-ink">จำนวนผลิต (ตัว)</th><th class="text-left font-semibold px-6 py-3 border-b-2 border-ink">คอกลม / คอวี</th><th class="text-left font-semibold px-6 py-3 border-b-2 border-ink">คอปก / คางหมู</th></tr></thead>
+        <tbody class="tabular-nums">{{#each pricing.tiers}}<tr><td class="px-6 py-4 border-b border-line font-semibold">{{this.label}}</td><td class="px-6 py-4 border-b border-line">{{this.round}} บาท</td><td class="px-6 py-4 border-b border-line">{{this.collar}} บาท</td></tr>{{/each}}</tbody>
+      </table>
+      <p class="px-6 py-4 bg-shell text-[16px]">ออปชันเสริม {{#each pricing.options}}{{this.name}} +{{this.add}} บาท{{#unless @last}} · {{/unless}}{{/each}}</p>
+    </div>
+  </section>
+
+  <!-- ===== D6 Accordion (Preline) ===== -->
+  <section class="kit-sec" id="d6">
+    <h2 class="t-display">D6 · Accordion</h2>
+    <p class="t-body max-w-[62ch]">ใช้คอมโพเนนต์ของ Preline จริง จัดการ aria-expanded และคีย์บอร์ดให้เอง ผมแค่เขียนสไตล์ทับ</p>
+    <div class="hs-accordion-group border-t-2 border-ink max-w-[860px] mt-7">
+      {{#each faq.home}}
+      <div class="hs-accordion border-b border-line{{#if @first}} active{{/if}}" id="acc-{{@index}}">
+        <button class="hs-accordion-toggle w-full flex items-center gap-4 py-6 text-left text-[19px] font-semibold min-h-tap" aria-controls="acc-c-{{@index}}" aria-expanded="{{#if @first}}true{{else}}false{{/if}}">
+          <span class="flex-1">{{this.[0]}}</span>
+          <span class="w-9 h-9 rounded-full bg-orange text-ink grid place-items-center flex-none flex-shrink-0" aria-hidden="true">
+            <svg class="hs-accordion-active:hidden" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg>
+            <svg class="hidden hs-accordion-active:block" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M2 8h12"/></svg>
+          </span>
+        </button>
+        <div id="acc-c-{{@index}}" class="hs-accordion-content{{#unless @first}} hidden{{/unless}} w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="acc-{{@index}}">
+          <p class="pb-6 t-body max-w-[64ch]">{{this.[1]}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </section>
+
+  <!-- ===== D7 Tabs (Preline) ===== -->
+  <section class="kit-sec" id="d7">
+    <h2 class="t-display">D7 · Tabs</h2>
+    <p class="t-body max-w-[62ch]">ใช้ Preline tabs ใช้กับหน้าสินค้าเวลาต้องสลับระหว่างสเปก ผ้า และตำแหน่งงาน</p>
+    <div class="tabs mt-7" role="tablist">
+      <button type="button" class="hs-tab-active:!bg-ink hs-tab-active:!text-paper active" id="tb1" data-hs-tab="#tp1" aria-controls="tp1" role="tab" aria-selected="true">สเปกสินค้า</button>
+      <button type="button" class="hs-tab-active:!bg-ink hs-tab-active:!text-paper" id="tb2" data-hs-tab="#tp2" aria-controls="tp2" role="tab" aria-selected="false">ผ้าที่เลือกได้</button>
+      <button type="button" class="hs-tab-active:!bg-ink hs-tab-active:!text-paper" id="tb3" data-hs-tab="#tp3" aria-controls="tp3" role="tab" aria-selected="false">ตำแหน่งงาน</button>
+    </div>
+    <div class="pt-6">
+      <div id="tp1" role="tabpanel" aria-labelledby="tb1">
+        <dl class="max-w-[520px]"><div class="specrow2"><dt>ทรง</dt><dd>โปโลคอปก แขนสั้น</dd></div><div class="specrow2"><dt>ไซส์</dt><dd>XS ถึง 7XL</dd></div><div class="specrow2"><dt>งานโลโก้</dt><dd>ปักอกซ้าย</dd></div></dl>
+      </div>
+      <div id="tp2" class="hidden" role="tabpanel" aria-labelledby="tb2">
+        <div class="flex flex-wrap gap-3"><span class="colorway"><i style="background:#111"></i>TK 180 แกรม</span><span class="colorway"><i style="background:#888"></i>TC 190 แกรม</span><span class="colorway"><i style="background:#e8e2d8"></i>Cotton Comb 200</span><span class="colorway"><i style="background:#FF6C00"></i>Micro Dry 160</span></div>
+      </div>
+      <div id="tp3" class="hidden" role="tabpanel" aria-labelledby="tb3">
+        <div class="flex flex-wrap gap-2"><span class="tag">อกซ้าย</span><span class="tag">อกขวา</span><span class="tag">แขนซ้าย</span><span class="tag">แขนขวา</span><span class="tag">หลังคอ</span><span class="tag">กลางหลัง</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== D8 Dropdown (Preline) ===== -->
+  <section class="kit-sec" id="d8">
+    <h2 class="t-display">D8 · Dropdown</h2>
+    <p class="t-body max-w-[62ch]">ใช้ Preline dropdown จัดการโฟกัส Escape และคลิกนอกให้เอง ใช้กับตัวเรียงลำดับในหน้าผลงาน</p>
+    <div class="hs-dropdown relative inline-flex mt-7">
+      <button id="dd1" type="button" class="hs-dropdown-toggle btn btn-line gap-2" aria-haspopup="menu" aria-expanded="false" aria-label="เรียงลำดับ">
+        เรียงตาม จำนวนมากไปน้อย
+        <svg class="hs-dropdown-open:rotate-180 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="hs-dropdown-menu transition-[opacity,margin] duration-150 hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[260px] bg-paper border-2 border-ink rounded-card p-2 mt-2 z-20" role="menu" aria-orientation="vertical" aria-labelledby="dd1">
+        <a class="flex items-center min-h-[52px] px-4 rounded-md text-[17px] font-semibold hover:bg-shell" href="#d8" role="menuitem">จำนวนมากไปน้อย</a>
+        <a class="flex items-center min-h-[52px] px-4 rounded-md text-[17px] font-semibold hover:bg-shell" href="#d8" role="menuitem">จำนวนน้อยไปมาก</a>
+        <a class="flex items-center min-h-[52px] px-4 rounded-md text-[17px] font-semibold hover:bg-shell" href="#d8" role="menuitem">วันงานล่าสุด</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== D9 แจ้งเตือน ===== -->
+  <section class="kit-sec" id="d9">
+    <h2 class="t-display">D9 · แจ้งเตือน</h2>
+    <div class="grid md:grid-cols-2 gap-4 mt-7">
+      <div class="rounded-card bg-ok-tint border border-ok/25 p-5 text-ok text-[17px] font-semibold">ทันสบาย ยังเหลือเวลาอีก 51 วัน ก่อนถึงวันที่ควรเริ่มบรีฟ</div>
+      <div class="rounded-card bg-alert-tint border border-alert/25 p-5 text-alert text-[17px] font-semibold">เลยวันที่ควรเริ่มมาแล้ว 12 วัน ต้องคุยเรื่องคิวก่อน</div>
+      <div class="rounded-card bg-shell border border-orange/30 p-5 text-[17px]">ราคานี้เป็นการประเมิน ราคาจริงยืนยันอีกครั้งหลังเลือกผ้าและแบบ</div>
+      <div class="toast"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>ส่งโจทย์เรียบร้อย</div>
+    </div>
+  </section>
+
+  <!-- ===== D10 นำทาง ===== -->
+  <section class="kit-sec" id="d10">
+    <h2 class="t-display">D10 · นำทาง</h2>
+    <p class="kit-lbl">Breadcrumb</p>
+    <nav class="crumb2" aria-label="เส้นทาง"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="/pages/products.html">เสื้อที่เราทำ</a><span aria-hidden="true">/</span><span class="text-ink font-semibold">โปโลปักยูนิฟอร์ม</span></nav>
+    <p class="kit-lbl">Pagination</p>
+    <nav class="pager" aria-label="หน้า"><a href="#d10" aria-label="ก่อนหน้า">&larr;</a><span aria-current="page">1</span><a href="#d10">2</a><a href="#d10">3</a><a href="#d10" aria-label="ถัดไป">&rarr;</a></nav>
+  </section>
+
+  <!-- ===== D11 ว่างและโหลด ===== -->
+  <section class="kit-sec" id="d11">
+    <h2 class="t-display">D11 · สถานะว่างและกำลังโหลด</h2>
+    <div class="grid md:grid-cols-2 gap-4 mt-7">
+      <div class="card text-center py-12 relative overflow-hidden">
+        <span class="watermark w-[200px] left-1/2 -translate-x-1/2 -bottom-8">{{> logo}}</span>
+        <p class="text-[21px] font-bold relative">ไม่มีงานที่ตรงกับตัวกรองนี้</p>
+        <p class="t-sm mt-2 relative">ลองเอาตัวกรองออกสักอัน หรือปรึกษาฟรีให้เราช่วยหา</p>
+        <button class="btn btn-line mt-5 relative">ล้างตัวกรอง</button>
+      </div>
+      <div class="card">
+        <div class="skel h-8 w-2/3"></div>
+        <div class="skel h-5 w-full mt-4"></div>
+        <div class="skel h-5 w-5/6 mt-2"></div>
+        <div class="skel h-32 w-full mt-5"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== E1 ฮีโร่ ===== -->
+  <section class="kit-sec" id="e1">
+    <h2 class="t-display">E1 · ฮีโร่ 3 แบบ</h2>
+    <p class="kit-lbl">แบบที่ 1 · ริ้วส้ม ใช้กับหน้าแรก</p>
+    <div class="tex-streak rounded-plate border-2 border-ink p-8 md:p-12 relative overflow-hidden">
+      <span class="watermark watermark--orange w-[300px] -right-12 -bottom-16 hidden sm:block">{{> logo}}</span>
+      <span class="eyebrow relative">{{site.positioning}}</span>
+      <h3 class="t-display text-[clamp(28px,4.2vw,52px)] max-w-[14ch] relative">{{site.tagline}}</h3>
+      <p class="t-body max-w-[46ch] mt-4 relative">{{site.belief}}</p>
+      <div class="flex flex-wrap gap-3 mt-7 relative"><button class="btn btn-orange btn-lg">ประเมินราคา</button><button class="btn btn-ink btn-lg">ปรึกษาฟรี</button></div>
+    </div>
+    <p class="kit-lbl">แบบที่ 2 · พื้นส้มทึบ ใช้กับหน้ากลุ่มลูกค้า</p>
+    <div class="band-orange on-orange rounded-plate p-8 md:p-12 grid lg:grid-cols-2 gap-8 items-end">
+      <div><span class="tag">คนใส่คือพนักงานทั้งบริษัท</span><h3 class="t-display text-[clamp(26px,3.6vw,44px)] mt-3">เสื้อประจำปีบริษัท</h3><p class="t-lead mt-4 max-w-[40ch]">ปัญหาไม่ใช่ราคา แต่คือปีที่แล้วสั่งไปแล้วไม่มีใครใส่</p></div>
+      <div class="bg-paper rounded-card p-6 text-ink"><p class="t-xs">วันสุดท้ายที่ควรเริ่มบรีฟ</p><p class="t-display text-[clamp(26px,3.4vw,38px)] tabular-nums mt-1">26 ต.ค. 2569</p></div>
+    </div>
+    <p class="kit-lbl">แบบที่ 3 · พื้นดำ ใช้กับหน้าเคสหรือหน้าแบรนด์</p>
+    <div class="tex-fabric rounded-plate p-8 md:p-12 text-paper relative overflow-hidden">
+      <span class="watermark watermark--orange w-[280px] -left-14 -top-12">{{> logo}}</span>
+      <span class="tag tag-ink relative" style="background:var(--color-orange);color:var(--color-ink)">เสื้อประจำปีบริษัท</span>
+      <h3 class="t-display text-[clamp(26px,3.6vw,44px)] mt-3 relative">เสื้อประจำปี บริษัทประกันภัย</h3>
+      <div class="flex flex-wrap gap-x-10 gap-y-3 mt-6 relative">
+        <div><p class="t-display text-[32px] tabular-nums text-orange">420</p><p class="text-[15px] text-paper/70">ตัว</p></div>
+        <div><p class="t-display text-[32px] tabular-nums text-orange">17</p><p class="text-[15px] text-paper/70">วันทำการ</p></div>
+        <div><p class="t-display text-[32px] tabular-nums text-orange">3</p><p class="text-[15px] text-paper/70">สาขาที่ส่ง</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== E2 แถบตัวเลข ===== -->
+  <section class="kit-sec" id="e2">
+    <h2 class="t-display">E2 · แถบตัวเลข</h2>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-line border border-line rounded-card overflow-hidden mt-7">
+      <div class="bg-paper p-6"><p class="t-display text-[clamp(30px,4vw,44px)] tabular-nums">{{site.foundedYear}}</p><p class="t-sm mt-1">ปีที่เริ่มทำเสื้อทีม</p></div>
+      <div class="bg-paper p-6"><p class="t-display text-[clamp(30px,4vw,44px)] tabular-nums">{{site.clients}}</p><p class="t-sm mt-1">องค์กรและทีม</p></div>
+      <div class="bg-paper p-6"><p class="t-display text-[clamp(30px,4vw,44px)] tabular-nums">{{site.sweetSpot}}</p><p class="t-sm mt-1">ช่วงที่เราทำได้ดีที่สุด</p></div>
+      <div class="bg-paper p-6"><p class="t-display text-[clamp(30px,4vw,44px)] tabular-nums">{{site.fabricCount}}</p><p class="t-sm mt-1">ชนิดผ้าให้เลือก</p></div>
+    </div>
+  </section>
+
+  <!-- ===== E3 แถวรายการ ===== -->
+  <section class="kit-sec" id="e3">
+    <h2 class="t-display">E3 · แถวรายการ</h2>
+    <p class="kit-lbl">แถวสินค้า</p>
+    <div class="border-t-2 border-ink">
+      {{#each products}}{{#if this.home}}
+      <a href="/pages/product-{{this.id}}.html" class="grid md:grid-cols-[6fr_8fr_5fr] gap-4 md:gap-8 items-center py-6 border-b border-line group">
+        <div>{{#if this.flag}}<span class="tag">เรือธง</span>{{/if}}<p class="text-[21px] font-bold mt-1.5 group-hover:text-orange">{{this.name}}</p></div>
+        <p class="t-sm">{{this.short}}</p>
+        <dl class="text-[16px] space-y-1"><div class="flex justify-between gap-4 border-b border-dotted border-line-2 pb-1"><dt class="text-ink-3">ช่วงจำนวน</dt><dd class="font-semibold tabular-nums">{{this.qty}} ตัว</dd></div><div class="flex justify-between gap-4"><dt class="text-ink-3">เทคนิค</dt><dd class="font-semibold">{{this.tech}}</dd></div></dl>
+      </a>
+      {{/if}}{{/each}}
+    </div>
+    <p class="kit-lbl">แถวผลงาน ตัวเลขเป็นตัวเอก</p>
+    <div class="border-t-2 border-ink">
+      {{#each works}}{{#if this.home}}
+      <a href="/pages/case-{{this.id}}.html" class="grid md:grid-cols-[130px_1fr_170px] gap-4 md:gap-8 items-center py-6 border-b border-line group">
+        <p class="t-display text-[clamp(32px,3.6vw,42px)] tabular-nums">{{baht this.qty}}<span class="block text-[15px] font-normal text-ink-3 mt-1">ตัว</span></p>
+        <div><span class="tag">{{this.groupName}}</span><p class="text-[20px] font-bold mt-1.5 group-hover:text-orange">{{this.title}}</p><div class="flex flex-wrap gap-x-5 gap-y-1 mt-2 t-sm"><span>ใช้วันที่ <b class="text-ink tabular-nums">{{this.event}}</b></span><span>ใช้เวลา <b class="text-ink tabular-nums">{{this.days}}</b> วันทำการ</span></div></div>
+        <p class="hidden md:block text-right font-bold text-ink-3 group-hover:text-orange">ดูเคสเต็ม &rarr;</p>
+      </a>
+      {{/if}}{{/each}}
+    </div>
+  </section>
+
+  <!-- ===== E4 ขั้นตอน ===== -->
+  <section class="kit-sec" id="e4">
+    <h2 class="t-display">E4 · ขั้นตอน 5 ขั้น</h2>
+    <p class="t-body max-w-[62ch]">ไม่ใช้การ์ดห้าใบเรียงกัน เพราะพอบีบเป็นห้าคอลัมน์แล้วข้อความไทยแตกบรรทัดจนอ่านยาก เปลี่ยนเป็นเส้นเดียวพาดยาว เลขนั่งคร่อมเส้น อ่านเป็นลำดับเวลาได้ทันที</p>
+    <ol class="grid sm:grid-cols-2 xl:grid-cols-5 gap-y-10 mt-12">
+      <li class="step"><div class="step__no">1</div><h3>เล่าโจทย์</h3><p class="t-sm">ตอบพร้อมช่วงราคาภายในวันทำการเดียวกัน</p></li>
+      <li class="step"><div class="step__no">2</div><h3>ขึ้นแบบ 3D</h3><p class="t-sm">แก้จนพอใจก่อนจ่ายเงิน พร้อมส่งชิ้นผ้าจริง</p></li>
+      <li class="step"><div class="step__no">3</div><h3>ยืนยันแบบและไซส์</h3><p class="t-sm">วันนี้คือวันที่นับถอยหลังเริ่มจริง</p></li>
+      <li class="step"><div class="step__no">4</div><h3>ผลิตและตรวจงาน</h3><p class="t-sm">{{site.produceDaysMin}}–{{site.produceDaysMax}} วันทำการ ถ่ายรูปให้ดูก่อนแพ็ก</p></li>
+      <li class="step"><div class="step__no">5</div><h3>ส่งถึงมือ</h3><p class="t-sm">ส่งฟรีทั่วประเทศ เคลมได้ {{site.claimDays}} วัน</p></li>
+    </ol>
+  </section>
+
+  <!-- ===== E5 แถบปิดท้าย ===== -->
+  <section class="kit-sec" id="e5">
+    <h2 class="t-display">E5 · แถบปิดท้าย</h2>
+    <p class="t-body max-w-[62ch]">แถบเดิมโล่งครึ่งขวา เลยเอาสี่คำถามที่ทีมขายต้องรู้มาวางให้เห็นจริง คนอ่านจะรู้ทันทีว่าเล่าโจทย์แล้วต้องตอบอะไรบ้าง ไม่ต้องเดา</p>
+    <div class="band-orange on-orange rounded-plate p-8 md:p-12 mt-7 relative overflow-hidden grid lg:grid-cols-[1.05fr_.95fr] gap-9 lg:gap-14 items-center">
+      <span class="watermark w-[340px] -right-20 -bottom-28 hidden lg:block" style="opacity:.09">{{> logo}}</span>
+      <div class="relative">
+        <h3 class="t-display text-[clamp(28px,4vw,44px)] max-w-[16ch]">{{site.slogan}}</h3>
+        <p class="t-lead mt-4 max-w-[38ch]">ตอบสี่ข้อ ทีมขายจะกลับไปพร้อมช่วงราคา ตารางเวลา และแบบร่างเบื้องต้น</p>
+        <div class="flex flex-wrap gap-3 mt-7"><button class="btn btn-ink btn-lg">ปรึกษาฟรี</button><button class="btn btn-line btn-lg">ลองคำนวณราคาเอง</button></div>
+      </div>
+      <ol class="relative bg-paper text-ink rounded-card p-6 md:p-7 divide-y divide-line">
+        <li class="flex items-center gap-4 py-3 first:pt-0 last:pb-0"><span class="w-8 h-8 shrink-0 rounded-full bg-orange grid place-items-center text-[16px] font-bold tabular-nums">1</span><span class="text-[17px] font-semibold">ใครใส่ และกี่ตัว</span></li>
+        <li class="flex items-center gap-4 py-3 first:pt-0 last:pb-0"><span class="w-8 h-8 shrink-0 rounded-full bg-orange grid place-items-center text-[16px] font-bold tabular-nums">2</span><span class="text-[17px] font-semibold">ต้องใส่วันไหน</span></li>
+        <li class="flex items-center gap-4 py-3 first:pt-0 last:pb-0"><span class="w-8 h-8 shrink-0 rounded-full bg-orange grid place-items-center text-[16px] font-bold tabular-nums">3</span><span class="text-[17px] font-semibold">อยากได้ทรงไหน มีโลโก้หรือยัง</span></li>
+        <li class="flex items-center gap-4 py-3 first:pt-0 last:pb-0"><span class="w-8 h-8 shrink-0 rounded-full bg-orange grid place-items-center text-[16px] font-bold tabular-nums">4</span><span class="text-[17px] font-semibold">งบต่อตัวประมาณเท่าไร</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== F1 เพลต ===== -->
+  <section class="kit-sec" id="f1">
+    <h2 class="t-display">F1 · เพลตแทนรูป</h2>
+    <p class="t-body max-w-[64ch]">ยังไม่มีรูปสินค้าจริง แทนที่จะเป็นกล่องเทาเขียนว่ารอภาพ ทำเป็นแผ่นสีที่มีตัวเลขและป้ายกำกับ อ่านแล้วเหมือนตั้งใจวาง พอได้รูปจริงก็เอาไปแทนพื้นสีโดยไม่ต้องรื้อโครงหน้า</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-7">
+      <div class="plate plate-orange"><span class="plate__tag">โปโลปักยูนิฟอร์ม</span><div><p class="plate__num text-[60px]">01</p><p class="font-semibold mt-2">เรือธง</p></div></div>
+      <div class="plate plate-ink"><span class="plate__tag">เสื้อกีฬาพิมพ์ลาย</span><div><p class="plate__num text-[60px]">02</p><p class="font-semibold mt-2">ลายเต็มตัว</p></div></div>
+      <div class="plate plate-line"><span class="plate__tag">เสื้อกิจกรรม</span><div><p class="plate__num text-[60px]">03</p><p class="font-semibold mt-2">จำนวนเยอะ</p></div></div>
+      <div class="plate plate-line relative overflow-hidden"><span class="tex-halftone absolute inset-0 opacity-45" aria-hidden="true"></span><span class="plate__tag relative">แจ็คเก็ต</span><div class="relative"><p class="plate__num text-[60px]">04</p><p class="font-semibold mt-2">งานปลายปี</p></div></div>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-4 mt-4">
+      <div class="plate plate-line min-h-[170px]"><span class="plate__tag text-ink-3">ภาพที่ 1 · 2000 × 1500</span><p class="t-sm">โลโก้ต้นฉบับที่ลูกค้าส่งมา ก่อนดราฟใหม่</p></div>
+      <div class="plate plate-line min-h-[170px]"><span class="plate__tag text-ink-3">ภาพที่ 2 · 1500 × 1500</span><p class="t-sm">แบบ 3D ที่ส่งให้ลูกค้าอนุมัติ</p></div>
+      <div class="plate plate-line min-h-[170px]"><span class="plate__tag text-ink-3">ภาพที่ 3 · 1500 × 1500</span><p class="t-sm">เสื้อจริงบนคนจริงในวันงาน</p></div>
+    </div>
+  </section>
+
+  <!-- ===== F2 ไซส์รัน ===== -->
+  <section class="kit-sec" id="f2">
+    <h2 class="t-display">F2 · ไซส์รัน</h2>
+    <p class="t-body max-w-[64ch]">ของแบบนี้มีแต่คนทำเสื้อเท่านั้นที่มี ใช้เป็นทั้งข้อมูลและองค์ประกอบกราฟิก สื่อสารเรื่องทุกไซส์ราคาเดียวได้ในตัว</p>
+    <div class="sizerun mt-7"><span>XS</span><span>S</span><span data-on>M</span><span data-on>L</span><span data-on>XL</span><span>2XL</span><span>3XL</span><span>4XL</span><span>7XL</span></div>
+    <p class="t-xs mt-3">ไซส์ที่ไฮไลต์คือช่วงที่คนสั่งมากที่สุด ทุกไซส์คิดราคาเดียวกัน ไม่มีส่วนต่าง</p>
+    <p class="kit-lbl">การกระจายไซส์ในหนึ่งงาน</p>
+    <div class="card max-w-[560px]">
+      <div class="flex items-end gap-1.5 h-32">
+        <div class="flex-1 bg-orange" style="height:8%"></div><div class="flex-1 bg-orange" style="height:31%"></div><div class="flex-1 bg-orange" style="height:79%"></div><div class="flex-1 bg-orange" style="height:100%"></div><div class="flex-1 bg-orange" style="height:76%"></div><div class="flex-1 bg-orange" style="height:38%"></div><div class="flex-1 bg-orange" style="height:11%"></div><div class="flex-1 bg-line-2" style="height:4%"></div><div class="flex-1 bg-line-2" style="height:3%"></div>
+      </div>
+      <div class="flex gap-1.5 mt-2 text-[15px] text-ink-3 text-center">
+        <span class="flex-1">XS</span><span class="flex-1">S</span><span class="flex-1">M</span><span class="flex-1">L</span><span class="flex-1">XL</span><span class="flex-1">2XL</span><span class="flex-1">3XL</span><span class="flex-1">4XL</span><span class="flex-1">7XL</span>
+      </div>
+      <p class="t-xs mt-3">งาน 420 ตัว · กราฟนี้เป็นการประมาณตามสัดส่วนที่พบทั่วไป รอไซส์รันจริงจากทีมขาย</p>
+    </div>
+  </section>
+
+  <!-- ===== F3 ชุดสี ===== -->
+  <section class="kit-sec" id="f3">
+    <h2 class="t-display">F3 · ชุดสีเสื้อ</h2>
+    <p class="t-body max-w-[64ch]">สีเสื้อไม่ใช่สีแบรนด์ ลูกค้าเลือกได้อิสระ องค์ประกอบนี้จึงแยกออกจากระบบสีของ TEAMDEE ชัดเจน</p>
+    <div class="flex flex-wrap gap-3 mt-7">
+      <span class="colorway"><i style="background:#111"></i>ดำ</span>
+      <span class="colorway"><i style="background:#1E2A38"></i>กรมท่า</span>
+      <span class="colorway"><i style="background:#FF6C00"></i>ส้ม</span>
+      <span class="colorway"><i style="background:#7A1F2B"></i>เลือดหมู</span>
+      <span class="colorway"><i style="background:#5B6670"></i>เทา</span>
+      <span class="colorway"><i style="background:#F4F2EE"></i>ขาว</span>
+      <span class="colorway"><i style="background:#12603F"></i>เขียวเข้ม</span>
+    </div>
+  </section>
+
+  <!-- ===== F4 ตารางสเปก ===== -->
+  <section class="kit-sec" id="f4">
+    <h2 class="t-display">F4 · ตารางสเปก</h2>
+    <p class="t-body max-w-[64ch]">ใช้ในหน้าเคส บอกว่างานนั้นทำด้วยอะไรบ้าง</p>
+    <dl class="card max-w-[560px] mt-7">
+      {{#each works}}{{#if @first}}{{#each this.spec}}<div class="specrow2"><dt>{{this.[0]}}</dt><dd>{{this.[1]}}</dd></div>{{/each}}{{/if}}{{/each}}
+    </dl>
+  </section>
+
+  <!-- ===== F5 ไทม์ไลน์ ===== -->
+  <section class="kit-sec" id="f5">
+    <h2 class="t-display">F5 · ไทม์ไลน์การผลิต</h2>
+    <p class="t-body max-w-[64ch]">คำนวณย้อนกลับจากวันงาน ใช้ทั้งในหน้าเคสและในเครื่องประเมินราคา ตัวเลขระยะเวลามาจากที่เก็บกลางที่เดียว</p>
+    <div class="card max-w-[560px] mt-7">
+      <div class="flex items-center gap-4 py-3 border-b border-line"><span class="w-3 h-3 rounded-full bg-orange flex-none"></span><span class="text-[17px] font-semibold">เริ่มบรีฟและขึ้นแบบ</span><b class="ml-auto text-[17px] tabular-nums">31 ต.ค. 69</b></div>
+      <div class="flex items-center gap-4 py-3 border-b border-line"><span class="w-3 h-3 rounded-full bg-line-2 flex-none"></span><span class="text-[17px] text-ink-2">แก้แบบจนพอใจ</span><b class="ml-auto text-[17px] tabular-nums">7 พ.ย. 69</b></div>
+      <div class="flex items-center gap-4 py-3 border-b border-line"><span class="w-3 h-3 rounded-full bg-orange flex-none"></span><span class="text-[17px] font-semibold">ยืนยันแบบและสรุปไซส์</span><b class="ml-auto text-[17px] tabular-nums">14 พ.ย. 69</b></div>
+      <div class="flex items-center gap-4 py-3 border-b border-line"><span class="w-3 h-3 rounded-full bg-line-2 flex-none"></span><span class="text-[17px] text-ink-2">เข้าคิวผลิต {{site.produceDaysMin}}–{{site.produceDaysMax}} วันทำการ</span><b class="ml-auto text-[17px] tabular-nums">15 พ.ย. 69</b></div>
+      <div class="flex items-center gap-4 py-3"><span class="w-3 h-3 rounded-full bg-orange flex-none"></span><span class="text-[17px] font-semibold">วันใส่จริง</span><b class="ml-auto text-[17px] tabular-nums">20 ธ.ค. 69</b></div>
+    </div>
+  </section>
+
+  <!-- ===== F6 ตำแหน่งงาน ===== -->
+  <section class="kit-sec" id="f6">
+    <h2 class="t-display">F6 · ตำแหน่งงานปักและสกรีน</h2>
+    <p class="t-body max-w-[64ch]">หกตำแหน่งที่ทำได้ เลือกได้หลายตำแหน่งในงานเดียว ค่าปักคิดตามขนาดและจำนวนสี ไม่ได้คิดตามตำแหน่ง</p>
+    <div class="grid sm:grid-cols-2 gap-4 mt-7 max-w-[720px]">
+      <div class="card bg-shell relative min-h-[260px] grid place-items-center">
+        <svg viewBox="0 0 200 240" class="w-[190px]" fill="none" stroke="var(--color-ink)" stroke-width="3" aria-label="แผนผังตำแหน่งงานด้านหน้า">
+          <path d="M62 22 40 34 22 58l24 18 12-12v144h104V64l12 12 24-18-18-24-22-12-16 12a24 20 0 0 1-42 0Z" fill="var(--color-paper)"/>
+          <rect x="106" y="72" width="34" height="22" fill="var(--color-orange)" stroke="none"/>
+          <rect x="60" y="72" width="34" height="22" fill="none" stroke="var(--color-orange)" stroke-dasharray="5 4"/>
+        </svg>
+        <p class="t-sm absolute bottom-4">ด้านหน้า · อกซ้าย อกขวา</p>
+      </div>
+      <div class="flex flex-col gap-2 justify-center">
+        <div class="flex items-center gap-3 text-[17px]"><span class="w-4 h-4 bg-orange flex-none"></span>อกซ้าย · ตำแหน่งหลัก ใช้บ่อยที่สุด</div>
+        <div class="flex items-center gap-3 text-[17px]"><span class="w-4 h-4 border-2 border-orange flex-none"></span>อกขวา</div>
+        <div class="flex items-center gap-3 text-[17px]"><span class="w-4 h-4 border-2 border-line-2 flex-none"></span>แขนซ้าย</div>
+        <div class="flex items-center gap-3 text-[17px]"><span class="w-4 h-4 border-2 border-line-2 flex-none"></span>แขนขวา</div>
+        <div class="flex items-center gap-3 text-[17px]"><span class="w-4 h-4 border-2 border-line-2 flex-none"></span>หลังคอ</div>
+        <div class="flex items-center gap-3 text-[17px]"><span class="w-4 h-4 border-2 border-line-2 flex-none"></span>กลางหลัง · พื้นที่ใหญ่ที่สุด</div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+</div>
+</div>
+
+</main>
+
+{{> footer}}
+<script type="module" src="/src/js/ui.js"></script>
+</body>
+</html>

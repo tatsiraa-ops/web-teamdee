@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>ปรึกษาฟรี เล่าโจทย์เสื้อทีมของคุณ ทีมขายตอบกลับในวันทำการเดียวกัน | TEAMDEE</title>
+  <meta name="description" content="ปรึกษาฟรีเรื่องสั่งทำเสื้อทีม ตอบไม่กี่ข้อว่าใครใส่ กี่ตัว ใช้วันไหน ทีมขายจะกลับไปพร้อมช่วงราคา ตารางเวลา และแบบร่างเบื้องต้นในวันทำการเดียวกัน ไม่มีค่าใช้จ่าย">
+</head>
+<body>
+{{> siteHeader active="brief"}}
+
+<main id="main">
+
+  <section class="bg-shell border-b border-line">
+    <div class="wrap py-12 md:py-16">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>ปรึกษาฟรี</span>
+      <h1 class="t-display text-[clamp(30px,4.6vw,54px)]">เล่าโจทย์มา เดี๋ยวเราคิดให้</h1>
+      <p class="t-lead mt-4 max-w-[56ch]">ไม่ต้องรู้ชื่อผ้า ไม่ต้องมีไฟล์โลโก้ ตอบเท่าที่รู้ก็พอ ทีมขายจะกลับไปพร้อมช่วงราคา ตารางเวลา และแบบร่างเบื้องต้นภายในวันทำการเดียวกัน</p>
+      <ul class="flex flex-wrap gap-x-8 gap-y-2 mt-7 text-[17px] font-semibold">
+        <li class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-orange" aria-hidden="true"></span>ไม่มีค่าใช้จ่าย</li>
+        <li class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-orange" aria-hidden="true"></span>ไม่ต้องมัดจำก่อน</li>
+        <li class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-orange" aria-hidden="true"></span>ขอชิ้นผ้าตัวอย่างได้ฟรี</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <form id="briefForm" class="grid lg:grid-cols-[1.15fr_0.85fr] gap-6 lg:gap-10 items-start" novalidate>
+
+      <div class="space-y-6">
+
+        <p class="t-sm"><span class="text-alert font-bold" aria-hidden="true">*</span> คือช่องที่ต้องกรอก ที่เหลือข้ามได้ ยิ่งบอกเยอะเรายิ่งตอบได้ตรง</p>
+
+        <div class="card border-2 border-alert bg-alert-tint" id="formErrs" hidden tabindex="-1" role="alert">
+          <h2 class="text-[19px] font-bold text-alert">ยังกรอกไม่ครบ</h2>
+          <ul class="mt-3 space-y-1.5" id="formErrsList"></ul>
+        </div>
+
+
+        <fieldset class="card">
+          <legend class="text-[21px] font-bold">1 · งานนี้ใครใส่</legend>
+          <p class="t-sm mt-1">คนใส่คือตัวกำหนดผ้า ทรง และเวลาทั้งหมด ถ้ายังไม่แน่ใจเลือกใกล้เคียงที่สุดได้</p>
+          <div class="grid sm:grid-cols-2 gap-3 mt-4">
+            <div>
+              <label class="label" for="bGroup">กลุ่มงาน</label>
+              <select class="input" id="bGroup" name="กลุ่มงาน" required>
+                {{#each groups}}<option value="{{this.name}}">{{this.name}} · {{this.who}}</option>{{/each}}
+                <option value="ยังไม่แน่ใจ">ยังไม่แน่ใจ</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="bQty">จำนวน (ตัว) <span class="text-alert" aria-hidden="true">*</span></label>
+              <input class="input tabular-nums" id="bQty" name="จำนวน" type="number" min="10" step="1" value="100" inputmode="numeric" required aria-describedby="bQty-err">
+              <p class="err" id="bQty-err" hidden>ยังไม่ได้กรอกจำนวน (ตัว) ต้องใส่ก่อนส่ง</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend class="text-[21px] font-bold">2 · ต้องใส่วันไหน</legend>
+          <p class="t-sm mt-1">ตอบข้อนี้ให้ตรงที่สุด เพราะเป็นข้อที่กำหนดว่างานทันหรือไม่ทัน</p>
+          <div class="grid sm:grid-cols-2 gap-3 mt-4">
+            <div>
+              <label class="label" for="bDate">วันที่ต้องใส่จริง <span class="text-alert" aria-hidden="true">*</span></label>
+              <input class="input" id="bDate" name="วันที่ใช้งาน" type="date" required aria-describedby="bDate-err">
+              <p class="err" id="bDate-err" hidden>ยังไม่ได้กรอกวันที่ต้องใส่จริง ต้องใส่ก่อนส่ง</p>
+            </div>
+            <div>
+              <label class="label" for="bWhere">งานอะไร จัดที่ไหน</label>
+              <input class="input" id="bWhere" name="งาน" type="text" placeholder="เช่น งานเลี้ยงปีใหม่ ที่โรงแรม">
+            </div>
+          </div>
+          <p class="help" id="dateNote">เลือกวันแล้วจะบอกให้ว่าเวลาพอไหม</p>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend class="text-[21px] font-bold">3 · อยากได้แบบไหน</legend>
+          <div class="grid sm:grid-cols-2 gap-3 mt-4">
+            <div>
+              <label class="label" for="bCollar">ชนิดคอเสื้อ</label>
+              <select class="input" id="bCollar" name="ชนิดคอ">
+                <option value="คอกลม / คอวี">คอกลม / คอวี</option>
+                <option value="คอปก / คางหมู">คอปก / คางหมู</option>
+                <option value="ยังไม่แน่ใจ">ยังไม่แน่ใจ ให้ช่วยแนะนำ</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="bTech">งานตกแต่ง</label>
+              <select class="input" id="bTech" name="งานตกแต่ง">
+                <option value="พิมพ์ลาย">พิมพ์ลาย</option>
+                <option value="ปัก">ปัก</option>
+                <option value="สกรีน">สกรีน</option>
+                <option value="ยังไม่แน่ใจ">ยังไม่แน่ใจ ให้ช่วยแนะนำ</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="bLogo">ไฟล์โลโก้</label>
+              <select class="input" id="bLogo" name="ไฟล์โลโก้">
+                <option value="มีไฟล์ AI หรือ PDF">มีไฟล์ AI หรือ PDF</option>
+                <option value="มีแต่ไฟล์รูป">มีแต่ไฟล์รูป</option>
+                <option value="ยังไม่มี ให้ช่วยดราฟ">ยังไม่มี ให้ช่วยดราฟ</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="bBudget">งบต่อตัว (บาท)</label>
+              <input class="input tabular-nums" id="bBudget" name="งบต่อตัว" type="number" min="0" step="10" placeholder="ไม่ระบุก็ได้" inputmode="numeric">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend class="text-[21px] font-bold">4 · ติดต่อกลับยังไง</legend>
+          <div class="grid sm:grid-cols-2 gap-3 mt-4">
+            <div>
+              <label class="label" for="bName">ชื่อผู้ติดต่อ <span class="text-alert" aria-hidden="true">*</span></label>
+              <input class="input" id="bName" name="ชื่อ" type="text" autocomplete="name" required aria-describedby="bName-err">
+              <p class="err" id="bName-err" hidden>ยังไม่ได้กรอกชื่อผู้ติดต่อ ต้องใส่ก่อนส่ง</p>
+            </div>
+            <div>
+              <label class="label" for="bOrg">องค์กรหรือทีม</label>
+              <input class="input" id="bOrg" name="องค์กร" type="text" autocomplete="organization">
+            </div>
+            <div>
+              <label class="label" for="bTel">เบอร์โทร <span class="text-alert" aria-hidden="true">*</span></label>
+              <input class="input tabular-nums" id="bTel" name="เบอร์โทร" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="bTel-err">
+              <p class="err" id="bTel-err" hidden>ยังไม่ได้กรอกเบอร์โทร ต้องใส่ก่อนส่ง</p>
+            </div>
+            <div>
+              <label class="label" for="bLine">LINE ID หรืออีเมล</label>
+              <input class="input" id="bLine" name="ไลน์หรืออีเมล" type="text">
+            </div>
+          </div>
+          <div class="mt-3">
+            <label class="label" for="bNote">อยากบอกอะไรเพิ่ม</label>
+            <textarea class="input" id="bNote" name="หมายเหตุ" rows="3" placeholder="เช่น ต้องแยกส่งสามสาขา หรือมีเสื้อเดิมให้ดูเป็นตัวอย่าง"></textarea>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="lg:sticky lg:top-28 space-y-4">
+        <div class="band-ink rounded-plate p-6 md:p-7">
+          <p class="text-[15px] font-bold uppercase tracking-[0.12em] text-orange">สรุปโจทย์ของคุณ</p>
+          <dl class="mt-5 divide-y divide-paper/15" id="sum">
+            <div class="flex justify-between gap-4 py-3"><dt class="text-[16px] text-paper/65">กลุ่มงาน</dt><dd class="text-[17px] font-semibold text-paper text-right" data-s="group">—</dd></div>
+            <div class="flex justify-between gap-4 py-3"><dt class="text-[16px] text-paper/65">จำนวน</dt><dd class="text-[17px] font-semibold text-paper text-right tabular-nums" data-s="qty">—</dd></div>
+            <div class="flex justify-between gap-4 py-3"><dt class="text-[16px] text-paper/65">ต้องใส่วันที่</dt><dd class="text-[17px] font-semibold text-paper text-right tabular-nums" data-s="date">—</dd></div>
+            <div class="flex justify-between gap-4 py-3"><dt class="text-[16px] text-paper/65">ประเมินราคาต่อตัว</dt><dd class="t-display text-[24px] text-orange text-right tabular-nums" data-s="unit">—</dd></div>
+            <div class="flex justify-between gap-4 py-3"><dt class="text-[16px] text-paper/65">ประเมินราคารวม</dt><dd class="t-display text-[24px] text-paper text-right tabular-nums" data-s="total">—</dd></div>
+          </dl>
+          <p class="text-[15px] leading-[1.65] text-paper/55 mt-4">เป็นการประเมินจากเรทในตาราง ราคาจริงยืนยันอีกทีในใบเสนอราคา</p>
+        </div>
+
+        <div class="card">
+          <button class="btn btn-orange btn-lg w-full" type="submit">ส่งโจทย์ให้ทีมขาย</button>
+          <p class="t-xs mt-3" id="formMsg" role="status"></p>
+          <div class="grid gap-3 mt-4 pt-4 border-t border-line">
+            <a class="btn btn-line w-full" href="{{site.lineUrl}}">ทักไลน์แทน</a>
+            <a class="btn btn-line w-full tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="band-ink">
+    <div class="wrap section">
+      <h2 class="t-display text-[clamp(26px,3.4vw,40px)] text-paper">ส่งแล้วเกิดอะไรขึ้นต่อ</h2>
+      <ol class="grid sm:grid-cols-2 xl:grid-cols-4 gap-px bg-paper/15 border border-paper/15 mt-9">
+        <li class="stepx"><p class="stepx__time">ภายในวันเดียวกัน</p><p class="stepx__no">ขั้นที่ 1</p><h3 class="stepx__t">ทีมขายอ่านโจทย์</h3><p class="stepx__d">ทักกลับพร้อมช่วงราคาและถามเพิ่มเฉพาะข้อที่จำเป็น</p></li>
+        <li class="stepx"><p class="stepx__time">1–2 วัน</p><p class="stepx__no">ขั้นที่ 2</p><h3 class="stepx__t">ส่งชิ้นผ้าให้จับ</h3><p class="stepx__d">ส่งชิ้นผ้าจริงกับชาร์ตสีไปให้ดูก่อน ไม่คิดค่าใช้จ่าย</p></li>
+        <li class="stepx"><p class="stepx__time">~7 วัน</p><p class="stepx__no">ขั้นที่ 3</p><h3 class="stepx__t">ขึ้นแบบ 3D ให้ดู</h3><p class="stepx__d">แก้จนพอใจก่อนจ่ายเงิน ไม่คิดค่าแก้แบบ</p></li>
+        <li class="stepx stepx--hi"><p class="stepx__time">เมื่อพร้อม</p><p class="stepx__no">ขั้นที่ 4</p><h3 class="stepx__t">ออกใบเสนอราคา</h3><p class="stepx__d">ระบุราคาสุทธิรวมภาษีและวันส่งมอบ เอาเข้าที่ประชุมได้เลย</p></li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+{{> footer}}
+<script type="module" src="/src/js/brief-page.js"></script>
+</body>
+</html>

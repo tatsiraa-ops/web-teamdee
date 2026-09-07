@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>เกี่ยวกับเรา · โรงงานผลิตเสื้อทีมครบวงจร ประสบการณ์ 10 ปี | TEAMDEE</title>
+  <meta name="description" content="TEAMDEE โรงงานผลิตเสื้อทีมครบวงจร ประสบการณ์ 10 ปี พิมพ์ ปัก สกรีน อยู่ที่เดียวกัน ดูแลตั้งแต่ออกแบบจนส่งมอบ โรงงานและสำนักงานอยู่นนทบุรี นัดเข้าดูหน้างานได้">
+</head>
+<body>
+{{> siteHeader active="about"}}
+
+<main id="main">
+
+  <!-- 1 · ฮีโร่ พื้นดำ รูปโรงงานจริงเป็นพื้นผิว -->
+  <section class="band-ink relative overflow-hidden">
+    <img src="/img/hero/factory-sign.jpg" alt="" width="1600" height="1067" fetchpriority="high" decoding="async"
+         class="absolute inset-0 w-full h-full object-cover opacity-[0.2]">
+    <div class="absolute inset-0 bg-[linear-gradient(150deg,rgba(0,0,0,.78)_0%,rgba(0,0,0,.9)_60%,#000_100%)]"></div>
+    <span class="watermark watermark--orange w-[min(80vw,860px)] -right-[18%] -bottom-[44%]" style="opacity:.12">{{> logo}}</span>
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+
+    <div class="wrap relative py-16 md:py-28">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShield}}</span>เกี่ยวกับเรา</span>
+      <h1 class="t-display text-[clamp(32px,5.6vw,72px)] text-paper">โรงงานที่ทำเสื้อทีมอย่างเดียว มาสิบปี</h1>
+      <p class="text-[19px] leading-[1.75] text-paper/75 max-w-[52ch] mt-6">เราไม่ได้รับงานทุกอย่าง เราทำเฉพาะเสื้อทีม เสื้อองค์กร และยูนิฟอร์ม เพราะเชื่อว่าการทำอย่างเดียวให้ลึก ดีกว่าทำหลายอย่างให้ผิวเผิน</p>
+      <div class="flex flex-wrap gap-3 mt-9">
+        <a class="btn btn-orange btn-lg" href="/pages/brief.html">ปรึกษาฟรี</a>
+        <a class="btn btn-lg bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="#contact">ช่องทางติดต่อ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · ตัวเลข นับขึ้นเมื่อเลื่อนมาถึง -->
+  <section class="bg-shell border-b border-line" aria-label="ตัวเลขของโรงงาน">
+    <div class="wrap py-12 md:py-16 grid grid-cols-2 lg:grid-cols-4 gap-y-9 gap-x-8 xl:gap-x-12">
+      <div><p class="t-display text-[clamp(30px,3.6vw,50px)] leading-none tabular-nums border-b-4 border-orange pb-3 self-start inline-block" data-count>{{site.yearsExperience}}</p><p class="text-[16px] font-semibold mt-3 text-ink-2">ปีที่ทำเสื้อทีม</p></div>
+      <div class="lg:border-l lg:border-line-2 lg:pl-8"><p class="t-display text-[clamp(30px,3.6vw,50px)] leading-none tabular-nums border-b-4 border-orange pb-3 inline-block" data-count>{{site.clients}}</p><p class="text-[16px] font-semibold mt-3 text-ink-2">ทีมและองค์กรที่ไว้ใจ</p></div>
+      <div class="lg:border-l lg:border-line-2 lg:pl-8"><p class="t-display text-[clamp(30px,3.6vw,50px)] leading-none tabular-nums border-b-4 border-orange pb-3 inline-block" data-count>{{site.pieces}}</p><p class="text-[16px] font-semibold mt-3 text-ink-2">ตัวที่ผลิตส่งมอบแล้ว</p></div>
+      <div class="lg:border-l lg:border-line-2 lg:pl-8"><p class="t-display text-[clamp(30px,3.6vw,50px)] leading-none tabular-nums border-b-4 border-orange pb-3 inline-block" data-count>{{site.fabricCount}}</p><p class="text-[16px] font-semibold mt-3 text-ink-2">ชนิดผ้าให้เลือก</p></div>
+    </div>
+  </section>
+
+  <!-- 3 · แก่นแบรนด์ รูปจริงครึ่งจอ + เสาหลักไล่ทีละข้อ -->
+  <section class="band-ink relative overflow-hidden" aria-labelledby="brand-h">
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+    <div class="grid lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="relative min-h-[320px] lg:min-h-0 overflow-hidden">
+        <img src="/img/tech/embroid.jpg" alt="เครื่องปักกำลังปักโลโก้ TEAMDEE ลงบนผ้าโปโล" width="960" height="1200" loading="lazy" decoding="async"
+             class="absolute inset-0 w-full h-full object-cover object-[center_45%]">
+        <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.55)_0%,transparent_35%,transparent_65%,rgba(0,0,0,.75)_100%)] lg:bg-[linear-gradient(90deg,transparent_40%,rgba(0,0,0,.85)_100%)]"></div>
+        <p class="absolute left-6 bottom-6 lg:left-8 lg:bottom-8 text-[15px] font-semibold text-paper/75 max-w-[26ch] leading-[1.6]">เครื่องปักในโรงงานของเราเอง ไม่ได้ส่งต่อให้ใคร</p>
+      </div>
+
+      <div class="wrap-r py-16 md:py-24 lg:py-28">
+        <span class="eyebrow">{{site.brand}} · {{site.positioning}}</span>
+        <h2 id="brand-h" class="t-display text-[clamp(28px,3.8vw,50px)] leading-[1.12] text-paper">เราไม่ได้ขายเสื้อ เรา<span class="text-orange">สร้างตัวตน</span>ของทีม</h2>
+        <p class="text-[18px] leading-[1.85] text-paper/70 mt-6 max-w-[54ch]">{{site.brand}} คือผู้เชี่ยวชาญด้านการออกแบบและผลิตเสื้อทีมแบบครบวงจร ที่เชื่อว่า &ldquo;เสื้อ&rdquo; ไม่ได้เป็นเพียงเครื่องแต่งกาย แต่เป็นเครื่องมือสำคัญในการสะท้อนตัวตน วัฒนธรรมองค์กร และความรู้สึกของการเป็นทีม</p>
+        <p class="text-[18px] leading-[1.85] text-paper/70 mt-4 max-w-[54ch]">เราก่อตั้งขึ้นจากแนวคิดที่ต้องการยกระดับการทำเสื้อแบบเดิมๆ ให้กลายเป็นการสร้าง Team Identity ร่วมกับลูกค้า ทุกองค์กรควรมีเสื้อที่สะท้อนเอกลักษณ์ของตัวเองอย่างแท้จริง</p>
+
+        <ol class="mt-12 border-t border-paper/20" id="pillars">
+          {{#each site.pillars}}
+          <li>
+            <button type="button" class="pill-row group" aria-expanded="{{#if (eq @index 0)}}true{{else}}false{{/if}}" data-pillar>
+              <span class="pill-row__bar" aria-hidden="true"></span>
+              <span class="pill-row__no">0{{inc @index}}</span>
+              <span class="pill-row__en">{{this.en}}</span>
+              <span class="pill-row__th">{{this.th}}</span>
+            </button>
+          </li>
+          {{/each}}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · เทคนิคการผลิต -->
+  <section class="wrap section">
+    <div class="max-w-[68ch] mb-11">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPrinter}}</span>ในโรงงานของเรา</span>
+      <h2 class="t-display text-[clamp(30px,4.4vw,52px)]">พิมพ์ ปัก สกรีน อยู่ที่เดียวกัน</h2>
+      <p class="t-lead mt-4">ไม่ต้องส่งงานต่อให้ใคร คุมคุณภาพและคุมเวลาได้เองทั้งสามเทคนิค นี่คือเหตุผลที่เรากล้ารับงานที่มีเดดไลน์แน่นอน</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <figure><div class="overflow-hidden rounded-plate aspect-[3/4]"><img src="/img/tech/print.jpg" alt="เสื้อพิมพ์ลายซับลิเมชันบนพื้นโรงงาน" width="900" height="1200" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="text-[21px] font-bold mt-4 flex items-center gap-3"><span class="block size-6 text-orange shrink-0">{{> icoPrinter}}</span>พิมพ์ลาย</figcaption><p class="t-sm mt-2">สีติดในเนื้อผ้า ไม่ลอกไม่แตก ลายไปได้ทั้งตัวไม่มีรอยต่อ</p></figure>
+      <figure><div class="overflow-hidden rounded-plate aspect-[3/4]"><img src="/img/tech/embroid.jpg" alt="เครื่องปักกำลังปักโลโก้ลงบนผ้าโปโล" width="960" height="1200" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="text-[21px] font-bold mt-4 flex items-center gap-3"><span class="block size-6 text-orange shrink-0">{{> icoNeedle}}</span>งานปัก</figcaption><p class="t-sm mt-2">โลโก้ไม่หลุดแม้ซักร้อยครั้ง เป็นงานที่องค์กรเลือกมากที่สุด</p></figure>
+      <figure><div class="overflow-hidden rounded-plate aspect-[3/4]"><img src="/img/tech/screen.jpg" alt="เสื้อยืดสกรีนสีส้มบนพื้นโรงงาน" width="900" height="1200" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="text-[21px] font-bold mt-4 flex items-center gap-3"><span class="block size-6 text-orange shrink-0">{{> icoTag}}</span>งานสกรีน</figcaption><p class="t-sm mt-2">คมชัดทุกดีเทล สีสดเด้ง ทำได้ทั้งผ้าสีเข้มและสีอ่อน</p></figure>
+    </div>
+  </section>
+
+  <!-- 5 · สิ่งที่เรายึด แบบสเปกชีต -->
+  <section class="bg-shell border-y border-line">
+    <div class="wrap section grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-20 items-start">
+      <div class="lg:sticky lg:top-28">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>วิธีทำงานของเรา</span>
+        <h2 class="t-display text-[clamp(30px,4.4vw,52px)]">หกอย่างที่เรายึดมาตลอด</h2>
+        <p class="t-lead mt-5 max-w-[36ch]">ไม่ใช่คำโฆษณา แต่เป็นเงื่อนไขที่เราให้ลูกค้าทุกรายเท่ากัน</p>
+      </div>
+      <ol class="border-t-2 border-ink">
+        <li class="why-row"><span class="why-row__no">01</span><div class="why-row__body"><h3 class="why-row__t">ผลิตเองทุกขั้น</h3><p class="why-row__d">ตัด เย็บ พิมพ์ ปัก อยู่ในโรงงานเดียวกัน ไม่ส่งต่อให้ใคร คุมเวลาได้จริง</p></div><span class="why-row__ico">{{> icoPrinter}}</span></li>
+        <li class="why-row"><span class="why-row__no">02</span><div class="why-row__body"><h3 class="why-row__t">บอกตรงถ้าไม่ทัน</h3><p class="why-row__d">งานที่เวลาไม่พอเราบอกตั้งแต่วันแรก ไม่รับไว้ก่อนแล้วค่อยขอเลื่อน</p></div><span class="why-row__ico">{{> icoClock}}</span></li>
+        <li class="why-row"><span class="why-row__no">03</span><div class="why-row__body"><h3 class="why-row__t">ให้จับของจริงก่อน</h3><p class="why-row__d">ส่งชิ้นผ้าและชาร์ตสีไปให้ดูก่อนตัดสินใจทุกงาน ไม่คิดค่าใช้จ่าย</p></div><span class="why-row__ico">{{> icoShirt}}</span></li>
+        <li class="why-row"><span class="why-row__no">04</span><div class="why-row__body"><h3 class="why-row__t">แก้แบบไม่คิดเงิน</h3><p class="why-row__d">ขึ้น 3D Mockup แก้จนพอใจก่อนเริ่มผลิต ไม่มีค่าแก้แบบทุกกรณี</p></div><span class="why-row__ico">{{> icoCube}}</span></li>
+        <li class="why-row"><span class="why-row__no">05</span><div class="why-row__body"><h3 class="why-row__t">ราคาเดียวทุกไซส์</h3><p class="why-row__d">XS ถึง 7XL เรทเดียวกันหมด ไม่มีส่วนต่างตอนทำเรื่องเบิก</p></div><span class="why-row__ico">{{> icoRuler}}</span></li>
+        <li class="why-row"><span class="why-row__no">06</span><div class="why-row__body"><h3 class="why-row__t">เอกสารครบตั้งแต่ต้น</h3><p class="why-row__d">ใบเสนอราคา หนังสือรับรองบริษัท และเอกสารภาษี ขอได้ตั้งแต่ยังไม่ตัดสินใจ</p></div><span class="why-row__ico">{{> icoDoc}}</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 · ที่ตั้งและติดต่อ -->
+  <section id="contact" class="band-ink scroll-mt-24">
+    <div class="wrap section grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16">
+      <div>
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPin}}</span>ที่ตั้งและติดต่อ</span>
+        <h2 class="t-display text-[clamp(30px,4.4vw,52px)] text-paper">โรงงานกับสำนักงานอยู่ที่เดียวกัน</h2>
+        <p class="text-[19px] leading-[1.75] text-paper/70 mt-5 max-w-[42ch]">นัดเข้ามาดูหน้างานได้ ทั้งเครื่องปัก เครื่องพิมพ์ และห้องตัดเย็บ อยากเห็นของจริงก่อนตัดสินใจก็บอกได้</p>
+        <div class="flex flex-wrap gap-3 mt-9">
+          <a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+          <a class="btn btn-lg gap-2 bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="/pages/brief.html">ปรึกษาฟรี</a>
+        </div>
+      </div>
+      <dl class="divide-y divide-paper/15 border-t border-paper/15">
+        <div class="flex gap-5 py-6"><span class="block size-6 text-orange shrink-0 mt-1">{{> icoPhone}}</span><div><dt class="text-[15px] font-bold uppercase tracking-[0.12em] text-paper/60">สายตรงฝ่ายขาย</dt><dd class="mt-2 flex flex-wrap gap-x-6"><a class="inline-flex items-center min-h-[44px] t-display text-[clamp(22px,2.6vw,28px)] tabular-nums text-paper hover:text-orange" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a><a class="inline-flex items-center min-h-[44px] t-display text-[clamp(22px,2.6vw,28px)] tabular-nums text-paper hover:text-orange" href="tel:0864166449">{{site.phoneSecondary}}</a></dd></div></div>
+        <div class="flex gap-5 py-6"><span class="block size-6 text-orange shrink-0 mt-1">{{> icoPin}}</span><div><dt class="text-[15px] font-bold uppercase tracking-[0.12em] text-paper/60">ที่อยู่</dt><dd class="text-[18px] leading-[1.7] text-paper/85 mt-2 max-w-[34ch]">{{site.address}}</dd></div></div>
+        <div class="flex gap-5 py-6"><span class="block size-6 text-orange shrink-0 mt-1">{{> icoClock}}</span><div><dt class="text-[15px] font-bold uppercase tracking-[0.12em] text-paper/60">เวลาทำการ</dt><dd class="text-[18px] leading-[1.7] text-paper/85 mt-2">{{site.hours}} ตอบไลน์ทุกวันไม่เว้นวันหยุด</dd></div></div>
+        <div class="flex gap-5 py-6"><span class="block size-6 text-orange shrink-0 mt-1">{{> icoDoc}}</span><div><dt class="text-[15px] font-bold uppercase tracking-[0.12em] text-paper/60">งานจัดซื้อและราชการ</dt><dd class="text-[18px] leading-[1.7] text-paper/85 mt-2 max-w-[36ch]">ขอใบเสนอราคา หนังสือรับรองบริษัท และเอกสารภาษีได้ตั้งแต่ยังไม่ตัดสินใจ</dd></div></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 7 · แถบปิดท้าย -->
+  <section class="band-orange on-orange relative overflow-hidden">
+    <span class="watermark w-[min(60vw,520px)] -right-[8%] -bottom-[34%]" style="opacity:.1">{{> logo}}</span>
+    <div class="wrap section relative grid lg:grid-cols-[1.05fr_.95fr] gap-10 lg:gap-16 items-center">
+      <div>
+        <h2 class="t-display text-[clamp(32px,5vw,60px)]">{{site.sloganA}} <br class="hidden md:inline">{{site.sloganB}}</h2>
+        <p class="text-[19px] leading-[1.75] mt-6 max-w-[38ch] text-paper">ตอบสี่ข้อ ทีมขายจะกลับไปพร้อมช่วงราคา ตารางเวลา และแบบร่างเบื้องต้น</p>
+        <div class="flex flex-wrap gap-3 mt-9">
+          <a class="btn btn-ink btn-lg" href="/pages/brief.html">ปรึกษาฟรี</a>
+          <a class="btn btn-line btn-lg" href="/pages/calculator.html">คำนวณราคา</a>
+        </div>
+      </div>
+      <ol class="on-paper bg-paper rounded-plate p-7 md:p-9 divide-y divide-line">
+        <li class="flex items-center gap-4 py-4 first:pt-0 last:pb-0"><span class="w-9 h-9 shrink-0 rounded-full bg-orange grid place-items-center text-[17px] font-bold tabular-nums text-paper">1</span><span class="text-[18px] font-semibold">ใครใส่ และกี่ตัว</span></li>
+        <li class="flex items-center gap-4 py-4 first:pt-0 last:pb-0"><span class="w-9 h-9 shrink-0 rounded-full bg-orange grid place-items-center text-[17px] font-bold tabular-nums text-paper">2</span><span class="text-[18px] font-semibold">ต้องใส่วันไหน</span></li>
+        <li class="flex items-center gap-4 py-4 first:pt-0 last:pb-0"><span class="w-9 h-9 shrink-0 rounded-full bg-orange grid place-items-center text-[17px] font-bold tabular-nums text-paper">3</span><span class="text-[18px] font-semibold">อยากได้ทรงไหน มีโลโก้หรือยัง</span></li>
+        <li class="flex items-center gap-4 py-4 first:pt-0 last:pb-0"><span class="w-9 h-9 shrink-0 rounded-full bg-orange grid place-items-center text-[17px] font-bold tabular-nums text-paper">4</span><span class="text-[18px] font-semibold">งบต่อตัวประมาณเท่าไร</span></li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+{{> footer}}
+<script type="module" src="/src/js/page.js"></script>
+</body>
+</html>

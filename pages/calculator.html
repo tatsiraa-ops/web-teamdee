@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>คำนวณราคาเสื้อโปโลและเสื้อกีฬาพิมพ์ลาย รู้ราคาต่อตัวทันที | TEAMDEE</title>
+  <meta name="description" content="คำนวณราคาผลิตเสื้อโปโลและเสื้อกีฬาพิมพ์ลายด้วยตัวเอง เลือกชนิดคอ จำนวน และตัวเลือกเพิ่ม รู้ราคาต่อตัวและราคารวมทันที รวม VAT แล้ว ส่งฟรีทั่วประเทศ ทักไลน์ได้">
+</head>
+<body>
+{{> siteHeader active="calculator"}}
+
+<main id="main">
+
+  <section class="bg-shell border-b border-line">
+    <div class="wrap py-12 md:py-16">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoDoc}}</span>คำนวณราคา</span>
+      <h1 class="t-display text-[clamp(30px,4.6vw,54px)]">รู้ราคาต่อตัวก่อนทักมาถาม</h1>
+      <p class="t-lead mt-4 max-w-[56ch]">เลือกชนิดคอ ใส่จำนวน แล้วติ๊กตัวเลือกที่ต้องการ ราคาจะขึ้นให้ทันที ทุกตัวเลขรวม VAT 7% แล้ว และส่งฟรีทั่วประเทศ</p>
+    </div>
+  </section>
+
+  <section class="wrap section" id="calc">
+    <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-6 lg:gap-10 items-start">
+
+      <div class="space-y-6">
+
+        <div class="card">
+          <h2 class="text-[21px]">1 · ชนิดคอเสื้อ</h2>
+          <p class="t-sm mt-1">คอคือตัวกำหนดเรทราคา คอปกจะสูงกว่าคอกลมประมาณ 50 บาทต่อตัว</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <button type="button" class="chip" data-collar="0" aria-pressed="true">คอกลม / คอวี</button>
+            <button type="button" class="chip" data-collar="1" aria-pressed="false">คอปก / คางหมู</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="text-[21px]">2 · จำนวนที่จะสั่ง</h2>
+          <p class="t-sm mt-1">ขั้นต่ำ {{site.moq}} ตัว ยิ่งเยอะราคาต่อตัวยิ่งลง</p>
+          <div class="flex items-end gap-4 mt-4">
+            <div class="grow">
+              <label class="label" for="qtyNum">จำนวน (ตัว)</label>
+              <input id="qtyNum" class="input tabular-nums" type="number" min="10" max="10000" step="1" value="100" inputmode="numeric">
+            </div>
+          </div>
+          <input id="qtyRange" class="rng mt-4" type="range" min="10" max="600" step="10" value="100" aria-label="เลื่อนเลือกจำนวน">
+          <div class="flex flex-wrap gap-2 mt-3">
+            <button type="button" class="chip" data-qty="20">20</button>
+            <button type="button" class="chip" data-qty="50">50</button>
+            <button type="button" class="chip" data-qty="100" aria-pressed="true">100</button>
+            <button type="button" class="chip" data-qty="300">300</button>
+            <button type="button" class="chip" data-qty="600">600</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="text-[21px]">3 · ตัวเลือกเพิ่ม</h2>
+          <p class="t-sm mt-1">ติ๊กเฉพาะที่ต้องการ ไม่ติ๊กก็ไม่คิดเพิ่ม</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            {{#each pricing.options}}
+            <button type="button" class="chip gap-2" data-opt="{{this.add}}" data-name="{{this.name}}" aria-pressed="false">{{this.name}} <b class="tabular-nums">+{{this.add}}</b></button>
+            {{/each}}
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="text-[21px]">4 · งานตกแต่ง</h2>
+          <p class="t-sm mt-1">เลือกไว้เพื่อให้ทีมขายเตรียมข้อมูล ยังไม่กระทบเรทในตารางนี้ งานที่ปักหลายจุดจะมีใบเสนอราคาเฉพาะงาน</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <button type="button" class="chip" data-tech="พิมพ์ลาย" aria-pressed="true">พิมพ์ลาย</button>
+            <button type="button" class="chip" data-tech="ปัก" aria-pressed="false">ปัก</button>
+            <button type="button" class="chip" data-tech="สกรีน" aria-pressed="false">สกรีน</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:sticky lg:top-28 band-orange on-orange rounded-plate p-6 md:p-8 relative overflow-hidden">
+        <span class="watermark w-[300px] -right-14 -bottom-20" style="opacity:.12">{{> logo}}</span>
+        <div class="relative" aria-live="polite">
+          <p class="text-[16px] font-bold uppercase tracking-[0.12em] text-paper/85">ราคาต่อตัว</p>
+          <p class="t-display text-[clamp(50px,7vw,84px)] leading-[0.95] tabular-nums mt-1"><span id="unitOut">210</span><span class="text-[clamp(20px,2.2vw,26px)] font-bold align-top ml-2">บาท</span></p>
+
+          <dl class="mt-6 pt-5 border-t border-paper/35 space-y-3">
+            <div class="flex items-baseline justify-between gap-4"><dt class="text-[17px] text-paper/85">ราคาพื้นฐานตามเรท</dt><dd class="text-[19px] font-bold tabular-nums"><span id="baseOut">210</span> บาท</dd></div>
+            <div class="flex items-baseline justify-between gap-4"><dt class="text-[17px] text-paper/85">ตัวเลือกเพิ่ม</dt><dd class="text-[19px] font-bold tabular-nums">+<span id="optOut">0</span> บาท</dd></div>
+            <div class="flex items-baseline justify-between gap-4"><dt class="text-[17px] text-paper/85">อยู่ในเรท</dt><dd class="text-[19px] font-bold tabular-nums" id="tierOut">51 – 100</dd></div>
+          </dl>
+
+          <div class="mt-6 pt-5 border-t border-paper/35">
+            <p class="text-[17px] text-paper/85">ราคารวมทั้งงาน</p>
+            <p class="t-display text-[clamp(30px,4vw,46px)] tabular-nums mt-1"><span id="totalOut">21,000</span> บาท</p>
+            <p class="text-[16px] text-paper/85 mt-2">ถูกกว่าเรทเริ่มต้นตัวละ <b class="tabular-nums" id="saveOut">69</b> บาท</p>
+          </div>
+
+          <p class="text-[16px] leading-[1.6] text-paper/85 mt-6">รวม VAT 7% · ส่งฟรีทั่วประเทศ · ทุกไซส์ XS–7XL ราคาเดียว · ขึ้นแบบ 3D ฟรี</p>
+
+          <div class="grid gap-3 mt-6">
+            <a class="btn btn-ink btn-lg w-full" id="toBrief" href="/pages/brief.html">ขอใบเสนอราคา</a>
+            <a class="btn btn-line btn-lg w-full" href="{{site.lineUrl}}">ทักไลน์คุยกับทีมขาย</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-ink">
+    <div class="wrap section">
+      <h2 class="t-display text-[clamp(26px,3.4vw,40px)] text-paper">ตารางเรทราคาเต็ม</h2>
+      <p class="text-[18px] leading-[1.75] text-paper/70 mt-3 max-w-[54ch]">แถวที่ตรงกับจำนวนที่เลือกไว้ด้านบนจะสว่างขึ้นให้เห็น</p>
+      <div class="overflow-x-auto border border-paper/25 rounded-card mt-8">
+        <table class="w-full min-w-[560px] text-[17px] tbl-price">
+          <caption class="sr-only">เรทราคาต่อตัว รวมภาษีมูลค่าเพิ่มแล้ว หน่วยเป็นบาท</caption>
+          <thead><tr class="text-paper/60">
+            <th scope="col" class="text-left font-bold px-5 py-4">จำนวนผลิต (ตัว)</th>
+            <th scope="col" class="text-left font-bold px-5 py-4">คอกลม / คอวี</th>
+            <th scope="col" class="text-left font-bold px-5 py-4">คอปก / คางหมู</th>
+          </tr></thead>
+          <tbody>
+            {{#each pricing.tiers}}
+            <tr>
+              <th scope="row" class="text-left font-bold px-5 py-4 tabular-nums text-paper">{{this.label}}</th>
+              <td class="px-5 py-4"><span class="bar" data-v="{{this.round}}"><b class="tabular-nums">{{baht this.round}}</b></span></td>
+              <td class="px-5 py-4"><span class="bar bar--2" data-v="{{this.collar}}"><b class="tabular-nums">{{baht this.collar}}</b></span></td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-[15px] leading-[1.7] text-paper/55 mt-4 max-w-[64ch]">ราคาข้างต้นเป็นเรทเริ่มต้น งานที่ใช้ผ้าพิเศษ ปักหลายจุด หรือแพ็กแยกสาขา จะมีใบเสนอราคาเฉพาะงานให้อีกที</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="grid lg:grid-cols-[1fr_1.5fr] gap-10 lg:gap-16 items-start">
+      <div class="lg:sticky lg:top-28">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามเรื่องราคา</span>
+        <h2 class="t-display text-[clamp(26px,3.4vw,40px)]">ถามบ่อยก่อนตัดสินใจ</h2>
+        <a class="btn btn-orange mt-7" href="/pages/size-chart.html">ดูตารางไซส์และเนื้อผ้า</a>
+      </div>
+      <div class="hs-accordion-group border-t-2 border-ink">
+        {{#each faq.home}}
+        <div class="hs-accordion border-b border-line" id="cf-{{@index}}">
+          <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-6 min-h-tap font-bold text-[19px] hover:text-orange transition-colors" aria-controls="cfp-{{@index}}">
+            <span>{{this.[0]}}</span>
+            <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div id="cfp-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="cf-{{@index}}">
+            <p class="t-body pb-7 max-w-[62ch]">{{this.[1]}}</p>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{{> footer}}
+<script type="module" src="/src/js/calc-page.js"></script>
+</body>
+</html>

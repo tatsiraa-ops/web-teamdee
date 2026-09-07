@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>บทความ · คู่มือก่อนสั่งทำเสื้อทีม 5 เรื่องที่ต้องรู้ | TEAMDEE</title>
+  <meta name="description" content="คู่มือก่อนสั่งทำเสื้อทีม ต้องเริ่มก่อนวันงานกี่วัน เลือกผ้ายังไง ปักหรือพิมพ์ดีกว่ากัน สรุปไซส์ทั้งทีมไม่ให้พลาด และเอกสารที่งานจัดซื้อกับราชการต้องใช้ครบชุด">
+</head>
+<body>
+{{> siteHeader active="blog"}}
+
+<main id="main">
+
+  <!-- 1 · ฮีโร่ -->
+  <section class="band-ink relative overflow-hidden">
+    <img src="/img/tech/print.jpg" alt="" width="900" height="1200" fetchpriority="high" decoding="async"
+         class="absolute inset-0 w-full h-full object-cover object-[center_35%] opacity-[0.22]">
+    <div class="absolute inset-0 bg-[linear-gradient(120deg,rgba(0,0,0,.86)_0%,rgba(0,0,0,.9)_55%,#000_100%)]"></div>
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+
+    <div class="wrap relative py-14 md:py-24">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoDoc}}</span>บทความ</span>
+      <h1 class="t-display text-[clamp(32px,5.2vw,64px)] text-paper">คู่มือก่อนสั่งทำเสื้อทีม</h1>
+      <p class="text-[19px] leading-[1.75] text-paper/75 max-w-[54ch] mt-5">ห้าเรื่องที่ลูกค้าถามซ้ำที่สุด เขียนจากงานที่เราทำจริง ไม่ใช่บทความเอาไว้ติดอันดับ อ่านจบแล้วคุยกับโรงงานไหนก็รู้เรื่อง</p>
+      <nav class="flex flex-wrap gap-2 mt-8" aria-label="สารบัญบทความ">
+        <a class="chip" href="#a1">ต้องเริ่มก่อนกี่วัน</a>
+        <a class="chip" href="#a2">เลือกผ้ายังไง</a>
+        <a class="chip" href="#a3">ปักหรือพิมพ์</a>
+        <a class="chip" href="#a4">สรุปไซส์ทั้งทีม</a>
+        <a class="chip" href="#a5">เอกสารจัดซื้อ</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 2 · เรื่องที่หนึ่ง เวลา -->
+  <section id="a1" class="wrap section scroll-mt-24">
+    <div class="max-w-[62ch]">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoClock}}</span>เรื่องที่ 01</span>
+      <h2 class="t-display text-[clamp(28px,4vw,46px)]">ต้องเริ่มก่อนวันงานกี่วัน</h2>
+      <p class="t-body mt-5">คำถามแรกที่ควรถามไม่ใช่ราคา แต่คือ &ldquo;ต้องใส่วันไหน&rdquo; เพราะงานเสื้อส่วนใหญ่ที่สะดุด สะดุดเพราะเริ่มช้า ไม่ใช่เพราะเลือกผ้าผิด</p>
+      <p class="t-body mt-4">จุดที่คนพลาดบ่อยที่สุดคือนับถอยหลังจากวันที่ทักมาครั้งแรก ทั้งที่นาฬิกาเริ่มเดินจริงตอน<b class="text-ink">อนุมัติแบบและสรุปไซส์</b> เวลาที่ใช้ไปกับการรอผู้บริหารเคาะแบบ มักกินเวลามากกว่าเวลาผลิตเสียอีก</p>
+    </div>
+
+    <ol class="grid sm:grid-cols-2 xl:grid-cols-5 gap-px bg-paper/15 border border-ink rounded-plate overflow-hidden mt-10">
+      <li class="stepx"><p class="stepx__time">วันเดียวกัน</p><p class="stepx__no">ขั้นที่ 1</p><h3 class="stepx__t">เล่าโจทย์</h3><p class="stepx__d">ทีมขายตอบกลับพร้อมช่วงราคาภายในวันทำการเดียวกัน</p></li>
+      <li class="stepx"><p class="stepx__time">~7 วัน</p><p class="stepx__no">ขั้นที่ 2</p><h3 class="stepx__t">ขึ้นแบบและแก้แบบ</h3><p class="stepx__d">ดูของจริงก่อนจ่ายเงิน พร้อมชิ้นผ้าไปให้จับ</p></li>
+      <li class="stepx"><p class="stepx__time">วันเริ่มนับ</p><p class="stepx__no">ขั้นที่ 3</p><h3 class="stepx__t">ยืนยันแบบและไซส์</h3><p class="stepx__d">วันนี้คือวันที่นาฬิกาเริ่มเดินจริง</p></li>
+      <li class="stepx stepx--hi"><p class="stepx__time">{{site.produceDaysMin}}–{{site.produceDaysMax}} วันทำการ</p><p class="stepx__no">ขั้นที่ 4</p><h3 class="stepx__t">ผลิตและตรวจงาน</h3><p class="stepx__d">ถ่ายรูปให้ดูก่อนแพ็กทุกครั้ง</p></li>
+      <li class="stepx"><p class="stepx__time">{{site.shipDaysMin}}–{{site.shipDaysMax}} วัน</p><p class="stepx__no">ขั้นที่ 5</p><h3 class="stepx__t">ส่งถึงมือ</h3><p class="stepx__d">ส่งฟรีทั่วประเทศ แยกส่งหลายสาขาได้</p></li>
+    </ol>
+
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-4 mt-8">
+      <p class="text-[19px] font-bold">รวมแล้วควรเริ่มคุยราว <span class="tabular-nums border-b-4 border-orange">50 วัน</span> ก่อนวันใส่จริง</p>
+      <a class="btn btn-orange" href="/pages/calculator.html">คำนวณราคาของงานคุณ</a>
+    </div>
+    <p class="t-xs mt-4 max-w-[64ch]">งานวิ่งหรืองานที่ต้องรอปิดรับสมัครก่อนสรุปไซส์ ให้บวกเพิ่มอีกสองสัปดาห์</p>
+  </section>
+
+  <!-- 3 · เรื่องที่สอง ผ้า -->
+  <section id="a2" class="bg-shell border-y border-line scroll-mt-24">
+    <div class="wrap section grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-20 items-start">
+      <div class="lg:sticky lg:top-28">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>เรื่องที่ 02</span>
+        <h2 class="t-display text-[clamp(28px,4vw,46px)]">เลือกผ้ายังไงให้คนใส่จริง</h2>
+        <p class="t-lead mt-5 max-w-[36ch]">อย่าเริ่มจากชื่อผ้า ให้เริ่มจากคำถามว่าคนใส่จะใส่ตอนไหน คำตอบนี้ตัดตัวเลือกออกไปได้เกินครึ่งทันที</p>
+        <a class="btn btn-line mt-7" href="/pages/size-chart.html#fabric">ดูตารางเทียบเนื้อผ้า</a>
+      </div>
+      <ol class="border-t-2 border-ink">
+        <li class="why-row"><span class="why-row__no">01</span><div class="why-row__body"><h3 class="why-row__t">ใส่ทำงานทั้งวันในห้องแอร์</h3><p class="why-row__d">ผ้าตระกูล TC หรือคอตตอนผสม ใส่สบาย ทรงอยู่ ปักโลโก้แล้วสวย</p></div><span class="why-row__ico">{{> icoShirt}}</span></li>
+        <li class="why-row"><span class="why-row__no">02</span><div class="why-row__body"><h3 class="why-row__t">ลงแข่งหรือออกกำลัง</h3><p class="why-row__d">ผ้าไมโครหรือผ้ากีฬาที่ระบายอากาศ น้ำหนักเบา แห้งเร็ว พิมพ์ลายได้เต็มตัว</p></div><span class="why-row__ico">{{> icoTruck}}</span></li>
+        <li class="why-row"><span class="why-row__no">03</span><div class="why-row__body"><h3 class="why-row__t">งานกลางแจ้งจำนวนเยอะ</h3><p class="why-row__d">เน้นน้ำหนักเบาและคุมราคาต่อตัว เพราะงบมักถูกกำหนดมาแล้วตั้งแต่ต้น</p></div><span class="why-row__ico">{{> icoUsers}}</span></li>
+        <li class="why-row"><span class="why-row__no">04</span><div class="why-row__body"><h3 class="why-row__t">ยังตัดสินใจไม่ได้</h3><p class="why-row__d">ขอชิ้นผ้าจริงกับชาร์ตสีมาจับก่อน ไม่คิดค่าใช้จ่าย เพราะสีบนจอกับสีผ้าจริงไม่เคยตรงกัน</p></div><span class="why-row__ico">{{> icoSpark}}</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4 · เรื่องที่สาม เทคนิค -->
+  <section id="a3" class="band-ink scroll-mt-24">
+    <div class="wrap section">
+      <div class="max-w-[62ch]">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoNeedle}}</span>เรื่องที่ 03</span>
+        <h2 class="t-display text-[clamp(28px,4vw,46px)] text-paper">ปัก พิมพ์ หรือสกรีน เลือกอันไหน</h2>
+        <p class="text-[18px] leading-[1.85] text-paper/70 mt-5">งานจริงส่วนใหญ่ใช้มากกว่าหนึ่งเทคนิคในตัวเดียว เช่นพิมพ์ลายทั้งตัวแล้วปักโลโก้ทับที่อกซ้าย ซึ่งทำได้เพราะทั้งสามเทคนิคอยู่ในโรงงานเดียวกัน</p>
+      </div>
+      <div class="overflow-x-auto border border-paper/25 rounded-card mt-9">
+        <table class="w-full min-w-[680px] text-[17px] tbl-price">
+          <thead><tr class="text-paper/60">
+            <th scope="col" class="text-left font-bold px-5 py-4">เทคนิค</th>
+            <th scope="col" class="text-left font-bold px-5 py-4">เหมาะกับ</th>
+            <th scope="col" class="text-left font-bold px-5 py-4">ข้อจำกัด</th>
+          </tr></thead>
+          <tbody>
+            <tr><th scope="row" class="text-left font-bold px-5 py-5 text-paper">ปัก</th><td class="px-5 py-5 text-paper/80">โลโก้องค์กรบนโปโล ยูนิฟอร์ม งานทางการ</td><td class="px-5 py-5 text-paper/80">ไม่เหมาะกับลายใหญ่หรือไล่เฉดสี</td></tr>
+            <tr><th scope="row" class="text-left font-bold px-5 py-5 text-paper">พิมพ์ลาย</th><td class="px-5 py-5 text-paper/80">ลายเต็มตัว ไล่เฉด โลโก้สปอนเซอร์หลายเจ้า</td><td class="px-5 py-5 text-paper/80">ทำได้ดีที่สุดกับผ้าใยสังเคราะห์</td></tr>
+            <tr><th scope="row" class="text-left font-bold px-5 py-5 text-paper">สกรีน</th><td class="px-5 py-5 text-paper/80">จำนวนเยอะ ลายไม่กี่สี งบจำกัด</td><td class="px-5 py-5 text-paper/80">ยิ่งสีเยอะยิ่งแพง ไล่เฉดไม่เนียน</td></tr>
+          </tbody>
+        </table>
+      </div>
+    <p class="scroll-hint">ปัดตารางไปทางขวาเพื่อดูคอลัมน์ที่เหลือ</p>
+    </div>
+  </section>
+
+  <!-- 5 · เรื่องที่สี่ ไซส์ -->
+  <section id="a4" class="wrap section scroll-mt-24">
+    <div class="max-w-[62ch]">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoRuler}}</span>เรื่องที่ 04</span>
+      <h2 class="t-display text-[clamp(28px,4vw,46px)]">สรุปไซส์ทั้งทีมยังไงไม่ให้พลาด</h2>
+      <p class="t-body mt-5">ขั้นตอนที่กินเวลามากที่สุดของทุกงานคือการไล่ถามไซส์ ไม่ใช่การผลิต สี่ข้อนี้คือวิธีที่ได้ผลจริงจากงานที่เราเจอมา</p>
+    </div>
+    <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-9">
+      <li class="card"><span class="grid place-items-center size-11 rounded-full bg-orange text-paper font-bold text-[18px] tabular-nums">1</span><h3 class="text-[20px] mt-4">ขอตัวอย่างไปลอง</h3><p class="t-sm mt-2">อย่าให้คนเดาจากตารางไซส์อย่างเดียว งานเกินห้าสิบคนควรมีเสื้อตัวอย่างให้ลองก่อน</p></li>
+      <li class="card"><span class="grid place-items-center size-11 rounded-full bg-orange text-paper font-bold text-[18px] tabular-nums">2</span><h3 class="text-[20px] mt-4">ตั้งวันปิดรับไซส์</h3><p class="t-sm mt-2">แจ้งล่วงหน้าว่าใครไม่แจ้งจะได้ไซส์กลางไปเลย ไม่ต้องไล่ตามทีหลัง</p></li>
+      <li class="card"><span class="grid place-items-center size-11 rounded-full bg-orange text-paper font-bold text-[18px] tabular-nums">3</span><h3 class="text-[20px] mt-4">เผื่อไซส์ใหญ่</h3><p class="t-sm mt-2">คนมักแจ้งไซส์เล็กกว่าที่ใส่จริง เผื่อไว้เสมอเพราะแก้ทีหลังไม่ได้</p></li>
+      <li class="card"><span class="grid place-items-center size-11 rounded-full bg-orange text-paper font-bold text-[18px] tabular-nums">4</span><h3 class="text-[20px] mt-4">สั่งเผื่อสำรอง 3–5%</h3><p class="t-sm mt-2">ถูกกว่าการเปิดออเดอร์ใหม่ทีหลังมาก และมีไว้แทนตัวที่หายด้วย</p></li>
+    </ol>
+    <div class="card mt-6 flex flex-wrap items-center justify-between gap-6">
+      <div>
+        <p class="text-[20px] font-bold">ทุกไซส์ราคาเดียว XS ถึง 7XL</p>
+        <p class="t-sm mt-1">ไม่ต้องคำนวณส่วนต่างตอนทำเรื่องเบิก</p>
+        <div class="sizerun mt-4 text-[15px] max-w-[420px]"><span>XS</span><span>S</span><span data-on>M</span><span data-on>L</span><span data-on>XL</span><span>2XL</span><span>3XL</span><span>7XL</span></div>
+      </div>
+      <a class="btn btn-line" href="/pages/size-chart.html">ดูตารางไซส์เต็ม</a>
+    </div>
+  </section>
+
+  <!-- 6 · เรื่องที่ห้า เอกสาร -->
+  <section id="a5" class="bg-shell border-y border-line scroll-mt-24">
+    <div class="wrap section">
+      <div class="max-w-[62ch]">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoDoc}}</span>เรื่องที่ 05</span>
+        <h2 class="t-display text-[clamp(28px,4vw,46px)]">เอกสารที่งานจัดซื้อและราชการต้องใช้</h2>
+        <p class="t-body mt-5">งานองค์กรและงานราชการมักแพ้ชนะกันที่เอกสารและรอบเวลา ไม่ใช่ที่ลาย ชุดนี้ขอได้ตั้งแต่ยังไม่ตัดสินใจ ไม่มีเงื่อนไข</p>
+      </div>
+      <ul class="flex flex-wrap gap-x-3 gap-y-2 mt-8">
+        <li class="pill-ok"><span class="pill-ok__i">{{> icoDoc}}</span>ใบเสนอราคาระบุราคาสุทธิและวันส่งมอบ</li>
+        <li class="pill-ok"><span class="pill-ok__i">{{> icoShield}}</span>หนังสือรับรองบริษัทและ ภ.พ.20</li>
+        <li class="pill-ok"><span class="pill-ok__i">{{> icoTag}}</span>ใบกำกับภาษีเต็มรูปแบบ VAT 7%</li>
+        <li class="pill-ok"><span class="pill-ok__i">{{> icoCube}}</span>แบบร่าง 3D สำหรับแนบเข้าที่ประชุม</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7 · แถบปิดท้าย -->
+  <section class="band-orange on-orange relative overflow-hidden">
+    <span class="watermark w-[min(60vw,520px)] -right-[8%] -bottom-[34%]" style="opacity:.1">{{> logo}}</span>
+    <div class="wrap section relative">
+      <h2 class="t-display text-[clamp(30px,4.6vw,54px)] max-w-[20ch]">อ่านจบแล้ว เล่าโจทย์ให้ฟังเลย</h2>
+      <p class="text-[19px] leading-[1.75] mt-5 max-w-[44ch] text-paper">ไม่ต้องรู้ชื่อผ้า ไม่ต้องมีไฟล์โลโก้ ตอบเท่าที่รู้ก็พอ ทีมขายจะช่วยไล่ให้ตั้งแต่ต้น</p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a class="btn btn-ink btn-lg" href="/pages/brief.html">ปรึกษาฟรี</a>
+        <a class="btn btn-line btn-lg" href="/pages/calculator.html">คำนวณราคา</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{{> footer}}
+<script type="module" src="/src/js/page.js"></script>
+</body>
+</html>

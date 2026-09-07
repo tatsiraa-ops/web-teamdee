@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>ผลงานจริง · แบบเสื้อหน้าหลังที่เราออกแบบและผลิตแล้ว | TEAMDEE</title>
+  <meta name="description" content="ดูแบบเสื้อหน้าหลังที่ TEAMDEE ออกแบบและผลิตจริง ทั้งเสื้อโปโล เสื้อฟุตบอล Jersey เสื้อแบดมินตัน เสื้อวิ่ง เสื้อแขนกุด และเสื้อเบสบอล เลือกดูแยกตามประเภทได้ทันที">
+</head>
+<body>
+{{> siteHeader active="works"}}
+
+<main id="main">
+
+  <!-- 1 · หัวหน้า -->
+  <section class="band-ink relative overflow-hidden">
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+    <div class="wrap relative py-12 md:py-16">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>ผลงานจริง</span>
+      <h1 class="t-display text-[clamp(30px,4.8vw,58px)] text-paper">แบบเสื้อที่เราออกแบบและผลิตแล้ว</h1>
+      <p class="text-[18px] leading-[1.75] text-paper/75 max-w-[56ch] mt-5">เห็นทั้งด้านหน้าและด้านหลังครบทุกแบบ เลือกดูตามประเภทเสื้อที่ตรงกับงานคุณ ชอบแบบไหนแคปส่งมาได้เลย เดี๋ยวดีไซเนอร์ปรับให้เป็นของทีมคุณเอง</p>
+      <p class="text-[15px] text-paper/55 mt-4">อยากดูรูปเสื้อบนตัวคนใส่จริงจากลูกค้า ไปที่ <a class="text-orange font-semibold hover:underline underline-offset-4 decoration-2" href="/pages/reviews.html">หน้ารีวิวลูกค้า</a></p>
+    </div>
+  </section>
+
+  <!-- 2 · ตัวกรอง + แกลเลอรี -->
+  <section class="wrap section">
+    <div class="flex flex-col gap-4" id="designFilter">
+      <div class="chiprail">
+        <span class="text-[15px] font-bold mr-1">ประเภทเสื้อ</span>
+        <button class="chip" type="button" data-f="garment" data-v="all" aria-pressed="true">ทั้งหมด <span class="tabular-nums opacity-60">{{designFilters.total}}</span></button>
+        {{#each designFilters.garments}}
+        <button class="chip" type="button" data-f="garment" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>
+        {{/each}}
+      </div>
+
+      {{#if designFilters.showTechs}}
+      <div class="chiprail">
+        <span class="text-[15px] font-bold mr-1">เทคนิค</span>
+        <button class="chip" type="button" data-f="tech" data-v="all" aria-pressed="true">ทุกเทคนิค</button>
+        {{#each designFilters.techs}}
+        <button class="chip" type="button" data-f="tech" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+        <p class="t-sm tabular-nums" id="designCount" role="status" aria-live="polite">แสดง {{designFilters.total}} แบบ</p>
+        <button class="chip" type="button" id="designReset" hidden>ล้างตัวกรอง</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 mt-7" id="designGrid">
+      {{#each designs}}
+      <figure data-garment="{{this.garment}}" data-tech="{{this.tech}}" class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]">
+        <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"
+             width="1080" height="720" loading="lazy" decoding="async"
+             alt="แบบ{{this.garmentName}}งาน{{this.techName}} ด้านหน้าและด้านหลัง ผลงานออกแบบโดย TEAMDEE ลำดับที่ {{inc @index}}"
+             class="w-full h-full object-contain">
+      </figure>
+      {{/each}}
+    </div>
+
+    <p class="t-sm mt-8 hidden" id="designEmpty">ไม่มีแบบที่ตรงกับตัวกรองนี้ ลองเอาตัวกรองออกสักอัน</p>
+    <p class="t-xs max-w-[70ch] mt-8">ทุกแบบเป็นงานที่ออกแบบและผลิตจริงโดยทีมดีไซเนอร์ของเรา ใช้เป็นแนวทางได้ แต่งานของคุณจะถูกออกแบบใหม่ให้เป็นของทีมคุณเอง ส่วนงานปักและงานสกรีนดูรายละเอียดเทคนิคได้ที่ <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="/pages/products.html#tech">หน้าเสื้อที่เราทำ</a></p>
+  </section>
+
+  <!-- 3 · CTA -->
+  <section class="band-orange">
+    <div class="wrap py-14 md:py-20 text-center">
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">ชอบแบบไหน ส่งมาบอกเรา</h2>
+      <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[46ch] mx-auto mt-4">แคปแบบที่ชอบแล้วทักมาพร้อมจำนวนกับวันงาน ดีไซเนอร์จะปรับให้เป็นแบบของทีมคุณ พร้อมช่วงราคาและตารางเวลา</p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink" href="/pages/brief.html">ปรึกษาฟรี</a>
+        <a class="btn btn-lg bg-transparent text-paper border-paper/60 hover:bg-paper hover:text-ink hover:border-paper" href="/pages/calculator.html">คำนวณราคา</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+{{> footer}}
+<script type="module" src="/src/js/works-page.js"></script>
+</body>
+</html>

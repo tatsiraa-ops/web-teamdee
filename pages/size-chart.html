@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>ตารางไซส์เสื้อมาตรฐาน XS–7XL พร้อมวิธีวัดตัวสั่งทำเสื้อโปโลและเสื้อกีฬา | TEAMDEE</title>
+  <meta name="description" content="ตารางไซส์เสื้อโปโลและเสื้อกีฬา XS ถึง 7XL บอกรอบอก ความยาว และไหล่เป็นนิ้ว พร้อมวิธีวัดตัวและตารางเปรียบเทียบเนื้อผ้าแต่ละชนิดว่าเหมาะกับงานแบบไหน วัดเองได้">
+</head>
+<body>
+{{> siteHeader active="size"}}
+
+<main id="main">
+
+  <section class="bg-shell border-b border-line">
+    <div class="wrap py-14 md:py-20">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoRuler}}</span>ข้อมูลก่อนสั่ง</span>
+      <h1 class="t-display text-[clamp(30px,5vw,60px)] max-w-[20ch]">ตารางไซส์ XS ถึง 7XL และวิธีวัดตัว</h1>
+      <p class="t-lead mt-5 max-w-[52ch]">ทุกไซส์คิดราคาเดียวกันหมด ไม่มีส่วนต่างตอนทำเรื่องเบิก ตัวเลขทั้งหมดเป็น<b class="text-ink">นิ้ว</b> วัดจากตัวเสื้อวางราบ {{sizing.tolerance}}</p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a class="btn btn-orange" href="/pages/calculator.html">คำนวณราคา</a>
+        <a class="btn btn-line" href="{{site.lineUrl}}">ขอเสื้อตัวอย่างไปลอง</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <h2 class="t-display text-[clamp(26px,3.4vw,40px)]">ตารางไซส์เสื้อโปโลและเสื้อกีฬา</h2>
+    <div class="overflow-x-auto border-2 border-ink rounded-card mt-7">
+      <table class="w-full min-w-[560px] text-[17px]">
+        <caption class="text-left font-bold text-[19px] px-5 py-4 border-b-2 border-ink">หน่วยเป็นนิ้ว วัดจากตัวเสื้อวางราบ</caption>
+        <thead class="bg-ink text-paper">
+          <tr>
+            <th scope="col" class="text-left font-bold px-5 py-4">ไซส์</th>
+            <th scope="col" class="text-right font-bold px-5 py-4">รอบอก</th>
+            <th scope="col" class="text-right font-bold px-5 py-4">ความยาว</th>
+            <th scope="col" class="text-right font-bold px-5 py-4">ไหล่</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each sizing.sizes}}
+          <tr class="border-t border-line">
+            <th scope="row" class="text-left font-semibold px-5 py-4">{{this.size}}</th>
+            <td class="text-right px-5 py-4 tabular-nums">{{this.chest}}</td>
+            <td class="text-right px-5 py-4 tabular-nums">{{this.length}}</td>
+            <td class="text-right px-5 py-4 tabular-nums">{{this.shoulder}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <p class="scroll-hint">ปัดตารางไปทางขวาเพื่อดูคอลัมน์ที่เหลือ</p>
+    <p class="t-xs mt-4 max-w-[64ch]">ตัวเลขชุดนี้เป็นมาตรฐานกลาง งานที่ใช้ทรงพิเศษเช่นทรงโอเวอร์ไซส์หรือทรงผู้หญิงจะมีตารางแยกให้ตอนขึ้นแบบ</p>
+  </section>
+
+  <section class="bg-shell border-y border-line">
+    <div class="wrap section">
+      <h2 class="t-display text-[clamp(26px,3.4vw,40px)]">วัดตัวยังไงให้ไม่พลาด</h2>
+      <ol class="grid md:grid-cols-3 gap-6 mt-9">
+        <li class="card"><span class="grid place-items-center size-11 rounded-full bg-orange text-paper font-bold text-[18px] tabular-nums">1</span><h3 class="text-[20px] mt-4">วัดจากเสื้อที่ใส่อยู่</h3><p class="t-sm mt-2">เอาเสื้อตัวที่ใส่แล้วพอดีมาวางราบ วัดรอบอกจากใต้รักแร้ข้างหนึ่งไปอีกข้าง แล้วคูณสอง เทียบกับตารางด้านบน</p></li>
+        <li class="card"><span class="grid place-items-center size-11 rounded-full bg-orange text-paper font-bold text-[18px] tabular-nums">2</span><h3 class="text-[20px] mt-4">ขอตัวอย่างมาลองจริง</h3><p class="t-sm mt-2">งานที่มีคนใส่เกินห้าสิบคน ควรขอเสื้อตัวอย่างไปให้ลองก่อนสรุปไซส์ทั้งทีม เราส่งให้ยืมได้</p></li>
+        <li class="card"><span class="grid place-items-center size-11 rounded-full bg-orange text-paper font-bold text-[18px] tabular-nums">3</span><h3 class="text-[20px] mt-4">เผื่อไซส์ใหญ่ไว้เสมอ</h3><p class="t-sm mt-2">คนมักแจ้งไซส์เล็กกว่าที่ใส่จริง สั่งเผื่อไซส์ใหญ่และเผื่อสำรอง 3–5% ถูกกว่าเปิดออเดอร์ใหม่ทีหลังมาก</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="fabric" class="wrap section scroll-mt-24">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>Fabric Technology</span>
+    <h2 class="t-display text-[clamp(26px,3.4vw,40px)]">เนื้อผ้าที่เลือกได้</h2>
+    <p class="t-lead mt-3 max-w-[56ch]">เพราะสัมผัสที่ดีคือจุดเริ่มต้นของเสื้อคุณภาพ เราคัดผ้าสปอร์ตที่มีเท็กซ์เจอร์เป็นเอกลักษณ์มาให้เลือกตามการใช้งานจริง</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-9">
+      {{#each sizing.fabrics}}
+      <div class="card !p-0 overflow-hidden">
+        {{#if this.img}}
+        <div class="aspect-[4/3] bg-shell overflow-hidden">
+          <img src="{{this.img}}" alt="พื้นผิว{{this.name}}" width="700" height="525" loading="lazy" decoding="async" class="w-full h-full object-cover">
+        </div>
+        {{else}}
+        <div class="aspect-[4/3] bg-shell grid place-items-center"><span class="t-xs">รอภาพผ้าจากทีม</span></div>
+        {{/if}}
+        <div class="p-5">
+          <h3 class="text-[20px]">{{this.name}}</h3>
+          <p class="t-sm mt-1.5">เหมาะกับ {{this.use}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+    <p class="kit-lbl">คุณสมบัติเด่นของเนื้อผ้า</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-line border border-line">
+      {{#each sizing.fabricProps}}
+      <div class="bg-paper p-6">
+        <p class="text-[15px] font-bold tracking-[0.1em] text-ink-3">{{this.en}}</p>
+        <h3 class="text-[20px] mt-2">{{this.th}}</h3>
+        <p class="t-sm mt-2">{{this.d}}</p>
+      </div>
+      {{/each}}
+    </div>
+
+    <p class="kit-lbl">ตารางสรุปการใช้งาน</p>
+    <div class="overflow-x-auto border-2 border-ink rounded-card">
+      <table class="w-full min-w-[520px] text-[17px]">
+        <thead class="bg-ink text-paper"><tr>
+          <th scope="col" class="text-left font-bold px-5 py-4">ชนิดเนื้อผ้า</th>
+          <th scope="col" class="text-left font-bold px-5 py-4">เหมาะสำหรับ</th>
+        </tr></thead>
+        <tbody>
+          {{#each sizing.fabrics}}
+          <tr class="border-t border-line">
+            <th scope="row" class="text-left font-semibold px-5 py-4">{{this.name}}</th>
+            <td class="px-5 py-4">{{this.use}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <p class="scroll-hint">ปัดตารางไปทางขวาเพื่อดูคอลัมน์ที่เหลือ</p>
+    <p class="t-xs mt-4 max-w-[64ch]">มีผ้าให้เลือกทั้งหมด {{site.fabricCount}} ชนิด ตารางนี้คือกลุ่มที่ใช้บ่อยที่สุด ขอชิ้นผ้าจริงมาจับก่อนตัดสินใจได้ ไม่มีค่าใช้จ่าย</p>
+  </section>
+
+  <section class="band-orange on-orange relative overflow-hidden">
+    <span class="watermark w-[min(60vw,520px)] -right-[8%] -bottom-[34%]" style="opacity:.1">{{> logo}}</span>
+    <div class="wrap section relative">
+      <h2 class="t-display text-[clamp(28px,4.4vw,52px)] max-w-[18ch]">รู้ไซส์แล้ว มาดูราคากันต่อ</h2>
+      <p class="text-[19px] leading-[1.75] mt-5 max-w-[42ch] text-paper">ทุกไซส์ XS ถึง 7XL คิดราคาเดียวกันหมด เลือกชนิดคอกับจำนวน แล้วระบบจะคำนวณราคาสุทธิให้ทันที</p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a class="btn btn-ink btn-lg" href="/pages/calculator.html">คำนวณราคา</a>
+        <a class="btn btn-line btn-lg" href="{{site.lineUrl}}">ทักไลน์ขอชิ้นผ้าตัวอย่าง</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{{> footer}}
+<script type="module" src="/src/js/page.js"></script>
+</body>
+</html>
