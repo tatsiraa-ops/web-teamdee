@@ -1,0 +1,22 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "steps": [
+    {
+      "step": "activateTheme",
+      "themeFolderName": "teamdee"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "TEAMDEE (ในเครื่อง)",
+        "permalink_structure": "/%postname%/"
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin"
+    }
+  ],
+  "login": true
+}
