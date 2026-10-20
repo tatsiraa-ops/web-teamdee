@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>ผลงานและรีวิว · งานจริงที่ทีมดีช่วยตั้งแต่โจทย์จนจบงาน | TEAMDEE</title>
+  <meta name="description" content="งานเสื้อทีมที่ TEAMDEE ส่งมอบแล้ว เล่าตั้งแต่โจทย์ที่ลูกค้าเอามา สินค้าที่ใช้ และสิ่งที่เราช่วย พร้อมภาพจากหน้างานจริงและเสียงลูกค้า กรองตามกลุ่มงานได้">
+</head>
+<body>
+{{> siteHeader active="works"}}
+
+<main id="main">
+
+  <!-- 1 · คำอธิบาย + ตัวกรองตามบริบท -->
+  <section class="band-ink relative overflow-hidden">
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+    <div class="wrap relative py-12 md:py-16">
+      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">ผลงานและรีวิว</span></nav>
+      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-7">งานจริงที่ทีมดีช่วยตั้งแต่โจทย์จนจบงาน</h1>
+      <p class="text-[18px] leading-[1.75] text-paper/75 max-w-[58ch] mt-5">ทุกงานเล่าเหมือนกันสี่ข้อ โจทย์ที่ลูกค้าเอามา สินค้าที่ใช้ สิ่งที่เราช่วย และผลที่เกิดขึ้น เพื่อให้เทียบกับงานของคุณได้ว่าใกล้เคียงแค่ไหน</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="space-y-4" id="workFilter">
+      <div class="chiprail">
+        <span class="text-[15px] font-bold mr-1">กลุ่มงาน</span>
+        <button class="chip" type="button" data-f="use" data-v="all" aria-pressed="true">ทั้งหมด <span class="tabular-nums opacity-60">{{workFilters.total}}</span></button>
+        {{#each workFilters.uses}}<button class="chip" type="button" data-f="use" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
+      </div>
+      <div class="chiprail">
+        <span class="text-[15px] font-bold mr-1">สินค้า</span>
+        <button class="chip" type="button" data-f="product" data-v="all" aria-pressed="true">ทุกประเภท</button>
+        {{#each workFilters.products}}<button class="chip" type="button" data-f="product" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+        <p class="t-sm tabular-nums" id="workCount" role="status" aria-live="polite">แสดง {{workFilters.total}} งาน</p>
+        <button class="chip" type="button" id="workReset" hidden>ล้างตัวกรอง</button>
+      </div>
+    </div>
+
+    <!-- 2 · งานจริง · ชุดภาพ + เรื่องย่อสี่ข้อ -->
+    <div class="grid lg:grid-cols-2 gap-6 mt-8" id="workGrid" data-line-url="{{site.lineUrl}}">
+      {{#each works}}
+      <article class="border border-line rounded-plate overflow-hidden flex flex-col" data-use="{{this.use}}" data-product="{{this.product}}">
+        <figure class="relative aspect-[4/3] bg-shell" data-code="{{this.id}}">
+          <img src="{{this.img}}" alt="ทีมใส่{{this.title}}จริงในวันงาน" width="800" height="600" loading="lazy" decoding="async" class="w-full h-full object-cover">
+          <figcaption class="tag tag-ink absolute left-3 bottom-3">{{#if (eq this.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}</figcaption>
+        </figure>
+
+        <div class="p-6 md:p-7 flex flex-col grow">
+          <p class="t-xs">{{this.groupName}}</p>
+          <h2 class="text-[22px] mt-1">{{this.title}}</h2>
+          <p class="t-xs mt-1">[รอยืนยันชื่อองค์กร · ขออนุญาตเผยแพร่แล้ว]</p>
+
+          <dl class="mt-5 space-y-3.5 grow">
+            <div><dt class="text-[15px] font-bold text-ink-3">โจทย์</dt><dd class="text-[17px] leading-[1.7] text-ink-2 mt-1">{{this.brief}}</dd></div>
+            <div><dt class="text-[15px] font-bold text-ink-3">สินค้าที่ใช้</dt><dd class="text-[17px] leading-[1.7] text-ink-2 mt-1">{{#each this.spec}}{{this.[0]}} {{this.[1]}}{{#unless @last}} · {{/unless}}{{/each}}</dd></div>
+            <div><dt class="text-[15px] font-bold text-ink-3">ทีมดีช่วย</dt><dd class="text-[17px] leading-[1.7] text-ink-2 mt-1">{{this.helped}}</dd></div>
+            <div><dt class="text-[15px] font-bold text-ink-3">ผลที่ยืนยันได้</dt>
+              <dd class="text-[17px] leading-[1.7] mt-1">
+                {{#if this.result}}<span class="text-ink-2">{{this.result}}</span>
+                {{else}}<span class="text-ink-3">[รอตัวเลขยืนยันจากทีมขาย]</span>{{/if}}
+              </dd></div>
+          </dl>
+
+          <p class="t-xs mt-5 pt-4 border-t border-line tabular-nums">ผลิต {{baht this.qty}} ตัว · งาน{{this.tech}} · ใช้เวลา {{this.days}} วันทำการ · ใช้งานวันที่ {{this.event}}</p>
+        </div>
+      </article>
+      {{/each}}
+    </div>
+
+    <div class="bg-shell border border-line rounded-plate p-7 md:p-9 mt-10 hidden" id="workEmpty">
+      <h2 class="t-display text-[clamp(22px,2.8vw,32px)]">ยังไม่มีงานในกลุ่มนี้บนเว็บ</h2>
+      <p class="t-lead mt-3 max-w-[52ch]">ไม่ได้แปลว่าเราไม่เคยทำ หน้านี้ลงเฉพาะงานที่ได้รับอนุญาตให้เผยแพร่แล้ว ถามมาได้เลยว่าเคยทำงานแบบไหนให้ใครบ้าง</p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <button class="btn btn-line" type="button" id="workReset2">ล้างตัวกรอง</button>
+        <a class="btn btn-orange" href="{{site.lineUrl}}">ถามทีมดีทางไลน์</a>
+      </div>
+    </div>
+
+    <p class="t-xs max-w-[70ch] mt-9">ตัวเลขจำนวนและระยะเวลาในหน้านี้เป็นข้อมูลตัวอย่างของต้นแบบ ชื่อองค์กรและผลลัพธ์ที่ยืนยันได้อยู่ระหว่างขออนุญาตและรวบรวมจากทีมขาย รูปทุกใบเป็นงานจริงจากโรงงานของเรา</p>
+  </section>
+
+  <!-- 3 · รีวิว -->
+  <section class="bg-shell border-y border-line">
+    <div class="wrap section">
+      <div class="max-w-[68ch] mb-9">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>เสียงลูกค้า</span>
+        <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">ลูกค้าพูดถึงเราว่ายังไง</h2>
+        <p class="t-lead mt-4">ลงเฉพาะคำพูดจริงที่ได้รับอนุญาตให้เผยแพร่ ไม่มีรีวิวที่เขียนขึ้นเอง</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        {{#each works}}{{#if (lt @index 6)}}{{> reviewSlot}}{{/if}}{{/each}}
+      </div>
+    </div>
+  </section>
+
+  <section class="band-orange">
+    <div class="wrap py-14 md:py-20 text-center">
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">อยากได้งานแบบนี้สำหรับทีมคุณ</h2>
+      <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">ดูสินค้าที่ใช้ หรือเล่าโจทย์ให้ทีมดีฟัง ใครใส่ กี่ตัว ใช้วันไหน แค่นี้ก็เริ่มได้</p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+{{> footer}}
+<script type="module" src="/src/js/works-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>คำถามที่พบบ่อย · สั่งทำเสื้อทีมต้องรู้อะไรบ้าง | TEAMDEE</title>
+  <meta name="description" content="รวมคำตอบเรื่องสั่งทำเสื้อทีม 7 หมวด เริ่มต้นเลือกสินค้า ผ้าและไซซ์ ราคาและการชำระเงิน การอนุมัติแบบ ระยะเวลาผลิต จัดส่งหลังการขาย และเอกสารบริษัท ถามทางไลน์ได้">
+</head>
+<body>
+{{> siteHeader active="learn"}}
+
+<main id="main">
+  <section class="band-ink relative overflow-hidden">
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+    <div class="wrap relative py-12 md:py-16">
+      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>คู่มือและบทความ</span><span aria-hidden="true">/</span><span aria-current="page">คำถามที่พบบ่อย</span></nav>
+      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-7">คำถามที่พบบ่อย</h1>
+      <p class="text-[18px] leading-[1.8] text-paper/75 max-w-[58ch] mt-5">คำตอบชุดเดียวกับที่ทีมขายใช้ตอบ ทุกข้อมีลิงก์ของตัวเอง กดที่คำถามแล้วคัดลอกลิงก์ส่งต่อได้เลย</p>
+    </div>
+  </section>
+
+  <!-- 1 · คำถามสำคัญ 5-6 ข้อ · ชุดเดียวกับหน้าแรก -->
+  <section class="wrap section" aria-labelledby="top-h">
+    <div class="max-w-[68ch] mb-7">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามสำคัญ</span>
+      <h2 id="top-h" class="t-display text-[clamp(26px,3.4vw,42px)]">หกข้อที่คนถามก่อนตัดสินใจ</h2>
+    </div>
+    <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
+      {{#each faq.home}}
+      <div class="hs-accordion border-b border-line" id="top-{{@index}}">
+        <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-5 min-h-tap font-bold text-[18px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-controls="topp-{{@index}}">
+          <span>{{this.[0]}}</span>
+          <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div id="topp-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region">
+          <p class="t-body pb-6">{{this.[1]}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </section>
+
+  <!-- 2 · ทางลัดหมวด -->
+  <section class="bg-shell border-y border-line" aria-labelledby="cat-h">
+    <div class="wrap py-10">
+      <h2 id="cat-h" class="text-[15px] font-bold text-ink-3 mb-4">ทางลัดหมวด</h2>
+      <nav class="chiprail" aria-label="ทางลัดหมวดคำถาม">
+        {{#each faq.full}}<a class="chip" href="#{{this.id}}">{{this.name}}</a>{{/each}}
+      </nav>
+    </div>
+  </section>
+
+  <!-- 3 · คำตอบรายหมวด · ทุกข้อมีลิงก์ตรง -->
+  <section class="wrap section">
+    <div class="max-w-[820px]">
+      {{#each faq.full}}
+      <section class="guide-sec scroll-mt-28 {{#unless @first}}mt-12 pt-12 border-t border-line{{/unless}}" id="{{this.id}}" aria-labelledby="h-{{this.id}}">
+        <h2 id="h-{{this.id}}" class="t-display text-[clamp(23px,2.8vw,32px)]">{{this.name}}</h2>
+        <div class="hs-accordion-group border-t-2 border-ink mt-5">
+          {{#each this.items}}
+          <div class="hs-accordion border-b border-line scroll-mt-28" id="{{../id}}-{{@index}}">
+            <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-5 min-h-tap font-bold text-[18px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-controls="{{../id}}-{{@index}}-a">
+              <span>{{this.[0]}}</span>
+              <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div id="{{../id}}-{{@index}}-a" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region">
+              <p class="t-body pb-4">{{this.[1]}}</p>
+              <p class="pb-6"><a class="text-[15px] font-semibold text-ink-3 underline decoration-line-2 underline-offset-4 hover:text-ink inline-flex items-center min-h-[44px]" href="#{{../id}}-{{@index}}" data-copy-link>คัดลอกลิงก์คำถามนี้</a></p>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </section>
+      {{/each}}
+
+      <div class="mt-12 pt-10 border-t-2 border-ink">
+        <h2 class="t-display text-[clamp(22px,2.6vw,30px)]">อยากอ่านละเอียดกว่านี้</h2>
+        <div class="chiprail mt-5">
+          {{#each guides}}<a class="chip" href="{{url 'guides' this.id}}">{{this.name}}</a>{{/each}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-orange">
+    <div class="wrap py-14 md:py-20 text-center">
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">ยังไม่เจอคำตอบ</h2>
+      <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[46ch] mx-auto mt-4">ถามทีมดีได้โดยตรง ตอบตามเวลาทำการจริง</p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+      </div>
+    </div>
+  </section>
+</main>
+{{> footer}}
+<script type="module" src="/src/js/faq-page.js"></script>
+</body>
+</html>

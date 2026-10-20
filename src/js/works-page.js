@@ -1,76 +1,81 @@
 import './page.js'
 import { initLightbox } from './lightbox.js'
 
-/* ตัวกรองแบบเสื้อ กรองสองแกนพร้อมกัน ประเภทเสื้อ x เทคนิค
-   สถานะเก็บไว้ใน URL ด้วย จะได้ก๊อปลิงก์หมวดส่งให้ลูกค้าได้ และปุ่มย้อนกลับของเบราว์เซอร์ใช้ได้จริง */
-const bar = document.getElementById('designFilter')
-const grid = document.getElementById('designGrid')
-const count = document.getElementById('designCount')
-const empty = document.getElementById('designEmpty')
-const reset = document.getElementById('designReset')
+/* ตัวกรองแบบเดียวกันสองชุดในหน้าเดียว
+   ชุดบนกรองเคสงาน ชุดล่างกรองภาพจากหน้างาน แยกกันคนละ URL param */
 
-if (bar && grid) {
-  const chips = [...bar.querySelectorAll('[data-f]')]
+/** กรองรายการด้วยชิปหลายแกน แล้วเก็บสถานะไว้ใน URL */
+function initFilter({ barId, gridId, countId, emptyId, resetIds, axes, label }) {
+  const bar = document.getElementById(barId)
+  const grid = document.getElementById(gridId)
+  if (!bar || !grid) return
+
+  const countEl = document.getElementById(countId)
+  const emptyEl = document.getElementById(emptyId)
+  const chips = [...bar.querySelectorAll('[data-f],[data-cat]')]
+  const key = (c) => c.dataset.f || 'cat'
   const items = [...grid.children]
-  const valid = (f) => new Set(chips.filter((c) => c.dataset.f === f).map((c) => c.dataset.v))
-  const ok = { garment: valid('garment'), tech: valid('tech') }
-  const state = { garment: 'all', tech: 'all' }
+  const valid = Object.fromEntries(axes.map((a) => [a, new Set(chips.filter((c) => key(c) === a).map((c) => c.dataset.v || c.dataset.cat))]))
+  const state = Object.fromEntries(axes.map((a) => [a, 'all']))
 
   const render = () => {
-    chips.forEach((c) => c.setAttribute('aria-pressed', String(state[c.dataset.f] === c.dataset.v)))
-
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(state[key(c)] === (c.dataset.v || c.dataset.cat))))
     let shown = 0
     items.forEach((el) => {
-      const on =
-        (state.garment === 'all' || el.dataset.garment === state.garment) &&
-        (state.tech === 'all' || el.dataset.tech === state.tech)
+      const on = axes.every((a) => state[a] === 'all' || (el.dataset[a] || '') === state[a])
       el.hidden = !on
       if (on) shown++
     })
-
-    const clean = state.garment === 'all' && state.tech === 'all'
-    if (count) count.textContent = clean ? `แสดง ${shown} แบบ` : `พบ ${shown} แบบที่ตรงกับตัวกรอง`
-    if (empty) empty.classList.toggle('hidden', shown > 0)
-    if (reset) reset.hidden = clean
+    const clean = axes.every((a) => state[a] === 'all')
+    if (countEl) countEl.textContent = clean ? `แสดง ${shown} ${label}` : `พบ ${shown} ${label}`
+    if (emptyEl) emptyEl.classList.toggle('hidden', shown > 0)
+    resetIds.forEach((id) => {
+      const b = document.getElementById(id)
+      if (b) b.hidden = clean
+    })
   }
 
   const readUrl = () => {
-    const q = new URLSearchParams(location.search)
-    for (const key of ['garment', 'tech']) {
-      const v = q.get(key)
-      state[key] = v && ok[key].has(v) ? v : 'all'
-    }
+    const p = new URLSearchParams(location.search)
+    axes.forEach((a) => {
+      const v = p.get(a)
+      state[a] = v && valid[a].has(v) ? v : 'all'
+    })
     render()
   }
 
-  const writeUrl = (push) => {
-    const q = new URLSearchParams(location.search)
-    for (const key of ['garment', 'tech']) {
-      if (state[key] === 'all') q.delete(key)
-      else q.set(key, state[key])
-    }
-    const url = location.pathname + (q.toString() ? `?${q}` : '') + location.hash
-    history[push ? 'pushState' : 'replaceState'](null, '', url)
+  const writeUrl = () => {
+    const p = new URLSearchParams(location.search)
+    axes.forEach((a) => (state[a] === 'all' ? p.delete(a) : p.set(a, state[a])))
+    history.pushState(null, '', location.pathname + (p.toString() ? `?${p}` : ''))
   }
 
   chips.forEach((c) =>
     c.addEventListener('click', () => {
-      if (state[c.dataset.f] === c.dataset.v) return
-      state[c.dataset.f] = c.dataset.v
+      const k = key(c)
+      const v = c.dataset.v || c.dataset.cat
+      if (state[k] === v) return
+      state[k] = v
       render()
-      writeUrl(true)
+      writeUrl()
+    }),
+  )
+  resetIds.forEach((id) =>
+    document.getElementById(id)?.addEventListener('click', () => {
+      axes.forEach((a) => (state[a] = 'all'))
+      render()
+      writeUrl()
     }),
   )
 
-  reset?.addEventListener('click', () => {
-    state.garment = 'all'
-    state.tech = 'all'
-    render()
-    writeUrl(true)
-  })
-
-  window.addEventListener('popstate', readUrl)
+  addEventListener('popstate', readUrl)
   readUrl()
 }
 
-initLightbox('#designGrid', 'figure', 'ดูแบบเสื้อขนาดใหญ่')
+initFilter({
+  barId: 'workFilter', gridId: 'workGrid', countId: 'workCount', emptyId: 'workEmpty',
+  resetIds: ['workReset', 'workReset2'], axes: ['use', 'product'], label: 'งาน',
+})
+
+
+initLightbox('#workGrid', 'figure', 'ดูภาพงานจริงขนาดใหญ่')

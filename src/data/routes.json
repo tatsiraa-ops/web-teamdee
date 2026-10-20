@@ -1,0 +1,45 @@
+{
+  "_note": "URL ทุกหน้าอยู่ที่นี่ที่เดียว ตาม Wireframe v2 · lock = URL เดิมบนเว็บจริง ห้ามเปลี่ยน · temp = ตั้งชั่วคราว รอ Rocket Rank ยืนยัน",
+  "home": "/",
+  "products": {
+    "print": "/sublimation/",
+    "baseball": "/baseball/",
+    "jersey": "/oversize/",
+    "polo": "/embroidery/",
+    "screen": "/screen-printing/"
+  },
+  "uses": {
+    "index": "/solutions/",
+    "corp": "/corporate/",
+    "gov": "/government/",
+    "edu": "/education/",
+    "sport": "/sports/",
+    "event": "/events/"
+  },
+  "guides": {
+    "print": "/guide-sublimation/",
+    "polo": "/guide-embroidery/",
+    "screen": "/guide-screen/",
+    "fabric": "/fabric-technology/",
+    "size": "/size-chart/",
+    "collar": "/collar-styles/",
+    "logo": "/guide-artwork/",
+    "delivery": "/guide-delivery/"
+  },
+  "articles": "/blog/{id}/",
+  "calculations": "/calculations/",
+  "designs": "/designs/",
+  "projects": "/projects/",
+  "blog": "/blog/",
+  "faq": "/faq/",
+  "about": "/about/",
+  "contact": "/contact/",
+  "search": "/search/",
+  "privacy": "/privacy/",
+  "terms": "/terms/",
+  "ui": "/ui/",
+  "lock": [
+    "/", "/sublimation/", "/embroidery/", "/screen-printing/", "/corporate/", "/education/", "/projects/",
+    "/fabric-technology/", "/size-chart/", "/collar-styles/", "/calculations/", "/blog/", "/about/", "/contact/"
+  ]
+}

@@ -1,6 +1,7 @@
-/* เมกะเมนู เปิดได้ทั้งคลิกและ hover
+/* dropdown เมนูหลัก เปิดได้ทั้งคลิกและ hover
    คลิกคือทางหลัก เพราะ hover อย่างเดียวจะปิดเองเวลาเมาส์เลื่อนออกนิดเดียว
-   และบนจอสัมผัสไม่มี hover ให้ใช้ */
+   และบนจอสัมผัสไม่มี hover ให้ใช้
+   คีย์บอร์ด: ลูกศรลงที่ปุ่ม = เปิดแล้วไปข้อแรก · ในเมนูใช้ลูกศรขึ้นลง Home End · Esc ปิดแล้วกลับไปที่ปุ่ม */
 export function initNav() {
   const roots = [...document.querySelectorAll('[data-mega-root]')]
 
@@ -18,24 +19,46 @@ export function initNav() {
     panel.hidden = false
   }
   const isOpen = (root) => root.querySelector('[data-mega-btn]').getAttribute('aria-expanded') === 'true'
+  const links = (root) => [...root.querySelectorAll('[data-mega-panel] a[href]')]
+
+  /* บอกว่าตอนนี้อยู่หน้าไหนในเมนู · เทียบ path ไม่สนใจ ?query กับ #หัวข้อ */
+  for (const a of document.querySelectorAll('[data-mega-panel] a[href]')) {
+    if (new URL(a.href, location.href).pathname === location.pathname) a.setAttribute('aria-current', 'page')
+  }
 
   const fine = window.matchMedia('(hover: hover) and (pointer: fine)')
   let timer
 
   for (const root of roots) {
-    root.querySelector('[data-mega-btn]').addEventListener('click', () => {
+    const btn = root.querySelector('[data-mega-btn]')
+    btn.addEventListener('click', () => {
       isOpen(root) ? close(root) : open(root)
+    })
+    btn.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
+      e.preventDefault()
+      open(root)
+      const list = links(root)
+      list[e.key === 'ArrowDown' ? 0 : list.length - 1]?.focus()
+    })
+    root.querySelector('[data-mega-panel]').addEventListener('keydown', (e) => {
+      const list = links(root)
+      const at = list.indexOf(document.activeElement)
+      const go = { ArrowDown: at + 1, ArrowUp: at - 1, Home: 0, End: list.length - 1 }[e.key]
+      if (go === undefined) return
+      e.preventDefault()
+      list[(go + list.length) % list.length]?.focus()
     })
     /* hover เป็นของแถม มีหน่วงกันเมนูกระพริบตอนเมาส์ผ่าน */
     root.addEventListener('pointerenter', () => {
       if (!fine.matches) return
       clearTimeout(timer)
-      timer = setTimeout(() => open(root), 120)
+      timer = setTimeout(() => open(root), 100)
     })
     root.addEventListener('pointerleave', () => {
       if (!fine.matches) return
       clearTimeout(timer)
-      timer = setTimeout(() => close(root), 220)
+      timer = setTimeout(() => close(root), 300)
     })
   }
 

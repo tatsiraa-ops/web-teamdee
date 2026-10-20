@@ -15,19 +15,29 @@ const svg = (d) =>
  * @param {string} itemSel  แต่ละช่องรูปในนั้น
  * @param {string} label    ใช้บอก screen reader ว่ากล่องนี้คืออะไร
  */
-export function initLightbox(gridSel, itemSel, label) {
+export function initLightbox(gridSel, itemSel, label, opts = {}) {
   const grid = document.querySelector(gridSel)
   if (!grid) return
 
   const dlg = document.createElement('dialog')
   dlg.className = 'lb'
   dlg.setAttribute('aria-label', label)
+  dlg.dataset.lineUrl = opts.lineUrl || grid.dataset.lineUrl || '#'
   dlg.innerHTML = `
     <figure class="lb__fig">
       <img class="lb__img" alt="">
-      <figcaption class="lb__cap" id="lbCap"></figcaption>
+      <figcaption class="lb__cap" id="lbCap">
+        <span class="lb__code"></span>
+        <span class="lb__meta"></span>
+        <span class="lb__note"></span>
+      </figcaption>
     </figure>
     <button type="button" class="lb__btn lb__close" aria-label="ปิด">${svg(ICON.close)}</button>
+    <div class="lb__bar">
+      <a class="btn btn-orange btn-sm lb__save" download>เซฟรูป</a>
+      <a class="btn btn-sm bg-paper text-ink border-paper lb__line" target="_blank" rel="noopener">ส่งคุยใน LINE</a>
+      <p class="lb__hint">มือถือกดค้างที่รูปเพื่อบันทึก · คอมคลิกขวา</p>
+    </div>
     <button type="button" class="lb__btn lb__prev" aria-label="รูปก่อนหน้า">${svg(ICON.prev)}</button>
     <button type="button" class="lb__btn lb__next" aria-label="รูปถัดไป">${svg(ICON.next)}</button>
     <p class="lb__count" aria-live="polite"></p>`
@@ -50,8 +60,22 @@ export function initLightbox(gridSel, itemSel, label) {
        กล่องดูรูปใหญ่ต้องได้ไฟล์เต็มเสมอ ไม่งั้นกดขยายแล้วยังเบลอ */
     img.src = src.src
     img.alt = src.alt
-    cap.textContent = src.alt
+    /* คำบรรยายตาม Wireframe: รหัส · สินค้า · การใช้งาน · สไตล์ + หมายเหตุเรื่องสี
+       ภาพที่ไม่ใช่แบบเสื้อ (รูปงานจริง) ไม่มีรหัส ให้ใช้ alt แทน */
+    const el = items[at]
+    const code = el.dataset.code && /^TD-/.test(el.dataset.code) ? el.dataset.code : ''
+    cap.querySelector('.lb__code').textContent = code
+    cap.querySelector('.lb__meta').textContent = el.dataset.meta || (code ? '' : src.alt)
+    cap.querySelector('.lb__note').textContent = code ? 'สีที่เห็นเป็นแนวอ้างอิง ปรับได้ [ยืนยันบริการ]' : ''
     count.textContent = `${at + 1} จาก ${items.length}`
+    /* ปุ่มเซฟตั้งชื่อไฟล์เป็นรหัสแบบ เพื่อให้ไฟล์ที่ลูกค้าส่งเข้าไลน์บอกได้เองว่าแบบไหน */
+    const save = dlg.querySelector('.lb__save')
+    const line = dlg.querySelector('.lb__line')
+    if (save) {
+      save.href = img.src
+      save.setAttribute('download', code ? `TEAMDEE-${code}.jpg` : 'TEAMDEE.jpg')
+    }
+    if (line) line.href = dlg.dataset.lineUrl || '#'
     const solo = items.length < 2
     dlg.querySelector('.lb__prev').hidden = solo
     dlg.querySelector('.lb__next').hidden = solo

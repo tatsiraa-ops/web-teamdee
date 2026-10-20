@@ -5,7 +5,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d01-540.webp"
+  "imgSmall": "/img/design/d01-540.webp",
+  "code": "TD-0001",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "stripe"
+  ],
+  "color": "น้ำเงิน"
  },
  {
   "img": "/img/design/d02.webp",
@@ -13,7 +24,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d02-540.webp"
+  "imgSmall": "/img/design/d02-540.webp",
+  "code": "TD-0002",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "แดง"
  },
  {
   "img": "/img/design/d03.webp",
@@ -21,7 +43,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d03-540.webp"
+  "imgSmall": "/img/design/d03-540.webp",
+  "code": "TD-0003",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "ดำ"
  },
  {
   "img": "/img/design/d04.webp",
@@ -29,7 +62,18 @@
   "garmentName": "เสื้อแบดมินตัน",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d04-540.webp"
+  "imgSmall": "/img/design/d04-540.webp",
+  "code": "TD-0004",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "gradient"
+  ],
+  "color": "ดำ"
  },
  {
   "img": "/img/design/d05.webp",
@@ -37,7 +81,19 @@
   "garmentName": "เสื้อแขนกุด บาส-วอลเลย์",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d05-540.webp"
+  "imgSmall": "/img/design/d05-540.webp",
+  "code": "TD-0005",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "gov",
+   "event"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "ส้ม"
  },
  {
   "img": "/img/design/d06.webp",
@@ -45,7 +101,18 @@
   "garmentName": "เสื้อแบดมินตัน",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d06-540.webp"
+  "imgSmall": "/img/design/d06-540.webp",
+  "code": "TD-0006",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "gradient"
+  ],
+  "color": "ม่วง"
  },
  {
   "img": "/img/design/d07.webp",
@@ -53,7 +120,18 @@
   "garmentName": "เสื้อแบดมินตัน",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d07-540.webp"
+  "imgSmall": "/img/design/d07-540.webp",
+  "code": "TD-0007",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "gradient"
+  ],
+  "color": "ชมพู"
  },
  {
   "img": "/img/design/d08.webp",
@@ -61,7 +139,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d08-540.webp"
+  "imgSmall": "/img/design/d08-540.webp",
+  "code": "TD-0008",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "corp"
+  ],
+  "style": [
+   "gradient"
+  ],
+  "color": "แดง"
  },
  {
   "img": "/img/design/d09.webp",
@@ -69,7 +158,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d09-540.webp"
+  "imgSmall": "/img/design/d09-540.webp",
+  "code": "TD-0009",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "แดง"
  },
  {
   "img": "/img/design/d10.webp",
@@ -77,7 +177,18 @@
   "garmentName": "เสื้อแขนกุด บาส-วอลเลย์",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d10-540.webp"
+  "imgSmall": "/img/design/d10-540.webp",
+  "code": "TD-0010",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "stripe"
+  ],
+  "color": "ขาว"
  },
  {
   "img": "/img/design/d11.webp",
@@ -85,7 +196,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d11-540.webp"
+  "imgSmall": "/img/design/d11-540.webp",
+  "code": "TD-0011",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "edu"
+  ],
+  "style": [
+   "stripe"
+  ],
+  "color": "ชมพู"
  },
  {
   "img": "/img/design/d12.webp",
@@ -93,7 +215,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d12-540.webp"
+  "imgSmall": "/img/design/d12-540.webp",
+  "code": "TD-0012",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "น้ำเงิน"
  },
  {
   "img": "/img/design/d13.webp",
@@ -101,7 +234,18 @@
   "garmentName": "เสื้อวิ่ง",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d13-540.webp"
+  "imgSmall": "/img/design/d13-540.webp",
+  "code": "TD-0013",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "event"
+  ],
+  "style": [
+   "gradient"
+  ],
+  "color": "เหลือง"
  },
  {
   "img": "/img/design/d14.webp",
@@ -109,7 +253,18 @@
   "garmentName": "เสื้อวิ่ง",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d14-540.webp"
+  "imgSmall": "/img/design/d14-540.webp",
+  "code": "TD-0014",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "event"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "น้ำเงิน"
  },
  {
   "img": "/img/design/d15.webp",
@@ -117,7 +272,19 @@
   "garmentName": "เสื้อเบสบอล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d15-540.webp"
+  "imgSmall": "/img/design/d15-540.webp",
+  "code": "TD-0015",
+  "product": [
+   "print",
+   "baseball"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "plain"
+  ],
+  "color": "ขาว"
  },
  {
   "img": "/img/design/d16.webp",
@@ -125,7 +292,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d16-540.webp"
+  "imgSmall": "/img/design/d16-540.webp",
+  "code": "TD-0016",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "ดำ"
  },
  {
   "img": "/img/design/d17.webp",
@@ -133,7 +311,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d17-540.webp"
+  "imgSmall": "/img/design/d17-540.webp",
+  "code": "TD-0017",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "ดำ"
  },
  {
   "img": "/img/design/d18.webp",
@@ -141,7 +330,19 @@
   "garmentName": "เสื้อแขนกุด บาส-วอลเลย์",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d18-540.webp"
+  "imgSmall": "/img/design/d18-540.webp",
+  "code": "TD-0018",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport",
+   "event"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "แดง"
  },
  {
   "img": "/img/design/d19.webp",
@@ -149,7 +350,18 @@
   "garmentName": "เสื้อแบดมินตัน",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d19-540.webp"
+  "imgSmall": "/img/design/d19-540.webp",
+  "code": "TD-0019",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "น้ำเงิน"
  },
  {
   "img": "/img/design/d20.webp",
@@ -157,7 +369,18 @@
   "garmentName": "เสื้อวิ่ง",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d20-540.webp"
+  "imgSmall": "/img/design/d20-540.webp",
+  "code": "TD-0020",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "event"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "ฟ้า"
  },
  {
   "img": "/img/design/d21.webp",
@@ -165,7 +388,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d21-540.webp"
+  "imgSmall": "/img/design/d21-540.webp",
+  "code": "TD-0021",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "plain"
+  ],
+  "color": "ส้ม"
  },
  {
   "img": "/img/design/d22.webp",
@@ -173,7 +407,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d22-540.webp"
+  "imgSmall": "/img/design/d22-540.webp",
+  "code": "TD-0022",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "ขาว"
  },
  {
   "img": "/img/design/d23.webp",
@@ -181,7 +426,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d23-540.webp"
+  "imgSmall": "/img/design/d23-540.webp",
+  "code": "TD-0023",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "stripe"
+  ],
+  "color": "ชมพู"
  },
  {
   "img": "/img/design/d24.webp",
@@ -189,7 +445,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d24-540.webp"
+  "imgSmall": "/img/design/d24-540.webp",
+  "code": "TD-0024",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "edu"
+  ],
+  "style": [
+   "stripe"
+  ],
+  "color": "น้ำเงิน"
  },
  {
   "img": "/img/design/d25.webp",
@@ -197,7 +464,18 @@
   "garmentName": "เสื้อฟุตบอล Jersey",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d25-540.webp"
+  "imgSmall": "/img/design/d25-540.webp",
+  "code": "TD-0025",
+  "product": [
+   "print"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "stripe"
+  ],
+  "color": "เขียว"
  },
  {
   "img": "/img/design/d26.jpg",
@@ -205,7 +483,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d26-540.jpg"
+  "imgSmall": "/img/design/d26-540.jpg",
+  "code": "TD-0026",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "corp"
+  ],
+  "style": [
+   "sponsor"
+  ],
+  "color": "น้ำเงิน"
  },
  {
   "img": "/img/design/d27.jpg",
@@ -213,7 +502,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d27-540.jpg"
+  "imgSmall": "/img/design/d27-540.jpg",
+  "code": "TD-0027",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "corp"
+  ],
+  "style": [
+   "sponsor"
+  ],
+  "color": "ดำ"
  },
  {
   "img": "/img/design/d28.jpg",
@@ -221,7 +521,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d28-540.jpg"
+  "imgSmall": "/img/design/d28-540.jpg",
+  "code": "TD-0028",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "edu"
+  ],
+  "style": [
+   "gradient"
+  ],
+  "color": "ม่วง"
  },
  {
   "img": "/img/design/d29.jpg",
@@ -229,7 +540,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d29-540.jpg"
+  "imgSmall": "/img/design/d29-540.jpg",
+  "code": "TD-0029",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "corp"
+  ],
+  "style": [
+   "gradient"
+  ],
+  "color": "น้ำเงิน"
  },
  {
   "img": "/img/design/d30.jpg",
@@ -237,7 +559,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d30-540.jpg"
+  "imgSmall": "/img/design/d30-540.jpg",
+  "code": "TD-0030",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "edu"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "น้ำเงิน"
  },
  {
   "img": "/img/design/d31.jpg",
@@ -245,7 +578,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d31-540.jpg"
+  "imgSmall": "/img/design/d31-540.jpg",
+  "code": "TD-0031",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "edu"
+  ],
+  "style": [
+   "gradient"
+  ],
+  "color": "ชมพู"
  },
  {
   "img": "/img/design/d32.jpg",
@@ -253,7 +597,18 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d32-540.jpg"
+  "imgSmall": "/img/design/d32-540.jpg",
+  "code": "TD-0032",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "gov"
+  ],
+  "style": [
+   "gradient"
+  ],
+  "color": "ชมพู"
  },
  {
   "img": "/img/design/d33.jpg",
@@ -261,6 +616,17 @@
   "garmentName": "เสื้อโปโล",
   "tech": "print",
   "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d33-540.jpg"
+  "imgSmall": "/img/design/d33-540.jpg",
+  "code": "TD-0033",
+  "product": [
+   "polo"
+  ],
+  "use": [
+   "sport"
+  ],
+  "style": [
+   "graphic"
+  ],
+  "color": "ส้ม"
  }
 ]

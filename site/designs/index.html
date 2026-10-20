@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>แบบเสื้อ · เลือกแบบที่ชอบ เซฟรูปส่งคุยใน LINE ได้เลย | TEAMDEE</title>
+  <meta name="description" content="รวมแบบเสื้อที่ TEAMDEE ออกแบบและผลิตจริง เห็นทั้งด้านหน้าและด้านหลัง กรองตามสินค้า การใช้งาน สไตล์ และสี ทุกแบบมีรหัสในภาพ เซฟรูปส่งคุยกับทีมขายได้ทันที">
+</head>
+<body>
+{{> siteHeader active="designs"}}
+
+<main id="main">
+
+  <!-- 1 · ชื่อหน้า + ค้นหา + ตัวกรอง -->
+  <section class="band-ink relative overflow-hidden">
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+    <div class="wrap relative py-12 md:py-16">
+      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">แบบเสื้อ</span></nav>
+      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-7">แบบเสื้อ</h1>
+      <p class="text-[18px] leading-[1.75] text-paper/75 max-w-[56ch] mt-5">เลือกแบบที่ชอบ กดขยาย เซฟรูป แล้วส่งคุยกับทีมดีใน LINE ได้เลย ทุกแบบมีรหัสอยู่ในภาพ ทีมขายเห็นแล้วรู้ทันทีว่าหมายถึงแบบไหน</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <form class="flex flex-wrap gap-2.5 max-w-[560px]" id="designSearch" role="search" onsubmit="return false">
+      <label class="sr-only" for="dq">ค้นหาชื่อสินค้า ชื่อแบบ หรือรหัสแบบ</label>
+      <input class="input flex-1 min-w-[220px]" id="dq" name="q" type="search" placeholder="ค้นหา เช่น โปโล หรือ TD-0012" autocomplete="off">
+      <button class="btn btn-ink" type="submit">ค้นหา</button>
+    </form>
+
+    <div class="mt-8 space-y-4" id="designFilter">
+      {{#if designFilters.showProducts}}
+      <div class="chiprail">
+        <span class="text-[15px] font-bold mr-1">สินค้า</span>
+        <button class="chip" type="button" data-f="product" data-v="all" aria-pressed="true">ทั้งหมด</button>
+        {{#each designFilters.products}}<button class="chip" type="button" data-f="product" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
+      </div>
+      {{/if}}
+
+      {{#if designFilters.showUses}}
+      <div class="chiprail">
+        <span class="text-[15px] font-bold mr-1">การใช้งาน</span>
+        <button class="chip" type="button" data-f="use" data-v="all" aria-pressed="true">ทั้งหมด</button>
+        {{#each designFilters.uses}}<button class="chip" type="button" data-f="use" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
+      </div>
+      {{/if}}
+
+      {{#if designFilters.showStyles}}
+      <div class="chiprail">
+        <span class="text-[15px] font-bold mr-1">สไตล์</span>
+        <button class="chip" type="button" data-f="style" data-v="all" aria-pressed="true">ทั้งหมด</button>
+        {{#each designFilters.styles}}<button class="chip" type="button" data-f="style" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
+      </div>
+      {{/if}}
+
+      {{#if designFilters.showColors}}
+      <div class="chiprail">
+        <span class="text-[15px] font-bold mr-1">สี</span>
+        <button class="chip" type="button" data-f="color" data-v="all" aria-pressed="true">ทุกสี</button>
+        {{#each designFilters.colors}}<button class="chip" type="button" data-f="color" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
+      </div>
+      {{/if}}
+
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+        <p class="t-sm tabular-nums" id="designCount" role="status" aria-live="polite">แสดง {{designFilters.total}} แบบ</p>
+        <button class="chip" type="button" id="designReset" hidden>ล้างตัวกรอง</button>
+      </div>
+    </div>
+
+    <!-- 2 · ตารางรูป · ขนาดและมุมเท่ากัน · รหัสอยู่ในภาพ -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 mt-7" id="designGrid" data-line-url="{{site.lineUrl}}">
+      {{#each designs}}
+      <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]"
+              data-code="{{this.code}}" data-meta="{{this.meta}}" data-product="{{#each this.product}}{{this}} {{/each}}"
+              data-use="{{#each this.use}}{{this}} {{/each}}" data-style="{{#each this.style}}{{this}} {{/each}}"
+              data-color="{{this.color}}" data-text="{{this.code}} {{this.garmentName}} {{this.techName}} {{this.color}}">
+        <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"
+             width="1080" height="720" loading="lazy" decoding="async"
+             alt="แบบ{{this.garmentName}}งาน{{this.techName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง"
+             class="w-full h-full object-contain">
+      </figure>
+      {{/each}}
+    </div>
+
+    <div class="flex justify-center mt-9">
+      <button class="btn btn-ink btn-lg" type="button" id="designMore">โหลดเพิ่ม</button>
+    </div>
+
+    <!-- 3 · ยังไม่เจอแบบที่ชอบ · แสดงตลอด -->
+    <p class="t-body mt-10 hidden" id="designEmpty">ไม่พบแบบที่ตรงกับที่เลือก ลองล้างตัวกรองหรือเปลี่ยนคำค้น</p>
+    <div class="bg-shell border border-line rounded-plate p-7 md:p-9 mt-10">
+      <h2 class="t-display text-[clamp(22px,2.8vw,32px)]">ยังไม่เจอแบบที่ชอบ</h2>
+      <p class="t-lead mt-3 max-w-[52ch]">แบบในหน้านี้เป็นแค่ตัวอย่างที่เคยทำ งานของคุณออกแบบใหม่ได้ทั้งหมด</p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <button class="btn btn-line" type="button" id="designReset2">ล้างตัวกรอง</button>
+        <a class="btn btn-line" href="{{url 'designs'}}">ดูแบบทั้งหมด</a>
+        <a class="btn btn-orange" href="{{url 'contact'}}">ส่งภาพอ้างอิงให้ทีมดี</a>
+      </div>
+    </div>
+
+    <p class="t-xs max-w-[70ch] mt-10">ทุกแบบเป็นงานที่ออกแบบและผลิตจริงโดยทีมดีไซเนอร์ของเรา ใช้เป็นแนวทางได้ แต่งานของคุณจะถูกออกแบบใหม่ให้เป็นของทีมคุณเอง รายละเอียดเทคนิคและผ้าดูได้ที่ <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'products' 'print'}}#spec">หน้าสินค้า</a></p>
+  </section>
+
+  <section class="band-orange">
+    <div class="wrap py-14 md:py-20 text-center">
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">ชอบแบบไหน ส่งมาบอกเรา</h2>
+      <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">เซฟรูปที่ชอบแล้วทักมาพร้อมจำนวนกับวันงาน ดีไซเนอร์จะปรับให้เป็นแบบของทีมคุณ</p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+{{> footer}}
+<script type="module" src="/src/js/designs-page.js"></script>
+</body>
+</html>

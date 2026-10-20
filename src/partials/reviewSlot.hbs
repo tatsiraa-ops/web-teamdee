@@ -1,0 +1,11 @@
+{{!-- ช่องรีวิว · ตาม Brief "รีวิวจริงตามสิทธิ์ที่ได้รับ" แสดงคำพูดจริงเมื่อมีข้อมูลที่ขออนุญาตแล้วเท่านั้น
+     ระหว่างที่ยังไม่มี ใช้ช่องรอแบบเดียวกับใน Wireframe ไม่เขียนคำรีวิวขึ้นเอง --}}
+<blockquote class="bg-paper border border-line rounded-plate p-6 flex flex-col">
+  {{#if this.review}}
+  <p class="text-[18px] leading-[1.65] font-semibold grow">&ldquo;{{this.review.text}}&rdquo;</p>
+  <footer class="t-xs mt-4 pt-4 border-t border-line">{{this.review.name}} · {{this.review.role}} · {{this.review.org}}</footer>
+  {{else}}
+  <p class="text-[18px] leading-[1.65] font-semibold text-ink-3 grow">[คำรีวิวจริง · รอขออนุญาตเผยแพร่]</p>
+  <footer class="t-xs mt-4 pt-4 border-t border-line">[ชื่อ · ตำแหน่ง · องค์กร] · {{this.groupName}}</footer>
+  {{/if}}
+</blockquote>

@@ -1,84 +1,76 @@
 <footer class="band-ink border-t-2 border-orange">
   <div class="wrap pt-16 pb-10 md:pt-20 md:pb-12">
 
-    <div class="grid gap-12 lg:grid-cols-[1.6fr_1fr_1fr_1fr] lg:gap-16">
-
+    <div class="flex flex-wrap items-end justify-between gap-6 pb-10 mb-10 border-b border-paper/15">
       <div>
         <span class="text-paper w-[190px] block">{{> logoHorizontal}}</span>
-        <p class="text-[17px] leading-[1.75] text-paper/65 mt-5 max-w-[36ch]">{{site.tagline}} ดูแลตั้งแต่โจทย์ขององค์กร จนถึงวันที่ทุกคนใส่พร้อมกัน</p>
-
-        <dl class="mt-8 space-y-3 text-[17px]">
-          <div class="flex gap-3">
-            <dt class="sr-only">ที่อยู่</dt>
-            <span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoPin}}</span>
-            <dd class="text-paper/65 leading-[1.7] max-w-[32ch]">{{site.address}}</dd>
-          </div>
-          <div class="flex gap-3">
-            <dt class="sr-only">เวลาทำการ</dt>
-            <span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoClock}}</span>
-            <dd class="text-paper/65 leading-[1.7]">{{site.hours}}</dd>
-          </div>
-          <div class="flex gap-3">
-            <dt class="sr-only">โทรศัพท์</dt>
-            <span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoPhone}}</span>
-            <dd><a class="inline-flex items-center min-h-[44px] text-paper font-semibold tabular-nums hover:text-orange" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a><span class="text-paper/30 px-2">·</span><a class="inline-flex items-center min-h-[44px] text-paper font-semibold tabular-nums hover:text-orange" href="tel:0864166449">{{site.phoneSecondary}}</a></dd>
-          </div>
-        </dl>
-
-        <div class="flex flex-wrap gap-2.5 mt-7">
-          <a class="btn btn-orange btn-sm" href="{{site.lineUrl}}">ทักไลน์</a>
-          <a class="btn btn-quiet-dark btn-sm" href="/pages/brief.html">ปรึกษาฟรี</a>
-        </div>
+        <p class="text-[17px] leading-[1.75] text-paper/65 mt-4 max-w-[40ch]">{{site.tagline}} · {{site.positioning}}</p>
       </div>
+      <a class="btn btn-orange" href="{{url 'contact'}}">ติดต่อทีมดี</a>
+    </div>
 
-      <nav aria-labelledby="f-a">
-        <h2 id="f-a" class="text-[15px] font-bold uppercase tracking-[0.14em] text-paper/60">เสื้อที่เราทำ</h2>
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+
+      <nav aria-labelledby="f-who">
+        <h2 id="f-who" class="text-[15px] font-bold text-paper/60">ตัวตนทีมดี</h2>
         <ul class="mt-4 space-y-0.5">
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/products.html">ดูสินค้าทั้งหมด</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/product-polo.html">โปโลปักยูนิฟอร์ม</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/product-sport.html">เสื้อกีฬาพิมพ์ลาย</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/product-event.html">เสื้อกิจกรรมและงานวิ่ง</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'about'}}">รู้จักทีมดี</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'projects'}}">ผลงานและรีวิว</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'about'}}#story">เรื่องราว</a></li>
         </ul>
       </nav>
 
-      <nav aria-labelledby="f-b">
-        <h2 id="f-b" class="text-[15px] font-bold uppercase tracking-[0.14em] text-paper/60">ผลงานและราคา</h2>
+      <nav aria-labelledby="f-find">
+        <h2 id="f-find" class="text-[15px] font-bold text-paper/60">หาเสื้อที่ต้องการ</h2>
         <ul class="mt-4 space-y-0.5">
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/works.html">แบบเสื้อที่เราออกแบบ</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/reviews.html">รีวิวลูกค้า</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/calculator.html">คำนวณราคา</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/#price">ตารางราคาต่อตัว</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/size-chart.html">ตารางไซส์และเนื้อผ้า</a></li>
+          {{#each products}}<li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'products' this.id}}">{{this.menuName}}</a></li>{{/each}}
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'uses' 'index'}}">เลือกตามการใช้งาน</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'designs'}}">แบบเสื้อ</a></li>
         </ul>
       </nav>
 
-      <nav aria-labelledby="f-c">
-        <h2 id="f-c" class="text-[15px] font-bold uppercase tracking-[0.14em] text-paper/60">บริษัท</h2>
+      <nav aria-labelledby="f-info">
+        <h2 id="f-info" class="text-[15px] font-bold text-paper/60">ข้อมูลก่อนสั่ง</h2>
         <ul class="mt-4 space-y-0.5">
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/about.html">เกี่ยวกับเรา</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/blog.html">บทความ</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/#faq">คำถามที่พบบ่อย</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="/pages/about.html#contact">ติดต่อเรา</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'guides' 'print'}}">คู่มือสั่งทำ</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'blog'}}">บทความ</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'faq'}}">คำถามที่พบบ่อย</a></li>
         </ul>
       </nav>
+
+      <div aria-labelledby="f-contact">
+        <h2 id="f-contact" class="text-[15px] font-bold text-paper/60">ติดต่อเรา</h2>
+        <ul class="mt-4 space-y-0.5">
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{site.lineUrl}}">ทักไลน์</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'contact'}}">กรอกฟอร์ม</a></li>
+        </ul>
+        <dl class="mt-5 space-y-3 text-[16px]">
+          <div class="flex gap-3"><dt class="sr-only">ที่ตั้ง</dt><span class="block size-5 text-orange shrink-0 mt-0.5" aria-hidden="true">{{> icoPin}}</span><dd class="text-paper/65 leading-[1.6]">{{site.address}}</dd></div>
+          <div class="flex gap-3"><dt class="sr-only">เวลาทำการ</dt><span class="block size-5 text-orange shrink-0 mt-0.5" aria-hidden="true">{{> icoClock}}</span><dd class="text-paper/65 leading-[1.6]">{{site.hours}}</dd></div>
+        </dl>
+        <p class="t-xs text-paper/50 mt-5">[QR ไลน์ รอไฟล์จากฝ่ายการตลาด]</p>
+      </div>
 
     </div>
 
     <div class="mt-14 pt-6 border-t border-paper/12 flex flex-wrap gap-x-8 gap-y-2 items-center">
-      <p class="text-[15px] text-paper/60">&copy; {{site.brand}} STUDIO</p>
+      <p class="text-[15px] text-paper/60">&copy; {{site.brand}} · บริษัท ดีดี ฟินิกซ์ จำกัด</p>
+      <a class="text-[15px] text-paper/60 hover:text-orange inline-flex items-center min-h-[44px]" href="{{url 'privacy'}}">นโยบายความเป็นส่วนตัว</a>
+      <a class="text-[15px] text-paper/60 hover:text-orange inline-flex items-center min-h-[44px]" href="{{url 'terms'}}">เงื่อนไขการใช้งาน</a>
       <p class="text-[15px] text-paper/60 max-w-[66ch]">{{site.prototypeNote}}</p>
     </div>
   </div>
 </footer>
 
 <nav class="mobilebar fixed inset-x-0 bottom-0 z-[80] grid grid-cols-3 gap-px bg-ink border-t-2 border-ink lg:hidden" aria-label="ช่องทางติดต่อด่วน">
-  <a class="bg-orange text-paper flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{site.lineUrl}}">
+  <a class="bg-orange text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{site.lineUrl}}">
     <span class="block size-5" aria-hidden="true">{{> icoChat}}</span><span class="text-[16px]">ทักไลน์</span>
   </a>
   <a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="tel:{{site.phonePrimaryTel}}">
     <span class="block size-5 text-orange" aria-hidden="true">{{> icoPhone}}</span><span class="text-[16px]">โทรเลย</span>
   </a>
-  <a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="/pages/calculator.html">
-    <span class="block size-5 text-orange" aria-hidden="true">{{> icoTag}}</span><span class="text-[16px]">คำนวณราคา</span>
+  <a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{url 'designs'}}">
+    <span class="block size-5 text-orange" aria-hidden="true">{{> icoShirt}}</span><span class="text-[16px]">ดูแบบเสื้อ</span>
   </a>
 </nav>

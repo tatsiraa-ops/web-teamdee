@@ -3,6 +3,10 @@
 @source '../../node_modules/preline/dist/*.js';
 /* คลาสบางตัวถูกเก็บไว้ในไฟล์ข้อมูล ต้องบอก Tailwind ให้สแกนด้วย ไม่งั้นคลาสหาย */
 @source '../data/*.json';
+/* หน้าเว็บอยู่ใน site/ (ราก Vite) Tailwind จึงไม่เห็น partials กับสคริปต์เอง ต้องชี้ให้ */
+@source '../partials';
+@source '../js';
+@source '../../site';
 
 /* ============================================================
    TEAMDEE design tokens
@@ -43,6 +47,10 @@
 }
 
 @layer base {
+  /* ลูกของ grid หดได้ต่ำกว่าความกว้างเนื้อหา · ไม่งั้นแถวชิปหรือตารางกว้างจะดันคอลัมน์เดียวบนมือถือจนล้นจอ
+     อยู่ใน base เพื่อให้ min-w-* ที่ใส่ตรงๆ ยังชนะได้ */
+  .grid > * { min-width: 0; }
+
   /* เผื่อที่ให้แถบเมนูที่ติดบนสุด ไม่งั้นตอนกด Tab หรือกดลิงก์ #anchor
      ตัวที่โฟกัสจะไปมุดอยู่ใต้แถบเมนู มองไม่เห็นว่าตอนนี้อยู่ตรงไหน (WCAG 2.2 focus-not-obscured) */
   html { -webkit-text-size-adjust: 100%; scroll-padding-top: 96px; }
@@ -64,7 +72,9 @@
   h1,h2,h3,h4 { font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; text-wrap: pretty; }
   /* กันคำโดดท้ายย่อหน้าทั้งเว็บ ภาษาไทยตัดบรรทัดตามพจนานุกรม ถ้าไม่คุมจะเหลือคำเดียวลอยบรรทัดสุดท้าย */
   p, li, dd, figcaption { text-wrap: pretty; }
-  :focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; border-radius: 3px; }
+  /* กรอบโฟกัสสองชั้น ดำ + ขาว ให้เห็นได้ทั้งบนพื้นขาว พื้นดำ และพื้นส้ม
+     ส้มอย่างเดียวบนขาวได้แค่ 2.84:1 ต่ำกว่า 3:1 ที่ WCAG 2.2 ต้องการ (ตรวจ 2 ต.ค. 2026) */
+  :focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-paper); border-radius: 3px; }
   ::selection { background: var(--color-orange); color: var(--color-ink); }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 }
@@ -73,36 +83,37 @@
   /* ---------- ปุ่ม ---------- */
   .btn { @apply inline-flex items-center justify-center gap-2 min-h-tap px-7 rounded-full
          font-bold text-[17px] whitespace-nowrap border-2 border-transparent transition-colors; }
-  /* ปุ่มส้มใช้ตัวหนังสือขาว ตามที่ตกลงเรื่องกรอบส้ม
+  /* ปุ่มส้มใช้ตัวหนังสือดำ · เดิมเป็นขาวตามที่ตกลงกันไว้ แต่ขาวบน #FF6C00 ได้ 2.84:1 ไม่ผ่าน WCAG AA
+     อาร์ตสั่ง "แก้ให้ครบ" 2 ต.ค. 2026 จึงเปลี่ยนเป็นดำ (7.4:1) · ถ้าจะกลับเป็นขาว แก้ที่ไฟล์นี้ที่เดียว
      ตอน hover ยกขึ้นเล็กน้อยและมีเงา ให้รู้สึกกดได้จริง */
-  .btn-orange { @apply bg-orange text-paper border-orange
+  .btn-orange { @apply bg-orange text-ink border-orange
                 hover:bg-ink hover:text-paper hover:border-ink; }
-  .btn-ink    { @apply bg-ink text-paper border-ink hover:bg-orange hover:text-paper hover:border-orange; }
+  .btn-ink    { @apply bg-ink text-paper border-ink hover:bg-orange hover:text-ink hover:border-orange; }
   .btn-line   { @apply bg-paper text-ink border-line-2 hover:border-ink hover:bg-shell; }
   .btn-quiet  { @apply bg-shell text-ink border-transparent hover:bg-ink hover:text-paper hover:border-ink; }
   .band-ink .btn-quiet, .btn-quiet-dark { @apply bg-paper/10 text-paper border-transparent hover:bg-paper hover:text-ink; }
   .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 18px -8px rgba(0,0,0,.45); }
   .btn:active { transform: translateY(0); box-shadow: none; }
   .btn { transition: background-color .18s, color .18s, border-color .18s, transform .12s, box-shadow .18s; }
-  .on-orange .btn-line { @apply bg-transparent border-paper/50 text-paper hover:bg-paper hover:text-ink hover:border-paper; }
+  .on-orange .btn-line { @apply bg-transparent border-ink/50 text-ink hover:bg-ink hover:text-paper hover:border-ink; }
   .btn-lg { @apply min-h-[3.75rem] px-9 text-[19px]; }
   .btn-sm { @apply min-h-[3rem] px-5 text-[16px]; }
 
   /* ---------- แผ่นส้ม ใช้แทนรูป ---------- */
-  /* พี่อาร์ตสั่งให้ตัวหนังสือในกรอบส้มเป็นสีขาวทั้งหมด
-     หมายเหตุ ขาวบนส้ม #FF6C00 วัดได้ 2.9:1 ไม่ผ่าน WCAG AA จึงชดเชยด้วยการ
-     ทำให้ตัวใหญ่และหนา และปุ่มยังคงใช้ตัวดำบนส้มเพราะเป็นจุดที่ต้องอ่านออกที่สุด */
-  .band-orange { @apply bg-orange text-paper; }
+  /* ตัวหนังสือในกรอบส้มเป็นสีดำ · เดิมอาร์ตสั่งให้เป็นขาวทั้งหมด แต่ขาวบน #FF6C00 ได้ 2.84:1
+     ไม่ผ่านแม้แต่เกณฑ์ตัวใหญ่ 3:1 · เปลี่ยนเป็นดำ 2 ต.ค. 2026 ตามคำสั่ง "แก้ให้ครบ" */
+  .band-orange { @apply bg-orange text-ink; }
   .band-shell  { @apply bg-shell; }
   .band-ink    { @apply bg-ink text-paper; }
 
   /* ---------- เพลต แทนที่กล่องเปล่า ---------- */
   .plate { @apply relative flex flex-col justify-between rounded-plate overflow-hidden p-6 min-h-[220px]; }
-  .plate-orange { @apply bg-orange text-paper; }
+  .plate-orange { @apply bg-orange text-ink; }
   .plate-ink    { @apply bg-ink text-paper; }
   .plate-line   { @apply bg-paper text-ink border-2 border-ink; }
   .plate__num   { @apply font-display font-bold leading-[0.86] tracking-tight tabular-nums; }
-  .plate__tag   { @apply text-[15px] font-semibold uppercase tracking-[0.14em] opacity-70; }
+  /* หัวข้อภาษาไทยห้ามยืดระยะตัวอักษร สระและวรรณยุกต์จะลอยแยกจากพยัญชนะ อ่านเป็นตัวๆ */
+  .plate__tag   { @apply text-[15px] font-semibold opacity-70; }
 
   /* ---------- การ์ด ---------- */
   .card { @apply bg-paper border border-line rounded-card p-6; }
@@ -118,10 +129,16 @@
      สถานะเลือกใช้ส้ม ไม่ใช้ดำ เพราะดำจมหายบนการ์ดพื้นเข้ม */
   .chip { @apply inline-flex items-center gap-2 min-h-[3rem] px-5 rounded-full border-2 border-line-2
           bg-paper text-ink text-[16px] font-semibold transition-colors hover:border-ink
-          aria-pressed:bg-orange aria-pressed:text-paper aria-pressed:border-orange; }
+          aria-pressed:bg-orange aria-pressed:text-ink aria-pressed:border-orange; }
 
   /* แถวชิปกรอง จอเล็กเลื่อนแนวนอนแถวเดียว จอใหญ่ค่อยตัดบรรทัด
      ที่ต้องเผื่อ padding ซ้ายขวาเพราะ scroll container กินขอบ wrap */
+  /* ตัวเลือกแบบ radio/checkbox หน้าตาเหมือนชิป · input ซ่อนแบบ sr-only คีย์บอร์ดยังใช้ได้ครบ
+     เลือกแล้วพื้นดำ ไม่ใช้ขาวบนส้มเพราะคอนทราสต์ไม่ถึง */
+  .choice { @apply inline-flex items-center gap-2 min-h-[3rem] px-5 rounded-full border-2 border-line-2
+          bg-paper text-ink text-[16px] font-semibold cursor-pointer transition-colors hover:border-ink
+          has-checked:bg-ink has-checked:text-paper has-checked:border-ink
+          has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-ink; }
   .chiprail { @apply flex items-center gap-2.5 overflow-x-auto flex-nowrap
               -mx-5 px-5 pb-1 sm:mx-0 sm:px-0 sm:pb-0 sm:flex-wrap sm:overflow-visible; scrollbar-width: none; }
   .chiprail::-webkit-scrollbar { display: none; }
@@ -133,30 +150,36 @@
   .cdot::before { content: ''; @apply block size-2.5 rounded-full bg-paper/40 transition-colors; }
   .cdot:hover::before { @apply bg-paper/70; }
   .cdot.active::before { @apply bg-paper size-3; }
-  .cdot:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 2px; }
+  .cdot:focus-visible { outline: 3px solid var(--color-paper); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-ink); }
 
   /* ---------- กล่องดูรูปใหญ่ ---------- */
   .lb-host { @apply relative; }
   /* ปุ่มโปร่งทับรูปทั้งใบ ให้กดตรงไหนก็ได้ ไม่ต้องเล็งไอคอนเล็กๆ */
   .lb-open { @apply absolute inset-0 w-full h-full cursor-zoom-in; }
-  .lb-open:focus-visible { outline: 3px solid var(--color-orange); outline-offset: -3px; }
+  .lb-open:focus-visible { outline: 3px solid var(--color-ink); outline-offset: -3px; box-shadow: inset 0 0 0 6px var(--color-paper); }
 
   .lb { @apply w-full h-full max-w-none max-h-none m-0 p-0 bg-transparent overflow-hidden; }
   .lb::backdrop { background: rgb(0 0 0 / .9); }
   /* แยก padding แต่ละด้าน เพราะ sm:p-10 จะไปทับ pb-20 ทำให้รูปล้นลงมาทับคำบรรยาย */
-  .lb__fig { @apply w-full h-full m-0 grid place-items-center px-2 sm:px-14 pt-4 sm:pt-8 pb-28; }
+  .lb__fig { @apply w-full h-full m-0 grid place-items-center px-2 sm:px-14 pt-4 sm:pt-8 pb-56; }
   /* คุมความสูงด้วย dvh ตรงๆ เพราะ max-h-full ในกริดไปอิงความสูงแถวไม่ใช่กรอบเนื้อหา
      รูปเลยล้นลงไปทับคำบรรยาย เว้น 11rem ไว้ให้คำบรรยายกับตัวนับด้านล่าง */
-  .lb__img { @apply max-w-full max-h-[calc(100dvh-11rem)] object-contain rounded-card bg-paper; }
+  .lb__img { @apply max-w-full max-h-[calc(100dvh-17rem)] object-contain rounded-card bg-paper; }
   /* บนมือถือต้องยกให้พ้นแถบติดต่อด่วนที่อยู่ล่างจอ ไม่งั้นอ่านทับกัน */
-  .lb__cap { @apply absolute inset-x-0 bottom-14 text-center text-[16px] leading-snug text-paper/85 px-5 max-w-[70ch] mx-auto; }
+  .lb__cap { @apply absolute inset-x-0 bottom-36 text-center px-5 max-w-[70ch] mx-auto flex flex-col items-center gap-1; }
+  .lb__code { @apply text-[18px] font-bold text-paper tabular-nums tracking-wide; }
+  .lb__code:empty, .lb__meta:empty, .lb__note:empty { display: none; }
+  .lb__meta { @apply text-[16px] leading-snug text-paper/85; }
+  .lb__note { @apply text-[15px] text-paper/60; }
+  .lb__bar { @apply absolute inset-x-0 bottom-16 flex flex-wrap items-center justify-center gap-2.5 px-5; }
+  .lb__hint { @apply basis-full text-center text-[14px] text-paper/55 mt-1; }
   .lb__count { @apply absolute inset-x-0 bottom-5 text-center text-[15px] font-semibold text-paper/60 tabular-nums; }
   .lb__btn { @apply absolute grid place-items-center size-14 rounded-full text-paper bg-ink/70 border-2 border-paper/25
              hover:bg-orange hover:border-orange transition-colors; }
   .lb__close { @apply top-4 right-4; }
   .lb__prev { @apply left-3 sm:left-5 top-1/2 -translate-y-1/2; }
   .lb__next { @apply right-3 sm:right-5 top-1/2 -translate-y-1/2; }
-  .lb__btn:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; }
+  .lb__btn:focus-visible { outline: 3px solid var(--color-paper); outline-offset: 3px; }
 
   /* ตารางกว้างกว่าจอมือถือ ต้องบอกให้รู้ว่าปัดดูต่อได้ ไม่งั้นคนคิดว่าตารางมีแค่นี้ */
   .scroll-hint { @apply text-[15px] text-ink-3 mt-2 flex items-center gap-1.5 sm:hidden; }
@@ -164,7 +187,7 @@
 
   /* ---------- ฟอร์ม ---------- */
   .input { @apply w-full min-h-[3.5rem] px-4 py-3 text-[18px] bg-paper border-2 border-line-2 rounded-card
-           focus:border-orange focus:outline-none focus:ring-4 focus:ring-orange/20; }
+           focus:border-ink focus:outline-none focus:ring-4 focus:ring-orange/40; }
   .label { @apply block text-[17px] font-semibold mb-2; }
   .help  { @apply block text-[16px] text-ink-3 mt-2 leading-relaxed; }
   /* ข้อความบอกว่าช่องไหนขาด วางใต้ช่องนั้นเลย ไม่ใช่ไปกองรวมที่ปุ่มส่ง */
@@ -175,14 +198,14 @@
   .t-display { @apply font-display font-bold leading-[1.06] tracking-tight; }
   .t-lead { @apply text-[19px] leading-[1.75] text-ink-2; text-wrap: pretty; }
   .band-ink .t-lead { @apply text-inherit opacity-90; }
-  .on-orange .t-lead { @apply text-paper opacity-100; }
+  .on-orange .t-lead { @apply text-ink opacity-100; }
   .t-body { @apply text-[18px] leading-[1.8] text-ink-2; text-wrap: pretty; }
   .t-sm   { @apply text-[16px] leading-[1.7] text-ink-2; }
   .t-xs   { @apply text-[15px] leading-[1.6] text-ink-3; }
   /* บนพื้นเข้ม ตัวหนังสือรองต้องสว่างขึ้น ไม่งั้นจมหาย */
   .band-ink .t-body, .band-ink .t-sm, .band-ink .t-xs,
   .plate-ink .t-body, .plate-ink .t-sm, .plate-ink .t-xs { @apply text-paper/80; }
-  .on-orange .t-body, .on-orange .t-sm, .on-orange .t-xs { @apply text-paper; }
+  .on-orange .t-body, .on-orange .t-sm, .on-orange .t-xs { @apply text-ink; }
   .eyebrow { @apply inline-flex items-center gap-2 text-[16px] font-bold text-ink mb-3; }
   .eyebrow svg { color: var(--color-orange); }
   /* การ์ดพื้นขาวที่ไปวางอยู่ในแถบดำหรือแถบส้ม ต้องดึงสีตัวหนังสือกลับ
@@ -192,12 +215,12 @@
   .band-ink .on-paper .t-body, .on-orange .on-paper .t-body,
   .band-ink .on-paper .t-sm,   .on-orange .on-paper .t-sm { @apply text-ink-2 opacity-100; }
   .band-ink .on-paper .t-xs,   .on-orange .on-paper .t-xs { @apply text-ink-3 opacity-100; }
-  .band-ink .on-paper .eyebrow,.on-orange .on-paper .eyebrow { @apply text-orange opacity-100; }
+  .band-ink .on-paper .eyebrow,.on-orange .on-paper .eyebrow { @apply text-ink opacity-100; }
 
 
   .band-ink .eyebrow { @apply text-orange opacity-100; }
   .band-ink .eyebrow svg { color: currentColor; }
-  .on-orange .eyebrow { @apply text-paper opacity-100; }
+  .on-orange .eyebrow { @apply text-ink opacity-100; }
   .on-orange .eyebrow svg { color: currentColor; }
 
 
@@ -210,15 +233,31 @@
   .nav-link[aria-expanded="true"] { @apply text-ink; }
   .nav-link[aria-expanded="true"] [data-caret] { @apply rotate-180; }
 
-  .mega { @apply absolute left-0 right-0 top-full bg-paper border-t border-line
-          shadow-[0_18px_40px_-12px_rgba(17,17,17,0.18)] z-50; }
-  .mega__head { @apply text-[15px] font-bold uppercase tracking-[0.1em] text-ink-3 mb-3 pb-2 border-b border-line; }
-  .mega__link { @apply flex flex-col justify-center min-h-[50px] py-1 text-[17px] font-semibold
-                text-ink-2 hover:text-orange transition-colors; }
+  /* ---------- dropdown เมนูหลัก ----------
+     dropdown ธรรมดาที่เปิดใต้ปุ่มของตัวเอง (เดิมเป็นแผงเต็มความกว้าง)
+     สิ่งที่เพิ่มจาก dropdown ทั่วไป: คำอธิบายสั้นใต้ชื่อ · ทรงเสื้อซ้อนใต้เทคนิค · หน้าปัจจุบันมีแถบส้ม
+     ลูกศรขึ้นลงบนคีย์บอร์ด (nav.js) · ลิงก์ท้ายเมนูพาไปหน้ารวมของหมวดนั้น */
+  .dd { @apply absolute left-0 top-[calc(100%-10px)] z-50 w-[360px] bg-paper border border-line rounded-plate p-2
+        shadow-[0_18px_40px_-12px_rgba(17,17,17,0.22)]; }
+  .dd:not([hidden]) { transition: opacity .14s ease-out, translate .14s ease-out; }
+  @starting-style { .dd:not([hidden]) { opacity: 0; translate: 0 -4px; } }
+  .dd__group { @apply text-[15px] font-bold text-ink-3 px-3 pt-2.5 pb-1.5; }
+  .dd__item { @apply relative flex flex-col justify-center min-h-[52px] px-3 py-2 rounded-card text-ink
+              hover:bg-shell focus-visible:bg-shell; }
+  .dd__item[aria-current="page"] { @apply bg-shell; }
+  .dd__item[aria-current="page"]::before { content: ''; @apply absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-orange; }
+  .dd__t { @apply text-[16px] font-semibold leading-snug; }
+  .dd__d { @apply text-[15px] text-ink-3 leading-snug mt-0.5; }
+  .dd__item--compact { @apply min-h-[44px] py-1.5; }
+  .dd__sub { @apply ml-3 pl-2 border-l-2 border-line; }
+  .dd__sep { @apply my-1.5 mx-3 border-t border-line; }
+  .dd__foot { @apply flex items-center justify-between gap-3 min-h-[48px] px-3 rounded-card text-[15px] font-bold text-ink
+              hover:bg-shell focus-visible:bg-shell; }
+  .dd__foot span:last-child { @apply text-ink-3 font-semibold tabular-nums; }
 
   .mnav { @apply flex items-center min-h-[60px] text-[19px] font-semibold border-b border-line; }
   .mnav--sub { @apply text-[18px] font-medium text-ink-2 pl-4; }
-  .mnav__head { @apply text-[15px] font-bold uppercase tracking-[0.1em] text-orange pt-7 pb-2; }
+  .mnav__head { @apply text-[15px] font-bold text-ink-3 pt-7 pb-2; }
 
 
   /* ==========================================================
@@ -463,7 +502,7 @@
   .rng::-webkit-slider-thumb:active { transform: scale(1.12); }
   .rng::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--color-orange);
     border: 4px solid var(--color-paper); box-shadow: 0 0 0 2px var(--color-ink); cursor: pointer; }
-  .rng:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 6px; }
+  .rng:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 6px; }
 
   /* ---------- ตารางราคาบนพื้นดำ มีแถบยาวหลังตัวเลขให้เห็นว่าราคาลง ---------- */
   .tbl-price thead tr { border-bottom: 1px solid rgba(255,255,255,.25); }
@@ -505,3 +544,330 @@
 /* ตอนเปิดกล่องดูรูป ซ่อนแถบติดต่อด่วนล่างจอ จะได้ไม่ทับคำบรรยาย
    ต้องอยู่นอก @layer เพราะกฎในเลเยอร์ components แพ้ utility .grid ของแถบเสมอ */
 html.lb-on .mobilebar { display: none; }
+
+/* ---------- คู่มือ ----------
+   สารบัญติดซ้ายเพื่อให้ทีมขายส่งลิงก์ตรงหัวข้อได้ และคนอ่านรู้ว่าตัวเองอยู่ตรงไหน */
+.toc a { display: flex; align-items: center; min-height: 44px; font-size: 16px;
+  color: var(--color-ink-2); border-left: 3px solid var(--color-line); padding-left: 14px; }
+.toc a:hover { color: var(--color-ink); border-left-color: var(--color-line-2); }
+.toc a[aria-current="true"] { color: var(--color-ink); font-weight: 700; border-left-color: var(--color-orange); }
+
+/* ป้ายบอกว่าใครเป็นคนทำขั้นนี้ · ตาม Brief "แยก ลูกค้าส่ง / ทีมดีทำ / ต้องอนุมัติ" */
+.gtag { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600;
+  border-radius: 999px; padding: 4px 12px; border: 2px solid; }
+.gtag--customer { color: #0F4C81; border-color: #0F4C81; background: #EAF2F9; }
+.gtag--teamdee  { color: #7A3A00; border-color: #7A3A00; background: #FDF0E4; }
+.gtag--approve  { color: var(--color-ok); border-color: var(--color-ok); background: var(--color-ok-tint); }
+
+/* ตัวเลขจำนวนในชิปที่ถูกเลือก · opacity-60 บนพื้นสีทำให้อ่านไม่ออก (1.8:1)
+   อยู่นอก @layer เพราะ utility opacity-60 ชนะกฎในเลเยอร์ components เสมอ */
+.chip[aria-pressed="true"] .opacity-60 { opacity: 1; }
+
+/* ==========================================================
+   HERO หน้าแรก · ฉาก A (แบบ → ทีมใส่จริง) สลับกับฉาก B (ผนังแบบเสื้อ)
+   ภาพเคลื่อนไหวอยู่ใน src/js/hero.js · ไม่มี JS หรือผู้ใช้ขอลดการเคลื่อนไหว = ภาพนิ่งฉาก A
+   ขยับเฉพาะ transform กับ opacity
+   ========================================================== */
+.hero-stage { position: relative; height: 400px; overflow: hidden; }
+@media (min-width: 1024px) { .hero-stage { position: absolute; inset: 0; height: auto; } }
+
+/* ความทึบ 0.001 แทน 0 · มองไม่เห็นแต่เบราว์เซอร์วาดเก็บไว้แล้ว ตอนผนังขึ้นจริงจะไม่ต้องวาดครั้งแรกกลางจังหวะ */
+.hero-wall { position: absolute; inset: -40% -40%; display: flex; gap: 10px; justify-content: center;
+  rotate: -8deg; opacity: 0.001; pointer-events: none; }
+@media (min-width: 1024px) { .hero-wall { inset: -40% -6% -40% 22%; gap: 14px; } }
+.hero-col { flex: 0 0 120px; display: flex; flex-direction: column; gap: 10px; }
+@media (min-width: 1024px) { .hero-col { flex-basis: 168px; gap: 14px; } }
+.hero-tile { aspect-ratio: 3 / 2; background: #fff; border-radius: 10px; overflow: hidden; flex: none; }
+.hero-tile img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.hero-tile.is-hi { outline: 4px solid var(--color-orange); outline-offset: 3px; }
+
+/* ม่านไล่มืดด้านซ้าย ให้ตัวหนังสืออ่านออกตอนผนังขึ้นเต็ม (จอใหญ่เท่านั้น) */
+.hero-shade { display: none; }
+@media (min-width: 1024px) { .hero-shade { display: block; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, #0B0B0B 0%, rgba(11,11,11,.95) 49%, rgba(11,11,11,.5) 62%, rgba(11,11,11,0) 80%); } }
+/* คอลัมน์ตัวหนังสือกว้าง 48% ม่านต้องทึบอย่างน้อย .95 ถึงตรงนั้น ตัวหนังสือ paper/60 บนช่องขาวของผนังยังได้เกิน 4.5:1 */
+
+.hero-a { position: absolute; inset: 18px 16px 18px 16px; }
+@media (min-width: 1024px) { .hero-a { inset: 56px max(3%, calc((100% - 1240px) / 2 + 40px)) 56px auto; width: min(46%, 600px); } }
+
+.hero-card { position: absolute; background: #fff; color: var(--color-ink); border-radius: var(--radius-plate, 18px); padding: 8px;
+  box-shadow: 0 24px 50px -20px rgba(0,0,0,.75); transform-origin: center; }
+.hero-card img { display: block; width: 100%; border-radius: 10px; }
+.hero-card figcaption { font-size: 15px; font-weight: 700; padding: 8px 4px 2px; }
+.hero-card--design { left: 0; top: 2%; width: 64%; rotate: -3deg; }
+.hero-card--photo { right: 0; bottom: 6%; width: 56%; rotate: 2deg; }
+/* มือถือพื้นที่แคบ ย่อการ์ดให้คำบรรยายของการ์ดแบบไม่ถูกการ์ดรูปทับ */
+@media (max-width: 639px) {
+  .hero-stage { height: 420px; }
+  .hero-card--design { width: 62%; top: 0; }
+  .hero-card--photo { width: 52%; bottom: 2%; }
+}
+.hero-card--photo .hero-photo { aspect-ratio: 5 / 4; overflow: hidden; border-radius: 10px; }
+.hero-card--photo .hero-photo img { height: 100%; object-fit: cover; object-position: center 85%; border-radius: 0; }
+.hero-arrow { position: absolute; left: 50%; top: 44%; translate: -50% -50%; display: grid; place-items: center;
+  width: 52px; height: 52px; border-radius: 999px; background: var(--color-orange); color: var(--color-ink); font-size: 24px; font-weight: 800; }
+.hero-note { position: absolute; left: 0; bottom: 0; font-size: 15px; line-height: 1.4; color: #fff; background: rgba(11,11,11,.78);
+  border-radius: 10px; padding: 6px 10px; max-width: 30ch; }
+@media (max-width: 639px) { .hero-note { display: none; } }
+
+.hero-pause { position: absolute; right: 16px; bottom: 16px; z-index: 20; display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 0 16px; border-radius: 999px; background: rgba(11,11,11,.82); color: #fff; font-size: 15px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,.3); }
+.hero-pause:hover { background: #fff; color: var(--color-ink); }
+
+/* มือถือ: คำบรรยาย ขั้นที่ 1 / 2 บอกลำดับอยู่แล้ว ลูกศรบนจอแคบไปทับรหัสแบบ · ต้องอยู่หลังกฎ .hero-arrow หลัก */
+@media (max-width: 639px) { .hero-arrow { display: none; } }
+
+/* สลับ hero 2 แบบ · ตั้ง data-hero-mode ที่ <html> ตั้งแต่ใน <head> (ตรรกะเดียวกับ src/js/hero-mode.js) */
+html[data-hero-mode="classic"] [data-hero-scroll] { display: none; }
+html:not([data-hero-mode="classic"]) section[data-hero] { display: none; }
+.hero-wrap { position: relative; }
+.hero-switch { position: absolute; top: 14px; right: 16px; z-index: 30; display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px; border-radius: 999px; background: rgba(11,11,11,.82); border: 1px solid rgba(255,255,255,.25); }
+.hero-switch__label { font-size: 15px; font-weight: 600; color: rgba(255,255,255,.7); padding: 0 8px 0 10px; }
+.hero-switch button { min-height: 36px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 700; color: #fff; }
+.hero-switch button[aria-pressed="true"] { background: var(--color-orange); color: var(--color-ink); }
+@media (max-width: 639px) { .hero-switch__label { display: none; } .hero-switch { top: 10px; right: 10px; } }
+
+/* ==========================================================
+   HERO แบบเลื่อนเล่าเรื่อง · docs/plans/hero-scroll.md
+   ตัวเอกคือเสื้อ 3D จริงของทีมดี · ไม่มีของตกแต่งลอย (ลูกบอล วงแหวน ตัวเลขยักษ์ ตัดออก 2 ต.ค. 2026 เพราะดูเป็นงาน AI)
+   ภาพทุกชิ้นผูกกับระยะเลื่อนของ .hs-track (view timeline --hs) · keyframes เป็น % ของทั้งเรื่อง
+   เบราว์เซอร์ที่ไม่รองรับ: hero-scroll.js ใส่ --hsp (0–1) แล้วใช้ delay ติดลบ · ขยับเฉพาะ translate / scale / opacity
+   ========================================================== */
+.hs { --hh: 77px; position: relative; background: #0B0B0B; color: #fff; }
+.hs-track { height: 620vh; view-timeline-name: --hs; view-timeline-axis: block; view-timeline-inset: var(--hh) 0px; }
+.hs-stage { position: sticky; top: var(--hh); height: calc(100svh - var(--hh)); min-height: 560px; overflow: hidden;
+  background-image: repeating-linear-gradient(52deg, rgba(255,255,255,.03) 0 2px, transparent 2px 5px), repeating-linear-gradient(-38deg, rgba(255,255,255,.025) 0 2px, transparent 2px 5px); }
+.hs-a { animation-timeline: --hs; animation-range: contain 0% contain 100%; animation-duration: auto; animation-fill-mode: both; animation-timing-function: linear; }
+@supports not (animation-timeline: view()) {
+  .hs-a { animation-duration: 1s; animation-play-state: paused; animation-delay: calc(var(--hsp, 0) * -1s); }
+}
+
+/* พื้นส้มบทออกแบบ · ริ้วเฉียงตาม CI เป็นเงาดำจางบนส้ม */
+.hs-orange { position: absolute; inset: 0; animation-name: hs-orange; pointer-events: none;
+  background: repeating-linear-gradient(24deg, transparent 0 46px, rgba(0,0,0,.12) 46px 52px, transparent 52px 96px, rgba(0,0,0,.06) 96px 99px, transparent 99px 150px), var(--color-orange); }
+
+.hs-vis { position: absolute; inset: 0; pointer-events: none; }
+.hs-floor { position: absolute; left: 14%; right: 14%; bottom: 0.5%; height: 4%; border-radius: 50%; background: rgba(0,0,0,.55); filter: blur(12px); }
+.hs-line img, .hs-backs img { position: relative; display: block; width: 100%; height: auto; }
+
+/* แถวเสื้อ 5 ตัว · ตัวกลางคือตัวเอก */
+.hs-line { position: absolute; left: 40%; right: 1%; top: 7%; bottom: 3%; }
+.hs-mate, .hs-star { position: absolute; bottom: 0; }
+.hs-mate img { filter: brightness(.7) saturate(.9); }
+.hs-mate--0 { left: 0; width: 28%; bottom: 9%; z-index: 1; animation-name: hs-mate-0; }
+.hs-mate--1 { left: 12%; width: 33%; bottom: 4%; z-index: 2; animation-name: hs-mate-1; }
+.hs-mate--3 { right: 12%; width: 33%; bottom: 4%; z-index: 2; animation-name: hs-mate-3; }
+.hs-mate--4 { right: 0; width: 28%; bottom: 9%; z-index: 1; animation-name: hs-mate-4; }
+.hs-star { left: 28%; width: 44%; z-index: 3; transform-origin: 50% 100%; animation-name: hs-star; perspective: 1600px; }
+/* ไฟสตูดิโอด้านหลังตัวเอก · แสงขาวจางแบบถ่ายสินค้า ไม่ใช่ก้อนสีลอย */
+.hs-light { position: absolute; left: -35%; right: -35%; top: -12%; bottom: 4%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(255,255,255,.15), rgba(255,255,255,.05) 55%, transparent 78%); }
+/* เอียงตามเมาส์ (บนคอม) · ค่ามาจาก hero-scroll.js */
+.hs-tilt { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transform-style: preserve-3d; }
+/* พลิกหน้า → หลัง → หน้า แบบ 3D จริง (หมุนรอบแกนตั้ง) แทนการบีบภาพ */
+.hs-flip { position: relative; transform-style: preserve-3d; animation-name: hs-flip; }
+.hs-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.hs-face--back { position: absolute !important; inset: 0; rotate: y 180deg; }
+.hs-side { position: absolute; left: 50%; bottom: -8%; translate: -50% 0; font-size: 15px; font-weight: 700; letter-spacing: .02em;
+  padding: 6px 14px; border-radius: 999px; background: var(--color-ink); color: #fff; white-space: nowrap; }
+.hs-side--front { animation-name: hs-side-front; } .hs-side--back { animation-name: hs-side-back; }
+
+/* ผนังแบบเสื้อ */
+.hs-wall { position: absolute; inset: -40% -8% -40% 26%; display: flex; gap: 14px; justify-content: center; rotate: -9deg; animation-name: hs-wall; }
+.hs-col { flex: 0 0 168px; display: flex; flex-direction: column; gap: 14px; }
+.hs-col--up { animation-name: hs-col-up; } .hs-col--down { animation-name: hs-col-down; }
+.hs-tile { aspect-ratio: 3 / 2; background: #fff; border-radius: 12px; overflow: hidden; flex: none; }
+.hs-tile img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.hs-vis::before { content: ''; position: absolute; inset: 0; z-index: 1; opacity: 0;
+  background: linear-gradient(90deg, #0B0B0B 0%, rgba(11,11,11,.95) 44%, rgba(11,11,11,.4) 62%, rgba(11,11,11,0) 78%);
+  animation: hs-shade linear both; animation-timeline: --hs; animation-range: contain 0% contain 100%; animation-duration: auto; }
+@supports not (animation-timeline: view()) { .hs-vis::before { animation-duration: 1s; animation-play-state: paused; animation-delay: calc(var(--hsp, 0) * -1s); } }
+
+/* ใบสรุปงาน */
+.hs-sheet { position: absolute; z-index: 2; width: min(420px, 34vw); left: calc(70% - min(420px, 34vw) / 2); top: 14%;
+  background: #fff; color: var(--color-ink); border-radius: 16px; padding: 22px 24px; box-shadow: 0 30px 60px -24px rgba(0,0,0,.7); animation-name: hs-sheet; }
+.hs-sheet__head { font-family: var(--font-display); font-weight: 800; font-size: 22px; display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 2px solid var(--color-ink); padding-bottom: 10px; }
+.hs-sheet__head span { font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: var(--color-ink-3); }
+.hs-sheet dl { margin-top: 10px; }
+.hs-sheet dl div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--color-line); font-size: 16px; }
+.hs-sheet dt { color: var(--color-ink-3); } .hs-sheet dd { font-weight: 700; text-align: right; display: flex; gap: 6px; align-items: center; }
+.hs-sheet dd i { display: inline-block; width: 22px; height: 22px; border-radius: 6px; border: 1px solid rgba(0,0,0,.15); }
+.hs-checks { margin-top: 14px; display: grid; gap: 8px; }
+.hs-check { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
+.hs-check::before { content: '✓'; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: var(--color-orange); color: var(--color-ink); font-size: 15px; font-weight: 800; }
+.hs-check--1 { animation-name: hs-check-1; } .hs-check--2 { animation-name: hs-check-2; } .hs-check--3 { animation-name: hs-check-3; } .hs-check--4 { animation-name: hs-check-4; }
+.hs-sheet__note { margin-top: 14px; font-size: 15px; color: var(--color-ink-3); }
+
+/* แบบ → ทีมใส่จริง */
+.hs-pair { position: absolute; inset: 0; }
+.hs-pcard { position: absolute; background: #fff; color: var(--color-ink); border-radius: 16px; padding: 8px; box-shadow: 0 30px 60px -24px rgba(0,0,0,.75); }
+.hs-pcard img { display: block; width: 100%; border-radius: 10px; }
+.hs-pcard figcaption { display: flex; align-items: baseline; gap: 10px; font-size: 16px; font-weight: 700; padding: 8px 4px 2px; }
+.hs-pcard figcaption span { font-family: var(--font-display); font-size: 28px; font-weight: 800; line-height: .8; color: var(--color-orange); }
+.hs-pcard--design { width: min(380px, 30vw); left: calc(70% - min(380px, 30vw) * .95); top: 10%; rotate: -3deg; animation-name: hs-pd; }
+.hs-pcard--photo { width: min(360px, 28vw); left: calc(70% - min(360px, 28vw) * .1); top: 34%; rotate: 2deg; animation-name: hs-pp; }
+.hs-pphoto { display: block; aspect-ratio: 5 / 4; overflow: hidden; border-radius: 10px; }
+.hs-pphoto img { width: 100%; height: 100%; object-fit: cover; object-position: center 85%; border-radius: 0; }
+.hs-pnote { position: absolute; left: calc(70% - min(380px, 30vw) * .95); bottom: 8%; font-size: 15px; color: rgba(255,255,255,.8);
+  background: rgba(11,11,11,.8); padding: 6px 10px; border-radius: 10px; animation-name: hs-pnote; }
+
+/* บทปิด · ด้านหลังทั้ง 5 ตัว */
+.hs-backs { position: absolute; left: 42%; right: 2%; bottom: 3%; display: flex; align-items: flex-end; justify-content: center; }
+.hs-backj { position: relative; width: 22%; margin: 0 -1.5%; }
+.hs-backj:nth-child(2), .hs-backj:nth-child(4) { margin-bottom: 3%; }
+.hs-backj--0 { animation-name: hs-back-0; } .hs-backj--1 { animation-name: hs-back-1; } .hs-backj--2 { animation-name: hs-back-2; z-index: 2; width: 26%; }
+.hs-backj--3 { animation-name: hs-back-3; } .hs-backj--4 { animation-name: hs-back-4; }
+
+/* ตัวหนังสือ */
+.hs-text { position: absolute; z-index: 5; top: 0; bottom: 0; left: max(20px, calc((100% - 1240px) / 2 + 40px)); width: min(40%, 520px); }
+.hs-t { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; }
+.hs-t0 { animation-name: hs-t0; } .hs-t1 { animation-name: hs-t1; } .hs-t2 { animation-name: hs-t2; } .hs-t3 { animation-name: hs-t3; }
+.hs-t4 { animation-name: hs-t4; } .hs-t5 { animation-name: hs-t5; } .hs-t6 { animation-name: hs-t6; }
+.hs-t1 .hs-ln:nth-child(1) > span { animation-name: hs-ln1-1; }
+.hs-t1 .hs-ln:nth-child(2) > span { animation-name: hs-ln1-2; }
+.hs-t2 .hs-ln:nth-child(1) > span { animation-name: hs-ln2-1; }
+.hs-t2 .hs-ln:nth-child(2) > span { animation-name: hs-ln2-2; }
+.hs-t3 .hs-ln:nth-child(1) > span { animation-name: hs-ln3-1; }
+.hs-t3 .hs-ln:nth-child(2) > span { animation-name: hs-ln3-2; }
+.hs-t4 .hs-ln:nth-child(1) > span { animation-name: hs-ln4-1; }
+.hs-t4 .hs-ln:nth-child(2) > span { animation-name: hs-ln4-2; }
+.hs-t5 .hs-ln:nth-child(1) > span { animation-name: hs-ln5-1; }
+.hs-t5 .hs-ln:nth-child(2) > span { animation-name: hs-ln5-2; }
+.hs-t6 .hs-ln:nth-child(1) > span { animation-name: hs-ln6-1; }
+.hs-t6 .hs-ln:nth-child(2) > span { animation-name: hs-ln6-2; }
+.hs-lead { display: flex; gap: 10px; align-items: flex-start; font-size: 18px; font-weight: 600; color: rgba(255,255,255,.85); max-width: 40ch; }
+.hs-lead > span:first-child { display: block; width: 26px; height: 3px; background: var(--color-orange); border-radius: 3px; margin-top: .75em; flex: none; }
+.hs-h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(44px, 6.4vw, 92px); line-height: 1.02; letter-spacing: -.02em; margin-top: 16px; }
+.hs-cue { margin-top: 28px; font-size: 17px; color: rgba(255,255,255,.75); display: flex; gap: 10px; align-items: center; }
+.hs-cue span { display: inline-block; color: var(--color-orange); font-weight: 800; animation: hs-bob 1.6s ease-in-out infinite; }
+@keyframes hs-bob { 0%,100% { translate: 0 -3px; } 50% { translate: 0 5px; } }
+.hs-kicker { font-size: 17px; font-weight: 700; color: rgba(255,255,255,.8); display: flex; gap: 10px; align-items: baseline; }
+.hs-kicker b { font-family: var(--font-display); font-size: 40px; line-height: .8; color: var(--color-orange); }
+.hs-h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 4.4vw, 64px); line-height: 1.06; letter-spacing: -.015em; margin-top: 14px; }
+/* หัวข้อเลื่อนขึ้นจากใต้เส้นทีละบรรทัด · เว้นขอบบนล่างไว้ให้สระและวรรณยุกต์ไทยไม่โดนตัด */
+.hs-ln { display: block; overflow: hidden; padding: .16em 0 .22em; margin: -.16em 0 -.22em; }
+.hs-ln > span { display: inline-block; }
+.hs-t:not(.hs-t0) .hs-ln > span { animation-timeline: --hs; animation-range: contain 0% contain 100%; animation-duration: auto; animation-fill-mode: both; animation-timing-function: linear; }
+@supports not (animation-timeline: view()) {
+  .hs-t:not(.hs-t0) .hs-ln > span { animation-duration: 1s; animation-play-state: paused; animation-delay: calc(var(--hsp, 0) * -1s); }
+}
+/* เปิดหน้า · พาดหัวกับแถวเสื้อขึ้นมาเองตามเวลา (ไม่ผูกการเลื่อน) */
+.hs-t0 .hs-ln > span { animation: hs-rise-ln 1s cubic-bezier(.2,.8,.2,1) both; }
+.hs-t0 .hs-ln:nth-child(2) > span { animation-delay: .12s; }
+.hs-lead, .hs-cue { animation: hs-fade .8s ease-out .45s both; }
+.hs-mate img, .hs-mate .hs-floor { animation: hs-rise 1.1s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i, 0) * 90ms + .25s); }
+.hs-star .hs-tilt, .hs-star .hs-floor, .hs-star .hs-light { animation: hs-rise 1.2s cubic-bezier(.2,.8,.2,1) .15s both; }
+@keyframes hs-rise { from { opacity: 0; translate: 0 70px; } to { opacity: 1; translate: 0 0; } }
+@keyframes hs-rise-ln { from { translate: 0 112%; } to { translate: 0 0; } }
+@keyframes hs-fade { from { opacity: 0; } to { opacity: 1; } }
+.hs-p { font-size: 19px; line-height: 1.7; color: rgba(255,255,255,.82); margin-top: 18px; max-width: 40ch; }
+.hs-small { font-size: 15px; color: rgba(255,255,255,.65); margin-top: 12px; }
+.hs-brief { margin-top: 22px; display: grid; gap: 2px; border-top: 1px solid rgba(255,255,255,.18); }
+.hs-bi { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+.hs-bi b { font-size: 19px; } .hs-bi span { font-size: 16px; color: rgba(255,255,255,.7); text-align: right; }
+.hs-bi--1 { animation-name: hs-bi-1; } .hs-bi--2 { animation-name: hs-bi-2; } .hs-bi--3 { animation-name: hs-bi-3; } .hs-bi--4 { animation-name: hs-bi-4; }
+/* บทออกแบบพื้นส้ม ตัวหนังสือดำ */
+.hs-t2 { color: var(--color-ink); } .hs-t2 .hs-kicker, .hs-t2 .hs-p { color: rgba(0,0,0,.85); } .hs-t2 .hs-small { color: rgba(0,0,0,.75); } .hs-t2 .hs-kicker b { color: var(--color-ink); }
+.hs-proof { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 8px 28px; margin-top: 22px; border-top: 1px solid rgba(255,255,255,.2); padding-top: 16px; }
+.hs-proof div { display: flex; flex-direction: column-reverse; }
+.hs-proof dt { font-size: 15px; color: rgba(255,255,255,.7); margin-top: 4px; }
+.hs-proof dd { font-family: var(--font-display); font-weight: 800; font-size: clamp(26px, 2.8vw, 38px); line-height: 1; color: rgba(255,255,255,.65); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.hs-skip { position: absolute; z-index: 6; left: max(20px, calc((100% - 1240px) / 2 + 40px)); bottom: 18px; display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 0 16px; border-radius: 999px; font-size: 15px; font-weight: 600; color: rgba(255,255,255,.8); }
+.hs-skip:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--color-orange); text-underline-offset: 4px; }
+
+/* ---------- จอเล็ก · ภาพด้านบน ตัวหนังสือด้านล่าง ---------- */
+@media (max-width: 1023px) {
+  .hs-text { left: 16px; right: 16px; width: auto; top: 55%; bottom: 84px; }
+  .hs-t { justify-content: flex-start; }
+  .hs-h1 { font-size: clamp(36px, 10vw, 60px); margin-top: 10px; }
+  .hs-h2 { font-size: clamp(28px, 7.4vw, 44px); margin-top: 8px; }
+  .hs-p { font-size: 17px; margin-top: 10px; }
+  .hs-kicker b { font-size: 30px; }
+  .hs-cue { margin-top: 14px; }
+  .hs-brief { margin-top: 12px; } .hs-bi { padding: 8px 0; } .hs-bi b { font-size: 17px; } .hs-bi span { font-size: 15px; }
+  .hs-line { left: 0; right: 0; top: 64px; bottom: 46%; }
+  .hs-mate--0, .hs-mate--4 { width: 26%; } .hs-mate--1, .hs-mate--3 { width: 30%; }
+  .hs-star { left: 27%; width: 46%; }
+  .hs-side { bottom: -4%; }
+  .hs-wall { inset: -30% -60% 30% -60%; gap: 10px; }
+  .hs-col { flex-basis: 120px; gap: 10px; }
+  .hs-vis::before { background: linear-gradient(0deg, #0B0B0B 0%, rgba(11,11,11,.96) 44%, rgba(11,11,11,.5) 58%, rgba(11,11,11,0) 72%); }
+  .hs-sheet { width: min(360px, 88vw); left: calc(50% - min(360px, 88vw) / 2); top: 58px; padding: 16px 18px; }
+  .hs-sheet dl, .hs-sheet__note { display: none; }
+  .hs-checks { grid-template-columns: 1fr 1fr; }
+  .hs-pcard--design { width: 56vw; left: 4%; top: 58px; } .hs-pcard--photo { width: 52vw; left: auto; right: 4%; top: 24%; }
+  .hs-pnote { display: none; }
+  .hs-backs { left: 0; right: 0; top: 64px; bottom: 46%; }
+  .hs-skip { display: none; }
+  .hs-proof { grid-template-columns: repeat(3, 1fr); gap: 6px 14px; margin-top: 14px; } .hs-proof dd { font-size: 24px; }
+}
+
+/* ---------- ขอลดการเคลื่อนไหว · ไม่ตรึงจอ เห็นแถวเสื้อนิ่งๆ แล้วบทเรียงลงมา ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hs-track { height: auto; }
+  .hs-stage { position: relative; top: 0; height: auto; min-height: 0; overflow: visible; padding: 40px 0 56px; }
+  .hs-a, .hs-vis::before { animation: none !important; opacity: 1; visibility: visible; translate: none; scale: none; }
+  .hs-orange, .hs-skip, .hs-cue span, .hs-wall, .hs-sheet, .hs-pair, .hs-backs, .hs-face--back, .hs-side { display: none; }
+  .hs-vis { position: relative; inset: auto; height: min(60vw, 420px); max-width: 760px; margin: 0 auto; }
+  .hs-line { left: 0; right: 0; top: 0; bottom: 0; }
+  .hs-text { position: relative; inset: auto; width: auto; max-width: 1240px; margin: 24px auto 0; padding: 0 20px; display: grid; gap: 36px; }
+  .hs-t { position: relative; inset: auto; }
+  .hs-t2, .hs-t2 .hs-kicker, .hs-t2 .hs-p, .hs-t2 .hs-small { color: #fff; } .hs-t2 .hs-kicker b { color: var(--color-orange); }
+}
+
+/* keyframes ของ hero แบบเลื่อน · % = ระยะของทั้งเรื่อง */
+@keyframes hs-t0 { 0%,8% { opacity:1; translate:0 0; visibility:visible; animation-timing-function:cubic-bezier(.4,0,1,1) } 13%,100% { opacity:0; translate:0 -6vh; visibility:hidden } }
+@keyframes hs-bi-1 { 0%,16.7% { opacity:0; translate:0 14px; animation-timing-function:cubic-bezier(0,0,.2,1) } 18.3%,100% { opacity:1; translate:0 0 } }
+@keyframes hs-bi-2 { 0%,18.4% { opacity:0; translate:0 14px; animation-timing-function:cubic-bezier(0,0,.2,1) } 20.0%,100% { opacity:1; translate:0 0 } }
+@keyframes hs-bi-3 { 0%,20.1% { opacity:0; translate:0 14px; animation-timing-function:cubic-bezier(0,0,.2,1) } 21.7%,100% { opacity:1; translate:0 0 } }
+@keyframes hs-bi-4 { 0%,21.8% { opacity:0; translate:0 14px; animation-timing-function:cubic-bezier(0,0,.2,1) } 23.4%,100% { opacity:1; translate:0 0 } }
+@keyframes hs-orange { 0%,27% { opacity:0; animation-timing-function:cubic-bezier(.4,0,.2,1) } 32%,45% { opacity:1; animation-timing-function:cubic-bezier(.4,0,.2,1) } 50%,100% { opacity:0 } }
+@keyframes hs-mate-0 { 0%,8% { opacity:1; translate:0 0; animation-timing-function:cubic-bezier(.4,0,1,1) } 16%,100% { opacity:0; translate:-26vw 0; visibility:hidden } }
+@keyframes hs-mate-1 { 0%,8% { opacity:1; translate:0 0; animation-timing-function:cubic-bezier(.4,0,1,1) } 16%,100% { opacity:0; translate:-18vw 0; visibility:hidden } }
+@keyframes hs-mate-3 { 0%,8% { opacity:1; translate:0 0; animation-timing-function:cubic-bezier(.4,0,1,1) } 16%,100% { opacity:0; translate:18vw 0; visibility:hidden } }
+@keyframes hs-mate-4 { 0%,8% { opacity:1; translate:0 0; animation-timing-function:cubic-bezier(.4,0,1,1) } 16%,100% { opacity:0; translate:26vw 0; visibility:hidden } }
+@keyframes hs-side-front { 0%,29% { opacity:0 } 31%,33% { opacity:1 } 35%,100% { opacity:0 } }
+@keyframes hs-side-back { 0%,38.5% { opacity:0 } 39.5%,42% { opacity:1 } 43.5%,100% { opacity:0 } }
+@keyframes hs-shade { 0%,48% { opacity:0 } 53%,60% { opacity:1 } 64%,100% { opacity:0 } }
+@keyframes hs-col-up { 0%,46% { translate:0 0 } 66%,100% { translate:0 -26% } }
+@keyframes hs-col-down { 0%,46% { translate:0 -26% } 66%,100% { translate:0 0 } }
+@keyframes hs-sheet { 0%,62% { opacity:0; translate:0 10vh; animation-timing-function:cubic-bezier(0,0,.2,1) } 67%,74% { opacity:1; translate:0 0; animation-timing-function:cubic-bezier(.4,0,1,1) } 78%,100% { opacity:0; translate:0 -8vh } }
+@keyframes hs-check-1 { 0%,68% { opacity:.35 } 69.5%,100% { opacity:1 } }
+@keyframes hs-check-2 { 0%,70% { opacity:.35 } 71.5%,100% { opacity:1 } }
+@keyframes hs-check-3 { 0%,72% { opacity:.35 } 73.5%,100% { opacity:1 } }
+@keyframes hs-check-4 { 0%,74% { opacity:.35 } 75.5%,100% { opacity:1 } }
+@keyframes hs-pd { 0%,78% { opacity:0; translate:-8vw 2vh; animation-timing-function:cubic-bezier(0,0,.2,1) } 82%,88% { opacity:1; translate:0 0; animation-timing-function:cubic-bezier(.4,0,1,1) } 91%,100% { opacity:0; translate:-3vw -4vh } }
+@keyframes hs-pp { 0%,80% { opacity:0; translate:8vw 6vh; animation-timing-function:cubic-bezier(0,0,.2,1) } 85%,88% { opacity:1; translate:0 0; animation-timing-function:cubic-bezier(.4,0,1,1) } 91%,100% { opacity:0; translate:3vw -4vh } }
+@keyframes hs-pnote { 0%,84% { opacity:0 } 86%,88% { opacity:1 } 91%,100% { opacity:0 } }
+@keyframes hs-back-0 { 0%,90.0% { opacity:0; translate:0 16vh; animation-timing-function:cubic-bezier(0,0,.2,1) } 93.4%,100% { opacity:1; translate:0 0 } }
+@keyframes hs-back-1 { 0%,91.2% { opacity:0; translate:0 16vh; animation-timing-function:cubic-bezier(0,0,.2,1) } 94.6%,100% { opacity:1; translate:0 0 } }
+@keyframes hs-back-2 { 0%,92.4% { opacity:0; translate:0 16vh; animation-timing-function:cubic-bezier(0,0,.2,1) } 95.8%,100% { opacity:1; translate:0 0 } }
+@keyframes hs-back-3 { 0%,93.6% { opacity:0; translate:0 16vh; animation-timing-function:cubic-bezier(0,0,.2,1) } 97.0%,100% { opacity:1; translate:0 0 } }
+@keyframes hs-back-4 { 0%,94.8% { opacity:0; translate:0 16vh; animation-timing-function:cubic-bezier(0,0,.2,1) } 98.2%,100% { opacity:1; translate:0 0 } }
+@keyframes hs-t1 { 0%,12% { opacity:0; translate:0 0; visibility:hidden; animation-timing-function:cubic-bezier(0,0,.2,1) } 13.2% { opacity:1; translate:0 0; visibility:visible } 25% { opacity:1; translate:0 0; visibility:visible; animation-timing-function:cubic-bezier(.4,0,1,1) } 29%,100% { opacity:0; translate:0 -5vh; visibility:hidden } }
+@keyframes hs-ln1-1 { 0%,12.0% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 15.4%,100% { translate:0 0 } }
+@keyframes hs-ln1-2 { 0%,13.2% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 16.6%,100% { translate:0 0 } }
+@keyframes hs-t2 { 0%,29% { opacity:0; translate:0 0; visibility:hidden; animation-timing-function:cubic-bezier(0,0,.2,1) } 30.2% { opacity:1; translate:0 0; visibility:visible } 44% { opacity:1; translate:0 0; visibility:visible; animation-timing-function:cubic-bezier(.4,0,1,1) } 48%,100% { opacity:0; translate:0 -5vh; visibility:hidden } }
+@keyframes hs-ln2-1 { 0%,29.0% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 32.4%,100% { translate:0 0 } }
+@keyframes hs-ln2-2 { 0%,30.2% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 33.6%,100% { translate:0 0 } }
+@keyframes hs-t3 { 0%,52% { opacity:0; translate:0 0; visibility:hidden; animation-timing-function:cubic-bezier(0,0,.2,1) } 53.2% { opacity:1; translate:0 0; visibility:visible } 61% { opacity:1; translate:0 0; visibility:visible; animation-timing-function:cubic-bezier(.4,0,1,1) } 64%,100% { opacity:0; translate:0 -5vh; visibility:hidden } }
+@keyframes hs-ln3-1 { 0%,52.0% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 55.4%,100% { translate:0 0 } }
+@keyframes hs-ln3-2 { 0%,53.2% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 56.6%,100% { translate:0 0 } }
+@keyframes hs-t4 { 0%,64% { opacity:0; translate:0 0; visibility:hidden; animation-timing-function:cubic-bezier(0,0,.2,1) } 65.2% { opacity:1; translate:0 0; visibility:visible } 75% { opacity:1; translate:0 0; visibility:visible; animation-timing-function:cubic-bezier(.4,0,1,1) } 78%,100% { opacity:0; translate:0 -5vh; visibility:hidden } }
+@keyframes hs-ln4-1 { 0%,64.0% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 67.4%,100% { translate:0 0 } }
+@keyframes hs-ln4-2 { 0%,65.2% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 68.6%,100% { translate:0 0 } }
+@keyframes hs-t5 { 0%,78% { opacity:0; translate:0 0; visibility:hidden; animation-timing-function:cubic-bezier(0,0,.2,1) } 79.2% { opacity:1; translate:0 0; visibility:visible } 87% { opacity:1; translate:0 0; visibility:visible; animation-timing-function:cubic-bezier(.4,0,1,1) } 90%,100% { opacity:0; translate:0 -5vh; visibility:hidden } }
+@keyframes hs-ln5-1 { 0%,78.0% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 81.4%,100% { translate:0 0 } }
+@keyframes hs-ln5-2 { 0%,79.2% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 82.6%,100% { translate:0 0 } }
+@keyframes hs-t6 { 0%,91% { opacity:0; visibility:hidden; animation-timing-function:cubic-bezier(0,0,.2,1) } 92.2%,100% { opacity:1; visibility:visible } }
+@keyframes hs-ln6-1 { 0%,91.0% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 94.4%,100% { translate:0 0 } }
+@keyframes hs-ln6-2 { 0%,92.2% { translate:0 112%; animation-timing-function:cubic-bezier(.2,.8,.2,1) } 95.6%,100% { translate:0 0 } }
+@keyframes hs-star { 0%,8% { opacity:1; scale:1; translate:0 0; animation-timing-function:cubic-bezier(.4,0,.2,1) } 16%,28% { opacity:1; scale:1.12; translate:0 0; animation-timing-function:cubic-bezier(.4,0,.2,1) }
+  33%,47% { opacity:1; scale:1.2; translate:0 -2vh; animation-timing-function:cubic-bezier(.4,0,.2,1) } 58% { opacity:1; scale:.3; translate:0 4vh; animation-timing-function:cubic-bezier(.4,0,1,1) } 61%,100% { opacity:0; scale:.28; translate:0 4vh } }
+@keyframes hs-flip { 0%,33% { rotate:y 0deg; animation-timing-function:cubic-bezier(.4,0,.2,1) } 39%,42% { rotate:y 180deg; animation-timing-function:cubic-bezier(.4,0,.2,1) } 47%,100% { rotate:y 360deg } }
+@keyframes hs-wall { 0%,49% { opacity:0; scale:1.3; animation-timing-function:cubic-bezier(0,0,.2,1) } 57% { opacity:1; scale:1 } 61% { opacity:1; scale:1; animation-timing-function:cubic-bezier(.4,0,1,1) } 65%,100% { opacity:0; scale:.96 } }

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>ไม่พบหน้าที่ต้องการ | TEAMDEE</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="ไม่พบหน้าที่คุณกำลังหา อาจถูกย้ายหรือพิมพ์ที่อยู่ผิด เลือกไปหน้าที่คนเข้าบ่อยที่สุดได้จากตรงนี้ หรือทักไลน์ถามแอดมิน TEAMDEE ได้ทุกวัน">
+</head>
+<body>
+{{> siteHeader}}
+
+<main id="main">
+  <section class="wrap section">
+    <div class="max-w-[56ch]">
+      <p class="t-display text-[clamp(64px,12vw,140px)] leading-none tabular-nums border-b-8 border-orange inline-block pb-2">404</p>
+      <h1 class="t-display text-[clamp(28px,4.4vw,52px)] mt-6">ไม่พบหน้าที่คุณต้องการ</h1>
+      <p class="t-lead mt-4">ลิงก์อาจเปลี่ยนแล้ว</p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a class="btn btn-orange btn-lg" href="/">กลับหน้าแรก</a>
+        <a class="btn btn-line btn-lg" href="{{url 'designs'}}">ดูแบบเสื้อ</a>
+      </div>
+    </div>
+  </section>
+</main>
+{{> footer}}
+<script type="module" src="/src/js/page.js"></script>
+</body>
+</html>

@@ -1,58 +1,91 @@
 {
- "brand": "TEAMDEE",
- "tagline": "เสื้อทีมที่ทุกคนภูมิใจจะใส่",
- "foundedYear": 2018,
- "clients": "5,000+",
- "fabricCount": "100+",
- "sweetSpot": "50–500 ตัว",
- "produceDaysMin": 15,
- "produceDaysMax": 20,
- "claimDays": 7,
- "hours": "ทุกวัน 8:30 – 21:00 น.",
- "phonePrimary": "097-549-5941",
- "phoneSecondary": "086-416-6449",
- "phonePrimaryTel": "0975495941",
- "lineUrl": "#",
- "address": "109/20 ถนนเลี่ยงเมืองนนทบุรี ตำบลตลาดขวัญ นนทบุรี 11000",
- "prototypeNote": "ต้นแบบสำหรับคุยภายใน ยังไม่ได้แก้ team-dee.com และยังไม่ได้เชื่อมระบบส่งข้อมูลจริง",
- "draft": "ร่างที่ 4 · 6 ก.ย. 2026",
- "todo": {
-  "foundedYear": "เว็บจริงโชว์ 10+ Years แปลว่าเริ่มราวปี 2016 แต่ brand book เขียน 2018 ต้องเคาะปีให้ตรงกัน หน้าแรกเลยใช้ 10+ ปี ไม่ระบุปี",
-  "clients": "เว็บจริงมีสองค่า 5,000+ ทีม กับ 10,000+ Projects ใช้ทั้งคู่บนหน้าแรกแล้ว ถ้าตัวเลขไหนไม่จริงบอกได้",
-  "produceDays": "เว็บจริงขัดกันเอง ขั้นตอนเขียน 12-15 วัน แต่ FAQ เขียน 15-20 วันทำการ หน้าแรกยึด 15-20 ตามที่เคยตกลง"
- },
- "positioning": "Team Identity Brand Partner",
- "slogan": "ทำเสื้อที่เดียวครบ จบที่ทีมดี",
- "belief": "มากกว่าเสื้อทีม คือความรู้สึกของความเป็นทีม",
- "manifesto": "WE BUILD TEAM IDENTITY",
- "pillars": [
-  {
-   "en": "IDENTITY",
-   "th": "ตัวตนของทีม"
+  "brand": "TEAMDEE",
+  "tagline": "เสื้อทีมที่ทุกคนภูมิใจจะใส่",
+  "foundedYear": 2018,
+  "clients": "5,000+",
+  "fabricCount": "100+",
+  "sweetSpot": "50–500 ตัว",
+  "produceDaysMin": 15,
+  "produceDaysMax": 20,
+  "claimDays": 7,
+  "hours": "ทุกวัน 8:30 – 21:00 น.",
+  "phonePrimary": "097-549-5941",
+  "phoneSecondary": "086-416-6449",
+  "phonePrimaryTel": "0975495941",
+  "lineUrl": "#",
+  "address": "109/20 ถนนเลี่ยงเมืองนนทบุรี ตำบลตลาดขวัญ นนทบุรี 11000",
+  "prototypeNote": "ต้นแบบสำหรับคุยภายใน ยังไม่ได้แก้ team-dee.com และยังไม่ได้เชื่อมระบบส่งข้อมูลจริง",
+  "draft": "ร่างที่ 4 · 6 ก.ย. 2026",
+  "todo": {
+    "foundedYear": "เว็บจริงโชว์ 10+ Years แปลว่าเริ่มราวปี 2016 แต่ brand book เขียน 2018 ต้องเคาะปีให้ตรงกัน หน้าแรกเลยใช้ 10+ ปี ไม่ระบุปี",
+    "clients": "เว็บจริงมีสองค่า 5,000+ ทีม กับ 10,000+ Projects ใช้ทั้งคู่บนหน้าแรกแล้ว ถ้าตัวเลขไหนไม่จริงบอกได้",
+    "produceDays": "เว็บจริงขัดกันเอง ขั้นตอนเขียน 12-15 วัน แต่ FAQ เขียน 15-20 วันทำการ หน้าแรกยึด 15-20 ตามที่เคยตกลง"
   },
-  {
-   "en": "CO-CREATE",
-   "th": "ร่วมคิดร่วมออกแบบ"
+  "positioning": "Team Identity Brand Partner",
+  "slogan": "ทำเสื้อที่เดียวครบ จบที่ทีมดี",
+  "belief": "มากกว่าเสื้อทีม คือความรู้สึกของความเป็นทีม",
+  "manifesto": "WE BUILD TEAM IDENTITY",
+  "pillars": [
+    {
+      "en": "IDENTITY",
+      "th": "ตัวตนของทีม"
+    },
+    {
+      "en": "CO-CREATE",
+      "th": "ร่วมคิดร่วมออกแบบ"
+    },
+    {
+      "en": "PRIDE",
+      "th": "ความภูมิใจเมื่อใส่จริง"
+    },
+    {
+      "en": "TRUST",
+      "th": "มั่นใจตั้งแต่แบบจนถึงงานจริง"
+    }
+  ],
+  "yearsExperience": "10+",
+  "projects": "10,000+",
+  "pieces": "500,000+",
+  "moq": 10,
+  "shipDaysMin": 1,
+  "shipDaysMax": 3,
+  "hoursShort": "8:30 – 21:00 น.",
+  "sloganA": "ทำเสื้อที่เดียวครบ",
+  "sloganB": "จบที่ทีมดี",
+  "fabricMain": 8,
+  "baseUrl": "https://team-dee.com",
+  "ogImage": "/img/hero/banner-expert.jpg",
+  "proof": {
+    "_note": "หลักฐานใน hero หน้าแรก (Brief: หลักฐานสั้น 3 ข้อ ตรวจสอบได้) · value = ตัวเลขที่ยืนยันแล้ว ใส่เมื่อพี่ทัชยืนยัน · candidate = ค่าที่เว็บเดิมใช้ ยังขัดกันเอง (ดู todo) · ถ้า value ยังว่าง หน้าเว็บโชว์ candidate ในวงเล็บ",
+    "source": "ตัวเลขในวงเล็บยกจากเว็บเดิม รอยืนยันก่อนเผยแพร่",
+    "items": [
+      {
+        "value": null,
+        "candidate": "10+ ปี",
+        "label": "ทำเสื้อทีมมาแล้ว",
+        "conflict": "brand book เขียนก่อตั้ง 2018"
+      },
+      {
+        "value": null,
+        "candidate": "5,000+",
+        "label": "ทีมที่ทำเสื้อให้",
+        "conflict": "เว็บเดิมมีอีกค่า 10,000+ projects"
+      },
+      {
+        "value": null,
+        "candidate": "500,000+",
+        "label": "ตัวที่ผลิตส่งมอบ",
+        "conflict": ""
+      }
+    ]
   },
-  {
-   "en": "PRIDE",
-   "th": "ความภูมิใจเมื่อใส่จริง"
-  },
-  {
-   "en": "TRUST",
-   "th": "มั่นใจตั้งแต่แบบจนถึงงานจริง"
+  "heroLine": {
+    "lead": "ออกแบบและผลิตเสื้อทีม ให้",
+    "who": [
+      "บริษัท",
+      "โรงเรียน",
+      "ทีมกีฬา",
+      "และงานกิจกรรม"
+    ]
   }
- ],
- "yearsExperience": "10+",
- "projects": "10,000+",
- "pieces": "500,000+",
- "moq": 10,
- "shipDaysMin": 1,
- "shipDaysMax": 3,
- "hoursShort": "8:30 – 21:00 น.",
- "sloganA": "ทำเสื้อที่เดียวครบ",
- "sloganB": "จบที่ทีมดี",
- "fabricMain": 8,
- "baseUrl": "https://team-dee.com",
- "ogImage": "/img/hero/banner-expert.jpg"
 }

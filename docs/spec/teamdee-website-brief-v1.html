@@ -1,0 +1,244 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>TEAMDEE Website Brief</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: one column of 760px reading width, left label column on wide screens; brand orange as the only accent. */
+:root{--bg:#FFFFFF;--bg2:#F6F4F1;--fg:#141414;--fg2:#5A5752;--line:#E3DFD8;--accent:#FF6C00;--accent-ink:#B84A00;--accent-soft:#FFE8D5;--ok:#1F6F43;--font:'Noto Sans Thai',system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121110;--bg2:#1C1A18;--fg:#F1EEE9;--fg2:#A7A29A;--line:#2E2B27;--accent:#FF7D1F;--accent-ink:#FFB070;--accent-soft:#3A2414;--ok:#6FCF97;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121110;--bg2:#1C1A18;--fg:#F1EEE9;--fg2:#A7A29A;--line:#2E2B27;--accent:#FF7D1F;--accent-ink:#FFB070;--accent-soft:#3A2414;--ok:#6FCF97;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.7;padding-inline:20px;padding-block:0 80px}
+.wrap{max-width:860px;margin:0 auto}
+header{padding-block:48px 28px;border-bottom:3px solid var(--fg)}
+.eyebrow{font-size:12px;letter-spacing:.14em;font-weight:700;color:var(--accent-ink);text-transform:uppercase}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.15;margin:8px 0 10px;text-wrap:balance;font-weight:900}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--fg2)}
+.meta b{color:var(--fg)}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;padding-block:18px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:2}
+nav.toc a{font-size:13px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none}
+nav.toc a:hover,nav.toc a:focus-visible{border-color:var(--accent);outline:none}
+section{padding-block:40px 8px;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{font-size:24px;font-weight:900;margin:0 0 6px;display:flex;gap:12px;align-items:baseline;text-wrap:balance}
+h2 .n{font-size:13px;color:var(--accent-ink);font-weight:700;letter-spacing:.08em}
+.lead{color:var(--fg2);margin:0 0 20px;max-width:65ch}
+h3{font-size:16px;font-weight:700;margin:22px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+ul{margin:0 0 12px;padding-left:20px}li{margin:3px 0}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.tile{border:1px solid var(--line);padding:14px 16px;min-width:0}
+.tile b{display:block;font-size:15px;margin-bottom:4px}
+.tile span{font-size:13px;color:var(--fg2);line-height:1.5;display:block}
+.pos{background:var(--fg);color:var(--bg);padding:22px 24px;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.pos div{font-size:13px;line-height:1.5}
+.pos b{display:block;font-size:17px;color:var(--accent);margin-bottom:2px}
+.pos .big{grid-column:1/-1;font-size:22px;font-weight:900;color:var(--bg)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+.tw{overflow-x:auto;margin:0 0 12px}
+th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.06em;color:var(--fg2);font-weight:700;text-transform:uppercase}
+td:first-child{font-weight:700;white-space:nowrap}
+.scope{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.scope>div{padding:16px 18px;min-width:0}
+.scope .in{background:var(--accent-soft)}
+.scope .out{background:var(--bg2)}
+.scope h3{margin-top:0}
+.tree{font-family:var(--font);font-size:14px;line-height:1.55;background:var(--bg2);padding:18px 20px;overflow-x:auto}
+.tree ul{list-style:none;padding-left:22px;margin:0;border-left:1px solid var(--line)}
+.tree>ul{border-left:0;padding-left:0}
+.tree li{margin:2px 0;padding-left:8px}
+.tree .m{color:var(--fg2)}
+.tree .cta{color:var(--accent-ink);font-weight:700}
+.tree .tag{font-size:11px;color:var(--fg2);margin-left:6px}
+.pages{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.pg{border-top:3px solid var(--fg);padding:10px 2px 6px;min-width:0}
+.pg b{font-size:15px;display:block}
+.pg small{display:block;color:var(--fg2);font-size:13px;line-height:1.5;margin-top:4px}
+.pg ol{margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--fg);line-height:1.5}
+.update{background:var(--accent-soft);border-left:4px solid var(--accent);padding:16px 18px;margin:0 0 22px}
+.update b{display:block;font-size:13px;letter-spacing:.08em;color:var(--accent-ink);text-transform:uppercase;margin-bottom:6px}
+.update ul{margin:0}
+.verify td:first-child{color:var(--accent-ink)}
+.steps{counter-reset:s;display:grid;gap:10px}
+.steps div{display:flex;gap:14px;align-items:flex-start}
+.steps div::before{counter-increment:s;content:counter(s);flex:none;width:28px;height:28px;border-radius:50%;background:var(--fg);color:var(--bg);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.done{color:var(--ok);font-size:12px;font-weight:700;margin-left:6px}
+footer{padding-top:28px;font-size:13px;color:var(--fg2)}
+@media (max-width:480px){td:first-child{white-space:normal}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Project Brief · Executive Summary</div>
+  <h1>เว็บไซต์ใหม่ TEAMDEE: สรุปสิ่งที่เคาะแล้ว ก่อนเริ่ม Wireframe</h1>
+  <div class="meta"><span>เอกสารต้นทาง <b>v1.0 · 1 ต.ค. 2026</b></span><span>สถานะ <b>สรุปการตัดสินใจจากบทสนทนา</b></span><span>ผู้อ่าน <b>ทีมออกแบบ · Sales · ผู้บริหาร</b></span></div>
+</header>
+
+<nav class="toc" aria-label="สารบัญ">
+  <a href="#goal">เป้าหมาย</a><a href="#job">หน้าที่ 7 ข้อ</a><a href="#journey">6 เส้นทาง</a><a href="#scope">ขอบเขต</a><a href="#sitemap">Sitemap</a><a href="#pages">รายหน้า</a><a href="#decisions">การตัดสินใจ</a><a href="#verify">ต้องยืนยัน</a><a href="#next">ขั้นถัดไป</a>
+</nav>
+
+<section id="update">
+  <div class="update">
+    <b>อัปเดตหลังเอกสาร v1.0 · 1 ต.ค. 2026 บ่าย</b>
+    <ul>
+      <li>แยกหน้าการใช้งานเป็น <strong>บริษัทเอกชน &amp; SME</strong> กับ <strong>หน่วยงานภาครัฐ / ราชการ</strong> (ภาครัฐโฟกัสจัดซื้อ-เอกสาร-การอนุมัติ)</li>
+      <li>ลูป "เซฟรูป → ส่ง LINE" ปิดแล้ว: รหัสแบบอยู่ในภาพ Sales รับจากแชทได้โดยไม่ต้องเพิ่มระบบ</li>
+      <li>หน้าแรกทำ 2 เวอร์ชัน: Hero นำด้วย <strong>แบบเสื้อ</strong> vs นำด้วย <strong>การใช้งาน</strong> แล้วเลือกหลังทดสอบกับ Sales</li>
+      <li>เริ่ม Visual Direction แล้ว 2 ทิศทาง (A แคตตาลอกที่มั่นใจ / B พลังทีม) และวาง Sitemap + Wireframe เดสก์ท็อปครบ 16 บอร์ด</li>
+    </ul>
+  </div>
+</section>
+
+<section id="goal">
+  <h2><span class="n">01</span>เป้าหมายและตัวตน</h2>
+  <p class="lead">เว็บต้องทำให้ลูกค้าสนใจ จำทีมดีได้ เชื่อถือ และเห็นว่าทีมดีแก้โจทย์เสื้อของตนได้ ท่ามกลางการเทียบหลายร้าน ทั้งคนที่รู้ประเภทเสื้อ คนที่รู้แค่โอกาสใช้งาน และคนที่อยากดูแบบก่อน เป้าหมายไม่ใช่ให้คนอยู่นาน แต่ให้เข้าใจ เลือกได้ และพร้อมติดต่อ</p>
+  <div class="pos">
+    <div class="big">Team Identity Partner</div>
+    <div><b>ช่วยคิด · ช่วยจัดการ · ช่วยจบงาน</b>แนวคิดการบริการ</div>
+    <div><b>เสื้อทีมที่ทุกคนภูมิใจจะใส่</b>ผลลัพธ์ที่ต้องการสื่อ</div>
+    <div><b>3WIN</b>คนสั่งมั่นใจ · คนใส่ภูมิใจ · คนเห็นจดจำ</div>
+    <div><b>Professional 50 / Active 30 / Creative 20</b>ส้ม #FF6C00 ขาว ดำ · Noto Sans Thai</div>
+  </div>
+  <p style="margin-top:14px">แสดงคุณค่าผ่านภาพจริง ตัวอย่างการช่วยลูกค้า รายละเอียดงาน และกระบวนการ ไม่พึ่งคำโฆษณาอย่างเดียว</p>
+</section>
+
+<section id="job">
+  <h2><span class="n">02</span>หน้าที่เว็บไซต์ 7 ข้อ</h2>
+  <p class="lead">ไม่จำเป็นที่ทุกหน้าจะทำครบ แต่รวมทั้งเว็บต้องครอบคลุม และหน้าที่เป็นจุดเข้าจากภายนอกต้องมีข้อมูลพอให้ตัดสินใจต่อ</p>
+  <div class="grid">
+    <div class="tile"><b>ATTRACT</b><span>ดึงคนที่มีโจทย์เข้ามา: เนื้อหาค้นได้ หน้าสินค้า/การใช้งาน บทความ</span></div>
+    <div class="tile"><b>POSITION</b><span>ให้เข้าใจความต่างของทีมดี: หน้าแรก รู้จักทีมดี ตัวอย่างวิธีช่วย</span></div>
+    <div class="tile"><b>HELP</b><span>ช่วยเลือก ลดความไม่แน่ใจ: การใช้งาน สเปก คู่มือ FAQ</span></div>
+    <div class="tile"><b>PROVE</b><span>หลักฐานให้เชื่อ: งานจริง รีวิว กระบวนการ ทีม ข้อมูลบริษัท</span></div>
+    <div class="tile"><b>CONVERT</b><span>เริ่มคุยง่าย: LINE โทร ฟอร์ม ปุ่มตามบริบท</span></div>
+    <div class="tile"><b>EXPLORE &amp; SELECT</b><span>สำรวจและเลือก: แบบเสื้อ ค้นหา ตัวกรอง ขยาย เซฟภาพ</span></div>
+    <div class="tile"><b>MEASURE &amp; LEARN</b><span>รู้ว่าคนสนใจอะไร ติดตรงไหน: เส้นทาง การค้นหา การติดต่อ</span></div>
+  </div>
+</section>
+
+<section id="journey">
+  <h2><span class="n">03</span>ผู้ใช้และ 6 เส้นทาง</h2>
+  <p class="lead">แยกสามมิติ WHO / WHY / WHERE FROM เพราะคนเดียวอาจเป็น HR ที่มาจาก Google และกำลังตรวจสอบผู้ผลิตพร้อมกัน ผู้ใช้หลัก: HR/Admin, จัดซื้อ, หัวหน้าทีม, ผู้จัดกิจกรรม, ลูกค้าเดิม</p>
+  <div class="tw"><table>
+    <tr><th>Journey</th><th>ต้องการ</th><th>ปลายทาง</th></tr>
+    <tr><td>1 Find a Supplier</td><td>หาผู้ผลิต เทียบสินค้า เงื่อนไข ความน่าเชื่อถือ</td><td>LINE / โทร / ฟอร์ม</td></tr>
+    <tr><td>2 Validate TEAMDEE</td><td>ตรวจสอบเพื่อเลือกหรือเสนอผู้ตัดสินใจ</td><td>ติดต่อ Sales</td></tr>
+    <tr><td>3 Find the Right Solution</td><td>มีโจทย์แต่เรียกประเภทเสื้อไม่ถูก</td><td>ได้ทิศทางและปรึกษา</td></tr>
+    <tr><td>4 Browse &amp; Choose Designs</td><td>หาแบบที่ชอบ หรือเปิดลิงก์จาก Sales</td><td>เซฟรูป ส่งคุยใน LINE</td></tr>
+    <tr><td>5 Continue a Sales Conversation</td><td>ข้อมูลเพื่อคุยต่อและอนุมัติ</td><td>กลับไปคุยกับ Sales</td></tr>
+    <tr><td>6 Reorder / Return</td><td>โครงการใหม่หรือสั่งซ้ำ</td><td>Sales ตรวจสอบและดำเนินการ</td></tr>
+  </table></div>
+  <p>กรอบวัดผล: <strong>Entry Source → User Intent → Experience → Next Action</strong> ลูกค้าไม่จำเป็นต้องผ่านหน้าแรก และไม่ต้องเดินทุกหน้าก่อนติดต่อ</p>
+</section>
+
+<section id="scope">
+  <h2><span class="n">04</span>ขอบเขตรอบแรก</h2>
+  <div class="scope">
+    <div class="in"><h3>ทำในรอบแรก</h3><ul>
+      <li>เว็บช่วยการตลาดและการขาย: สินค้า การใช้งาน แบบเสื้อ ผลงาน คู่มือ บทความ FAQ รู้จักทีมดี ติดต่อ</li>
+      <li>ค้นหาพื้นฐานจากชื่อสินค้า ชื่อแบบ รหัสแบบ</li>
+      <li>ตัวกรองแบบเสื้อ ขยายรูป เซฟภาพที่มีรหัส</li>
+      <li>LINE โทร ฟอร์ม ไม่บังคับสมัครสมาชิก</li>
+      <li>ลิงก์ตรงไปคู่มือและหัวข้อที่ Sales ใช้ตอบ</li>
+      <li>โครงข้อมูลกลาง: สินค้า แบบ ผ้า ไซซ์ เงื่อนไข ใช้ร่วมหลายหน้า</li>
+    </ul></div>
+    <div class="out"><h3>ยังไม่ทำ</h3><ul>
+      <li>ค้นหาภาษาธรรมชาติ / แชท AI แนะนำสินค้า</li>
+      <li>ระบบออกแบบ 3D โต้ตอบ (ภาพ 3D ที่มีใช้ประกอบได้)</li>
+      <li>Customer Portal, Login, Approve ออนไลน์, Track Order</li>
+      <li>ตะกร้า ชำระเงิน เครื่องคำนวณราคา</li>
+      <li>หน้ารายละเอียดทุกแบบเสื้อ รายการโปรด Collection แชร์</li>
+      <li>หน้าผลงานแยกทุกงาน / Landing แยกทุกคำค้น</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="sitemap">
+  <h2><span class="n">05</span>Sitemap และเมนูหลัก</h2>
+  <p class="lead">เมนู 6 หมวด + ปุ่มติดต่อ · หน้าเนื้อหาคงที่ 23 หน้า (ก่อนนับบทความรายเรื่อง) · จำนวนมาจากหน้าที่จำเป็น ไม่ใช่เป้าแข่งกับคู่แข่ง</p>
+  <div class="tree"><ul>
+    <li><strong>หน้าแรก</strong>
+      <ul>
+        <li><span class="m">สินค้าและบริการ</span><span class="tag">เมนู ไม่มีหน้ารวม</span><ul><li>เสื้อพิมพ์ลาย</li><li>เสื้อโปโลปัก</li><li>เสื้อเบสบอล</li><li>Jersey Oversize</li></ul></li>
+        <li><strong>เลือกตามการใช้งาน</strong><span class="tag">มีหน้ารวม</span><ul><li>บริษัทเอกชน &amp; SME</li><li>หน่วยงานภาครัฐ / ราชการ</li><li>โรงเรียนและมหาวิทยาลัย</li><li>กีฬาและการแข่งขัน</li><li>กิจกรรมและชมรม</li></ul></li>
+        <li><strong>แบบเสื้อ</strong><span class="tag">แกลเลอรี ไม่มีหน้ารายละเอียดทุกแบบ</span></li>
+        <li><strong>ผลงานและรีวิว</strong><span class="tag">หน้ารวม เปิดดูชุดรูป</span></li>
+        <li><span class="m">คู่มือและบทความ</span><span class="tag">เมนู ไม่มีหน้ารวม</span>
+          <ul>
+            <li><span class="m">คู่มือสั่งทำ</span><span class="tag">กลุ่มเมนู</span><ul><li>คู่มือสั่งเสื้อพิมพ์ลาย</li><li>คู่มือสั่งเสื้อโปโลปัก</li><li>คู่มือเลือกผ้า</li><li>คู่มือไซซ์และการวัด</li><li>คู่มือเตรียมโลโก้และข้อมูลสั่งผลิต</li><li>คู่มือจัดส่งและบริการหลังการขาย</li></ul></li>
+            <li><strong>บทความและไอเดีย</strong><span class="tag">หน้ารวม + รายเรื่อง</span></li>
+            <li><strong>คำถามที่พบบ่อย</strong></li>
+          </ul></li>
+        <li><strong>รู้จักทีมดี</strong><span class="tag">หน้าเดียว ทางลัดในหน้า</span></li>
+        <li><span class="cta">ติดต่อทีมดี</span><span class="tag">ปุ่มหลัก</span></li>
+      </ul></li>
+    <li class="m">หน้าประกอบ: ผลการค้นหา · หน้าไม่พบ · นโยบาย — สถานะในหน้า: ส่งฟอร์มสำเร็จ/ไม่สำเร็จ · ไม่พบผลค้นหา</li>
+  </ul></div>
+</section>
+
+<section id="pages">
+  <h2><span class="n">06</span>แนวทางเนื้อหารายหน้า</h2>
+  <p class="lead">ลำดับส่วนถูกเคาะแล้ว ส่วนจำนวนการ์ด ตำแหน่งจริง ขนาดปุ่ม และมือถือ ให้ทดสอบในขั้น Wireframe/Prototype</p>
+  <div class="pages">
+    <div class="pg"><b>หน้าแรก</b><ol><li>Hero ภาพทีมจริง + หลักฐานสั้น</li><li>หาเสื้อที่เหมาะ (การใช้งาน / สินค้า / ค้นหา)</li><li>ผลงานจริงและเสียงลูกค้า</li><li>แบบเสื้อคัดมา 4-6</li><li>ทีมดีช่วยอย่างไร</li><li>FAQ 5-6 ข้อ</li><li>เริ่มคุย</li><li>Footer</li></ol></div>
+    <div class="pg"><b>สินค้า 4 หน้า</b><small>เป็นเสื้อแบบไหน เหมาะกับใคร ปรับอะไรได้ งานจริง ราคา/เวลาขึ้นกับอะไร เริ่มอย่างไร · เปิดจาก Google/Ads/Sales Link แล้วเข้าใจได้โดยไม่ผ่านหน้าแรก · แยกภาพจำลองจากงานจริง ไม่ใส่ตัวเลขที่ยังไม่ยืนยัน</small></div>
+    <div class="pg"><b>การใช้งาน 5 หน้า + หน้ารวม</b><small>แยกบริบท → แนะนำสินค้าพร้อมเหตุผล → แบบและงานจริง → ช่วยวางแผน (จำนวน ไซซ์ กำหนดใช้ อนุมัติ เอกสาร) → FAQ · รายการเดียวติดหลายแท็ก ไม่ก๊อปข้อมูล</small></div>
+    <div class="pg"><b>แบบเสื้อ</b><small>เปิดดู → ขยาย → เซฟรูปที่มีรหัส → ส่ง LINE · ตัวกรอง สินค้า/การใช้งาน/สไตล์ (สีเสริม) · กลับจากรูปใหญ่ต้องคงตัวกรองและตำแหน่ง</small></div>
+    <div class="pg"><b>ผลงานและรีวิว</b><small>ชุดภาพ + บริบท โจทย์ สินค้า สิ่งที่ช่วย ผลที่ยืนยันได้ · รีวิวจริงตามสิทธิ์ · ติดป้าย Mockup/งานจริง · ไม่ใช้ภาพ AI เป็นหลักฐาน</small></div>
+    <div class="pg"><b>คู่มือ 6 หน้า</b><small>เข้าจากเมนูตรง มีสารบัญและลิงก์ตรงหัวข้อให้ Sales ส่งเฉพาะส่วน · แยก ลูกค้าส่ง / ทีมดีทำ / ต้องอนุมัติ · เงื่อนไขงานปักไม่ใช้ของพิมพ์ลายแทน</small></div>
+    <div class="pg"><b>บทความ + FAQ</b><small>หน้ารวมกรอง 4 แนว · บทความตอบตั้งแต่ต้น มีผู้ตรวจและวันที่ · FAQ 7 หมวด คำตอบตรง → เงื่อนไขต่างตามสินค้า → ลิงก์ · ใช้ชุดเดียวกันซ้ำทุกหน้า</small></div>
+    <div class="pg"><b>รู้จักทีมดี + ติดต่อ</b><small>หน้าเดียว: ใครคือทีมดี จุดเริ่มต้น วิธีช่วย 3WIN คนและสถานที่ ข้อมูลบริษัท · ฟอร์มกรอกได้เลยไม่ต้องเลือกเรื่อง บังคับแค่ชื่อ+เบอร์ · LINE/โทรวางใกล้ฟอร์ม</small></div>
+  </div>
+</section>
+
+<section id="decisions">
+  <h2><span class="n">07</span>บันทึกการตัดสินใจสำคัญ</h2>
+  <div class="tw"><table>
+    <tr><th>ประเด็น</th><th>ข้อสรุป</th></tr>
+    <tr><td>หน้ารวมสินค้า</td><td>ไม่ทำ เมนูไปสินค้า 4 หน้าโดยตรง</td></tr>
+    <tr><td>หน้ารวมการใช้งาน</td><td>ทำ เพื่อช่วยคนที่มีโจทย์แต่ไม่รู้ชื่อสินค้า</td></tr>
+    <tr><td>ภาครัฐ vs เอกชน</td><td>แยก 2 หน้า ภาครัฐโฟกัสจัดซื้อ-เอกสาร-อนุมัติ</td></tr>
+    <tr><td>กลุ่มลูกค้าทับซ้อน</td><td>ใช้แท็กและรายการกลาง ไม่คัดลอกข้อมูล</td></tr>
+    <tr><td>หน้ารวมคู่มือ</td><td>ไม่ทำ ใช้เมนูเลือกคู่มือ บทความ FAQ</td></tr>
+    <tr><td>รายละเอียดแบบเสื้อ</td><td>ไม่ทำทุกแบบ ใช้ขยายและเซฟภาพ รหัสอยู่ในภาพ</td></tr>
+    <tr><td>รายการโปรด / ชุดแชร์</td><td>ยังไม่ทำ ลูกค้าใช้รูปคุยต่อใน LINE อยู่แล้ว</td></tr>
+    <tr><td>ผลงาน</td><td>หน้ารวมก่อน Case Study แยกเมื่อมีสาระพอ</td></tr>
+    <tr><td>ฟอร์มติดต่อ</td><td>กรอกได้เลย ไม่ต้องเลือกเรื่อง มี LINE/โทร</td></tr>
+    <tr><td>Hero หน้าแรก</td><td>ทำ 2 เวอร์ชัน (แบบเสื้อ / การใช้งาน) เลือกหลังทดสอบ</td></tr>
+    <tr><td>ค้นหาเหมือน Google</td><td>เก็บแนวคิดไว้ เริ่มค้นพื้นฐานก่อน</td></tr>
+    <tr><td>SEO/SEM Landing</td><td>หน้าสินค้าและการใช้งานใช้ร่วม แยกแคมเปญเมื่อมีเหตุผล</td></tr>
+    <tr><td>Portal / Track Order</td><td>นอกขอบเขตรอบแรก</td></tr>
+  </table></div>
+  <h3>Benchmark ที่ใช้เป็นแกน</h3>
+  <p>PMK Polomaker (ครอบคลุมคำค้นตาม Intent แต่ไม่เพิ่มหน้าเพื่อจำนวน) · Tumtook (แคตตาลอกเบา ติดต่อสั้น) · Giftwise (ช่วยเลือกตามบริบท B2B) · Gogoprint (สเปก จำนวน เวลา ชัด) ทั้งหมดเป็นข้อสังเกตเชิงโครงสร้าง ไม่ใช่ผลวัด Conversion หรือ SEO</p>
+</section>
+
+<section id="verify">
+  <h2><span class="n">08</span>ต้องยืนยันก่อนเผยแพร่</h2>
+  <p class="lead">ตัวเลขจากคอนเทนต์ร่าง เช่น ค่าเริ่มออกแบบ 500 บาท มัดจำ 50/50 แจ้งปัญหา 7 วัน สั่งซ้ำ 30 วันราคาเดิม ยังไม่ถือเป็นนโยบายที่อนุมัติ</p>
+  <div class="tw"><table class="verify">
+    <tr><th>กลุ่ม</th><th>สิ่งที่ต้องตรวจ</th></tr>
+    <tr><td>สินค้า / ไซซ์</td><td>สินค้าที่ยังขาย ตัวเลือก ผ้า ทรง คอ สี · ตารางไซซ์เฉพาะทรง หน่วย วิธีวัด ค่าคลาดเคลื่อน</td></tr>
+    <tr><td>ราคา / เวลา</td><td>ราคาเริ่มต้น ขั้นต่ำ ค่าออกแบบ ค่าตัวอย่าง · จุดเริ่มนับระยะผลิต เร่งด่วน กำหนดส่ง</td></tr>
+    <tr><td>การเงิน / ตัวอย่าง</td><td>มัดจำ งวดชำระ เอกสารภาษี เงื่อนไขจัดซื้อ · ชิ้นปัก/เสื้อตัวอย่างได้เมื่อใด มีค่าใช้จ่ายไหม</td></tr>
+    <tr><td>หลังการขาย</td><td>ค่าส่ง ข้อยกเว้น ระยะแจ้งปัญหา ขอบเขตแก้ไข สั่งซ้ำ</td></tr>
+    <tr><td>ตัวตนบริษัท</td><td>ชื่อ ที่อยู่จดทะเบียน (แยกจากสถานที่เข้าพบ) เวลาทำการ ช่องทางจริง</td></tr>
+    <tr><td>หลักฐาน</td><td>สิทธิ์ใช้ภาพ/โลโก้/รีวิว ตัวเลขลูกค้า กำลังผลิต คำกล่าวอ้าง</td></tr>
+  </table></div>
+</section>
+
+<section id="next">
+  <h2><span class="n">09</span>ขั้นตอนถัดไป</h2>
+  <div class="steps">
+    <div><p>ใช้ Brief เป็นฐานวาง Wireframe หน้าแรก มุมมองมือถือและคอมพิวเตอร์ <span class="done">✓ เดสก์ท็อปทั้งเว็บเสร็จ 1 ต.ค. · มือถือรอเลือกเวอร์ชัน</span></p></div>
+    <div><p>ทดสอบทางเข้าของคนรู้สินค้า คนรู้การใช้งาน และคนอยากดูแบบก่อน รวมทางไป LINE/ฟอร์ม กับ Sales</p></div>
+    <div><p>วางแม่แบบหน้าสินค้า การใช้งาน แกลเลอรี คู่มือ บทความ แล้วปรับเฉพาะส่วนที่ต่าง <span class="done">✓ แม่แบบร่างแล้ว</span></p></div>
+    <div><p>ทำ Visual Direction และยืนยันภาพอ้างอิง ก่อนออกแบบรายละเอียด <span class="done">✓ มี 2 ทิศทางให้เลือก · Benchmark ต่างประเทศยังต้องเคาะ</span></p></div>
+    <div><p>เติมข้อมูลจริงและยืนยันเงื่อนไขที่ยังเปิดไว้ ก่อนพัฒนาและเผยแพร่</p></div>
+  </div>
+</section>
+
+<footer>สรุปจาก TEAMDEE-Website-Project-Brief.md v1.0 · อ้างอิงไฟล์โปรเจค: Brand Strategy v2, Content Strategy 2026, Brandbook CI, Storytelling, ข้อมูลงานปัก PD, Master Catalog SSB v0.4, ใบราคาขาย v1.4 · ข้อมูลสินค้าและเงื่อนไขจากไฟล์เหล่านี้ต้องตรวจเวอร์ชันก่อนใช้จริง</footer>
+</div>
+
+</body></html>

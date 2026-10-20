@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>ติดต่อทีมดี · เล่าโจทย์เสื้อทีมของคุณ ไม่มีแบบก็เริ่มได้ | TEAMDEE</title>
+  <meta name="description" content="ติดต่อ TEAMDEE เล่าโจทย์เสื้อทีมได้เลย ไม่ต้องเลือกหัวข้อก่อน บังคับแค่ชื่อกับเบอร์ แนบไฟล์โลโก้หรือภาพอ้างอิงได้ หรือทักไลน์กับโทรหาเราโดยตรง ตอบทุกวัน">
+</head>
+<body>
+{{> siteHeader active="contact"}}
+
+<main id="main">
+  <section class="band-ink relative overflow-hidden">
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+    <div class="wrap relative py-12 md:py-16">
+      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">ติดต่อทีมดี</span></nav>
+      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-7">มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย</h1>
+      <p class="text-[18px] leading-[1.75] text-paper/75 max-w-[54ch] mt-5">ไม่มีแบบก็เริ่มได้ ไม่ต้องเลือกหัวข้อก่อน กรอกเท่าที่รู้ ที่เหลือเราถามเอง</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-start">
+
+      <!-- ฟอร์ม -->
+      <div>
+        <div class="card border-2 border-alert bg-alert-tint mb-7 hidden" id="formErrs" tabindex="-1" role="alert">
+          <h2 class="text-[19px] font-bold text-alert">ยังกรอกไม่ครบ</h2>
+          <ul class="mt-3 space-y-1.5" id="formErrsList"></ul>
+        </div>
+
+        <!-- สถานะส่งสำเร็จ · อยู่ในหน้า ไม่สร้างหน้าใหม่ -->
+        <div class="card border-2 border-ok bg-ok-tint hidden" id="formDone" tabindex="-1" role="status">
+          <h2 class="t-display text-[clamp(22px,2.6vw,30px)] text-ok">เตรียมข้อมูลให้แล้ว</h2>
+          <p class="t-body mt-3" id="doneMsg"></p>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" id="doneLine"><span class="block size-5">{{> icoChat}}</span>เปิดไลน์แล้ววางข้อความ</a>
+            <button class="btn btn-line btn-lg" type="button" id="doneBack">กลับไปแก้ข้อมูล</button>
+          </div>
+          <p class="t-xs mt-5">ระหว่างรอ ดู <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'designs'}}">แบบเสื้อ</a> หรืออ่าน <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'guides' 'print'}}">คู่มือสั่งทำ</a> ไปก่อนได้</p>
+        </div>
+
+        <form id="contactForm" novalidate>
+          <input type="hidden" name="มาจากหน้า" id="cFrom">
+          <p class="t-sm"><span class="text-alert font-bold" aria-hidden="true">*</span> คือช่องที่ต้องกรอก ที่เหลือข้ามได้ ยิ่งบอกเยอะเรายิ่งตอบได้ตรง</p>
+
+          <fieldset class="card mt-5">
+            <legend class="text-[21px] font-bold">ติดต่อกลับยังไง</legend>
+            <div class="grid sm:grid-cols-2 gap-3 mt-4">
+              <div>
+                <label class="label" for="cName">ชื่อผู้ติดต่อ <span class="text-alert" aria-hidden="true">*</span></label>
+                <input class="input" id="cName" name="ชื่อ" type="text" autocomplete="name" required aria-describedby="cName-err">
+                <p class="err" id="cName-err" hidden>ยังไม่ได้กรอกชื่อผู้ติดต่อ ต้องใส่ก่อนส่ง</p>
+              </div>
+              <div>
+                <label class="label" for="cTel">เบอร์โทร <span class="text-alert" aria-hidden="true">*</span></label>
+                <input class="input tabular-nums" id="cTel" name="เบอร์โทร" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="cTel-err">
+                <p class="err" id="cTel-err" hidden>ยังไม่ได้กรอกเบอร์โทร ต้องใส่ก่อนส่ง</p>
+              </div>
+              <div>
+                <label class="label" for="cOrg">บริษัทหรือทีม</label>
+                <input class="input" id="cOrg" name="องค์กร" type="text" autocomplete="organization">
+              </div>
+              <div>
+                <label class="label" for="cMail">อีเมล</label>
+                <input class="input" id="cMail" name="อีเมล" type="email" autocomplete="email" inputmode="email">
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="card mt-4">
+            <legend class="text-[21px] font-bold">งานที่อยากทำ</legend>
+            <p class="t-sm mt-1">ไม่รู้ก็ข้ามได้ทุกช่อง</p>
+            <div class="grid sm:grid-cols-2 gap-3 mt-4">
+              <div>
+                <label class="label" for="cQty">จำนวนประมาณ (ตัว)</label>
+                <input class="input tabular-nums" id="cQty" name="จำนวน" type="number" min="1" step="1" inputmode="numeric" placeholder="ยังไม่แน่ใจก็ข้ามได้">
+              </div>
+              <div>
+                <label class="label" for="cDate">วันที่ต้องการใช้</label>
+                <input class="input" id="cDate" name="วันที่ต้องการใช้" type="date">
+              </div>
+            </div>
+            <div class="mt-3">
+              <label class="label" for="cNote">รายละเอียดหรือข้อมูลอ้างอิง</label>
+              <textarea class="input" id="cNote" name="รายละเอียด" rows="4" placeholder="เช่น อยากได้สีประมาณนี้ · เคยสั่งที่อื่นแล้วเจอปัญหาอะไร · มีรหัสแบบที่ชอบจากหน้าแบบเสื้อ"></textarea>
+            </div>
+            <div class="mt-3">
+              <label class="label" for="cFiles">แนบไฟล์ โลโก้ หรือภาพอ้างอิง</label>
+              <input class="input" id="cFiles" name="ไฟล์แนบ" type="file" multiple accept="image/*,.pdf,.ai,.eps,.svg,.csv,.xlsx">
+              <p class="help">รองรับรูป PDF ไฟล์เวกเตอร์ และตารางไซซ์ · ต้นแบบนี้ยังไม่ได้ต่อระบบอัปโหลด ชื่อไฟล์จะถูกใส่ไว้ในข้อความให้ แล้วส่งไฟล์จริงตามไปในไลน์</p>
+            </div>
+          </fieldset>
+
+          <div class="card mt-4">
+            <button class="btn btn-orange btn-lg w-full" type="submit">ส่งข้อมูลให้ทีมดีติดต่อกลับ</button>
+            <p class="t-xs mt-3" id="formMsg" role="status"></p>
+            <p class="t-xs mt-4 pt-4 border-t border-line">การส่งฟอร์มยังไม่ถือเป็นการสั่งซื้อ เราจะติดต่อกลับเพื่อยืนยันรายละเอียดก่อน · อ่าน <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'privacy'}}">นโยบายความเป็นส่วนตัว</a></p>
+          </div>
+        </form>
+      </div>
+
+      <!-- ช่องทางติดต่อ อยู่ใกล้ฟอร์ม -->
+      <aside class="lg:sticky lg:top-28 space-y-4">
+        <div class="band-ink rounded-plate p-7">
+          <h2 class="t-display text-[clamp(22px,2.4vw,28px)] text-paper">อยากคุยเลยไม่ต้องกรอก</h2>
+          <p class="text-[17px] leading-[1.7] text-paper/70 mt-3">ทักไลน์หรือโทรมาได้โดยตรง</p>
+          <p class="text-[15px] text-paper/55 mt-2">ตอบกลับตามเวลาทำการจริง</p>
+          <div class="grid gap-3 mt-6">
+            <a class="btn btn-orange btn-lg w-full gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+            <a class="btn btn-lg w-full gap-2 tabular-nums bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="tel:{{site.phonePrimaryTel}}"><span class="block size-5">{{> icoPhone}}</span>{{site.phonePrimary}}</a>
+            <a class="btn btn-lg w-full tabular-nums bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="tel:0864166449">{{site.phoneSecondary}}</a>
+          </div>
+          <dl class="mt-7 pt-6 border-t border-paper/20 space-y-3">
+            <div class="flex gap-3"><dt class="sr-only">เวลาทำการ</dt><span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoClock}}</span><dd class="text-[17px] text-paper/75 leading-[1.6]">{{site.hours}}</dd></div>
+            <div class="flex gap-3"><dt class="sr-only">สถานที่เข้าพบ</dt><span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoPin}}</span><dd class="text-[17px] text-paper/75 leading-[1.6]">{{site.address}}<span class="block t-xs mt-1 text-paper/50">ที่อยู่จดทะเบียนเป็นคนละที่ · [รอยืนยัน] · กรุณาโทรนัดก่อนเดินทาง</span></dd></div>
+          </dl>
+          <div class="mt-6 pt-6 border-t border-paper/20">
+            <p class="t-xs text-paper/55">[QR ไลน์ รอไฟล์จากฝ่ายการตลาด]</p>
+          </div>
+          <div class="mt-5 rounded-card border border-paper/20 aspect-[4/3] grid place-items-center text-center px-6">
+            <p class="t-xs text-paper/55">[แผนที่ · รอยืนยันที่ตั้งก่อนฝัง]</p>
+          </div>
+          <p class="t-xs text-paper/55 mt-4">[เงื่อนไขนัดหมายเข้าดูโรงงาน ถ้ามี · รอยืนยัน]</p>
+        </div>
+
+        <div class="bg-shell border border-line rounded-plate p-7">
+          <h2 class="text-[19px] font-bold">ยังไม่พร้อมคุย</h2>
+          <ul class="mt-4 space-y-1">
+            <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'designs'}}">ดูแบบเสื้อก่อน &rarr;</a></li>
+            <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'faq'}}">อ่านคำถามที่พบบ่อย &rarr;</a></li>
+            <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'guides' 'print'}}">อ่านคู่มือสั่งทำ &rarr;</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+{{> footer}}
+<script type="module" src="/src/js/contact-page.js"></script>
+</body>
+</html>

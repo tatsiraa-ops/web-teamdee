@@ -1,0 +1,100 @@
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"{{item.title}}","description":"{{item.excerpt}}","image":"{{site.baseUrl}}{{item.img}}","dateModified":"2026-10-01","publisher":{"@type":"Organization","name":"TEAMDEE","legalName":"บริษัท ดีดี ฟินิกซ์ จำกัด"},"mainEntityOfPage":"{{site.baseUrl}}{{url 'articles' item.id}}"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"บทความและไอเดีย","item":"{{site.baseUrl}}{{url 'blog'}}"},{"@type":"ListItem","position":3,"name":"{{item.title}}"}]}</script>
+
+<!-- 1 · หัวเรื่อง + ผู้เขียน + วันที่อัปเดต -->
+<section class="wrap pt-10 md:pt-14">
+  <div class="max-w-[68ch]">
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'blog'}}">บทความและไอเดีย</a><span aria-hidden="true">/</span><span aria-current="page">{{item.title}}</span></nav>
+    <h1 class="t-display text-[clamp(30px,4.4vw,52px)] mt-6">{{item.title}}</h1>
+    <p class="t-xs mt-5">{{item.catName}} · โดย [รอชื่อผู้เขียน] · ตรวจข้อมูลโดย [รอชื่อผู้ตรวจ] · อัปเดต {{item.updated}}</p>
+  </div>
+</section>
+
+<section class="wrap section pt-8">
+  <div class="grid lg:grid-cols-[minmax(0,1fr)_260px] gap-10 lg:gap-16 items-start">
+
+    <!-- 2 · เนื้อหา · คำตอบหลักอยู่ตั้งแต่ต้น -->
+    <article class="max-w-[68ch]">
+      <p class="text-[20px] leading-[1.8] font-semibold border-l-4 border-orange pl-6">{{item.lead}}</p>
+
+      <figure class="mt-9">
+        <div class="overflow-hidden rounded-plate bg-shell aspect-[16/9]">
+          <img src="{{item.img}}" alt="{{item.title}}" width="1200" height="675" fetchpriority="high" decoding="async" class="w-full h-full object-cover">
+        </div>
+      </figure>
+
+      {{#each item.sections}}
+      <section class="art-sec scroll-mt-28 mt-11" id="{{this.id}}">
+        <h2 class="t-display text-[clamp(24px,3vw,34px)]">{{this.t}}</h2>
+        <p class="t-body mt-4">{{this.body}}</p>
+        {{#if this.list}}
+        <ul class="mt-5 space-y-3">
+          {{#each this.list}}
+          <li class="flex gap-3 text-[17px] leading-[1.75] text-ink-2"><svg class="shrink-0 mt-2 text-orange" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{this}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </section>
+      {{/each}}
+
+      <div class="mt-12 pt-8 border-t-2 border-ink">
+        <p class="t-sm">บทความนี้เป็นข้อมูลประกอบการตัดสินใจ เงื่อนไขที่ผูกพันจริงอยู่ในใบเสนอราคาของแต่ละงาน</p>
+      </div>
+    </article>
+
+    <!-- สารบัญ + ลิงก์ตามบริบท -->
+    <aside class="lg:sticky lg:top-28 space-y-7" id="guideToc">
+      <nav aria-labelledby="atoc-h">
+        <h2 id="atoc-h" class="text-[15px] font-bold text-ink-3 mb-3">สารบัญ</h2>
+        <ol class="toc">
+          {{#each item.sections}}<li><a href="#{{this.id}}">{{this.t}}</a></li>{{/each}}
+        </ol>
+      </nav>
+
+      <div class="bg-shell border border-line rounded-plate p-6">
+        <h2 class="text-[17px] font-bold">อ่านต่อตามบริบท</h2>
+        <ul class="mt-3 space-y-1">
+          {{#each item.links}}
+          <li><a class="inline-flex items-center min-h-[44px] text-[16px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url this.[1]}}">{{this.[0]}} &rarr;</a></li>
+          {{/each}}
+        </ul>
+        <a class="btn btn-orange btn-sm w-full mt-5" href="{{url 'contact'}}">ปรึกษาทีมดี</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- 3 · บทความเกี่ยวข้อง -->
+{{#if related.length}}
+<section class="bg-shell border-y border-line">
+  <div class="wrap section">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <h2 class="t-display text-[clamp(24px,3vw,36px)]">บทความเกี่ยวข้อง</h2>
+      <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'blog'}}">ดูบทความทั้งหมด &rarr;</a>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-x-5 gap-y-8">
+      {{#each related}}
+      <a href="{{url 'articles' this.id}}" class="group flex flex-col">
+        <div class="overflow-hidden rounded-plate bg-paper aspect-[4/3]">
+          <img src="{{this.img}}" alt="{{this.title}}" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
+        </div>
+        <h3 class="text-[19px] mt-3.5 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
+        <p class="t-sm mt-1.5 grow">{{this.excerpt}}</p>
+        <p class="t-xs mt-3 pt-3 border-t border-line">{{this.catName}}</p>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{/if}}
+
+<section class="band-orange">
+  <div class="wrap py-14 md:py-20 text-center">
+    <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">มีคำถามที่บทความยังไม่ได้ตอบ</h2>
+    <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[46ch] mx-auto mt-4">ถามทีมดีได้โดยตรง ไม่ต้องมีแบบ ไม่ต้องรู้ชื่อเสื้อ</p>
+    <div class="flex flex-wrap justify-center gap-3 mt-8">
+      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+      <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+    </div>
+  </div>
+</section>

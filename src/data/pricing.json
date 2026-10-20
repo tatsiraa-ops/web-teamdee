@@ -1,18 +1,143 @@
 {
-  "vatIncluded": true,
-  "freeShipping": true,
-  "optionMax": 30,
-  "options": [
-    { "name": "แขนยาว", "add": 30 },
-    { "name": "ทรงโอเวอร์ไซส์", "add": 40 },
-    { "name": "มีกระเป๋าเสื้อ", "add": 20 }
-  ],
+ "_note": "ข้อมูลเครื่องประมาณราคา /calculations/ (Wireframe v2) · ราคาทุกช่องต้องเทียบใบราคาขาย v1.4 ก่อนเผยแพร่ · null = ยังไม่ยืนยัน หน้าเว็บขึ้น [ยืนยัน] และไม่คิดยอด · ช่วงจำนวนยกจากบอร์ด รอยืนยันพร้อมราคา",
+ "vatIncluded": true,
+ "source": "ใบราคาขาย v1.4",
+ "kinds": [
+  {
+   "id": "round",
+   "name": "คอกลม / คอวี",
+   "sub": "พิมพ์ลาย"
+  },
+  {
+   "id": "collar",
+   "name": "คอปก",
+   "sub": "โปโล"
+  },
+  {
+   "id": "screen",
+   "name": "สกรีน",
+   "sub": "[ยืนยันบริการ]"
+  }
+ ],
+ "bands": [
+  {
+   "id": "10-20",
+   "label": "10–20",
+   "min": 10,
+   "max": 20
+  },
+  {
+   "id": "21-50",
+   "label": "21–50",
+   "min": 21,
+   "max": 50
+  },
+  {
+   "id": "51-100",
+   "label": "51–100",
+   "min": 51,
+   "max": 100
+  },
+  {
+   "id": "101-200",
+   "label": "101–200",
+   "min": 101,
+   "max": 200
+  },
+  {
+   "id": "200+",
+   "label": "200 ขึ้นไป",
+   "min": 200,
+   "max": null
+  }
+ ],
+ "prices": {
+  "round": {
+   "10-20": null,
+   "21-50": null,
+   "51-100": null,
+   "101-200": null,
+   "200+": null
+  },
+  "collar": {
+   "10-20": null,
+   "21-50": null,
+   "51-100": null,
+   "101-200": null,
+   "200+": null
+  },
+  "screen": {
+   "10-20": null,
+   "21-50": null,
+   "51-100": null,
+   "101-200": null,
+   "200+": null
+  }
+ },
+ "options": [
+  {
+   "id": "sleeve",
+   "name": "แขนยาว",
+   "add": null
+  },
+  {
+   "id": "oversize",
+   "name": "ทรง Oversize",
+   "add": null
+  },
+  {
+   "id": "pocket",
+   "name": "กระเป๋าอก",
+   "add": null
+  }
+ ],
+ "_oldSite": {
+  "_note": "ตัวเลขจากต้นแบบเดิม (279-160 / 329-210) เก็บไว้เทียบเท่านั้น ห้ามนำไปแสดง",
   "tiers": [
-    { "label": "10 – 20", "max": 20, "round": 279, "collar": 329 },
-    { "label": "21 – 50", "max": 50, "round": 230, "collar": 280 },
-    { "label": "51 – 100", "max": 100, "round": 210, "collar": 260 },
-    { "label": "101 – 200", "max": 200, "round": 180, "collar": 230 },
-    { "label": "200 ขึ้นไป", "max": 1000000, "round": 160, "collar": 210 }
+   {
+    "label": "10 – 20",
+    "max": 20,
+    "round": 279,
+    "collar": 329
+   },
+   {
+    "label": "21 – 50",
+    "max": 50,
+    "round": 230,
+    "collar": 280
+   },
+   {
+    "label": "51 – 100",
+    "max": 100,
+    "round": 210,
+    "collar": 260
+   },
+   {
+    "label": "101 – 200",
+    "max": 200,
+    "round": 180,
+    "collar": 230
+   },
+   {
+    "label": "200 ขึ้นไป",
+    "max": 1000000,
+    "round": 160,
+    "collar": 210
+   }
   ],
-  "lead": { "design": 7, "confirm": 7, "ship": 3, "buffer": 5 }
+  "options": [
+   {
+    "name": "แขนยาว",
+    "add": 30
+   },
+   {
+    "name": "ทรงโอเวอร์ไซส์",
+    "add": 40
+   },
+   {
+    "name": "มีกระเป๋าเสื้อ",
+    "add": 20
+   }
+  ]
+ }
 }

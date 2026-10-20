@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>โรงงานรับผลิตเสื้อทีม เสื้อพิมพ์ลาย โปโลปัก เบสบอล Jersey | TEAMDEE</title>
+  <meta name="description" content="TEAMDEE รับออกแบบและผลิตเสื้อทีมครบวงจร เสื้อพิมพ์ลาย โปโลปัก เบสบอล Jersey Oversize ช่วยคิดตั้งแต่โจทย์ ขึ้นแบบ 3D ให้ดูก่อนผลิต ดูแลจนถึงวันส่งมอบ ปรึกษาฟรี">
+  <!-- เลือก hero ก่อนวาดหน้า ไม่ให้แบบที่ไม่ใช้กระพริบขึ้นมา · ตรรกะเดียวกับ src/js/hero-mode.js (มีเทส) -->
+  <script>(function(){var m=['scroll','classic'],v='scroll';try{var p=new URLSearchParams(location.search).get('hero'),s=localStorage.getItem('td-hero');v=m.indexOf(p)>-1?p:(m.indexOf(s)>-1?s:'scroll')}catch(e){}document.documentElement.setAttribute('data-hero-mode',v)})()</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"TEAMDEE","legalName":"บริษัท ดีดี ฟินิกซ์ จำกัด","description":"โรงงานรับออกแบบและผลิตเสื้อทีมครบวงจร","telephone":"{{site.phonePrimary}}","address":{"@type":"PostalAddress","streetAddress":"{{site.address}}","addressCountry":"TH"},"url":"{{site.baseUrl}}"}</script>
+</head>
+<body>
+{{> siteHeader active="home"}}
+
+<main id="main">
+
+  <div class="hero-wrap">
+  {{> heroScroll}}
+
+  <!-- 1 · HERO · ฉาก A (แบบเสื้อ → ทีมใส่จริง) สลับกับฉาก B (ผนังแบบเสื้อ) วนไปเรื่อยๆ · src/js/hero.js
+       ตัวหนังสือกับปุ่มอยู่นิ่ง ขยับแค่ฝั่งภาพ · มีปุ่มหยุด · หยุดเองเมื่อชี้หรือโฟกัส · ลดการเคลื่อนไหว = ภาพนิ่งฉาก A
+       มือถือเรียง หัว → ภาพ → ที่เหลือ · จอใหญ่ภาพเต็มพื้นหลัง ตัวหนังสืออยู่ซ้าย -->
+  <section class="tex-fabric text-paper relative overflow-hidden lg:min-h-[660px]" data-hero>
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+
+    <div class="wrap relative z-10 pt-10 md:pt-16 lg:pt-20">
+      <div class="lg:max-w-[48%]">
+        <p class="text-[16px] sm:text-[18px] font-semibold text-paper/85 max-w-[52ch] flex items-start gap-2.5"><span class="block w-6 h-[3px] bg-orange rounded-full mt-[0.7em] shrink-0" aria-hidden="true"></span><span>{{site.heroLine.lead}}{{#each site.heroLine.who}} <span class="inline-block">{{this}}</span>{{/each}}</span></p>
+        {{!-- หน้าเดียวมี hero 2 แบบ ให้ h1 จริงมีตัวเดียว (อยู่ในแบบเลื่อน) แบบเดิมใช้ role=heading แทน --}}
+        <p role="heading" aria-level="1" class="t-display text-[clamp(36px,5.4vw,70px)] leading-[1.08] text-paper mt-3"><span class="inline-block">เสื้อทีม</span><span class="inline-block">ที่ทุกคน</span><span class="inline-block text-orange">ภูมิใจจะใส่</span></p>
+      </div>
+    </div>
+
+    <div class="hero-stage mt-7 lg:mt-0" data-stage>
+      {{!-- ผนังเป็น 6 คอลัมน์ ขยับทั้งคอลัมน์ ไม่ขยับรายช่อง (ช่องขยับแยก 66 ช่อง = เฟรมค้างตอนผนังขึ้นครั้งแรก) --}}
+      <div class="hero-wall" data-wall aria-hidden="true">
+        {{#each heroWallCols}}<div class="hero-col" data-col="{{this.dir}}">{{#each this.tiles}}<div class="hero-tile"><img data-src="{{this.imgSmall}}" alt="" width="540" height="360" decoding="async"></div>{{/each}}</div>{{/each}}
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      {{#with heroPairs.[0]}}
+      <div class="hero-a" data-a>
+        <figure class="hero-card hero-card--design" data-design>
+          <img src="{{this.design.imgSmall}}" srcset="{{this.design.imgSmall}} 540w, {{this.design.img}} 1080w" sizes="(min-width:1024px) 380px, 64vw" alt="แบบเสื้อรหัส {{this.code}} ที่ทีมดีออกแบบ" width="540" height="360" data-design-img>
+          <figcaption>ขั้นที่ 1 · แบบ <span data-card-code>{{this.code}}</span></figcaption>
+        </figure>
+        <span class="hero-arrow" data-arrow aria-hidden="true">&rarr;</span>
+        <figure class="hero-card hero-card--photo" data-photo>
+          <div class="hero-photo"><img src="{{this.photo}}" alt="{{this.who}}ใส่เสื้อทีมในวันงานจริง" width="760" height="608" fetchpriority="high" data-photo-img></div>
+          <figcaption>ขั้นที่ 2 · <span data-who>{{this.who}}</span>ใส่จริง</figcaption>
+        </figure>
+        <p class="hero-note" data-note{{#if this.confirmed}} hidden{{/if}}>[คู่ตัวอย่าง · ยังไม่ใช่งานเดียวกัน รอคู่ไฟล์แบบกับรูปของงานจริง]</p>
+      </div>
+      {{/with}}
+    </div>
+
+    <div class="wrap relative z-10 pb-20 lg:pb-24">
+      <div class="lg:max-w-[48%]">
+        <p class="text-[18px] sm:text-[19px] leading-[1.75] text-paper/80 max-w-[46ch] mt-7 lg:mt-6">ทีมดีคิดแบบให้ตั้งแต่ยังไม่มีอะไรในมือ แล้วอยู่จนถึงวันที่ทุกคนได้ใส่จริง {{designFilters.total}} แบบบนเว็บนี้ทำมาแบบนั้นทุกตัว</p>
+
+        <dl class="grid grid-cols-3 gap-x-4 sm:gap-x-6 mt-7 border-t border-paper/20 pt-5">
+          {{#each site.proof.items}}
+          <div class="flex flex-col-reverse">
+            <dt class="text-[15px] leading-snug text-paper/70 mt-1">{{this.label}}</dt>
+            <dd class="t-display text-[clamp(24px,3vw,36px)] leading-none tabular-nums {{#if this.value}}text-paper{{else}}text-paper/60{{/if}}">{{#if this.value}}{{this.value}}{{else}}[{{this.candidate}}]{{/if}}</dd>
+          </div>
+          {{/each}}
+        </dl>
+        <p class="text-[15px] text-paper/60 mt-3">{{site.proof.source}}</p>
+
+        <div class="flex flex-wrap items-center gap-3 mt-8">
+          <a class="btn btn-orange btn-lg" href="{{url 'designs'}}">ดูแบบเสื้อ {{designFilters.total}} แบบ</a>
+          <a class="btn btn-lg bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}">ปรึกษาทีมดี</a>
+        </div>
+        <p class="text-[15px] text-paper/70 mt-4">ไม่มีแบบก็เริ่มได้ บอกแค่ใครใส่ กี่ตัว ใช้วันไหน</p>
+      </div>
+    </div>
+
+    <div class="hero-switch" role="group" aria-label="ต้นแบบ · เลือกแบบ hero ที่จะดู">
+        <span class="hero-switch__label">ต้นแบบ</span>
+        <button type="button" data-hero-set="scroll">แบบเลื่อน</button>
+        <button type="button" data-hero-set="classic">แบบเดิม</button>
+      </div>
+
+    <button class="hero-pause" type="button" data-hero-pause aria-pressed="false" hidden>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-ico-pause><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-ico-play hidden><path d="M7 5v14l12-7z"/></svg>
+      <span data-pause-label>หยุดภาพเคลื่อนไหว</span>
+    </button>
+
+    <script type="application/json" id="heroPairs">[{{#each heroPairs}}{"code":"{{this.code}}","img":"{{this.design.imgSmall}}","img2x":"{{this.design.img}}","photo":"{{this.photo}}","who":"{{this.who}}","confirmed":{{#if this.confirmed}}true{{else}}false{{/if}} }{{#unless @last}},{{/unless}}{{/each}}]</script>
+  </section>
+
+  </div>
+  <span id="after-hero" tabindex="-1"></span>
+
+  <!-- 2 · หาเสื้อที่เหมาะกับคุณ · การใช้งาน + สินค้า + ค้นหา -->
+  <section class="wrap section" aria-labelledby="find-h">
+    <div class="max-w-[68ch]">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>หาเสื้อที่เหมาะกับคุณ</span>
+      <h2 id="find-h" class="t-display text-[clamp(30px,4.4vw,52px)]">ทีมของคุณคือแบบไหน</h2>
+      <p class="t-lead mt-4">มีโจทย์แต่ยังเรียกชื่อเสื้อไม่ถูกก็ไม่เป็นไร เลือกจากสิ่งที่ทีมคุณกำลังจะทำ หรือค้นจากชื่อแบบกับรหัสได้เลย</p>
+    </div>
+
+    <form class="flex flex-wrap gap-2.5 mt-7 max-w-[560px]" action="{{url 'search'}}" method="get" role="search">
+      <label class="sr-only" for="q">ค้นหาชื่อสินค้า ชื่อแบบ หรือรหัสแบบ</label>
+      <input class="input flex-1 min-w-[220px]" id="q" name="q" type="search" placeholder="ค้นหา เช่น โปโล หรือ TD-0012" autocomplete="off">
+      <button class="btn btn-ink" type="submit">ค้นหา</button>
+    </form>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-9">
+      {{#each uses}}
+      <a href="{{url 'uses' this.id}}" class="group flex flex-col">
+        <div class="relative overflow-hidden rounded-plate bg-shell aspect-[4/5]">
+          <img src="{{this.img}}" alt="ตัวอย่างงาน{{this.name}}" width="600" height="750" loading="lazy" decoding="async"
+               class="w-full h-full object-cover {{this.imgPos}} transition-transform duration-500 group-hover:scale-[1.04]">
+        </div>
+        <h3 class="text-[19px] mt-3.5 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.name}}</h3>
+        <p class="t-xs mt-1.5 grow">{{this.short}}</p>
+      </a>
+      {{/each}}
+    </div>
+
+    <div class="mt-10 pt-8 border-t border-line">
+      <p class="text-[17px] font-bold">รู้อยู่แล้วว่าอยากได้เสื้อแบบไหน</p>
+      <div class="chiprail mt-3.5">
+        {{#each products}}
+        <a class="chip" href="{{url 'products' this.id}}">{{this.menuName}}</a>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · ผลงานจริงและเสียงลูกค้า -->
+  <section class="bg-shell border-y border-line" aria-labelledby="proof-h">
+    <div class="wrap section">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-9">
+        <div class="max-w-[62ch]">
+          <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShield}}</span>ผลงานจริงและเสียงลูกค้า</span>
+          <h2 id="proof-h" class="t-display text-[clamp(30px,4.4vw,52px)]">งานที่ส่งมอบแล้ว</h2>
+        </div>
+        <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'projects'}}">ดูผลงานทั้งหมด &rarr;</a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        {{#each works}}{{#if this.home}}
+        <article class="bg-paper border border-line rounded-plate overflow-hidden flex flex-col">
+          <div class="relative aspect-[4/3] bg-shell">
+            <img src="{{this.img}}" alt="ทีมใส่{{this.title}}จริง" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover">
+            <span class="tag tag-ink absolute left-3 bottom-3">งานผลิตจริง</span>
+          </div>
+          <div class="p-6 flex flex-col grow on-paper">
+            <p class="t-xs">{{this.groupName}}</p>
+            <h3 class="text-[20px] mt-1">{{this.title}}</h3>
+            <dl class="mt-4 space-y-2 text-[16px] leading-[1.6] grow">
+              <div><dt class="inline font-bold">โจทย์ </dt><dd class="inline text-ink-2">{{this.brief}}</dd></div>
+              <div><dt class="inline font-bold">ทีมดีช่วย </dt><dd class="inline text-ink-2">งาน{{this.tech}} {{baht this.qty}} ตัว คุมให้เสร็จใน {{this.days}} วันทำการ</dd></div>
+            </dl>
+          </div>
+        </article>
+        {{/if}}{{/each}}
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 mt-5">
+        {{#each works}}{{#if this.home}}{{> reviewSlot}}{{/if}}{{/each}}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · แบบเสื้อที่คัดมา -->
+  <section class="wrap section" aria-labelledby="designs-h">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <div class="max-w-[62ch]">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>แบบเสื้อที่คัดมา</span>
+        <h2 id="designs-h" class="t-display text-[clamp(30px,4.4vw,52px)]">ชอบแบบไหน กดขยายแล้วเซฟไปคุยต่อได้</h2>
+        <p class="t-lead mt-4">ทุกแบบมีรหัสอยู่ในภาพ เซฟรูปส่งเข้าไลน์แล้วทีมขายรู้ทันทีว่าหมายถึงแบบไหน</p>
+      </div>
+      <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'designs'}}">ดูแบบเสื้อทั้งหมด {{designFilters.total}} แบบ &rarr;</a>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" id="pickGrid" data-line-url="{{site.lineUrl}}">
+      {{#each pickedDesigns}}
+      <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="{{this.code}}" data-meta="{{this.meta}}">
+        <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 33vw, 50vw"
+             width="1080" height="720" loading="lazy" decoding="async"
+             alt="แบบ{{this.garmentName}}งาน{{this.techName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง"
+             class="w-full h-full object-contain">
+      </figure>
+      {{/each}}
+    </div>
+  </section>
+
+  <!-- 5 · ทีมดีช่วยอย่างไร -->
+  <section class="band-ink relative overflow-hidden" aria-labelledby="help-h">
+    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+    <div class="wrap section">
+      <div class="max-w-[68ch] mb-11">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>ทีมดีช่วยอย่างไร</span>
+        <h2 id="help-h" class="t-display text-[clamp(30px,4.4vw,52px)] text-paper">ช่วยคิด ช่วยจัดการ ช่วยจบงาน</h2>
+        <p class="text-[18px] leading-[1.8] text-paper/70 mt-4">ไม่ใช่คำขวัญ แต่เป็นสามเรื่องที่เราทำจริงทุกงาน</p>
+      </div>
+      <ol class="grid md:grid-cols-3 gap-8">
+        <li>
+          <p class="t-display text-[44px] text-orange leading-none tabular-nums">01</p>
+          <h3 class="text-[23px] text-paper mt-3">ช่วยคิด</h3>
+          <p class="text-[17px] leading-[1.75] text-paper/70 mt-2.5">ยังไม่มีแบบก็เริ่มได้ บอกมาว่าใครใส่ ใส่ตอนไหน ทีมออกแบบดราฟให้ดูเป็น 3D แล้วแก้จนพอใจ</p>
+        </li>
+        <li>
+          <p class="t-display text-[44px] text-orange leading-none tabular-nums">02</p>
+          <h3 class="text-[23px] text-paper mt-3">ช่วยจัดการ</h3>
+          <p class="text-[17px] leading-[1.75] text-paper/70 mt-2.5">รวบรวมไซซ์จากหลายคน แยกสีตามทีม เตรียมเอกสารให้ฝ่ายจัดซื้อ และนับถอยหลังจากวันที่ต้องใส่จริง</p>
+        </li>
+        <li>
+          <p class="t-display text-[44px] text-orange leading-none tabular-nums">03</p>
+          <h3 class="text-[23px] text-paper mt-3">ช่วยจบงาน</h3>
+          <p class="text-[17px] leading-[1.75] text-paper/70 mt-2.5">ถ่ายรูปงานจริงให้ดูก่อนแพ็ก ส่งถึงที่ และเก็บสเปกไว้ให้ รอบหน้าสั่งซ้ำแจ้งแค่จำนวนกับไซซ์</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 · FAQ และข้อมูลช่วยตัดสินใจ -->
+  <section class="wrap section" aria-labelledby="faq-h" id="faq">
+    <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-start">
+      <div class="lg:sticky lg:top-28">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามที่พบบ่อย</span>
+        <h2 id="faq-h" class="t-display text-[clamp(30px,4.2vw,50px)]">เรื่องที่คนถามก่อนตัดสินใจ</h2>
+        <ul class="mt-7 space-y-1">
+          <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'guides' 'print'}}">คู่มือสั่งทำ &rarr;</a></li>
+          <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'blog'}}">บทความและไอเดีย &rarr;</a></li>
+          <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'faq'}}">คำถามที่พบบ่อยฉบับเต็ม &rarr;</a></li>
+        </ul>
+      </div>
+
+      <div class="hs-accordion-group border-t-2 border-ink">
+        {{#each faq.home}}
+        <div class="hs-accordion border-b border-line" id="faq-{{@index}}">
+          <button type="button"
+                  class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-6 min-h-tap font-bold text-[19px] hover:underline decoration-orange decoration-2 underline-offset-4"
+                  aria-controls="faq-panel-{{@index}}">
+            <span>{{this.[0]}}</span>
+            <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div id="faq-panel-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="faq-{{@index}}">
+            <p class="t-body pb-7 max-w-[62ch]">{{this.[1]}}</p>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CONVERT · เริ่มคุยกับทีมดี -->
+  <section class="band-orange">
+    <div class="wrap py-14 md:py-20 text-center">
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย</h2>
+      <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">บอกแค่ใครใส่ จำนวนประมาณ และใช้วันไหน ก็เริ่มได้แล้ว ไม่มีแบบก็ไม่เป็นไร</p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink gap-2 tabular-nums" href="tel:{{site.phonePrimaryTel}}"><span class="block size-5">{{> icoPhone}}</span>{{site.phonePrimary}}</a>
+        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+{{> footer}}
+<script type="module" src="/src/js/home.js"></script>
+</body>
+</html>

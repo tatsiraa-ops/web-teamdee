@@ -1,0 +1,176 @@
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"เลือกตามการใช้งาน","item":"{{site.baseUrl}}{{url 'uses' 'index'}}"},{"@type":"ListItem","position":3,"name":"{{item.name}}"}]}</script>
+
+<!-- 1 · โจทย์ของกลุ่มนี้ -->
+<section class="band-ink relative overflow-hidden">
+  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+  <div class="wrap relative py-12 md:py-18">
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'uses' 'index'}}">เลือกตามการใช้งาน</a><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
+
+    <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center mt-8">
+      <div>
+        <span class="tag">คนใส่คือ{{item.who}}</span>
+        <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-4">เสื้อสำหรับ{{item.name}}</h1>
+        <p class="text-[19px] leading-[1.75] text-paper/75 max-w-[52ch] mt-5">{{item.lead}}</p>
+        <div class="flex flex-wrap gap-3 mt-9">
+          <a class="btn btn-orange btn-lg" href="{{url 'contact'}}?u={{item.id}}">ปรึกษาเสื้อ{{item.name}}</a>
+          <a class="btn btn-lg bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'designs'}}">ดูแบบเสื้อ</a>
+        </div>
+      </div>
+      <figure class="relative">
+        <div class="overflow-hidden rounded-plate bg-shell aspect-[4/3]">
+          <img src="{{item.img}}" alt="ตัวอย่างงาน{{item.name}}" width="900" height="675" fetchpriority="high" decoding="async" class="w-full h-full object-cover {{item.imgPos}}">
+        </div>
+        <figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-4 bottom-4">{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · แยกบริบท -->
+<section class="wrap section">
+  <div class="max-w-[68ch] mb-9">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>แยกตามบริบท</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">งานของคุณอยู่แบบไหน</h2>
+    <p class="t-lead mt-4">กลุ่มเดียวกันแต่บริบทต่างกัน ผ้ากับทรงที่เหมาะก็ต่างกัน</p>
+  </div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    {{#each item.contexts}}
+    <div class="bg-shell border border-line rounded-plate p-6">
+      <h3 class="text-[19px] font-bold">{{this.name}}</h3>
+      <p class="t-sm mt-2">{{this.note}}</p>
+    </div>
+    {{/each}}
+  </div>
+</section>
+
+<!-- 3 · สินค้าที่แนะนำ พร้อมเหตุผล -->
+<section class="bg-shell border-y border-line">
+  <div class="wrap section">
+    <div class="max-w-[68ch] mb-9">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>สินค้าที่แนะนำ</span>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">เลือกจากงานที่จะใช้ ไม่ใช่จากชื่อกลุ่ม</h2>
+      <p class="t-lead mt-4">กลุ่มนี้ไม่ได้ต้องใช้เสื้อแบบเดียวเสมอ ขึ้นกับว่าคนใส่จะใส่ตอนไหนและทำอะไร</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      {{#each item.recommend}}
+      <a href="{{url 'products' this.id}}" class="group bg-paper border border-line rounded-plate overflow-hidden flex flex-col">
+        <div class="aspect-[3/2] bg-paper border-b border-line">
+          <img src="{{this.img}}" alt="{{this.name}}" width="1080" height="720" loading="lazy" decoding="async" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.04]">
+        </div>
+        <div class="p-6 on-paper grow flex flex-col">
+          <h3 class="text-[21px] transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.name}}</h3>
+          <p class="text-[16px] leading-[1.6] font-semibold mt-3">{{this.when}}</p>
+          <p class="t-sm mt-1.5 grow">{{this.why}}</p>
+        </div>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- 4 · แบบและงานจริงที่เกี่ยวข้อง (แท็กจากข้อมูลกลาง) -->
+<section class="wrap section">
+  {{#if useDesigns.length}}
+  <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+    <h2 class="t-display text-[clamp(26px,3.4vw,42px)]">แบบเสื้อของกลุ่มนี้</h2>
+    <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'designs'}}?use={{item.id}}">ดูแบบทั้งหมดของกลุ่มนี้ &rarr;</a>
+  </div>
+  <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" id="useGrid" data-line-url="{{site.lineUrl}}">
+    {{#each useDesigns}}
+    <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="{{this.code}}" data-meta="{{this.meta}}">
+      <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 33vw, 50vw"
+           width="1080" height="720" loading="lazy" decoding="async"
+           alt="แบบ{{this.garmentName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง" class="w-full h-full object-contain">
+    </figure>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  {{#if useWorks.length}}
+  <div class="flex flex-wrap items-end justify-between gap-4 mb-8 {{#if useDesigns.length}}mt-14{{/if}}">
+    <h2 class="t-display text-[clamp(26px,3.4vw,42px)]">งานจริงของกลุ่มนี้</h2>
+    <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'projects'}}?use={{item.id}}">ดูผลงานทั้งหมด &rarr;</a>
+  </div>
+  <div class="grid md:grid-cols-3 gap-5">
+    {{#each useWorks}}
+    <article class="border border-line rounded-plate overflow-hidden flex flex-col">
+      <div class="relative aspect-[4/3] bg-shell">
+        <img src="{{this.img}}" alt="ทีมใส่{{this.title}}จริง" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover">
+        <span class="tag tag-ink absolute left-3 bottom-3">งานผลิตจริง</span>
+      </div>
+      <div class="p-6 grow">
+        <h3 class="text-[19px]">{{this.title}}</h3>
+        <dl class="mt-3 space-y-2 text-[16px] leading-[1.6]">
+          <div><dt class="inline font-bold">โจทย์ </dt><dd class="inline text-ink-2">{{this.brief}}</dd></div>
+          <div><dt class="inline font-bold">ทีมดีช่วย </dt><dd class="inline text-ink-2">{{this.helped}}</dd></div>
+        </dl>
+      </div>
+    </article>
+    {{/each}}
+  </div>
+  {{/if}}
+</section>
+
+<!-- 5 · ช่วยวางแผน -->
+<section class="band-ink relative overflow-hidden">
+  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+  <div class="wrap section">
+    <div class="max-w-[68ch] mb-9">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoDoc}}</span>ช่วยวางแผน</span>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)] text-paper">สี่เรื่องที่กลุ่มนี้มักติด</h2>
+      <p class="text-[18px] leading-[1.8] text-paper/70 mt-4">ไม่ใช่เรื่องผลิต แต่เป็นเรื่องที่ทำให้งานช้าหรือต้องแก้ทีหลัง เราช่วยจัดการให้ตั้งแต่ต้น</p>
+    </div>
+    <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {{#each item.planning}}
+      <li class="border border-paper/20 rounded-plate p-6">
+        <p class="t-display text-[32px] text-orange leading-none tabular-nums">0{{inc @index}}</p>
+        <h3 class="text-[19px] text-paper mt-3">{{this}}</h3>
+      </li>
+      {{/each}}
+    </ol>
+  </div>
+</section>
+
+<!-- 6 · FAQ เฉพาะกลุ่ม -->
+<section class="wrap section">
+  <div class="max-w-[68ch] mb-8">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามที่พบบ่อย</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">เรื่องที่กลุ่มนี้ถามบ่อย</h2>
+  </div>
+  <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
+    {{#each useFaq}}
+    <div class="hs-accordion border-b border-line" id="ufaq-{{@index}}">
+      <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-6 min-h-tap font-bold text-[19px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-controls="ufaq-panel-{{@index}}">
+        <span>{{this.[0]}}</span>
+        <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+      <div id="ufaq-panel-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="ufaq-{{@index}}">
+        <p class="t-body pb-7 max-w-[62ch]">{{this.[1]}}</p>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  <a class="inline-flex items-center min-h-[44px] mt-6 font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'faq'}}">คำถามที่พบบ่อยฉบับเต็ม &rarr;</a>
+</section>
+
+<!-- กลุ่มอื่น -->
+<section class="bg-shell border-y border-line">
+  <div class="wrap section">
+    <h2 class="t-display text-[clamp(24px,3vw,36px)] mb-6">กลุ่มอื่น</h2>
+    <div class="chiprail">
+      {{#each relatedUses}}<a class="chip" href="{{url 'uses' this.id}}">{{this.name}}</a>{{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- CONVERT -->
+<section class="band-orange">
+  <div class="wrap py-14 md:py-20 text-center">
+    <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">เล่าโจทย์ของทีมคุณมา</h2>
+    <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">บอกว่าใครใส่ จำนวนประมาณ และใช้วันไหน ทีมดีช่วยเลือกให้ว่าควรใช้เสื้อแบบไหน</p>
+    <div class="flex flex-wrap justify-center gap-3 mt-8">
+      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+      <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}?u={{item.id}}">กรอกฟอร์ม</a>
+    </div>
+  </div>
+</section>
