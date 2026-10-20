@@ -98,6 +98,46 @@ const loadData = () => ({
     back: `/img/jersey3d/${id}-back.webp`,
     backSmall: `/img/jersey3d/${id}-back-440.webp`,
   })),
+  /* hero แบบทีม (ค่าเริ่มต้น ตามแบบ Figma Present 2026) · เรียงเสื้อ 3D 5 ตัวแทนคน 5 คนในแบบ
+     ระหว่างรอถ่ายรูปคนใส่จริง (อาร์ตเลือกทาง A-2 วันที่ 20 ต.ค. 2026) · ตัวกลางคือตัวเอก
+     label = งานแบบไหน ดูจากโลโก้บนเสื้อ · ทุกตัวมีโลโก้ลูกค้าจริง ต้องขออนุญาตก่อนเผยแพร่ */
+  teamLineup: [
+    { id: 'school50', label: 'โรงเรียน · ครบรอบ 50 ปี', alt: 'ภาพจำลองเสื้อโปโลพิมพ์ลายไล่สีฟ้าเหลือง งานครบรอบ 50 ปีของโรงเรียน' },
+    { id: 'choomthong', label: 'ทีมขาย · องค์กร', alt: 'ภาพจำลองเสื้อโปโลพิมพ์ลายสีแดงขาว ลายภูเขา ของทีมตัวแทนขาย' },
+    { id: 'ptk', label: 'ยูนิฟอร์มบริษัท', alt: 'ภาพจำลองเสื้อโปโลพิมพ์ลายสีขาวฟ้า ลายเครื่องมือช่างไฟ ของบริษัท PTK' },
+    { id: 'watsadu', label: 'ทีมงาน · ร้านวัสดุ', alt: 'ภาพจำลองเสื้อโปโลพิมพ์ลายสีน้ำเงิน มีโลโก้สปอนเซอร์ ของร้านวัสดุก่อสร้าง' },
+    { id: 'highvolt', label: 'ค่าย · กิจกรรม', alt: 'ภาพจำลองเสื้อโปโลพิมพ์ลายสีม่วง HIGHVOLT CAMP' },
+  ].map((x, i) => ({
+    ...x,
+    lead: i === 2,
+    front: `/img/jersey3d/${x.id}-front.webp`,
+    frontSmall: `/img/jersey3d/${x.id}-front-440.webp`,
+    backSmall: `/img/jersey3d/${x.id}-back-440.webp`,
+  })),
+  /* วงกลมรูปทีมลูกค้า 30 รูป สลับหมวดกันไม่ให้รูปองค์กรกองอยู่แถวเดียว · รูปชุดเดียวกับหน้า /projects/ */
+  homeCircles: (() => {
+    const c = json('customers.json')
+    const byCat = {}
+    for (const x of c) (byCat[x.cat] ||= []).push(x)
+    const lists = Object.values(byCat)
+    const out = []
+    for (let i = 0; out.length < 30 && lists.some((l) => l[i]); i++) for (const l of lists) if (l[i] && out.length < 30) out.push(l[i])
+    return out
+  })(),
+  /* แผงกลุ่มงานหน้าแรก · ใช้รูปทีมลูกค้าจริง (public/img/real) แทนภาพกราฟิกโปรโมต · อาร์ตสั่งรื้อ 20 ต.ค. 2026 */
+  /* lines = จุดตัดบรรทัดชื่อกลุ่มในแผงแคบ ไม่ให้ภาษาไทยตัดกลางวลี (เช่น กีฬาและการ / แข่งขัน) */
+  homeUses: (() => {
+    const pick = {
+      corp: { lines: ['บริษัทเอกชน', '& SME'], en: 'CORPORATE', photo: '/img/real/r02.jpg', alt: 'พนักงานบริษัทใส่เสื้อทีมสีดำที่ทีมดีผลิต' },
+      gov: { lines: ['หน่วยงานภาครัฐ', '/ ราชการ'], en: 'GOVERNMENT', photo: '/img/real/r26.jpg', alt: 'เจ้าหน้าที่หน่วยงานใส่เสื้อโปโลสีกรมท่าที่ทีมดีผลิต' },
+      edu: { lines: ['โรงเรียนและ', 'มหาวิทยาลัย'], en: 'EDUCATION', photo: '/img/real/r16.jpg', alt: 'นักเรียนใส่เสื้อโปโลสีขาวฟ้าที่ทีมดีผลิต' },
+      sport: { lines: ['กีฬาและ', 'การแข่งขัน'], en: 'SPORTS', photo: '/img/real/r17.jpg', alt: 'ทีมฟุตบอลใส่เสื้อลายทางแดงขาวที่ทีมดีผลิต' },
+      event: { lines: ['กิจกรรม', 'และชมรม'], en: 'EVENTS', photo: '/img/real/r21.jpg', alt: 'นักวิ่งใส่เสื้อสีม่วงที่ทีมดีผลิต ในงานวิ่ง' },
+    }
+    return json('uses.json').map((u) => ({ ...u, ...pick[u.id] }))
+  })(),
+  /* ผ้าที่มีรูปจริง ใช้ในแถบผ้าหน้าแรก */
+  homeFabrics: json('sizing.json').fabrics.filter((f) => f.img),
   heroTeams: [
     { img: '/img/real/r23.jpg', use: 'corp', label: 'บริษัท', alt: 'พนักงานบริษัทใส่เสื้อทีมสีแดงที่ TEAMDEE ผลิต ถ่ายในวันงานจริง' },
     { img: '/img/real/r17.jpg', use: 'sport', label: 'ทีมกีฬา', alt: 'นักฟุตบอลใส่เสื้อลายทางแดงขาวที่ TEAMDEE ผลิต' },

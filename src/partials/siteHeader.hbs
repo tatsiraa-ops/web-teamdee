@@ -63,7 +63,7 @@
           <p class="dd__group" id="ddh-guides">คู่มือสั่งทำ</p>
           <ul aria-labelledby="ddh-guides">
             {{#each guides}}<li><a class="dd__item dd__item--compact" href="{{url 'guides' this.id}}"><span class="dd__t">{{this.name}}</span></a></li>{{/each}}
-            <li><a class="dd__item dd__item--compact" href="{{url 'calculations'}}"><span class="dd__t">ประมาณราคาเบื้องต้น</span></a></li>
+            <li><a class="dd__item dd__item--compact" href="{{url 'calculations'}}"><span class="dd__t">คำนวณราคาเบื้องต้น</span></a></li>
           </ul>
           <div class="dd__sep" aria-hidden="true"></div>
           <p class="dd__group" id="ddh-more">อ่านเพิ่ม</p>
@@ -113,7 +113,7 @@
 
     <p class="mnav__head">คู่มือและบทความ</p>
     {{#each guides}}<a class="mnav mnav--sub" href="{{url 'guides' this.id}}">{{this.name}}</a>{{/each}}
-    <a class="mnav mnav--sub" href="{{url 'calculations'}}">ประมาณราคาเบื้องต้น</a>
+    <a class="mnav mnav--sub" href="{{url 'calculations'}}">คำนวณราคาเบื้องต้น</a>
     <a class="mnav mnav--sub" href="{{url 'blog'}}">บทความและไอเดีย</a>
     <a class="mnav mnav--sub" href="{{url 'faq'}}">คำถามที่พบบ่อย</a>
 

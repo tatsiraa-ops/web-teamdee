@@ -1,0 +1,257 @@
+/* ============================================================
+   หน้าแรกแบบทีม · ตามแบบ Figma "Present 2026" ที่อาร์ตเลือก (20 ต.ค. 2026)
+   พื้นขาวเป็นหลัก ส้มเป็นเส้นโค้ง (Dynamic Curve ใน brand book) ปุ่ม และป้าย · ดำเป็นตัวหนังสือ
+   การเคลื่อนไหวเบาๆ อย่างเดียว · เนื้อหาค่อยขึ้นตอนเลื่อนถึง เสื้อค่อยยืนขึ้นตอนเปิดหน้า ชี้เสื้อแล้วเห็นด้านหลัง
+   ไม่มีฉากผูกกับการเลื่อน (ข้อ C ที่ตกลงกัน)
+   ============================================================ */
+
+:root { --hm-cream: #FFF6EE; --hm-ease: cubic-bezier(.2,.7,.2,1); }
+
+/* ---------- หัวข้อส่วน (กลางหน้า) ---------- */
+.hm-sec { padding-block: 72px; }
+@media (min-width: 768px) { .hm-sec { padding-block: 104px; } }
+.hm-head { text-align: center; max-width: 760px; margin: 0 auto 44px; }
+/* ป้ายอังกฤษตัวเล็กเหนือหัวข้อ ยืดระยะได้เพราะเป็นอังกฤษล้วน (ไทยห้ามยืด) */
+.hm-eyebrow { font-size: 14px; font-weight: 700; letter-spacing: .14em; color: var(--color-ink-2); margin-bottom: 10px; }
+.hm-eyebrow::before { content: ''; display: inline-block; width: 18px; height: 3px; border-radius: 3px; background: var(--color-orange); vertical-align: middle; margin: -2px 10px 0 0; }
+.hm-eyebrow--dark { color: rgba(255,255,255,.72); }
+.hm-head h2, .hm-fabric h2, .hm-end h2 { font-size: clamp(30px, 3.7vw, 46px); line-height: 1.22; font-weight: 700; }
+.hm-head > p:last-child { font-size: 18px; line-height: 1.75; color: var(--color-ink-2); margin-top: 14px; }
+/* หัวข้อชิดซ้าย ใช้สลับกับแบบกลางหน้า ไม่ให้ทุกส่วนหน้าตาเหมือนกันหมด */
+.hm-head--left { text-align: left; max-width: none; }
+.wrap.hm-head--left { max-width: 1240px; }
+.hm-head--left > * { max-width: 760px; }
+.hm-faq-h { font-size: clamp(30px, 3.7vw, 46px); line-height: 1.22; font-weight: 700; }
+
+/* ---------- เนื้อหาค่อยขึ้น · JS ใส่ html.rv เมื่อพร้อม ไม่มี JS หรือขอลดการเคลื่อนไหว = เห็นครบทันที ---------- */
+html.rv [data-rv] { opacity: 0; translate: 0 18px; transition: opacity .6s ease-out, translate .7s var(--hm-ease); transition-delay: calc(min(var(--d, 0), 6) * 70ms); }
+html.rv [data-rv].in { opacity: 1; translate: 0 0; }
+
+/* ============================================================
+   HERO แบบทีม
+   ============================================================ */
+.th { position: relative; overflow: hidden; background: var(--color-paper); padding-top: 64px; isolation: isolate; }
+@media (min-width: 1024px) { .th { padding-top: 76px; } }
+.th-arc { position: absolute; left: 0; right: 0; top: 56px; width: 100%; height: calc(100% - 56px); z-index: -1; }
+.th-arc path { fill: var(--hm-cream); }
+.th-head { text-align: center; animation: th-up .8s var(--hm-ease) both; }
+.th-kicker { font-size: 17px; font-weight: 600; color: var(--color-ink-2); }
+.th-h1 { font-size: clamp(38px, 5.4vw, 72px); line-height: 1.16; font-weight: 800; letter-spacing: -.01em; margin-top: 10px; }
+/* เส้นโค้งส้มใต้คำ แทนการทำตัวหนังสือส้ม (ส้มบนขาว 2.8:1 ไม่ผ่าน) · ขีดเข้ามาหลังหัวข้อขึ้น */
+.th-mark { position: relative; display: inline-block; white-space: nowrap; }
+.th-mark svg { position: absolute; left: -2%; width: 104%; bottom: -.12em; height: .3em; overflow: visible; }
+.th-mark path { fill: none; stroke: var(--color-orange); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; animation: th-draw .9s .45s var(--hm-ease) forwards; }
+.th-lead { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.75; color: var(--color-ink-2); max-width: 46ch; margin: 22px auto 0; }
+
+/* แถวเสื้อ 5 ตัว ยืนเหลื่อมกันเหมือนคนในทีม ตัวกลางใหญ่สุด · ชายเสื้อจางลงไปเป็นพื้นให้ปุ่มวางทับได้ */
+.th-stage { position: relative; margin-top: 30px; }
+.th-line { display: flex; justify-content: center; align-items: flex-end; max-width: 1240px; margin: 0 auto; padding: 0 20px;
+  -webkit-mask-image: linear-gradient(#000 64%, transparent 97%); mask-image: linear-gradient(#000 64%, transparent 97%); }
+.th-shirt { --s: .86; --y: 34px; --z: 1; position: relative; flex: 0 0 23%; margin-inline: -1.4%; z-index: var(--z);
+  animation: th-stand .9s calc(.15s + var(--i) * 80ms) var(--hm-ease) both; }
+.th-shirt:nth-child(2), .th-shirt:nth-child(4) { --s: .94; --y: 14px; --z: 2; }
+.th-shirt.is-lead { --s: 1.04; --y: 0px; --z: 3; }
+.th-shirt img { display: block; width: 100%; height: auto; translate: 0 var(--y); scale: var(--s); transform-origin: 50% 100%;
+  filter: drop-shadow(0 22px 26px rgba(60,30,0,.14)); transition: opacity .35s ease-out, scale .45s var(--hm-ease); }
+/* แสดงด้านหน้าอย่างเดียว (อาร์ตสั่ง 20 ต.ค. 2026) · ชี้แล้วยกขึ้นนิดเดียวพอ */
+@media (hover: hover) and (pointer: fine) {
+  .th-shirt:hover { --z: 4; }
+  .th-shirt:hover img { scale: calc(var(--s) * 1.03); }
+}
+
+.th-foot { position: relative; z-index: 5; margin-top: -86px; padding-bottom: 56px; text-align: center; animation: th-up .8s .55s var(--hm-ease) both; }
+.th-checks { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; margin-top: 22px; font-size: 16px; font-weight: 600; color: var(--color-ink-2); }
+.th-checks li { display: inline-flex; align-items: center; gap: 8px; }
+.th-checks li::before { content: ''; width: 18px; height: 18px; flex: none; border-radius: 50%; background: var(--color-orange)
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat; }
+.th-note { font-size: 14px; color: var(--color-ink-3); margin-top: 14px; }
+
+/* ปุ่มสลับต้นแบบบนพื้นสว่าง */
+.hero-switch--light { background: rgba(255,255,255,.92); border-color: var(--color-line-2); top: auto; bottom: 16px; right: max(16px, calc((100vw - 1240px) / 2 + 40px)); }
+.hero-switch--light .hero-switch__label { color: var(--color-ink-3); }
+.hero-switch--light button { color: var(--color-ink); }
+.hero-switch--light button[aria-pressed="true"] { background: var(--color-ink); color: var(--color-paper); }
+
+/* มือถือ · เหลือเสื้อ 3 ตัวแต่ตัวใหญ่ขึ้น ปุ่มสองปุ่มอยู่แถวเดียวกัน ปุ่มสลับต้นแบบอยู่ใต้หมายเหตุ ไม่ลอยทับ */
+@media (max-width: 767px) {
+  .th { padding-top: 36px; }
+  .th-line { padding: 0; }
+  .th-shirt { flex-basis: 44%; margin-inline: -7%; }
+  .th-shirt:first-child, .th-shirt:last-child { display: none; }
+  .th-foot { margin-top: -58px; padding-bottom: 28px; }
+  .th-foot .flex { flex-wrap: nowrap; gap: 10px; }
+  .th-foot .btn-lg { min-height: 3.25rem; padding-inline: 20px; font-size: 17px; }
+  .th-checks { gap: 6px 16px; font-size: 15px; }
+}
+/* จอเล็กกว่า 1280 ปุ่มสลับต้นแบบลงมาอยู่ใต้หมายเหตุ ไม่ลอยทับข้อความ */
+@media (max-width: 1279px) { .hero-switch--light { position: static; display: flex; width: max-content; margin: 0 auto 24px; } }
+
+@keyframes th-up { from { opacity: 0; translate: 0 16px; } }
+@keyframes th-stand { from { opacity: 0; translate: 0 44px; } }
+@keyframes th-draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .th-mark path { stroke-dashoffset: 0; } }
+
+/* ============================================================
+   ตัวเลข 4 ช่อง
+   ============================================================ */
+.hm-stats { padding-top: 48px; }
+.hm-stat { display: flex; flex-direction: column-reverse; align-items: center; text-align: center; padding: 18px 12px; }
+.hm-stat + .hm-stat { border-left: 1px solid var(--color-line); }
+@media (max-width: 1023px) { .hm-stat:nth-child(3) { border-left: 0; } .hm-stat:nth-child(n+3) { border-top: 1px solid var(--color-line); } }
+.hm-stat dd { font-size: clamp(32px, 3.6vw, 46px); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.hm-stat dd.is-pending::after { content: '*'; color: var(--color-ink-3); font-weight: 600; font-size: .6em; vertical-align: super; margin-left: 2px; }
+.hm-stat dt { font-size: 16px; color: var(--color-ink-2); margin-top: 4px; }
+.hm-pending-note { text-align: center; font-size: 14px; color: var(--color-ink-3); margin-top: 12px; }
+
+/* ============================================================
+   กลุ่มงาน · แผงสูงเต็มจอ แผงที่เลือกขยาย
+   ขยายด้วย flex-grow (5 ชิ้น ไม่หนักพอให้กระตุก) · ตัวหนังสือในแผงแคบซ่อนแค่คำอธิบาย ชื่อกลุ่มอ่านได้ตลอด
+   ============================================================ */
+/* อยู่ในกรอบ 1240 เท่าเนื้อหาส่วนอื่น */
+.hm-panels { display: flex; gap: 12px; height: clamp(460px, 40vw, 560px); max-width: 1240px; margin-inline: auto; padding-inline: 20px; }
+@media (min-width: 768px) { .hm-panels { padding-inline: 40px; } }
+.hm-panel { flex: 1 1 0; min-width: 0; transition: flex-grow .6s var(--hm-ease); }
+.hm-panel.is-on { flex-grow: 2.2; }
+.hm-panel a { position: relative; display: block; height: 100%; border-radius: 22px; overflow: hidden; background: var(--color-ink); color: var(--color-paper); isolation: isolate; }
+/* รูปทีมจริงชุดนี้มีขาวจางกับลายน้ำติดมาด้านบน ~20% · ขยายรูปให้สูงเกินแผงแล้วชิดล่าง ตัดส่วนนั้นทิ้ง */
+.hm-panel img { position: absolute; inset: auto 0 0 0; width: 100%; height: 128%; object-fit: cover; object-position: 50% 100%; transform-origin: 50% 100%; z-index: -2; transition: scale .9s var(--hm-ease), filter .6s; filter: saturate(.85) brightness(.9); }
+.hm-panel.is-on img { scale: 1.04; filter: none; }
+/* ม่านดำด้านล่าง ให้อ่านตัวหนังสือบนรูปได้ */
+.hm-panel a::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(transparent 35%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.88)); }
+.hm-panel__body { position: absolute; inset: auto 0 0; display: flex; flex-direction: column; padding: clamp(16px, 1.6vw, 30px); }
+.hm-panel__tag { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: rgba(255,255,255,.8); white-space: nowrap; }
+.hm-panel__tag b { color: var(--color-orange); font-size: 15px; letter-spacing: .04em; }
+.hm-panel__name { font-size: clamp(17px, 1.3vw, 26px); font-weight: 700; line-height: 1.3; margin-top: 6px; }
+.hm-panel.is-on .hm-panel__name { font-size: clamp(24px, 2.1vw, 36px); }
+.hm-panel__more { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .5s var(--hm-ease), opacity .35s ease-out; }
+.hm-panel__inner { display: flex; flex-direction: column; align-items: flex-start; min-height: 0; overflow: hidden; }
+.hm-panel.is-on .hm-panel__more { grid-template-rows: 1fr; opacity: 1; transition-delay: .12s; }
+.hm-panel__short { display: block; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.85); margin-top: 8px; }
+.hm-panel__go { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; min-height: 44px; padding: 0 18px;
+  border-radius: 999px; background: var(--color-paper); color: var(--color-ink); font-size: 16px; font-weight: 700; transition: background-color .18s; }
+.hm-panel a:hover .hm-panel__go, .hm-panel a:focus-visible .hm-panel__go { background: var(--color-orange); }
+.hm-panel a:focus-visible { outline-offset: 3px; }
+
+/* แท็บเล็ตลงมา · เลื่อนซ้ายขวาเป็นการ์ด ทุกใบเปิดคำอธิบาย ไม่ต้องขยาย */
+@media (max-width: 1023px) {
+  .hm-panels { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; padding-inline: 20px; scrollbar-width: none; }
+  .hm-panels::-webkit-scrollbar { display: none; }
+  .hm-panel, .hm-panel.is-on { flex: 0 0 min(76vw, 340px); scroll-snap-align: start; }
+  .hm-panel a { aspect-ratio: 3 / 4; height: auto; }
+  .hm-panel .hm-panel__more { grid-template-rows: 1fr; opacity: 1; }
+  .hm-panel .hm-panel__name, .hm-panel.is-on .hm-panel__name { font-size: 22px; }
+  .hm-panel img, .hm-panel.is-on img { scale: 1; filter: none; }
+}
+
+/* ============================================================
+   ตัวช่วยเลือก
+   ============================================================ */
+.hm-pick { max-width: 1240px; margin-inline: auto; background: var(--color-shell); border: 1px solid var(--color-line); border-radius: 24px; padding: 48px 20px; }
+@media (min-width: 768px) { .hm-pick { padding: 64px 48px; } }
+.hm-pick .hm-head { margin-bottom: 32px; }
+.hm-pick__form { max-width: 1000px; margin: 0 auto; }
+.hm-pick__step + .hm-pick__step { margin-top: 26px; }
+.hm-pick__step legend { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+.hm-pick__step legend span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--color-ink); color: var(--color-paper); font-size: 14px; }
+.hm-pick__uses { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+@media (max-width: 1023px) { .hm-pick__uses { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 479px) { .hm-pick__uses { grid-template-columns: 1fr; } }
+.hm-opt { position: relative; display: flex; flex-direction: column; gap: 2px; min-height: 84px; padding: 14px 16px; border-radius: 14px; cursor: pointer;
+  background: var(--color-paper); border: 2px solid var(--color-line); transition: border-color .15s, box-shadow .15s; }
+.hm-opt:hover { border-color: var(--color-ink-3); }
+.hm-opt:has(:checked) { border-color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-ink); }
+.hm-opt:has(:checked)::after { content: ''; position: absolute; top: 12px; right: 12px; width: 10px; height: 10px; border-radius: 50%; background: var(--color-orange); }
+.hm-opt:has(:focus-visible) { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+.hm-opt__name { font-size: 16px; font-weight: 700; line-height: 1.35; padding-right: 14px; }
+.hm-opt__sub { font-size: 14px; line-height: 1.5; color: var(--color-ink-3); }
+.hm-pick__bands { display: flex; flex-wrap: wrap; gap: 10px; }
+.hm-pick__bands .choice:has(:focus-visible) { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+
+.hm-pick__result { margin-top: 28px; padding: 22px 24px; border-radius: 16px; background: var(--color-paper); border: 1px solid var(--color-line); border-left: 5px solid var(--color-orange); }
+.hm-pick__label { font-size: 14px; font-weight: 700; color: var(--color-ink-3); }
+.hm-pick__main { font-size: 24px; font-weight: 800; line-height: 1.3; margin-top: 2px; }
+.hm-pick__why { font-size: 16px; line-height: 1.7; color: var(--color-ink-2); margin-top: 6px; }
+.hm-pick__alts { font-size: 16px; margin-top: 10px; color: var(--color-ink-2); }
+.hm-pick__alts a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 4px; margin-left: 10px; }
+.hm-pick__alts a:hover { text-decoration-color: var(--color-ink); }
+.hm-pick__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+.hm-pick__fine { text-align: center; font-size: 14px; color: var(--color-ink-3); margin-top: 12px; }
+
+/* ============================================================
+   รูปทีมลูกค้าวงกลม · แถวล่างจางลง
+   ============================================================ */
+.hm-faces { display: grid; grid-template-columns: repeat(10, 1fr); gap: 14px;
+  -webkit-mask-image: linear-gradient(#000 62%, transparent 98%); mask-image: linear-gradient(#000 62%, transparent 98%); }
+.hm-faces li { aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--color-shell); box-shadow: 0 0 0 3px var(--color-paper), 0 6px 16px -8px rgba(0,0,0,.35); }
+.hm-faces img { width: 100%; height: 100%; object-fit: cover; transition: scale .4s var(--hm-ease); }
+.hm-faces li:hover img { scale: 1.08; }
+@media (max-width: 1023px) { .hm-faces { grid-template-columns: repeat(6, 1fr); } .hm-faces li:nth-child(n+25) { display: none; } }
+@media (max-width: 639px) { .hm-faces { grid-template-columns: repeat(5, 1fr); gap: 10px; } .hm-faces li:nth-child(n+21) { display: none; } }
+.hm-faces__more { margin-top: 8px; }
+
+/* แบบเสื้อที่คัดมา ยกขึ้นเล็กน้อยตอนชี้ บอกว่ากดขยายได้ */
+.hm-design { cursor: zoom-in; transition: border-color .18s, box-shadow .25s; }
+.hm-design:hover { border-color: var(--color-ink-3); box-shadow: 0 14px 30px -18px rgba(0,0,0,.4); }
+
+/* ============================================================
+   3 ขั้น
+   ============================================================ */
+.hm-steps-wrap { border-top: 1px solid var(--color-line); }
+.hm-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+@media (max-width: 899px) { .hm-steps { grid-template-columns: 1fr; max-width: 560px; } }
+.hm-steps img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 18px; background: var(--color-shell); }
+.hm-steps__no { display: flex; align-items: baseline; gap: 12px; margin-top: 20px; font-size: 34px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.hm-steps__no span { font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--color-ink-3); }
+.hm-steps h3 { font-size: 22px; margin-top: 10px; }
+.hm-steps h3 + p { font-size: 17px; line-height: 1.75; color: var(--color-ink-2); margin-top: 6px; }
+
+/* ============================================================
+   แถบผ้า · พื้นผ้าดำ การ์ดเลื่อนซ้ายขวา
+   ============================================================ */
+.hm-fabric { padding-block: 80px 88px; }
+@media (min-width: 768px) { .hm-fabric { padding-block: 104px 112px; } }
+.hm-fabric__top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 32px; }
+.hm-fabric__top > div:first-child { max-width: 720px; }
+.hm-fabric__top p:last-child { font-size: 18px; line-height: 1.75; color: rgba(255,255,255,.75); margin-top: 12px; }
+.hm-fabric__nav { display: flex; align-items: center; gap: 10px; }
+.hm-arrow { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.4); color: var(--color-paper); transition: background-color .18s, color .18s, border-color .18s; }
+.hm-arrow:hover { background: var(--color-paper); color: var(--color-ink); border-color: var(--color-paper); }
+.hm-arrow:disabled { opacity: .35; pointer-events: none; }
+.hm-fabrics { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-top: 40px;
+  max-width: 1240px; margin-inline: auto; padding-inline: 20px; scroll-padding-inline: 20px; }
+/* การ์ดใบสุดท้ายจางที่ขอบกรอบ แทนการถูกตัดขาดกลางใบ · บอกว่าเลื่อนดูต่อได้ */
+@media (min-width: 768px) { .hm-fabrics { padding-inline: 40px; scroll-padding-inline: 40px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 96px), transparent); mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 96px), transparent); } }
+.hm-fabrics::-webkit-scrollbar { display: none; }
+.hm-fabrics:focus-visible { outline-offset: -3px; }
+.hm-fab { flex: 0 0 min(76vw, 300px); scroll-snap-align: start; border-radius: 18px; overflow: hidden; background: var(--color-paper); color: var(--color-ink); }
+.hm-fab__img { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--color-shell); }
+/* รูปผ้าตอนนี้เป็นภาพโปรโมตจากเว็บเดิม (700×700) มีชื่อผ้า ไอคอน และ "เพิ่ม xx บาท/ตัว" อยู่ครึ่งล่าง
+   ตัดให้เห็นแค่เนื้อผ้าช่วง 16–57% ของภาพ · ราคาบวกเพิ่มยังไม่ยืนยัน ห้ามโผล่ · ได้รูป macro จริงแล้วเอาส่วนนี้ออก */
+.hm-fab__img img { position: absolute; left: -32.5%; top: 0; width: 165%; max-width: none; height: auto; translate: 0 -16%; transition: scale .6s var(--hm-ease); }
+.hm-fab:hover .hm-fab__img img { scale: 1.06; }
+.hm-fab__body { padding: 18px 20px 22px; }
+.hm-fab__no { font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--color-ink-3); }
+.hm-fab h3 { font-size: 21px; margin-top: 4px; }
+.hm-fab__use { font-size: 15px; line-height: 1.6; color: var(--color-ink-2); margin-top: 8px; }
+.hm-fab__use span { display: block; font-size: 13px; font-weight: 700; color: var(--color-ink); }
+
+/* ============================================================
+   ปิดท้าย
+   ============================================================ */
+.hm-end { position: relative; overflow: hidden; padding-block: 96px 104px; isolation: isolate; }
+.hm-end__arc { position: absolute; inset: auto 0 0; width: 100%; height: 60%; z-index: -1; }
+.hm-end__arc path { fill: var(--hm-cream); }
+.hm-end h2 { font-size: clamp(34px, 4.6vw, 58px); font-weight: 800; line-height: 1.2; }
+.hm-end h2 + p { font-size: 18px; line-height: 1.75; color: var(--color-ink-2); max-width: 46ch; margin: 18px auto 30px; }
+.hm-end__alt { font-size: 16px; color: var(--color-ink-2); margin-top: 8px; }
+.hm-end__fine { font-size: 14px; color: var(--color-ink-3); margin-top: 12px; }
+.hm-end .hm-eyebrow { margin-bottom: 14px; }
+.hm-end__alt a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 4px; font-weight: 700; color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.hm-end__alt a:hover { text-decoration-color: var(--color-ink); }
+
+/* จอแคบมาก (320px = คอมซูม 400%) · ปุ่มคู่ใน hero เรียงลงได้ ตัวหนังสือในปุ่มขึ้นบรรทัดได้ ไม่ถูกตัดหาย */
+@media (max-width: 379px) {
+  .th-foot .flex { flex-wrap: wrap; }
+  .th .btn, .hm-sec .btn, .hm-end .btn { white-space: normal; text-align: center; max-width: 100%; }
+}

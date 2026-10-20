@@ -17,7 +17,7 @@ export function initPrintStory(smoothScroll) {
 
   function update() {
     queued = false
-    if (!enabled || document.documentElement.dataset.heroMode === 'classic') return
+    if (!enabled || document.documentElement.dataset.heroMode !== 'scroll') return
     const p = clamp((scrollY - start) / distance)
     if (p === previous) return
     previous = p

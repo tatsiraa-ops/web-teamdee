@@ -1,6 +1,6 @@
 import './page.js'
 import pricing from '../data/pricing.json'
-import { estimate } from './estimate.js'
+import { estimate, readPrefill } from './estimate.js'
 import { baht } from './lib.js'
 
 /* เครื่องประมาณราคา 3 ขั้น (Wireframe v2 /calculations/)
@@ -34,6 +34,13 @@ if (form) {
     const opt = options.map((id) => pricing.options.find((o) => o.id === id).name)
     const from = ['/calculations/', k.name, `${r.band.label} ตัว`, ...opt].join(' · ')
     quote.href = `${base}?from=${encodeURIComponent(from)}`
+  }
+
+  /* มาจากตัวช่วยเลือกหน้าแรก ติ๊กประเภทกับจำนวนให้ก่อน */
+  const pre = readPrefill(pricing, location.search)
+  for (const [name, v] of Object.entries(pre)) {
+    const el = v && form.querySelector(`input[name="${name}"][value="${CSS.escape(v)}"]`)
+    if (el) el.checked = true
   }
 
   form.addEventListener('change', render)

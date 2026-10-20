@@ -28,3 +28,14 @@ export const estimate = (data, { kind, band, options = [] }) => {
     vatIncluded: !!data.vatIncluded,
   }
 }
+
+/* ค่าที่ส่งมากับลิงก์ (?kind=&band=) จากตัวช่วยเลือกหน้าแรก · ค่าไหนไม่มีในตารางให้เป็น null */
+export const readPrefill = (data, search) => {
+  const q = new URLSearchParams(search)
+  const kind = q.get('kind')
+  const band = q.get('band')
+  return {
+    kind: data.kinds.some((k) => k.id === kind) ? kind : null,
+    band: data.bands.some((b) => b.id === band) ? band : null,
+  }
+}

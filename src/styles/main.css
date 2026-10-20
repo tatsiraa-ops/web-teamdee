@@ -538,6 +538,8 @@
     padding:16px 20px; border-radius:12px; font-size:17px; font-weight:600; box-shadow:0 12px 30px -10px rgba(0,0,0,.5); }
 
   .wrap { @apply mx-auto w-full max-w-[1240px] px-5 md:px-10; }
+  /* ไม่ขยายเต็มจอ · ทุกส่วนอยู่ในกรอบ 1240 (อาร์ตตัดสิน 20 ต.ค. 2026 "ทั้งหมดเราจะไม่เน้นเต็มจอแบบนี้")
+     พื้นหลังเต็มจอได้ (โค้งครีม แถบผ้าดำ footer) แต่เนื้อหาไม่ออกนอกกรอบ */
   .section { @apply py-16 md:py-24; }
 }
 
@@ -619,8 +621,12 @@ html.lb-on .mobilebar { display: none; }
 @media (max-width: 639px) { .hero-arrow { display: none; } }
 
 /* สลับ hero 2 แบบ · ตั้ง data-hero-mode ที่ <html> ตั้งแต่ใน <head> (ตรรกะเดียวกับ src/js/hero-mode.js) */
-html[data-hero-mode="classic"] [data-hero-scroll] { display: none; }
+/* ไม่มี data-hero-mode (สคริปต์ใน head ไม่ทำงาน เช่นปิด JS) = แบบทีม · ไม่งั้น hero หายทั้งหมด (ตรวจ 20 ต.ค. 2026) */
+html:not([data-hero-mode="scroll"]) [data-hero-scroll] { display: none; }
 html:not([data-hero-mode="classic"]) section[data-hero] { display: none; }
+html[data-hero-mode]:not([data-hero-mode="team"]) [data-hero-team] { display: none; }
+/* ปุ่มสลับต้นแบบ ไว้เทียบภายในตอน dev หรือเปิดด้วย ?proto · เว็บที่ build แล้วลูกค้าไม่เห็น */
+html:not(.is-proto) .hero-switch { display: none !important; }
 .hero-wrap { position: relative; }
 .hero-switch { position: absolute; top: 14px; right: 16px; z-index: 30; display: inline-flex; align-items: center; gap: 4px;
   padding: 4px; border-radius: 999px; background: rgba(11,11,11,.82); border: 1px solid rgba(255,255,255,.25); }
