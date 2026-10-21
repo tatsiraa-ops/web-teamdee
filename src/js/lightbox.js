@@ -35,7 +35,7 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
     <button type="button" class="lb__btn lb__close" aria-label="ปิด">${svg(ICON.close)}</button>
     <div class="lb__bar">
       <a class="btn btn-orange btn-sm lb__save" download>เซฟรูป</a>
-      <a class="btn btn-sm bg-paper text-ink border-paper lb__line" target="_blank" rel="noopener">ส่งคุยใน LINE</a>
+      <a class="btn btn-sm bg-paper text-ink border-paper lb__line" data-track="line" target="_blank" rel="noopener">ส่งคุยใน LINE</a>
       <p class="lb__hint">มือถือกดค้างที่รูปเพื่อบันทึก · คอมคลิกขวา</p>
     </div>
     <button type="button" class="lb__btn lb__prev" aria-label="รูปก่อนหน้า">${svg(ICON.prev)}</button>

@@ -43,6 +43,12 @@ if (form) {
     if (el) el.checked = true
   }
 
-  form.addEventListener('change', render)
+  /* สัญญาณวัดผล "ใช้เครื่องคำนวณราคาจนเห็นผล" · ยิงหลังผู้ใช้เปลี่ยนตัวเลือกเอง ไม่นับตอนเปิดหน้า (track.js) */
+  form.addEventListener('change', () => {
+    render()
+    const kind = form.querySelector('input[name="kind"]:checked')?.value
+    const band = form.querySelector('input[name="band"]:checked')?.value
+    document.dispatchEvent(new CustomEvent('td:calc', { detail: { td_kind: kind, td_band: band } }))
+  })
   render()
 }

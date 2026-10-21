@@ -8,3 +8,7 @@ dist
 
 # WordPress ในเครื่อง (wp-playground) · ข้อมูลทดสอบ ไม่เอาเข้า git · ธีมจริงอยู่ที่ wp-theme/
 wordpress-local/
+
+# ผลลัพธ์ build สำหรับธีม WordPress (สร้างใหม่ด้วย npm run export:wp)
+dist-wp/
+wp-theme/teamdee/build/
