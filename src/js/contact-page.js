@@ -41,6 +41,9 @@ if (form) {
     }
   }
   $('cFrom').value = from || 'เข้าหน้าติดต่อโดยตรง'
+  /* มาจากหน้าสินค้า (?p=) เลือกสินค้าในฟอร์มให้ก่อน · หน้ารวมเสื้อแบบพิเศษไม่มีในรายการ ปล่อยเป็นให้ช่วยเลือก */
+  const pick = $('cProduct')
+  if (pick && fromProduct && [...pick.options].some((o) => o.value === fromProduct)) pick.value = fromProduct
 
   $('cDate').min = new Date().toISOString().slice(0, 10)
 

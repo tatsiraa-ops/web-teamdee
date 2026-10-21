@@ -331,3 +331,11 @@ Supabase · hosting · deploy · redirect บน host — ตามกติก�
 - เครื่องมือ: `@wp-playground/cli@3.1.60` (ของทีม WordPress · wp-now เลิกพัฒนาแล้ว) · ฐานข้อมูล SQLite · WordPress 7.1.3
 - ไฟล์ WordPress + ฐานข้อมูล อยู่ `wordpress-local/` (ไม่เข้า git) · ธีมอยู่ `wp-theme/teamdee/` (เข้า git) · ตั้งค่าเริ่มต้นใน `wp-theme/blueprint.json`
 - ยังไม่ได้เช็ก PHP ของ hosting จริง ต้องตั้งให้ตรงกันตอนได้ admin
+**ฐานธีม (ทำแล้ว 20 ต.ค.) · แบบ ก. = Vite เป็นต้นฉบับ export ลงธีม**
+- `npm run export:wp` → build ด้วย TD_TARGET=wp แล้วเขียน `wp-theme/teamdee/build/` (CSS JS รูป + head/body ของ 38 หน้า + pages.json) · build/ ไม่เข้า git สร้างใหม่ก่อนส่งขึ้นเว็บ
+- path รูปและไฟล์ถูกเปลี่ยนเป็น `/wp-content/themes/teamdee/build/...` (ถ้าเว็บจริงติดตั้ง WordPress ใน sub-folder ต้องตั้ง TD_THEME_URL)
+- WordPress: หน้าแรก / หน้า (Page) ที่ slug ตรงกับต้นแบบ / URL ที่ยังไม่มีหน้า → แสดง HTML จากต้นแบบ · โพสต์ใช้ index.php พร้อมแถบเมนูกับ footer ชุดเดียวกัน (ตัดจากหน้า /blog/)
+- title / description / noindex ใช้ค่าจากต้นแบบเมื่อไม่มีปลั๊กอิน SEO · มี Yoast / Rank Math / AIOSEO / SEOPress ให้ปลั๊กอินจัดการ และตัดแท็ก og: / twitter: ของต้นแบบออก
+- เครื่องมือ > หน้าจากต้นแบบ: สร้างหน้า (Page) ที่ยังไม่มี ไม่แก้และไม่ลบหน้าเดิม (ในเครื่องสร้างแล้ว 29 หน้า)
+- GTM: ลักษณะ > ปรับแต่ง > TEAMDEE ใส่ GTM ID · สัญญาณที่ส่ง td_line_click / td_phone_click / td_form_submit / td_calc_result (src/js/track.js มีเทส)
+- ลิงก์ไลน์ติด data-track="line" ไว้แล้ว ใส่ลิงก์จริงใน site.json เมื่อได้ แล้ว export ใหม่

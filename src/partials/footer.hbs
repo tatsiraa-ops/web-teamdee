@@ -41,7 +41,7 @@
       <div aria-labelledby="f-contact">
         <h2 id="f-contact" class="text-[15px] font-bold text-paper/60">ติดต่อเรา</h2>
         <ul class="mt-4 space-y-0.5">
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{site.lineUrl}}">ทักไลน์</a></li>
+          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{site.lineUrl}}" data-track="line">ทักไลน์</a></li>
           <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a></li>
           <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'contact'}}">กรอกฟอร์ม</a></li>
         </ul>
@@ -64,7 +64,7 @@
 </footer>
 
 <nav class="mobilebar fixed inset-x-0 bottom-0 z-[80] grid grid-cols-3 gap-px bg-ink border-t-2 border-ink lg:hidden" aria-label="ช่องทางติดต่อด่วน">
-  <a class="bg-orange text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{site.lineUrl}}">
+  <a class="bg-orange text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{site.lineUrl}}" data-track="line">
     <span class="block size-5" aria-hidden="true">{{> icoChat}}</span><span class="text-[16px]">ทักไลน์</span>
   </a>
   <a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="tel:{{site.phonePrimaryTel}}">

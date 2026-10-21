@@ -1,14 +1,14 @@
-{{!-- hero แบบทีม · ค่าเริ่มต้นของหน้าแรก ตามแบบ Figma "Present 2026" ที่อาร์ตเลือก (20 ต.ค. 2026)
-     แบบตั้งใจให้เห็น "คนในทีมใส่เสื้อคนละแบบยืนด้วยกัน" · ยังไม่มีรูปคนใส่จริง จึงเรียงเสื้อ 3D 5 ตัวแทน (ทาง A-2)
-     ได้รูปถ่ายจริงแล้ว เปลี่ยนแค่รูปใน teamLineup (vite.config.js) โครงหน้าไม่ต้องแก้
+{{!-- hero หน้าแรก · Wireframe v4 มี 2 สไลด์ แต่อาร์ตเลือกใช้แค่สไลด์ 02 สินค้าและบริการ (21 ต.ค. 2026)
+     เสื้อ 3D 5 ตัว (มีโลโก้ลูกค้า ต้องขออนุญาตก่อนขึ้นจริง) · ปุ่ม ดูแบบเสื้อ / ช่วยเลือกให้ทีมฉัน
      ตัวหนังสือส้มบนพื้นขาวได้แค่ 2.8:1 พาดหัวจึงเป็นดำ แล้วขีดเส้นโค้งส้มใต้คำแทน --}}
 <section class="th" data-hero-team aria-labelledby="th-h1">
   <svg class="th-arc" viewBox="0 0 1440 760" preserveAspectRatio="none" aria-hidden="true"><path d="M0 760V250C260 70 560 0 760 0c260 0 520 90 680 230v530z"/></svg>
 
   <div class="wrap th-head">
-    <p class="th-kicker">รับออกแบบและผลิตเสื้อทีมครบวงจร</p>
+    <p class="th-kicker">{{homeV4.hero.no}} / {{homeV4.hero.title}}</p>
     <h1 id="th-h1" class="th-h1"><span class="inline-block">เสื้อทีมที่ทุกคน</span> <span class="th-mark">ภูมิใจจะใส่<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M4 17C70 6 170 3 296 11"/></svg></span></h1>
-    <p class="th-lead">ไม่มีแบบก็เริ่มได้ ทีมดีออกแบบ ขึ้นแบบ 3D ให้ดูก่อนผลิต แล้วดูแลจนถึงวันที่ทุกคนได้ใส่จริง</p>
+    <p class="th-lead">{{homeV4.hero.sub}}</p>
+    <p class="th-pillars">{{homeV4.hero.pillars}}</p>
   </div>
 
   <div class="th-stage">
@@ -23,21 +23,19 @@
 
   <div class="wrap th-foot">
     <div class="flex flex-wrap justify-center gap-3">
-      <a class="btn btn-orange btn-lg" href="{{url 'calculations'}}">คำนวณราคา</a>
-      <a class="btn btn-line btn-lg" href="{{url 'projects'}}">ดูผลงานจริง</a>
+      <a class="btn btn-orange btn-lg" href="{{url 'designs'}}">ดูแบบเสื้อ</a>
+      <a class="btn btn-line btn-lg" href="{{url 'uses' 'index'}}">ช่วยเลือกให้ทีมฉัน</a>
     </div>
-    <ul class="th-checks">
-      <li>ขึ้นแบบ 3D ให้ดูก่อนผลิต</li>
-      <li>ไม่มีแบบก็เริ่มได้</li>
-      <li>ดูแลจนถึงวันส่งมอบ</li>
-    </ul>
+    <p class="th-have"><a href="{{url 'contact'}}?from=%2F%20%C2%B7%20%E0%B8%A1%E0%B8%B5%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B9%81%E0%B8%A5%E0%B9%89%E0%B8%A7">{{homeV4.hero.haveDesign}} &rarr;</a></p>
     <p class="th-note">ภาพจำลองแบบเสื้อที่ทีมดีออกแบบ</p>
   </div>
 
+  {{#unless wp}}
   <div class="hero-switch hero-switch--light" role="group" aria-label="ต้นแบบ · เลือกแบบ hero ที่จะดู">
     <span class="hero-switch__label">ต้นแบบ</span>
     <button type="button" data-hero-set="team">แบบทีม</button>
     <button type="button" data-hero-set="scroll">แบบเลื่อน</button>
     <button type="button" data-hero-set="classic">แบบเดิม</button>
   </div>
+  {{/unless}}
 </section>

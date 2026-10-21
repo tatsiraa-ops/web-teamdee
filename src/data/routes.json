@@ -2,16 +2,18 @@
   "_note": "URL ทุกหน้าอยู่ที่นี่ที่เดียว ตาม Wireframe v2 · lock = URL เดิมบนเว็บจริง ห้ามเปลี่ยน · temp = ตั้งชั่วคราว รอ Rocket Rank ยืนยัน",
   "home": "/",
   "products": {
-    "print": "/sublimation/",
-    "baseball": "/baseball/",
-    "jersey": "/oversize/",
     "polo": "/embroidery/",
-    "screen": "/screen-printing/"
+    "print": "/sublimation/",
+    "screen": "/screen-printing/",
+    "special": "/special/",
+    "warmup": "/warm-up/",
+    "jersey": "/oversize/",
+    "baseball": "/baseball/"
   },
   "uses": {
     "index": "/solutions/",
     "corp": "/corporate/",
-    "gov": "/government/",
+    "gov": "/organization/",
     "edu": "/education/",
     "sport": "/sports/",
     "event": "/events/"
@@ -39,7 +41,19 @@
   "terms": "/terms/",
   "ui": "/ui/",
   "lock": [
-    "/", "/sublimation/", "/embroidery/", "/screen-printing/", "/corporate/", "/education/", "/projects/",
-    "/fabric-technology/", "/size-chart/", "/collar-styles/", "/calculations/", "/blog/", "/about/", "/contact/"
+    "/",
+    "/sublimation/",
+    "/embroidery/",
+    "/screen-printing/",
+    "/corporate/",
+    "/education/",
+    "/projects/",
+    "/fabric-technology/",
+    "/size-chart/",
+    "/collar-styles/",
+    "/calculations/",
+    "/blog/",
+    "/about/",
+    "/contact/"
   ]
 }

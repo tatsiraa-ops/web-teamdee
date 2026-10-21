@@ -62,7 +62,7 @@
       <div class="flex flex-col gap-2.5 mt-6">
         <a class="btn btn-orange w-full" id="sQuote" href="{{url 'contact'}}?from=%2Fcalculations%2F">ขอใบเสนอราคาจริง</a>
         <div class="grid grid-cols-2 gap-2.5">
-          <a class="btn btn-line" href="{{site.lineUrl}}">ทัก LINE</a>
+          <a class="btn btn-line" href="{{site.lineUrl}}" data-track="line">ทัก LINE</a>
           <a class="btn btn-line tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร</a>
         </div>
       </div>
@@ -113,7 +113,7 @@
       </div>
       {{/each}}
     </div>
-    <a class="btn btn-orange mt-8 gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทัก LINE</a>
+    <a class="btn btn-orange mt-8 gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE</a>
   </div>
 </section>
 

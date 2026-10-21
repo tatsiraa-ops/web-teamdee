@@ -4,8 +4,8 @@
   {{> head}}
   <title>โรงงานรับผลิตเสื้อทีม เสื้อพิมพ์ลาย โปโลปัก เบสบอล Jersey | TEAMDEE</title>
   <meta name="description" content="TEAMDEE รับออกแบบและผลิตเสื้อทีมครบวงจร เสื้อพิมพ์ลาย โปโลปัก เบสบอล Jersey Oversize ช่วยคิดตั้งแต่โจทย์ ขึ้นแบบ 3D ให้ดูก่อนผลิต ดูแลจนถึงวันส่งมอบ ปรึกษาฟรี">
-  <!-- เลือก hero ก่อนวาดหน้า ไม่ให้แบบที่ไม่ใช้กระพริบขึ้นมา · ตรรกะเดียวกับ src/js/hero-mode.js (มีเทส) -->
-  <script>(function(){var m=['team','scroll','classic'],v='team';try{var p=new URLSearchParams(location.search).get('hero'),s=localStorage.getItem('td-hero2');v=m.indexOf(p)>-1?p:(m.indexOf(s)>-1?s:'team')}catch(e){}document.documentElement.setAttribute('data-hero-mode',v)})()</script>
+{{#unless wp}}  <!-- เลือก hero ก่อนวาดหน้า ไม่ให้แบบที่ไม่ใช้กระพริบขึ้นมา · ตรรกะเดียวกับ src/js/hero-mode.js (มีเทส) -->
+  <script>(function(){var m=['team','scroll','classic'],v='team';try{var p=new URLSearchParams(location.search).get('hero'),s=localStorage.getItem('td-hero2');v=m.indexOf(p)>-1?p:(m.indexOf(s)>-1?s:'team')}catch(e){}document.documentElement.setAttribute('data-hero-mode',v)})()</script>{{/unless}}
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"TEAMDEE","legalName":"บริษัท ดีดี ฟินิกซ์ จำกัด","description":"โรงงานรับออกแบบและผลิตเสื้อทีมครบวงจร","telephone":"{{site.phonePrimary}}","address":{"@type":"PostalAddress","streetAddress":"{{site.address}}","addressCountry":"TH"},"url":"{{site.baseUrl}}"}</script>
 </head>
 <body>
@@ -15,6 +15,7 @@
 
   <div class="hero-wrap">
   {{> heroTeam}}
+  {{#unless wp}}
   {{> heroScroll}}
 
   <!-- 1 · HERO · ฉาก A (แบบเสื้อ → ทีมใส่จริง) สลับกับฉาก B (ผนังแบบเสื้อ) วนไปเรื่อยๆ · src/js/hero.js
@@ -90,38 +91,44 @@
 
     <script type="application/json" id="heroPairs">[{{#each heroPairs}}{"code":"{{this.code}}","img":"{{this.design.imgSmall}}","img2x":"{{this.design.img}}","photo":"{{this.photo}}","who":"{{this.who}}","confirmed":{{#if this.confirmed}}true{{else}}false{{/if}} }{{#unless @last}},{{/unless}}{{/each}}]</script>
   </section>
+  {{/unless}}
 
   </div>
   <span id="after-hero" tabindex="-1"></span>
+  {{!-- หน้าแรกตาม Wireframe v4 (21 ต.ค. 2026) · ข้อความ src/data/home.json · รูปจริง vite.config.js homeV4
+       ลำดับ: hero → สินค้า 4 หมวด → กลุ่มลูกค้า → รีวิว → โลโก้ → คลิป → รูปลูกค้า → CTA → แบบเสื้อพิมพ์ลาย → วิธีทำงาน → ผลงาน 4 แถว → CTA → FAQ → รู้จักทีมดี → บทความ/ข่าว → รับประกันและติดต่อ --}}
 
-  <!-- 2 · ตัวเลข 4 ช่อง · ทุกตัวยังเป็นค่าจากเว็บเดิม (site.json proof/todo) ติดดอกจันจนกว่าพี่ทัชยืนยัน -->
-  <section class="wrap hm-stats" aria-label="ทีมดีในตัวเลข">
-    <dl class="grid grid-cols-2 lg:grid-cols-4">
-      {{#each site.proof.items}}
-      <div class="hm-stat" data-rv style="--d:{{@index}}">
-        <dt>{{this.label}}</dt>
-        <dd class="{{#unless this.value}}is-pending{{/unless}}">{{#if this.value}}{{this.value}}{{else}}{{this.candidate}}{{/if}}</dd>
-      </div>
+  <!-- 02 · สินค้าและบริการ 4 หมวด -->
+  <section class="wrap hm-sec" aria-labelledby="cats-h">
+    <header class="hm-head hm-head--left" data-rv>
+      <p class="hm-eyebrow">{{homeV4.cats.no}}</p>
+      <h2 id="cats-h">{{homeV4.cats.title}}</h2>
+    </header>
+    <ul class="hm-cats">
+      {{#each homeV4.cats.items}}
+      <li data-rv style="--d:{{@index}}">
+        <a class="hm-cat" href="{{url 'products' this.id}}">
+          <span class="hm-cat__img">{{#if this.img}}<img src="{{this.img}}" alt="ตัวอย่าง{{this.product.name}}" width="1080" height="720" loading="lazy" decoding="async">{{else}}<span class="img-pending" role="img" aria-label="ยังไม่มีภาพ{{this.product.name}}">{{this.imgNote}}</span>{{/if}}</span>
+          <span class="hm-cat__body">
+            <span class="hm-cat__name">{{this.product.name}} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+            <span class="hm-cat__copy">{{this.copy}}</span>
+          </span>
+        </a>
+      </li>
       {{/each}}
-      <div class="hm-stat" data-rv style="--d:3">
-        <dt>ชนิดผ้าให้เลือก</dt>
-        <dd class="is-pending">{{site.fabricCount}}</dd>
-      </div>
-    </dl>
-    <p class="hm-pending-note">* ตัวเลขยกจากเว็บเดิม รอยืนยันก่อนเผยแพร่</p>
+    </ul>
   </section>
 
-  <!-- 3 · กลุ่มงาน 5 กลุ่ม · แผงสูงเต็มจอ ชี้หรือโฟกัสแผงไหน แผงนั้นขยาย (รื้อใหม่ 20 ต.ค. 2026)
-       รูปทีมลูกค้าจริง ไม่ใช่ภาพกราฟิกโปรโมต · ไม่มี JS แผงแรกเปิดค้าง ลิงก์กดได้ครบ · src/js/home-picker.js initUsePanels -->
-  <section class="hm-sec" aria-labelledby="uses-h">
+  <!-- 03 · ทีมคุณเป็นทีมแบบไหน · แผงรูปทีมจริง ชี้แล้วขยาย -->
+  <section class="hm-sec hm-sec--tight" aria-labelledby="uses-h">
     <header class="wrap hm-head hm-head--left" data-rv>
-      <p class="hm-eyebrow">IDENTITY</p>
-      <h2 id="uses-h"><span class="inline-block">เสื้อทีมที่ใช่</span> <span class="inline-block">เริ่มจากงานของทีมคุณ</span></h2>
-      <p>ใส่ทำงาน ลงสนาม หรือใส่ในวันพิเศษ โจทย์ต่างกัน ผ้า ทรง และเทคนิคที่เหมาะก็ต่างกัน</p>
+      <p class="hm-eyebrow">{{homeV4.uses.no}}</p>
+      <h2 id="uses-h">{{homeV4.uses.title}}</h2>
+      <p>{{homeV4.uses.lead}}</p>
     </header>
-    <ul class="hm-panels" data-use-panels data-rv>
+    <ul class="hm-panels hm-panels--open" data-rv>
       {{#each homeUses}}
-      <li class="hm-panel{{#if @first}} is-on{{/if}}">
+      <li class="hm-panel">
         <a href="{{url 'uses' this.id}}">
           <img src="{{this.photo}}" alt="{{this.alt}}" width="760" height="760" loading="lazy" decoding="async">
           <span class="hm-panel__body">
@@ -129,7 +136,7 @@
             <span class="hm-panel__name">{{#each this.lines}}<span class="inline-block">{{this}}</span> {{/each}}</span>
             <span class="hm-panel__more"><span class="hm-panel__inner">
               <span class="hm-panel__short">{{this.short}}</span>
-              <span class="hm-panel__go">ดูเสื้อที่เหมาะ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <span class="hm-panel__go"><span class="hm-panel__go-t">ดูเสื้อที่เหมาะ</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </span></span>
           </span>
         </a>
@@ -138,168 +145,174 @@
     </ul>
   </section>
 
-  <!-- 4 · ตัวช่วยเลือก 2 ขั้น · แบบ Figma ส่วน "ยังไม่มีไอเดีย" · แนะนำจาก uses.json ไม่มีราคา (ราคายังเป็น null)
-       ไม่มี JS ก็ยังเห็นคำแนะนำของค่าเริ่มต้น และปุ่มไปเครื่องคิดราคาได้ · src/js/home-picker.js -->
-  <section class="wrap hm-sec" aria-labelledby="pick-h">
-    <div class="hm-pick" data-rv>
-      <header class="hm-head">
-        <p class="hm-eyebrow">CO-CREATE</p>
-        <h2 id="pick-h"><span class="inline-block">ยังไม่แน่ใจว่า</span><span class="inline-block">เสื้อแบบไหนเหมาะกับทีม</span></h2>
-        <p>ตอบ 2 ข้อ ทีมดีแนะนำแบบที่ทีมลักษณะเดียวกันเลือกบ่อย แล้วคำนวณราคาต่อได้เลย</p>
+  <!-- 04 · รีวิวพร้อมรูปเจ้าของคำพูด · ยังไม่มีรีวิวจริงที่ได้รับอนุญาต จึงเป็นช่องรอข้อมูลตาม v4 ไม่แต่งรีวิวขึ้นเอง -->
+  <section class="bg-shell border-y border-line" aria-labelledby="rev-h">
+    <div class="wrap hm-sec">
+      <header class="hm-head" data-rv>
+        <p class="hm-eyebrow">{{homeV4.reviews.no}}</p>
+        <h2 id="rev-h">{{homeV4.reviews.title}}</h2>
       </header>
-      <form class="hm-pick__form" id="homePick" action="{{url 'calculations'}}" method="get">
-        <fieldset class="hm-pick__step">
-          <legend><span>1</span>ทีมของคุณคือ</legend>
-          <div class="hm-pick__uses">
-            {{#each uses}}
-            <label class="hm-opt"><input class="sr-only" type="radio" name="use" value="{{this.id}}"{{#if @first}} checked{{/if}}><span class="hm-opt__name">{{this.name}}</span><span class="hm-opt__sub">{{this.short}}</span></label>
-            {{/each}}
-          </div>
-        </fieldset>
-        <fieldset class="hm-pick__step">
-          <legend><span>2</span>จำนวนประมาณ (ตัว)</legend>
-          <div class="hm-pick__bands">
-            {{#each pricing.bands}}
-            <label class="choice"><input class="sr-only" type="radio" name="band" value="{{this.id}}"{{#if (eq this.id "21-50")}} checked{{/if}}>{{this.label}}</label>
-            {{/each}}
-          </div>
-        </fieldset>
-
-        <div class="hm-pick__result" aria-live="polite" data-pick-result>
-          {{#with uses.[0]}}
-          <p class="hm-pick__label">แนะนำ · <span data-pick-qty>สำหรับ 21–50 ตัว</span></p>
-          <p class="hm-pick__main"><span data-pick-name>{{this.recommend.[0].name}}</span></p>
-          <p class="hm-pick__why"><span data-pick-when>{{this.recommend.[0].when}}</span> · <span data-pick-why>{{this.recommend.[0].why}}</span></p>
-          <p class="hm-pick__alts" data-pick-alts>หรือดู {{#each this.recommend}}{{#unless @first}}<a href="{{url 'products' this.id}}">{{this.name}}</a>{{/unless}}{{/each}}</p>
-          {{/with}}
-        </div>
-
-        <div class="hm-pick__cta">
-          <a class="btn btn-orange btn-lg" href="{{url 'calculations'}}?kind=collar&band=21-50" data-pick-calc>คำนวณราคา 21–50 ตัว</a>
-          <a class="btn btn-line btn-lg" href="{{site.lineUrl}}">ปรึกษาทางไลน์</a>
-        </div>
-        <p class="hm-pick__fine">ราคาต่อตัวขึ้นกับผ้า จำนวน และความซับซ้อนของลาย หน้าคำนวณราคาจะถามต่ออีกนิด</p>
-      </form>
+      <ul class="hm-reviews">
+        {{#each homeV4.reviews.items}}
+        <li class="hm-review" data-rv style="--d:{{@index}}">
+          <span class="hm-review__photo"><img src="{{this.photo}}" alt="{{this.alt}}" width="760" height="760" loading="lazy" decoding="async"><span>ภาพทีมลูกค้าจริง</span></span>
+          <div class="hm-review__who"><span class="hm-review__avatar" aria-hidden="true"></span><span><b>[ชื่อลูกค้า / ทีม]</b><small>{{this.source}} · [วันที่จริง]</small></span></div>
+          <p class="hm-review__stars" aria-label="คะแนน รอข้อมูลจริง">[คะแนนจริง]</p>
+          <p class="hm-review__text">[ข้อความรีวิวจริงเกี่ยวกับ{{this.topic}}]</p>
+          <p class="hm-review__src">[ลิงก์รีวิวต้นทาง]</p>
+        </li>
+        {{/each}}
+      </ul>
+      <p class="hm-pending-note">ภาพเป็นทีมลูกค้าจริง · ข้อความรีวิว ชื่อ และคะแนน รอรีวิวจริงพร้อมการอนุญาตจากเจ้าของคำพูด</p>
     </div>
   </section>
 
-  <!-- 5 · รูปทีมลูกค้าวงกลม · แบบ Figma ส่วน "ผลงานที่เราได้ผลิตให้จริง" · แถวล่างจางลงชวนกดดูทั้งหมด
-       รูปชุดเดียวกับหน้า /projects/ ต้องขออนุญาตลูกค้าก่อนเผยแพร่ (Brief ข้อ 08) -->
-  <section class="hm-sec" aria-labelledby="real-h">
+  <!-- 04b · โลโก้ลูกค้า 2 แถว เลื่อนเอง สวนทางกัน (อาร์ตสั่ง 21 ต.ค. 2026) · ชี้หรือโฟกัสแล้วหยุด มีปุ่มหยุด
+       ลดการเคลื่อนไหว = ไม่เลื่อน เลื่อนดูเองได้ · โลโก้ยังไม่ได้รับอนุญาตจากลูกค้า (home.json logos.approved) -->
+  <section class="hm-sec hm-sec--tight hm-logowrap" aria-labelledby="logo-h">
     <header class="wrap hm-head" data-rv>
-      <p class="hm-eyebrow">PRIDE</p>
-      <h2 id="real-h">ทีมที่ใส่เสื้อทีมดีจริง</h2>
-      <p>องค์กร โรงเรียน ทีมกีฬา และงานกิจกรรม ทุกรูปเป็นวันที่ทีมได้ใส่เสื้อจริง</p>
+      <h2 id="logo-h" class="hm-h3">{{homeV4.logos.title}}</h2>
+      <p>{{homeV4.logos.lead}}</p>
     </header>
-    <ul class="wrap hm-faces" aria-label="รูปทีมลูกค้า {{homeCircles.length}} ทีม">
-      {{#each homeCircles}}
-      <li style="--d:{{@index}}"><img src="{{this.imgSmall}}" alt="ทีมลูกค้า{{this.catName}}ใส่เสื้อที่ทีมดีผลิต" width="320" height="320" loading="lazy" decoding="async"></li>
+    <div class="hm-marquee" data-marquee>
+      {{#each homeV4.logoRows}}
+      <div class="hm-marquee__row{{#if @index}} is-reverse{{/if}}">
+        <ul class="hm-marquee__track" aria-label="โลโก้ลูกค้า แถว {{inc @index}}">
+          {{#each this}}<li>{{#if this.img}}<img src="{{this.img}}" alt="โลโก้ลูกค้าทีมดี" width="200" height="200" loading="lazy" decoding="async">{{else}}<span class="img-pending">{{this.ph}}</span>{{/if}}</li>{{/each}}
+        </ul>
+        <ul class="hm-marquee__track" aria-hidden="true">
+          {{#each this}}<li>{{#if this.img}}<img src="{{this.img}}" alt="" width="200" height="200" loading="lazy" decoding="async">{{else}}<span class="img-pending">{{this.ph}}</span>{{/if}}</li>{{/each}}
+        </ul>
+      </div>
+      {{/each}}
+    </div>
+    <div class="wrap hm-marquee__ctl">
+      <button type="button" class="hm-pause" data-marquee-toggle aria-pressed="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-ico-pause><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-ico-play hidden><path d="M7 5v14l12-7z"/></svg><span data-marquee-label>หยุดแถบโลโก้</span></button>
+      {{#unless homeV4.logos.approved}}<p class="hm-pending-note">โลโก้ทั้ง {{homeV4.logoCount}} แบรนด์ยังรอลูกค้าอนุญาตก่อนขึ้นเว็บจริง</p>{{/unless}}
+    </div>
+  </section>
+
+  <!-- 04c · คลิปรีวิว · ยังไม่มีคลิป ไม่เล่นอัตโนมัติ -->
+  <section class="wrap hm-sec hm-sec--tight" aria-labelledby="vid-h">
+    <header class="hm-head hm-head--left" data-rv>
+      <h2 id="vid-h" class="hm-h3">{{homeV4.videos.title}}</h2>
+      <p>{{homeV4.videos.lead}}</p>
+    </header>
+    <ul class="hm-videos">
+      {{#each homeV4.videos.items}}
+      <li data-rv style="--d:{{@index}}">
+        <div class="hm-video" role="img" aria-label="ตำแหน่งคลิปรีวิวลูกค้า {{inc @index}} ยังไม่มีวิดีโอแนบ"><span class="hm-video__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="hm-video__ph">ตำแหน่งคลิปรีวิวลูกค้า {{inc @index}} · ยังไม่มีวิดีโอแนบ</span></div>
+        <h3>{{this}}</h3>
+        <p class="t-xs">[ชื่อทีม / บริบทงาน / ความยาวคลิปจริง]</p>
+      </li>
       {{/each}}
     </ul>
-    <div class="wrap text-center hm-faces__more">
-      <a class="btn btn-ink" href="{{url 'projects'}}">ดูผลงานทั้งหมด <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </section>
+
+  <!-- 04d · รูปลูกค้า 3 แถว · ภาพชุดเดียวกับหน้า /projects/ ต้องขออนุญาตก่อนขึ้นจริง -->
+  <section class="hm-sec hm-sec--tight" aria-labelledby="photo-h">
+    <header class="wrap hm-head hm-head--left" data-rv>
+      <h2 id="photo-h" class="hm-h3">{{homeV4.photos.title}}</h2>
+      <p>{{homeV4.photos.lead}}</p>
+    </header>
+    {{#each homeV4.photoRows}}
+    <div class="wrap hm-railbox">
+      <ul class="hm-rail hm-photos" data-rail tabindex="0" aria-label="ภาพลูกค้าแถว {{inc @index}} เลื่อนซ้ายขวาได้">
+        {{#each this}}<li><img src="{{this.imgSmall}}" alt="ทีมลูกค้า{{this.catName}}ใส่เสื้อที่ทีมดีผลิต" width="320" height="320" loading="lazy" decoding="async"><span>{{this.catName}}</span></li>{{/each}}
+      </ul>
+      <div class="hm-railnav"><button type="button" class="hm-arrow hm-arrow--ink" data-rail-prev aria-label="เลื่อนภาพแถว {{inc @index}} ไปซ้าย"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hm-arrow hm-arrow--ink" data-rail-next aria-label="เลื่อนภาพแถว {{inc @index}} ไปขวา"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+    </div>
+    {{/each}}
+  </section>
+
+  <!-- CTA 1 -->
+  <section class="wrap hm-sec hm-sec--tight" aria-labelledby="cta1-h">
+    <div class="hm-cta" data-rv>
+      <div><h2 id="cta1-h">{{homeV4.cta1.title}}</h2><p>{{homeV4.cta1.lead}}</p></div>
+      <div class="hm-cta__btns"><a class="btn btn-orange btn-lg" href="{{url 'contact'}}">ปรึกษาโจทย์กับทีมดี</a><a class="btn btn-line btn-lg" href="{{url 'designs'}}">ดูแบบเสื้อ</a></div>
     </div>
   </section>
 
-  <!-- 6 · แบบเสื้อที่คัดมา · ไม่มีใน Figma แต่เก็บไว้ เพราะเป็นลูปขายหลัก กดขยาย → เซฟรูปที่มีรหัส → ส่งคุยในไลน์ -->
+  <!-- 05 · แบบกราฟิกเสื้อพิมพ์ลาย แบ่งตามกลุ่มลูกค้า · กดขยายแล้วเซฟรูปที่มีรหัสไปคุยต่อ -->
   <section class="wrap hm-sec" aria-labelledby="designs-h">
-    <header class="hm-head hm-head--left" data-rv>
-      <h2 id="designs-h"><span class="inline-block">ชอบแบบไหน</span> <span class="inline-block">กดขยายแล้วเซฟไปคุยต่อได้</span></h2>
-      <p>ทุกแบบมีรหัสอยู่ในภาพ เซฟรูปส่งเข้าไลน์แล้วทีมขายรู้ทันทีว่าหมายถึงแบบไหน</p>
+    <header class="hm-head hm-head--left hm-head--row" data-rv>
+      <div><p class="hm-eyebrow">{{homeV4.gallery.no}}</p><h2 id="designs-h">{{homeV4.gallery.title}}</h2><p>{{homeV4.gallery.lead}}</p></div>
+      <a class="hm-more" href="{{url 'designs'}}">ดูแบบเสื้อพิมพ์ลายทั้งหมด {{homeV4.gallery.total}} แบบ &rarr;</a>
     </header>
-    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" id="pickGrid" data-line-url="{{site.lineUrl}}">
-      {{#each pickedDesigns}}
-      <figure class="overflow-hidden rounded-plate bg-paper border border-line aspect-[3/2] hm-design" data-code="{{this.code}}" data-meta="{{this.meta}}" data-rv style="--d:{{@index}}">
-        <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 33vw, 50vw"
-             width="1080" height="720" loading="lazy" decoding="async"
-             alt="แบบ{{this.garmentName}}งาน{{this.techName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง"
-             class="w-full h-full object-contain">
+    <div class="chiprail" role="group" aria-label="กรองแบบเสื้อตามกลุ่มลูกค้า" data-gallery-filter>
+      <button class="chip" type="button" aria-pressed="true" data-use="">ทั้งหมด</button>
+      {{#each homeV4.gallery.uses}}<button class="chip" type="button" aria-pressed="false" data-use="{{this.id}}">{{this.name}}</button>{{/each}}
+    </div>
+    <p class="t-xs mt-3" role="status" aria-live="polite" data-gallery-count>ทุกกลุ่มลูกค้า · 10 จาก {{homeV4.gallery.total}} แบบ</p>
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 mt-5" id="pickGrid" data-line-url="{{site.lineUrl}}">
+      {{#each homeV4.gallery.items}}
+      <figure class="overflow-hidden rounded-plate bg-paper border border-line aspect-[3/2] hm-design" data-code="{{this.code}}" data-meta="{{this.meta}}" data-uses="{{#each this.use}}{{this}} {{/each}}"{{#unless (lt @index 10)}} hidden{{/unless}}>
+        <img src="{{this.imgSmall}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 20vw, 50vw" width="1080" height="720" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}}งาน{{this.techName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง" class="w-full h-full object-contain">
       </figure>
       {{/each}}
     </div>
-    <div class="text-center mt-9" data-rv>
-      <a class="btn btn-line" href="{{url 'designs'}}">ดูแบบเสื้อทั้งหมด {{designFilters.total}} แบบ</a>
-    </div>
   </section>
 
-  <!-- 7 · 3 ขั้น · แบบ Figma ส่วน "ขั้นตอน" · ใช้รูปจริงแทนภาพ 3D · ไม่เขียนจำนวนสัปดาห์ เพราะระยะผลิตยังขัดกัน (site.json todo) -->
+  <!-- 06 · วิธีทำงาน 3 ขั้น -->
   <section class="hm-sec hm-steps-wrap" aria-labelledby="steps-h">
     <header class="wrap hm-head" data-rv>
-      <p class="hm-eyebrow">TRUST</p>
-      <h2 id="steps-h"><span class="inline-block">3 ขั้น</span> <span class="inline-block">จากโจทย์ถึงวันที่ทุกคนได้ใส่</span></h2>
-      <p>ช่วยคิด ช่วยจัดการ ช่วยจบงาน สามเรื่องที่ทีมดีทำจริงทุกงาน</p>
+      <p class="hm-eyebrow">{{homeV4.steps.no}}</p>
+      <h2 id="steps-h">{{homeV4.steps.title}}</h2>
     </header>
     <ol class="wrap hm-steps">
       <li data-rv style="--d:0">
-        <img src="/img/mockup/m01.jpg" alt="ภาพจำลองเสื้อ 3D ที่ทีมดีขึ้นแบบให้ลูกค้าดูก่อนผลิต" width="800" height="600" loading="lazy" decoding="async">
-        <p class="hm-steps__no">01 <span>BRIEF &amp; 3D MOCKUP</span></p>
-        <h3>ช่วยคิด</h3>
-        <p>ยังไม่มีแบบก็เริ่มได้ บอกว่าใครใส่ ใส่ตอนไหน ทีมออกแบบขึ้นแบบ 3D ให้ดู แล้วแก้จนพอใจ</p>
+        <img src="/img/mockup/m01.jpg" alt="ภาพจำลองเสื้อที่ทีมดีขึ้นแบบให้ลูกค้าดูก่อนผลิต" width="820" height="543" loading="lazy" decoding="async">
+        <p class="hm-steps__no">01</p><h3>{{homeV4.steps.items.[0].[0]}}</h3><p>{{homeV4.steps.items.[0].[1]}}</p>
       </li>
       <li data-rv style="--d:1">
         <img src="/img/hero/embroidery.jpg" alt="เครื่องปักกำลังปักโลโก้ทีมดีลงบนผ้า" width="1280" height="1600" loading="lazy" decoding="async">
-        <p class="hm-steps__no">02 <span>PRODUCTION</span></p>
-        <h3>ช่วยจัดการ</h3>
-        <p>รวบรวมไซซ์จากหลายคน แยกสีตามทีม เตรียมเอกสารให้ฝ่ายจัดซื้อ และนับถอยหลังจากวันที่ต้องใส่จริง</p>
+        <p class="hm-steps__no">02</p><h3>{{homeV4.steps.items.[1].[0]}}</h3><p>{{homeV4.steps.items.[1].[1]}}</p>
       </li>
       <li data-rv style="--d:2">
-        <img src="/img/real/r23.jpg" alt="ทีมพนักงานใส่เสื้อทีมที่ทีมดีผลิต ในวันงานจริง" width="760" height="608" loading="lazy" decoding="async">
-        <p class="hm-steps__no">03 <span>DELIVERY</span></p>
-        <h3>ช่วยจบงาน</h3>
-        <p>ถ่ายรูปงานจริงให้ดูก่อนแพ็ก ส่งถึงที่ และเก็บสเปกไว้ให้ รอบหน้าสั่งซ้ำแจ้งแค่จำนวนกับไซซ์</p>
+        <img src="/img/real/r23.jpg" alt="ทีมพนักงานใส่เสื้อทีมที่ทีมดีผลิต ในวันงานจริง" width="760" height="760" loading="lazy" decoding="async">
+        <p class="hm-steps__no">03</p><h3>{{homeV4.steps.items.[2].[0]}}</h3><p>{{homeV4.steps.items.[2].[1]}}</p>
       </li>
     </ol>
-    <div class="wrap text-center mt-10" data-rv>
-      <a class="btn btn-orange btn-lg" href="{{url 'contact'}}">เริ่มคุยกับทีมดี</a>
+  </section>
+
+  <!-- 07 · ผลงานแยก 4 แถว · เลื่อนเอง ไม่วิ่งอัตโนมัติ · แถวที่ยังไม่มีงานจริงเป็นช่องรอภาพตาม v4 -->
+  <section class="hm-sec" aria-labelledby="works-h">
+    <header class="wrap hm-head hm-head--left hm-head--row" data-rv>
+      <div><p class="hm-eyebrow">{{homeV4.works.no}}</p><h2 id="works-h">{{homeV4.works.title}}</h2><p>{{homeV4.works.lead}}</p></div>
+      <a class="hm-more" href="{{url 'projects'}}">ดูผลงานและรีวิวทั้งหมด &rarr;</a>
+    </header>
+    {{#each homeV4.works.rows}}
+    <div class="wrap hm-railbox hm-works">
+      <div class="hm-works__head"><h3>{{this.title}}</h3><p>{{this.lead}}</p></div>
+      <ul class="hm-rail" data-rail tabindex="0" aria-label="ผลงาน{{this.title}} เลื่อนซ้ายขวาได้">
+        {{#each this.real}}<li class="hm-work"><a href="{{url 'projects'}}#{{this.id}}"><span class="hm-work__img"><img src="{{this.img}}" alt="ทีมใส่{{this.title}}จริง" width="760" height="760" loading="lazy" decoding="async"></span><span class="hm-work__t">{{this.title}}</span><span class="hm-work__d">{{this.groupName}} · ดูรายละเอียด &rarr;</span></a></li>{{/each}}
+        {{#each this.pending}}<li class="hm-work"><span class="hm-work__img"><span class="img-pending">ตำแหน่งภาพจริง: {{this}}</span></span><span class="hm-work__t">{{this}}</span><span class="hm-work__d">รอภาพงานจริง</span></li>{{/each}}
+      </ul>
+      <div class="hm-railnav"><button type="button" class="hm-arrow hm-arrow--ink" data-rail-prev aria-label="เลื่อนผลงาน{{this.title}} ไปซ้าย"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hm-arrow hm-arrow--ink" data-rail-next aria-label="เลื่อนผลงาน{{this.title}} ไปขวา"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+    </div>
+    {{/each}}
+  </section>
+
+  <!-- CTA 2 -->
+  <section class="wrap hm-sec hm-sec--tight" aria-labelledby="cta2-h">
+    <div class="hm-cta hm-cta--ink" data-rv>
+      <div><h2 id="cta2-h">{{homeV4.cta2.title}}</h2><p>{{homeV4.cta2.lead}}</p></div>
+      <div class="hm-cta__btns"><a class="btn btn-orange btn-lg" href="{{url 'contact'}}">ส่งแบบให้ช่วยประเมินราคา &rarr;</a></div>
     </div>
   </section>
 
-  <!-- 8 · แถบผ้า พื้นผ้าดำตาม brand book · แบบ Figma ส่วน "สัมผัสเนื้อผ้า" · ไม่ใส่ไอคอนคุณสมบัติรายผ้า เพราะยังไม่มีข้อมูลรายผ้าที่ยืนยัน -->
-  <section class="tex-fabric text-paper hm-fabric" aria-labelledby="fabric-h">
-    <div class="wrap">
-      <div class="hm-fabric__top" data-rv>
-        <div>
-          <h2 id="fabric-h"><span class="inline-block">เลือกผ้าให้ตรงกับงาน</span> <span class="inline-block">ก่อนเลือกลาย</span></h2>
-          <p>ผ้าแต่ละแบบทอต่างกัน ใส่แล้วรู้สึกต่างกัน ทีมดีช่วยเลือกจากวันที่ทีมจะใส่จริง</p>
-        </div>
-        <div class="hm-fabric__nav">
-          <a class="btn btn-sm bg-paper text-ink border-paper hover:bg-orange hover:border-orange" href="{{url 'guides' 'fabric'}}">คู่มือเลือกผ้า</a>
-          <button type="button" class="hm-arrow" data-fab-prev aria-label="ผ้าก่อนหน้า"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-          <button type="button" class="hm-arrow" data-fab-next aria-label="ผ้าถัดไป"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-        </div>
-      </div>
-    </div>
-    <ul class="hm-fabrics" data-fab-rail tabindex="0" aria-label="ผ้า {{homeFabrics.length}} ชนิด เลื่อนซ้ายขวาได้">
-      {{#each homeFabrics}}
-      <li class="hm-fab">
-        <div class="hm-fab__img"><img src="{{this.img}}" alt="ภาพขยายเนื้อ{{this.name}}" width="600" height="450" loading="lazy" decoding="async"></div>
-        <div class="hm-fab__body">
-          <h3>{{this.name}}</h3>
-          <p class="hm-fab__use"><span>เหมาะกับ</span>{{this.use}}</p>
-        </div>
-      </li>
-      {{/each}}
-    </ul>
-  </section>
-
-  <!-- 9 · FAQ และข้อมูลช่วยตัดสินใจ -->
-  <section class="wrap section" aria-labelledby="faq-h" id="faq">
+  <!-- 08 · FAQ 7 ข้อ -->
+  <section class="wrap hm-sec" aria-labelledby="faq-h" id="faq">
     <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-start">
       <div class="lg:sticky lg:top-28">
-        <h2 id="faq-h" class="hm-faq-h">เรื่องที่คนถาม<br>ก่อนตัดสินใจ</h2>
-        <ul class="mt-7 space-y-1">
-          <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'guides' 'print'}}">คู่มือสั่งทำ &rarr;</a></li>
-          <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'blog'}}">บทความและไอเดีย &rarr;</a></li>
-          <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'faq'}}">คำถามที่พบบ่อยฉบับเต็ม &rarr;</a></li>
-        </ul>
+        <p class="hm-eyebrow">{{homeV4.faq.no}}</p>
+        <h2 id="faq-h" class="hm-faq-h">{{homeV4.faq.title}}</h2>
+        <a class="hm-more mt-6" href="{{url 'faq'}}">คำถามทั้งหมด &rarr;</a>
       </div>
-
       <div class="hs-accordion-group border-t-2 border-ink">
-        {{#each faq.home}}
+        {{#each homeV4.faq.items}}
         <div class="hs-accordion border-b border-line" id="faq-{{@index}}">
-          <button type="button"
-                  class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-6 min-h-tap font-bold text-[19px] hover:underline decoration-orange decoration-2 underline-offset-4"
-                  aria-controls="faq-panel-{{@index}}">
+          <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-6 min-h-tap font-bold text-[19px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-controls="faq-panel-{{@index}}">
             <span>{{this.[0]}}</span>
             <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
           </button>
@@ -312,16 +325,59 @@
     </div>
   </section>
 
-  <!-- 10 · ปิดท้าย · แบบ Figma ตัวใหญ่บนพื้นขาว ปุ่มดำปุ่มเดียว ที่เหลือเป็นลิงก์ -->
+  <!-- 09 · รู้จักทีมดี · ออฟฟิศนนทบุรี · บรรยากาศผลิต · ยังไม่มีรูปออฟฟิศจริง จึงเป็นช่องรอภาพตาม v4 -->
+  <section class="bg-shell border-y border-line" aria-labelledby="about-h">
+    <div class="wrap hm-sec">
+      <header class="hm-head hm-head--left hm-head--row" data-rv>
+        <div><p class="hm-eyebrow">{{homeV4.about.no}}</p><h2 id="about-h">{{homeV4.about.title}}</h2><p>{{homeV4.about.lead}}</p></div>
+        <a class="hm-more" href="{{url 'about'}}">รู้จักทีมดีเพิ่มเติม &rarr;</a>
+      </header>
+      <ul class="hm-about">
+        {{#each homeV4.about.cards}}<li data-rv style="--d:{{@index}}"><span class="hm-about__img"><span class="img-pending">{{this.ph}}</span></span><h3>{{this.title}}</h3></li>{{/each}}
+      </ul>
+      <div class="hm-office" data-rv>
+        <div><h3>ออฟฟิศทีมดี · นนทบุรี</h3><p>{{site.address}} · {{site.hours}} · [วิธีนัดหมายเข้าพบ]</p></div>
+        <div class="hm-cta__btns"><a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query={{site.address}}" target="_blank" rel="noopener">ดูแผนที่ออฟฟิศ</a><a class="btn btn-ink" href="{{url 'contact'}}">ติดต่อ / นัดหมาย</a></div>
+      </div>
+      <ul class="hm-values">
+        {{#each homeV4.about.values}}<li data-rv style="--d:{{@index}}"><h3>{{this.[0]}}</h3><p>{{this.[1]}}</p></li>{{/each}}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10 · ไอเดีย ข่าวสาร และเรื่องราว -->
+  <section class="wrap hm-sec" aria-labelledby="news-h">
+    <header class="hm-head hm-head--left" data-rv>
+      <p class="hm-eyebrow">{{homeV4.news.no}}</p>
+      <h2 id="news-h">{{homeV4.news.title}}</h2>
+    </header>
+    <ul class="hm-news">
+      {{#each homeV4.news.items}}
+      <li data-rv style="--d:{{@index}}"><a href="{{url this.to}}"><span class="hm-news__img{{#if this.crop}} hm-news__img--fabric{{/if}}">{{#if this.img}}<img src="{{this.img}}" alt="" width="700" height="700" loading="lazy" decoding="async">{{else}}<span class="img-pending">{{this.ph}}</span>{{/if}}</span><h3>{{this.title}} &rarr;</h3><p>{{this.copy}}</p></a></li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <!-- 11 · รับประกันและติดต่อ -->
   <section class="hm-end" aria-labelledby="end-h">
     <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
-    <div class="wrap relative text-center" data-rv>
-      <p class="hm-eyebrow">WE BUILD TEAM IDENTITY</p>
-      <h2 id="end-h">พร้อมทำเสื้อที่ทั้งทีม<br>ภูมิใจจะใส่หรือยัง</h2>
-      <p>บอกแค่ใครใส่ จำนวนประมาณ และใช้วันไหน ก็เริ่มได้แล้ว ไม่มีแบบก็ไม่เป็นไร</p>
-      <a class="btn btn-ink btn-lg hm-end__cta" href="{{url 'calculations'}}">คำนวณราคา</a>
-      <p class="hm-end__fine">ได้ราคาประมาณแล้ว ขอใบเสนอราคาต่อได้ในหน้าเดียวกัน</p>
-      <p class="hm-end__alt">หรือ <a href="{{site.lineUrl}}">ทักไลน์</a> · <a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a> · <a href="{{url 'contact'}}">กรอกฟอร์ม</a></p>
+    <div class="wrap relative">
+      <div class="hm-care" data-rv>
+        <div class="hm-care__box">
+          <p class="hm-eyebrow">{{homeV4.care.no}}</p>
+          <h2 class="hm-h3">{{homeV4.care.title}}</h2>
+          <h3 class="hm-care__sub">{{homeV4.care.boxTitle}}</h3>
+          <p>{{homeV4.care.copy}}</p>
+          <a class="hm-more mt-5" href="{{url 'guides' 'delivery'}}">ดูวิธีรับงานและแจ้งปัญหา &rarr;</a>
+        </div>
+        <div class="hm-care__start">
+          <p class="hm-eyebrow is-en">WE BUILD TEAM IDENTITY</p>
+          <h2 id="end-h">{{homeV4.care.startTitle}}</h2>
+          <p>{{homeV4.care.startCopy}}</p>
+          <div class="hm-cta__btns"><a class="btn btn-ink btn-lg" href="{{url 'contact'}}">เริ่มคุยกับทีมดี</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}?from=%E0%B8%AA%E0%B8%B1%E0%B9%88%E0%B8%87%E0%B8%8B%E0%B9%89%E0%B8%B3">สั่งซ้ำ / เพิ่มจำนวน</a></div>
+          <p class="hm-end__alt">หรือ <a href="{{site.lineUrl}}" data-track="line">ทัก LINE</a> · <a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a></p>
+        </div>
+      </div>
     </div>
   </section>
 

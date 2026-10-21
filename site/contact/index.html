@@ -33,7 +33,7 @@
           <h2 class="t-display text-[clamp(22px,2.6vw,30px)] text-ok">เตรียมข้อมูลให้แล้ว</h2>
           <p class="t-body mt-3" id="doneMsg"></p>
           <div class="flex flex-wrap gap-3 mt-6">
-            <a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" id="doneLine"><span class="block size-5">{{> icoChat}}</span>เปิดไลน์แล้ววางข้อความ</a>
+            <a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line" id="doneLine"><span class="block size-5">{{> icoChat}}</span>เปิดไลน์แล้ววางข้อความ</a>
             <button class="btn btn-line btn-lg" type="button" id="doneBack">กลับไปแก้ข้อมูล</button>
           </div>
           <p class="t-xs mt-5">ระหว่างรอ ดู <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'designs'}}">แบบเสื้อ</a> หรืออ่าน <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'guides' 'print'}}">คู่มือสั่งทำ</a> ไปก่อนได้</p>
@@ -81,6 +81,14 @@
               </div>
             </div>
             <div class="mt-3">
+              <label class="label" for="cProduct">สินค้า / บริการที่สนใจ</label>
+              {{!-- ตัวเลือกตาม Wireframe v4 · หน้ารวมเสื้อแบบพิเศษไม่อยู่ในรายการ เลือกทรงจริงแทน --}}
+              <select class="input" id="cProduct" name="สินค้าที่สนใจ">
+                <option value="">ยังไม่แน่ใจ / ให้ช่วยเลือก</option>
+                {{#each products}}{{#unless this.hub}}<option value="{{this.id}}">{{this.name}}</option>{{/unless}}{{/each}}
+              </select>
+            </div>
+            <div class="mt-3">
               <label class="label" for="cNote">รายละเอียดหรือข้อมูลอ้างอิง</label>
               <textarea class="input" id="cNote" name="รายละเอียด" rows="4" placeholder="เช่น อยากได้สีประมาณนี้ · เคยสั่งที่อื่นแล้วเจอปัญหาอะไร · มีรหัสแบบที่ชอบจากหน้าแบบเสื้อ"></textarea>
             </div>
@@ -106,7 +114,7 @@
           <p class="text-[17px] leading-[1.7] text-paper/70 mt-3">ทักไลน์หรือโทรมาได้โดยตรง</p>
           <p class="text-[15px] text-paper/55 mt-2">ตอบกลับตามเวลาทำการจริง</p>
           <div class="grid gap-3 mt-6">
-            <a class="btn btn-orange btn-lg w-full gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+            <a class="btn btn-orange btn-lg w-full gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
             <a class="btn btn-lg w-full gap-2 tabular-nums bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="tel:{{site.phonePrimaryTel}}"><span class="block size-5">{{> icoPhone}}</span>{{site.phonePrimary}}</a>
             <a class="btn btn-lg w-full tabular-nums bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="tel:0864166449">{{site.phoneSecondary}}</a>
           </div>

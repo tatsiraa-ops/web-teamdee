@@ -33,7 +33,7 @@
 
       <figure class="relative">
         <div class="overflow-hidden rounded-plate bg-paper aspect-[3/2]">
-          <img src="{{item.img}}" alt="{{item.name}} ด้านหน้าและด้านหลัง ผลิตโดย TEAMDEE" width="1080" height="720" fetchpriority="high" decoding="async" class="w-full h-full object-contain">
+          {{#if item.img}}<img src="{{item.img}}" alt="{{item.name}} ด้านหน้าและด้านหลัง ผลิตโดย TEAMDEE" width="1080" height="720" fetchpriority="high" decoding="async" class="w-full h-full object-contain">{{else}}<div class="img-pending" role="img" aria-label="ยังไม่มีภาพ{{item.name}}">{{item.imgNote}}</div>{{/if}}
         </div>
         <figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-4 top-4 max-w-[calc(100%-2rem)]">{{#if item.imgNote}}{{item.imgNote}}{{else}}{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}{{/if}}</figcaption>
       </figure>
@@ -73,7 +73,7 @@
   <div class="bg-shell border border-line rounded-plate p-7 md:p-9">
     <p class="t-lead max-w-[56ch]">ยังไม่มีแบบ {{item.name}} ขึ้นในคลังบนเว็บ <span class="text-ink-3">[รอรูปแบบจริงจากทีมดีไซน์]</span> ทักมาขอดูงานที่เคยทำได้ หรือดูแบบสินค้าอื่นเป็นแนวทางก่อน</p>
     <div class="flex flex-wrap gap-3 mt-6">
-      <a class="btn btn-orange" href="{{site.lineUrl}}">ขอดูแบบทางไลน์</a>
+      <a class="btn btn-orange" href="{{site.lineUrl}}" data-track="line">ขอดูแบบทางไลน์</a>
       <a class="btn btn-line" href="{{url 'designs'}}">ดูแบบเสื้อทั้งหมด</a>
     </div>
   </div>
@@ -167,7 +167,7 @@
     <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-12 items-start mt-7">
       <figure class="relative">
         <div class="overflow-hidden rounded-plate bg-paper border border-line aspect-[3/2]">
-          <img src="{{item.img}}" alt="ทรงของ{{item.name}}" width="1080" height="720" loading="lazy" decoding="async" class="w-full h-full object-contain">
+          {{#if item.img}}<img src="{{item.img}}" alt="ทรงของ{{item.name}}" width="1080" height="720" loading="lazy" decoding="async" class="w-full h-full object-contain">{{else}}<div class="img-pending" role="img" aria-label="ยังไม่มีภาพทรง{{item.name}}">{{item.imgNote}}</div>{{/if}}
         </div>
         <figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-3 top-3 max-w-[calc(100%-1.5rem)]">{{#if item.imgNote}}{{item.imgNote}}{{else}}{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}{{/if}}</figcaption>
       </figure>
@@ -270,7 +270,7 @@
     {{else}}
     <div class="bg-paper border border-line rounded-plate p-7">
       <p class="t-body">ยังไม่มีงาน{{item.name}}ที่ได้รับอนุญาตให้เผยแพร่บนเว็บ ไม่ได้แปลว่าเราไม่เคยทำ ถามทีมขายได้เลยว่าเคยทำให้ใครบ้าง</p>
-      <a class="btn btn-orange mt-5" href="{{site.lineUrl}}">ถามทีมดีทางไลน์</a>
+      <a class="btn btn-orange mt-5" href="{{site.lineUrl}}" data-track="line">ถามทีมดีทางไลน์</a>
     </div>
     {{/if}}
   </div>
@@ -351,7 +351,7 @@
     <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">อยากได้{{item.name}}สำหรับทีมคุณ</h2>
     <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">บอกแค่ใครใส่ จำนวนประมาณ และใช้วันไหน ก็เริ่มได้แล้ว ไม่มีแบบก็ไม่เป็นไร</p>
     <div class="flex flex-wrap justify-center gap-3 mt-8">
-      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
       <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}?p={{item.id}}">กรอกฟอร์ม</a>
     </div>
   </div>

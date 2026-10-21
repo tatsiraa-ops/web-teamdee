@@ -9,7 +9,7 @@
     <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center mt-8">
       <div>
         <span class="tag">คนใส่คือ{{item.who}}</span>
-        <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-4">เสื้อสำหรับ{{item.name}}</h1>
+        <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-4">{{item.name}}</h1>
         <p class="text-[19px] leading-[1.75] text-paper/75 max-w-[52ch] mt-5">{{item.lead}}</p>
         <div class="flex flex-wrap gap-3 mt-9">
           <a class="btn btn-orange btn-lg" href="{{url 'contact'}}?u={{item.id}}">ปรึกษาเสื้อ{{item.name}}</a>
@@ -169,7 +169,7 @@
     <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">เล่าโจทย์ของทีมคุณมา</h2>
     <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">บอกว่าใครใส่ จำนวนประมาณ และใช้วันไหน ทีมดีช่วยเลือกให้ว่าควรใช้เสื้อแบบไหน</p>
     <div class="flex flex-wrap justify-center gap-3 mt-8">
-      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
+      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
       <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}?u={{item.id}}">กรอกฟอร์ม</a>
     </div>
   </div>

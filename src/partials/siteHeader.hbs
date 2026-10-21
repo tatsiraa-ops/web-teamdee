@@ -16,7 +16,7 @@
           <svg class="ml-1.5 transition-transform" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-caret><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <div id="megaProducts" class="dd w-[380px]" hidden data-mega-panel>
-          <p class="dd__group" id="ddh-products">สินค้าตามเทคนิค</p>
+          <p class="dd__group" id="ddh-products">สินค้าและบริการ</p>
           <ul aria-labelledby="ddh-products">
             {{#each productTree}}
             <li>
@@ -63,7 +63,6 @@
           <p class="dd__group" id="ddh-guides">คู่มือสั่งทำ</p>
           <ul aria-labelledby="ddh-guides">
             {{#each guides}}<li><a class="dd__item dd__item--compact" href="{{url 'guides' this.id}}"><span class="dd__t">{{this.name}}</span></a></li>{{/each}}
-            <li><a class="dd__item dd__item--compact" href="{{url 'calculations'}}"><span class="dd__t">คำนวณราคาเบื้องต้น</span></a></li>
           </ul>
           <div class="dd__sep" aria-hidden="true"></div>
           <p class="dd__group" id="ddh-more">อ่านเพิ่ม</p>
@@ -113,7 +112,6 @@
 
     <p class="mnav__head">คู่มือและบทความ</p>
     {{#each guides}}<a class="mnav mnav--sub" href="{{url 'guides' this.id}}">{{this.name}}</a>{{/each}}
-    <a class="mnav mnav--sub" href="{{url 'calculations'}}">คำนวณราคาเบื้องต้น</a>
     <a class="mnav mnav--sub" href="{{url 'blog'}}">บทความและไอเดีย</a>
     <a class="mnav mnav--sub" href="{{url 'faq'}}">คำถามที่พบบ่อย</a>
 
@@ -121,7 +119,7 @@
 
     <div class="grid gap-3 mt-7">
       <a class="btn btn-orange btn-lg w-full" href="{{url 'contact'}}">ติดต่อทีมดี</a>
-      <a class="btn btn-line btn-lg w-full" href="{{site.lineUrl}}">ทักไลน์</a>
+      <a class="btn btn-line btn-lg w-full" href="{{site.lineUrl}}" data-track="line">ทักไลน์</a>
       <a class="btn btn-line btn-lg w-full tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a>
     </div>
   </nav>

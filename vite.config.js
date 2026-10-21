@@ -10,6 +10,8 @@ const root = dirname(fileURLToPath(import.meta.url))
 /* ไฟล์หน้าเว็บอยู่ใน site/ วางโฟลเดอร์ตาม URL จริง เช่น site/sublimation/index.html → /sublimation/
    dev กับ build จึงได้ URL เดียวกันโดยไม่ต้อง rewrite (PLAN ข้อ 6) */
 const siteDir = resolve(root, 'site')
+/* build สำหรับธีม WordPress (scripts/export-wp.mjs ตั้ง TD_TARGET=wp) · ตัด hero ต้นแบบ ไม่ทำ sitemap เอง (ปลั๊กอิน SEO ทำ) */
+const forWp = process.env.TD_TARGET === 'wp'
 const json = (f) => JSON.parse(readFileSync(resolve(root, 'src/data', f), 'utf8'))
 
 // นับจำนวนต่อหมวดให้ชิปตัวกรอง เรียงหมวดที่มีของเยอะสุดขึ้นก่อน
@@ -128,13 +130,56 @@ const loadData = () => ({
   /* lines = จุดตัดบรรทัดชื่อกลุ่มในแผงแคบ ไม่ให้ภาษาไทยตัดกลางวลี (เช่น กีฬาและการ / แข่งขัน) */
   homeUses: (() => {
     const pick = {
-      corp: { lines: ['บริษัทเอกชน', '& SME'], en: 'CORPORATE', photo: '/img/real/r02.jpg', alt: 'พนักงานบริษัทใส่เสื้อทีมสีดำที่ทีมดีผลิต' },
-      gov: { lines: ['หน่วยงานภาครัฐ', '/ ราชการ'], en: 'GOVERNMENT', photo: '/img/real/r26.jpg', alt: 'เจ้าหน้าที่หน่วยงานใส่เสื้อโปโลสีกรมท่าที่ทีมดีผลิต' },
-      edu: { lines: ['โรงเรียนและ', 'มหาวิทยาลัย'], en: 'EDUCATION', photo: '/img/real/r16.jpg', alt: 'นักเรียนใส่เสื้อโปโลสีขาวฟ้าที่ทีมดีผลิต' },
-      sport: { lines: ['กีฬาและ', 'การแข่งขัน'], en: 'SPORTS', photo: '/img/real/r17.jpg', alt: 'ทีมฟุตบอลใส่เสื้อลายทางแดงขาวที่ทีมดีผลิต' },
-      event: { lines: ['กิจกรรม', 'และชมรม'], en: 'EVENTS', photo: '/img/real/r21.jpg', alt: 'นักวิ่งใส่เสื้อสีม่วงที่ทีมดีผลิต ในงานวิ่ง' },
+      corp: { lines: ['เสื้อบริษัท ร้านค้า', 'และยูนิฟอร์ม'], en: 'CORPORATE', photo: '/img/real/r02.jpg', alt: 'พนักงานบริษัทใส่เสื้อทีมสีดำที่ทีมดีผลิต' },
+      gov: { lines: ['เสื้อหน่วยงาน', 'และองค์กร'], en: 'ORGANIZATION', photo: '/img/real/r26.jpg', alt: 'เจ้าหน้าที่หน่วยงานใส่เสื้อโปโลสีกรมท่าที่ทีมดีผลิต' },
+      edu: { lines: ['เสื้อโรงเรียน', 'และมหาวิทยาลัย'], en: 'EDUCATION', photo: '/img/real/r16.jpg', alt: 'นักเรียนใส่เสื้อโปโลสีขาวฟ้าที่ทีมดีผลิต' },
+      sport: { lines: ['เสื้อกีฬา', 'และการแข่งขัน'], en: 'SPORTS', photo: '/img/real/r17.jpg', alt: 'ทีมฟุตบอลใส่เสื้อลายทางแดงขาวที่ทีมดีผลิต' },
+      event: { lines: ['เสื้อกิจกรรม', 'และชมรม'], en: 'EVENTS', photo: '/img/real/r21.jpg', alt: 'นักวิ่งใส่เสื้อสีม่วงที่ทีมดีผลิต ในงานวิ่ง' },
     }
     return json('uses.json').map((u) => ({ ...u, ...pick[u.id] }))
+  })(),
+  /* หน้าแรกตาม Wireframe v4 (21 ต.ค. 2026) · ข้อความอยู่ใน home.json · ที่นี่เติมรูปจริงที่มีอยู่แล้ว
+     ช่องที่ยังไม่มีของจริง (รีวิว คลิป โลโก้ที่ได้อนุญาต งานสกรีน งานแบบพิเศษ) คงเป็นช่องรอข้อมูลตาม v4 */
+  homeV4: (() => {
+    const h = json('home.json')
+    const products = json('products.json')
+    const customers = json('customers.json')
+    const works = json('works.json')
+    const uses = json('uses.json')
+    const designs = withMeta()
+    const pick = (id) => products.find((p) => p.id === id)
+    /* รูปทีมจริง 3 แถว × 6 รูป สลับหมวด ไม่ให้หมวดเดียวกองแถวเดียว */
+    const byCat = {}
+    for (const c of customers) (byCat[c.cat] ||= []).push(c)
+    const lists = Object.values(byCat)
+    const mixed = []
+    for (let i = 0; mixed.length < 48 && lists.some((l) => l[i]); i++) for (const l of lists) if (l[i]) mixed.push(l[i])
+    const photoRows = [0, 1, 2].map((r) => mixed.slice(r * 6, r * 6 + 6))
+    const logoFiles = h.logos.show ? readdirSync(resolve(root, 'public/img/client')).filter((f) => /\.(png|svg|webp)$/.test(f)).sort() : []
+    const half = Math.ceil(logoFiles.length / 2)
+    const printDesigns = designs.filter((d) => (d.product || []).includes('print'))
+    return {
+      ...h,
+      cats: { ...h.cats, items: h.cats.items.map((c) => ({ ...c, product: pick(c.id) })) },
+      logoRows: h.logos.show
+        ? [logoFiles.slice(0, half), logoFiles.slice(half)].map((row) => row.map((f) => ({ img: `/img/client/${f}` })))
+        : [1, 2].map((r) => Array.from({ length: 7 }, (_, i) => ({ ph: `โลโก้แบรนด์ ${r}-${i + 1}` }))),
+      logoCount: logoFiles.length,
+      photoRows,
+      gallery: {
+        ...h.gallery,
+        items: printDesigns,
+        total: printDesigns.length,
+        uses: uses.map((u) => ({ id: u.id, name: u.name, n: printDesigns.filter((d) => (d.use || []).includes(u.id)).length })).filter((u) => u.n > 0),
+      },
+      works: {
+        ...h.works,
+        rows: h.works.rows.map((row) => ({
+          ...row,
+          real: works.filter((w) => (row.id === 'print' ? ['print'] : [row.id]).includes(w.product)),
+        })),
+      },
+    }
   })(),
   /* ผ้าที่มีรูปจริง ใช้ในแถบผ้าหน้าแรก */
   homeFabrics: json('sizing.json').fabrics.filter((f) => f.img),
@@ -319,7 +364,7 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     seoTags(),
-    seoFiles(),
+    ...(forWp ? [] : [seoFiles()]),
     handlebars({
       partialDirectory: resolve(root, 'src/partials'),
       context(pagePath) {
@@ -328,10 +373,15 @@ export default defineConfig({
         const rel = pagePath.replace(/\\/g, '/').replace(siteDir.replace(/\\/g, '/'), '')
         const at = ('/' + rel.replace(/^\//, '')).replace(/index\.html$/, '')
         const page = pageFor(routes, data.articles.items.map((a) => a.id))[at] || { kind: null, id: null }
-        const base = { ...data, page }
+        const base = { ...data, page, wp: forWp }
         const { kind, id } = page
         if (kind === 'products') {
           const item = data.allProducts.find((x) => x.id === id)
+          /* หน้ารวมเสื้อแบบพิเศษ (v4) ไม่มีเทคนิคของตัวเอง · ลูก 3 ทรงเรียงตาม compare */
+          if (item.hub) {
+            const kids = data.allProducts.filter((x) => x.parent === id && !x.hidden)
+            return { ...base, item, childProducts: kids, compareRows: (item.compare || []).map(([pid, note]) => ({ item: kids.find((k) => k.id === pid), note })).filter((r) => r.item) }
+          }
           const tech = data.techniques[item.technique]
           /* ผ้าตามเทคนิค ดึงจากรายการผ้ากลางก่อน แล้วต่อด้วยรายการที่ยังรอยืนยัน ไม่ใช้ผ้าชุดเดียวกันทุกเทคนิค */
           const fabrics = [
@@ -357,7 +407,8 @@ export default defineConfig({
             relatedProducts: data.products.filter((x) => x.id !== id && x.id !== item.parent && x.parent !== id),
             relatedUses: data.uses.filter((u) => (u.recommend || []).some((r) => r.id === id)),
             productWorks: data.works.filter((w) => w.product === id).slice(0, 3),
-            guideId: data.allGuides.some((g) => g.id === id) ? id : item.parent || 'print',
+            /* คู่มือตามเทคนิค (v4: เสื้อวอร์มใช้คู่มือพิมพ์ลายร่วม) */
+            guideId: data.allGuides.some((g) => g.id === id) ? id : ({ sublimation: 'print', embroidery: 'polo', screen: 'screen' })[item.technique] || 'print',
           }
         }
         if (kind === 'uses' && id !== 'index') {
@@ -398,5 +449,6 @@ export default defineConfig({
       },
     }),
   ],
-  build: { outDir: resolve(root, 'dist'), emptyOutDir: true, rollupOptions: { input } },
+  define: { 'import.meta.env.TD_WP': JSON.stringify(forWp) },
+  build: { outDir: resolve(root, forWp ? 'dist-wp' : 'dist'), emptyOutDir: true, rollupOptions: { input } },
 })
