@@ -1,41 +1,17 @@
-import { MODES, KEY, resolveMode } from './hero-mode.js'
+import { resolveMode } from './hero-mode.js'
 
 /* hero แบบเลื่อนเล่าเรื่อง · ภาพผูกกับการเลื่อนด้วย CSS (animation-timeline) ไม่ต้องใช้ JS
    ไฟล์นี้ทำแค่ 2 อย่าง
-   1. สลับแบบเลื่อน ↔ แบบเดิม และจำค่าที่เลือก
+   1. ตั้งแบบ hero จาก ?hero= (ไม่มี = แบบทีม)
    2. เบราว์เซอร์ที่ไม่รองรับ scroll timeline · คำนวณความคืบหน้าเองแล้วใส่ --hsp ให้ CSS
 */
 
+/* ปุ่มสลับ hero เอาออกแล้ว (อาร์ต 21 ต.ค. 2026) · หน้าแรกเป็นแบบทีมเสมอ ไม่จำค่าที่เคยเลือก
+   แบบอื่นยังเปิดดูได้ด้วย ?hero=scroll หรือ ?hero=classic */
 export function initHeroSwitch(onClassic) {
-  const root = document.documentElement
-  const stored = (() => {
-    try {
-      return localStorage.getItem(KEY)
-    } catch {
-      return null
-    }
-  })()
-  const apply = (mode, remember) => {
-    root.setAttribute('data-hero-mode', mode)
-    for (const b of document.querySelectorAll('[data-hero-set]')) b.setAttribute('aria-pressed', String(b.dataset.heroSet === mode))
-    if (remember) {
-      try {
-        localStorage.setItem(KEY, mode)
-      } catch {
-        /* โหมดส่วนตัว เก็บไม่ได้ก็ไม่เป็นไร */
-      }
-    }
-    if (mode === 'classic') onClassic()
-  }
-  apply(resolveMode({ param: new URLSearchParams(location.search).get('hero'), stored }), false)
-  for (const b of document.querySelectorAll('[data-hero-set]')) {
-    b.addEventListener('click', () => {
-      if (!MODES.includes(b.dataset.heroSet)) return
-      apply(b.dataset.heroSet, true)
-      /* กดสลับแล้วพากลับไปต้น hero ของแบบที่เลือก ไม่ค้างอยู่กลางเรื่อง */
-      document.querySelector('.hero-wrap')?.scrollIntoView({ block: 'start' })
-    })
-  }
+  const mode = resolveMode({ param: new URLSearchParams(location.search).get('hero'), stored: null })
+  document.documentElement.setAttribute('data-hero-mode', mode)
+  if (mode === 'classic') onClassic()
 }
 
 export function initHeroScroll() {

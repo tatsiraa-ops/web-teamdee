@@ -157,3 +157,36 @@ export function initMarquee() {
     b.querySelector('[data-marquee-label]').textContent = paused ? 'เล่นแถบโลโก้' : 'หยุดแถบโลโก้'
   })
 }
+
+/* แท็บผลงาน 4 หมวด · ลูกศรซ้ายขวาสลับแท็บ · เปลี่ยนแท็บแล้วจัดปุ่มเลื่อนของแถวใหม่ */
+export function initTabs() {
+  const list = document.querySelector('[data-tabs]')
+  if (!list) return
+  const tabs = [...list.querySelectorAll('[data-tab]')]
+  const show = (t, focus) => {
+    for (const x of tabs) {
+      const on = x === t
+      x.setAttribute('aria-selected', String(on))
+      x.tabIndex = on ? 0 : -1
+      const panel = document.getElementById(x.getAttribute('aria-controls'))
+      if (panel) panel.hidden = !on
+    }
+    if (focus) t.focus()
+    dispatchEvent(new Event('resize'))
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(t))
+    t.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
+      e.preventDefault()
+      show(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true)
+    })
+  })
+}
+
+/* แถบโลโก้หยุดเมื่ออยู่นอกจอ */
+export function initMarqueeOffscreen() {
+  const m = document.querySelector('[data-marquee]')
+  if (!m || !('IntersectionObserver' in window)) return
+  new IntersectionObserver(([en]) => m.classList.toggle('is-off', !en.isIntersecting)).observe(m)
+}

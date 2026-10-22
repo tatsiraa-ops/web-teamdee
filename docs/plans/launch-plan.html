@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แผนขึ้นเว็บ TEAMDEE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF6C00; --orange-ink: #B34A00; --orange-tint: #FFF1E3;
+    --ink: #000; --ink-2: #4A4A4C; --ink-3: #5E5E61; --grey: #808285;
+    --paper: #fff; --shell: #FAF9F7; --line: #E5E2DC; --line-2: #C4BFB4;
+    --ok: #0F6B41; --ok-tint: #E4F2EA; --alert: #A32E12; --alert-tint: #FCEBE4;
+    --r: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--shell); color: var(--ink); font: 400 16px/1.6 'Noto Sans Thai', system-ui, sans-serif; }
+  a { color: inherit; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 768px) { .wrap { padding: 0 32px; } }
+  h1, h2, h3 { margin: 0; line-height: 1.3; }
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  .eyebrow { font-size: 14px; font-weight: 700; color: var(--ink-2); display: inline-flex; align-items: center; gap: 8px; }
+  .eyebrow::before { content: ''; width: 10px; height: 10px; border-radius: 3px; background: var(--orange); }
+  h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 800; margin-top: 6px; }
+  .lead { color: var(--ink-2); max-width: 70ch; margin: 8px 0 0; }
+
+  /* ---------- หัว ---------- */
+  header.top { background: var(--paper); border-bottom: 3px solid var(--orange); padding: 36px 0 32px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .04em; font-size: 15px; }
+  .brand b { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: var(--orange); color: var(--ink); font-size: 14px; letter-spacing: 0; }
+  header.top h1 { font-size: clamp(30px, 4.6vw, 52px); font-weight: 800; margin-top: 18px; }
+  header.top h1 span { color: var(--orange-ink); white-space: nowrap; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 12px; color: var(--ink-2); font-size: 15px; }
+  .count { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 26px; }
+  @media (min-width: 768px) { .count { grid-template-columns: repeat(4, 1fr); } }
+  .count div { background: var(--shell); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; }
+  .count div.hot { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .count small { display: block; font-size: 14px; color: var(--ink-2); font-weight: 600; }
+  .count .hot small { color: #D8D8D8; }
+  .count strong { display: block; font-size: 30px; font-weight: 800; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .count em { font-style: normal; font-size: 14px; color: var(--ink-3); }
+  .count .hot em { color: var(--orange); font-weight: 700; }
+
+  /* ---------- หมุดหมาย ---------- */
+  .miles { display: grid; gap: 10px; margin-top: 22px; }
+  @media (min-width: 900px) { .miles { grid-template-columns: repeat(5, 1fr); } }
+  .mile { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; position: relative; }
+  .mile.is-done { border-color: var(--ok); }
+  .mile .d { font-size: 14px; font-weight: 700; color: var(--ink-2); }
+  .mile .t { font-weight: 700; margin-top: 2px; }
+  .mile .s { font-size: 14px; color: var(--ink-3); margin-top: 4px; }
+  .mile.key { background: var(--orange); border-color: var(--orange); }
+  .mile.key .d, .mile.key .s { color: var(--ink); }
+
+  /* ---------- แถบเวลา (Gantt) ---------- */
+  .gantt-box { margin-top: 22px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); overflow-x: auto; }
+  .gantt { --days: 26; display: grid; grid-template-columns: 150px repeat(var(--days), minmax(34px, 1fr)); min-width: 1060px; position: relative; }
+  .g-h { font-size: 12px; text-align: center; padding: 8px 0 6px; border-bottom: 1px solid var(--line); color: var(--ink-3); line-height: 1.25; font-variant-numeric: tabular-nums; }
+  .g-h b { display: block; font-size: 14px; color: var(--ink); }
+  .g-h.we { background: var(--shell); }
+  .g-h.today b { color: var(--paper); background: var(--orange-ink); border-radius: 6px; margin: 0 4px; }
+  .g-h.month { text-align: left; padding-left: 12px; font-weight: 700; color: var(--ink); font-size: 13px; }
+  .g-lane { grid-column: 1; padding: 10px 12px; font-size: 14px; font-weight: 700; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; background: var(--paper); position: sticky; left: 0; z-index: 2; }
+  .g-lane i { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+  .g-cell { border-bottom: 1px solid var(--line); border-left: 1px solid #F1EEE9; min-height: 48px; }
+  .g-cell.we { background: var(--shell); }
+  .bar { align-self: center; margin: 6px 2px; padding: 4px 8px; border-radius: 8px; font-size: 12.5px; font-weight: 700; line-height: 1.3; z-index: 1; overflow: hidden; }
+  .bar.pt { border-radius: 999px; text-align: center; padding: 4px 4px; }
+  .bar.one { margin: 6px 1px; padding: 4px 0; text-align: center; font-size: 11.5px; white-space: nowrap; overflow: visible; }
+  .l-web { background: var(--orange); color: var(--ink); }
+  .l-sys { background: var(--ink); color: var(--paper); }
+  .l-data { background: var(--orange-tint); color: #6B3A0B; border: 1px dashed #E8A56A; }
+  .l-boss { background: #fff; color: var(--ink); border: 2px solid var(--ink); }
+  .l-seo { background: #EDEBE7; color: var(--ink); border: 1px solid var(--line-2); }
+  .bar.done { background: var(--ok); color: #fff; border-color: var(--ok); }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 14px; color: var(--ink-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; }
+  .hint { font-size: 14px; color: var(--ink-3); margin-top: 8px; }
+
+  /* ---------- รายวัน ---------- */
+  .weeks { display: grid; gap: 28px; margin-top: 26px; }
+  .week h3 { font-size: 20px; font-weight: 800; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .week h3 small { font-size: 15px; font-weight: 600; color: var(--ink-3); }
+  .days { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+  .day { display: grid; grid-template-columns: 1fr; gap: 6px 18px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; border-left: 5px solid var(--line-2); }
+  @media (min-width: 820px) { .day { grid-template-columns: 150px 1fr 230px; } }
+  .day.is-done { border-left-color: var(--ok); }
+  .day.is-now { border-left-color: var(--orange); box-shadow: 0 0 0 2px var(--orange) inset; }
+  .day.is-gate { border-left-color: var(--ink); }
+  .day .when { font-weight: 800; font-size: 17px; font-variant-numeric: tabular-nums; }
+  .day .when small { display: block; font-size: 13px; font-weight: 700; color: var(--ink-3); }
+  .tag { display: table; font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 999px; margin-top: 6px; background: var(--shell); color: var(--ink-2); border: 1px solid var(--line); }
+  .tag.done { background: var(--ok-tint); color: var(--ok); }
+  .tag.now { background: var(--orange); color: var(--ink); }
+  .tag.gate { background: var(--ink); color: var(--paper); }
+  .tag.buf { background: #EDEBE7; color: var(--ink-2); }
+  .day h4 { margin: 0; font-size: 17px; line-height: 1.4; }
+  .day ul { margin: 6px 0 0; padding-left: 18px; color: var(--ink-2); font-size: 15px; }
+  .day ul li + li { margin-top: 2px; }
+  .proof { font-size: 14px; color: var(--ink-2); background: var(--shell); border-radius: 10px; padding: 10px 12px; align-self: start; }
+  .proof b { display: block; color: var(--ink); font-size: 13px; margin-bottom: 2px; }
+  .who { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .who span { font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 6px; border: 1px solid var(--line-2); color: var(--ink-2); background: var(--paper); }
+
+  /* ---------- รอบการทำงาน ---------- */
+  .loop { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 10px; counter-reset: s; }
+  @media (min-width: 900px) { .loop { grid-template-columns: repeat(6, 1fr); } }
+  .loop li { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 14px; counter-increment: s; position: relative; }
+  .loop li::before { content: counter(s, decimal-leading-zero); display: block; font-weight: 800; font-size: 22px; color: var(--orange-ink); line-height: 1; margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+  .loop b { display: block; font-size: 16px; }
+  .loop span { display: block; font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+  .loop code { font-size: 12.5px; background: var(--shell); padding: 1px 5px; border-radius: 4px; }
+
+  /* ---------- สถานะหน้า ---------- */
+  .pg-groups { display: grid; gap: 14px; margin-top: 22px; }
+  @media (min-width: 900px) { .pg-groups { grid-template-columns: repeat(2, 1fr); } }
+  .pg { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; }
+  .pg h3 { font-size: 17px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .pg h3 small { font-size: 13px; font-weight: 700; color: var(--ink-3); white-space: nowrap; }
+  .pg ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
+  .pg li { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+  .pg li:last-child { border-bottom: 0; }
+  .pg li code { font-size: 12.5px; color: var(--ink-3); margin-left: 6px; }
+  .n { font-size: 12.5px; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; align-self: center; font-variant-numeric: tabular-nums; }
+  .n0 { background: var(--ok-tint); color: var(--ok); }
+  .n1 { background: var(--orange-tint); color: #6B3A0B; }
+  .n2 { background: var(--alert-tint); color: var(--alert); }
+  .pg.is-v4 { border-color: var(--ok); }
+
+  /* ---------- ตาราง ---------- */
+  .tbl { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; font-size: 15px; }
+  .tbl th, .tbl td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .tbl th { font-size: 13px; color: var(--ink-3); background: var(--shell); font-weight: 700; }
+  .tbl tr:last-child td { border-bottom: 0; }
+  .tbl td.dl { white-space: nowrap; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .tbl .urgent td.dl { color: var(--alert); }
+  @media (max-width: 720px) {
+    .tbl, .tbl tbody, .tbl tr, .tbl td { display: block; width: 100%; }
+    .tbl thead { display: none; }
+    .tbl tr { border-bottom: 1px solid var(--line); padding: 8px 0; }
+    .tbl td { border: 0; padding: 3px 14px; }
+    .tbl td[data-l]::before { content: attr(data-l) ' · '; font-size: 13px; color: var(--ink-3); font-weight: 700; }
+  }
+
+  /* ---------- วันสลับ ---------- */
+  .run { list-style: none; margin: 20px 0 0; padding: 0; border-left: 3px solid var(--ink); }
+  .run li { position: relative; padding: 0 0 18px 24px; }
+  .run li::before { content: ''; position: absolute; left: -9px; top: 6px; width: 15px; height: 15px; border-radius: 50%; background: var(--paper); border: 3px solid var(--ink); }
+  .run li.stop::before { background: var(--alert); border-color: var(--alert); }
+  .run .tm { font-weight: 800; font-variant-numeric: tabular-nums; }
+  .run p { margin: 2px 0 0; color: var(--ink-2); font-size: 15px; }
+  .rollback { margin-top: 8px; background: var(--alert-tint); border: 1px solid #EBC3B5; border-radius: var(--r); padding: 14px 18px; color: #5C1A0A; font-size: 15px; }
+  .rollback b { color: var(--alert); }
+
+  .rules { display: grid; gap: 10px; margin-top: 20px; }
+  @media (min-width: 820px) { .rules { grid-template-columns: repeat(3, 1fr); } }
+  .rules div { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; font-size: 15px; color: var(--ink-2); }
+  .rules b { display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
+
+  footer.end { padding: 30px 0 48px; color: var(--ink-3); font-size: 14px; border-top: 1px solid var(--line); }
+  @media print { .gantt-box { overflow: visible; } section { break-inside: avoid-page; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><b>TD</b>TEAMDEE · แผนเว็บใหม่</div>
+    <h1>จากเครื่องอาร์ต สู่ <span>team-dee.com</span><br>และเริ่มยิงแอด 15 พ.ย.</h1>
+    <div class="meta">
+      <span>อัปเดต พ. 21 ต.ค. 2026</span>
+      <span>ทำโดย อาร์ต (AI Automation) · ตรวจโดย พี่ทัช</span>
+      <span>วิธี: ทำต้นแบบใน Vite แล้ว export ลงธีม WordPress ของเราเอง</span>
+    </div>
+    <div class="count" aria-label="นับถอยหลัง">
+      <div><small>ถึงพี่ทัชดูรอบแรก</small><strong data-to="2026-10-30">9 วัน</strong><em>ศ. 30 ต.ค.</em></div>
+      <div><small>ถึงวันรับข้อมูลวันสุดท้าย</small><strong data-to="2026-11-03">13 วัน</strong><em>อ. 3 พ.ย.</em></div>
+      <div><small>ถึงสลับเว็บจริง</small><strong data-to="2026-11-09">19 วัน</strong><em>จ. 9 พ.ย. เช้า</em></div>
+      <div class="hot"><small>ถึงเริ่มยิงแอด</small><strong data-to="2026-11-15">25 วัน</strong><em>อา. 15 พ.ย.</em></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section style="border-top:0">
+  <div class="wrap">
+    <span class="eyebrow">ภาพรวม</span>
+    <h2>5 หมุดหมายที่ต้องผ่าน</h2>
+    <p class="lead">ทุกหมุดมีวันที่ตายตัว ถ้าหมุดไหนเลื่อน หมุดถัดไปเลื่อนตาม ยกเว้นวันยิงแอด 15 พ.ย. ที่ต้องรักษาไว้ จึงเผื่อวันว่างไว้ 2 ช่วง</p>
+    <div class="miles">
+      <div class="mile is-done"><div class="d">20–21 ต.ค.</div><div class="t">ฐานระบบพร้อม</div><div class="s">WordPress ในเครื่อง · ธีม · ตัววัดผล · เมนูและหน้าแรกตาม v4</div></div>
+      <div class="mile"><div class="d">ศ. 30 ต.ค.</div><div class="t">พี่ทัชดูรอบแรก</div><div class="s">ทุกหน้าตาม v4 · ยังแก้หน้าตาได้</div></div>
+      <div class="mile"><div class="d">ส. 31 ต.ค.</div><div class="t">ได้ Admin คืน</div><div class="s">ดึงสำเนาเว็บจริงมาลองในเครื่อง</div></div>
+      <div class="mile"><div class="d">ศ. 6 พ.ย.</div><div class="t">ซ้อมสลับ + พี่ทัชเคาะ</div><div class="s">ตอบแค่ ขึ้นได้ / ไม่ได้เพราะ…</div></div>
+      <div class="mile key"><div class="d">จ. 9 → อา. 15 พ.ย.</div><div class="t">สลับเว็บจริง → ยิงแอด</div><div class="s">มี 6 วันแก้จุดที่เจอและทดสอบตัววัดผล</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">ไทม์ไลน์</span>
+    <h2>ใครทำอะไร วันไหน</h2>
+    <p class="lead">แต่ละแถวคือสายงาน ช่องสีเทาคือเสาร์–อาทิตย์ ซึ่งเผื่อไว้เป็นวันกันพลาด</p>
+    <div class="gantt-box" tabindex="0" aria-label="ตารางไทม์ไลน์ เลื่อนซ้ายขวาได้">
+      <div class="gantt" id="gantt"></div>
+    </div>
+    <div class="legend">
+      <span><i class="l-web"></i>หน้าเว็บ (อาร์ต)</span>
+      <span><i class="l-sys"></i>WordPress และระบบ</span>
+      <span><i class="l-data"></i>ข้อมูลจากทีม</span>
+      <span><i class="l-boss"></i>พี่ทัชตรวจ</span>
+      <span><i class="l-seo"></i>SEO · Rocket Rank</span>
+      <span><i style="background:var(--ok)"></i>เสร็จแล้ว</span>
+    </div>
+    <p class="hint">บนมือถือเลื่อนตารางซ้ายขวาได้</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">รายวัน</span>
+    <h2>แต่ละวันทำอะไร และเสร็จแล้วต้องเห็นอะไร</h2>
+    <p class="lead">ช่องขวาของแต่ละวันคือหลักฐานว่าเสร็จจริง ไม่มีหลักฐาน = ยังไม่เสร็จ</p>
+
+    <div class="weeks">
+
+      <div class="week">
+        <h3>สัปดาห์ 1 · ทำหน้าเว็บตาม v4 <small>อ. 20 – อา. 25 ต.ค.</small></h3>
+        <ol class="days">
+          <li class="day is-done" data-date="2026-10-20">
+            <div class="when">อ. 20 ต.ค.<span class="tag done">เสร็จแล้ว</span></div>
+            <div><h4>ตั้ง WordPress ในเครื่อง และฐานธีม TEAMDEE</h4>
+              <ul><li>export ต้นแบบลงธีมด้วยคำสั่งเดียว <code>npm run export:wp</code></li><li>ตัววัดผล 4 อย่าง: กดไลน์ · กดโทร · ส่งฟอร์ม · ใช้เครื่องคิดราคา และช่องใส่ GTM ID</li><li>รองรับปลั๊กอิน SEO เดิม · เมนูสร้างหน้าที่ยังขาดให้ครบ</li></ul>
+              <div class="who"><span>อาร์ต</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>เปิด 127.0.0.1:9400 ได้ทุกหน้า · เทสตัววัดผลผ่าน</div>
+          </li>
+          <li class="day is-done" data-date="2026-10-21">
+            <div class="when">พ. 21 ต.ค.<span class="tag done">เสร็จแล้ว</span></div>
+            <div><h4>ได้ Wireframe v4 เร็วกว่าแผน 1 วัน → ทำเมนูและหน้าแรก</h4>
+              <ul><li>เมนู · footer · เมนูมือถือ · ฟอร์มติดต่อมีช่องเลือกสินค้า</li><li>หน้าแรก 12 ส่วน · หน้าใหม่: เสื้อแบบพิเศษ · เสื้อวอร์ม · หน่วยงานและองค์กร</li><li>ปุ่มลอย LINE กับโทร · การ์ดแนะนำมุมซ้ายล่าง · เมนูอยู่กลางจอ · เอาปุ่มสลับ hero ออก</li></ul>
+              <div class="who"><span>อาร์ต</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>เทส 45/45 · axe หน้าแรกไม่พบปัญหา · export ไปธีมได้ 40 หน้า</div>
+          </li>
+          <li class="day" data-date="2026-10-22">
+            <div class="when">พฤ. 22 ต.ค.<span class="tag">รอบ 3</span></div>
+            <div><h4>แม่แบบหน้าสินค้าตาม v4</h4>
+              <ul><li>ทำแม่แบบชุดเดียว ใช้กับ โปโลปัก · พิมพ์ลาย · สกรีน · Jersey · เบสบอล</li><li>เนื้อหาแยกตามเทคนิค ห้ามเอาของพิมพ์ลายไปใส่งานปักหรือสกรีน</li><li>เริ่มต้นวัน: commit งานที่ค้าง (เมื่ออาร์ตสั่ง) เพื่อให้มีจุดย้อนกลับ</li></ul>
+              <div class="who"><span>อาร์ต</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>ภาพหน้าพิมพ์ลาย 3 ขนาดจอ · โครงตรงกับบอร์ด v4</div>
+          </li>
+          <li class="day" data-date="2026-10-23">
+            <div class="when">ศ. 23 ต.ค.<span class="tag">รอบ 3</span></div>
+            <div><h4>ใส่เนื้อหาหน้าสินค้าครบ 5 หน้า + ตรวจ</h4>
+              <ul><li>หน้าเสื้อแบบพิเศษกับเสื้อวอร์มใช้ชิ้นส่วนชุดเดียวกัน</li><li>ส่วนที่ไม่มีข้อมูล: ต้นแบบติดป้าย "รอข้อมูล" · บนเว็บจริงซ่อน</li></ul>
+              <div class="who"><span>อาร์ต</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>เทส · axe · export:wp · เทียบหน้าใน WordPress กับต้นแบบ</div>
+          </li>
+          <li class="day" data-date="2026-10-24">
+            <div class="when">ส.–อา. 24–25 ต.ค.<span class="tag buf">วันกันพลาด</span></div>
+            <div><h4>ว่างไว้ ใช้เมื่องานรอบ 3 ล้น</h4></div>
+            <div class="proof"><b>ทีมช่วยได้</b>ทวง LINE OA URL กับฝ่ายการตลาด</div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="week">
+        <h3>สัปดาห์ 2 · ทำครบทุกหน้า → พี่ทัชดู → ได้ Admin <small>จ. 26 ต.ค. – อา. 1 พ.ย.</small></h3>
+        <ol class="days">
+          <li class="day" data-date="2026-10-26">
+            <div class="when">จ.–อ. 26–27 ต.ค.<span class="tag">รอบ 4</span></div>
+            <div><h4>กลุ่มลูกค้า · แบบเสื้อ · ผลงาน</h4>
+              <ul><li>หน้ารวมกลุ่มลูกค้า + บริษัท · โรงเรียน · กีฬา · กิจกรรม</li><li>แบบเสื้อ: กรองตามกลุ่มลูกค้าและสไตล์ · ผลงาน: 4 แถวตามหมวดสินค้า</li><li>ส่งรายการ URL ใหม่ให้ Rocket Rank ยืนยัน</li></ul>
+              <div class="who"><span>อาร์ต</span><span>Rocket Rank</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>ภาพ 3 ขนาดจอ · กรองแบบเสื้อได้จริง</div>
+          </li>
+          <li class="day" data-date="2026-10-28">
+            <div class="when">พ.–พฤ. 28–29 ต.ค.<span class="tag">รอบ 5</span></div>
+            <div><h4>คู่มือ 7 · บทความ · FAQ · รู้จักทีมดี · ติดต่อ · ค้นหา · 404 · นโยบาย</h4>
+              <ul><li>บ่ายวันพฤหัส: ตรวจรวมทั้งเว็บ ลิงก์เสียต้องเป็น 0 · h1 กับ meta ครบทุกหน้า</li><li>ทำสรุปหน้าเดียวให้พี่ทัช: ดูหน้าไหน และต้องตัดสินเรื่องอะไร</li></ul>
+              <div class="who"><span>อาร์ต</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>รายงานตรวจรวม · ลิงก์ให้พี่ทัชเปิดดู</div>
+          </li>
+          <li class="day is-gate" data-date="2026-10-30">
+            <div class="when">ศ. 30 ต.ค.<span class="tag gate">พี่ทัชตรวจ</span></div>
+            <div><h4>พี่ทัชดูรอบแรก · ยังแก้หน้าตาได้</h4>
+              <ul><li>หน้าที่แอดจะยิงไป: หน้าแรก · กลุ่มลูกค้า · สินค้า · ติดต่อ (และคำนวณราคา ถ้ายังจะยิง)</li><li>เรื่องจาก Playbook ที่ต้องเคาะ: ข้อดีที่ใช้โปรย 10 ข้อ · รายการสินค้า · 2,800+ องค์กร · คำบนปุ่ม · landing 5 หน้า</li></ul>
+              <div class="who"><span>พี่ทัช</span><span>อาร์ต</span></div></div>
+            <div class="proof"><b>ต้องได้กลับมา</b>รายการแก้ที่จบในข้อความเดียว + คำตอบ 5 เรื่อง</div>
+          </li>
+          <li class="day is-gate" data-date="2026-10-31">
+            <div class="when">ส. 31 ต.ค.<span class="tag gate">หมุดหมาย</span></div>
+            <div><h4>ได้ WordPress Administrator คืน</h4>
+              <ul><li>ดูอย่างเดียว ยังไม่แก้อะไร: เวอร์ชัน PHP · ปลั๊กอินฟอร์มและผู้รับ · ปลั๊กอิน SEO · ธีมเดิม</li><li>ขออนุญาตอาร์ตก่อน export สำเนาเว็บจริงลงเครื่อง</li></ul>
+              <div class="who"><span>อาร์ต</span><span>ทีมเดิม</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>บันทึกค่าระบบของ hosting จริง · ไฟล์สำเนาอยู่ในเครื่อง</div>
+          </li>
+          <li class="day" data-date="2026-11-01">
+            <div class="when">อา. 1 พ.ย.<span class="tag buf">วันกันพลาด</span></div>
+            <div><h4>ว่างไว้ ถ้าได้ Admin ช้าจะใช้วันนี้แทน</h4></div>
+            <div class="proof"><b>ถ้า Admin ยังไม่มา</b>แจ้งพี่ทัชทันที เพราะทุกวันหลังจากนี้ขึ้นกับ Admin</div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="week">
+        <h3>สัปดาห์ 3 · ใส่ข้อมูลจริง ซ้อมบนสำเนาเว็บจริง <small>จ. 2 – อา. 8 พ.ย.</small></h3>
+        <ol class="days">
+          <li class="day" data-date="2026-11-02">
+            <div class="when">จ. 2 พ.ย.</div>
+            <div><h4>แก้ตามพี่ทัช · ลงธีมบนสำเนาเว็บจริง</h4>
+              <ul><li>ต่อฟอร์มเข้าปลั๊กอินเดิมและผู้รับเดิม</li><li>เช็ก URL เดิมที่ล็อกไว้ทุกตัวว่าเปิดได้ · บทความเดิมยังอยู่</li></ul>
+              <div class="who"><span>อาร์ต</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>ส่งฟอร์มทดสอบแล้วถึงอีเมลผู้รับ · URL เดิมได้ 200 ครบ</div>
+          </li>
+          <li class="day is-gate" data-date="2026-11-03">
+            <div class="when">อ. 3 พ.ย.<span class="tag gate">ปิดรับข้อมูล</span></div>
+            <div><h4>วันสุดท้ายที่รับข้อมูลค้าง</h4>
+              <ul><li>ข้อมูลที่มาไม่ทัน → ส่วนนั้นซ่อนบนเว็บจริง ไม่ขึ้นเป็นวงเล็บ และไม่เดาตัวเลขเอง</li><li>ค่อยเพิ่มหลังเปิดเว็บ ทีมใส่เองไม่ได้ (เนื้อหาอยู่ในธีม) ต้องให้อาร์ตแก้แล้ว export ใหม่</li></ul>
+              <div class="who"><span>ฝ่ายผลิต</span><span>การตลาด</span><span>ฝ่ายขาย</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>ตารางข้อมูลด้านล่างทุกแถวมีคำตอบ: ได้แล้ว หรือ ซ่อน</div>
+          </li>
+          <li class="day" data-date="2026-11-04">
+            <div class="when">พ.–พฤ. 4–5 พ.ย.</div>
+            <div><h4>ใส่ข้อมูลจริง → วงเล็บต้องเหลือ 0</h4>
+              <ul><li>ใส่ LINE OA, QR, ตัวเลขที่อนุมัติแล้ว และโลโก้หรือรีวิวที่ได้รับอนุญาต</li><li>ทำ redirect ตามที่ Rocket Rank ตัดสิน (คำนวณราคา · ทรงคอ · /government/)</li><li>ใส่ GTM ID แล้วเปิดโหมด Preview เช็ก 4 สัญญาณ</li></ul>
+              <div class="who"><span>อาร์ต</span><span>Rocket Rank</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>สคริปต์นับวงเล็บ = 0 ทุกหน้า · GTM Preview เห็นครบ 4 สัญญาณ</div>
+          </li>
+          <li class="day is-gate" data-date="2026-11-06">
+            <div class="when">ศ. 6 พ.ย.<span class="tag gate">พี่ทัชเคาะ</span></div>
+            <div><h4>ซ้อมสลับบนสำเนาเว็บจริง + พี่ทัชตอบว่าขึ้นได้หรือไม่</h4>
+              <ul><li>ซ้อมตามลำดับงานวันสลับเว็บด้านล่างให้ครบทุกขั้น รวมการกดกลับไปธีมเดิม และจับเวลาไว้</li><li>พี่ทัชตอบสั้นๆ: ขึ้นได้ หรือ ไม่ได้เพราะ…</li></ul>
+              <div class="who"><span>อาร์ต</span><span>พี่ทัช</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>เวลาที่ใช้สลับ และเวลาที่ใช้กดกลับ (เป้า ≤ 5 นาที)</div>
+          </li>
+          <li class="day" data-date="2026-11-07">
+            <div class="when">ส.–อา. 7–8 พ.ย.<span class="tag buf">วันกันพลาด</span></div>
+            <div><h4>แก้ข้อ "ไม่ได้เพราะ…" ของพี่ทัช</h4></div>
+            <div class="proof"><b>ถ้าแก้ไม่ทัน</b>เลื่อนวันสลับไป อ. 10 พ.ย. · วันยิงแอดยังเป็นวันเดิม</div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="week">
+        <h3>สัปดาห์ 4 · ขึ้นจริง → ยิงแอด <small>จ. 9 – อา. 15 พ.ย.</small></h3>
+        <ol class="days">
+          <li class="day is-gate" data-date="2026-11-09">
+            <div class="when">จ. 9 พ.ย. เช้า<span class="tag gate">สลับเว็บจริง</span></div>
+            <div><h4>backup → สลับธีม → เช็กลิสต์หลังสลับ</h4>
+              <ul><li>ทำตามลำดับงานวันสลับเว็บ (ส่วนท้ายหน้านี้) · เก็บธีมเดิมไว้ กดกลับได้</li><li>ส่ง sitemap ใหม่เข้า Search Console</li></ul>
+              <div class="who"><span>อาร์ต</span><span>พี่ทัช (รับแจ้ง)</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>เช็กลิสต์ครบทุกข้อพร้อมภาพหน้าจอ · แจ้งพี่ทัชว่าขึ้นแล้ว</div>
+          </li>
+          <li class="day" data-date="2026-11-10">
+            <div class="when">อ.–ส. 10–14 พ.ย.</div>
+            <div><h4>แก้จุดที่เจอบนเว็บจริง · ทดสอบตัววัดผลจริง</h4>
+              <ul><li>ดู 4 สัญญาณใน GA4 Realtime · Meta Pixel · Google Ads ผ่าน GTM</li><li>ดู Search Console ทุกวัน: หน้าที่ error · URL ที่หลุด</li><li>วัดความเร็วหน้าที่แอดจะยิงไปบนมือถือ</li></ul>
+              <div class="who"><span>อาร์ต</span><span>คนยิงแอด</span><span>Rocket Rank</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>ภาพ GA4 Realtime เห็น 4 สัญญาณ · Search Console ไม่มี error ใหม่</div>
+          </li>
+          <li class="day is-gate" data-date="2026-11-15">
+            <div class="when">อา. 15 พ.ย.<span class="tag gate">เริ่มยิงแอด</span></div>
+            <div><h4>เปิดแอด</h4>
+              <ul><li>ยิงไปหน้าที่ผ่านการตรวจแล้วเท่านั้น</li><li>สัปดาห์แรกดูตัวเลขกดไลน์และกดโทรทุกวัน</li></ul>
+              <div class="who"><span>คนยิงแอด</span><span>พี่ทัช</span></div></div>
+            <div class="proof"><b>หลักฐาน</b>สัญญาณแรกจากผู้ใช้จริงเข้า GA4</div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">วิธีรัน</span>
+    <h2>ทุกรอบงานเดินแบบเดียวกัน 6 ขั้น</h2>
+    <p class="lead">ทำแบบนี้ตั้งแต่รอบ 3 ถึงรอบ 5 ถ้าขั้นไหนไม่ผ่าน ห้ามข้ามไปขั้นถัดไป</p>
+    <ol class="loop">
+      <li><b>ทำหน้าในต้นแบบ</b><span>Vite · ยึดบอร์ด v4 · ข้อความที่ยังไม่ยืนยันใส่วงเล็บ</span></li>
+      <li><b>เทส</b><span><code>npm test</code> ต้องผ่านทุกข้อ · ตรรกะใหม่เขียนเทสก่อน</span></li>
+      <li><b>ตรวจหน้าตา</b><span>ภาพ 375 · 768 · 1440 · axe ตรวจการเข้าถึง</span></li>
+      <li><b>export ลงธีม</b><span><code>npm run export:wp</code> แล้วเทียบหน้าใน WordPress กับต้นแบบ</span></li>
+      <li><b>อาร์ตดู</b><span>เปิดให้ลองในเบราว์เซอร์ · แก้จนผ่าน</span></li>
+      <li><b>commit</b><span>เมื่ออาร์ตสั่งเท่านั้น · 1 รอบงาน = 1 จุดย้อนกลับ</span></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">สถานะหน้า · 40 หน้า</span>
+    <h2>หน้าไหนเสร็จแล้ว หน้าไหนรอรอบไหน</h2>
+    <p class="lead">ตัวเลขคือจำนวนจุดที่ยังรอข้อมูล [วงเล็บ] นับจากไฟล์ที่ export ลงธีมเมื่อ 21 ต.ค. ทุกหน้าเปิดได้แล้ว แต่หน้าที่ยังไม่ปรับยังเป็นหน้าตาตาม Wireframe v2</p>
+    <div class="pg-groups" id="pages"></div>
+    <div class="legend" style="margin-top:14px">
+      <span><span class="n n0">ครบ</span>ไม่ต้องรอข้อมูล</span>
+      <span><span class="n n1">1–9</span>รอข้อมูลบางส่วน</span>
+      <span><span class="n n2">10+</span>รอข้อมูลเยอะ ต้องเร่ง</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">ข้อมูลที่ต้องได้</span>
+    <h2>ของที่อาร์ตทำเองไม่ได้ ต้องได้จากทีม</h2>
+    <p class="lead">หลังวันที่ 3 พ.ย. ข้อมูลที่ยังไม่มาจะถูกซ่อนบนเว็บจริง แถวสีแดงต้องได้ก่อนพี่ทัชดูรอบแรก เพราะกระทบทุกหน้า</p>
+    <table class="tbl">
+      <thead><tr><th>ต้องได้อะไร</th><th>จากใคร</th><th>ภายใน</th><th>ถ้าไม่ได้</th></tr></thead>
+      <tbody>
+        <tr class="urgent"><td data-l="ต้องได้">ลิงก์ LINE OA และไฟล์ QR</td><td data-l="จาก">การตลาด</td><td class="dl" data-l="ภายใน">พฤ. 29 ต.ค.</td><td data-l="ถ้าไม่ได้">ปุ่มไลน์ทุกปุ่มกดแล้วไม่ไปไหน ยิงแอดไม่ได้</td></tr>
+        <tr class="urgent"><td data-l="ต้องได้">คำตอบ 5 เรื่องจาก Playbook</td><td data-l="จาก">พี่ทัช</td><td class="dl" data-l="ภายใน">ศ. 30 ต.ค.</td><td data-l="ถ้าไม่ได้">ใช้ข้อความแบบปลอดภัยตาม v4 · ไม่ใส่ข้อดีที่ยังไม่อนุมัติ</td></tr>
+        <tr><td data-l="ต้องได้">จำนวนวันผลิต · ขั้นต่ำ · ขั้นตอนที่อนุมัติแล้ว</td><td data-l="จาก">ฝ่ายผลิต</td><td class="dl" data-l="ภายใน">อ. 3 พ.ย.</td><td data-l="ถ้าไม่ได้">ซ่อนตัวเลข เขียนว่า "แจ้งตามจำนวนและแบบ"</td></tr>
+        <tr><td data-l="ต้องได้">รายละเอียดงานสกรีน (เทคนิค ผ้า ขนาด ทรง)</td><td data-l="จาก">ฝ่ายผลิต</td><td class="dl" data-l="ภายใน">อ. 3 พ.ย.</td><td data-l="ถ้าไม่ได้">หน้าสกรีนกับคู่มือสกรีน (รอ 34 จุด) ปิดไว้ก่อน</td></tr>
+        <tr><td data-l="ต้องได้">สเปกเสื้อวอร์ม + รูปแบบจริง</td><td data-l="จาก">ฝ่ายผลิต · ทีมดีไซน์</td><td class="dl" data-l="ภายใน">อ. 3 พ.ย.</td><td data-l="ถ้าไม่ได้">หน้าเสื้อวอร์มเหลือแค่ส่วนแนะนำ + ปุ่มทักไลน์</td></tr>
+        <tr><td data-l="ต้องได้">อนุญาตโลโก้ลูกค้า (มี 45 ไฟล์) · รีวิว · ชื่อองค์กรในผลงาน</td><td data-l="จาก">ฝ่ายขาย</td><td class="dl" data-l="ภายใน">อ. 3 พ.ย.</td><td data-l="ถ้าไม่ได้">ไม่โชว์แถบโลโก้กับรีวิว · ผลงานไม่ใส่ชื่อองค์กร</td></tr>
+        <tr><td data-l="ต้องได้">รูปออฟฟิศ ทีมงาน โรงงาน · ที่อยู่สำหรับเข้าพบ</td><td data-l="จาก">การตลาด</td><td class="dl" data-l="ภายใน">อ. 3 พ.ย.</td><td data-l="ถ้าไม่ได้">หน้ารู้จักทีมดีไม่มีรูป · ไม่ฝังแผนที่</td></tr>
+        <tr><td data-l="ต้องได้">ราคาจากใบราคาขาย v1.4 (ถ้าแอดยิงหน้าคำนวณราคา)</td><td data-l="จาก">ฝ่ายขาย · พี่ทัช</td><td class="dl" data-l="ภายใน">อ. 3 พ.ย.</td><td data-l="ถ้าไม่ได้">ไม่ยิงแอดไปหน้าคำนวณราคา</td></tr>
+        <tr><td data-l="ต้องได้">ยืนยัน URL ใหม่ · ตัดสิน /calculations/ กับ /collar-styles/</td><td data-l="จาก">Rocket Rank</td><td class="dl" data-l="ภายใน">พ. 4 พ.ย.</td><td data-l="ถ้าไม่ได้">ใช้ URL ชั่วคราวไปก่อน · เก็บ 2 หน้านี้ไว้ ไม่ redirect</td></tr>
+        <tr><td data-l="ต้องได้">GTM ID · ใครยิงแอด · ยิงช่องทางไหน</td><td data-l="จาก">พี่ทัช</td><td class="dl" data-l="ภายใน">พ. 4 พ.ย.</td><td data-l="ถ้าไม่ได้">ทดสอบตัววัดผลไม่ได้ก่อนวันยิงแอด</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">วันสลับเว็บ · จ. 9 พ.ย.</span>
+    <h2>ลำดับงานเช้าวันสลับ</h2>
+    <p class="lead">เวลาเป็นค่าประมาณ จะได้เวลาจริงจากการซ้อมวันที่ 6 พ.ย. ทุกขั้นที่แตะเว็บจริงต้องรอคำสั่งของอาร์ตก่อน</p>
+    <ol class="run">
+      <li><span class="tm">07:30</span><p>backup ทั้งเว็บผ่าน hosting (ไฟล์ + ฐานข้อมูล) · ดาวน์โหลดเก็บไว้นอก hosting อีกชุด</p></li>
+      <li><span class="tm">08:00</span><p>อัปโหลดธีม TEAMDEE ที่ export ล่าสุด · ยังไม่เปิดใช้</p></li>
+      <li><span class="tm">08:10</span><p>เปิดธีม TEAMDEE · ธีมเดิมยังติดตั้งอยู่ ไม่ลบ</p></li>
+      <li><span class="tm">08:15</span><p>เครื่องมือ › หน้าจากต้นแบบ › สร้างหน้าที่ยังไม่มี (ไม่แก้และไม่ลบหน้าเดิม)</p></li>
+      <li><span class="tm">08:20</span><p>เช็กลิสต์: 40 URL เปิดได้ · URL เดิมที่ล็อกไว้ครบ · บทความเดิมเปิดได้ · ส่งฟอร์มถึงผู้รับ · ปุ่มไลน์และโทรใช้ได้ · GTM ส่งครบ 4 สัญญาณ · มือถือไม่มีเลื่อนแนวนอน</p></li>
+      <li class="stop"><span class="tm">08:50</span><p>ถ้าเจอข้อร้ายแรง (หน้าแรกพัง · ฟอร์มไม่ถึง · URL เดิมหาย) → กดกลับไปธีมเดิมทันที แล้วค่อยหาสาเหตุ</p></li>
+      <li><span class="tm">09:00</span><p>ผ่านทุกข้อ → ส่ง sitemap เข้า Search Console · แจ้งพี่ทัชพร้อมภาพหน้าจอ</p></li>
+    </ol>
+    <div class="rollback"><b>แผนถอย:</b> เปิดธีมเดิมกลับในหน้า ลักษณะ › ธีม ใช้เวลาไม่ถึง 5 นาที เพราะเนื้อหาเดิมและบทความอยู่ในฐานข้อมูล ไม่ได้ถูกลบ ถ้าฐานข้อมูลเสียหาย ใช้ backup ของ 07:30</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">ความเสี่ยง</span>
+    <h2>ถ้าเกิดเรื่องพวกนี้ ทำอะไรแทน</h2>
+    <div class="rules">
+      <div><b>Admin ไม่มาวันที่ 31 ต.ค.</b>ทำงานบนต้นแบบต่อไปได้ แต่ซ้อมสลับไม่ได้ · ถ้าเกินวันที่ 3 พ.ย. ต้องเลื่อนวันสลับ แจ้งพี่ทัชทันที</div>
+      <div><b>PHP ของ hosting ไม่ตรงกับในเครื่อง</b>รู้ตั้งแต่ 31 ต.ค. · ตั้งเครื่องให้ตรงกับ hosting แล้วเทสใหม่ก่อนซ้อม</div>
+      <div><b>ปลั๊กอินฟอร์มเดิมใช้กับธีมใหม่ไม่ได้</b>ทดสอบบนสำเนาวันที่ 2 พ.ย. · ทางสำรองคือให้ฟอร์มส่งเข้า LINE หรืออีเมลโดยตรง</div>
+      <div><b>อันดับ SEO ตก</b>URL เดิมที่ล็อกไว้ไม่เปลี่ยน · บทความไม่ย้าย · ปลั๊กอิน SEO เดิมยังคุม title กับ description · Rocket Rank ดู Search Console ทุกวัน</div>
+      <div><b>ข้อมูลมาไม่ทันวันที่ 3 พ.ย.</b>ส่วนนั้นซ่อนบนเว็บจริงอัตโนมัติ · ไม่เดาตัวเลขเอง · เพิ่มทีหลังด้วยการแก้ธีมแล้ว export ใหม่</div>
+      <div><b>งานหน้าเว็บล้นกำหนด</b>ใช้วันกันพลาด 24–25 ต.ค. · ถ้ายังไม่พอ หน้ารอง (บทความ นโยบาย) ใช้ของเดิมไปก่อน หน้าที่แอดยิงไปต้องเสร็จก่อน</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="end">
+  <div class="wrap">ไฟล์นี้อยู่ที่ <code>docs/plans/launch-plan.html</code> · ข้อมูลอ้างอิงจาก PLAN.md และ Wireframe v4 · ไม่ได้แตะ team-dee.com</div>
+</footer>
+
+<script>
+/* วันในตาราง: 21 ต.ค. = ช่อง 1 ถึง 15 พ.ย. = ช่อง 26 */
+const START = new Date(2026, 9, 21)
+const DAYS = 26
+const col = (m, d) => Math.round((new Date(2026, m - 1, d) - START) / 864e5) + 2
+const TH = ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส']
+const lanes = [
+  { id: 'web', name: 'หน้าเว็บ', c: 'var(--orange)', bars: [
+    ['web done', 10, 21, 10, 21, 'v4', 'เมนูและหน้าแรกตาม v4'],
+    ['web', 10, 22, 10, 23, 'รอบ 3 หน้าสินค้า'],
+    ['web', 10, 26, 10, 27, 'รอบ 4 กลุ่มลูกค้า · แบบ · ผลงาน'],
+    ['web', 10, 28, 10, 29, 'รอบ 5 คู่มือ · อื่นๆ'],
+    ['web', 11, 2, 11, 2, 'แก้', 'แก้ตามพี่ทัช'],
+    ['web', 11, 4, 11, 5, 'ใส่ข้อมูลจริง'],
+    ['web', 11, 10, 11, 14, 'แก้จุดที่เจอบนเว็บจริง'] ] },
+  { id: 'sys', name: 'WordPress · ระบบ', c: 'var(--ink)', bars: [
+    ['sys done', 10, 21, 10, 21, 'ธีม'],
+    ['sys', 10, 31, 11, 1, 'ได้ Admin · ดึงสำเนา'],
+    ['sys', 11, 2, 11, 2, 'ฟอร์ม', 'ต่อฟอร์ม · เช็ก URL เดิม'],
+    ['sys', 11, 4, 11, 5, 'redirect · GTM'],
+    ['sys', 11, 6, 11, 6, 'ซ้อม'],
+    ['sys', 11, 9, 11, 9, 'สลับ'],
+    ['sys', 11, 10, 11, 14, 'ทดสอบตัววัดผลจริง'] ] },
+  { id: 'data', name: 'ข้อมูลจากทีม', c: '#E8A56A', bars: [
+    ['data', 10, 21, 10, 29, 'LINE OA · QR'],
+    ['data', 10, 30, 11, 3, 'ตัวเลข · สเปก · อนุญาต'] ] },
+  { id: 'boss', name: 'พี่ทัช', c: 'var(--ink)', bars: [
+    ['boss pt', 10, 30, 10, 30, 'ดู'],
+    ['boss pt', 11, 6, 11, 6, 'เคาะ'],
+    ['boss pt', 11, 15, 11, 15, 'แอด'] ] },
+  { id: 'seo', name: 'SEO · Rocket Rank', c: 'var(--line-2)', bars: [
+    ['seo', 10, 26, 11, 4, 'ยืนยัน URL ใหม่ · 2 หน้าเดิม'],
+    ['seo', 11, 9, 11, 14, 'ดู Search Console'] ] },
+]
+const g = document.getElementById('gantt')
+const el = (cls, html, style) => { const d = document.createElement('div'); d.className = cls; if (html != null) d.innerHTML = html; if (style) d.setAttribute('style', style); g.append(d); return d }
+const today = new Date(); today.setHours(0, 0, 0, 0)
+el('g-h month', 'ต.ค. → พ.ย. 2026', 'grid-column:1;grid-row:1')
+for (let i = 0; i < DAYS; i++) {
+  const d = new Date(START); d.setDate(d.getDate() + i)
+  const we = d.getDay() === 0 || d.getDay() === 6
+  const isT = d.getTime() === today.getTime()
+  el('g-h' + (we ? ' we' : '') + (isT ? ' today' : ''), `${TH[d.getDay()]}<b>${d.getDate()}</b>`, `grid-column:${i + 2};grid-row:1`)
+}
+lanes.forEach((ln, r) => {
+  const row = r + 2
+  el('g-lane', `<i style="background:${ln.c}"></i>${ln.name}`, `grid-row:${row}`)
+  for (let i = 0; i < DAYS; i++) {
+    const d = new Date(START); d.setDate(d.getDate() + i)
+    el('g-cell' + (d.getDay() === 0 || d.getDay() === 6 ? ' we' : ''), null, `grid-column:${i + 2};grid-row:${row}`)
+  }
+  for (const [k, m1, d1, m2, d2, t, full] of ln.bars) {
+    const cls = k.split(' ').map((x) => (['web', 'sys', 'data', 'boss', 'seo'].includes(x) ? 'l-' + x : x)).join(' ')
+    el('bar ' + cls + (m1 === m2 && d1 === d2 ? ' one' : ''), t, `grid-column:${col(m1, d1)} / ${col(m2, d2) + 1};grid-row:${row}`).title = full || t
+  }
+})
+
+/* สถานะหน้า · ตัวเลข = จุดที่รอข้อมูล [วงเล็บ] (นับ 21 ต.ค.) */
+const groups = [
+  { t: 'ปรับตาม v4 แล้ว', s: 'เสร็จ 21 ต.ค.', v4: true, p: [['หน้าแรก', '/', 5], ['เสื้อแบบพิเศษ', '/special/', 0], ['เสื้อวอร์มพิมพ์ลาย', '/warm-up/', 8], ['เสื้อหน่วยงานและองค์กร', '/organization/', 0]] },
+  { t: 'รอบ 3 · หน้าสินค้า', s: '22–23 ต.ค.', p: [['เสื้อโปโลปัก', '/embroidery/', 16], ['เสื้อพิมพ์ลาย', '/sublimation/', 13], ['เสื้อสกรีน', '/screen-printing/', 25], ['Jersey Oversize', '/oversize/', 9], ['เสื้อเบสบอล', '/baseball/', 8]] },
+  { t: 'รอบ 4 · กลุ่มลูกค้า แบบเสื้อ ผลงาน', s: '26–27 ต.ค.', p: [['เลือกตามการใช้งาน (หน้ารวม)', '/solutions/', 0], ['เสื้อบริษัท ร้านค้า ยูนิฟอร์ม', '/corporate/', 0], ['เสื้อโรงเรียนและมหาวิทยาลัย', '/education/', 0], ['เสื้อกีฬาและการแข่งขัน', '/sports/', 0], ['เสื้อกิจกรรมและชมรม', '/events/', 0], ['แบบเสื้อ', '/designs/', 0], ['ผลงานและรีวิว', '/projects/', 30]] },
+  { t: 'รอบ 5 · คู่มือ 7 เรื่อง', s: '28–29 ต.ค.', p: [['คู่มือสั่งเสื้อพิมพ์ลาย', '/guide-sublimation/', 0], ['คู่มือเลือกผ้า', '/fabric-technology/', 0], ['คู่มือไซซ์และการวัด', '/size-chart/', 0], ['คู่มือเตรียมโลโก้และข้อมูล', '/guide-artwork/', 0], ['คู่มือจัดส่งและหลังการขาย', '/guide-delivery/', 0], ['คู่มือสั่งเสื้อโปโลปัก', '/guide-embroidery/', 1], ['คู่มือสั่งเสื้อสกรีน', '/guide-screen/', 9]] },
+  { t: 'รอบ 5 · บทความ 8 หน้า', s: '28–29 ต.ค.', p: [['หน้ารวมบทความ', '/blog/', 0], ['บทความรายเรื่อง × 7', '/blog/…/', '2 / เรื่อง']] },
+  { t: 'รอบ 5 · หน้าอื่น', s: '28–29 ต.ค.', p: [['คำถามที่พบบ่อย', '/faq/', 4], ['รู้จักทีมดี', '/about/', 3], ['ติดต่อทีมดี', '/contact/', 4], ['นโยบายความเป็นส่วนตัว', '/privacy/', 2], ['เงื่อนไขการใช้งาน', '/terms/', 1], ['ค้นหา', '/search/', 0], ['ไม่พบหน้า', '404', 0]] },
+  { t: 'ไม่อยู่ใน v4 · รอ Rocket Rank', s: 'ตัดสินภายใน 4 พ.ย.', p: [['คำนวณราคาเบื้องต้น', '/calculations/', 27], ['คู่มือทรงคอ', '/collar-styles/', 11]] },
+]
+const box = document.getElementById('pages')
+for (const gr of groups) {
+  const n = gr.p.length
+  const li = gr.p.map(([name, url, c]) => {
+    const k = typeof c === 'string' ? 'n1' : c === 0 ? 'n0' : c < 10 ? 'n1' : 'n2'
+    return `<li><span>${name}<code>${url}</code></span><span class="n ${k}">${c === 0 ? 'ครบ' : 'รอ ' + c}</span></li>`
+  }).join('')
+  box.insertAdjacentHTML('beforeend', `<div class="pg${gr.v4 ? ' is-v4' : ''}"><h3>${gr.t}<small>${n} หน้า · ${gr.s}</small></h3><ul>${li}</ul></div>`)
+}
+
+/* นับถอยหลังตามวันที่เปิดไฟล์ · วันที่ล่วงไปแล้ว ขึ้นว่า "ผ่านแล้ว" */
+for (const s of document.querySelectorAll('[data-to]')) {
+  const [y, m, d] = s.dataset.to.split('-').map(Number)
+  const left = Math.round((new Date(y, m - 1, d) - today) / 864e5)
+  s.textContent = left > 0 ? `${left} วัน` : left === 0 ? 'วันนี้' : 'ผ่านแล้ว'
+}
+/* ไฮไลต์วันนี้ในรายวัน */
+const iso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+document.querySelector(`.day[data-date="${iso}"]:not(.is-done)`)?.classList.add('is-now')
+</script>
+</body>
+</html>

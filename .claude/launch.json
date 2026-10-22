@@ -26,6 +26,18 @@
         "--login"
       ],
       "port": 9400
+    },
+    {
+      "name": "teamdee-prod",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "vite",
+        "preview",
+        "--port",
+        "4173",
+        "--strictPort"
+      ],
+      "port": 4173
     }
   ]
 }

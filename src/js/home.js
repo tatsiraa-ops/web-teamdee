@@ -1,15 +1,18 @@
 import '../styles/main.css'
 import '../styles/home.css'
-import 'preline/plugins/accordion'
+import { initAccordion } from './accordion.js'
 import { initNav } from './nav.js'
 import { initLightbox } from './lightbox.js'
 import { initHeroSwitch } from './hero-scroll.js'
-import { initReveal, initRails, initGalleryFilter, initMarquee } from './home-picker.js'
+import { initReveal, initRails, initGalleryFilter, initMarquee, initMarqueeOffscreen, initTabs } from './home-picker.js'
 import './ui-bits.js'
 import { initTracking } from './track.js'
+import { initFloats } from './nudge.js'
 
 initNav()
+initAccordion()
 initTracking()
+initFloats()
 
 /* ธีม WordPress (TD_WP) ใช้ hero แบบทีมแบบเดียว (ตกลง 20 ต.ค. 2026) · hero ต้นแบบอีก 2 แบบ + Lenis มีเฉพาะในต้นแบบ
    ใช้ import แบบไดนามิก ตอน build ธีมโค้ดส่วนนี้จะถูกตัดทิ้งทั้งก้อน */
@@ -35,5 +38,7 @@ initLightbox('#pickGrid', 'figure', 'ดูแบบเสื้อขนาด�
 
 initRails()
 initMarquee()
+initMarqueeOffscreen()
+initTabs()
 initGalleryFilter()
 initReveal()

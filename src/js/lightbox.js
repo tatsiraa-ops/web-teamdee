@@ -34,8 +34,8 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
     </figure>
     <button type="button" class="lb__btn lb__close" aria-label="ปิด">${svg(ICON.close)}</button>
     <div class="lb__bar">
-      <a class="btn btn-orange btn-sm lb__save" download>เซฟรูป</a>
-      <a class="btn btn-sm bg-paper text-ink border-paper lb__line" data-track="line" target="_blank" rel="noopener">ส่งคุยใน LINE</a>
+      <a class="btn btn-orange btn-sm lb__save" href="#" download>เซฟรูป</a>
+      <a class="btn btn-sm bg-paper text-ink border-paper lb__line" href="#" data-track="line" target="_blank" rel="noopener">ส่งคุยใน LINE</a>
       <p class="lb__hint">มือถือกดค้างที่รูปเพื่อบันทึก · คอมคลิกขวา</p>
     </div>
     <button type="button" class="lb__btn lb__prev" aria-label="รูปก่อนหน้า">${svg(ICON.prev)}</button>
@@ -73,7 +73,8 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
     const line = dlg.querySelector('.lb__line')
     if (save) {
       save.href = img.src
-      save.setAttribute('download', code ? `TEAMDEE-${code}.jpg` : 'TEAMDEE.jpg')
+      const ext = (/\.(webp|png|jpe?g)(?:$|\?)/i.exec(img.src) || [, 'jpg'])[1]
+      save.setAttribute('download', `TEAMDEE${code ? '-' + code : ''}.${ext}`)
     }
     if (line) line.href = dlg.dataset.lineUrl || '#'
     const solo = items.length < 2

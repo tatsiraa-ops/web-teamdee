@@ -1,8 +1,9 @@
 import '../styles/main.css'
 // โหลดเฉพาะปลั๊กอินที่ใช้จริง แทนการ import ทั้งไลบรารี
-import 'preline/plugins/accordion'
-import 'preline/plugins/dropdown'
-import 'preline/plugins/tabs'
+import { initAccordion } from './accordion.js'
+/* เหตุผลเดียวกับ accordion.js · import เปล่าๆ ถูกตัดทิ้งตอน build */
+import HSDropdown from 'preline/plugins/dropdown-non-auto'
+import HSTabs from 'preline/plugins/tabs-non-auto'
 import { initNav } from './nav.js'
 
 initNav()
@@ -32,3 +33,8 @@ if (links.length) {
   )
   for (const s of document.querySelectorAll('.kit-sec')) io.observe(s)
 }
+
+initAccordion()
+Object.assign(window, { HSDropdown, HSTabs })
+HSDropdown.autoInit()
+HSTabs.autoInit()

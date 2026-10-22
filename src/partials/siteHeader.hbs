@@ -1,26 +1,28 @@
 <a class="sr-only focus:not-sr-only focus:absolute focus:z-[200] focus:left-2 focus:top-2 focus:bg-orange focus:text-ink focus:px-5 focus:py-3 focus:font-bold" href="#main">ข้ามไปเนื้อหาหลัก</a>
 
 <header class="sticky top-0 z-50 bg-paper border-b border-line relative" data-header>
-  <div class="wrap flex items-center gap-2 min-h-[76px]">
+  {{!-- เมนูหลักอยู่กลางแถบ (อาร์ต 21 ต.ค. 2026) · จอ 1400+ กลางจอพอดีด้วย grid 3 ช่อง · 1280–1399 ที่ไม่พอ กลางช่องระหว่างโลโก้กับปุ่ม --}}
+  <div class="wrap-full flex items-center gap-2 min-h-[76px] min-[1400px]:grid min-[1400px]:grid-cols-[1fr_auto_1fr]">
 
-    <a class="flex items-center gap-2.5 flex-none min-h-tap mr-2 sm:mr-4 xl:mr-8" href="/" aria-label="TEAMDEE หน้าแรก">
+    <a class="flex items-center gap-2.5 flex-none min-h-tap mr-2 sm:mr-4 xl:mr-8 justify-self-start" href="/" aria-label="TEAMDEE หน้าแรก">
       <span class="text-orange w-[156px] sm:w-[188px] flex-none">{{> logoHorizontal}}</span>
     </a>
 
-    <nav class="hidden xl:flex items-center" aria-label="เมนูหลัก">
+    <nav class="hidden xl:flex xl:flex-1 xl:justify-center min-[1400px]:flex-none items-center" aria-label="เมนูหลัก">
 
+      {{!-- เมนูมีแค่ชื่อ ไม่มีคำอธิบายรอง (อาร์ต 21 ต.ค. 2026 "คำเยอะไป") --}}
       {{!-- สินค้าและบริการ · เมนูเปิดตัวเลือก ไม่มีหน้ารวม (Brief ข้อ 07) · ทรงเสื้อซ้อนใต้เทคนิค (Wireframe v2) --}}
       <div class="relative" data-mega-root>
         <button class="nav-link nav-link--btn{{#if (eq active 'products')}} is-active{{/if}}" type="button" aria-expanded="false" aria-controls="megaProducts" data-mega-btn>
           สินค้าและบริการ
           <svg class="ml-1.5 transition-transform" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-caret><path d="m6 9 6 6 6-6"/></svg>
         </button>
-        <div id="megaProducts" class="dd w-[380px]" hidden data-mega-panel>
+        <div id="megaProducts" class="dd w-[300px]" hidden data-mega-panel>
           <p class="dd__group" id="ddh-products">สินค้าและบริการ</p>
           <ul aria-labelledby="ddh-products">
             {{#each productTree}}
             <li>
-              <a class="dd__item" href="{{url 'products' this.id}}"><span class="dd__t">{{#if this.navName}}{{this.navName}}{{else}}{{this.menuName}}{{/if}}</span><span class="dd__d">{{this.short}}</span></a>
+              <a class="dd__item" href="{{url 'products' this.id}}"><span class="dd__t">{{#if this.navName}}{{this.navName}}{{else}}{{this.menuName}}{{/if}}</span></a>
               {{#if this.children.length}}
               <ul class="dd__sub" aria-label="ทรงเสื้อของ{{this.menuName}}">
                 {{#each this.children}}<li><a class="dd__item dd__item--compact" href="{{url 'products' this.id}}"><span class="dd__t">{{this.menuName}}</span></a></li>{{/each}}
@@ -43,7 +45,7 @@
         <div id="megaUse" class="dd" hidden data-mega-panel>
           <p class="dd__group" id="ddh-use">ทีมของคุณคือแบบไหน</p>
           <ul aria-labelledby="ddh-use">
-            {{#each uses}}<li><a class="dd__item" href="{{url 'uses' this.id}}"><span class="dd__t">{{this.name}}</span><span class="dd__d">{{this.short}}</span></a></li>{{/each}}
+            {{#each uses}}<li><a class="dd__item" href="{{url 'uses' this.id}}"><span class="dd__t">{{this.name}}</span></a></li>{{/each}}
           </ul>
           <div class="dd__sep" aria-hidden="true"></div>
           <a class="dd__foot" href="{{url 'uses' 'index'}}"><span>ยังไม่แน่ใจ ดูทั้ง 5 กลุ่ม</span><span>&rarr;</span></a>
@@ -67,8 +69,8 @@
           <div class="dd__sep" aria-hidden="true"></div>
           <p class="dd__group" id="ddh-more">อ่านเพิ่ม</p>
           <ul aria-labelledby="ddh-more">
-            <li><a class="dd__item" href="{{url 'blog'}}"><span class="dd__t">บทความและไอเดีย</span><span class="dd__d">เลือกเสื้อ ผ้าและเทคนิค ไอเดีย วางแผนสั่ง</span></a></li>
-            <li><a class="dd__item" href="{{url 'faq'}}"><span class="dd__t">คำถามที่พบบ่อย</span><span class="dd__d">คำตอบชุดเดียวกับที่ทีมขายใช้ตอบ</span></a></li>
+            <li><a class="dd__item" href="{{url 'blog'}}"><span class="dd__t">บทความและไอเดีย</span></a></li>
+            <li><a class="dd__item" href="{{url 'faq'}}"><span class="dd__t">คำถามที่พบบ่อย</span></a></li>
           </ul>
         </div>
       </div>
@@ -76,9 +78,9 @@
       <a class="nav-link{{#if (eq active 'about')}} is-active{{/if}}" href="{{url 'about'}}">รู้จักทีมดี</a>
     </nav>
 
-    <span class="flex-1"></span>
+    <span class="flex-1 xl:hidden"></span>
 
-    <a class="hidden sm:inline-flex btn btn-orange btn-sm{{#if (eq active 'contact')}} !bg-ink !border-ink !text-paper{{/if}}" href="{{url 'contact'}}">ติดต่อทีมดี</a>
+    <a class="hidden sm:inline-flex justify-self-end btn btn-orange btn-sm{{#if (eq active 'contact')}} !bg-ink !border-ink !text-paper{{/if}}" href="{{url 'contact'}}">ติดต่อทีมดี</a>
 
     <button class="xl:hidden btn btn-line btn-sm gap-2" type="button" data-menu-open aria-expanded="false" aria-controls="mobileMenu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>

@@ -1,0 +1,34 @@
+{{!-- มุมจอ 2 ฝั่ง ทุกหน้า · ตรรกะอยู่ที่ src/js/nudge.js --}}
+<div data-floats>
+  <aside class="nudge" data-nudge hidden aria-label="แนะนำหน้าอื่นในเว็บ">
+    <div class="nudge__bar">
+      <span class="nudge__count tabular-nums" data-nudge-count aria-hidden="true"></span>
+      <button type="button" class="nudge__x" data-nudge-close aria-label="ปิดการ์ดแนะนำ">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    {{#each nudges}}
+    <a class="nudge__item" data-nudge-item href="{{url this.key this.id}}" hidden>
+      <span class="nudge__pic" aria-hidden="true">
+        {{#if this.img}}<img src="{{this.img}}" alt="" width="96" height="96" loading="lazy" decoding="async">
+        {{else}}<span class="nudge__ico">{{#if (eq this.icon 'ruler')}}{{> icoRuler}}{{else}}{{> icoSpark}}{{/if}}</span>{{/if}}
+      </span>
+      <span class="nudge__txt">
+        <span class="nudge__k">{{this.kicker}}</span>
+        <span class="nudge__t">{{this.title}}</span>
+        <span class="nudge__go">ไปดู<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </span>
+    </a>
+    {{/each}}
+    <span class="nudge__time" aria-hidden="true"></span>
+  </aside>
+
+  <nav class="fcta" data-float-cta aria-label="ติดต่อทีมดี">
+    <a class="fcta__btn fcta__btn--line" href="{{site.lineUrl}}" data-track="line">
+      <span class="fcta__ico" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ทีมดี
+    </a>
+    <a class="fcta__btn fcta__btn--tel tabular-nums" href="tel:{{site.phonePrimaryTel}}">
+      <span class="fcta__ico" aria-hidden="true">{{> icoPhone}}</span>โทร {{site.phonePrimary}}
+    </a>
+  </nav>
+</div>

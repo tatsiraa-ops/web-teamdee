@@ -1,0 +1,2211 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FF6C00">
+<title>TEAMDEE — Customer Value Playbook v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#ff6c00;--ink:#202321;--muted:#626963;--line:#e4e7e1;--paper:#f5f6f2;--white:#fff;--soft:#fff1e5;--green:#23604a;--greenbg:#edf5ee;--red:#914c38;--redbg:#fcf0eb;--radius:20px;--shadow:0 8px 30px #26311b06}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:110px}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.75 'Noto Sans Thai',Tahoma,sans-serif}button,input,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #b64d00;outline-offset:4px}a{color:#a24300;text-underline-offset:3px}button{color:inherit}h1,h2,h3,h4,p{margin:0}h1{font-size:clamp(30px,4vw,52px);line-height:1.3;letter-spacing:-1.2px}h2{font-size:27px;line-height:1.5;letter-spacing:-.5px}h3{font-size:20px;line-height:1.55}h4{font-size:16px}p+p{margin-top:12px}small,.small{font-size:12px;line-height:1.65}.muted{color:var(--muted)}.eyebrow{text-transform:uppercase;font-size:11px;font-weight:700;letter-spacing:1.8px;color:#8d430d;display:block;margin-bottom:12px}.mono{font-variant-numeric:tabular-nums}.wrap{max-width:1240px;margin:auto;padding:0 32px}.mast{background:var(--white);border-bottom:1px solid var(--line)}.mast .wrap{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px}.wordmark{font-size:26px;font-weight:700;letter-spacing:-1.4px;line-height:1}.wordmark span{color:var(--orange)}.brand-sub{font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:6px}.mast-right{display:flex;align-items:center;gap:18px}.quiet-btn{border:1px solid var(--line);border-radius:9px;background:white;padding:8px 14px;font-size:13px}.nav-shell{position:sticky;top:0;z-index:20;background:#fffffff5;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}.tabs{display:flex;gap:4px;overflow-x:auto;padding:10px 0;scrollbar-width:thin}.tab{white-space:nowrap;border:0;background:transparent;padding:11px 18px;border-radius:10px;font-size:14px;color:var(--muted)}.tab[aria-selected=true]{background:var(--ink);color:white}.tab .tn{font-size:10px;opacity:.6;margin-right:7px}.page{padding:38px 0 58px}.page[hidden]{display:none!important}.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px}.section-head p{max-width:680px;color:var(--muted);margin-top:8px}.tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:100px;background:#eef0eb;color:#4c544d;font-size:11px;font-weight:500}.tag.orange{background:var(--soft);color:#9b4408}.tag.green{background:var(--greenbg);color:var(--green)}.tag.outline{background:transparent;border:1px solid var(--line)}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.card{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);min-width:0}.card p{color:var(--muted)}.spacer{margin-top:24px}.bigspace{margin-top:38px}.subhead{margin-bottom:16px}.note{padding:16px 19px;border-left:3px solid #dca06e;background:#fff8f0;border-radius:0 12px 12px 0;color:#745438;font-size:13px}.note.neutral{background:#ecefe8;border-color:#9aa492;color:#505b4a}.list{margin:10px 0 0;padding-left:20px}.list li{padding-left:3px;margin:6px 0}.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;background:white;border:1px solid var(--line);border-radius:26px;padding:38px;overflow:hidden}.hero h1 em{font-style:normal;color:#d45a00}.hero-copy>p{max-width:540px;margin-top:18px;color:var(--muted);font-size:16px}.hero-meta{margin-top:26px;display:flex;gap:30px;flex-wrap:wrap}.hero-meta b{display:block;font-size:25px;line-height:1.3}.hero-meta span{font-size:12px;color:var(--muted)}.identity-art{display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;padding:14px 6px}.orbit{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-items:center}.orb{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;background:var(--soft);text-align:center;border:1px solid #f4d5bc}.orb:nth-child(2){background:var(--ink);color:white;border-color:var(--ink);transform:translateY(-15px)}.orb:nth-child(3){background:var(--greenbg);border-color:#d1e1d4}.orb strong{font-size:20px}.orb span{font-size:11px;opacity:.8}.orbit-label{text-align:center;margin-top:12px;font-size:13px;color:var(--muted)}.approver{border-top:1px solid var(--line);padding-top:16px;text-align:center;font-size:12px;color:var(--muted);margin-top:10px}.promise{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--ink);border-radius:18px;color:white;overflow:hidden}.promise>div{padding:25px;border-right:1px solid #ffffff20}.promise>div:last-child{border:0}.promise b{font-size:19px}.promise p{color:#cad0c8;font-size:13px;margin-top:6px}.promise .step{color:#ffab70;font-size:11px;letter-spacing:1px;margin-bottom:8px}.group-card{display:flex;flex-direction:column;align-items:start;text-align:left;width:100%;transition:transform .15s,border-color .15s}.group-card:hover{transform:translateY(-3px);border-color:#e0a97e}.group-letter{display:flex;align-items:center;justify-content:center;background:var(--soft);color:#ba5000;width:42px;height:42px;border-radius:12px;font-size:19px;font-weight:700;margin-bottom:18px}.group-card h3{font-size:17px}.group-card p{font-size:13px;margin:9px 0 15px}.group-card .bottom{margin-top:auto;font-size:12px;color:#a44808}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.flow>div{background:white;border:1px solid var(--line);border-radius:14px;padding:18px;position:relative}.flow>div:not(:last-child):after{content:'→';position:absolute;right:-11px;top:36%;z-index:2;color:#a5aa9e;background:var(--paper)}.flow span{font-size:11px;color:#9c4e12;display:block;margin-bottom:6px}.flow strong{font-size:14px}.flow p{font-size:12px;color:var(--muted);margin-top:8px}.toolbar{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px}.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{padding:8px 14px;border:1px solid var(--line);border-radius:100px;background:white;font-size:12px}.chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:white}.search{min-width:220px;max-width:100%;padding:9px 14px;background:white;border:1px solid var(--line);border-radius:10px;font-size:13px}.persona-layout{display:grid;grid-template-columns:275px minmax(0,1fr);gap:22px;align-items:start}.persona-list{display:grid;gap:7px}.person-btn{border:1px solid var(--line);background:#ffffffb0;border-radius:13px;padding:13px;text-align:left;display:flex;gap:12px;align-items:start;width:100%}.person-btn[aria-pressed=true]{border-color:#e8ac7d;background:var(--soft);box-shadow:inset 3px 0 0 var(--orange)}.person-btn .num{font-size:11px;opacity:.6;min-width:18px;padding-top:3px}.person-btn b{font-size:13px;font-weight:600;display:block}.person-btn small{font-size:11px;color:var(--muted);display:block;margin-top:2px}.count{font-size:12px;color:var(--muted);margin:0 0 10px}.person-detail{padding:29px;background:white;border:1px solid var(--line);border-radius:20px;min-width:0}.person-title{display:flex;gap:16px;justify-content:space-between;align-items:start;margin-bottom:22px}.person-title h2{font-size:25px;margin-top:10px}.person-no{color:#eee9e2;font-size:58px;line-height:1;font-weight:700;letter-spacing:-4px}.fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13px}.fact label,.mini-label{display:block;color:#747b71;font-size:11px;margin-bottom:5px;font-weight:500}.job{padding:15px 18px;background:#f5f6f2;border-radius:12px;margin:19px 0;font-size:14px}.pg{display:grid;grid-template-columns:1fr 1fr;gap:14px}.pg>div{padding:18px;border-radius:14px;background:var(--redbg)}.pg>div:last-child{background:var(--greenbg)}.pg h4{font-size:12px;letter-spacing:.4px;color:var(--red)}.pg>div:last-child h4{color:var(--green)}.pg ul{font-size:13px}.vp{margin-top:20px;border-left:3px solid var(--orange);padding:4px 0 4px 18px}.vp p{font-size:16px;font-weight:500;line-height:1.8}.wow-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.wow-tag{display:flex;align-items:center;gap:7px;border:1px solid #efd4bd;background:#fff8f1;padding:7px 10px;border-radius:9px;font-size:12px;text-align:left}.wow-tag b{color:#aa4a00;font-size:12px}.detail-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:22px;font-size:13px}.detail-pair h4{font-size:13px;margin-bottom:6px}.detail-pair p{color:var(--muted)}.success{font-size:12px;border-top:1px solid var(--line);padding-top:15px;margin-top:20px;color:var(--muted)}.copy-card{background:#f5f6f2;border-radius:14px;padding:20px;margin-top:20px}.copy-card .headline{font-size:18px;line-height:1.65;font-weight:600;margin-top:9px}.cta-sample{display:inline-block;background:var(--ink);color:white;border-radius:8px;padding:8px 12px;font-size:12px;margin-top:12px}.copy-btn{float:right;background:white;border:1px solid var(--line);padding:4px 10px;font-size:11px;border-radius:7px}.empty{padding:25px;color:var(--muted)}.wow-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.wow-card{padding:22px;scroll-margin-top:110px}.wow-title{display:flex;gap:14px;align-items:center;margin-bottom:17px}.wow-number{height:42px;width:42px;border-radius:12px;background:var(--ink);color:white;display:grid;place-items:center;flex-shrink:0;font-size:17px}.wow-card h3{font-size:17px}.wow-card .stage{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#8c5c36}.wow-pg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.wow-pg p{font-size:13px}.wow-pg .mini-label{font-size:10px}.wow-pg .pain-label{color:var(--red)}.wow-pg .gain-label{color:var(--green)}.value-line{font-weight:500;font-size:14px;padding:13px 0;border-top:1px solid var(--line)}details{border-top:1px solid var(--line);padding-top:10px;margin-top:2px}summary{font-size:12px;color:var(--muted);cursor:pointer}details p{font-size:12px;margin:8px 0 2px}.matrix-scroll{position:relative;overflow:auto;border:1px solid var(--line);border-radius:16px;background:white}.matrix{border-collapse:collapse;width:100%;font-size:12px;min-width:750px}.matrix th{text-align:left;padding:12px 15px;background:#f0f2ec;color:#626c5e;font-weight:500;font-size:11px}.matrix td{padding:13px 15px;border-top:1px solid var(--line);vertical-align:top;line-height:1.65}.matrix .dot{text-align:center;color:#ac4900}.matrix td:first-child{font-weight:500}.matrix button{border:0;background:none;padding:0;text-align:left;font:inherit;color:inherit}.matrix td.dot>span:not(.sr-only){background:var(--orange);display:inline-block;width:8px;height:8px;border-radius:50%}.dimension-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.dimension{padding:20px}.dimension .idx{color:#b5530a;font-size:11px;font-weight:600}.dimension h3{font-size:16px;margin:5px 0 12px}.drow{display:grid;grid-template-columns:40px 1fr;gap:8px;font-size:13px;margin-top:7px}.drow label{font-size:10px;color:var(--muted);padding-top:3px}.drow.pain label{color:var(--red)}.drow.gain label{color:var(--green)}.dimension .web{font-size:12px;margin-top:13px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted)}.tier{position:relative;padding-left:21px;border-left:3px solid #dedfd7}.tier:nth-child(2){border-color:#c9d6c6}.tier:nth-child(3){border-color:#e9ac78}.tier:nth-child(4){border-color:var(--orange)}.tier b{font-size:15px}.tier p{font-size:12px;color:var(--muted);margin-top:8px}.scenario-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.scenario{padding:18px;background:white;border:1px solid var(--line);border-radius:14px}.scenario h4{font-size:14px}.scenario p{font-size:12px;color:var(--muted);margin:8px 0}.scenario blockquote{margin:10px 0 0;font-size:12px;color:#935021;border-left:2px solid #efd5bd;padding-left:10px}.web-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}.copy-large{background:var(--ink);color:white;border-radius:22px;padding:30px;min-height:340px;display:flex;flex-direction:column}.copy-large .eyebrow{color:#ffab70}.copy-large h3{font-size:27px;line-height:1.55;letter-spacing:-.4px}.copy-large p{color:#ced3cc;margin-top:18px;font-size:14px}.copy-large .cta-sample{background:var(--orange);color:#1a180f;align-self:start;margin-top:22px;font-weight:600}.copy-large .copy-btn{float:none;align-self:end;background:#ffffff15;color:white;border-color:#ffffff30;margin-top:18px}.landing-map{padding:25px}.landing-step{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}.landing-step:last-child{border:0}.landing-step .n{font-size:11px;color:#b45a18;padding-top:3px}.landing-step h4{font-size:14px}.landing-step p{font-size:12px;color:var(--muted);margin-top:4px}.landing-step .tag{margin-top:8px}.mini-browser{border:1px solid var(--line);border-radius:16px;background:white;overflow:hidden}.browser-bar{background:#eef0ea;padding:10px 16px;display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)}.browser-bar i{height:5px;width:5px;background:#b9c2b5;border-radius:50%}.browser-bar span{margin-left:10px}.mini-home{padding:30px}.mini-home h3{font-size:25px;line-height:1.5}.mini-home p{font-size:13px;color:var(--muted);margin-top:12px}.mini-home .benefits{margin-top:20px;display:flex;gap:7px;flex-wrap:wrap}.mini-home .benefits span{background:var(--soft);font-size:10px;padding:4px 8px;border-radius:6px;color:#914609}.proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.proof-card h3{font-size:16px;margin-bottom:8px}.proof-card p{font-size:13px}.proof-card .tag{margin-bottom:12px}.gap-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:1px solid var(--line);padding:15px 0;font-size:13px}.gap-row:first-of-type{margin-top:12px}.gap-row p{color:var(--muted)}.funnel{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}.funnel span{background:#eef0e9;border-radius:8px;padding:9px 12px;font-size:12px}.source-list{font-size:12px;line-height:1.9;overflow-wrap:anywhere}.footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:11px}.footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;padding:10px 20px;border-radius:10px;font-size:13px;z-index:40;max-width:90%;text-align:center}.toast:empty{display:none}.print-only{display:none}.flash{animation:flash 1.6s ease}@keyframes flash{0%,55%{box-shadow:0 0 0 3px #ef9b57}100%{box-shadow:var(--shadow)}}
+@media(max-width:980px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr 1fr;padding:27px;gap:22px}.hero h1{font-size:36px}.persona-layout{grid-template-columns:225px minmax(0,1fr)}.scenario-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{gap:0}.tab{padding:10px 12px}.flow{grid-template-columns:repeat(3,minmax(0,1fr))}.flow>div:after{display:none}}
+@media(max-width:760px){.wrap{padding:0 20px}.mast .wrap{min-height:73px}.mast-right>.small{display:none}.hero{grid-template-columns:1fr;padding:26px}.hero h1{font-size:35px}.identity-art{max-width:430px;width:100%;margin:20px auto 0}.orbit{gap:13px}.orb strong{font-size:20px}.hero-meta{gap:26px}.section-head{display:block}.section-head>.tag{margin-top:12px}.grid3,.grid2,.web-layout,.wow-grid,.dimension-grid{grid-template-columns:1fr}.promise{grid-template-columns:1fr}.promise>div{border-right:0;border-bottom:1px solid #ffffff20;padding:20px 24px}.persona-layout{grid-template-columns:1fr}.persona-list{grid-template-columns:repeat(2,minmax(0,1fr))}.person-btn{padding:11px;gap:7px}.person-btn b{font-size:12px}.person-btn small{font-size:10px}.person-detail{padding:22px}.fact-grid{gap:14px}.flow{grid-template-columns:1fr 1fr}.flow>div:last-child{grid-column:1/-1}.proof-grid{grid-template-columns:1fr 1fr}.section-head h2{font-size:25px}.tab{font-size:12px}.tab .tn{display:none}.page{padding-top:26px}.grid4{gap:12px}.card{padding:21px}.copy-large{padding:25px}.copy-large h3{font-size:25px}.print-btn{font-size:12px;padding:7px 10px}.wordmark{font-size:24px}.person-title h2{font-size:23px}.toast{bottom:14px}}
+@media(max-width:420px){body{font-size:14px}.wrap{padding:0 14px}.hero{padding:22px}.hero h1{font-size:30px}.hero-meta b{font-size:23px}.hero-meta{gap:20px}.orb strong{font-size:17px}.orb span{font-size:10px}.grid4,.proof-grid{grid-template-columns:1fr}.pg,.detail-pair,.fact-grid{grid-template-columns:1fr}.person-detail{padding:18px}.person-no{font-size:43px}.person-title h2{font-size:22px}.wow-pg{grid-template-columns:1fr}.scenario-grid{grid-template-columns:1fr}.chips{gap:5px}.chip{font-size:11px;padding:7px 10px}.hero-copy>p{font-size:14px}.gap-row{grid-template-columns:1fr;gap:6px}.matrix-scroll{max-width:100%}.flow{grid-template-columns:1fr}.flow>div:last-child{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{@page{size:A4;margin:14mm}body{background:white;font-size:10pt}.wrap{max-width:none;padding:0}.nav-shell,.toolbar,.persona-list,.person-detail,.print-btn,.copy-btn,.wow-tag,.toast,.mast-right{display:none!important}.page,.page[hidden]{display:block!important;padding:20px 0;break-before:page}.page:first-of-type{break-before:auto}.print-only{display:block}.print-person{break-before:page}.print-person .person-detail{display:block!important;border:0;padding:0}.print-person .wow-tag{display:inline-flex!important}.persona-layout{display:block}.card,.hero,.copy-large,.mini-browser{box-shadow:none;break-inside:avoid}.hero{grid-template-columns:1fr 1fr;padding:20px}.hero h1{font-size:28pt}.hero-meta b{font-size:18pt}.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(3,1fr)}.grid2,.wow-grid,.dimension-grid,.web-layout{grid-template-columns:repeat(2,1fr)}.matrix{min-width:0;font-size:8pt}.matrix-scroll{overflow:visible}.matrix th,.matrix td{padding:6px}.card{padding:14px}details:not([open])>p{display:block}.copy-large{background:#f1f1ed;color:#222;min-height:0}.copy-large p{color:#444}.promise{background:#eee;color:#222}.promise p{color:#444}.copy-large .cta-sample,.cta-sample{background:#eee;color:#222}.flow{grid-template-columns:repeat(5,1fr)}.print-copy{break-inside:avoid;border-top:1px solid #ddd;padding:20px 0}.footer{margin-top:20px}.section-head{break-after:avoid}.print-only .person-detail{margin:0}.tag{font-size:8pt}.small,small{font-size:8pt}}
+
+/* v2 · message maps, working tools and confirmation inventory */
+.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;line-height:1.5;border-radius:7px;padding:5px 8px;background:#f0f2ec;color:#56634d;white-space:normal}
+.status-badge.ready{background:#e7f3ec;color:#23583d}.status-badge.build{background:#edf0f4;color:#485b73}.status-badge.verify{background:#fff0db;color:#815017}
+.status-legend{display:flex;flex-wrap:wrap;gap:12px 22px;margin:16px 0 22px;font-size:12px;color:var(--muted)}.status-legend>span{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.map-picker{display:grid;grid-template-columns:minmax(250px,1fr) minmax(0,1.2fr);gap:24px;align-items:center;margin-bottom:22px;padding:20px 24px;background:white;border:1px solid var(--line);border-radius:16px}
+.map-picker label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}.map-picker select{width:100%;max-width:100%;background:#f5f6f2;border:1px solid #d7ddd2;border-radius:9px;padding:11px 12px;font-size:15px;color:var(--ink)}
+.map-picker p{font-size:12px;margin-top:8px;color:var(--muted)}#map-type{display:flex;gap:6px;flex-wrap:wrap}.secondary-cta{font-size:12px!important;color:#d6dccf!important;margin-top:13px!important}
+.persona-ref{font-size:11px;border:1px solid var(--line);background:#f6f7f3;border-radius:8px;padding:6px 9px;text-align:left}.message-priority{margin:18px 0;display:grid;gap:14px}.message-priority>div:first-child{padding-left:12px;border-left:3px solid var(--orange)}.message-priority b{font-size:15px;font-weight:500}.message-priority p{font-size:13px}.map-section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-top:26px}
+.hook-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:22px;min-width:0}.hook-card h4{font-size:16px;line-height:1.7}.hook-card p{font-size:13px;color:var(--muted);margin-top:12px}.hook-card .eyebrow{font-size:10px;margin-bottom:10px}
+.faq-item{padding:13px 0;margin:0}.faq-item summary{font-size:13px;color:var(--ink);font-weight:500}.faq-item p{font-size:13px;color:var(--muted);padding-left:16px;margin:9px 0 0}.tool-links{display:grid;gap:8px}.tool-link{display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;font-size:12px;padding:10px;border:1px solid var(--line);border-radius:10px;background:white}.tool-link span:first-child{min-width:0}.tool-link .status-badge{flex-shrink:0}
+.pending-box{background:#fff8ee;border:1px solid #efd9bb;border-radius:15px;padding:21px;margin-top:20px;font-size:13px}.pending-link{font-size:12px;border:1px solid #e7ccaa;background:white;border-radius:8px;padding:8px 11px;text-align:left}
+.extra-detail{background:#f6f7f2;border:1px solid var(--line);border-radius:12px;padding:15px;margin-top:20px}.extra-detail summary{font-size:13px;color:var(--ink);font-weight:500}.extra-detail .quiet-btn{font-size:11px;padding:6px 9px}.mini-flow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:14px 0}.mini-flow span{border:1px solid var(--line);border-radius:6px;padding:6px 9px;background:white;font-size:11px}.mini-flow b{font-size:12px;color:#8a947f;font-weight:400}
+.tool-card{scroll-margin-top:105px}.tool-card h3{font-size:18px;margin:15px 0 10px}.tool-card p{font-size:13px}.tool-card details{margin-top:15px}.inventory-item{padding:0;border-top:1px solid var(--line);scroll-margin-top:105px}.inventory-item summary{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 2px;list-style:none}.inventory-item summary::-webkit-details-marker{display:none}.inventory-item summary:before{content:'+';color:#93613d;flex-shrink:0}.inventory-item[open] summary:before{content:'−'}.inventory-title{display:block;flex:1;min-width:0}.inventory-title b{font-size:14px;font-weight:500;color:var(--ink)}.inventory-title small{display:block;font-size:11px;color:var(--muted);margin-top:3px}.inventory-body{padding:0 18px 18px 23px}.inventory-body p{font-size:13px;line-height:1.8;color:var(--muted);margin:7px 0}.inventory-item:last-child{border-bottom:1px solid var(--line)}
+.scope-note{margin-top:24px}.scope-note summary{color:var(--ink);font-size:14px;font-weight:500}.scope-note .list{font-size:13px}.map-print-link{margin-top:12px}
+@media(max-width:760px){.map-picker{grid-template-columns:1fr;gap:15px;padding:18px}.map-picker select{font-size:16px}.hook-card{padding:19px}.inventory-item summary{gap:10px}.inventory-item .status-badge{font-size:10px;max-width:105px}.map-section-title h3{font-size:19px}.copy-large{min-height:0}}
+@media(max-width:420px){.inventory-item summary{flex-wrap:wrap}.inventory-title{flex-basis:75%}.inventory-item summary>.status-badge{margin-left:18px;max-width:none}.inventory-body{padding:0 6px 16px 18px}.tool-link{flex-wrap:wrap}.map-picker{padding:15px}.pending-box{padding:17px}.status-legend>span{gap:6px}}
+@media print{#map-screen,.extra-detail button{display:none!important}.print-copy{break-before:page;break-inside:auto;font-size:10pt}.print-copy h3{font-size:19pt;margin-bottom:12px}.print-copy h4{margin-top:15px}.print-copy p{margin:8px 0}.print-copy .faq-item{break-inside:avoid}.inventory-item,.tool-card,.hook-card{break-inside:avoid}.inventory-body{padding-bottom:10px}.status-legend{font-size:9pt}.inventory-item summary>.status-badge{max-width:none}.extra-detail{break-inside:avoid}.print-person .extra-detail{font-size:9pt}.print-person .extra-detail p{font-size:9pt}}
+
+</style>
+</head>
+<body>
+<header class="mast"><div class="wrap"><div><div class="wordmark">TEAMDEE<span>.</span></div><div class="brand-sub">CUSTOMER VALUE PLAYBOOK</div></div><div class="mast-right"><span class="small muted">ฉบับรวมสำหรับทีมเว็บและคอนเทนต์<br>21 ตุลาคม 2569 · v3 · ปรับภาษา</span><button type="button" class="quiet-btn print-btn" id="print">พิมพ์ / บันทึก PDF</button></div></div></header>
+<nav class="nav-shell" aria-label="หัวข้อในคู่มือ"><div class="wrap"><div class="tabs" role="tablist" aria-label="เนื้อหา 6 ส่วน">
+<button class="tab" type="button" id="t-overview" role="tab" aria-controls="overview" aria-selected="true"><span class="tn">01</span>ภาพรวมคุณค่า</button>
+<button class="tab" type="button" id="t-personas" role="tab" aria-controls="personas" aria-selected="false" tabindex="-1"><span class="tn">02</span>14 Persona</button>
+<button class="tab" type="button" id="t-wows" role="tab" aria-controls="wows" aria-selected="false" tabindex="-1"><span class="tn">03</span>10 ว้าว × Pain–Gain</button>
+<button class="tab" type="button" id="t-dimensions" role="tab" aria-controls="dimensions" aria-selected="false" tabindex="-1"><span class="tn">04</span>ก่อนตัดสินใจสั่ง</button>
+<button class="tab" type="button" id="t-website" role="tab" aria-controls="website" aria-selected="false" tabindex="-1"><span class="tn">05</span>เว็บ & Landing Page</button>
+<button class="tab" type="button" id="t-proof" role="tab" aria-controls="proof" aria-selected="false" tabindex="-1"><span class="tn">06</span>ข้อมูลที่ต้องยืนยัน</button>
+</div></div></nav>
+<main class="wrap">
+<section id="overview" class="page" role="tabpanel" aria-labelledby="t-overview">
+<div class="hero"><div class="hero-copy"><span class="eyebrow">The value of a good team</span><h1>เสื้อทีมที่อยากใส่<br><em>มีคนช่วยดูแลเรื่องสั่งทำ</em></h1><p>ทีมดีช่วยคิด ช่วยจัดการ และช่วยจบงาน<br>ให้คนสั่งสบายใจ คนใส่ภูมิใจ และคนเห็นจำทีมได้</p><div class="hero-meta"><div><b>4</b><span>กลุ่มลูกค้าหลัก</span></div><div><b>14</b><span>กลุ่มย่อยของคนสั่งเสื้อ</span></div><div><b>10</b><span>บริการที่ช่วยคนสั่ง</span></div></div></div><div class="identity-art" aria-label="3WIN: คนสั่งมั่นใจ คนใส่ภูมิใจ คนเห็นจดจำ โดยมีผู้อนุมัติเป็นมุมมองเสริม"><div class="orbit"><div class="orb"><strong>คนสั่ง</strong><span>มั่นใจ · งานเดิน</span></div><div class="orb"><strong>คนใส่</strong><span>ภูมิใจ · ใช้จริง</span></div><div class="orb"><strong>คนเห็น</strong><span>จดจำ · เห็นตัวตน</span></div></div><div class="orbit-label">3WIN — ผลลัพธ์ของงานเสื้อหนึ่งงาน</div><div class="approver">มุมมองเสริม: <b>ผู้อนุมัติ / คนจ่าย</b><br>ต้องเห็นความคุ้มค่า ขอบเขต และเหตุผลของราคา</div></div></div>
+<div class="note neutral spacer"><b>ปรับใน v3:</b> ปรับภาษาให้อ่านง่ายขึ้นทั้ง 10 ชุดข้อความ FAQ ปุ่ม และคำอธิบาย · คง 4 กลุ่มหลัก 14 Persona และ 6 แท็บ · แยกข้อความสำหรับลูกค้าจากเรื่องที่ทีมต้องยืนยัน</div><div class="note spacer"><b>วิธีอ่าน:</b> โครง 4 กลุ่มและตัวตนแบรนด์มาจากข้อมูลโปรเจกต์ ส่วน Persona, Pain–Gain และข้อความหน้าเว็บเป็นข้อเสนอเชิงกลยุทธ์ที่ต้องตรวจสอบกับลูกค้าและทีมขาย บริการ 10 ว้าวใช้ตามข้อมูลแบรนด์ที่ให้มา โดยยืนยันเงื่อนไขตามสินค้าก่อนเผยแพร่</div>
+<div class="bigspace"><div class="section-head"><div><span class="eyebrow">Brand foundation</span><h2>Team Identity Partner</h2><p>“TEAMDEE คือ Team Identity Partner ที่ช่วยคิด ช่วยจัดการ ช่วยจบงาน — เปลี่ยนตัวตนของทีมให้เป็นเสื้อที่ทุกคนภูมิใจใส่ ด้วยความแน่นอนที่งานสำคัญต้องการ”</p></div></div><div class="promise"><div><div class="step">01 / ช่วยคิด</div><b>เลือกให้เหมาะกับทีม</b><p>แบบ ผ้า ทรง และการใช้งาน<br>ว้าว ① ปรับแบบ · ② ตัวอย่างผ้า</p></div><div><div class="step">02 / ช่วยจัดการ</div><b>ราคาเข้าใจง่าย ติดตามงานได้</b><p>ค่าใช้จ่าย การติดต่อ และสถานะงาน<br>ว้าว ③–⑤ งบ · ⑥–⑧ ประสานงาน</p></div><div><div class="step">03 / ช่วยจบงาน</div><b>ดูแลหลังรับเสื้อ</b><p>ปัญหาการผลิตและสมาชิกที่เพิ่ม<br>ว้าว ⑨ เคลม · ⑩ ล็อตเติม</p></div></div></div>
+<div class="bigspace"><div class="section-head"><div><span class="eyebrow">Who buys & how</span><h2>4 กลุ่มหลัก แยกตามผู้ซื้อและวิธีซื้อ</h2><p>ให้ลูกค้าหาหน้าจากงานที่จะใช้เสื้อ แล้วดูว่าใครจ่าย ใครอนุมัติ และต้องสั่งผ่านขั้นตอนอะไร</p></div><span class="tag outline">เลือกกลุ่มเพื่อเปิด Persona</span></div><div class="grid4" id="group-cards"></div></div>
+<div class="grid2 spacer"><div class="card"><h3>คนสั่งเสื้อกับงานที่จะใช้ ต้องแยกกันดู</h3><ul class="list small"><li>กีฬาสีบริษัทที่ HR ใช้งบบริษัท → <b>บริษัท</b> + กีฬาสี</li><li>สมาชิกทีมแบดร่วมจ่าย → <b>ทีมกีฬา</b> + แข่งขัน</li><li>เสื้อคณะที่สถาบันจัดซื้อ → <b>สถานศึกษา</b> + กิจกรรม</li><li>นักศึกษารวมเงินทำเสื้อรุ่น → พฤติกรรมแบบ <b>ชมรม / สมาชิก</b></li><li>Agency สั่งเสื้อส่งมอบให้ลูกค้า → <b>Organizer</b></li></ul></div><div class="card"><h3>10 ว้าวช่วยอธิบายว่าเราดูแลลูกค้าอย่างไร</h3><p class="small" style="margin-top:12px">ช่วยเรื่องงบ การเลือกเสื้อ และงานที่คนสั่งต้องทำ ส่วนคุณภาพแบบ ความเหมาะกับคนใส่ และการส่งมอบ ต้องใช้ภาพจริง รีวิว และข้อมูลผลงานประกอบ</p><div class="row spacer"><span class="tag orange">บริการ = สิ่งที่เราช่วยทำ</span><span class="tag green">ผลงานจริง = เหตุผลให้เชื่อ</span></div></div></div>
+<div class="bigspace"><h3 class="subhead">เขียนข้อความจากปัญหา ไปถึงวิธีที่เราช่วยได้</h3><div class="flow"><div><span>01 · PAIN</span><strong>ลูกค้าติดอะไร</strong><p>หลายฝ่ายขอแก้แบบ</p></div><div><span>02 · SERVICE</span><strong>ทีมดีช่วยอย่างไร</strong><p>ปรับแบบฟรีไม่จำกัด</p></div><div><span>03 · GAIN</span><strong>ลูกค้าได้อะไร</strong><p>ปรับจนได้ข้อสรุปร่วม</p></div><div><span>04 · PROOF</span><strong>มีอะไรให้เชื่อ</strong><p>โจทย์ → แบบ → งานจริง</p></div><div><span>05 · TERMS</span><strong>เงื่อนไขเข้าใจง่าย</strong><p>เงื่อนไขก่อนเริ่มผลิต</p></div></div></div>
+</section>
+<section id="personas" class="page" role="tabpanel" aria-labelledby="t-personas" hidden>
+<div class="section-head"><div><span class="eyebrow">Customer profiles</span><h2>ทำความรู้จักคนสั่งเสื้อแต่ละกลุ่ม</h2><p>ดูว่าแต่ละกลุ่มสั่งเสื้อเมื่อไร กังวลเรื่องอะไร อยากได้อะไร และทีมดีช่วยได้อย่างไร พร้อมข้อความตัวอย่างสำหรับหน้าเว็บ</p></div><span class="tag orange">แนววิเคราะห์ที่ควรตรวจสอบกับลูกค้า</span></div>
+<div class="toolbar"><div class="chips" id="group-filters" aria-label="กรองกลุ่มลูกค้า"></div><label><span class="sr-only">ค้นหา Persona</span><input id="persona-search" class="search" type="search" placeholder="ค้นหา เช่น HR · เสื้อรุ่น · แบด"></label></div>
+<div class="persona-layout"><aside><p class="count" id="persona-count" aria-live="polite"></p><div class="persona-list" id="persona-list"></div></aside><article class="person-detail" id="persona-detail" aria-live="polite"></article></div><div id="print-personas" class="print-only"></div>
+<div class="note neutral spacer">Persona 9 อยู่ในบริบทการศึกษา แต่ถ้ารวมเงินสมาชิกเอง ให้ใช้วิธีสื่อสารแบบชมรม ส่วนงานด่วน งบจำกัด หรือสั่งซ้ำ เป็นสถานการณ์ซื้อที่เกิดได้ในทุก Persona</div>
+</section>
+<section id="wows" class="page" role="tabpanel" aria-labelledby="t-wows" hidden>
+<div class="section-head"><div><span class="eyebrow">10 service promises</span><h2>10 ว้าว ช่วยคนสั่งเสื้อเรื่องไหนบ้าง</h2><p>ดูว่าบริการแต่ละข้อช่วยลดปัญหาอะไร แล้วเลือกเรื่องที่ลูกค้ากลุ่มนั้นสนใจไปเล่าก่อน</p></div><span class="tag outline">เงื่อนไขเปิดอ่านได้ในแต่ละข้อ</span></div><div class="wow-grid" id="wow-grid"></div>
+<div class="bigspace" id="tools-section"><div class="section-head"><div><span class="eyebrow">Tools that make the promise work</span><h3>ไฟล์ที่ช่วยให้บริการทำงานได้จริง</h3><p class="small">รายการนี้บอกว่าเว็บควรมีไฟล์อะไรให้ลูกค้าใช้ ยังไม่ได้ตรวจว่ามีไฟล์เดิมพร้อมแล้วหรือไม่ ควรหาของเดิมก่อนทำเพิ่ม</p></div></div><div class="grid2" id="tool-grid"></div></div><div class="bigspace"><h3 class="subhead">จับคู่ Persona × ว้าวที่ควรนำก่อน</h3><p class="small muted" style="margin-bottom:14px">จุดสีส้ม = ข้อที่ควรเน้นก่อนตามข้อเสนอเชิงกลยุทธ์ ไม่ใช่คะแนนหรือผลสำรวจ · เลือกชื่อ Persona เพื่อกลับไปดูรายละเอียด</p><div class="matrix-scroll" id="wow-matrix"></div></div>
+<div class="card spacer"><h3>3WIN: ผลประโยชน์หนึ่งข้อส่งถึงหลายฝ่าย</h3><div class="grid3 spacer"><div><span class="tag orange">คนสั่ง · โดยตรง</span><p class="small" style="margin-top:10px">แต่ละข้อช่วยคนละช่วง โดย ⑧ ช่วยให้ไม่ต้องคอยถามสถานะ และ ⑩ ช่วยเรื่องสั่งเพิ่มให้สมาชิก</p></div><div><span class="tag green">คนใส่ · วัสดุและการดูแล</span><p class="small" style="margin-top:10px">② วัสดุ · ③ ค่าไซซ์ · ⑨ ปัญหาการผลิต · ⑩ คนเพิ่ม แต่ความพอดีและสบายยังต้องพิสูจน์</p></div><div><span class="tag">คนเห็น · ผลทางอ้อม</span><p class="small" style="margin-top:10px">เห็นทีมใส่เสื้อพร้อมกันและจำลักษณะของทีมได้ ต้องใช้ภาพเสื้อจริงช่วยเล่า ไม่ใช่แค่รายการบริการ</p></div></div></div>
+</section>
+<section id="dimensions" class="page" role="tabpanel" aria-labelledby="t-dimensions" hidden>
+<div class="section-head"><div><span class="eyebrow">Decision dimensions</span><h2>ลูกค้าคิดเรื่องอะไรบ้างก่อนสั่งเสื้อ</h2><p>ใช้ 14 เรื่องนี้ตรวจว่าเนื้อหาครบหรือยัง แล้วเลือกเรื่องที่สำคัญกับลูกค้าในหน้านั้นมาพูดก่อน</p></div></div><div class="dimension-grid" id="dimension-grid"></div>
+<div class="card bigspace"><h3 class="subhead">สิ่งที่ลูกค้าอยากได้ มีตั้งแต่เรื่องพื้นฐานถึงเรื่องที่ทำให้ประทับใจ</h3><div class="grid4"><div class="tier"><b>ต้องได้</b><p>จำนวน สเปก ชื่อ–โลโก้ และส่งมอบตรงข้อตกลง</p></div><div class="tier"><b>คาดหวัง</b><p>สื่อสารรู้เรื่อง คุณภาพเหมาะกับราคา ข้อมูลตรงกัน</p></div><div class="tier"><b>อยากได้</b><p>ดีไซน์มีตัวตน คนใส่ชอบ คนสั่งลดภาระ</p></div><div class="tier"><b>ประทับใจเพิ่ม</b><p>ช่วยพบข้อผิดพลาด เสนอทางเลือก และเตรียมข้อมูลใช้ต่อ</p></div></div></div>
+<div class="bigspace"><h3 class="subhead">คนสั่งกลุ่มเดียวกัน อาจต้องการคำตอบต่างกันใน 8 สถานการณ์นี้</h3><div class="scenario-grid" id="scenario-grid"></div></div>
+<div class="bigspace"><h3 class="subhead">ลูกค้ายังลังเลเรื่องอะไร</h3><div class="matrix-scroll"><table class="matrix" id="objections"></table></div></div>
+</section>
+<section id="website" class="page" role="tabpanel" aria-labelledby="t-website" hidden>
+<div class="section-head"><div><span class="eyebrow">From strategy to page</span><h2>ชุดข้อความสำหรับแต่ละหน้าเว็บ</h2><p>เลือกอ่านทีละหน้าได้ ทั้งหัวข้อ คำอธิบาย ปุ่ม และคำถามที่ลูกค้ามักถาม ส่วนข้อมูลที่ทีมต้องตรวจสอบแยกไว้ด้านล่าง</p></div><span class="tag orange">10 ชุดข้อความ · เลือกใช้ตามหน้าเว็บ</span></div>
+<div class="status-legend"><span><span class="status-badge ready">ข้อความร่าง</span>สำหรับนำไปใช้เขียนหน้าเว็บ</span><span><span class="status-badge build">ต้องจัดทำ</span>หาไฟล์เดิมหรือจัดทำเพิ่มเติม</span><span><span class="status-badge verify">ต้องยืนยัน</span>ตรวจบริการ ข้อมูล และสิทธิ์ก่อนเผยแพร่</span></div>
+<div id="map-screen"><div class="map-picker"><div><label for="map-select">เลือกหน้าเว็บหรือประเภทงาน</label><select id="map-select"></select></div><div><div id="map-type"></div><p id="map-context"></p></div></div><div class="web-layout"><div class="copy-large" id="group-copy"></div><div class="card" id="copy-support"></div></div><div id="message-map-detail" aria-live="polite"></div></div><div id="print-copies" class="print-only"></div>
+<div class="bigspace"><div class="section-head"><div><span class="eyebrow">Website architecture</span><h3>5 หน้าหลัก ครอบคลุมคนสั่งเสื้อทั้ง 14 กลุ่มย่อย</h3><p class="small">นำสินค้าและผลงานเดิมไปแสดงในหน้าที่เกี่ยวข้องได้ เพิ่มหน้าเฉพาะเมื่อคำถามของลูกค้าและเนื้อหาแตกต่างกันจริง</p></div></div><div class="matrix-scroll"><table class="matrix" id="page-map"></table></div></div>
+<div class="bigspace"><h3 class="subhead">เลือกเสื้อให้เหมาะกับงานที่จะใช้</h3><div class="grid4" id="products"></div></div>
+<div class="web-layout bigspace"><div><h3 class="subhead">หน้าแรก: เชื่อมลูกค้าทุกกลุ่ม</h3><div class="mini-browser"><div class="browser-bar"><i></i><i></i><i></i><span>TEAMDEE · Homepage copy concept</span></div><div class="mini-home"><span class="eyebrow">ช่วยคิด · ช่วยจัดการ · ช่วยจบงาน</span><h3>เสื้อทีมที่ทุกคน<br>ภูมิใจจะใส่</h3><p>ทีมดีช่วยแนะนำแบบ ผ้า และรายละเอียดการสั่งทำ ให้คุณเลือกเสื้อที่เข้ากับทีมและเหมาะกับงานที่จะใช้</p><span class="cta-sample">ปรึกษาทีมดี</span><p class="small">ปุ่มรอง: ดูแบบและผลงานจริง</p><div class="benefits"><span>ปรับแบบ</span><span>เลือกผ้า</span><span>งบชัด</span><span>ติดตามงาน</span></div></div></div><div class="note neutral spacer">หน้าแรกควรมีหลักฐานงานองค์กรตามทิศทางแบรนด์ พร้อมทางเข้าสำหรับกีฬา ชมรม และกลุ่มอื่น โดยไม่ให้ภาพรวมกลับไปเป็นแบรนด์กีฬาเพียงอย่างเดียว</div><div class="card spacer"><h4>ฟอร์มเริ่มคุย: ถามเท่าที่ลูกค้ารู้</h4><p class="small" style="margin-top:10px">โอกาสใช้งาน · จำนวนประมาณ · วันต้องได้รับสินค้า · วันแจก / วันใช้งาน (ถามแยก) · สินค้าที่สนใจหรือยังไม่แน่ใจ · แบบ/โลโก้ที่มี · งบถ้าสะดวกแจ้ง · ช่องทางติดต่อ</p><p class="small">งานวิ่งต้องรู้วันรับสินค้าสำหรับเตรียม Race Kit ซึ่งอาจมาก่อนวันแข่ง ค่อยถามรายชื่อ–เบอร์ เอกสาร หรือจุดส่งตามบริบท</p></div></div><div><h3 class="subhead">ตัวอย่าง Landing Page สำหรับ HR</h3><div class="card landing-map" id="landing-steps"></div></div></div>
+<div class="card bigspace"><h3>หน้าเฉพาะที่อาจทำเพิ่มเมื่อมีข้อมูลพร้อม</h3><p class="small" style="margin-top:10px">เสื้อบริษัทประจำปี · Outing / กีฬาสีบริษัท · ทีมแบดมินตัน · Organizer · หน่วยงาน · เสื้อรุ่น / คณะ</p><p class="small">ใช้ยอดขาย คุณภาพผู้ติดต่อ และความพร้อมของกรณีศึกษาจัดลำดับ ไม่ต้องสร้างหน้าแยกทุก Persona หรือทุกคำค้น</p></div><details class="card scope-note"><summary>ข้อเสนอเว็บไซต์ใหม่ที่ยังไม่เปลี่ยนขอบเขตเดิม</summary><ul class="list"><li>คง 4 กลุ่มธุรกิจหลัก การแยกรัฐ/สถานศึกษาเป็นระดับเนื้อหาหน้าเว็บ</li><li>ยังไม่ล็อกจำนวนหรือกำหนดเปิด Landing Page ตามแผน พ.ย. ในร่างใหม่</li><li>Price Calculator ยังอยู่นอกขอบเขตรอบแรก ไม่เพิ่มจากการรวมข้อมูลครั้งนี้</li><li>คำว่า “โรงงาน” ต้องตรงสถานะธุรกิจจริง และยังไม่เปลี่ยนบทบาทหน้าแรกเป็น SEO-first</li><li>ยังไม่บังคับทุกทางเข้า LINE ผ่านเว็บ หรือแปลงสัดส่วนคอนเทนต์กีฬาเป็นกฎพื้นที่หน้าแรก</li></ul></details>
+</section>
+<section id="proof" class="page" role="tabpanel" aria-labelledby="t-proof" hidden>
+<div class="section-head"><div><span class="eyebrow">Evidence & validation</span><h2>เตรียมข้อมูลให้พร้อม ก่อนนำข้อความขึ้นเว็บ</h2><p>10 ว้าวบอกว่าเรามีบริการอะไร ส่วนภาพจริง รีวิว และข้อมูลส่งมอบช่วยให้ลูกค้าเชื่อว่าทำได้ ก่อนเผยแพร่ต้องตรวจทั้งข้อมูลและเงื่อนไข</p></div></div><div class="proof-grid" id="proof-grid"></div><div class="card bigspace" id="case-section"><div class="section-head"><div><span class="eyebrow">Evidence inventory</span><h3>ผลงานที่ควรหาไฟล์และตรวจข้อมูลเพิ่ม</h3><p class="small">รายชื่อเหล่านี้มาจากร่างที่ได้รับ ยังต้องหาไฟล์ ตรวจข้อมูล และเช็กสิทธิ์ก่อนใช้บนเว็บ</p></div><span class="tag outline">7 รายการที่ต้องตรวจ</span></div><div id="case-inventory"></div></div><div class="card bigspace" id="confirmation-section"><div class="section-head"><div><span class="eyebrow">Open items / confirmation queue</span><h3>สิ่งที่ต้องยืนยัน แยกจากข้อความขาย</h3><p class="small">ระบุฝ่ายที่น่าจะให้คำตอบได้ ยังไม่ได้มอบหมายงาน และทุกรายการยังต้องขอข้อมูลยืนยัน</p></div><span class="tag orange">17 ประเด็น</span></div><div id="open-items"></div></div>
+<div class="card spacer"><h3>เล่าผลงาน 1 เรื่อง ควรมีข้อมูลอะไรบ้าง</h3><div class="funnel"><span>ลูกค้าเป็นใคร</span>→<span>ต้องทำอะไร</span>→<span>ติดปัญหาใด</span>→<span>ทีมดีช่วยอย่างไร</span>→<span>ทำเสื้ออะไรให้</span>→<span>งานออกมาอย่างไร มีข้อมูลอะไรยืนยัน</span></div><p class="small" style="margin-top:14px">ภาพส่งงานใช้เป็นผลงานได้ แต่ไม่ควรเติมผลลัพธ์ “ลดเวลาทำงาน / เพิ่มยอดขาย / ทุกคนพอใจ” หากไม่มีข้อมูลจริง</p></div>
+<div class="grid2 bigspace"><div class="card"><h3>เรื่องที่ต้องมีข้อมูลเพิ่ม นอกเหนือจาก 10 ว้าว</h3><div id="gaps"></div></div><div><div class="card"><h3>ยืนยันเงื่อนไขก่อนใช้ขาย</h3><ul class="list small"><li><b>สินค้า:</b> สิ่งที่ผลิตได้ ผ้า ทรง ช่วงไซซ์ และออปชั่น</li><li><b>ราคา:</b> ขั้นต่ำ สิ่งที่รวม ค่าออกแบบ/ตัวอย่าง และงานเพิ่ม</li><li><b>เวลา:</b> จุดเริ่มนับ คิว วันที่ต้องยืนยันรายละเอียด และวันส่งที่ตกลง</li><li><b>จัดส่ง:</b> ปลายทาง ข้อยกเว้น การแยกแพ็กและหลายสาขา</li><li><b>จัดซื้อ:</b> เอกสาร มัดจำ เครดิต และเงื่อนไขชำระเงินที่รองรับ</li><li><b>หลังการขาย:</b> จุดเริ่มนับ 7 วัน ขอบเขตเคลม วิธีแจ้งและเวลาแก้</li><li><b>ล็อต 2:</b> จุดเริ่มนับ 30 วัน ขั้นต่ำ ราคา สเปก และระยะผลิตใหม่</li><li><b>หลักฐาน:</b> สิทธิ์ใช้ภาพ/โลโก้/รีวิวและตัวเลขลูกค้าล่าสุด</li></ul></div><div class="note spacer"><b>คำที่ยังไม่ควรใช้ถ้าไม่มีข้อมูลยืนยัน:</b> ไม่รับรองว่าจะทันทุกงาน เบิกได้ทุกหน่วยงาน สีเหมือนเดิมทุกล็อต ส่งทุกจุดฟรี หรือเคลมทุกสาเหตุ หากบริการจริงไม่ครอบคลุม</div></div></div>
+<div class="grid2 bigspace"><div class="card"><span class="eyebrow">Where we play</span><h3>กรอบลูกค้าเป้าหมายภายใน</h3><div class="hero-meta" style="margin-top:16px"><div><b>50–500</b><span>ตัว / งาน</span></div><div><b>20K–150K</b><span>บาท / งาน</span></div></div><p class="small" style="margin-top:16px">จากกลยุทธ์แบรนด์: งานมีวันใช้ชัดและพลาดไม่ได้ ตัวเลขนี้เป็นจุดเน้นทางธุรกิจ ไม่ใช่ขั้นต่ำ–สูงสุดหรือแพ็กเกจราคา</p><p class="small">“2,800+ องค์กร” ใช้เป็นหลักฐานประสบการณ์ได้เมื่อยืนยันข้อมูลล่าสุด ไม่ใช่ตัวชี้วัดผลลัพธ์ของทุกงาน</p></div><div class="card"><span class="eyebrow">Explore, don't assume</span><h3>กลุ่มที่ต้องตรวจสอบเพิ่ม</h3><p class="small" style="margin-top:12px">Creator / แบรนด์เสื้อขายปลีก · ตัวแทนจำหน่าย · ครอบครัวจำนวนเล็ก · OEM ปริมาณมากแข่งราคา · เสื้อเฉพาะทางที่ต้องมีคุณสมบัติรับรอง</p><p class="small">ธุรกิจโรงแรม คลินิก ร้านอาหาร และโลจิสติกส์ อาจใช้ Persona เจ้าของธุรกิจ / HR / Operations เดิม แล้วปรับบริบท ไม่จำเป็นต้องสร้างกลุ่มใหม่ทุกอุตสาหกรรม</p><p class="small">ไม่สื่อว่าเสื้อทีมทั่วไปเป็นชุดป้องกัน เครื่องแบบทุกชนิด หรือเสื้อแข่งขันที่เหมาะกับทุกกีฬา</p></div></div>
+<div class="card bigspace"><h3>คุยกับลูกค้าและทีมขาย แล้วดูผลจากคนสนใจจนถึงคนสั่งจริง</h3><div class="grid2 spacer"><div><h4>ถามลูกค้าและทีมขาย</h4><ul class="list small"><li>ใครเลือก ใครอนุมัติ และใครจ่าย?</li><li>ลูกค้าพูดถึง Pain ใดเองก่อนถูกถาม?</li><li>เหตุผลที่เลือก ไม่เลือก และกลับมาซื้อคืออะไร?</li><li>งานหยุดตรงไหน และต้องการหลักฐานอะไรเพิ่ม?</li></ul><p class="small muted" style="margin-top:10px">เริ่มจากลูกค้าที่ซื้อ ไม่ซื้อ และซื้อซ้ำในแต่ละกลุ่ม ใช้ค้นหารูปแบบ ไม่สรุปแทนตลาดทั้งหมด</p></div><div><h4>ติดตามแยกตามกลุ่มและหน้าเริ่มต้น</h4><div class="funnel"><span>ดูผลงาน</span>→<span>คลิกติดต่อ</span>→<span>มีโจทย์ชัด</span>→<span>ใบเสนอราคา</span>→<span>ซื้อ / ซื้อซ้ำ</span></div><p class="small muted" style="margin-top:14px">คลิก LINE ไม่เท่ากับเริ่มแชทหรือยอดขาย ต้องเชื่อมข้อมูลทีมขาย จึงจะรู้ว่าหน้าดึงลูกค้าที่เหมาะกับทีมดีได้หรือไม่</p></div></div></div>
+<details class="card bigspace"><summary>ฐานข้อมูลและสถานะของเอกสาร</summary><div class="source-list"><p>เรียบเรียงจากบทสนทนา Persona / Pain–Gain / Value Proposition และส่วนเพิ่มเติม 10 ว้าวที่ผู้ใช้ยอมรับ พร้อมภาพ 1792556589671.jpg และร่าง “TEAMDEE · Web + Landing Page Input · v2” ที่ผู้ใช้ให้ โดยคัดสารเพิ่มเติมและแยกข้อเสนอ/เงื่อนไขที่ยังไม่ยืนยัน</p><ul><li>TEAMDEE_Brand_Strategy_v2 (4).html — ตัวตนแบรนด์และ 4 กลุ่มหลัก</li><li>TEAMDEE_Content_Strategy_2026.html — สิ่งที่แต่ละกลุ่มต้องการเห็น</li><li>TEAMDEE-Website-Project-Brief.md — โครงเว็บไซต์และขอบเขตสินค้า</li></ul><p>Persona และข้อความที่เสนอไม่ใช่ผลวิจัยลูกค้า และบริการในภาพยังต้องผูกเงื่อนไขกับสินค้าให้ชัด ไม่มีการเพิ่มตัวเลขประสิทธิภาพหรือคำรับรองยอดขาย</p></div></details>
+</section>
+</main>
+<footer class="footer"><div class="wrap"><span>TEAMDEE · ช่วยคิด ช่วยจัดการ ช่วยจบงาน</span><span>Customer Value Playbook · ฉบับรวมเพื่อวางแผนเว็บและคอนเทนต์</span></div></footer>
+<div class="toast" role="status" aria-live="polite" id="toast"></div><noscript><p style="padding:25px">คู่มือนี้ใช้ JavaScript สำหรับเปิดแท็บและแสดงรายละเอียด กรุณาเปิดใช้งาน JavaScript ในเบราว์เซอร์</p></noscript>
+<script>
+const groups=[
+ {
+  "id": "A",
+  "name": "บริษัท / เอกชน",
+  "short": "บริษัท",
+  "role": "Core engine",
+  "desc": "HR, เจ้าของธุรกิจ, จัดซื้อ, Marketing และ Operations",
+  "focus": "งานดี · งบชัด · ประสานง่าย"
+ },
+ {
+  "id": "B",
+  "name": "หน่วยงาน / การศึกษา",
+  "short": "หน่วยงาน",
+  "role": "Big game",
+  "desc": "พัสดุ ผู้ดูแลโครงการ บุคลากร และผู้ประสานงานสถานศึกษา",
+  "focus": "สเปก · เอกสาร · การอนุมัติ"
+ },
+ {
+  "id": "C",
+  "name": "กีฬา / ชมรม",
+  "short": "กีฬา / ชมรม",
+  "role": "Volume engine",
+  "desc": "หัวหน้าทีม โค้ช ผู้จัดการชมรม และผู้รวมออเดอร์สมาชิก",
+  "focus": "เอกลักษณ์ · ใส่จริง · สมาชิก"
+ },
+ {
+  "id": "D",
+  "name": "กิจกรรม / Organizer",
+  "short": "Organizer",
+  "role": "Occasion-driven",
+  "desc": "Agency, Project Manager และเจ้าของงานกิจกรรม",
+  "focus": "ความเป็นไปได้ · แผนส่งมอบ"
+ }
+];
+const wows=[
+ {
+  "id": 1,
+  "name": "ปรับแบบฟรีไม่จำกัด",
+  "short": "ปรับแบบฟรี",
+  "stage": "ช่วยคิด",
+  "pain": "กลัวแบบไม่ถูกใจ หัวหน้าขอแก้แล้วมีค่าใช้จ่ายเพิ่ม",
+  "gain": "ปรับรายละเอียดให้ได้แบบที่ทีมตกลงร่วมกัน",
+  "value": "มีคนช่วยปรับแบบก่อนสรุปผลิต",
+  "term": "ตรวจว่าบริการออกแบบรวมอะไรบ้าง และแก้ได้ถึงขั้นไหน ไม่ถือว่าเปลี่ยนแบบหลังเริ่มผลิตได้โดยไม่มีค่าใช้จ่ายหรือไม่กระทบวันส่ง"
+ },
+ {
+  "id": 2,
+  "name": "ตัวอย่างผ้าฟรี ไม่ต้องมัดจำ",
+  "short": "ตัวอย่างผ้า",
+  "stage": "ช่วยคิด",
+  "pain": "เลือกผ้าจากรูปไม่ถูก อยากเห็นของจริงก่อนจ่าย",
+  "gain": "สัมผัสตัวอย่างผ้าเพื่อช่วยตัดสินใจ",
+  "value": "ดูตัวอย่างผ้าก่อนเลือก",
+  "term": "ตัวอย่างผ้าไม่ใช่เสื้อตัวอย่าง จึงยังใช้ยืนยันความพอดีหรือความสบายของเสื้อทั้งตัวไม่ได้"
+ },
+ {
+  "id": 3,
+  "name": "ทุกไซซ์ราคาเดียว XS–7XL",
+  "short": "ทุกไซซ์ราคาเดียว",
+  "stage": "ช่วยจัดการ / งบ",
+  "pain": "ไซซ์ใหญ่มีค่าบวก ทำให้เก็บเงินและคุมงบยาก",
+  "gain": "คิดงบตามจำนวนได้ง่ายขึ้นในช่วงไซซ์ที่ให้บริการ",
+  "value": "ไซซ์ต่างกัน ก็คิดราคาเสื้อได้ง่ายขึ้น",
+  "term": "ตรวจช่วงไซซ์ของแต่ละสินค้าและทรง ราคาตามไซซ์ไม่ได้ช่วยตรวจว่าลูกค้าเลือกขนาดถูกหรือไม่ จึงยังต้องมีตารางกับวิธีวัด"
+ },
+ {
+  "id": 4,
+  "name": "ราคารวม VAT ไม่บวกหน้างาน",
+  "short": "ราคารวม VAT",
+  "stage": "ช่วยจัดการ / งบ",
+  "pain": "เสนอราคาไปแล้ว เพิ่งรู้ว่าต้องบวก VAT เพิ่ม",
+  "gain": "เห็นยอดรวมสำหรับนำไปขออนุมัติ",
+  "value": "รู้ยอดรวมของงานที่ตกลง ก่อนตัดสินใจสั่ง",
+  "term": "บอกสิ่งที่รวมและไม่รวมในราคา หากเพิ่มจำนวน ออปชั่น หรือเปลี่ยนสเปก ต้องสรุปยอดใหม่ตามที่ตกลง"
+ },
+ {
+  "id": 5,
+  "name": "จัดส่งฟรีทั่วประเทศ",
+  "short": "ส่งฟรี",
+  "stage": "ช่วยจัดการ / งบ",
+  "pain": "ไม่รู้ค่าส่ง โดยเฉพาะงานต่างจังหวัด",
+  "gain": "คำนวณค่าใช้จ่ายได้ง่ายขึ้น",
+  "value": "ลูกค้าต่างจังหวัดวางงบสั่งเสื้อได้สะดวกขึ้น",
+  "term": "ระบุที่อยู่ส่งและข้อยกเว้นให้ชัด ส่งฟรีทั่วประเทศไม่ได้หมายถึงแยกส่งทุกสาขาหรือทุกคนฟรี"
+ },
+ {
+  "id": 6,
+  "name": "ตอบแชทไว",
+  "short": "ตอบแชทไว",
+  "stage": "ช่วยจัดการ / ประสาน",
+  "pain": "รอร้านตอบจนเลือกแบบหรือทำงานต่อไม่ได้",
+  "gain": "ได้ข้อมูลไปตัดสินใจและแจ้งทีมต่อ",
+  "value": "มีทีมงานช่วยตอบคำถามระหว่างสั่งทำ",
+  "term": "ใช้เวลาตอบที่ทีมทำได้จริง การตอบรับแชทยังไม่ใช่การยืนยันคิวหรือเริ่มผลิต"
+ },
+ {
+  "id": 7,
+  "name": "เปิดทุกวัน 8:30–21:00",
+  "short": "เปิดทุกวัน",
+  "stage": "ช่วยจัดการ / ประสาน",
+  "pain": "ว่างหลังเลิกงาน แต่ร้านปิดแล้ว",
+  "gain": "มีเวลาติดต่อช่วงเย็นและวันหยุด",
+  "value": "คุยเรื่องเสื้อในช่วงที่คุณสะดวก",
+  "term": "ระบุช่องทางและวันหยุดพิเศษตามจริง เวลาเปิดให้ติดต่อไม่ใช่เวลาที่ทุกฝ่ายผลิตงานตลอด"
+ },
+ {
+  "id": 8,
+  "name": "อัปเดตสถานะทุกขั้นหลัก",
+  "short": "อัปเดตสถานะ",
+  "stage": "ช่วยจัดการ / ประสาน",
+  "pain": "ไม่รู้ว่างานถึงไหน ต้องคอยทักถาม",
+  "gain": "รู้ความคืบหน้าและแจ้งคนในทีมต่อได้",
+  "value": "อัปเดตว่างานอยู่ในขั้นตอนไหน",
+  "term": "เสื้อพิมพ์ลาย: ตรวจแบบ → พิมพ์ → อัดผ้า → ตัดเย็บ → รีด → แพ็กส่ง ส่วนงานปักใช้ขั้นตอนของงานปัก การอัปเดตสถานะยังต้องมีวันส่งที่ตกลงร่วมกัน"
+ },
+ {
+  "id": 9,
+  "name": "รับประกันเคลมฟรีใน 7 วัน",
+  "short": "เคลม 7 วัน",
+  "stage": "ช่วยจบงาน",
+  "pain": "ได้เสื้อแล้วพบปัญหาการผลิต ไม่รู้ใครจะดูแล",
+  "gain": "รู้ช่องทางและเงื่อนไขแจ้งเคลม",
+  "value": "มีทีมดูแลปัญหาที่อยู่ในเงื่อนไขรับประกัน",
+  "term": "ยืนยันว่าเริ่มนับ 7 วันจากเมื่อไร เคลมเรื่องอะไรได้ แจ้งอย่างไร และแก้ใช้เวลาเท่าไร ไม่ถือว่ารวมการเลือกไซซ์ผิดทุกกรณี"
+ },
+ {
+  "id": 10,
+  "name": "Lot 2 ราคาเดิมใน 30 วัน",
+  "short": "ล็อต 2 ราคาเดิม",
+  "stage": "ช่วยจบงาน",
+  "pain": "มีคนตกหล่นหรือสมาชิกเพิ่ม กลัวรอบใหม่ราคาแพงกว่า",
+  "gain": "วางงบสั่งเพิ่มได้ในช่วงที่กำหนด",
+  "value": "สอบถามการสั่งเพิ่มราคาเดิมภายใน 30 วัน",
+  "term": "ยืนยันว่าเริ่มนับ 30 วันจากเมื่อไร ขั้นต่ำเท่าไร และสเปกต้องเหมือนเดิมหรือไม่ การได้ราคาเดิมไม่ได้แปลว่าจะทันวันงานเดิมหรือสีเหมือนทุกล็อต"
+ }
+];
+const personas=[
+ {
+  "id": 1,
+  "g": "A",
+  "name": "HR / Admin เสื้อบริษัท",
+  "sub": "ยูนิฟอร์ม · เสื้อประจำปี",
+  "who": "HR คุยกับพนักงาน จัดซื้อ และบัญชี โดยผู้บริหารเป็นคนอนุมัติ",
+  "trigger": "เปลี่ยนเสื้อประจำปี รับคนเพิ่ม เปิดสาขา รีแบรนด์ หรือเปลี่ยนผู้ขาย",
+  "job": "เลือกเสื้อให้บริษัท รวบรวมไซซ์ ทำงบ เสนอแบบ และแจกเสื้อให้ครบตามรายชื่อ",
+  "pain": [
+   "แบบถูกใจหัวหน้า แต่พนักงานไม่อยากใส่",
+   "เก็บไซซ์ไม่ครบ ราคาเพิ่ม และต้องคอยตามงาน",
+   "กลัวงานผิดแล้วต้องเป็นคนรับผิดชอบ"
+  ],
+  "gain": [
+   "มีเหตุผลเลือกแบบไปอธิบายให้หัวหน้าฟัง",
+   "รู้ค่าใช้จ่ายและแจ้งความคืบหน้าให้ทีมได้",
+   "พนักงานใส่ได้เหมาะกับงาน และมีปัญหาหลังแจกน้อย"
+  ],
+  "vp": "ช่วย HR เลือกแบบและผ้า สรุปจำนวนกับราคาให้เสนอหัวหน้าได้ และอัปเดตงานระหว่างผลิต",
+  "w": [
+   3,
+   4,
+   8,
+   9
+  ],
+  "mechanism": "แนะนำผ้าและทรง สรุปแบบกับตำแหน่งโลโก้ เตรียมไซซ์ และยืนยันรายละเอียดก่อนผลิต",
+  "proof": "ภาพแบบเทียบกับเสื้อจริง ภาพคนใส่หลายรูปร่าง ตารางไซซ์ และตัวอย่างสรุปออเดอร์",
+  "ask": "ทำไมราคานี้ และเสื้อจริงจะเหมือนแบบไหม? ควรมีรายละเอียดสิ่งที่รวมในราคาและภาพงานจริงให้ดู",
+  "success": "แบบผ่านอนุมัติ เสื้อครบตามรายการ ใช้ได้ตามแผน และแก้ปัญหาหลังแจกน้อย",
+  "headline": "เสื้อบริษัทสั่งทำ มีทีมช่วยดูแลตั้งแต่เลือกแบบ",
+  "cta": "ปรึกษาเสื้อบริษัท"
+ },
+ {
+  "id": 2,
+  "g": "A",
+  "name": "HR / ผู้จัดกิจกรรมบริษัท",
+  "sub": "Outing · กีฬาสี · CSR",
+  "who": "HR หรือคณะทำงานกิจกรรม คุยกับกรรมการและผู้บริหาร",
+  "trigger": "ได้วันงาน ธีม สถานที่ และจำนวนเบื้องต้น",
+  "job": "ทำเสื้อให้เข้าธีม แยกทีมได้ ใส่ทำกิจกรรมสะดวก และรับเสื้อก่อนวันงาน",
+  "pain": [
+   "วันงานเลื่อนไม่ได้ แต่จำนวนคนยังเปลี่ยน",
+   "หลายคนขอแก้แบบ และเสื้อแต่ละสีดูไม่เข้าชุดกัน",
+   "กลัวเสื้อไม่เหมาะกับกิจกรรมหรือภาพรวมงานไม่สวย"
+  ],
+  "gain": [
+   "เสื้อแต่ละทีมดูเข้าชุดกันและแยกสีง่าย",
+   "รู้ว่าต้องส่งแบบกับจำนวนเมื่อไร และงานถึงขั้นตอนไหนแล้ว",
+   "รู้ว่าถ้ามีคนเพิ่ม ต้องสั่งอย่างไรและรับเสื้อได้เมื่อไร"
+  ],
+  "vp": "ช่วยเลือกแบบให้เข้าธีม พร้อมสรุปสี ไซซ์ จำนวน และวันที่ต้องยืนยันรายละเอียดก่อนผลิต",
+  "w": [
+   1,
+   6,
+   8,
+   10
+  ],
+  "mechanism": "เสนอแบบแต่ละสี แยกเสื้อผู้ร่วมงานกับสตาฟ และกำหนดวันสรุปแบบกับจำนวน",
+  "proof": "ภาพกิจกรรมที่คล้ายกัน แบบเสื้อแต่ละสี และกำหนดการที่ตกลงกับลูกค้า",
+  "ask": "เพิ่มคนหรือแก้แบบได้ถึงเมื่อไร? ต้องอธิบายว่าช่วงไหนยังเปลี่ยนได้ และมีผลต่อวันส่งอย่างไร",
+  "success": "ได้เสื้อตามกำหนด แจกสะดวก แยกทีมง่าย และใส่ทำกิจกรรมได้เหมาะ",
+  "headline": "เสื้อ Outing และกีฬาสีบริษัท ออกแบบตามธีมงาน",
+  "cta": "ปรึกษาเสื้อกิจกรรม"
+ },
+ {
+  "id": 3,
+  "g": "A",
+  "name": "เจ้าของ SME / ร้านค้า",
+  "sub": "ร้านอาหาร · คาเฟ่ · ธุรกิจบริการ",
+  "who": "เจ้าของร้านเป็นคนเลือกและจ่าย โดยผู้จัดการหรือพนักงานช่วยให้ความเห็น",
+  "trigger": "เปิดร้าน ขยายสาขา เปลี่ยนภาพลักษณ์ หรือเปลี่ยนเสื้อพนักงาน",
+  "job": "ทำเสื้อให้พนักงานดูเข้ากับร้าน ลูกค้าจำได้ว่าใครเป็นพนักงาน และใส่ทำงานสะดวก",
+  "pain": [
+   "มีภาพในใจ แต่ไม่รู้จะเลือกผ้าหรือทรงอะไร",
+   "กลัวเสื้อดูธรรมดาหรือใส่ทำงานไม่สะดวก",
+   "ต้องคุมค่าใช้จ่ายและอยากรู้ว่าจะสั่งเพิ่มอย่างไร"
+  ],
+  "gain": [
+   "พนักงานดูเป็นทีมเดียวกันและเข้ากับร้าน",
+   "มีแบบและตัวอย่างผ้าช่วยให้เลือก",
+   "รู้ราคาและวิธีติดต่อหากมีปัญหาหลังรับเสื้อ"
+  ],
+  "vp": "ช่วยเจ้าของร้านเลือกเสื้อที่เข้ากับร้านและงานของพนักงาน พร้อมอธิบายแบบ ผ้า และราคาให้ตัดสินใจง่ายขึ้น",
+  "w": [
+   1,
+   2,
+   4,
+   9
+  ],
+  "mechanism": "ดูสีร้าน โลโก้ บรรยากาศ และงานที่พนักงานทำ ก่อนแนะนำตัวเลือก",
+  "proof": "ผลงานร้านค้าที่คล้ายกัน ภาพผ้าและงานปัก ภาพพนักงานใส่จริง และวิธีดูแลเสื้อ",
+  "ask": "สั่งจำนวนน้อยได้ไหม ซักบ่อยได้หรือเปล่า และสั่งเพิ่มอย่างไร? ต้องมีข้อมูลขั้นต่ำ วิธีดูแล และเงื่อนไขสั่งเพิ่ม",
+  "success": "เสื้อเข้ากับร้าน พนักงานใส่ทำงานได้สะดวก และค่าใช้จ่ายเหมาะกับการใช้จริง",
+  "headline": "เสื้อพนักงานสั่งทำ ให้เข้ากับร้านของคุณ",
+  "cta": "ปรึกษาเสื้อพนักงาน"
+ },
+ {
+  "id": 4,
+  "g": "A",
+  "name": "จัดซื้อ / Operations",
+  "sub": "หลายแผนก · หลายสาขา",
+  "who": "ฝ่ายจัดซื้อคุยกับหัวหน้าแผนก HR บัญชี และผู้บริหาร",
+  "trigger": "เปลี่ยนรอบยูนิฟอร์ม เพิ่มหน่วยงาน หรือรวมมาตรฐานเสื้อ",
+  "job": "กำหนดรายละเอียดเสื้อ เปรียบเทียบราคา รวบรวมจำนวน และตรวจรับให้ตรงรายการ",
+  "pain": [
+   "แต่ละแผนกต้องการเสื้อต่างกัน และมีข้อมูลหลายฉบับ",
+   "จำนวนหรือไซซ์ผิด ทำให้แจกผิดแผนกหรือสาขา",
+   "รายละเอียดไม่ครบจนเปรียบเทียบราคาไม่ได้"
+  ],
+  "gain": [
+   "มีรายละเอียดเสื้อของแต่ละแผนกให้ตรวจร่วมกัน",
+   "เปรียบเทียบราคาได้ว่ารวมอะไรบ้าง",
+   "ตรวจรับและส่งต่อให้แต่ละสาขาได้สะดวก"
+  ],
+  "vp": "ช่วยสรุปรายละเอียดเสื้อของแต่ละแผนกให้เปรียบเทียบราคา ขออนุมัติ และตรวจรับได้ง่ายขึ้น",
+  "w": [
+   3,
+   4,
+   5,
+   8
+  ],
+  "mechanism": "ทำสรุปสเปก ตรวจจำนวนกับไซซ์ และตกลงวิธีแพ็กกับจุดส่งก่อนเสนอราคา",
+  "proof": "สรุปสิ่งที่รวมในราคา รายการตรวจรับ และผลงานที่แยกเสื้อหลายแผนก",
+  "ask": "ราคารวมอะไร แพ็กแยกและส่งหลายสาขาได้ไหม? ต้องระบุบริการ ค่าใช้จ่าย และเงื่อนไขสั่งรอบใหม่ให้ชัด",
+  "success": "รายละเอียดตรง จำนวนครบ ตรวจรับง่าย และแต่ละฝ่ายใช้ข้อมูลชุดเดียวกัน",
+  "headline": "สั่งเสื้อหลายแผนก สรุปแบบ จำนวน และราคาให้ครบ",
+  "cta": "ขอใบเสนอราคา"
+ },
+ {
+  "id": 5,
+  "g": "A",
+  "name": "Marketing / Brand",
+  "sub": "ออกบูธ · แคมเปญ · ทีมพบลูกค้า",
+  "who": "ฝ่ายการตลาดคุยกับนักออกแบบ ทีมขาย ผู้บริหาร หรือ Agency",
+  "trigger": "เปิดตัวสินค้า Roadshow ออกบูธ รีแบรนด์ หรือแคมเปญใหม่",
+  "job": "ทำเสื้อให้เข้ากับแบรนด์และสื่อในงาน โดยพนักงานใส่ทำงานได้จริง",
+  "pain": [
+   "สีหรือโลโก้ไม่ตรงกับแบรนด์ และแบบบางจุดผลิตจริงได้ยาก",
+   "ต้องแก้แบบตามความเห็นหลายคน",
+   "ภาพบนจอสวย แต่ไม่รู้ว่าบนเสื้อจริงจะเป็นอย่างไร"
+  ],
+  "gain": [
+   "เสื้อเข้ากับสี โลโก้ และภาพของแบรนด์",
+   "มีภาพแบบกับข้อมูลผ้าให้ผู้เกี่ยวข้องพิจารณา",
+   "ทีมดูเด่นในงานและภาพถ่าย โดยใส่ทำงานได้สะดวก"
+  ],
+  "vp": "ช่วยนำสี โลโก้ และแนวคิดของแบรนด์มาออกแบบเสื้อ พร้อมอธิบายสิ่งที่ผลิตได้ให้ตัดสินใจก่อนสั่ง",
+  "w": [
+   1,
+   2,
+   6,
+   8
+  ],
+  "mechanism": "ดูคู่มือแบรนด์ ตรวจไฟล์โลโก้กับตำแหน่งลาย และส่งรายละเอียดให้อนุมัติก่อนผลิต",
+  "proof": "ภาพโลโก้ใกล้ ๆ แบบเทียบกับเสื้อจริง และวิธีตรวจสีหรือตัวอย่างก่อนผลิต",
+  "ask": "สีจะใกล้กับสีแบรนด์แค่ไหน และโลโก้ละเอียดทำได้ไหม? ควรอธิบายข้อจำกัดของงานพิมพ์หรืองานปัก พร้อมตัวอย่างจริง",
+  "success": "แบบผ่านอนุมัติ เสื้อเข้ากับแคมเปญ และพนักงานใส่ทำงานได้",
+  "headline": "เสื้อทีมออกบูธและแคมเปญ ออกแบบให้เข้ากับแบรนด์",
+  "cta": "ปรึกษาแบบเสื้อ"
+ },
+ {
+  "id": 6,
+  "g": "B",
+  "name": "พัสดุ / โครงการภาครัฐ",
+  "sub": "สเปก · เอกสาร · ตรวจรับ",
+  "who": "เจ้าหน้าที่พัสดุคุยกับเจ้าของโครงการ หัวหน้า การเงิน และผู้ตรวจรับ",
+  "trigger": "โครงการอนุมัติ มีแผนกิจกรรม หรือเริ่มเตรียมจัดซื้อ",
+  "job": "เตรียมสเปก ราคา เอกสาร และกำหนดส่ง ให้ตรงกับสิ่งที่หน่วยงานต้องใช้",
+  "pain": [
+   "เอกสารต้องแก้หลายรอบ หรือข้อมูลไม่ตรงกัน",
+   "ร้านรับเงื่อนไขก่อน แล้วแจ้งภายหลังว่าทำไม่ได้",
+   "วันส่งไม่สอดคล้องกับขั้นตอนอนุมัติของหน่วยงาน"
+  ],
+  "gain": [
+   "รู้ว่าเตรียมเอกสารอะไรให้ได้บ้างก่อนเริ่มงาน",
+   "มีราคาและความคืบหน้าให้รายงานต่อ",
+   "ตรวจเสื้อเทียบกับสเปกที่ตกลงกันได้"
+  ],
+  "vp": "ช่วยสรุปรายละเอียดเสื้อ ราคา และการจัดส่ง เพื่อใช้เสนอซื้อและคุยกับผู้เกี่ยวข้องในหน่วยงาน",
+  "w": [
+   4,
+   6,
+   8,
+   9
+  ],
+  "mechanism": "ตรวจรายการเอกสาร ยืนยันแบบกับราคา และแจ้งเงื่อนไขที่ทำได้ก่อนรับงาน",
+  "proof": "รายการเอกสารบริษัท ตัวอย่างใบเสนอราคา รายละเอียดที่ใช้ตรวจรับ และงานหน่วยงานที่คล้ายกัน",
+  "ask": "ออกเอกสารอะไรได้ และรับเงื่อนไขชำระเงินแบบไหน? ควรให้ฝ่ายที่รับผิดชอบยืนยันก่อนตอบลูกค้า",
+  "success": "ข้อมูลและเอกสารถูกต้องตามที่ตกลง ตรวจรับเสื้อได้ตามสเปก",
+  "headline": "สั่งทำเสื้อหน่วยงาน พร้อมรายละเอียดสำหรับเสนอจัดซื้อ",
+  "cta": "สอบถามเอกสารและราคา"
+ },
+ {
+  "id": 7,
+  "g": "B",
+  "name": "รัฐวิสาหกิจ / หลายชั้นอนุมัติ",
+  "sub": "ภาพองค์กร · เวอร์ชันงาน",
+  "who": "HR ฝ่ายสื่อสารองค์กร หรือจัดซื้อ ต้องส่งข้อมูลให้ผู้อนุมัติหลายฝ่าย",
+  "trigger": "กิจกรรมประจำปี งานสาธารณะ หรือเสื้อหลายหน่วยงาน",
+  "job": "ให้ทุกฝ่ายดูแบบ สเปก จำนวน และราคาฉบับเดียวกัน ก่อนอนุมัติผลิต",
+  "pain": [
+   "มีหลายไฟล์จนไม่รู้ว่าอนุมัติแบบไหนแล้ว",
+   "ต้องขอข้อมูลและแก้แบบซ้ำหลายรอบ",
+   "กลัวงานผิดแล้วกระทบชื่อเสียงองค์กร"
+  ],
+  "gain": [
+   "รู้ว่าแบบและรายละเอียดใดได้รับอนุมัติแล้ว",
+   "มีข้อมูลราคาและสถานะงานให้รายงานต่อ",
+   "ตรวจได้ว่าการเปลี่ยนแต่ละอย่างกระทบงานอย่างไร"
+  ],
+  "vp": "ช่วยสรุปแบบ ราคา และสิ่งที่ตกลงกันให้ชัด เพื่อให้คนหลายฝ่ายอนุมัติและติดตามงานต่อได้",
+  "w": [
+   1,
+   4,
+   8,
+   9
+  ],
+  "mechanism": "ระบุแบบฉบับล่าสุด แยกรายการที่ยืนยันแล้วกับรายการที่ยังรอคำตอบ",
+  "proof": "ผลงานองค์กร ตัวอย่างสรุปการอนุมัติ และวิธีบันทึกสิ่งที่เปลี่ยนระหว่างงาน",
+  "ask": "เคยทำงานลักษณะนี้ไหม และถ้าขอแก้จะกระทบอะไร? ควรมีงานจริงให้ดูและอธิบายผลต่อราคาและเวลา",
+  "success": "แต่ละฝ่ายเข้าใจตรงกัน และได้เสื้อตรงแบบกับรายละเอียดที่อนุมัติ",
+  "headline": "เสื้อองค์กรสั่งทำ พร้อมข้อมูลให้เสนออนุมัติ",
+  "cta": "ปรึกษางานเสื้อองค์กร"
+ },
+ {
+  "id": 8,
+  "g": "B",
+  "name": "ครู / บุคลากรสถานศึกษา",
+  "sub": "บุคลากร · กีฬาสี · โครงการ",
+  "who": "ครู ฝ่ายบุคคล กิจการนักศึกษา หรือจัดซื้อเป็นคนดูแลงาน โดยผู้บริหารอนุมัติ",
+  "trigger": "เปิดปีการศึกษา งานสถาบัน กีฬาสี หรือกิจกรรมคณะ",
+  "job": "เลือกเสื้อให้เหมาะกับนักเรียนและบุคลากร รวบรวมไซซ์หลายห้อง และคุมงบที่ได้รับ",
+  "pain": [
+   "มีทั้งเด็กและผู้ใหญ่ จึงต้องใช้หลายไซซ์",
+   "แบบต้องเหมาะกับวัยและงบต่อคน",
+   "แต่ละห้องหรือคณะส่งข้อมูลมาไม่ครบ"
+  ],
+  "gain": [
+   "แต่ละกลุ่มได้เสื้อเหมาะกับการใช้งาน",
+   "มีตัวอย่างผ้าและราคาไว้ช่วยตัดสินใจ",
+   "ตรวจจำนวนและไซซ์แยกห้องได้ก่อนรวมออเดอร์"
+  ],
+  "vp": "ช่วยเลือกแบบและผ้า พร้อมวางวิธีรวบรวมรายชื่อ ไซซ์ และจำนวนของแต่ละห้องให้ครบก่อนสั่ง",
+  "w": [
+   2,
+   3,
+   4,
+   8
+  ],
+  "mechanism": "แยกกลุ่มผู้ใส่ ตรวจไซซ์ที่ทำได้ และกำหนดวิธีรวมข้อมูลจากแต่ละห้องหรือคณะ",
+  "proof": "ผลงานโรงเรียนหรือมหาวิทยาลัย ตารางไซซ์จริง และตัวอย่างเสื้อของแต่ละกลุ่มผู้ใส่",
+  "ask": "มีไซซ์เด็กเล็กไหม และใช้แบบเดียวกับครูได้หรือไม่? ต้องตรวจทรงกับตารางไซซ์ของสินค้าที่เลือก",
+  "success": "เสื้อเหมาะกับคนใส่ จำนวนและไซซ์ครบ และผ่านขั้นตอนอนุมัติของสถาบัน",
+  "headline": "เสื้อกีฬาสีและเสื้อกิจกรรมโรงเรียน สั่งทำตามแบบที่ต้องการ",
+  "cta": "ปรึกษาเสื้อโรงเรียน"
+ },
+ {
+  "id": 9,
+  "g": "B",
+  "name": "นักศึกษา / หัวหน้ารุ่น",
+  "sub": "เสื้อคณะ · เสื้อรุ่น · ค่าย",
+  "who": "หัวหน้ารุ่นหรือผู้รวบรวมออเดอร์ดูแลงาน สมาชิกช่วยเลือกและจ่ายเอง บางงานมีอาจารย์อนุมัติ",
+  "trigger": "รับน้อง ค่าย แข่งขัน เสื้อรุ่น หรือจบการศึกษา",
+  "job": "สรุปแบบที่สมาชิกเลือก รวบรวมเงิน ไซซ์ และรายชื่อให้ครบก่อนสั่งผลิต",
+  "pain": [
+   "สมาชิกชอบคนละแบบและมีงบไม่เท่ากัน",
+   "มีคนแจ้งไซซ์หรือจ่ายเงินช้า และอาจตกหล่นจากรายชื่อ",
+   "คนรวบรวมกลัวต้องออกเงินหรือรับผิดแทน"
+  ],
+  "gain": [
+   "มีภาพแบบให้สมาชิกดูและช่วยกันเลือก",
+   "รู้ยอดเงินที่ต้องเก็บ และติดต่อช่วงหลังเรียนได้",
+   "ได้เสื้อที่อยากใส่ต่อ พร้อมรู้วิธีสอบถามหากมีคนตกหล่น"
+  ],
+  "vp": "ช่วยเปลี่ยนไอเดียของรุ่นให้เป็นแบบที่คุยกันรู้เรื่อง พร้อมข้อมูลไซซ์และราคาสำหรับรวมออเดอร์",
+  "w": [
+   1,
+   3,
+   7,
+   10
+  ],
+  "mechanism": "เสนอภาพหน้า–หลังให้ร่วมเลือก พร้อมแจ้งข้อมูลที่ต้องสรุปก่อนผลิต",
+  "proof": "ภาพแบบและเสื้อจริง ตารางไซซ์ และตัวอย่างตารางรวบรวมออเดอร์",
+  "ask": "ราคาขึ้นกับจำนวนไหม ไม่มีแบบเริ่มได้ไหม และคนตกหล่นสั่งเพิ่มได้หรือไม่? ควรตอบทั้งราคา ขั้นตอนออกแบบ และเงื่อนไขสั่งเพิ่ม",
+  "success": "สมาชิกตกลงแบบได้ เงินกับจำนวนตรงกัน และคนรวบรวมไม่ต้องรับภาระเพิ่มโดยไม่รู้ล่วงหน้า",
+  "headline": "เสื้อรุ่นและเสื้อคณะ ออกแบบในแบบของพวกเรา",
+  "cta": "ปรึกษาเสื้อรุ่น"
+ },
+ {
+  "id": 10,
+  "g": "C",
+  "name": "หัวหน้าทีมแบดมินตัน",
+  "sub": "ทีมแบด · ชมรม · แข่งขัน",
+  "who": "หัวก๊วนหรือผู้จัดการชมรมเป็นทั้งคนสั่งและคนใส่ สมาชิกกับสปอนเซอร์ช่วยให้ความเห็น",
+  "trigger": "ตั้งทีม เปลี่ยนเสื้อ แข่งขัน มีสปอนเซอร์หรือสมาชิกเพิ่ม",
+  "job": "ทำเสื้อที่เป็นของก๊วน เลือกให้เหมาะกับการตีแบด และตรวจชื่อกับโลโก้ให้ถูกต้อง",
+  "pain": [
+   "แบบคล้ายก๊วนอื่น กลัวผ้าร้อนหรือขยับไม่สะดวก",
+   "ไซซ์ ชื่อ หรือโลโก้อาจผิด",
+   "ตกลงแบบกันนาน และมีสมาชิกใหม่เข้ามาเรื่อย ๆ"
+  ],
+  "gain": [
+   "เสื้อดูเป็นทีมเดียวกันและใส่ตีได้ตามที่ต้องการ",
+   "มีภาพแบบและตัวอย่างผ้าช่วยให้ตัดสินใจ",
+   "ติดต่อหลังเลิกงานได้ และรู้เงื่อนไขสำหรับสมาชิกที่เพิ่ม"
+  ],
+  "vp": "ช่วยเลือกแบบ ผ้า และทรงสำหรับก๊วน พร้อมคุยเรื่องไซซ์ ราคา และการสั่งเพิ่มให้ชัดตั้งแต่รอบแรก",
+  "w": [
+   1,
+   2,
+   7,
+   10
+  ],
+  "mechanism": "เริ่มจากชื่อก๊วน สี และแบบที่ชอบ แล้วตรวจรายชื่อกับโลโก้ก่อนผลิต",
+  "proof": "ภาพก๊วนใส่ในสนาม ข้อมูลผ้าและทรง และตัวอย่างชื่อกับโลโก้บนเสื้อ",
+  "ask": "ผ้าใส่ตีเหมาะไหม ใส่ชื่อคิดเพิ่มหรือเปล่า และสมาชิกใหม่สั่งอย่างไร? ควรมีข้อมูลผ้า ออปชั่น และเงื่อนไขสั่งเพิ่ม",
+  "success": "สมาชิกชอบเสื้อ ใส่ตีได้ตามที่ต้องการ และรายละเอียดของทีมถูกต้อง",
+  "headline": "เสื้อแบดสั่งทำ ออกแบบให้เข้ากับก๊วนคุณ",
+  "cta": "ปรึกษาเสื้อแบด"
+ },
+ {
+  "id": 11,
+  "g": "C",
+  "name": "โค้ช / ผู้จัดการทีมกีฬา",
+  "sub": "ฟุตบอล · วิ่ง · กอล์ฟ · ทีมเชียร์",
+  "who": "ผู้จัดการทีมคุยกับนักกีฬา โค้ช ผู้สนับสนุน และผู้ดูแลทีม",
+  "trigger": "เปิดฤดูกาล ลงแข่งขัน ตั้งทีม หรือเปลี่ยนสปอนเซอร์",
+  "job": "เลือกเสื้อให้เหมาะกับกีฬา ใส่ชื่อ–เบอร์ถูก และทำตามข้อกำหนดของรายการแข่งขัน",
+  "pain": [
+   "เลือกจากความสวย แต่ใส่เล่นจริงไม่เหมาะ",
+   "ชื่อหรือเบอร์ผิด และโลโก้หลายจุดดูแน่นเกินไป",
+   "ไม่รู้ว่าเสื้อแข่ง เสื้อเชียร์ และแต่ละทรงต่างกันอย่างไร"
+  ],
+  "gain": [
+   "เลือกผ้าและทรงจากงานที่ต้องใช้จริง",
+   "ตรวจชื่อ เบอร์ และโลโก้ได้ก่อนผลิต",
+   "รู้ความคืบหน้าเพื่อเตรียมทีมก่อนวันแข่ง"
+  ],
+  "vp": "ช่วยเลือกผ้าและทรงตามกีฬาที่เล่น พร้อมตรวจแบบ ชื่อ เบอร์ และโลโก้ให้ครบก่อนผลิต",
+  "w": [
+   2,
+   6,
+   8,
+   9
+  ],
+  "mechanism": "ถามประเภทกีฬา สถานที่ และข้อกำหนดของผู้จัด โดยแยกเสื้อแข่งกับเสื้อเชียร์",
+  "proof": "ภาพใช้งานจริง ข้อมูลผ้าและทรงที่ตรวจสอบได้ และตัวอย่างชื่อ–เบอร์",
+  "ask": "ทำไมผ้าหรือทรงนี้เหมาะกับกีฬาที่เล่น? ควรอธิบายจากข้อมูลสินค้าและตัวอย่างใช้งานจริง",
+  "success": "เสื้อเหมาะกับกีฬา ชื่อและเบอร์ถูกต้อง และทีมดูเป็นชุดเดียวกัน",
+  "headline": "เสื้อกีฬาสั่งทำ ออกแบบลายสำหรับทีมคุณ",
+  "cta": "ปรึกษาเสื้อกีฬา"
+ },
+ {
+  "id": 12,
+  "g": "C",
+  "name": "ชมรม / ศิษย์เก่า / กลุ่มสนใจ",
+  "sub": "รวมรุ่น · ทริป · ครบรอบ",
+  "who": "สมาชิกที่อาสารวมออเดอร์ให้กลุ่ม ต้องฟังความเห็นจากคนหลายวัย",
+  "trigger": "รวมรุ่น ทริปประจำปี งานชมรม หรือวันครบรอบ",
+  "job": "หาข้อสรุปแบบที่สมาชิกส่วนใหญ่ชอบ และรวมจำนวนกับไซซ์ให้เรียบร้อย",
+  "pain": [
+   "สมาชิกชอบคนละแนวและใส่คนละไซซ์",
+   "ไม่รู้เริ่มแบบอย่างไร เก็บไซซ์ช้า และมีเวลาทำงานนี้ไม่มาก",
+   "กลัวเสื้อใช้ได้แค่วันเดียว"
+  ],
+  "gain": [
+   "เสื้อมีความหมายกับกลุ่มและสมาชิกอยากใส่",
+   "รู้ค่าใช้จ่ายและติดต่อในช่วงที่สะดวกได้",
+   "เลือกแบบที่ใช้ต่อหลังงาน และรู้วิธีสั่งเพิ่ม"
+  ],
+  "vp": "ช่วยนำชื่อ สี และเรื่องราวของกลุ่มมาเป็นแบบเสื้อ พร้อมคุยเรื่องงบ ไซซ์ และการสั่งเพิ่มให้คนรวมออเดอร์ทำงานง่ายขึ้น",
+  "w": [
+   1,
+   3,
+   7,
+   10
+  ],
+  "mechanism": "ใช้ชื่อกลุ่ม สัญลักษณ์ หรือปีที่สำคัญเป็นไอเดีย แล้วเลือกทรงกับลายให้เหมาะกับสมาชิก",
+  "proof": "ภาพคนใส่หลายรูปร่าง ตัวอย่างเสื้อหลายสไตล์ และตารางไซซ์",
+  "ask": "แบบจะเหมาะกับสมาชิกหลายวัยไหม และมีไซซ์ครบหรือไม่? ควรมีภาพใส่จริงกับตารางไซซ์ให้ช่วยกันเลือก",
+  "success": "สมาชิกตกลงกันได้ เสื้อมีความหมายกับกลุ่ม และคนรวบรวมจัดการออเดอร์จบ",
+  "headline": "เสื้อชมรมและเสื้อรวมรุ่น ออกแบบให้เป็นของกลุ่มคุณ",
+  "cta": "ปรึกษาเสื้อชมรม"
+ },
+ {
+  "id": 13,
+  "g": "D",
+  "name": "Organizer / Agency / PM",
+  "sub": "B2B2B · ส่งมอบให้ลูกค้าอีกทอด",
+  "who": "Organizer หรือผู้จัดการโครงการดูแลงาน โดยบริษัทลูกค้าเป็นผู้อนุมัติแบบและงบ",
+  "trigger": "ได้บรีฟ เตรียมเสนอ ชนะงาน หรือรายละเอียดอีเวนต์เริ่มชัด",
+  "job": "เช็กว่างานทำได้ทันไหม สรุปราคาให้ลูกค้าอนุมัติ และรับเสื้อไปใช้ตามแผน",
+  "pain": [
+   "รอคำตอบเรื่องเสื้อจนเสนอราคาต่อลูกค้าไม่ได้",
+   "ลูกค้าขอแก้ ค่าใช้จ่ายเพิ่ม หรือร้านรับงานเกินกำลัง",
+   "ถ้าเสื้อมีปัญหา ชื่อเสียงของผู้จัดงานก็เสียไปด้วย"
+  ],
+  "gain": [
+   "รู้ว่าทำอะไรได้และรับเสื้อเมื่อไรก่อนตอบลูกค้า",
+   "มีราคาและความคืบหน้าให้แจ้งต่อ",
+   "รู้ว่าถ้างานเปลี่ยนต้องทำอย่างไร และติดต่อใครหลังส่งมอบ"
+  ],
+  "vp": "ช่วย Organizer ตรวจคิว ราคา และรายละเอียดก่อนรับปากลูกค้า พร้อมอัปเดตงานให้นำไปแจ้งลูกค้าต่อได้",
+  "w": [
+   4,
+   6,
+   8,
+   9
+  ],
+  "mechanism": "ตรวจจำนวน แบบ วันรับ และที่ส่ง ก่อนกำหนดวันยืนยันรายละเอียดกับเงื่อนไขการแก้",
+  "proof": "แผนงานที่ตกลงกับลูกค้า หลักฐานส่งมอบจริง และเงื่อนไขบริการของงานนั้น",
+  "ask": "คิวว่างไหม แก้แบบหรือแยกส่งได้ไหม? ต้องตรวจงานก่อนรับปาก ส่วนเครดิต งานลับ และการไม่ติดแบรนด์ต้องตกลงแยก",
+  "success": "รับเสื้อไปส่งต่อได้ตามแผน คุมค่าใช้จ่าย และลูกค้ายังไว้วางใจ",
+  "headline": "สั่งทำเสื้อสตาฟและเสื้ออีเวนต์ มีทีมช่วยดูแลงาน",
+  "cta": "เช็กคิวผลิต"
+ },
+ {
+  "id": 14,
+  "g": "D",
+  "name": "เจ้าของกิจกรรม / งานอาสา",
+  "sub": "งานวิ่ง · ชุมชน · มูลนิธิ",
+  "who": "เจ้าของกิจกรรมคุยกับคณะทำงาน สปอนเซอร์ ผู้ร่วมงาน และอาสาสมัคร",
+  "trigger": "เปิดโครงการ กำหนดวัน รับสมัคร หรือยืนยันผู้สนับสนุน",
+  "job": "ทำเสื้อให้เข้ากับงาน แยกผู้ร่วมงานกับสตาฟ และสรุปจำนวนตามยอดสมัคร",
+  "pain": [
+   "จำนวนผู้ร่วมงานยังเปลี่ยน และโลโก้สปอนเซอร์มาช้า",
+   "ต้องแยกเสื้อสตาฟ อาสา และผู้ร่วมงานให้ชัด",
+   "งบเสื้อต้องไม่กระทบค่าใช้จ่ายส่วนอื่น"
+  ],
+  "gain": [
+   "เสื้อเข้ากับงานและแยกทีมงานออกจากผู้ร่วมงานได้",
+   "คุมงบและติดตามงานได้",
+   "รู้วิธีจัดการหากยอดสมัครเพิ่ม โดยตรวจคิวรอบใหม่ก่อน"
+  ],
+  "vp": "ช่วยเลือกแบบเสื้อสำหรับผู้ร่วมงานและทีมงาน พร้อมตรวจจำนวน โลโก้ และกำหนดรับเสื้อให้ตรงกับการเตรียมงาน",
+  "w": [
+   1,
+   3,
+   8,
+   10
+  ],
+  "mechanism": "แยกแบบผู้ร่วมงาน สตาฟ และอาสา ตรวจโลโก้ผู้สนับสนุน แล้วกำหนดวันยืนยันยอด",
+  "proof": "ภาพกิจกรรมจริง ตัวอย่างแบบแยกสตาฟกับผู้ร่วมงาน และรายการออเดอร์ที่ตรวจแล้ว",
+  "ask": "ยอดเพิ่มหรือโลโก้ยังไม่ครบ เริ่มทำอะไรได้บ้าง? ควรบอกสิ่งที่ต้องยืนยันก่อนผลิต และผลของการเพิ่มข้อมูลภายหลัง",
+  "success": "เสื้อแต่ละกลุ่มถูกต้อง เข้ากับกิจกรรม และแจกให้ผู้ร่วมงานได้สะดวก",
+  "headline": "เสื้อกิจกรรมและเสื้อสตาฟ ออกแบบให้เข้ากับงาน",
+  "cta": "ปรึกษาเสื้อกิจกรรม"
+ }
+];
+const dimensions=[
+ [
+  "เลือกเสื้อให้เหมาะกับงาน",
+  "เลือกผิดแบบ ใส่ทำงานหรือกิจกรรมไม่สะดวก",
+  "ได้เสื้อที่เหมาะกับการใช้งาน",
+  "แนะนำผ้าและทรง พร้อมอธิบายเหตุผล"
+ ],
+ [
+  "แบบและภาพลักษณ์",
+  "แบบดูธรรมดาหรือไม่เข้ากับทีม",
+  "มีสี โลโก้ และลายที่เป็นของทีม",
+  "ภาพตัวอย่างหลายแนวและที่มาของแบบ"
+ ],
+ [
+  "ความสบายและไซซ์",
+  "ทรงไม่เข้ากับบางคน หรือเลือกขนาดไม่พอดี",
+  "คนหลายรูปร่างเลือกขนาดได้",
+  "ตารางไซซ์ของแต่ละทรง วิธีวัด และภาพใส่จริง"
+ ],
+ [
+  "คุณภาพเสื้อจริง",
+  "ภาพแบบสวย แต่ไม่รู้ว่าเสื้อจริงเป็นอย่างไร",
+  "เห็นรายละเอียดก่อนตัดสินใจ",
+  "ภาพเนื้อผ้า ตะเข็บ งานปักและงานพิมพ์ใกล้ ๆ"
+ ],
+ [
+  "ระยะเวลา",
+  "ไม่รู้ต้องเริ่มเมื่อไร กลัวรับเสื้อไม่ทัน",
+  "รู้วันยืนยันแบบ จำนวน และวันรับเสื้อ",
+  "ขั้นตอนผลิต จุดเริ่มนับเวลา และเงื่อนไขวันส่ง"
+ ],
+ [
+  "ราคาและงบ",
+  "เทียบราคาไม่ถูก หรือมีค่าใช้จ่ายเพิ่มทีหลัง",
+  "รู้ว่ารวมอะไรบ้าง และเลือกให้พอดีกับงบ",
+  "รายการราคา สิ่งที่รวม และค่าออปชั่น"
+ ],
+ [
+  "งานที่ต้องตามและรวบรวม",
+  "ต้องถามร้าน ตามไซซ์ และแก้ข้อมูลซ้ำ",
+  "รู้ว่าต้องเตรียมข้อมูลอะไรตั้งแต่แรก",
+  "รายการข้อมูลก่อนสั่งและตารางรวบรวมไซซ์"
+ ],
+ [
+  "การเสนออนุมัติ",
+  "ข้อมูลไม่พอให้หัวหน้าหรือกรรมการตัดสินใจ",
+  "มีสรุปส่งต่อให้ผู้อนุมัติได้",
+  "ภาพแบบ รายละเอียดเสื้อ ราคา และเหตุผลที่เลือก"
+ ],
+ [
+  "เอกสาร",
+  "ไม่รู้ว่าร้านออกเอกสารที่ต้องใช้ได้ไหม",
+  "ตรวจรายการได้ก่อนสั่ง",
+  "รายชื่อเอกสารและเงื่อนไขที่ออกให้ได้จริง"
+ ],
+ [
+  "ความสบายใจของคนสั่ง",
+  "กลัวทำผิดและต้องรับผิดชอบคนเดียว",
+  "รู้ว่าต้องทำอะไร และมีใครช่วยดูแลงาน",
+  "ผู้ติดต่อ ขั้นตอนยืนยัน และการอัปเดตงาน"
+ ],
+ [
+  "ความไว้วางใจจากทีม",
+  "กลัวเสียเครดิตกับหัวหน้า เพื่อน หรือลูกค้า",
+  "งานออกมาดีและทีมมั่นใจในคนรับผิดชอบ",
+  "รีวิวที่เล่าประสบการณ์ของคนสั่ง"
+ ],
+ [
+  "การดูแลหลังรับเสื้อ",
+  "มีปัญหาแล้วไม่รู้ต้องแจ้งใคร",
+  "รู้วิธีแจ้งและเรื่องที่ดูแลให้ได้",
+  "ช่องทางแจ้ง เงื่อนไข และระยะเวลารับเรื่อง"
+ ],
+ [
+  "การสั่งเพิ่ม",
+  "คนเพิ่ม แต่ไม่รู้ขั้นต่ำ ราคา และเวลารอบใหม่",
+  "วางแผนสั่งเพิ่มได้",
+  "เงื่อนไขใน 30 วัน หลัง 30 วัน และความต่างระหว่างล็อต"
+ ],
+ [
+  "ความคุ้มค่าเมื่อใช้จริง",
+  "เสื้อใช้ครั้งเดียวแล้วไม่อยากใส่ต่อ",
+  "ได้เสื้อที่ใช้ได้ตามที่ตั้งใจ",
+  "คำแนะนำแบบ ทรง วิธีดูแล และภาพการใช้งาน"
+ ]
+];
+const scenarios=[
+ [
+  "สั่งครั้งแรก",
+  "อยากรู้ขั้นตอนและสิ่งที่ต้องเตรียม",
+  "บอกจำนวนกับวันใช้เสื้อ แล้วเริ่มคุยได้เลย"
+ ],
+ [
+  "มีแบบแล้ว",
+  "อยากรู้ราคาและวันรับเสื้อ",
+  "ส่งแบบมาให้ทีมดีตรวจสอบได้"
+ ],
+ [
+  "ยังไม่มีแบบ",
+  "อยากมีคนช่วยแนะนำ",
+  "ส่งสีที่ชอบหรือรูปตัวอย่างมาเริ่มคุยได้"
+ ],
+ [
+  "เคยเจองานมีปัญหา",
+  "อยากเห็นของจริงและวิธีดูแลงาน",
+  "ดูผลงานและขั้นตอนก่อนตัดสินใจ"
+ ],
+ [
+  "ใกล้วันต้องใช้",
+  "อยากรู้ว่ารับงานทันไหม",
+  "แจ้งวันรับเสื้อและจำนวนเพื่อเช็กคิว"
+ ],
+ [
+  "มีงบจำกัด",
+  "อยากรู้ตัวเลือกที่อยู่ในงบ",
+  "บอกงบคร่าว ๆ ให้ช่วยแนะนำได้"
+ ],
+ [
+  "ต้องเสนอหลายฝ่าย",
+  "ต้องมีข้อมูลส่งต่อให้อนุมัติ",
+  "ขอสรุปแบบและราคาไปเสนอได้"
+ ],
+ [
+  "สั่งเพิ่มจากงานเดิม",
+  "อยากรู้ราคาและขั้นต่ำรอบใหม่",
+  "ส่งเลขออเดอร์หรือรูปเสื้อเดิมมาได้"
+ ]
+];
+const objections=[
+ [
+  "อีกเจ้าถูกกว่า",
+  "ราคาที่ต่างกัน ได้อะไรเพิ่มบ้าง",
+  "เทียบผ้า ทรง รายละเอียดงาน และสิ่งที่รวมในราคา"
+ ],
+ [
+  "ขอดูร้านอื่นก่อน",
+  "ยังมีข้อมูลพอให้เลือกไหม",
+  "แสดงงานจริงที่คล้ายกันและข้อมูลที่นำไปเทียบได้"
+ ],
+ [
+  "กลัวไม่เหมือนแบบ",
+  "เสื้อจริงจะออกมาอย่างไร",
+  "ภาพแบบเทียบกับเสื้อจริง และขั้นตอนตรวจตัวอย่าง"
+ ],
+ [
+  "กลัวไซซ์ผิด",
+  "ต้องวัดอย่างไร และถ้าผิดทำอย่างไร",
+  "ตารางของทรงที่เลือก วิธีวัด และเงื่อนไขแก้ปัญหา"
+ ],
+ [
+  "ยังไม่มีแบบ",
+  "ต้องออกแบบมาเองไหม",
+  "อธิบายว่าเลือกแบบ ส่งรูปอ้างอิง หรือเริ่มจากไอเดียได้อย่างไร"
+ ],
+ [
+  "กลัวไม่ทัน",
+  "ตรวจคิวให้ได้ไหม",
+  "ขอวันรับเสื้อและจำนวน ก่อนตรวจคิวกับวันต้องยืนยันแบบ"
+ ],
+ [
+  "ขอเสนอหัวหน้าก่อน",
+  "มีอะไรส่งให้หัวหน้าดูได้บ้าง",
+  "สรุปแบบ ผ้า จำนวน ราคา และเหตุผลที่เลือก"
+ ],
+ [
+  "สมาชิกยังไม่ครบ",
+  "เริ่มทำอะไรได้ และต้องยืนยันยอดเมื่อไร",
+  "แยกสิ่งที่คุยล่วงหน้าได้กับข้อมูลที่ต้องครบก่อนผลิต"
+ ],
+ [
+  "เคยเจอร้านทำงานมีปัญหา",
+  "รอบนี้จะไว้ใจได้อย่างไร",
+  "มีงานจริง ขั้นตอนดูแล ผู้ติดต่อ และวิธีแก้ปัญหา"
+ ],
+ [
+  "มีร้านประจำแล้ว",
+  "มีเหตุผลอะไรให้ลองร้านใหม่",
+  "แสดงงานที่ตรงกับสิ่งที่ลูกค้าต้องการในครั้งนี้"
+ ]
+];
+const pageMap=[
+ [
+  "บริษัท ร้านค้า และยูนิฟอร์ม",
+  "1 · 3 · 4 · 5",
+  "เสื้อแบบไหนเหมาะกับงาน รวบรวมจำนวนและของบอย่างไร"
+ ],
+ [
+  "โรงเรียนและมหาวิทยาลัย",
+  "8 · 9",
+  "ใครสั่ง ใครจ่าย และต้องเก็บข้อมูลจากแต่ละห้องอย่างไร"
+ ],
+ [
+  "หน่วยงานและองค์กร",
+  "6 · 7",
+  "ต้องใช้สเปก เอกสาร และข้อมูลอะไรเพื่อเสนอซื้อ"
+ ],
+ [
+  "กีฬาและการแข่งขัน",
+  "10 · 11",
+  "ผ้าและทรงเหมาะกับกีฬาหรือไม่ ใส่ชื่อ–เบอร์อย่างไร"
+ ],
+ [
+  "กิจกรรมและชมรม",
+  "2 · 12 · 13 · 14",
+  "เลือกแบบให้เข้าธีม แยกทีม และรับเสื้อทันเตรียมงานอย่างไร"
+ ]
+];
+const products=[
+ [
+  "เสื้อโปโลปัก",
+  "เลือกผ้า ทรง และรายละเอียดโลโก้ให้เข้ากับภาพของทีม",
+  "บริษัท ร้านค้า บุคลากร หน่วยงาน และทีมพบลูกค้า"
+ ],
+ [
+  "เสื้อพิมพ์ลาย",
+  "เลือกสีและลายให้เป็นของทีม หรือเข้ากับธีมงาน",
+  "กีฬา กีฬาสี Outing อีเวนต์ และเสื้อคณะ"
+ ],
+ [
+  "เสื้อเบสบอล",
+  "มีเอกลักษณ์จากทรงและกระดุมด้านหน้า ต้องดูตำแหน่งลายให้เหมาะ",
+  "ชมรม เสื้อรุ่น กิจกรรม และแคมเปญที่เลือกสไตล์นี้"
+ ],
+ [
+  "Jersey Oversize",
+  "ทรงหลวม เลือกจากภาพใส่จริงและตารางไซซ์ของทรงนี้",
+  "เสื้อรุ่น ทีมเชียร์ ชมรม และใส่ทั่วไป"
+ ]
+];
+const landing=[
+ [
+  "บอกว่าเสื้อแบบไหน ช่วยอะไรได้",
+  "เสื้อบริษัทสั่งทำ ช่วยเลือกแบบให้เหมาะกับทีมคุณ",
+  "ภาพเสื้อบริษัทจริง + ปุ่มปรึกษา"
+ ],
+ [
+  "ตอบเรื่องที่คนสั่งกังวล",
+  "หัวหน้าขอแก้แบบ · ไซซ์ยังไม่ครบ · ต้องรายงานงานให้ทีม",
+  "เลือก 3 เรื่องที่ HR เจอบ่อย"
+ ],
+ [
+  "ช่วยเลือกแบบและผ้า",
+  "มีภาพแบบและตัวอย่างผ้าให้ใช้ตัดสินใจ",
+  "① ปรับแบบ + ② ตัวอย่างผ้า"
+ ],
+ [
+  "ทำราคาให้เข้าใจง่าย",
+  "บอกสิ่งที่รวม ค่าออปชั่น และเงื่อนไขจัดส่ง",
+  "③ ทุกไซซ์ + ④ VAT + ⑤ ส่งฟรี"
+ ],
+ [
+  "บอกวิธีติดต่อและติดตามงาน",
+  "รู้ว่าติดต่อได้เมื่อไร และอัปเดตขั้นตอนไหนบ้าง",
+  "⑥ ตอบไว + ⑦ เวลา + ⑧ สถานะ"
+ ],
+ [
+  "อธิบายการเคลมและสั่งเพิ่ม",
+  "แจ้งวิธีติดต่อ ขอบเขตการดูแล และเวลาที่กำหนด",
+  "⑨ เคลม + ⑩ สั่งซ้ำ"
+ ],
+ [
+  "ตอบคำถามและชวนเริ่มคุย",
+  "ตอบเรื่องไซซ์ เวลา ราคา และเอกสารให้ตรงคำถาม",
+  "ปุ่ม: ปรึกษาทีมดี"
+ ]
+];
+const proofs=[
+ [
+  "ช่วยเลือกและออกแบบได้",
+  "ดูโจทย์ลูกค้า เหตุผลที่เลือกแบบ และเสื้อที่ผลิตจริง",
+  "งานออกแบบ"
+ ],
+ [
+  "เข้าใจงานของลูกค้า",
+  "เล่าผลงานที่มีความต้องการและข้อจำกัดใกล้เคียงกัน",
+  "ประสบการณ์"
+ ],
+ [
+  "ใส่แล้วเหมาะกับงาน",
+  "ภาพใส่จริง ตารางไซซ์ และข้อมูลผ้ากับทรง",
+  "การใช้งาน"
+ ],
+ [
+  "ดูแลรายละเอียดครบ",
+  "ตัวอย่างสรุปงาน การยืนยันแบบ และการอัปเดตที่ปกปิดข้อมูลแล้ว",
+  "การดูแลงาน"
+ ],
+ [
+  "ส่งงานและดูแลต่อ",
+  "แผนที่ตกลง หลักฐานส่งมอบ และตัวอย่างการแก้ปัญหา",
+  "การส่งมอบ"
+ ],
+ [
+  "มีข้อมูลให้ตัดสินใจ",
+  "ราคาแยกรายการ รีวิวที่ได้รับอนุญาต และข้อมูลบริษัท",
+  "ความน่าเชื่อถือ"
+ ]
+];
+const gaps=[
+ [
+  "แบบจะสวยและเข้ากับทีมไหม",
+  "เพิ่มภาพจากไอเดียแรกไปจนถึงเสื้อจริง การแก้แบบฟรีอย่างเดียวไม่บอกคุณภาพงาน"
+ ],
+ [
+  "จะใส่พอดีและสบายไหม",
+  "เพิ่มภาพใส่จริง วิธีวัด และตารางไซซ์ของแต่ละทรง"
+ ],
+ [
+  "จะรับเสื้อทันไหม",
+  "ตรวจคิว วันยืนยันข้อมูล และวันรับที่ตกลง รวมถึงวิธีแจ้งหากมีปัญหา"
+ ],
+ [
+  "เก็บไซซ์หลายคนอย่างไร",
+  "มีตารางรวบรวมและคนตรวจรายการก่อนยืนยัน"
+ ],
+ [
+  "เอกสารออกให้ได้ไหม",
+  "ระบุรายการเอกสารและเงื่อนไขชำระเงินที่ทำได้จริง"
+ ],
+ [
+  "สีและโลโก้จะออกมาอย่างไร",
+  "อธิบายข้อจำกัดของวิธีผลิต และตัวอย่างที่ใช้ยืนยัน"
+ ],
+ [
+  "แยกส่งหลายที่ได้ไหม",
+  "ระบุวิธีแพ็ก จำนวนปลายทาง และค่าใช้จ่าย"
+ ],
+ [
+  "มีปัญหาแล้วแก้ทันใช้ไหม",
+  "แจ้งวิธีรับเรื่อง ตรวจปัญหา และแผนแก้ของแต่ละงาน"
+ ]
+];
+const messageMaps=[
+ {
+  "id": "company",
+  "name": "บริษัท ร้านค้า และยูนิฟอร์ม",
+  "type": "base",
+  "parent": "บริษัท / เอกชน",
+  "p": [
+   1,
+   3,
+   4,
+   5
+  ],
+  "w": [
+   3,
+   4,
+   8,
+   9
+  ],
+  "lead": "ต้องเลือกแบบ รวบรวมไซซ์ และขออนุมัติงบ โดยยังมีงานประจำต้องทำ",
+  "secondary": "พนักงานใส่ได้เหมาะกับงาน และเสื้อดูเข้ากับบริษัท",
+  "angle": "บอกว่าทำเสื้ออะไร และช่วยคนรับผิดชอบเรื่องไหนบ้าง",
+  "heading": "เสื้อบริษัทสั่งทำ ช่วยเลือกแบบให้เหมาะกับทีมคุณ",
+  "body": "ยังไม่แน่ใจว่าจะเลือกเสื้อแบบไหน? บอกลักษณะงาน จำนวน และงบที่ตั้งไว้ ทีมดีช่วยแนะนำแบบและผ้า พร้อมสรุปราคาให้ใช้เสนอหัวหน้า และอัปเดตงานระหว่างผลิต",
+  "cta": "ปรึกษาทีมดี",
+  "cta2": "ดูผลงานเสื้อบริษัท",
+  "benefits": [
+   "มีคนช่วยเลือกแบบและผ้าให้เหมาะกับงาน",
+   "รู้ว่าราคารวมอะไรบ้าง ก่อนนำไปขออนุมัติ",
+   "รู้ว่างานถึงขั้นตอนไหนแล้ว ให้แจ้งทีมต่อได้"
+  ],
+  "hooks": [
+   [
+    "หัวหน้าขอแก้แบบ ทำได้ไหม?",
+    "ทีมดีมีบริการปรับแบบก่อนผลิต โดยแจ้งรายละเอียดและขั้นตอนให้ทราบก่อนเริ่มงาน"
+   ],
+   [
+    "ต้องรวบรวมไซซ์หลายแผนก เริ่มยังไงดี?",
+    "เริ่มจากเลือกทรงเสื้อ ใช้ตารางไซซ์ของทรงนั้น และแยกรายชื่อตามแผนกก่อนรวมจำนวน"
+   ],
+   [
+    "หัวหน้าถามว่างานถึงไหนแล้ว?",
+    "ทีมดีอัปเดตขั้นตอนหลักระหว่างผลิต ให้คุณนำไปแจ้งคนในทีมต่อได้"
+   ]
+  ],
+  "faq": [
+   [
+    "ควรเลือกเสื้อโปโลหรือเสื้อพิมพ์ลาย?",
+    "บอกลักษณะงานและแบบที่ชอบ ทีมดีช่วยแนะนำผ้า ทรง และวิธีทำโลโก้ให้เหมาะกับการใช้งานได้"
+   ],
+   [
+    "ราคาเสื้อรวมอะไรบ้าง?",
+    "ดูรายการในใบเสนอราคาได้ทั้งตัวเสื้อ งานพิมพ์หรือปัก และออปชั่นที่เลือก พร้อมยอดรวม VAT และเงื่อนไขจัดส่ง หากมีรายการเพิ่มเติมควรตกลงราคาก่อนสั่ง"
+   ],
+   [
+    "สั่งทำเสื้อใช้เวลากี่วัน?",
+    "แจ้งจำนวน แบบที่สนใจ และวันที่ต้องการรับเสื้อ ทีมดีจะตรวจสอบคิวผลิตก่อนยืนยันวันส่ง"
+   ],
+   [
+    "ส่งหลายสาขาหรือสั่งเพิ่มทีหลังได้ไหม?",
+    "แจ้งจำนวนและที่อยู่แต่ละสาขาเพื่อสอบถามการแพ็กและค่าจัดส่ง ส่วนการสั่งเพิ่มให้ส่งเลขออเดอร์เดิม เพื่อเช็กขั้นต่ำ ราคา และวันส่งรอบใหม่"
+   ],
+   [
+    "เสื้อหน้าร้านกับเสื้อออกบูธควรเลือกต่างกันไหม?",
+    "ควรดูทั้งภาพลักษณ์และลักษณะงาน เช่น ต้องเคลื่อนไหวมาก อยู่กลางแจ้ง หรือพบลูกค้าตลอดวัน ทีมดีช่วยแนะนำตัวเลือกตามงานได้"
+   ]
+  ],
+  "proof": "ภาพเสื้อบริษัทหรือร้านค้าที่ใช้งานคล้ายกัน ภาพแบบเทียบกับเสื้อจริง ใบสรุปออเดอร์ และรีวิวจากคนสั่ง",
+  "tools": [
+   "size",
+   "approval",
+   "timeline"
+  ],
+  "pending": [
+   "terms",
+   "delivery",
+   "repeat",
+   "materials"
+  ],
+  "asset": "รวมงานองค์กร / ร้านค้า · ต้องคัดไฟล์และยืนยันสิทธิ์"
+ },
+ {
+  "id": "institution",
+  "name": "หน่วยงานและองค์กร",
+  "type": "base",
+  "parent": "รัฐ / รัฐวิสาหกิจ",
+  "p": [
+   6,
+   7
+  ],
+  "w": [
+   4,
+   8,
+   9,
+   1
+  ],
+  "lead": "ต้องมีข้อมูลและเอกสารพอให้เสนอซื้อ อนุมัติ และตรวจรับได้",
+  "secondary": "แบบเหมาะกับหน่วยงาน และทุกฝ่ายใช้ข้อมูลชุดเดียวกัน",
+  "angle": "บอกว่าช่วยเตรียมข้อมูลอะไรได้ โดยไม่รับรองผลอนุมัติหรือเบิกจ่าย",
+  "heading": "สั่งทำเสื้อหน่วยงาน พร้อมรายละเอียดสำหรับเสนอจัดซื้อ",
+  "body": "ส่งแบบ จำนวน และรายการเอกสารที่ต้องใช้มาให้ทีมดีตรวจสอบได้ เราช่วยสรุปรายละเอียดเสื้อ ราคา และกำหนดส่ง เพื่อนำไปเสนอผู้อนุมัติ",
+  "cta": "ขอใบเสนอราคา",
+  "cta2": "สอบถามเอกสารจัดซื้อ",
+  "benefits": [
+   "ตรวจเอกสารที่ต้องใช้ก่อนตัดสินใจสั่ง",
+   "มีสรุปแบบและราคาให้ส่งต่อผู้อนุมัติ",
+   "ตรวจงานเทียบกับรายละเอียดที่ตกลงกันได้"
+  ],
+  "hooks": [
+   [
+    "ต้องใช้เอกสารหลายรายการ ออกให้ได้ไหม?",
+    "ส่งรายการเอกสารมาให้ทีมดีตรวจสอบก่อนขอใบเสนอราคาได้"
+   ],
+   [
+    "เสื้อจริงจะตรงกับแบบที่อนุมัติไหม?",
+    "ก่อนผลิตควรยืนยันแบบ ผ้า สี และรายละเอียดโลโก้ รวมถึงตัวอย่างที่ใช้ตรวจงาน"
+   ],
+   [
+    "ต้องเสนอหลายฝ่าย ทำอย่างไรไม่ให้ข้อมูลสับสน?",
+    "ใช้แบบและใบเสนอราคาฉบับล่าสุด พร้อมระบุรายการที่ยืนยันแล้วและรายการที่ยังต้องเลือก"
+   ]
+  ],
+  "faq": [
+   [
+    "ออกเอกสารจัดซื้ออะไรได้บ้าง?",
+    "แจ้งรายการเอกสารที่หน่วยงานต้องใช้ ทีมดีจะตรวจสอบและแจ้งว่าจัดเตรียมรายการใดให้ได้ก่อนดำเนินการ"
+   ],
+   [
+    "ขอดูตัวอย่างก่อนผลิตได้ไหม?",
+    "สอบถามได้ทั้งตัวอย่างผ้าและตัวอย่างงานที่เกี่ยวข้อง โดยแต่ละชนิดอาจมีค่าใช้จ่ายและระยะเวลาเตรียมต่างกัน"
+   ],
+   [
+    "รับเงื่อนไขชำระเงินของหน่วยงานได้ไหม?",
+    "ส่งเงื่อนไขชำระเงินมาให้ตรวจสอบพร้อมรายละเอียดงาน เพื่อให้ตกลงกันก่อนเสนอราคาและเริ่มผลิต"
+   ],
+   [
+    "จะทราบกำหนดส่งเมื่อไร?",
+    "เมื่อรายละเอียดเสื้อ จำนวน และขั้นตอนอนุมัติชัดเจน ทีมดีจะตรวจคิวก่อนยืนยันกำหนดส่งพร้อมเงื่อนไขที่เกี่ยวข้อง"
+   ],
+   [
+    "มีข้อมูลการขึ้นทะเบียน e-GP ให้ตรวจสอบไหม?",
+    "หากหน่วยงานต้องใช้ข้อมูล e-GP กรุณาแจ้งพร้อมเงื่อนไขจัดซื้อ เพื่อให้ทีมดีตรวจสอบข้อมูลก่อนเสนอราคา"
+   ]
+  ],
+  "proof": "รายการเอกสารที่ออกได้จริง ตัวอย่างสเปกและใบอนุมัติแบบ รวมถึงผลงานหน่วยงานที่ได้รับอนุญาตให้เผยแพร่",
+  "tools": [
+   "vendor",
+   "approval",
+   "timeline"
+  ],
+  "pending": [
+   "documents",
+   "timeline",
+   "sample",
+   "rights"
+  ],
+  "asset": "กองสลาก / หน่วยงานที่ระบุในร่างใหม่ · ยังต้องตรวจไฟล์และสิทธิ์"
+ },
+ {
+  "id": "education",
+  "name": "โรงเรียนและมหาวิทยาลัย",
+  "type": "base",
+  "parent": "สถานศึกษาที่จัดซื้อ / สมาชิกที่ร่วมจ่าย",
+  "p": [
+   8,
+   9
+  ],
+  "w": [
+   3,
+   2,
+   8,
+   10
+  ],
+  "lead": "ต้องเก็บรายชื่อและไซซ์จากหลายห้องหรือหลายคณะ ในงบที่กำหนด",
+  "secondary": "แบบเหมาะกับผู้ใส่ และมีข้อมูลให้ครู ผู้บริหาร หรือสมาชิกช่วยเลือก",
+  "angle": "เน้นเสื้อที่ลูกค้าต้องการทำ และวิธีลดภาระคนรวบรวมออเดอร์",
+  "heading": "เสื้อกีฬาสี เสื้อรุ่น และเสื้อกิจกรรมโรงเรียน",
+  "body": "ช่วยเลือกแบบและผ้าให้เหมาะกับนักเรียน นักศึกษา และบุคลากร พร้อมแนะนำการเตรียมรายชื่อ ไซซ์ และจำนวนให้ครบก่อนสั่งผลิต",
+  "cta": "ปรึกษาเรื่องเสื้อ",
+  "cta2": "ดูผลงานโรงเรียนและมหาวิทยาลัย",
+  "benefits": [
+   "แยกรายชื่อและไซซ์ตามห้องหรือคณะก่อนรวมจำนวน",
+   "เลือกแบบและผ้าให้เหมาะกับผู้ใส่แต่ละกลุ่ม",
+   "รู้ว่าต้องสรุปแบบและจำนวนภายในวันไหน"
+  ],
+  "hooks": [
+   [
+    "ต้องเก็บไซซ์ทั้งโรงเรียน เริ่มยังไงดี?",
+    "แยกรายชื่อตามห้อง ให้แต่ละห้องตรวจจำนวนและไซซ์ก่อนส่งให้คนรวบรวมกลาง"
+   ],
+   [
+    "ทำเสื้อรุ่น แต่สมาชิกชอบคนละแบบ?",
+    "เริ่มจากเลือกแนวที่ชอบร่วมกัน แล้วใช้ภาพแบบช่วยสรุปความคิดเห็นก่อนยืนยันผลิต"
+   ],
+   [
+    "มีนักเรียนหรือสมาชิกเพิ่มทีหลังล่ะ?",
+    "แจ้งจำนวนที่เพิ่มและวันที่ต้องการรับเสื้อ เพื่อเช็กราคา ขั้นต่ำ และคิวรอบใหม่"
+   ]
+  ],
+  "faq": [
+   [
+    "มีไซซ์เด็กไหม ราคาเท่าผู้ใหญ่หรือเปล่า?",
+    "แจ้งช่วงอายุหรือขนาดเสื้อที่ต้องการ ทีมดีจะตรวจทรง ไซซ์ และราคาที่ใช้ได้กับสินค้าที่เลือก"
+   ],
+   [
+    "ทำหลายสีตามคณะสีได้ไหม?",
+    "ส่งสีและจำนวนที่ต้องการในแต่ละสีมาให้ตรวจสอบขั้นต่ำและราคา ก่อนสรุปออเดอร์"
+   ],
+   [
+    "ควรเก็บไซซ์นักเรียนอย่างไร?",
+    "ใช้ตารางไซซ์ของเสื้อที่เลือก แยกรายชื่อตามห้องหรือชั้น และให้แต่ละห้องตรวจข้อมูลก่อนรวมยอด"
+   ],
+   [
+    "เสื้อรุ่นที่นักศึกษาจ่ายเอง ต้องเตรียมอะไรบ้าง?",
+    "เตรียมจำนวนคร่าว ๆ งบต่อคน แบบที่ชอบ และวันที่ต้องการรับเสื้อ จากนั้นจึงรวบรวมไซซ์และสรุปจำนวนก่อนสั่ง"
+   ],
+   [
+    "ถ้าสั่งหลายร้อยหรือหลักพันตัว รับได้ไหม?",
+    "แจ้งจำนวน แบบ และวันที่ต้องการรับเสื้อ เพื่อให้ทีมดีตรวจสอบกำลังผลิตและคิวในช่วงนั้นก่อนยืนยัน"
+   ]
+  ],
+  "proof": "ภาพกิจกรรมและเสื้อจริงที่ได้รับอนุญาตให้ใช้ ตัวอย่างตารางแยกห้อง และรายการส่งมอบที่ตรวจสอบจำนวนได้",
+  "tools": [
+   "size",
+   "approval",
+   "timeline"
+  ],
+  "pending": [
+   "children",
+   "capacity",
+   "colors",
+   "rights"
+  ],
+  "asset": "อัสสัมชัญ 1,500 ตัวที่ระบุในร่าง · เป็นรายการตรวจสอบ ยังไม่ยืนยันเคส"
+ },
+ {
+  "id": "sports",
+  "name": "กีฬาและการแข่งขัน",
+  "type": "base",
+  "parent": "ทีมกีฬา / ผู้ซื้อองค์กรตามผู้จ่ายจริง",
+  "p": [
+   10,
+   11
+  ],
+  "w": [
+   1,
+   2,
+   3,
+   9
+  ],
+  "lead": "อยากได้เสื้อสวยที่ใส่เล่นได้เหมาะ และชื่อ–เบอร์ไม่ผิด",
+  "secondary": "ทีมดูมีเอกลักษณ์ สมาชิกเลือกไซซ์และรู้ค่าใช้จ่ายได้ง่าย",
+  "angle": "บอกประเภทเสื้อและสิ่งที่ปรับได้ แล้วใช้ภาพใส่จริงช่วยให้เลือก",
+  "heading": "เสื้อกีฬาสั่งทำ ออกแบบลายสำหรับทีมคุณ",
+  "body": "เลือกสี โลโก้ และลายในแบบของทีม พร้อมให้ทีมดีช่วยแนะนำผ้าและทรงตามกีฬาที่เล่น แล้วตรวจชื่อ เบอร์ และรายละเอียดให้ครบก่อนผลิต",
+  "cta": "ปรึกษาเสื้อทีม",
+  "cta2": "ดูผลงานเสื้อกีฬา",
+  "benefits": [
+   "เลือกผ้าและทรงตามกีฬาที่เล่น",
+   "ตรวจชื่อ เบอร์ และโลโก้ก่อนผลิต",
+   "มีตารางไซซ์และรายละเอียดราคาให้สมาชิกดู"
+  ],
+  "hooks": [
+   [
+    "เสื้อแข่งกับเสื้อเชียร์ เลือกเหมือนกันได้ไหม?",
+    "ดูการใช้งานก่อน เสื้อที่ใส่เล่นควรเลือกทรงและผ้าให้เหมาะกับการเคลื่อนไหว ส่วนเสื้อเชียร์เลือกตามสไตล์ที่ทีมชอบได้"
+   ],
+   [
+    "มีชื่อ เบอร์ และโลโก้หลายตำแหน่ง?",
+    "ส่งรายการพร้อมแบบอ้างอิง เพื่อให้ตรวจตำแหน่งและค่าใช้จ่ายก่อนสรุป"
+   ],
+   [
+    "สมาชิกใส่คนละไซซ์ จะเลือกยังไง?",
+    "ใช้ตารางไซซ์ของทรงที่เลือก และเทียบกับเสื้อที่แต่ละคนใส่พอดี"
+   ]
+  ],
+  "faq": [
+   [
+    "ควรเลือกผ้าแบบไหน?",
+    "บอกประเภทกีฬา สถานที่เล่น และแบบที่ชอบ ทีมดีจะช่วยแนะนำจากผ้าและทรงที่มีให้เลือก"
+   ],
+   [
+    "ใส่ชื่อและเบอร์ได้ไหม คิดเพิ่มหรือเปล่า?",
+    "ส่งรายละเอียดที่ต้องการมาให้ตรวจวิธีทำ ตำแหน่ง และค่าใช้จ่ายก่อนสั่งได้"
+   ],
+   [
+    "มีทรงผู้หญิงและไซซ์อะไรบ้าง?",
+    "สอบถามทรงและตารางไซซ์ของเสื้อแบบที่สนใจ เพื่อเลือกขนาดให้เหมาะกับสมาชิกแต่ละคน"
+   ],
+   [
+    "สั่งขั้นต่ำกี่ตัว และใช้เวลากี่วัน?",
+    "ส่งแบบ จำนวน และวันที่ต้องการรับเสื้อมาให้ทีมดีตรวจสอบขั้นต่ำกับคิวผลิตก่อนสั่ง"
+   ],
+   [
+    "ถ้าเป็นทีมกีฬาบริษัท ต้องเตรียมอะไรเพิ่มไหม?",
+    "แจ้งชื่อบริษัท รายการเอกสารที่ต้องใช้ และขั้นตอนอนุมัติ พร้อมรายละเอียดเสื้อทีม"
+   ]
+  ],
+  "proof": "ภาพเสื้อที่ใส่เล่นจริง ภาพเนื้อผ้าและทรง และตัวอย่างชื่อ–เบอร์กับโลโก้บนเสื้อ",
+  "tools": [
+   "size",
+   "approval",
+   "reorder"
+  ],
+  "pending": [
+   "materials",
+   "minimum",
+   "personalize",
+   "repeat"
+  ],
+  "asset": "รวมงานกีฬา · คัดภาพใช้งานจริงตามชนิดกีฬา"
+ },
+ {
+  "id": "community",
+  "name": "กิจกรรมและชมรม",
+  "type": "base",
+  "parent": "ชมรม / เจ้าของกิจกรรม / งานที่จะใช้เสื้อของบริษัท",
+  "p": [
+   2,
+   12,
+   13,
+   14
+  ],
+  "w": [
+   1,
+   3,
+   7,
+   10
+  ],
+  "lead": "คนในกลุ่มชอบไม่เหมือนกัน แต่ต้องมีคนสรุปแบบ ไซซ์ และยอดเงิน",
+  "secondary": "อยากได้เสื้อที่สื่อถึงกลุ่มและใส่ต่อได้หลังจบงาน",
+  "angle": "ใช้ชื่อกิจกรรมที่ลูกค้าคุ้นเคย และอธิบายว่าจะเริ่มจากอะไรได้บ้าง",
+  "heading": "เสื้อชมรม เสื้อรวมรุ่น และเสื้อกิจกรรมกลุ่ม",
+  "body": "ยังไม่มีแบบก็เริ่มคุยได้ บอกชื่อกลุ่ม สีที่ชอบ และกิจกรรมที่จะใช้เสื้อ ทีมดีช่วยแนะนำแบบให้เลือก พร้อมคุยเรื่องไซซ์ จำนวน และงบที่ตั้งไว้",
+  "cta": "ปรึกษาทีมดี",
+  "cta2": "ดูแบบเสื้อและผลงานจริง",
+  "benefits": [
+   "มีแนวแบบให้สมาชิกช่วยกันเลือก",
+   "คุยเรื่องสีและแบบให้เข้ากับกิจกรรม",
+   "รู้ว่าต้องเตรียมรายชื่อ ไซซ์ และจำนวนอย่างไร"
+  ],
+  "hooks": [
+   [
+    "คนหลายวัย ชอบแบบไม่เหมือนกัน?",
+    "เริ่มจากสี ชื่อ หรือเรื่องราวที่ทุกคนมีร่วมกัน แล้วเลือกทรงและลายให้เหมาะกับคนใส่"
+   ],
+   [
+    "อยากได้เสื้อที่ใส่ต่อหลังจบงาน?",
+    "บอกสไตล์ที่สมาชิกชอบ เพื่อช่วยเลือกสี ทรง และขนาดลายที่ใส่ได้ในโอกาสอื่นด้วย"
+   ],
+   [
+    "ในงานมีหลายทีม ต้องแยกสีกัน?",
+    "ส่งจำนวนและสีของแต่ละทีมมาให้ตรวจรูปแบบที่ทำได้พร้อมราคา"
+   ]
+  ],
+  "faq": [
+   [
+    "ยังไม่มีแบบหรือโลโก้ สั่งทำได้ไหม?",
+    "เริ่มจากชื่อกลุ่ม สีที่ชอบ หรือรูปอ้างอิงได้ ทีมดีจะแจ้งขั้นตอนออกแบบและค่าใช้จ่ายที่เกี่ยวข้องก่อนเริ่ม"
+   ],
+   [
+    "ต้องรวบรวมข้อมูลอะไรจากสมาชิกบ้าง?",
+    "หลังเลือกแบบและทรงแล้ว ให้รวบรวมชื่อ ไซซ์ จำนวน และรายละเอียดเฉพาะคน เช่น ชื่อหรือเบอร์ที่จะใส่บนเสื้อ"
+   ],
+   [
+    "ทำหลายสีหรือหลายแบบในออเดอร์เดียวได้ไหม?",
+    "แจ้งรายละเอียดแต่ละแบบกับจำนวน เพื่อให้ทีมดีตรวจขั้นต่ำและราคาของแต่ละทางเลือก"
+   ],
+   [
+    "สมาชิกเพิ่มทีหลัง สั่งเพิ่มได้ไหม?",
+    "ส่งข้อมูลออเดอร์เดิม จำนวนที่เพิ่ม และวันที่ต้องการรับ เพื่อเช็กราคา ขั้นต่ำ และคิวใหม่"
+   ],
+   [
+    "ถ้าสั่งให้บริษัทหรือลูกค้าอีกทอด ต้องแจ้งอะไรเพิ่ม?",
+    "แจ้งคนอนุมัติ เอกสารที่ต้องใช้ วันต้องรับเสื้อ และสถานที่ส่ง เพื่อให้คุยรายละเอียดได้ครบตั้งแต่แรก"
+   ]
+  ],
+  "proof": "ภาพกลุ่มใส่จริงหลายวัย ตัวอย่างเสื้อแยกสี และงานที่นำชื่อหรือเรื่องราวของกลุ่มมาออกแบบ",
+  "tools": [
+   "size",
+   "approval",
+   "reorder"
+  ],
+  "pending": [
+   "design",
+   "colors",
+   "repeat",
+   "delivery"
+  ],
+  "asset": "รวมงานชมรม / ศิษย์เก่า / อาสา · ต้องคัดไฟล์จริง"
+ },
+ {
+  "id": "organizer",
+  "name": "Organizer / Agency",
+  "type": "scenario",
+  "parent": "ต่อยอดจากกิจกรรมและชมรม",
+  "p": [
+   13
+  ],
+  "w": [
+   4,
+   6,
+   8,
+   9
+  ],
+  "lead": "ต้องตอบลูกค้าต่อ แต่ยังไม่รู้ว่าผลิตทันไหมและราคาเท่าไร",
+  "secondary": "ลูกค้าแก้แบบ โลโก้มาช้า หรือเปลี่ยนจำนวนและที่อยู่จัดส่ง",
+  "angle": "บอกข้อมูลที่ต้องส่งเพื่อเช็กคิว และสิ่งที่จะใช้ตอบลูกค้าต่อได้",
+  "heading": "สั่งทำเสื้อสตาฟและเสื้ออีเวนต์ มีทีมช่วยดูแลงาน",
+  "body": "ส่งรายละเอียดงาน จำนวน และวันที่ต้องรับเสื้อมาได้ ทีมดีช่วยตรวจคิว สรุปราคา และคุยกำหนดยืนยันแบบ เพื่อให้คุณนำข้อมูลไปคุยกับลูกค้าต่อ",
+  "cta": "เช็กคิวผลิต",
+  "cta2": "ดูผลงานเสื้ออีเวนต์",
+  "benefits": [
+   "รู้ราคาและกำหนดส่งก่อนรับปากลูกค้า",
+   "มีสรุปรายละเอียดและสถานะงานให้ส่งต่อ",
+   "รู้ว่าการแก้แบบหรือเพิ่มจำนวนกระทบอะไรบ้าง"
+  ],
+  "hooks": [
+   [
+    "ลูกค้าเพิ่งอนุมัติ เหลือเวลาไม่มาก ทำทันไหม?",
+    "แจ้งวันที่ต้องรับเสื้อ จำนวน และแบบล่าสุด เพื่อให้ทีมดีตรวจคิวก่อนยืนยัน"
+   ],
+   [
+    "โลโก้สปอนเซอร์ยังมาไม่ครบ?",
+    "แจ้งว่ารอไฟล์ใดอยู่ เพื่อคุยวันที่ต้องส่งแบบครบก่อนเริ่มผลิต"
+   ],
+   [
+    "ลูกค้าเพิ่มจำนวนหรือเปลี่ยนที่ส่ง?",
+    "ส่งรายละเอียดใหม่มาให้ตรวจราคาและกำหนดส่งอีกครั้งก่อนตกลง"
+   ]
+  ],
+  "faq": [
+   [
+    "แจ้งงานแล้วจะรู้ทันทีไหมว่าผลิตทันหรือเปล่า?",
+    "ทีมดีต้องตรวจแบบ จำนวน และคิวผลิตก่อนยืนยันวันส่ง ยิ่งรายละเอียดครบก็ยิ่งตรวจสอบได้ตรงกับงาน"
+   ],
+   [
+    "ขอสรุปราคาและกำหนดส่งไปให้ลูกค้าดูได้ไหม?",
+    "แจ้งข้อมูลที่ต้องการใช้เสนอ พร้อมรายละเอียดงาน เพื่อให้ทีมดีตรวจสอบและสรุปข้อมูลที่ยืนยันได้ให้"
+   ],
+   [
+    "แก้แบบได้ถึงเมื่อไร?",
+    "ควรสรุปแบบให้เรียบร้อยก่อนอนุมัติผลิต หากต้องแก้ภายหลังให้ติดต่อทีมงานเพื่อตรวจว่าทำได้หรือมีผลต่อราคาและวันส่งอย่างไร"
+   ],
+   [
+    "ส่งตรงหน้างานหรือหลายจุดได้ไหม?",
+    "แจ้งที่อยู่ จำนวนของแต่ละจุด วันรับ และผู้รับสินค้า เพื่อสอบถามการแพ็ก ค่าส่ง และกำหนดจัดส่ง"
+   ],
+   [
+    "มีเงื่อนไขสำหรับ Agency ไหม?",
+    "แจ้งเรื่องเครดิต การรักษาความลับ การใช้ภาพผลงาน หรือเงื่อนไขอื่นที่ต้องการ เพื่อให้ตรวจสอบและตกลงกันก่อนเริ่มงาน"
+   ]
+  ],
+  "proof": "ตัวอย่างสรุปแผนงานที่ปกปิดข้อมูลลูกค้า ภาพส่งมอบ และวันส่งจริงเทียบกับวันที่ตกลง",
+  "tools": [
+   "timeline",
+   "approval",
+   "vendor"
+  ],
+  "pending": [
+   "timeline",
+   "response",
+   "delivery",
+   "agency"
+  ],
+  "asset": "Motor Expo / SHUTTLE JAM ในร่าง · ต้องตรวจข้อมูลและสิทธิ์"
+ },
+ {
+  "id": "badminton",
+  "name": "เสื้อก๊วน / ชมรมแบด",
+  "type": "scenario",
+  "parent": "ต่อยอดจากกีฬาและการแข่งขัน",
+  "p": [
+   10
+  ],
+  "w": [
+   1,
+   2,
+   3,
+   10
+  ],
+  "lead": "หัวก๊วนต้องเก็บไซซ์และเงินเอง แล้วยังมีสมาชิกใหม่เข้ามาเรื่อย ๆ",
+  "secondary": "อยากได้เสื้อที่ใส่ตีประจำและมีลายในแบบของก๊วน",
+  "angle": "พูดถึงเสื้อที่ก๊วนอยากใส่ แล้วตอบเรื่องผ้า ไซซ์ และการสั่งเพิ่ม",
+  "heading": "เสื้อแบดสั่งทำ ออกแบบให้เข้ากับก๊วนคุณ",
+  "body": "อยากทำเสื้อให้ก๊วน แต่ยังไม่มีแบบ? ส่งชื่อก๊วน โลโก้ หรือสีที่ชอบมาได้ ทีมดีช่วยแนะนำแบบและผ้า พร้อมแจ้งรายละเอียดเรื่องไซซ์ ราคา และการสั่งเพิ่ม",
+  "cta": "ปรึกษาเสื้อแบด",
+  "cta2": "ดูผลงานเสื้อแบด",
+  "benefits": [
+   "มีแบบให้สมาชิกดูและช่วยกันเลือก",
+   "ดูตัวอย่างผ้าและตารางไซซ์ก่อนตัดสินใจ",
+   "สอบถามเงื่อนไขสั่งเพิ่มได้ตั้งแต่รอบแรก"
+  ],
+  "hooks": [
+   [
+    "ก๊วนมีไม่กี่คน ทำเสื้อได้ไหม?",
+    "บอกจำนวนและแบบที่สนใจ เพื่อให้ทีมดีตรวจขั้นต่ำและราคาให้ก่อน"
+   ],
+   [
+    "มีสมาชิกใหม่ สั่งเพิ่มทีหลังได้ไหม?",
+    "ส่งข้อมูลออเดอร์เดิมและจำนวนที่เพิ่มมาได้ ทีมงานจะตรวจราคา ขั้นต่ำ และคิวรอบใหม่"
+   ],
+   [
+    "เสื้อสวย แต่กลัวใส่ตีแล้วไม่สบาย?",
+    "ดูข้อมูลผ้า ทรง และภาพใส่จริงประกอบกัน พร้อมสอบถามตัวอย่างผ้าก่อนเลือก"
+   ]
+  ],
+  "faq": [
+   [
+    "เสื้อแบดสั่งขั้นต่ำกี่ตัว?",
+    "ส่งแบบที่สนใจและจำนวนคร่าว ๆ มาให้ทีมดีตรวจสอบขั้นต่ำก่อนสั่งได้"
+   ],
+   [
+    "สั่งเพิ่ม 2–3 ตัวหลังผ่านไปหลายเดือนได้ไหม?",
+    "ส่งเลขออเดอร์หรือภาพเสื้อเดิมให้ตรวจสอบก่อน โดยราคา ขั้นต่ำ และระยะเวลาของรอบใหม่อาจต่างจากรอบแรก"
+   ],
+   [
+    "สั่งเพิ่มแล้วสีจะเหมือนเสื้อเดิมไหม?",
+    "การผลิตต่างรอบอาจมีความต่างของสีหรือวัสดุ ควรส่งตัวอย่างหรือข้อมูลเสื้อเดิมให้ทีมงานตรวจสอบก่อนยืนยัน"
+   ],
+   [
+    "มีทรงผู้หญิงหรือใส่ชื่อสมาชิกได้ไหม?",
+    "แจ้งแบบที่สนใจและรายละเอียดที่ต้องการ เพื่อให้ตรวจทรง ตารางไซซ์ และค่าใช้จ่ายในการใส่ชื่อ"
+   ],
+   [
+    "ทำเสื้อสำหรับทัวร์นาเมนต์ของคอร์ทได้ไหม?",
+    "ส่งจำนวน แบบที่ต้องการสำหรับผู้เล่นหรือสตาฟ และวันที่ต้องรับเสื้อ เพื่อให้ทีมดีประเมินงาน"
+   ]
+  ],
+  "proof": "ภาพก๊วนใส่เสื้อในสนาม ภาพแบบเทียบเสื้อจริง และข้อมูลการสั่งเพิ่มที่ตรวจสอบได้",
+  "tools": [
+   "size",
+   "approval",
+   "reorder"
+  ],
+  "pending": [
+   "minimum",
+   "repeat",
+   "materials",
+   "personalize"
+  ],
+  "asset": "ทีมแบดออมสิน / SHUTTLE JAM · รายการค้นหลักฐาน ไม่ใช่เคสยืนยันแล้ว"
+ },
+ {
+  "id": "race",
+  "name": "เสื้องานวิ่ง / Race Kit",
+  "type": "scenario",
+  "parent": "ต่อยอดจากกีฬาและกิจกรรม ตามผู้จ่ายจริง",
+  "p": [
+   2,
+   13,
+   14
+  ],
+  "w": [
+   8,
+   3,
+   2,
+   1
+  ],
+  "lead": "ต้องรับเสื้อไปเตรียมแจกก่อนวันแข่ง แต่ยอดสมัครกับโลโก้ยังไม่ครบ",
+  "secondary": "ไซซ์ตรงกับใบสมัคร แยกเสื้อนักวิ่งกับสตาฟ และเลือกผ้าให้เหมาะ",
+  "angle": "เริ่มจากวันต้องรับเสื้อ ไม่ใช้วันแข่งขันแทนวันที่ลูกค้าต้องใช้ของ",
+  "heading": "สั่งทำเสื้องานวิ่ง วางแผนผลิตตามวันที่ต้องรับเสื้อ",
+  "body": "บอกวันที่ต้องรับเสื้อเพื่อเตรียมชุด Race Kit พร้อมจำนวนโดยประมาณ ทีมดีช่วยตรวจแบบ ไซซ์ และโลโก้สปอนเซอร์ ก่อนสรุปคิวผลิตกับกำหนดส่ง",
+  "cta": "เช็กคิวผลิต",
+  "cta2": "ดูผลงานเสื้องานวิ่ง",
+  "benefits": [
+   "วางแผนจากวันที่ต้องรับเสื้อไปเตรียมแจก",
+   "ตรวจจำนวนแต่ละไซซ์ก่อนสรุปผลิต",
+   "รู้ว่าถ้าเพิ่มยอดหรือแก้โลโก้ต้องปรับอะไรบ้าง"
+  ],
+  "hooks": [
+   [
+    "ต้องรับเสื้อก่อนวันงาน ควรสั่งล่วงหน้ากี่วัน?",
+    "แจ้งวันต้องรับเสื้อ วันแจก Race Kit และวันแข่งขันแยกกัน เพื่อให้ตรวจคิวได้ตรงกับงาน"
+   ],
+   [
+    "เปิดรับสมัครหลายรอบ กลัวรวมไซซ์ผิด?",
+    "รวบรวมข้อมูลไว้ในตารางเดียว แยกยอดแต่ละไซซ์ และตรวจยอดรวมก่อนยืนยันผลิต"
+   ],
+   [
+    "สปอนเซอร์หรือผู้สมัครเพิ่มหลังสรุปไปแล้ว?",
+    "ส่งข้อมูลที่เพิ่มมาให้ตรวจผลต่อแบบ ราคา และวันส่งก่อนตกลง"
+   ]
+  ],
+  "faq": [
+   [
+    "ควรแจ้งวันแข่งหรือวันรับเสื้อ?",
+    "แจ้งทั้งสองวัน โดยใช้วันที่ต้องได้รับเสื้อเพื่อเตรียมแจกเป็นหลัก หากมีวันรับ Race Kit ให้แจ้งแยกด้วย"
+   ],
+   [
+    "สั่งหลักพันตัวได้ไหม?",
+    "แจ้งจำนวน แบบ และวันรับเสื้อ เพื่อให้ทีมดีตรวจสอบกำลังผลิตกับคิวในช่วงนั้นก่อนยืนยัน"
+   ],
+   [
+    "เพิ่มยอดแล้วได้ราคาเดิมไหม?",
+    "ขึ้นอยู่กับเงื่อนไขการสั่งเพิ่มและรายละเอียดงาน ทีมดีจะตรวจราคาและวันส่งรอบใหม่ให้ก่อน ไม่ควรถือว่าจะทันรอบแจกเดิมโดยอัตโนมัติ"
+   ],
+   [
+    "ควรเลือกผ้าแบบไหนสำหรับงานวิ่ง?",
+    "สอบถามข้อมูลผ้า น้ำหนัก ทรง และตัวอย่างที่มีให้เลือก โดยดูให้เหมาะกับรูปแบบงานและผู้ใส่"
+   ],
+   [
+    "ทำเสื้อสตาฟคนละแบบและส่งหลายจุดได้ไหม?",
+    "แจ้งแบบ จำนวน และที่อยู่ของแต่ละจุด เพื่อให้ตรวจขั้นต่ำ การแยกแพ็ก และค่าจัดส่ง"
+   ]
+  ],
+  "proof": "วันที่ต้องรับเสื้อตามข้อตกลงเทียบกับวันส่งจริง ตารางตรวจยอดไซซ์ และภาพนักวิ่งที่ได้รับอนุญาตให้เผยแพร่",
+  "tools": [
+   "timeline",
+   "size",
+   "approval"
+  ],
+  "pending": [
+   "capacity",
+   "sizecheck",
+   "timeline",
+   "materials",
+   "delivery"
+  ],
+  "asset": "เคสงานวิ่ง · ยังต้องเลือกชื่อและไฟล์ ไม่ยืนยันว่ามีเคสพร้อม"
+ },
+ {
+  "id": "runclub",
+  "name": "เสื้อชมรมวิ่ง",
+  "type": "scenario",
+  "parent": "ต่อยอดจากกีฬาและการแข่งขัน",
+  "p": [
+   11,
+   12
+  ],
+  "w": [
+   1,
+   2,
+   3,
+   10
+  ],
+  "lead": "อยากได้เสื้อใส่ประจำ แต่จำนวนสมาชิกและยอดสั่งเพิ่มยังไม่แน่นอน",
+  "secondary": "ใส่แล้วรู้ว่าเป็นชมรมเดียวกัน และเหมาะกับการซ้อมหรือร่วมงานวิ่ง",
+  "angle": "เน้นเสื้อของสมาชิกชมรม แยกจากโจทย์ผลิตเสื้อแจกในงานใหญ่",
+  "heading": "เสื้อชมรมวิ่ง สำหรับใส่ซ้อมและลงงานด้วยกัน",
+  "body": "เลือกสี โลโก้ และลายที่เป็นของชมรม พร้อมให้ทีมดีช่วยแนะนำผ้าและทรงสำหรับการใช้งาน และสอบถามการสั่งเพิ่มเมื่อมีสมาชิกใหม่",
+  "cta": "ปรึกษาเสื้อชมรม",
+  "cta2": "ดูผลงานเสื้อชมรมวิ่ง",
+  "benefits": [
+   "มีแบบให้สมาชิกช่วยกันเลือก",
+   "เลือกผ้าและทรงตามการใช้งาน",
+   "รู้เงื่อนไขสั่งเพิ่มและข้อมูลที่ต้องเก็บจากรอบแรก"
+  ],
+  "hooks": [
+   [
+    "อยากให้เห็นแล้วรู้ว่าเป็นชมรมเรา?",
+    "ใช้สี โลโก้ และรายละเอียดร่วมกัน แล้วดูภาพแบบให้ครบทั้งด้านหน้าและด้านหลัง"
+   ],
+   [
+    "อยากได้เสื้อที่ใส่ซ้อมได้บ่อย?",
+    "บอกลักษณะการใช้งาน เพื่อช่วยเลือกผ้า ทรง และวิธีดูแลที่เหมาะ"
+   ],
+   [
+    "มีสมาชิกใหม่เข้ามาตลอด สั่งเพิ่มยังไง?",
+    "เก็บเลขออเดอร์หรือข้อมูลแบบเดิมไว้ แล้วสอบถามขั้นต่ำ ราคา และคิวทุกครั้งที่สั่งเพิ่ม"
+   ]
+  ],
+  "faq": [
+   [
+    "ชมรมเล็กสั่งทำได้ไหม?",
+    "แจ้งจำนวนและแบบที่สนใจ เพื่อให้ทีมดีตรวจสอบขั้นต่ำและราคาก่อนสั่ง"
+   ],
+   [
+    "ถ้าสั่งเพิ่มหลัง 30 วัน ราคาเป็นอย่างไร?",
+    "ส่งข้อมูลออเดอร์เดิมและจำนวนที่ต้องการเพิ่มมาให้ตรวจราคาใหม่ได้ สิทธิ์ราคาเดิมภายใน 30 วันไม่ครอบคลุมการสั่งเพิ่มทุกช่วงเวลา"
+   ],
+   [
+    "ผ้ากับทรงควรเลือกอย่างไร?",
+    "บอกว่าจะใส่ซ้อม ลงงาน หรือใช้ทั้งสองแบบ พร้อมดูตารางไซซ์และข้อมูลผ้าของเสื้อที่สนใจ"
+   ],
+   [
+    "ใส่ชื่อสมาชิกแต่ละคนได้ไหม?",
+    "ส่งตัวอย่างชื่อและตำแหน่งที่ต้องการให้ตรวจวิธีทำและค่าใช้จ่ายก่อนรวบรวมเงิน"
+   ],
+   [
+    "สั่งรอบใหม่ต้องออกแบบใหม่ไหม?",
+    "ส่งเลขออเดอร์หรือภาพแบบเดิมมาให้ทีมงานตรวจสอบได้ พร้อมเช็กว่าผ้า สี และรายละเอียดเดิมยังทำได้หรือไม่"
+   ]
+  ],
+  "proof": "ภาพสมาชิกใส่ซ้อมหรือร่วมงานวิ่ง รายละเอียดผ้าและทรง และตัวอย่างการสั่งเพิ่มถ้ามี",
+  "tools": [
+   "size",
+   "approval",
+   "reorder"
+  ],
+  "pending": [
+   "minimum",
+   "repeat",
+   "materials",
+   "personalize"
+  ],
+  "asset": "เคสชมรมวิ่ง · ต้องคัดไฟล์และยืนยันสิทธิ์"
+ },
+ {
+  "id": "corporate-event",
+  "name": "Outing / กีฬาสีบริษัท",
+  "type": "scenario",
+  "parent": "ต่อยอดจากบริษัทและกิจกรรม · ยังนับลูกค้าเป็นเอกชน",
+  "p": [
+   2
+  ],
+  "w": [
+   1,
+   3,
+   4,
+   8
+  ],
+  "lead": "ธีมยังไม่ลงตัว แต่วันงานเปลี่ยนไม่ได้ และอยากให้พนักงานชอบเสื้อ",
+  "secondary": "แยกทีมด้วยสี ภาพหมู่ดูดี และเลือกแบบที่ใส่ต่อหลังงานได้",
+  "angle": "บอกประเภทกิจกรรมและเรื่องที่ช่วยได้ ใช้ภาพจริงให้เห็นบรรยากาศงาน",
+  "heading": "เสื้อ Outing และเสื้อกีฬาสีบริษัท ออกแบบตามธีมงาน",
+  "body": "มีธีมแล้วหรือยังเลือกไม่ถูก? บอกกิจกรรม จำนวน และวันที่ต้องรับเสื้อ ทีมดีช่วยแนะนำแบบให้เข้ากับงาน พร้อมคุยเรื่องสี ไซซ์ และงบที่ตั้งไว้",
+  "cta": "ปรึกษาเสื้อกิจกรรม",
+  "cta2": "ดูผลงาน Outing และกีฬาสี",
+  "benefits": [
+   "มีแนวแบบให้ทีมช่วยกันเลือก",
+   "คุยเรื่องสีและแบบให้เข้ากับแต่ละทีม",
+   "เลือกทรงและลายที่ใส่ต่อหลังจบงานได้"
+  ],
+  "hooks": [
+   [
+    "อยากให้พนักงานช่วยเลือกแบบ มีภาพให้ดูก่อนไหม?",
+    "สอบถามขั้นตอนทำภาพแบบและค่าใช้จ่ายที่เกี่ยวข้อง เพื่อเตรียมให้ทีมร่วมเลือกก่อนสรุป"
+   ],
+   [
+    "ธีมยังไม่ลงตัว แต่ใกล้วันงานแล้ว?",
+    "เริ่มจากแจ้งวันที่ต้องรับเสื้อ ให้ทีมดีตรวจคิวและแจ้งว่าต้องยืนยันแบบภายในวันไหน"
+   ],
+   [
+    "กีฬาสีมีหลายทีม ราคาจะบวกไหม?",
+    "ส่งสีและจำนวนแต่ละทีมมาให้ตรวจขั้นต่ำกับราคา ก่อนนำไปขออนุมัติงบ"
+   ]
+  ],
+  "faq": [
+   [
+    "ควรเลือกโปโล เสื้อพิมพ์ลาย หรือเสื้อเบสบอล?",
+    "ดูสถานที่ กิจกรรม งบ และสไตล์ที่ทีมชอบ ทีมดีช่วยแนะนำข้อแตกต่างของแต่ละแบบได้"
+   ],
+   [
+    "ทำหลายสีในออเดอร์เดียวได้ไหม?",
+    "แจ้งจำนวนแต่ละสี เพื่อให้ตรวจขั้นต่ำและราคาของทางเลือกนั้นก่อนสั่ง"
+   ],
+   [
+    "ขอภาพแบบให้พนักงานโหวตก่อนได้ไหม?",
+    "แจ้งว่าต้องการใช้ภาพแบบเพื่อให้ทีมช่วยเลือก ทีมดีจะอธิบายขั้นตอน ขั้นตอนชำระมัดจำ และค่าใช้จ่ายที่เกี่ยวข้อง"
+   ],
+   [
+    "ถ้าธีมเปลี่ยนหลังอนุมัติแบบแล้วทำอย่างไร?",
+    "ติดต่อทีมงานพร้อมรายละเอียดที่ต้องแก้ เพื่อเช็กว่าทำได้หรือไม่ และมีผลต่อราคาและวันส่งอย่างไร"
+   ],
+   [
+    "ส่งเสื้อไปรีสอร์ตหรือสั่งเพิ่มทีหลังได้ไหม?",
+    "แจ้งที่อยู่ วันรับ และผู้รับสินค้าเพื่อสอบถามการจัดส่ง หากมีคนเพิ่มให้เช็กคิวและวันส่งของรอบใหม่อีกครั้ง"
+   ]
+  ],
+  "proof": "ภาพหมู่วันกิจกรรมจริง ตัวอย่างเสื้อหลายสี และคำอธิบายว่าทำไมเลือกเสื้อแบบนั้น",
+  "tools": [
+   "approval",
+   "size",
+   "timeline"
+  ],
+  "pending": [
+   "colors",
+   "design",
+   "timeline",
+   "delivery",
+   "repeat"
+  ],
+  "asset": "อัลบั้ม Outing / สัมมนาที่ร่างกล่าวถึง · ต้องตรวจไฟล์และสิทธิ์"
+ }
+];
+const toolItems=[
+ {
+  "id": "size",
+  "name": "ตารางรวบรวมไซซ์และจำนวน",
+  "status": "build",
+  "who": "HR · โรงเรียน · ชมรม · งานวิ่ง",
+  "pain": "รายการตกหล่น ยอดรวมผิด ข้อมูลหลายเวอร์ชัน",
+  "what": "รายชื่อ/รหัส · แผนก/ห้อง/ทีม · สินค้า/ทรง · ไซซ์ · จำนวน · ผู้ตรวจ · เวอร์ชัน · วันปิดยอด",
+  "w": [
+   3,
+   8
+  ],
+  "owner": "Sales Admin + Marketing",
+  "ready": "พบไฟล์ต้นฉบับที่ใช้จริง หรือจัดทำและให้ทีมขายตรวจรูปแบบ",
+  "note": "③ ช่วยเรื่องราคา ไม่ได้เก็บไซซ์แทนลูกค้า; ไม่ต้องเผยแพร่รายชื่อลูกค้าในตัวอย่าง"
+ },
+ {
+  "id": "approval",
+  "name": "ใบสรุปแบบและรายละเอียดก่อนผลิต",
+  "status": "build",
+  "who": "ทุกกลุ่ม โดยเฉพาะหลายฝ่ายอนุมัติ",
+  "pain": "ไม่รู้ว่าอนุมัติอะไรหรือใช้ไฟล์เวอร์ชันไหน",
+  "what": "แบบอ้างอิง · โลโก้/ชื่อ/เบอร์ · สเปก · จำนวน · ไซซ์ · ราคา · ผู้อนุมัติ · วันที่แก้แบบได้ถึง",
+  "w": [
+   1,
+   2,
+   4
+  ],
+  "owner": "Design + Sales Admin + Production",
+  "ready": "มีแบบฟอร์มที่ทีมผลิตยอมรับและตัวอย่างปกปิดข้อมูล",
+  "note": "แยกตัวอย่างผ้า ภาพจำลอง ชิ้นปัก และเสื้อตัวอย่าง รวมทั้งค่าใช้จ่าย"
+ },
+ {
+  "id": "timeline",
+  "name": "ตารางกำหนดงานก่อนถึงวันรับเสื้อ",
+  "status": "build",
+  "who": "Organizer · งานวิ่ง · กิจกรรมบริษัท",
+  "pain": "ใช้วันงานเป็นเส้นตาย ทั้งที่ต้องรับของก่อน",
+  "what": "วันใช้ · วันต้องรับ · วันกระจาย/แจก · ปิดแบบ · ปิดยอด · อนุมัติ · ผลิต · ส่ง",
+  "w": [
+   6,
+   8
+  ],
+  "owner": "Production / Operations + Sales",
+  "ready": "มีขั้นตอนประเมินคิวและผู้รับผิดชอบยืนยันวันส่ง",
+  "note": "ตอบรับแชทไม่เท่ากับยืนยันงาน; การแก้หรือจำนวนที่สั่งเพิ่มต้องประเมินแผนใหม่"
+ },
+ {
+  "id": "vendor",
+  "name": "รายการเอกสารสำหรับจัดซื้อ",
+  "status": "verify",
+  "who": "จัดซื้อ · หน่วยงาน · Agency",
+  "pain": "ต้องถามเอกสารทีละรายการ และไม่รู้เงื่อนไขที่ทำได้",
+  "what": "ชื่อเอกสาร · เวอร์ชัน/วันที่ · ผู้ติดต่อ · วิธีขอ · ข้อจำกัดการใช้",
+  "w": [
+   4,
+   9
+  ],
+  "owner": "บัญชี / Office",
+  "ready": "บัญชียืนยันรายการและจัดไฟล์ที่อนุญาตให้ส่งลูกค้า",
+  "note": "รวม VAT ไม่เท่ากับรองรับทุกกระบวนการเบิกจ่าย"
+ },
+ {
+  "id": "reorder",
+  "name": "ฟอร์มสั่งเพิ่มจากออเดอร์เดิม",
+  "status": "build",
+  "who": "บริษัท · แบด · ชมรมวิ่ง",
+  "pain": "ต้องเริ่มอธิบายใหม่ ไม่รู้เงื่อนไขของจำนวนที่สั่งเพิ่ม",
+  "what": "เลขออเดอร์/ภาพเดิม · สเปกเดิม · จำนวนเพิ่ม · ไซซ์ · วันต้องรับ · เงื่อนไขรอบใหม่",
+  "w": [
+   10
+  ],
+  "owner": "Sales Admin + Production",
+  "ready": "มีวิธีค้นแบบเดิมและนโยบายจำนวนที่สั่งเพิ่มที่ยืนยันได้",
+  "note": "เก็บไฟล์แบบ ≠ รับยอดน้อยทุกจำนวน ≠ สีเหมือนทุกล็อต"
+ }
+];
+const openItems=[
+ {
+  "id": "timeline",
+  "name": "กำหนดผลิต คิว และการยืนยันวันส่ง",
+  "owner": "Production / Operations",
+  "pages": "ทุกหน้า โดยเฉพาะ Organizer และงานวิ่ง",
+  "need": "เวลามาตรฐาน/งานเร่ง จุดเริ่มนับ เงื่อนไขยืนยันแบบและจำนวน และผู้ยืนยันแผน",
+  "close": "ตารางระยะเวลาและตัวอย่างแผนที่ได้รับอนุมัติ"
+ },
+ {
+  "id": "documents",
+  "name": "เอกสารจัดซื้อและเงื่อนไขชำระเงิน",
+  "owner": "บัญชี / Office",
+  "pages": "หน่วยงาน · โรงเรียน · จัดซื้อ",
+  "need": "รายการเอกสาร เครดิต มัดจำ และสถานะ e-GP ที่ตรวจสอบได้",
+  "close": "รายการเอกสารและนโยบายการเงินที่ยืนยันแล้ว"
+ },
+ {
+  "id": "rights",
+  "name": "ข้อมูลเคส สิทธิ์ใช้ และตัวเลขลูกค้า",
+  "owner": "Sales Admin + Marketing",
+  "pages": "ทุกหน้าที่ใช้ผลงานหรือชื่อองค์กร",
+  "need": "ไฟล์จริง ชื่อ/จำนวน/วันส่ง และสิทธิ์ที่ได้รับในการใช้ภาพ โลโก้ รีวิว รวมตัวเลข 2,800+",
+  "close": "รายการไฟล์พร้อมหลักฐานข้อมูลและสิทธิ์ใช้งาน"
+ },
+ {
+  "id": "children",
+  "name": "ช่วงไซซ์เด็กและระบบรวบรวมโรงเรียน",
+  "owner": "Production + Sales Admin",
+  "pages": "โรงเรียนและมหาวิทยาลัย",
+  "need": "ไซซ์เด็กต่ำสุด ทรง ตารางจริง ขอบเขตราคาเดียว และวิธีตรวจยอดแยกห้อง",
+  "close": "ตารางไซซ์และเงื่อนไขราคาตามสินค้า"
+ },
+ {
+  "id": "minimum",
+  "name": "จำนวนขั้นต่ำตามสินค้าและทรง",
+  "owner": "ผู้ดูแลธุรกิจ + Production",
+  "pages": "กีฬา · แบด · ชมรมวิ่ง · ร้านค้า",
+  "need": "ขั้นต่ำต่อสินค้า/ทรง/แบบ; 10 ตัวใช้กับอะไรได้จริง",
+  "close": "ตารางขั้นต่ำฉบับเดียวที่ฝ่ายขายและผลิตใช้ร่วมกัน"
+ },
+ {
+  "id": "response",
+  "name": "เวลาตอบรับกับเวลาประเมินงาน",
+  "owner": "Sales Lead + Operations",
+  "pages": "Organizer และ CTA งานเร่ง",
+  "need": "ระยะตอบรับที่ทำได้จริง และข้อมูล/เวลาที่ใช้ยืนยันคิว",
+  "close": "ข้อตกลงบริการที่แยกสองช่วง ไม่แทน 5 นาทีด้วยคำสัญญาใหม่โดยไม่มีข้อมูล"
+ },
+ {
+  "id": "design",
+  "name": "ช่วยคิด ภาพแบบ และขั้นตอนชำระมัดจำ",
+  "owner": "Sales Lead + Design + ผู้ดูแลธุรกิจ",
+  "pages": "ทุกหน้าที่ใช้ CTA เริ่มออกแบบ",
+  "need": "ฟรีถึงขั้นไหน 3D/ภาพแบบได้เมื่อไร จำนวนทิศทาง และขอบเขตแก้ก่อนผลิต",
+  "close": "ขั้นตอนที่ตรงกับงานขายจริงและข้อความเสนอที่ตรวจแล้ว"
+ },
+ {
+  "id": "repeat",
+  "name": "ล็อต 2 และการเติมหลัง 30 วัน",
+  "owner": "ผู้ดูแลธุรกิจ + Sales Admin + Production",
+  "pages": "บริษัท · แบด · วิ่ง · ชมรม",
+  "need": "จุดเริ่ม 30 วัน ขั้นต่ำ ราคา เวลาผลิต การเก็บไฟล์ และวัสดุ/สีต่างล็อต",
+  "close": "นโยบายสั่งซ้ำแยกในช่วงสิทธิ์และหลังสิทธิ์"
+ },
+ {
+  "id": "colors",
+  "name": "หลายสีหรือหลายแบบในออเดอร์เดียว",
+  "owner": "Production + Sales",
+  "pages": "กิจกรรมบริษัท · โรงเรียน · ผู้จัดงาน",
+  "need": "ขั้นต่ำต่อสี/แบบ ราคา ออปชั่น และขั้นตอนยืนยันงานที่แยกกัน",
+  "close": "ตารางเงื่อนไขพร้อมตัวอย่างเสนอราคาหลายสี"
+ },
+ {
+  "id": "capacity",
+  "name": "งานหลักพันและช่วงที่มีงานสั่งจำนวนมาก",
+  "owner": "Operations",
+  "pages": "โรงเรียน · งานวิ่ง · อีเวนต์ใหญ่",
+  "need": "กำลังผลิตตามรอบที่รับได้จริง และวิธีตรวจคิวก่อนรับงาน",
+  "close": "แผนคิวที่ตรวจสอบได้ ไม่ใช้จำนวนในเคสเป็นคำรับรองทุกช่วง"
+ },
+ {
+  "id": "sizecheck",
+  "name": "การตรวจยอดจากใบสมัครก่อนผลิต",
+  "owner": "Sales Admin + Production",
+  "pages": "งานวิ่ง · งานหลายหน่วย",
+  "need": "ผู้รวมยอด คนตรวจข้อมูลทั้งสองฝ่าย เวอร์ชันข้อมูล และขั้นตอนยืนยันงาน",
+  "close": "แบบฟอร์มและขั้นตอนที่ใช้งานจริงก่อนเรียกว่าเป็นระบบบริการ"
+ },
+ {
+  "id": "delivery",
+  "name": "จัดส่งฟรี แยกแพ็ก และหลายปลายทาง",
+  "owner": "Operations / Logistics + Sales",
+  "pages": "บริษัท · Organizer · กิจกรรม · งานวิ่ง",
+  "need": "จำนวนจุดส่ง พื้นที่ยกเว้น ค่าส่งเพิ่ม การแยกแพ็ก ผู้รับและวันรับ",
+  "close": "เงื่อนไขจัดส่งตามบริการและใบเสนอราคา"
+ },
+ {
+  "id": "materials",
+  "name": "ผ้า ทรง สี และคำอธิบายคุณสมบัติ",
+  "owner": "Product / Production",
+  "pages": "ทุกสินค้า โดยเฉพาะกีฬา",
+  "need": "สเปกผ้า/น้ำหนักถ้ามี ทรง ตารางไซซ์ และข้อจำกัดสีระหว่างจอ/ตัวอย่าง/ล็อต",
+  "close": "ข้อมูลสินค้าที่ตรวจสอบได้และภาพใช้งานจริง"
+ },
+ {
+  "id": "personalize",
+  "name": "ทรงหญิง ชื่อ–เบอร์ และออปชั่นรายคน",
+  "owner": "Product + Sales",
+  "pages": "กีฬา · แบด · ชมรมวิ่ง",
+  "need": "สิ่งที่ผลิตได้ เทคนิค ตำแหน่ง ค่าใช้จ่าย และวิธีตรวจรายชื่อ",
+  "close": "ตารางออปชั่นและสเปกที่ทีมผลิตยืนยัน"
+ },
+ {
+  "id": "sample",
+  "name": "ชนิดตัวอย่างและการตรวจรับ",
+  "owner": "Design + Production + Sales",
+  "pages": "หน่วยงาน · Marketing · ทุกหน้าสินค้า",
+  "need": "แยกผ้า ชิ้นปัก เสื้อตัวอย่าง และภาพจำลอง พร้อมค่าใช้จ่าย/วันอนุมัติ",
+  "close": "รายการบริการตัวอย่างและหลักฐานอ้างอิงตรวจงาน"
+ },
+ {
+  "id": "terms",
+  "name": "ราคา VAT และเงื่อนไขเคลม 7 วัน",
+  "owner": "บัญชี + Sales + Production",
+  "pages": "ทุกหน้า",
+  "need": "สิ่งที่รวม จุดเริ่มนับรับประกัน ขอบเขต วิธีแจ้ง และแผนแก้รายกรณี",
+  "close": "เงื่อนไขที่ได้รับการยืนยันและใช้ตรงกันทุกหน้า"
+ },
+ {
+  "id": "agency",
+  "name": "เงื่อนไขพิเศษสำหรับ Agency",
+  "owner": "Sales Lead + ผู้ดูแลธุรกิจ",
+  "pages": "Organizer",
+  "need": "งานลับ การติดต่อปลายทาง เครดิต ใช้ภาพ และไม่ติดชื่อผู้ผลิต",
+  "close": "ข้อตกลงรายโปรเจกต์ที่ผู้มีอำนาจรับรอง"
+ }
+];
+const caseItems=[
+ {
+  "name": "อัสสัมชัญ · 1,500 ตัว",
+  "source": "ชื่อและจำนวนปรากฏในร่างใหม่ ยังไม่ตรวจหลักฐาน",
+  "pain": "การจัดการออเดอร์หลายห้องและไซซ์",
+  "want": "ภาพส่งมอบ/กิจกรรม รายการจำนวน–ไซซ์ และเรื่องเล่าขั้นตอนจริง",
+  "page": "โรงเรียน / มหาวิทยาลัย"
+ },
+ {
+  "name": "SHUTTLE JAM · 60 ตัว",
+  "source": "ชื่อและจำนวนปรากฏในร่างใหม่ ยังไม่ตรวจหลักฐาน",
+  "pain": "เอกลักษณ์ทีมและการใช้ในงานจริง",
+  "want": "ภาพใส่ในสนาม/อีเวนต์ แบบคู่ของจริง และรายละเอียดงาน",
+  "page": "แบด / กีฬา / Organizer"
+ },
+ {
+  "name": "Motor Expo",
+  "source": "ถูกอ้างในแผนคอนเทนต์ ไม่ยืนยันว่าบทสัมภาษณ์พร้อม",
+  "pain": "ประสานงานและส่งมอบต่อให้ลูกค้า",
+  "want": "ภาพสตาฟ วันส่งจริงเทียบแผน และคำยืนยันผู้รับผิดชอบ",
+  "page": "Organizer"
+ },
+ {
+  "name": "กองสลาก / หน่วยงานที่กล่าวถึง",
+  "source": "ร่างอ้างเคสและแผนเดือน พ.ย. ต้องค้นไฟล์",
+  "pain": "สเปก เอกสาร และการอนุมัติ",
+  "want": "รายละเอียดงานที่ตกลง ตัวอย่างสเปก หลักฐานส่งมอบและสิทธิ์ใช้ชื่อ",
+  "page": "หน่วยงาน"
+ },
+ {
+  "name": "ทีมแบดออมสิน",
+  "source": "ร่างระบุว่ามีอัลบั้ม ต้องตรวจไฟล์และขอบเขตสิทธิ์",
+  "pain": "เสื้อสำหรับตีจริงและภาพทีม",
+  "want": "ภาพในคอร์ท ข้อมูลผ้า/ทรง แบบและงานจริง",
+  "page": "แบด / กีฬา"
+ },
+ {
+  "name": "Outing / สัมมนาบริษัท",
+  "source": "ร่างอ้างชุดคอนเทนต์และ Broadcast ต้องคัดรายการจริง",
+  "pain": "ธีม หลายสี และคนอยากใส่ร่วมกัน",
+  "want": "ภาพหมู่ ชุดแบบสี และเหตุผลเลือกเสื้อสำหรับกิจกรรม",
+  "page": "กิจกรรมบริษัท / บริษัท"
+ },
+ {
+  "name": "งานวิ่ง / ชมรมวิ่ง",
+  "source": "ร่างยังไม่ระบุเคสที่พร้อมใช้",
+  "pain": "วันรับ Race Kit / ความต่อเนื่องสมาชิก",
+  "want": "เลือกเคส แยกงานอีเวนต์กับชมรม พร้อมวันรับที่ตกลงเทียบวันส่ง",
+  "page": "งานวิ่ง / ชมรมวิ่ง"
+ }
+];
+const personaExtras={
+ "2": {
+  "title": "ช่วยให้พนักงานเลือกแบบ และเตรียมเสื้อก่อนวันงาน",
+  "items": [
+   "หัวหน้าอนุมัติแบบไม่ได้แปลว่าพนักงานทุกคนชอบ ใช้ภาพแบบรับความคิดเห็นก่อนสรุปได้",
+   "ถามวันรับเสื้อและวันแจกให้พนักงาน แยกจากวันจัดงาน",
+   "เลือกทรงกับลายโดยคิดด้วยว่าจะใส่ต่อหลังจบกิจกรรมได้อย่างไร"
+  ],
+  "flow": [
+   "ธีมและวันรับ",
+   "ให้ทีมดูแบบ",
+   "ยืนยันสี ไซซ์ จำนวน",
+   "อนุมัติผลิต"
+  ],
+  "maps": [
+   "corporate-event"
+  ],
+  "pending": "ภาพก่อน/หลังมัดจำ · ขั้นต่ำต่อสี · ส่งถึงสถานที่จัดงาน"
+ },
+ "8": {
+  "title": "แยกข้อมูลตามห้อง แล้วตรวจให้ครบก่อนรวมยอด",
+  "items": [
+   "ตารางแยกห้องหรือคณะช่วยให้หาจำนวนที่คลาดเคลื่อนได้ง่ายขึ้น",
+   "ไซซ์เด็กต้องดูจากสินค้าที่เลือก ไม่ถือว่ารวมอยู่ในช่วง XS–7XL ทุกแบบ",
+   "เคสงานใหญ่ใช้เล่าประสบการณ์ได้ แต่ไม่ควรบอกว่าครูคนเดียวจัดการได้ทุกงาน"
+  ],
+  "flow": [
+   "รายชื่อนักเรียน",
+   "แยกห้อง / คณะ",
+   "ตรวจแต่ละกลุ่ม",
+   "รวมจำนวน",
+   "ยืนยันผลิต"
+  ],
+  "maps": [
+   "education"
+  ],
+  "pending": "ตารางจริง · ช่วงไซซ์เด็ก · คิวงานจำนวนมาก"
+ },
+ "10": {
+  "title": "สมาชิกเพิ่มได้ทั้งปี ต้องมีคำตอบเรื่องสั่งเพิ่ม",
+  "items": [
+   "หัวก๊วนทั้งเก็บเงิน เก็บไซซ์ และรับความเห็น ควรมีรายการกลางและวันยืนยันจำนวน",
+   "มีไฟล์แบบเดิมไม่ได้แปลว่ารับสั่งเพิ่มได้ทุกจำนวน หรือสีจะเหมือนเดิมทุกครั้ง",
+   "ถ้าเจ้าของคอร์ทสั่งเสื้อทัวร์นาเมนต์ ให้ถามรายละเอียดแบบงานอีเวนต์ด้วย"
+  ],
+  "flow": [
+   "ออเดอร์แรก",
+   "เก็บข้อมูลแบบเดิม",
+   "มีสมาชิกใหม่",
+   "เช็กราคาและคิวใหม่"
+  ],
+  "maps": [
+   "badminton",
+   "organizer"
+  ],
+  "pending": "ขั้นต่ำเติม · หลัง 30 วัน · วัสดุและสีต่างล็อต"
+ },
+ "11": {
+  "title": "งานวิ่งกับชมรมวิ่ง ต้องการคนละอย่าง",
+  "items": [
+   "ผู้จัดงานต้องรับเสื้อไปเตรียม Race Kit ให้ทัน ไซซ์และโลโก้ต้องตรงรายการ",
+   "ชมรมต้องการเสื้อใส่ซ้อมและลงงาน รวมถึงวิธีสั่งเพิ่มให้สมาชิกใหม่",
+   "ถามวันต้องได้รับเสื้อแยกจากวันแข่ง เพราะต้องมีเวลาเตรียมและแจกก่อน"
+  ],
+  "flow": [
+   "รับเสื้อ",
+   "เตรียม / แจก Race Kit",
+   "วันแข่งขัน"
+  ],
+  "maps": [
+   "race",
+   "runclub"
+  ],
+  "pending": "สเปกผ้า · ทวนยอดสองฝ่าย · คิวงานใหญ่ / นโยบายล็อตเติม"
+ },
+ "13": {
+  "title": "ตอบแชทเร็ว กับยืนยันคิวผลิต เป็นคนละขั้นตอน",
+  "items": [
+   "ต้องตรวจแบบ จำนวน และคิวก่อนยืนยันวันส่ง ไม่ใช้เวลาตอบแชทเป็นคำรับรอง",
+   "ตกลงวันที่ต้องยืนยันแบบ จำนวน และสถานที่ส่งก่อนรับปากลูกค้า",
+   "สั่งเพิ่มได้ราคาเดิม ก็ยังต้องเช็กวันรับเสื้อของรอบใหม่"
+  ],
+  "flow": [
+   "รับรายละเอียดงาน",
+   "เช็กคิวและราคา",
+   "ยืนยันวันส่ง",
+   "ติดตามและส่งมอบ"
+  ],
+  "maps": [
+   "organizer",
+   "race"
+  ],
+  "pending": "ผู้ยืนยันวันส่ง · เวลาประเมิน · หลายปลายทาง"
+ }
+};
+const $=s=>document.querySelector(s);const $$=s=>[...document.querySelectorAll(s)];const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const state={group:'all',person:1,query:'',map:'company'};const tabIds=['overview','personas','wows','dimensions','website','proof'];
+function wowTags(ids){return ids.map(id=>`<button type="button" class="wow-tag" data-wow="${id}" aria-label="ดูว้าว ${id} ${esc(wows[id-1].short)}"><b>${String(id).padStart(2,'0')}</b>${esc(wows[id-1].short)}</button>`).join('')}
+function showTab(id,update=true){if(!tabIds.includes(id))id='overview';$$('.tab').forEach(b=>{let on=b.getAttribute('aria-controls')===id;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1});$$('.page').forEach(p=>p.hidden=p.id!==id);if(update)history.replaceState(null,'','#'+id)}
+$$('.tab').forEach((b,i)=>{b.addEventListener('click',()=>showTab(b.getAttribute('aria-controls')));b.addEventListener('keydown',e=>{let n=i;if(e.key==='ArrowRight')n=(i+1)%tabIds.length;else if(e.key==='ArrowLeft')n=(i+tabIds.length-1)%tabIds.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=tabIds.length-1;else return;e.preventDefault();showTab(tabIds[n]);$('#t-'+tabIds[n]).focus()})});
+$('#group-cards').innerHTML=groups.map(g=>`<button type="button" class="card group-card" data-group-open="${g.id}"><span class="group-letter">${g.id}</span><span class="tag outline">${g.role}</span><h3 style="margin-top:12px">${g.name}</h3><p>${g.desc}</p><span class="small muted" style="margin-bottom:14px">${g.focus}</span><span class="bottom">ดู Persona ในกลุ่มนี้ ↗</span></button>`).join('');
+function renderFilters(){let arr=[{id:'all',short:'ทั้งหมด 14'},...groups];$('#group-filters').innerHTML=arr.map(g=>`<button type="button" class="chip" data-filter="${g.id}" aria-pressed="${state.group===g.id}">${g.short}</button>`).join('')}
+function personHTML(p){let g=groups.find(x=>x.id===p.g);return `<div class="person-title"><div><span class="tag orange">${g.name}</span><h2>${p.name}</h2><p class="small muted">${p.sub}</p></div><span class="person-no">${String(p.id).padStart(2,'0')}</span></div><div class="fact-grid"><div class="fact"><label>ใครสั่ง ใครช่วยตัดสินใจ</label>${p.who}</div><div class="fact"><label>เริ่มหาเสื้อเมื่อไร</label>${p.trigger}</div></div><div class="job"><span class="mini-label">JOB TO BE DONE · สิ่งที่คนสั่งต้องทำ</span>${p.job}</div><div class="pg"><div><h4>PAIN · สิ่งที่กังวล</h4><ul class="list">${p.pain.map(s=>`<li>${s}</li>`).join('')}</ul></div><div><h4>GAIN · ผลลัพธ์ที่ต้องการ</h4><ul class="list">${p.gain.map(s=>`<li>${s}</li>`).join('')}</ul></div></div><div class="vp"><span class="mini-label">VALUE PROPOSITION · ทีมดีช่วยอะไรได้</span><p>${p.vp}</p></div><div class="spacer"><span class="mini-label">10 บริการที่ควรเน้นก่อน · เลือกเพื่อดูรายละเอียด</span><div class="wow-tags">${wowTags(p.w)}</div></div><div class="detail-pair"><div><h4>ช่วยอย่างไร</h4><p>${p.mechanism}</p></div><div><h4>ผลงานและข้อมูลที่ใช้ประกอบ</h4><p>${p.proof}</p></div></div><div class="detail-pair" style="grid-template-columns:1fr"><div><h4>ข้อกังวลที่ต้องตอบ</h4><p>${p.ask}</p></div></div>${personaExtra(p)}<div class="success"><b>ลูกค้าพอใจเมื่องานจบแบบนี้:</b> ${p.success}</div><div class="copy-card"><button class="copy-btn" type="button" data-copy-person="${p.id}">คัดลอกข้อความ</button><span class="mini-label">ข้อความร่างสำหรับหน้าเว็บ</span><div class="headline">${p.headline}</div><span class="cta-sample">${p.cta}</span></div>`}
+function renderPeople(){let list=personas.filter(p=>(state.group==='all'||p.g===state.group)&&(!state.query||[p.name,p.sub,p.who,p.trigger,p.job,p.vp].join(' ').toLowerCase().includes(state.query.toLowerCase())));if(list.length&&!list.some(p=>p.id===state.person))state.person=list[0].id;$('#persona-count').textContent=`${list.length} Persona${state.group==='all'?'': ' ในกลุ่มนี้'}`;$('#persona-list').innerHTML=list.map(p=>`<button type="button" class="person-btn" data-person="${p.id}" aria-pressed="${p.id===state.person}"><span class="num">${String(p.id).padStart(2,'0')}</span><span><b>${p.name}</b><small>${p.sub}</small></span></button>`).join('')||'<p class="empty">ไม่พบ Persona ลองใช้คำอื่นหรือเลือกทุกกลุ่ม</p>';$('#persona-detail').innerHTML=list.length?personHTML(personas.find(p=>p.id===state.person)):'<p class="empty">ไม่มีรายการตรงกับคำค้น</p>';renderFilters()}
+$('#persona-search').addEventListener('input',e=>{state.query=e.target.value.trim();renderPeople()});
+$('#wow-grid').innerHTML=wows.map(w=>`<article class="card wow-card" id="wow-${w.id}"><div class="wow-title"><span class="wow-number">${String(w.id).padStart(2,'0')}</span><div><span class="stage">${w.stage}</span><h3>${w.name}</h3></div></div><div class="wow-pg"><div><span class="mini-label pain-label">PAIN RELIEVER</span><p>${w.pain}</p></div><div><span class="mini-label gain-label">GAIN CREATOR</span><p>${w.gain}</p></div></div><div class="value-line">${w.value}</div><details><summary>เงื่อนไขที่ทีมต้องตรวจสอบ</summary><p>${w.term}</p></details></article>`).join('');
+$('#wow-matrix').innerHTML=`<table class="matrix"><thead><tr><th scope="col">Persona</th>${wows.map(w=>`<th scope="col" class="dot"><span aria-label="${w.name}">${w.id}</span></th>`).join('')}</tr></thead><tbody>${personas.map(p=>`<tr><td><button type="button" data-person-open="${p.id}">${String(p.id).padStart(2,'0')} · ${p.name} ↗</button></td>${wows.map(w=>`<td class="dot">${p.w.includes(w.id)?`<span role="img" aria-label="เน้น ${esc(w.name)}"></span>`:'<span class="sr-only">ไม่ใช่ข้อที่นำก่อน</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+$('#dimension-grid').innerHTML=dimensions.map((d,i)=>`<article class="card dimension"><span class="idx">${String(i+1).padStart(2,'0')} / DECISION</span><h3>${d[0]}</h3><div class="drow pain"><label>PAIN</label><span>${d[1]}</span></div><div class="drow gain"><label>GAIN</label><span>${d[2]}</span></div><div class="web"><b>เว็บควรมี:</b> ${d[3]}</div></article>`).join('');
+$('#scenario-grid').innerHTML=scenarios.map(s=>`<article class="scenario"><h4>${s[0]}</h4><p>${s[1]}</p><blockquote>${s[2]}</blockquote></article>`).join('');
+function table(head,rows){return `<thead><tr>${head.map(x=>`<th scope="col">${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>`}
+$('#objections').innerHTML=table(['สิ่งที่ลูกค้าพูด','คำถามที่ซ่อนอยู่','คำตอบที่มีน้ำหนัก'],objections);
+$('#page-map').innerHTML=table(['หน้าการใช้งาน','Persona','คำถามหลัก'],pageMap);
+$('#products').innerHTML=products.map((p,i)=>`<article class="card"><span class="eyebrow">PRODUCT / 0${i+1}</span><h3 style="font-size:17px">${p[0]}</h3><p class="small" style="margin-top:10px">${p[1]}</p><p class="small" style="margin-top:14px;color:#8c552c">${p[2]}</p></article>`).join('');
+$('#landing-steps').innerHTML=landing.map((s,i)=>`<div class="landing-step"><span class="n">0${i+1}</span><div><h4>${s[0]}</h4><p>${s[1]}</p><span class="tag">${s[2]}</span></div></div>`).join('');
+$('#proof-grid').innerHTML=proofs.map(p=>`<article class="card proof-card"><span class="tag">${p[2]}</span><h3>${p[0]}</h3><p>${p[1]}</p></article>`).join('');
+$('#gaps').innerHTML=gaps.map(g=>`<div class="gap-row"><b>${g[0]}</b><p>${g[1]}</p></div>`).join('');
+function openPerson(id){state.person=id;state.group='all';state.query='';$('#persona-search').value='';renderPeople();showTab('personas');$('#persona-detail').scrollIntoView({behavior:'smooth',block:'start'})}
+let toastTimer;function toast(s){$('#toast').textContent=s;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').textContent='',2800)}
+async function copyText(s){try{await navigator.clipboard.writeText(s);toast('คัดลอกข้อความแล้ว')}catch{const t=document.createElement('textarea');t.value=s;t.style.position='fixed';t.style.opacity='0';document.body.append(t);t.select();const ok=document.execCommand('copy');t.remove();toast(ok?'คัดลอกข้อความแล้ว':'คัดลอกอัตโนมัติไม่ได้ กรุณาเลือกข้อความแล้วคัดลอก')}}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+if(b.dataset.filter){state.group=b.dataset.filter;renderPeople()}
+if(b.dataset.groupOpen){state.group=b.dataset.groupOpen;state.query='';$('#persona-search').value='';renderPeople();showTab('personas');$('#personas').scrollIntoView({behavior:'smooth'})}
+if(b.dataset.person){state.person=Number(b.dataset.person);renderPeople();if(innerWidth<761)$('#persona-detail').scrollIntoView({behavior:'smooth',block:'start'})}
+if(b.dataset.personOpen)openPerson(Number(b.dataset.personOpen));
+if(b.dataset.wow){showTab('wows');const target=$('#wow-'+b.dataset.wow);target.scrollIntoView({behavior:'smooth',block:'start'});target.classList.remove('flash');requestAnimationFrame(()=>target.classList.add('flash'))}
+if(b.dataset.copyPerson){const p=personas.find(p=>p.id===Number(b.dataset.copyPerson));copyText(p.headline+'\n\n'+p.vp+'\n\n'+p.cta)}
+});
+function statusTag(kind,text){const labels={ready:'ข้อความร่าง',build:'ต้องจัดทำ',verify:'ต้องยืนยัน'};return `<span class="status-badge ${kind}">${labels[kind]}${text?' · '+text:''}</span>`}
+function personaExtra(p){const x=personaExtras[p.id];if(!x)return '';return `<details class="extra-detail"><summary>${x.title}</summary><ul class="list small">${x.items.map(t=>`<li>${t}</li>`).join('')}</ul><div class="mini-flow">${x.flow.map(t=>`<span>${t}</span>`).join('<b aria-hidden="true">→</b>')}</div><p class="small muted"><b>ต้องยืนยัน:</b> ${x.pending}</p><div class="row" style="margin-top:12px">${x.maps.map(id=>`<button type="button" class="quiet-btn" data-map-open="${id}">ชุดข้อความ · ${messageMaps.find(m=>m.id===id).name} ↗</button>`).join('')}</div></details>`}
+function mapFaq(d,print=false){return d.faq.map(([q,a])=>`<details class="faq-item"${print?' open':''}><summary>${q}</summary><p>${a}</p></details>`).join('')}
+function mapPending(d){return `<div class="pending-box"><div class="row">${statusTag('verify')}<b>หมายเหตุสำหรับทีม — ยังไม่ใช้เป็นคำรับรอง</b></div><p class="small muted" style="margin:8px 0 12px">ตรวจข้อมูลให้ครบก่อนเขียนเป็นคำรับรองบนเว็บ เลือกหัวข้อเพื่อดูว่าควรถามฝ่ายไหนและต้องได้คำตอบอะไร</p><div class="row">${d.pending.map(id=>{let o=openItems.find(o=>o.id===id);return `<button type="button" class="pending-link" data-pending="${id}">${o.name} ↗</button>`}).join('')}</div></div>`}
+function renderCopy(){const d=messageMaps.find(m=>m.id===state.map);$('#map-select').value=d.id;$('#map-type').innerHTML=statusTag('ready','สำหรับหน้าเว็บ')+` <span class="tag outline">${d.type==='base'?'หน้าการใช้งานหลัก':'เนื้อหาเฉพาะงาน · เลือกใช้ในหน้าที่เกี่ยวข้อง'}</span>`;$('#map-context').textContent=d.parent;
+$('#group-copy').innerHTML=`<span class="eyebrow">${d.name} / MESSAGE DRAFT</span><h3>${d.heading}</h3><p>${d.body}</p><span class="cta-sample">${d.cta}</span><p class="secondary-cta">ปุ่มรอง: ${d.cta2}</p><button type="button" class="copy-btn" data-copy-map="${d.id}">คัดลอกข้อความ</button>`;
+$('#copy-support').innerHTML=`<span class="mini-label">หน้านี้เขียนให้ใครอ่าน</span><div class="row">${d.p.map(id=>`<button type="button" class="persona-ref" data-person-open="${id}">${id} · ${personas.find(p=>p.id===id).name}</button>`).join('')}</div><div class="message-priority"><div><span class="mini-label">เรื่องที่ลูกค้าอยากรู้ก่อน</span><b>${d.lead}</b></div><div><span class="mini-label">เรื่องอื่นที่ช่วยให้ตัดสินใจ</span><p>${d.secondary}</p></div></div><p class="small muted"><b>หน้านี้ควรเริ่มเล่าอย่างไร:</b> ${d.angle}</p><ul class="list small">${d.benefits.map(t=>`<li>${t}</li>`).join('')}</ul><div class="spacer"><span class="mini-label">บริการที่ควรพูดถึงก่อน</span><div class="wow-tags">${wowTags(d.w)}</div></div>`;
+$('#message-map-detail').innerHTML=`<div class="subhead map-section-title"><h3>3 เรื่องที่ลูกค้ามักกังวล</h3><span class="tag">คำถามและคำตอบสั้น ๆ</span></div><div class="grid3">${d.hooks.map(([q,a],i)=>`<article class="hook-card"><span class="eyebrow">0${i+1} / CUSTOMER QUESTION</span><h4>${q}</h4><p>${a}</p></article>`).join('')}</div><div class="grid2 spacer"><div class="card"><h3>คำถามที่ลูกค้ามักถาม</h3><p class="small muted" style="margin:8px 0 15px">คำตอบร่างสำหรับลูกค้า ข้อมูลที่ยังไม่แน่ใจให้ตรวจสอบก่อนนำขึ้นเว็บ</p>${mapFaq(d)}</div><div class="card"><h3>ผลงานและข้อมูลที่ควรเตรียม</h3><span class="mini-label" style="margin-top:18px">ตัวอย่างงานที่ควรให้ลูกค้าดู</span><p class="small">${d.proof}</p><div class="note neutral spacer"><b>ผลงานที่ต้องหาเพิ่ม:</b> ${d.asset}</div><span class="mini-label" style="margin-top:18px">ไฟล์ที่ช่วยให้ลูกค้าสั่งง่ายขึ้น</span><div class="tool-links">${d.tools.map(id=>{const t=toolItems.find(t=>t.id===id);return `<button type="button" class="tool-link" data-tool-open="${id}"><span>${t.name} ↗</span>${statusTag(t.status)}</button>`}).join('')}</div><button type="button" class="quiet-btn spacer" data-proof-open="cases">ดูรายการผลงานที่ต้องตรวจสอบ ↗</button></div></div>${mapPending(d)}`;
+}
+function initV2(){
+$('#map-select').innerHTML=['base','scenario'].map(type=>`<optgroup label="${type==='base'?'5 หน้าการใช้งานหลัก':'5 ชุดข้อความสำหรับงานเฉพาะ'}">${messageMaps.filter(m=>m.type===type).map(m=>`<option value="${m.id}">${m.name}</option>`).join('')}</optgroup>`).join('');
+$('#map-select').addEventListener('change',e=>{state.map=e.target.value;renderCopy()});
+$('#tool-grid').innerHTML=toolItems.map(t=>`<article class="card tool-card" id="tool-${t.id}"><div class="row">${statusTag(t.status)}<span class="tag outline">ว้าว ${t.w.join(' · ')}</span></div><h3>${t.name}</h3><p class="small"><b>ใช้กับ:</b> ${t.who}</p><p class="small"><b>Pain ที่ลด:</b> ${t.pain}</p><details><summary>ในไฟล์ควรมีอะไร และใครควรตรวจ</summary><p><b>ควรมี:</b> ${t.what}</p><p><b>ฝ่ายที่ควรช่วยตรวจ:</b> ${t.owner}</p><p><b>พร้อมใช้เมื่อ:</b> ${t.ready}</p><p>${t.note}</p></details></article>`).join('');
+$('#case-inventory').innerHTML=caseItems.map((c,i)=>`<details class="inventory-item"><summary><span class="inventory-title"><b>${c.name}</b><small>${c.page}</small></span>${statusTag('verify','ข้อมูล + สิทธิ์')}</summary><div class="inventory-body"><p><b>ที่มา:</b> ${c.source}</p><p><b>ใช้ตอบ Pain:</b> ${c.pain}</p><p><b>ไฟล์/ข้อมูลที่ต้องหา:</b> ${c.want}</p><div class="row" style="margin:12px 0">${statusTag('verify','ไฟล์จริง')}${statusTag('verify','ข้อเท็จจริง')}${statusTag('verify','สิทธิ์เผยแพร่')}</div><p><b>ฝ่ายที่ควรช่วยตรวจ:</b> Sales Admin + Marketing · ยังไม่ได้ตรวจคลังไฟล์หรือเอกสารสิทธิ์ในรอบนี้</p></div></details>`).join('');
+$('#open-items').innerHTML=openItems.map((o,i)=>`<details class="inventory-item" id="pending-${o.id}"><summary><span class="inventory-title"><b>${String(i+1).padStart(2,'0')} · ${o.name}</b><small>${o.owner}</small></span>${statusTag('verify')}</summary><div class="inventory-body"><p><b>คำตอบที่ต้องมี:</b> ${o.need}</p><p><b>กระทบ:</b> ${o.pages}</p><p><b>ยืนยันได้เมื่อมี:</b> ${o.close}</p></div></details>`).join('');
+}
+function openMap(id){state.map=id;renderCopy();showTab('website');$('#map-select').scrollIntoView({behavior:'smooth',block:'center'});$('#map-select').focus({preventScroll:true})}
+function highlightTarget(el){el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.remove('flash');requestAnimationFrame(()=>el.classList.add('flash'))}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.mapOpen)openMap(b.dataset.mapOpen);if(b.dataset.toolOpen){showTab('wows');const el=$('#tool-'+b.dataset.toolOpen);el.querySelector('details').open=true;highlightTarget(el)}if(b.dataset.pending){showTab('proof');const el=$('#pending-'+b.dataset.pending);el.open=true;highlightTarget(el)}if(b.dataset.proofOpen){showTab('proof');highlightTarget($('#case-section'))}if(b.dataset.copyMap){const d=messageMaps.find(m=>m.id===b.dataset.copyMap);copyText(d.heading+'\n\n'+d.body+'\n\n'+d.cta+'\nปุ่มรอง: '+d.cta2)}});
+function printMap(d){return `<article class="print-copy"><span class="eyebrow">MESSAGE MAP / ${d.type==='base'?'หน้าหลัก':'โจทย์เฉพาะ'}</span><h3>${d.name}</h3><p><b>บริบท:</b> ${d.parent} · Persona ${d.p.join(', ')}</p><p><b>นำ:</b> ${d.lead}<br><b>รอง:</b> ${d.secondary}<br><b>มุมเปิด:</b> ${d.angle}</p><h4>${d.heading}</h4><p>${d.body}</p><p><b>CTA:</b> ${d.cta}<br><b>รอง:</b> ${d.cta2}</p><p><b>ว้าว:</b> ${d.w.join(', ')}</p><ul>${d.benefits.map(x=>`<li>${x}</li>`).join('')}</ul><h4>คำถามที่ลูกค้ามักกังวล</h4>${d.hooks.map(([q,a])=>`<p><b>${q}</b> → ${a}</p>`).join('')}<h4>คำถามและคำตอบ</h4>${mapFaq(d,true)}<p><b>หลักฐาน:</b> ${d.proof}<br><b>รายการค้น:</b> ${d.asset}</p><p><b>เครื่องมือ:</b> ${d.tools.map(id=>toolItems.find(t=>t.id===id).name).join(' · ')}</p><p><b>ต้องยืนยัน:</b> ${d.pending.map(id=>openItems.find(o=>o.id===id).name).join(' · ')}</p></article>`}
+let detailStates=[];
+function preparePrint(){if(!detailStates.length)detailStates=$$('details:not(#print-copies details)').map(el=>[el,el.open]);detailStates.forEach(([el])=>el.open=true);$('#print-personas').innerHTML=personas.map(p=>`<article class="print-person"><div class="person-detail">${personHTML(p)}</div></article>`).join('');$$('#print-personas details').forEach(el=>el.open=true);$('#print-copies').innerHTML=messageMaps.map(printMap).join('')}
+window.addEventListener('afterprint',()=>{detailStates.forEach(([el,open])=>el.open=open);detailStates=[]});
+
+$('#print').addEventListener('click',()=>{preparePrint();window.print()});window.addEventListener('beforeprint',preparePrint);window.addEventListener('hashchange',()=>showTab(location.hash.slice(1),false));initV2();renderPeople();renderCopy();showTab(location.hash.slice(1)||'overview',false);
+</script>
+</body>
+</html>

@@ -5,8 +5,7 @@
   <svg class="th-arc" viewBox="0 0 1440 760" preserveAspectRatio="none" aria-hidden="true"><path d="M0 760V250C260 70 560 0 760 0c260 0 520 90 680 230v530z"/></svg>
 
   <div class="wrap th-head">
-    <p class="th-kicker">{{homeV4.hero.no}} / {{homeV4.hero.title}}</p>
-    <h1 id="th-h1" class="th-h1"><span class="inline-block">เสื้อทีมที่ทุกคน</span> <span class="th-mark">ภูมิใจจะใส่<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M4 17C70 6 170 3 296 11"/></svg></span></h1>
+    <h1 id="th-h1" class="th-h1"><span class="th-kick">โรงงานรับผลิตเสื้อโปโล ยูนิฟอร์ม และเสื้อทีม</span><span class="inline-block">เสื้อทีมที่ทุกคน</span> <span class="th-mark">ภูมิใจจะใส่<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M4 17C70 6 170 3 296 11"/></svg></span></h1>
     <p class="th-lead">{{homeV4.hero.sub}}</p>
     <p class="th-pillars">{{homeV4.hero.pillars}}</p>
   </div>
@@ -15,27 +14,20 @@
     <ul class="th-line" aria-label="ตัวอย่างเสื้อที่ทีมดีออกแบบ 5 แบบ">
       {{#each teamLineup}}
       <li class="th-shirt{{#if this.lead}} is-lead{{/if}}" style="--i:{{@index}}">
-        <img class="th-front" src="{{this.frontSmall}}" srcset="{{this.frontSmall}} 440w, {{this.front}} 880w" sizes="(min-width:1240px) 290px, (min-width:768px) 23vw, 44vw" width="880" height="1080" alt="{{this.alt}}"{{#if this.lead}} fetchpriority="high"{{/if}} decoding="async">
+        <img class="th-front" src="{{this.frontSmall}}" srcset="{{this.frontSmall}} 440w, {{this.front}} 880w" sizes="(min-width:1240px) 290px, (min-width:768px) 23vw, 44vw" width="880" height="1080" alt="{{this.alt}}"{{#if this.lead}} fetchpriority="high"{{/if}}{{#if @first}} loading="lazy"{{/if}}{{#if @last}} loading="lazy"{{/if}} decoding="async">
       </li>
       {{/each}}
     </ul>
   </div>
 
   <div class="wrap th-foot">
+    {{!-- ปุ่มหลักเป็นทางติดต่อ เพราะแอดนับกดไลน์เป็นผล (ตกลง 21 ต.ค.) · ปุ่มของ v4 (ดูแบบเสื้อ / ช่วยเลือกให้ทีมฉัน) อยู่ถัดมา --}}
     <div class="flex flex-wrap justify-center gap-3">
-      <a class="btn btn-orange btn-lg" href="{{url 'designs'}}">ดูแบบเสื้อ</a>
-      <a class="btn btn-line btn-lg" href="{{url 'uses' 'index'}}">ช่วยเลือกให้ทีมฉัน</a>
+      <a class="btn btn-orange btn-lg" href="{{site.lineUrl}}" data-track="line">ทัก LINE ทีมดี</a>
+      <a class="btn btn-line btn-lg" href="{{url 'designs'}}">ดูแบบเสื้อ</a>
     </div>
-    <p class="th-have"><a href="{{url 'contact'}}?from=%2F%20%C2%B7%20%E0%B8%A1%E0%B8%B5%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B9%81%E0%B8%A5%E0%B9%89%E0%B8%A7">{{homeV4.hero.haveDesign}} &rarr;</a></p>
+    <p class="th-have"><a href="{{url 'uses' 'index'}}">ช่วยเลือกให้ทีมฉัน</a><span aria-hidden="true">·</span><a href="{{url 'contact'}}">{{homeV4.hero.haveDesign}}</a></p>
     <p class="th-note">ภาพจำลองแบบเสื้อที่ทีมดีออกแบบ</p>
   </div>
 
-  {{#unless wp}}
-  <div class="hero-switch hero-switch--light" role="group" aria-label="ต้นแบบ · เลือกแบบ hero ที่จะดู">
-    <span class="hero-switch__label">ต้นแบบ</span>
-    <button type="button" data-hero-set="team">แบบทีม</button>
-    <button type="button" data-hero-set="scroll">แบบเลื่อน</button>
-    <button type="button" data-hero-set="classic">แบบเดิม</button>
-  </div>
-  {{/unless}}
 </section>

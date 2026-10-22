@@ -3,12 +3,11 @@
 export function initTabs(root) {
   const tabs = [...root.querySelectorAll('[role="tab"]')]
   const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')))
-  // ใช้ aria-pressed ให้ chip ได้สีส้มตอนเลือก โดยไม่ต้องเขียน CSS ซ้ำ
+  // สีส้มตอนเลือกมาจาก aria-selected ใน .chip · role=tab ใส่ aria-pressed ไม่ได้ (axe aria-allowed-attr)
   const select = (i, focus) => {
     tabs.forEach((t, k) => {
       const on = k === i
       t.setAttribute('aria-selected', String(on))
-      t.setAttribute('aria-pressed', String(on))
       t.tabIndex = on ? 0 : -1
       if (panels[k]) panels[k].hidden = !on
     })

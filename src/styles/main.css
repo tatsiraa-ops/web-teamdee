@@ -55,7 +55,8 @@
      ตัวที่โฟกัสจะไปมุดอยู่ใต้แถบเมนู มองไม่เห็นว่าตอนนี้อยู่ตรงไหน (WCAG 2.2 focus-not-obscured) */
   html { -webkit-text-size-adjust: 100%; scroll-padding-top: 96px; }
   /* แถบติดต่อด่วนล่างจอบังของด้านล่างเหมือนกัน ตอนโฟกัสต้องเผื่อไว้ด้วย */
-  @media (max-width: 1023px) { html { scroll-padding-bottom: 88px; } }
+  /* มือถือ: แถบติดต่อด่วน + การ์ดแนะนำที่ลอยเหนือแถบ (src/partials/floats.hbs) */
+  @media (max-width: 1023px) { html { scroll-padding-bottom: 180px; } }
   body {
     background: var(--color-paper);
     color: var(--color-ink);
@@ -129,7 +130,8 @@
      สถานะเลือกใช้ส้ม ไม่ใช้ดำ เพราะดำจมหายบนการ์ดพื้นเข้ม */
   .chip { @apply inline-flex items-center gap-2 min-h-[3rem] px-5 rounded-full border-2 border-line-2
           bg-paper text-ink text-[16px] font-semibold transition-colors hover:border-ink
-          aria-pressed:bg-orange aria-pressed:text-ink aria-pressed:border-orange; }
+          aria-pressed:bg-orange aria-pressed:text-ink aria-pressed:border-orange
+          aria-selected:bg-orange aria-selected:text-ink aria-selected:border-orange; }
 
   /* แถวชิปกรอง จอเล็กเลื่อนแนวนอนแถวเดียว จอใหญ่ค่อยตัดบรรทัด
      ที่ต้องเผื่อ padding ซ้ายขวาเพราะ scroll container กินขอบ wrap */
@@ -242,7 +244,7 @@
   .dd:not([hidden]) { transition: opacity .14s ease-out, translate .14s ease-out; }
   @starting-style { .dd:not([hidden]) { opacity: 0; translate: 0 -4px; } }
   .dd__group { @apply text-[15px] font-bold text-ink-3 px-3 pt-2.5 pb-1.5; }
-  .dd__item { @apply relative flex flex-col justify-center min-h-[52px] px-3 py-2 rounded-card text-ink
+  .dd__item { @apply relative flex flex-col justify-center min-h-[46px] px-3 py-1.5 rounded-card text-ink
               hover:bg-shell focus-visible:bg-shell; }
   .dd__item[aria-current="page"] { @apply bg-shell; }
   .dd__item[aria-current="page"]::before { content: ''; @apply absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-orange; }
@@ -543,6 +545,8 @@
   .wrap { @apply mx-auto w-full max-w-[1240px] px-5 md:px-10; }
   /* ไม่ขยายเต็มจอ · ทุกส่วนอยู่ในกรอบ 1240 (อาร์ตตัดสิน 20 ต.ค. 2026 "ทั้งหมดเราจะไม่เน้นเต็มจอแบบนี้")
      พื้นหลังเต็มจอได้ (โค้งครีม แถบผ้าดำ footer) แต่เนื้อหาไม่ออกนอกกรอบ */
+  /* ยกเว้นแถบเมนูบน เต็มซ้ายขวา (อาร์ต 21 ต.ค. 2026 "ภาพสองทำให้เต็มๆ") · เนื้อหายังอยู่ในกรอบ 1240 */
+  .wrap-full { @apply w-full px-5 md:px-10 xl:px-14; }
   .section { @apply py-16 md:py-24; }
 }
 
@@ -628,15 +632,7 @@ html.lb-on .mobilebar { display: none; }
 html:not([data-hero-mode="scroll"]) [data-hero-scroll] { display: none; }
 html:not([data-hero-mode="classic"]) section[data-hero] { display: none; }
 html[data-hero-mode]:not([data-hero-mode="team"]) [data-hero-team] { display: none; }
-/* ปุ่มสลับต้นแบบ ไว้เทียบภายในตอน dev หรือเปิดด้วย ?proto · เว็บที่ build แล้วลูกค้าไม่เห็น */
-html:not(.is-proto) .hero-switch { display: none !important; }
 .hero-wrap { position: relative; }
-.hero-switch { position: absolute; top: 14px; right: 16px; z-index: 30; display: inline-flex; align-items: center; gap: 4px;
-  padding: 4px; border-radius: 999px; background: rgba(11,11,11,.82); border: 1px solid rgba(255,255,255,.25); }
-.hero-switch__label { font-size: 15px; font-weight: 600; color: rgba(255,255,255,.7); padding: 0 8px 0 10px; }
-.hero-switch button { min-height: 36px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 700; color: #fff; }
-.hero-switch button[aria-pressed="true"] { background: var(--color-orange); color: var(--color-ink); }
-@media (max-width: 639px) { .hero-switch__label { display: none; } .hero-switch { top: 10px; right: 10px; } }
 
 /* ==========================================================
    HERO แบบเลื่อนเล่าเรื่อง · docs/plans/hero-scroll.md
@@ -880,3 +876,90 @@ html:not(.is-proto) .hero-switch { display: none !important; }
   33%,47% { opacity:1; scale:1.2; translate:0 -2vh; animation-timing-function:cubic-bezier(.4,0,.2,1) } 58% { opacity:1; scale:.3; translate:0 4vh; animation-timing-function:cubic-bezier(.4,0,1,1) } 61%,100% { opacity:0; scale:.28; translate:0 4vh } }
 @keyframes hs-flip { 0%,33% { rotate:y 0deg; animation-timing-function:cubic-bezier(.4,0,.2,1) } 39%,42% { rotate:y 180deg; animation-timing-function:cubic-bezier(.4,0,.2,1) } 47%,100% { rotate:y 360deg } }
 @keyframes hs-wall { 0%,49% { opacity:0; scale:1.3; animation-timing-function:cubic-bezier(0,0,.2,1) } 57% { opacity:1; scale:1 } 61% { opacity:1; scale:1; animation-timing-function:cubic-bezier(.4,0,1,1) } 65%,100% { opacity:0; scale:.96 } }
+
+/* ---------- มุมจอ 2 ฝั่ง (src/partials/floats.hbs + src/js/nudge.js) ----------
+   ซ้ายล่าง การ์ดชวนไปหน้าอื่น · ขวาล่าง ปุ่มลอย LINE กับโทร (จอ lg ขึ้นไป มือถือใช้ .mobilebar)
+   ชั้นซ้อน: ต่ำกว่า .mobilebar (80) เมนูมือถือ (100) และรูปขยาย */
+@media (min-width: 1024px) { html { scroll-padding-bottom: 170px; } }
+
+.nudge { position: fixed; z-index: 70; left: 24px; bottom: 24px; width: 344px;
+  background: var(--color-paper); color: var(--color-ink); border: 1px solid var(--color-line-2); border-radius: 16px;
+  box-shadow: 0 18px 40px -18px rgb(0 0 0 / .38), 0 2px 6px rgb(0 0 0 / .06); overflow: hidden;
+  opacity: 0; transform: translateY(28px) scale(.94); transform-origin: 0% 100%; visibility: hidden;
+  transition: opacity .22s cubic-bezier(0,0,.2,1), transform .55s cubic-bezier(.34,1.56,.64,1), visibility 0s linear .55s; }
+.nudge.is-on { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
+.nudge.is-on.is-away, html.lb-on .nudge { opacity: 0; transform: translateY(16px); visibility: hidden; pointer-events: none;
+  transition: opacity .16s cubic-bezier(.4,0,1,1), transform .16s cubic-bezier(.4,0,1,1), visibility 0s linear .16s; }
+
+.nudge__item { display: grid; grid-template-columns: 88px 1fr; gap: 14px; align-items: center; padding: 14px 14px 16px; text-decoration: none; color: inherit; }
+.nudge__item:not([hidden]) { animation: nudge-in .5s cubic-bezier(.34,1.4,.64,1) both; }
+.nudge__item:not([hidden]) .nudge__pic { animation: nudge-pop .6s cubic-bezier(.34,1.7,.64,1) .05s both; }
+.nudge__item:focus-visible { outline-offset: -4px; border-radius: 14px; }
+.nudge__pic { display: block; width: 88px; height: 88px; border-radius: 12px; overflow: hidden; background: var(--color-shell); }
+.nudge__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s cubic-bezier(0,0,.2,1); }
+.nudge__ico { display: grid; place-items: center; width: 100%; height: 100%; background: var(--color-ink); color: var(--color-orange); }
+.nudge__ico svg { width: 40px; height: 40px; }
+.nudge__txt { display: grid; gap: 3px; padding-right: 30px; min-width: 0; }
+.nudge__k { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 700; color: var(--color-ink-2); }
+.nudge__k::before { content: ''; width: 8px; height: 8px; border-radius: 2px; background: var(--color-orange); }
+.nudge__t { font-size: 16px; line-height: 1.45; font-weight: 700; }
+.nudge__go { display: inline-flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 14px; font-weight: 700; color: var(--color-ink); }
+.nudge__go svg { width: 16px; height: 16px; transition: transform .18s cubic-bezier(0,0,.2,1); }
+.nudge__item:hover .nudge__go svg { transform: translateX(3px); }
+.nudge__item:hover .nudge__pic img { transform: scale(1.06); }
+.nudge__item:hover .nudge__t { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; text-decoration-color: var(--color-orange); }
+
+.nudge__bar { position: absolute; z-index: 1; top: 2px; right: 2px; display: flex; align-items: center; }
+.nudge__count { font-size: 13px; color: var(--color-ink-3); padding-right: 2px; }
+.nudge__x { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; color: var(--color-ink-2); cursor: pointer; }
+.nudge__x svg { width: 18px; height: 18px; }
+.nudge__x:hover { background: var(--color-shell); color: var(--color-ink); }
+
+/* แถบเวลา บอกว่าการ์ดจะเปลี่ยนเมื่อไหร่ · หยุดตอนชี้หรือโฟกัส */
+.nudge__time { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--color-orange); transform: scaleX(0); transform-origin: 0 50%; }
+.nudge.is-tick .nudge__time { animation: nudge-time var(--nudge-every, 7s) linear both; }
+.nudge.is-held .nudge__time, .nudge.is-still .nudge__time { animation: none; transform: scaleX(0); }
+
+@keyframes nudge-in { from { opacity: 0; transform: translateY(10px); } }
+@keyframes nudge-pop { from { transform: scale(.7) rotate(-6deg); } }
+@keyframes nudge-time { to { transform: scaleX(1); } }
+
+.fcta { position: fixed; z-index: 70; right: 24px; bottom: 24px; display: none; flex-direction: column; align-items: flex-end; gap: 10px;
+  opacity: 0; transform: translateY(20px); visibility: hidden;
+  transition: opacity .2s cubic-bezier(.4,0,1,1), transform .2s cubic-bezier(.4,0,1,1), visibility 0s linear .2s; }
+.fcta.is-on { opacity: 1; transform: none; visibility: visible;
+  transition: opacity .24s cubic-bezier(0,0,.2,1), transform .45s cubic-bezier(.34,1.56,.64,1), visibility 0s; }
+html.lb-on .fcta { visibility: hidden; opacity: 0; }
+@media (min-width: 1024px) { .fcta { display: flex; } }
+.fcta__btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px 0 18px; border-radius: 999px;
+  font-size: 16px; font-weight: 700; text-decoration: none; box-shadow: 0 12px 28px -12px rgb(0 0 0 / .45);
+  transition: transform .16s cubic-bezier(0,0,.2,1), box-shadow .16s cubic-bezier(0,0,.2,1); }
+.fcta__btn:hover { transform: translateY(-2px); box-shadow: 0 16px 32px -12px rgb(0 0 0 / .5); }
+.fcta__btn:active { transform: scale(.97); }
+.fcta__btn--line { background: var(--color-orange); color: var(--color-ink); }
+.fcta__btn--tel { background: var(--color-ink); color: var(--color-paper); }
+.fcta__btn--tel .fcta__ico { color: var(--color-orange); }
+.fcta__ico { display: block; width: 22px; height: 22px; }
+
+/* มือถือ / แท็บเล็ต: การ์ดเล็กลง ลอยเหนือแถบติดต่อด่วน */
+@media (max-width: 1023px) {
+  .nudge { left: 12px; bottom: calc(68px + 12px + env(safe-area-inset-bottom)); width: min(340px, calc(100vw - 24px)); }
+  .nudge__item { grid-template-columns: 56px 1fr; gap: 12px; padding: 10px 10px 12px; }
+  .nudge__pic { width: 56px; height: 56px; border-radius: 10px; }
+  .nudge__ico svg { width: 28px; height: 28px; }
+  .nudge__k { font-size: 13px; }
+  .nudge__t { font-size: 15px; line-height: 1.4; }
+  .nudge__go { display: none; }
+  html:has(#mobileMenu:not([hidden])) .nudge { visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nudge, .nudge.is-on, .fcta, .fcta.is-on { transform: none; transition: opacity .15s linear, visibility 0s; }
+  .nudge__item:not([hidden]), .nudge__item:not([hidden]) .nudge__pic { animation: none; }
+  .nudge__time { display: none; }
+  .fcta__btn, .fcta__btn:hover, .fcta__btn:active, .nudge__pic img { transform: none; }
+}
+
+/* การ์ดสินค้าที่ยังไม่มีรูปจริง · พื้นครีม ไอคอนส้ม ชื่อสินค้า · ไม่ใช่ช่องเทา "รอภาพ" เพราะขึ้นบนเว็บจริงด้วย */
+.prod-noimg { display: grid; place-items: center; align-content: center; gap: 10px; width: 100%; height: 100%; background: var(--color-shell); color: var(--color-orange); }
+.prod-noimg > span:last-child { color: var(--color-ink-2); font-size: 15px; font-weight: 700; }

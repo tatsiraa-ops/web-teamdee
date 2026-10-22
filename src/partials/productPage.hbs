@@ -1,4 +1,5 @@
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"สินค้าและบริการ"},{{#if parentItem}}{"@type":"ListItem","position":3,"name":"{{parentItem.name}}","item":"{{site.baseUrl}}{{url 'products' parentItem.id}}"},{"@type":"ListItem","position":4,"name":"{{item.name}}"}{{else}}{"@type":"ListItem","position":3,"name":"{{item.name}}"}{{/if}}]}</script>
+{{#if productLd}}<script type="application/ld+json">{{{productLd}}}</script>
+{{/if}}<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"สินค้าและบริการ"},{{#if parentItem}}{"@type":"ListItem","position":3,"name":"{{parentItem.name}}","item":"{{site.baseUrl}}{{url 'products' parentItem.id}}"},{"@type":"ListItem","position":4,"name":"{{item.name}}"}{{else}}{"@type":"ListItem","position":3,"name":"{{item.name}}"}{{/if}}]}</script>
 
 <!-- 1 · ภาพจริง + คำอธิบาย + เงื่อนไขที่ยืนยันแล้ว -->
 <section class="band-ink relative overflow-hidden">
@@ -336,7 +337,9 @@
     {{#each relatedProducts}}
     <a href="{{url 'products' this.id}}" class="group flex flex-col">
       <div class="relative overflow-hidden rounded-plate bg-paper border border-line aspect-[3/2]">
-        <img src="{{this.img}}" alt="{{this.name}}" width="1080" height="720" loading="lazy" decoding="async" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.04]">
+        {{#if this.img}}<img src="{{this.img}}" alt="{{this.name}}" width="1080" height="720" loading="lazy" decoding="async" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.04]">
+        {{else}}{{!-- สินค้าที่ยังไม่มีรูปจริง (เสื้อวอร์ม · หน้ารวมเสื้อแบบพิเศษ) · ไม่ใส่ img src ว่าง และไม่ใช้รูปของสินค้าอื่นแทน --}}
+        <span class="prod-noimg" aria-hidden="true"><span class="block size-12">{{> icoShirt}}</span><span>{{this.name}}</span></span>{{/if}}
       </div>
       <h3 class="text-[19px] mt-3 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.name}}</h3>
       <p class="t-xs mt-1">{{this.short}}</p>

@@ -5,6 +5,8 @@
 // 3. แต่ละหน้า: เก็บส่วน head (CSS JS ฟอนต์ JSON-LD) กับ body ทั้งก้อน · บอก title / description / robots ไว้ใน pages.json
 // 4. เปลี่ยน path ไฟล์ /img/ /assets/ ... ให้ชี้เข้าโฟลเดอร์ธีม (ทั้ง HTML CSS JS)
 import { execSync } from 'node:child_process'
+import { INTERNAL_PAGES } from './seo-check.mjs'
+import { makeRewrite } from './wp-rewrite.mjs'
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -16,19 +18,14 @@ const out = join(root, 'wp-theme/teamdee/build')
    ถ้าเว็บจริงติดตั้งใน sub-folder ต้องเปลี่ยนค่านี้ */
 const THEME_URL = process.env.TD_THEME_URL || '/wp-content/themes/teamdee/build'
 /* หน้าที่มีไว้ใช้ภายในต้นแบบ ไม่ขึ้นเว็บจริง */
-const SKIP = new Set(['/ui/', '/hero-storyboard/'])
+const SKIP = INTERNAL_PAGES
 
 execSync('npx vite build', { cwd: root, stdio: 'inherit', env: { ...process.env, TD_TARGET: 'wp' } })
 
 rmSync(out, { recursive: true, force: true })
 mkdirSync(join(out, 'pages'), { recursive: true })
 
-/* path ไฟล์ที่ขึ้นต้นด้วย / (รูป assets โลโก้ ไฟล์ดาวน์โหลด favicon) → ชี้เข้าธีม · ลิงก์หน้าอย่าง /sublimation/ ไม่แตะ */
-const FILE_DIRS = 'img|assets|logo|files'
-const rewrite = (text) =>
-  text
-    .replace(new RegExp(`(["'\`(\\s,=])\\/(${FILE_DIRS})\\/`, 'g'), `$1${THEME_URL}/$2/`)
-    .replace(/(["'(\s])\/(favicon\.svg|apple-touch-icon\.png)/g, `$1${THEME_URL}/$2`)
+const rewrite = makeRewrite({ themeUrl: THEME_URL, baseUrl: JSON.parse(readFileSync(join(root, 'src/data/site.json'), 'utf8')).baseUrl })
 
 const copyRewritten = (from, to) => {
   for (const e of readdirSync(from, { withFileTypes: true })) {

@@ -43,7 +43,8 @@
     </article>
 
     <!-- สารบัญ + ลิงก์ตามบริบท -->
-    <aside class="lg:sticky lg:top-28 space-y-7" id="guideToc">
+    {{!-- div ไม่ใช่ aside · aside ซ้อนใน main ผิดกฎ landmark (axe) · สารบัญข้างในเป็น nav อยู่แล้ว --}}
+    <div class="lg:sticky lg:top-28 space-y-7" id="guideToc">
       <nav aria-labelledby="atoc-h">
         <h2 id="atoc-h" class="text-[15px] font-bold text-ink-3 mb-3">สารบัญ</h2>
         <ol class="toc">
@@ -60,7 +61,7 @@
         </ul>
         <a class="btn btn-orange btn-sm w-full mt-5" href="{{url 'contact'}}">ปรึกษาทีมดี</a>
       </div>
-    </aside>
+    </div>
   </div>
 </section>
 

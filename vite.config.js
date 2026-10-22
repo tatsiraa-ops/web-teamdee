@@ -1,10 +1,11 @@
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { defineConfig } from 'vite'
 import handlebars from 'vite-plugin-handlebars'
 import tailwindcss from '@tailwindcss/vite'
 import { makeUrl, pageFor } from './src/js/routes.js'
+import { faqSchema, businessSchema, ldJson } from './src/js/seo-schema.js'
 
 const root = dirname(fileURLToPath(import.meta.url))
 /* ไฟล์หน้าเว็บอยู่ใน site/ วางโฟลเดอร์ตาม URL จริง เช่น site/sublimation/index.html → /sublimation/
@@ -67,6 +68,7 @@ const loadData = () => ({
   allGuides: json('guides.json'),
   styles: json('styles.json'),
   articles: json('articles.json'),
+  nudges: json('nudges.json').items,
   // รูปฮีโร่หน้าแรก ต้องเป็นภาพทีมจริงตาม Brief ข้อ 06 ไม่ใช่ภาพจำลอง
   heroShot: { img: '/img/real/r23.jpg', alt: 'ทีมพนักงานใส่เสื้อทีมที่ TEAMDEE ผลิตให้ ถ่ายในวันงานจริง' },
   /* hero หน้าแรก · รูปทีมจริง 4 ประเภทงาน แทนรูปเดียว · รูปจริงทุกรูปกว้างแค่ 760px ขยายรูปเดียวให้ใหญ่จะเบลอ
@@ -130,7 +132,7 @@ const loadData = () => ({
   /* lines = จุดตัดบรรทัดชื่อกลุ่มในแผงแคบ ไม่ให้ภาษาไทยตัดกลางวลี (เช่น กีฬาและการ / แข่งขัน) */
   homeUses: (() => {
     const pick = {
-      corp: { lines: ['เสื้อบริษัท ร้านค้า', 'และยูนิฟอร์ม'], en: 'CORPORATE', photo: '/img/real/r02.jpg', alt: 'พนักงานบริษัทใส่เสื้อทีมสีดำที่ทีมดีผลิต' },
+      corp: { lines: ['เสื้อบริษัท ร้านค้า', 'และยูนิฟอร์ม'], en: 'CORPORATE', photo: '/img/real/r23.jpg', alt: 'ทีมพนักงานบริษัทใส่เสื้อทีมสีแดงที่ทีมดีผลิต' },
       gov: { lines: ['เสื้อหน่วยงาน', 'และองค์กร'], en: 'ORGANIZATION', photo: '/img/real/r26.jpg', alt: 'เจ้าหน้าที่หน่วยงานใส่เสื้อโปโลสีกรมท่าที่ทีมดีผลิต' },
       edu: { lines: ['เสื้อโรงเรียน', 'และมหาวิทยาลัย'], en: 'EDUCATION', photo: '/img/real/r16.jpg', alt: 'นักเรียนใส่เสื้อโปโลสีขาวฟ้าที่ทีมดีผลิต' },
       sport: { lines: ['เสื้อกีฬา', 'และการแข่งขัน'], en: 'SPORTS', photo: '/img/real/r17.jpg', alt: 'ทีมฟุตบอลใส่เสื้อลายทางแดงขาวที่ทีมดีผลิต' },
@@ -154,12 +156,26 @@ const loadData = () => ({
     const lists = Object.values(byCat)
     const mixed = []
     for (let i = 0; mixed.length < 48 && lists.some((l) => l[i]); i++) for (const l of lists) if (l[i]) mixed.push(l[i])
-    const photoRows = [0, 1, 2].map((r) => mixed.slice(r * 6, r * 6 + 6))
+    /* รูปลูกค้าแถวเดียว 12 รูป (เดิม 3 แถว ซ้ำกับส่วนอื่นมากไป) */
+    const photoRows = [mixed.slice(0, 12)]
     const logoFiles = h.logos.show ? readdirSync(resolve(root, 'public/img/client')).filter((f) => /\.(png|svg|webp)$/.test(f)).sort() : []
     const half = Math.ceil(logoFiles.length / 2)
     const printDesigns = designs.filter((d) => (d.product || []).includes('print'))
+    /* ส่วนที่ยังไม่มีข้อมูลจริง (อาร์ต 21 ต.ค.: ซ่อนจนกว่าจะมีข้อมูล) · ต้นแบบยังโชว์พร้อมป้าย · เว็บจริง (forWp) ซ่อน */
+    const real = {
+      reviews: h.reviews.items.some((r) => r.text),
+      videos: h.videos.items.some((v) => typeof v === 'object' && v.url),
+      aboutPhotos: h.about.cards.some((c) => c.img),
+      news: h.news.items.filter((n) => !n.ph).length >= 2,
+      care: !String(h.care.copy).startsWith('['),
+      logos: h.logos.show && h.logos.approved,
+    }
+    const show = Object.fromEntries(Object.entries(real).map(([k, v]) => [k, v || !forWp]))
+    if (!h.logos.show) show.logos = false
     return {
       ...h,
+      real,
+      show,
       cats: { ...h.cats, items: h.cats.items.map((c) => ({ ...c, product: pick(c.id) })) },
       logoRows: h.logos.show
         ? [logoFiles.slice(0, half), logoFiles.slice(half)].map((row) => row.map((f) => ({ img: `/img/client/${f}` })))
@@ -174,10 +190,15 @@ const loadData = () => ({
       },
       works: {
         ...h.works,
-        rows: h.works.rows.map((row) => ({
-          ...row,
-          real: works.filter((w) => (row.id === 'print' ? ['print'] : [row.id]).includes(w.product)),
-        })),
+        /* แถวเดียวมีแท็บ 4 หมวด · เว็บจริงไม่มีช่องรอภาพ และไม่มีแท็บที่ยังไม่มีงานจริง */
+        rows: h.works.rows
+          .map((row) => {
+            const real = works.filter((w) => w.product === row.id)
+            /* ช่องรอภาพโชว์เฉพาะแถวที่ยังไม่มีงานจริงเลย (21 ต.ค.: แถวโปโล/พิมพ์ลายมีงานจริงพอแล้ว ช่องเปล่าเกินมา) */
+            return { ...row, real, pending: forWp || real.length ? [] : row.pending }
+          })
+          .filter((row) => row.real.length || !forWp)
+          .map((row, i) => ({ ...row, first: i === 0 })),
       },
     }
   })(),
@@ -309,6 +330,18 @@ const seoTags = () => ({
   },
 })
 
+/* รูป JPG ที่มีไฟล์ .webp คู่กัน (สร้างด้วย cwebp) ให้หน้าเว็บโหลด webp แทน เล็กลงราวครึ่ง (Lighthouse 21 ต.ค. 2026)
+   แตะแค่ src / srcset · og:image ยังเป็น JPG ให้แอปแชร์ที่ไม่รองรับ webp */
+const webpImages = () => ({
+  name: 'teamdee-webp',
+  enforce: 'post',
+  /* เฉพาะ path ของเราเองที่ขึ้นต้นด้วย /img/ (ต้นค่า หรือหลังจุลภาคใน srcset) ไม่แตะ URL ของเว็บอื่น */
+  transformIndexHtml: (html) =>
+    html.replace(/\b(src|srcset)="([^"]+)"/g, (m, attr, val) =>
+      `${attr}="${val.replace(/(^|[\s,])(\/img\/[^\s",?#]+)\.jpg(?=[\s,?#]|$)/g, (p, pre, path) =>
+        existsSync(resolve(root, 'public' + path + '.webp')) ? `${pre}${path}.webp` : p)}"`),
+})
+
 const walk = (dir, base = '') => {
   const out = []
   for (const e of readdirSync(resolve(siteDir, dir), { withFileTypes: true })) {
@@ -364,6 +397,7 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     seoTags(),
+    webpImages(),
     ...(forWp ? [] : [seoFiles()]),
     handlebars({
       partialDirectory: resolve(root, 'src/partials'),
@@ -374,6 +408,8 @@ export default defineConfig({
         const at = ('/' + rel.replace(/^\//, '')).replace(/index\.html$/, '')
         const page = pageFor(routes, data.articles.items.map((a) => a.id))[at] || { kind: null, id: null }
         const base = { ...data, page, wp: forWp }
+        /* หน้าแรก: ข้อมูลธุรกิจ + FAQ ให้ Google อ่าน (SEO เสื้อโปโล / ยูนิฟอร์ม 21 ต.ค. 2026) */
+        if (at === '/') base.homeLd = [businessSchema(data.site), faqSchema(json('home.json').faq.items)].filter(Boolean).map(ldJson)
         const { kind, id } = page
         if (kind === 'products') {
           const item = data.allProducts.find((x) => x.id === id)
@@ -403,6 +439,7 @@ export default defineConfig({
               })
               .filter((t) => t.n > 0),
             productFaq: data.faq.product[id] || [],
+            productLd: (() => { const s = faqSchema(data.faq.product[id] || []); return s && ldJson(s) })(),
             productDesigns: item.tags ? designsOf : designsOf.slice(0, 6),
             relatedProducts: data.products.filter((x) => x.id !== id && x.id !== item.parent && x.parent !== id),
             relatedUses: data.uses.filter((u) => (u.recommend || []).some((r) => r.id === id)),
@@ -417,6 +454,7 @@ export default defineConfig({
             ...base,
             item,
             useFaq: data.faq.use[id] || [],
+            useLd: (() => { const s = faqSchema(data.faq.use[id] || []); return s && ldJson(s) })(),
             useDesigns: data.designs.filter((r) => (r.use || []).includes(id)).slice(0, 6),
             useWorks: data.works.filter((w) => (item?.legacyIds || []).includes(w.group)).slice(0, 3),
             relatedUses: data.uses.filter((x) => x.id !== id),
