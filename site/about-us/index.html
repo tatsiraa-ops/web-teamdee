@@ -12,181 +12,208 @@
 <main id="main">
 
   <!-- โครงตาม Wireframe v22 (about): จุดเริ่มต้น → ช่วยคิด·จัดการ·จบงาน → 3WIN → ทีมงาน/ออฟฟิศ/การผลิต → ข้อมูลบริษัท → ติดต่อ → นัดหมายที่ออฟฟิศ
+       รื้อหน้าตา 23 ต.ค. (อาร์ต "ทำเป็นสวยๆ น่าอ่าน"): เล่าเป็นเรื่องยาวแบบนิตยสาร · รูปจริงทุกส่วน · ข้อความเดิมทั้งหมด
        v22 + storytelling: ไม่อ้างว่าเป็นเจ้าของโรงงาน (ทีมดีประสานงานผลิตกับโรงงานพาร์ตเนอร์) -->
-  <section class="band-hero relative overflow-hidden">
-    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-    <div class="wrap relative py-14 md:py-20">
+
+  <!-- hero · หัวเรื่อง + แถบรูปลูกค้าใส่จริงเลื่อนช้าๆ (หยุดเมื่อพ้นจอ · ลดการเคลื่อนไหว = นิ่ง) -->
+  <section class="ab-hero">
+    <div class="wrap">
       <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">รู้จักทีมดี</span></nav>
-      <h1 class="t-display text-[clamp(32px,5vw,62px)] text-ink mt-7">รู้จัก TEAMDEE บริการรับทำเสื้อทีมในนนทบุรี</h1>
-      <p class="text-[19px] leading-[1.75] text-ink-2 max-w-[58ch] mt-6">ทีมดีช่วยคิดแบบ ช่วยจัดการรายละเอียด และช่วยประสานงานจนรับเสื้อ ทำความรู้จักทีมงาน สถานที่ และขั้นตอนการทำงานก่อนเริ่มสั่งทำ</p>
-      <p class="text-[18px] font-bold text-ink mt-4">{{site.belief}}</p>
-      <div class="flex flex-wrap gap-3 mt-8">
-        <a class="btn btn-orange btn-lg" href="{{url 'projects'}}">ดูผลงาน</a>
-        <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">ติดต่อทีมดี</a>
+      <div class="ab-hero__grid">
+        <div>
+          <p class="hm-eyebrow mt-8">รู้จักทีมดี</p>
+          <h1 class="ab-hero__h">{{{ph "รู้จัก TEAMDEE บริการรับทำเสื้อทีมในนนทบุรี"}}}</h1>
+        </div>
+        <div class="ab-hero__side">
+          <p class="ab-hero__lead">{{{ph "ทีมดีช่วยคิดแบบ ช่วยจัดการรายละเอียด และช่วยประสานงานจนรับเสื้อ ทำความรู้จักทีมงาน สถานที่ และขั้นตอนการทำงานก่อนเริ่มสั่งทำ"}}}</p>
+          <div class="flex flex-wrap gap-3 mt-7">
+            <a class="btn btn-orange btn-lg" href="{{url 'projects'}}">ดูผลงาน</a>
+            <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">ติดต่อทีมดี</a>
+          </div>
+        </div>
       </div>
-      <nav class="chiprail mt-9" aria-label="ทางลัดในหน้า">
-        <a class="chip" href="#story">จุดเริ่มต้น</a>
-        <a class="chip" href="#how">วิธีทำงาน</a>
-        <a class="chip" href="#win">3WIN</a>
-        <a class="chip" href="#team">ทีมงานและออฟฟิศ</a>
-        <a class="chip" href="#company">ข้อมูลบริษัท</a>
-        <a class="chip" href="#office">นัดหมาย</a>
+    </div>
+    <div class="ab-strip" data-marquee>
+      <ul class="ab-strip__track" aria-label="ภาพลูกค้าใส่เสื้อที่ทีมดีผลิต">
+        {{#each homeV4.realGrid.items}}{{#if (lt @index 12)}}<li><img src="{{#if this.imgSmall}}{{this.imgSmall}}{{else}}{{this.img}}{{/if}}" alt="ทีมลูกค้า{{this.meta}}ใส่เสื้อที่ทีมดีผลิต" width="320" height="320" loading="lazy" decoding="async"></li>{{/if}}{{/each}}
+      </ul>
+      <ul class="ab-strip__track" aria-hidden="true">
+        {{#each homeV4.realGrid.items}}{{#if (lt @index 12)}}<li><img src="{{#if this.imgSmall}}{{this.imgSmall}}{{else}}{{this.img}}{{/if}}" alt="" width="320" height="320" loading="lazy" decoding="async"></li>{{/if}}{{/each}}
+      </ul>
+    </div>
+    <div class="wrap">
+      <p class="ab-belief" data-rv>{{{ph site.belief}}}</p>
+      <nav class="ab-toc" aria-label="ทางลัดในหน้า">
+        <a href="#story">จุดเริ่มต้น</a><a href="#how">วิธีทำงาน</a><a href="#win">3WIN</a><a href="#team">ทีมงานและออฟฟิศ</a><a href="#company">ข้อมูลบริษัท</a><a href="#office">นัดหมาย</a>
       </nav>
     </div>
   </section>
 
-  <!-- 1 · จุดเริ่มต้น (เรื่องจาก teamdee-storytelling · ปี 2018 ยืนยันแล้ว 22 ต.ค.) -->
-  <section class="bg-shell border-y border-line scroll-mt-28" id="story" aria-labelledby="story-h">
-    <div class="wrap section">
-      <div class="max-w-[68ch] mb-9">
-        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoClock}}</span>{{homeV4.location.story.year}}</span>
-        <h2 id="story-h" class="t-display text-[clamp(28px,3.8vw,46px)]">จุดเริ่มต้นของทีมดี</h2>
-        <p class="t-lead mt-4">{{homeV4.location.story.h}}</p>
-        {{#each homeV4.location.story.p}}<p class="t-body mt-4">{{this}}</p>{{/each}}
+  {{#if homeV4.show.stats}}
+  <!-- ตัวเลขชุดเดียวกับหน้าแรก (อาร์ตยืนยัน 22 ต.ค.) · วิ่งนับขึ้นตอนเลื่อนมาเห็น -->
+  <section class="wrap ab-stats" aria-label="ตัวเลขทีมดี">
+    <dl class="hm-stats hm-stats--fit" data-countup>
+      {{#each homeV4.stats.items}}<div class="hm-stat" data-stat="{{this.n}}" style="--i:{{@index}}"><dt class="t-sm">{{{ph this.t}}}</dt><dd>{{#with (stat this.n)}}<span class="sr-only">{{../n}}</span><span class="hm-stat__v" aria-hidden="true"><span class="hm-stat__n" data-stat-n>{{baht this.n}}</span>{{this.plus}}<span class="hm-stat__u">{{this.unit}}</span></span><span class="hm-stat__bar" aria-hidden="true"></span>{{else}}{{this.n}}{{/with}}</dd></div>{{/each}}
+    </dl>
+  </section>
+  {{/if}}
+
+  <!-- 1 · จุดเริ่มต้น (เรื่องจาก teamdee-storytelling · ปี 2018 ยืนยันแล้ว 22 ต.ค.)
+       คอม: ปี 2018 + หัวเรื่องค้างซ้าย (sticky) ขณะ 4 ช่วงเรื่องพร้อมรูปเลื่อนผ่านด้านขวา · มือถือเรียงลงปกติ -->
+  <section class="ab-story scroll-mt-28" id="story" aria-labelledby="story-h">
+    <div class="wrap ab-story__grid">
+      <div class="ab-story__pin">
+        <p class="ab-year" aria-hidden="true">2018</p>
+        <p class="hm-eyebrow">{{homeV4.location.story.year}}</p>
+        <h2 id="story-h" class="ab-h2">จุดเริ่มต้นของทีมดี</h2>
+        <p class="ab-lead">{{{ph homeV4.location.story.h}}}</p>
+        {{#each homeV4.location.story.p}}<p class="ab-body">{{{ph this}}}</p>{{/each}}
       </div>
-      <ol class="border-t-2 border-ink">
-        <li class="why-row"><span class="why-row__no">01</span><div class="why-row__body"><h3 class="why-row__t">เริ่มจากเสื้อทีมกีฬา</h3><p class="why-row__d">งานแรกๆ คือเสื้อแข่งที่ต้องทำชื่อและเบอร์รายคน ซึ่งสอนเราเรื่องความแม่นของรายละเอียดตั้งแต่วันแรก</p></div><span class="why-row__ico">{{> icoShirt}}</span></li>
-        <li class="why-row"><span class="why-row__no">02</span><div class="why-row__body"><h3 class="why-row__t">ขยายมาทำงานองค์กร</h3><p class="why-row__d">โจทย์เปลี่ยนจากความเร็วเป็นความสม่ำเสมอ เพราะองค์กรต้องสั่งซ้ำและสีต้องตรงทุกล็อต</p></div><span class="why-row__ico">{{> icoDoc}}</span></li>
-        <li class="why-row"><span class="why-row__no">03</span><div class="why-row__body"><h3 class="why-row__t">ทำเสื้อที่เดียวครบ จบที่ทีมดี</h3><p class="why-row__d">ลูกค้าคุยกับทีมเดียวตั้งแต่ออกแบบ ตรวจรายละเอียด ประสานการผลิต จนส่งถึงมือ ไม่ต้องตามงานหลายที่เอง</p></div><span class="why-row__ico">{{> icoPrinter}}</span></li>
-        <li class="why-row"><span class="why-row__no">04</span><div class="why-row__body"><h3 class="why-row__t">วันนี้ในชื่อ TEAMDEE</h3><p class="why-row__d">ในนามบริษัท ดีดี ฟินิกซ์ จำกัด ทำงานกับทั้งบริษัทเอกชน หน่วยงานภาครัฐ สถานศึกษา ทีมกีฬา และผู้จัดกิจกรรม</p></div><span class="why-row__ico">{{> icoSpark}}</span></li>
+      <ol class="ab-chapters">
+        <li data-rv><figure><img src="/img/real/r01.jpg" alt="ทีมฟุตบอลใส่เสื้อแข่งที่ทีมดีผลิต" width="760" height="760" loading="lazy" decoding="async"></figure><p class="ab-ch__n">01</p><h3 class="ab-ch__t">เริ่มจากเสื้อทีมกีฬา</h3><p class="ab-ch__d">{{{ph "งานแรกๆ คือเสื้อแข่งที่ต้องทำชื่อและเบอร์รายคน ซึ่งสอนเราเรื่องความแม่นของรายละเอียดตั้งแต่วันแรก"}}}</p></li>
+        <li data-rv><figure><img src="/img/real/r12.jpg" alt="พนักงานองค์กรใส่เสื้อยูนิฟอร์มที่ทีมดีผลิต" width="760" height="760" loading="lazy" decoding="async"></figure><p class="ab-ch__n">02</p><h3 class="ab-ch__t">ขยายมาทำงานองค์กร</h3><p class="ab-ch__d">{{{ph "โจทย์เปลี่ยนจากความเร็วเป็นความสม่ำเสมอ เพราะองค์กรต้องสั่งซ้ำและสีต้องตรงทุกล็อต"}}}</p></li>
+        <li data-rv><figure><img src="/img/hero/embroidery.jpg" alt="เข็มปักกำลังปักโลโก้ลงเสื้อ" width="900" height="900" loading="lazy" decoding="async"></figure><p class="ab-ch__n">03</p><h3 class="ab-ch__t">ทำเสื้อที่เดียวครบ จบที่ทีมดี</h3><p class="ab-ch__d">{{{ph "ลูกค้าคุยกับทีมเดียวตั้งแต่ออกแบบ ตรวจรายละเอียด ประสานการผลิต จนส่งถึงมือ ไม่ต้องตามงานหลายที่เอง"}}}</p></li>
+        <li data-rv><figure><img src="/img/real/r25.jpg" alt="ทีมลูกค้าใส่เสื้อโปโลที่ทีมดีผลิตในวันส่งมอบงาน" width="760" height="760" loading="lazy" decoding="async"></figure><p class="ab-ch__n">04</p><h3 class="ab-ch__t">วันนี้ในชื่อ TEAMDEE</h3><p class="ab-ch__d">{{{ph "ในนามบริษัท ดีดี ฟินิกซ์ จำกัด ทำงานกับทั้งบริษัทเอกชน หน่วยงานภาครัฐ สถานศึกษา ทีมกีฬา และผู้จัดกิจกรรม"}}}</p></li>
       </ol>
     </div>
   </section>
 
-  <!-- 2 · ช่วยคิด ช่วยจัดการ ช่วยจบงาน -->
-  <section class="band-soft relative overflow-hidden scroll-mt-28" id="how" aria-labelledby="how-h">
-    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-    <div class="wrap section">
-      <div class="max-w-[68ch] mb-11">
-        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoCube}}</span>วิธีทำงาน</span>
-        <h2 id="how-h" class="t-display text-[clamp(28px,3.8vw,46px)] text-ink">ช่วยคิด · ช่วยจัดการ · ช่วยจบงาน</h2>
-        <p class="text-[18px] leading-[1.8] text-ink-2 mt-4">สามคำนี้ไม่ใช่คำขวัญ นี่คือสิ่งที่เราทำจริงในทุกงาน</p>
-      </div>
-      <ol class="grid md:grid-cols-3 gap-8">
-        <li>
-          <p class="t-display text-[44px] text-ink leading-none tabular-nums">01</p>
-          <h3 class="text-[23px] text-ink mt-3">ช่วยคิด</h3>
-          <p class="text-[17px] leading-[1.75] text-ink-2 mt-2.5">ลูกค้าส่วนใหญ่มาหาเราตอนยังไม่มีแบบ เราถามว่าใครใส่ ใส่ตอนไหน อยากให้คนเห็นแล้วรู้สึกยังไง แล้วดีไซเนอร์ขึ้นแบบ 3D ให้ดู แก้จนพอใจ</p>
-        </li>
-        <li>
-          <p class="t-display text-[44px] text-ink leading-none tabular-nums">02</p>
-          <h3 class="text-[23px] text-ink mt-3">ช่วยจัดการ</h3>
-          <p class="text-[17px] leading-[1.75] text-ink-2 mt-2.5">เรื่องที่ทำให้งานช้าไม่ใช่การผลิต แต่คือการรวบรวมไซซ์จากหลายคน การอนุมัติหลายขั้น และเอกสารจัดซื้อ เราช่วยทั้งสามเรื่องนี้</p>
-        </li>
-        <li>
-          <p class="t-display text-[44px] text-ink leading-none tabular-nums">03</p>
-          <h3 class="text-[23px] text-ink mt-3">ช่วยจบงาน</h3>
-          <p class="text-[17px] leading-[1.75] text-ink-2 mt-2.5">ถ่ายรูปงานจริงให้ดูก่อนแพ็ก ส่งถึงที่ และเก็บสเปกทั้งหมดไว้ให้ รอบหน้าสั่งซ้ำแจ้งแค่จำนวนกับไซซ์</p>
-        </li>
+  <!-- 2 · ช่วยคิด ช่วยจัดการ ช่วยจบงาน · เล่าผ่านงานจริงงานเดียว (เคส FTI ในหน้าแรก): แบบ 3D → เสื้อจริง → วันใช้งาน -->
+  <section class="ab-how scroll-mt-28" id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <header class="ab-head" data-rv>
+        <p class="hm-eyebrow">วิธีทำงาน</p>
+        <h2 id="how-h" class="ab-h2">ช่วยคิด · ช่วยจัดการ · ช่วยจบงาน</h2>
+        <p class="ab-lead">{{{ph "สามคำนี้ไม่ใช่คำขวัญ นี่คือสิ่งที่เราทำจริงในทุกงาน"}}}</p>
+      </header>
+      <ol class="ab-steps">
+        <li data-rv><figure class="ab-steps__img is-contain"><img src="/img/case/fti-3d.webp" alt="แบบ 3D เสื้อ FTI Outing 2026 ที่ทีมดีขึ้นให้ลูกค้าดูก่อนผลิต" width="1080" height="1080" loading="lazy" decoding="async"></figure><div><p class="ab-steps__n">01</p><h3 class="ab-steps__t">ช่วยคิด</h3><p class="ab-steps__d">{{{ph "ลูกค้าส่วนใหญ่มาหาเราตอนยังไม่มีแบบ เราถามว่าใครใส่ ใส่ตอนไหน อยากให้คนเห็นแล้วรู้สึกยังไง แล้วดีไซเนอร์ขึ้นแบบ 3D ให้ดู แก้จนพอใจ"}}}</p></div></li>
+        <li data-rv><figure class="ab-steps__img"><img src="/img/case/fti-front.webp" alt="เสื้อ FTI Outing 2026 ตัวจริงหลังผลิต" width="1080" height="1080" loading="lazy" decoding="async"></figure><div><p class="ab-steps__n">02</p><h3 class="ab-steps__t">ช่วยจัดการ</h3><p class="ab-steps__d">{{{ph "เรื่องที่ทำให้งานช้าไม่ใช่การผลิต แต่คือการรวบรวมไซซ์จากหลายคน การอนุมัติหลายขั้น และเอกสารจัดซื้อ เราช่วยทั้งสามเรื่องนี้"}}}</p></div></li>
+        <li data-rv><figure class="ab-steps__img"><img src="/img/case/fti-team.webp" alt="ทีม FTI ใส่เสื้อ Outing 2026 ในวันงานจริง" width="1080" height="1080" loading="lazy" decoding="async"></figure><div><p class="ab-steps__n">03</p><h3 class="ab-steps__t">ช่วยจบงาน</h3><p class="ab-steps__d">{{{ph "ถ่ายรูปงานจริงให้ดูก่อนแพ็ก ส่งถึงที่ และเก็บสเปกทั้งหมดไว้ให้ รอบหน้าสั่งซ้ำแจ้งแค่จำนวนกับไซซ์"}}}</p></div></li>
+      </ol>
+      <p class="ab-note">ภาพประกอบ: งานจริง FTI Outing 2026 ตั้งแต่แบบ 3D จนถึงวันใช้งาน</p>
+    </div>
+  </section>
+
+  <!-- 3 · 3WIN · แถบดำแถบเดียวของหน้า (ดำ 15% ตามเล่มแบรนด์) · ประโยคใหญ่อ่านทีละบรรทัด -->
+  <section class="ab-win scroll-mt-28" id="win" aria-labelledby="win-h">
+    <div class="wrap">
+      <header class="ab-win__head" data-rv>
+        <p class="hm-eyebrow hm-eyebrow--dark is-en"><span lang="en">3WIN</span></p>
+        <h2 id="win-h" class="ab-h2">คนสั่งมั่นใจ คนใส่ภูมิใจ คนเห็นจดจำ</h2>
+        <p class="ab-win__lead">{{{ph "งานจะสำเร็จก็ต่อเมื่อชนะทั้งสามฝ่าย เสื้อที่สวยแต่คนใส่ไม่ยอมใส่ คืองานที่ล้มเหลว เราวัดผลงานจากสามข้อนี้"}}}</p>
+      </header>
+      <ol class="ab-win__list">
+        <li data-rv><span class="ab-win__n" aria-hidden="true">01</span><h3>คนสั่งมั่นใจ</h3><p>{{{ph "เห็นแบบก่อนจ่าย รู้ราคาและกำหนดส่งตั้งแต่ต้น มีเอกสารครบสำหรับการอนุมัติ และติดต่อได้ตลอดทาง"}}}</p></li>
+        <li data-rv><span class="ab-win__n" aria-hidden="true">02</span><h3>คนใส่ภูมิใจ</h3><p>{{{ph "ผ้าและทรงเลือกจากว่าจะใส่ตอนไหนจริงๆ ไม่ใช่เลือกจากราคาอย่างเดียว เสื้อที่ใส่สบายคือเสื้อที่คนหยิบมาใส่เอง"}}}</p></li>
+        <li data-rv><span class="ab-win__n" aria-hidden="true">03</span><h3>คนเห็นจดจำ</h3><p>{{{ph "ลายและโลโก้ออกแบบให้อ่านออกในระยะที่คนเห็นจริง ไม่ใช่แค่สวยตอนดูในจอใกล้ๆ"}}}</p></li>
       </ol>
     </div>
   </section>
 
-  <!-- 3 · 3WIN -->
-  <section class="wrap section scroll-mt-28" id="win" aria-labelledby="win-h">
-    <div class="max-w-[68ch] mb-9">
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShield}}</span>3WIN</span>
-      <h2 id="win-h" class="t-display text-[clamp(28px,3.8vw,46px)]">คนสั่งมั่นใจ คนใส่ภูมิใจ คนเห็นจดจำ</h2>
-      <p class="t-lead mt-4">งานจะสำเร็จก็ต่อเมื่อชนะทั้งสามฝ่าย เสื้อที่สวยแต่คนใส่ไม่ยอมใส่ คืองานที่ล้มเหลว เราวัดผลงานจากสามข้อนี้</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-5">
-      <div class="bg-shell border border-line rounded-plate p-7">
-        <h3 class="text-[22px] font-bold">คนสั่งมั่นใจ</h3>
-        <p class="t-sm mt-3">เห็นแบบก่อนจ่าย รู้ราคาและกำหนดส่งตั้งแต่ต้น มีเอกสารครบสำหรับการอนุมัติ และติดต่อได้ตลอดทาง</p>
+  {{#if homeV4.show.logos}}
+  <!-- โลโก้ลูกค้าชุดเดียวกับหน้าแรก (อนุญาตแล้ว · home.json logos.approved) -->
+  <section class="ab-logos hm-logowrap" aria-labelledby="logo-h">
+    <header class="wrap ab-head ab-head--c" data-rv>
+      <h2 id="logo-h" class="hm-h3">{{{ph homeV4.logos.title}}}</h2>
+    </header>
+    <div class="hm-marquee" data-marquee>
+      {{#each homeV4.logoRows}}
+      <div class="hm-marquee__row{{#if @index}} is-reverse{{/if}}">
+        <ul class="hm-marquee__track" aria-label="โลโก้ลูกค้า แถว {{inc @index}}">
+          {{#each this}}<li>{{#if this.img}}<img src="{{this.img}}" alt="{{this.alt}}" width="336" height="144" loading="lazy" decoding="async">{{else}}<span class="img-pending">{{this.ph}}</span>{{/if}}</li>{{/each}}
+        </ul>
+        <ul class="hm-marquee__track" aria-hidden="true">
+          {{#each this}}<li>{{#if this.img}}<img src="{{this.img}}" alt="" width="336" height="144" loading="lazy" decoding="async">{{else}}<span class="img-pending">{{this.ph}}</span>{{/if}}</li>{{/each}}
+        </ul>
       </div>
-      <div class="bg-shell border border-line rounded-plate p-7">
-        <h3 class="text-[22px] font-bold">คนใส่ภูมิใจ</h3>
-        <p class="t-sm mt-3">ผ้าและทรงเลือกจากว่าจะใส่ตอนไหนจริงๆ ไม่ใช่เลือกจากราคาอย่างเดียว เสื้อที่ใส่สบายคือเสื้อที่คนหยิบมาใส่เอง</p>
-      </div>
-      <div class="bg-shell border border-line rounded-plate p-7">
-        <h3 class="text-[22px] font-bold">คนเห็นจดจำ</h3>
-        <p class="t-sm mt-3">ลายและโลโก้ออกแบบให้อ่านออกในระยะที่คนเห็นจริง ไม่ใช่แค่สวยตอนดูในจอใกล้ๆ</p>
-      </div>
+      {{/each}}
     </div>
   </section>
+  {{/if}}
 
-  <!-- 4 · ทีมงาน ออฟฟิศ และการผลิต (v22) · ภาพทีมงาน/ออฟฟิศ/ขั้นตอนผลิตรอชุดภาพจริง · ไม่อ้างเป็นเจ้าของโรงงาน -->
-  <section class="bg-shell border-y border-line scroll-mt-28" id="team" aria-labelledby="team-h">
-    <div class="wrap section">
-      <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
-        <div>
-          <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>{{site.positioning}}</span>
-          <h2 id="team-h" class="t-display text-[clamp(28px,3.8vw,46px)]">ทีมงาน ออฟฟิศ และการผลิต</h2>
-          <p class="t-lead mt-4">TEAMDEE — คู่คิดเรื่องเสื้อทีมที่นนทบุรี ตั้งแต่โจทย์แรกจนถึงวันที่ทุกคนได้ใส่</p>
-          <p class="t-body mt-5">เราไม่ได้รอให้คุณส่งไฟล์มาแล้วผลิตตามนั้น แต่เข้าไปช่วยตั้งแต่ตอนที่คุณยังไม่รู้ว่าอยากได้อะไร เสื้อทีมไม่ใช่แค่เครื่องแต่งกาย แต่เป็นสิ่งที่คนในทีมใส่แล้วรู้สึกว่าเป็นพวกเดียวกัน และคนนอกเห็นแล้วจำองค์กรคุณได้</p>
-          <ul class="grid sm:grid-cols-2 gap-4 mt-8">
-          {{#each site.pillars}}
-          <li class="border-l-4 border-orange pl-4 py-1">
-            <p class="text-[15px] font-bold tracking-[0.12em] text-ink-3">{{this.en}}</p>
-            <p class="text-[18px] font-bold mt-0.5">{{this.th}}</p>
-          </li>
-          {{/each}}
-          </ul>
-          <div class="flex flex-wrap gap-x-6 mt-8"><a class="pp-more" href="#office">ดูแผนที่ออฟฟิศ<span class="arw" aria-hidden="true">&rarr;</span></a><a class="pp-more" href="{{url 'contact'}}">ติดต่อ / นัดหมาย<span class="arw" aria-hidden="true">&rarr;</span></a></div>
-        </div>
-        <figure class="relative">
-          <div class="overflow-hidden rounded-plate bg-paper aspect-[4/3]">
-            <img src="/img/real/r25.jpg" alt="ทีมงานและลูกค้าของ TEAMDEE ในวันส่งมอบงานจริง" width="900" height="675" loading="lazy" decoding="async" class="w-full h-full object-cover">
-          </div>
-          <figcaption class="tag tag-ink absolute left-4 bottom-4">งานผลิตจริง</figcaption>
-        </figure>
+  <!-- 4 · ทีมงาน ออฟฟิศ และการผลิต (v22) · ยังไม่มีภาพทีมงาน/ออฟฟิศ/การผลิตจริง → ใช้ภาพงานจริงที่ส่งมอบแล้ว ระบุว่าเป็นภาพลูกค้า · ไม่อ้างเป็นเจ้าของโรงงาน -->
+  <section class="ab-team scroll-mt-28" id="team" aria-labelledby="team-h">
+    <div class="wrap ab-team__grid">
+      <div data-rv>
+        <p class="hm-eyebrow is-en"><span lang="en">{{site.positioning}}</span></p>
+        <h2 id="team-h" class="ab-h2">ทีมงาน ออฟฟิศ และการผลิต</h2>
+        <p class="ab-lead">{{{ph "คู่คิดเรื่องเสื้อทีมที่นนทบุรี ตั้งแต่โจทย์แรกจนถึงวันที่ทุกคนได้ใส่"}}}</p>
+        <p class="ab-body">{{{ph "เราไม่ได้รอให้คุณส่งไฟล์มาแล้วผลิตตามนั้น แต่เข้าไปช่วยตั้งแต่ตอนที่คุณยังไม่รู้ว่าอยากได้อะไร เสื้อทีมไม่ใช่แค่เครื่องแต่งกาย แต่เป็นสิ่งที่คนในทีมใส่แล้วรู้สึกว่าเป็นพวกเดียวกัน และคนนอกเห็นแล้วจำองค์กรคุณได้"}}}</p>
+        <ul class="ab-pillars">
+          {{#each site.pillars}}<li><span lang="en">{{this.en}}</span><b>{{this.th}}</b></li>{{/each}}
+        </ul>
       </div>
-      {{#unless wp}}<p class="pending-ribbon mt-8">รอชุดภาพทีมงาน ออฟฟิศ และขั้นตอนผลิตจริง · ความสัมพันธ์กับโรงงานพาร์ตเนอร์ต้องยืนยันก่อนใช้ภาพหรือถ้อยคำ · บนเว็บจริงแสดงเฉพาะข้อความและภาพที่ยืนยันแล้ว</p>{{/unless}}
+      <figure class="ab-collage" data-rv>
+        <img src="/img/real/r02.jpg" alt="ทีมลูกค้าองค์กรใส่เสื้อที่ทีมดีผลิต" width="760" height="760" loading="lazy" decoding="async">
+        <img src="/img/real/r07.jpg" alt="บุคลากรหน่วยงานใส่เสื้อโปโลที่ทีมดีผลิต" width="760" height="760" loading="lazy" decoding="async">
+        <img src="/img/real/r20.jpg" alt="พนักงานใส่เสื้อทีมสีแดงเลือดหมูที่ทีมดีผลิต" width="760" height="760" loading="lazy" decoding="async">
+        <img src="/img/real/r28.jpg" alt="ทีมลูกค้าใส่เสื้อกิจกรรมที่ทีมดีผลิต" width="760" height="760" loading="lazy" decoding="async">
+        <figcaption>ภาพงานจริงที่ส่งมอบแล้ว</figcaption>
+      </figure>
     </div>
+    {{#unless wp}}<div class="wrap"><p class="pending-ribbon mt-8">รอชุดภาพทีมงาน ออฟฟิศ และขั้นตอนผลิตจริง · ความสัมพันธ์กับโรงงานพาร์ตเนอร์ต้องยืนยันก่อนใช้ภาพหรือถ้อยคำ · ระหว่างนี้ใช้ภาพงานลูกค้าที่ส่งมอบแล้ว</p></div>{{/unless}}
   </section>
 
-  <!-- 5 · ข้อมูลบริษัท (v22) -->
-  <section class="wrap section scroll-mt-28" id="company" aria-labelledby="company-h">
-    <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
-      <div>
-        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoDoc}}</span>ข้อมูลบริษัท</span>
-        <h2 id="company-h" class="t-display text-[clamp(28px,3.6vw,44px)]">ข้อมูลบริษัทที่ตรวจสอบได้</h2>
-        <p class="t-lead mt-5">เราจดทะเบียนเป็นนิติบุคคล ขอเอกสารประกอบการจัดซื้อได้ทุกฉบับ และนัดเข้ามาพบทีมที่ออฟฟิศได้</p>
+  <!-- 5 · ข้อมูลบริษัท (v22) · แบบเอกสารรับรอง ให้ฝ่ายจัดซื้อเช็กได้ในที่เดียว -->
+  <section class="ab-company scroll-mt-28" id="company" aria-labelledby="company-h">
+    <div class="wrap ab-company__grid">
+      <div data-rv>
+        <p class="hm-eyebrow">ข้อมูลบริษัท</p>
+        <h2 id="company-h" class="ab-h2">ข้อมูลบริษัทที่ตรวจสอบได้</h2>
+        <p class="ab-lead">{{{ph "เราจดทะเบียนเป็นนิติบุคคล ขอเอกสารประกอบการจัดซื้อได้ทุกฉบับ และนัดเข้ามาพบทีมที่ออฟฟิศได้"}}}</p>
         <div class="flex flex-wrap gap-3 mt-8">
           <a class="btn btn-orange btn-lg" href="{{url 'contact'}}">นัดเข้าพบที่ออฟฟิศ</a>
           <a class="btn btn-line btn-lg" href="{{url 'projects'}}">ดูผลงาน</a>
         </div>
       </div>
-
-      <dl class="divide-y divide-line border-t-2 border-ink">
-        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">ชื่อจดทะเบียน</dt><dd class="text-[18px] font-bold text-right">บริษัท ดีดี ฟินิกซ์ จำกัด</dd></div>
-        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">ชื่อทางการค้า</dt><dd class="text-[18px] font-bold text-right">{{site.brand}}</dd></div>
-{{#unless wp}}        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">เลขทะเบียนนิติบุคคล</dt><dd class="text-[18px] font-bold text-right text-ink-3">[รอยืนยัน]</dd></div>{{/unless}}
-{{#unless wp}}        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">วันจดทะเบียน</dt><dd class="text-[18px] font-bold text-right text-ink-3">[รอยืนยัน: 19 มกราคม 2021]</dd></div>{{/unless}}
-{{#unless wp}}        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">ที่อยู่จดทะเบียน</dt><dd class="text-[18px] font-bold text-right text-ink-3">[รอยืนยัน]</dd></div>{{/unless}}
-        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">สถานที่เข้าพบ</dt><dd class="text-[18px] font-bold text-right max-w-[32ch]">{{site.address}}</dd></div>
-        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">เวลาทำการ</dt><dd class="text-[18px] font-bold text-right">{{site.hours}}</dd></div>
-        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">โทรศัพท์</dt><dd class="text-[18px] font-bold text-right tabular-nums"><a class="hover:underline decoration-orange decoration-2 underline-offset-4" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a></dd></div>
-        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">เอกสารที่ขอได้</dt><dd class="text-[17px] font-semibold text-right max-w-[32ch]">ใบเสนอราคา · หนังสือรับรองบริษัท · ภ.พ.20 · ใบกำกับภาษีเต็มรูปแบบ · ใบส่งของ</dd></div>
-      </dl>
-      <p class="t-xs mt-5 lg:col-start-2">ที่อยู่จดทะเบียนกับสถานที่เข้าพบอาจเป็นคนละที่ ก่อนเดินทางกรุณาโทรนัดล่วงหน้า</p>
-    </div>
-  </section>
-
-  <section class="band-orange">
-    <div class="wrap py-14 md:py-20 text-center">
-      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย</h2>
-      <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[48ch] mx-auto mt-4">บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้</p>
-      <div class="flex flex-wrap justify-center gap-3 mt-8">
-        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
-        <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a>
+      <div class="ab-doc" data-rv>
+        <p class="ab-doc__h"><span>บริษัท ดีดี ฟินิกซ์ จำกัด</span><span lang="en">TEAMDEE</span></p>
+        <dl>
+          <div><dt>ชื่อจดทะเบียน</dt><dd>บริษัท ดีดี ฟินิกซ์ จำกัด</dd></div>
+          <div><dt>ชื่อทางการค้า</dt><dd>{{site.brand}}</dd></div>
+{{#unless wp}}          <div><dt>เลขทะเบียนนิติบุคคล</dt><dd class="is-pending">[รอยืนยัน]</dd></div>{{/unless}}
+          <div><dt>วันจดทะเบียน</dt><dd>19 มกราคม 2021</dd></div>
+{{#unless wp}}          <div><dt>ที่อยู่จดทะเบียน</dt><dd class="is-pending">[รอยืนยัน]</dd></div>{{/unless}}
+          <div><dt>สถานที่เข้าพบ</dt><dd>{{{ph site.address}}}</dd></div>
+          <div><dt>เวลาทำการ</dt><dd>{{{ph site.hours}}}</dd></div>
+          <div><dt>โทรศัพท์</dt><dd class="tabular-nums"><a href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a></dd></div>
+          <div><dt>เอกสารที่ขอได้</dt><dd><ul class="ab-docs"><li>ใบเสนอราคา</li><li>หนังสือรับรองบริษัท</li><li>ภ.พ.20</li><li>ใบกำกับภาษีเต็มรูปแบบ</li><li>ใบส่งของ</li></ul></dd></div>
+        </dl>
+        <p class="ab-doc__note">ที่อยู่จดทะเบียนกับสถานที่เข้าพบอาจเป็นคนละที่ ก่อนเดินทางกรุณาโทรนัดล่วงหน้า</p>
       </div>
     </div>
   </section>
 
-  <!-- 7 · นัดหมายที่ออฟฟิศ (v22) -->
-  <section class="wrap section scroll-mt-28" id="office" aria-labelledby="office-h">
-    <div class="max-w-[68ch]">
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPin}}</span>{{homeV4.location.office.label}}</span>
-      <h2 id="office-h" class="t-display text-[clamp(28px,3.6vw,44px)]">นัดหมายที่ออฟฟิศทีมดี นนทบุรี</h2>
-      <p class="t-lead mt-4">{{site.address}}</p>
-      <p class="t-body mt-3">{{site.hours}} · {{homeV4.location.office.note}}</p>
-      <a class="pp-more mt-5 inline-flex" href="{{url 'contact'}}#location">ดูที่ตั้ง / การเดินทาง / นัดหมาย<span class="arw" aria-hidden="true">&rarr;</span></a>
+  <!-- ติดต่อ · ใบสั่งงานสั้นแบบเดียวกับหน้าแรก (หัวข้อ | ต้องบอก 3 อย่าง | ปุ่ม) · พื้นส้มตัวอักษรดำ (ขาวบนส้มไม่ผ่าน AA) -->
+  <section class="wrap ab-cta" aria-labelledby="cta-h">
+    <div class="hm-cta hm-cta--ink" data-rv>
+      <div class="hm-cta__main"><h2 id="cta-h">{{{ph "มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย"}}}</h2><p>{{{ph "ยังไม่มีแบบก็เริ่มคุยได้"}}}</p></div>
+      <div class="hm-cta__send"><p class="hm-cta__sl">บอกทีมดี 3 อย่าง</p><ol><li>ใครใส่</li><li>จำนวนประมาณเท่าไร</li><li>ใช้วันไหน</li></ol></div>
+      <div class="hm-cta__btns"><a class="btn btn-lg gap-2 bg-ink text-paper border-ink hover:bg-paper hover:text-ink" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-lg bg-transparent text-ink border-ink hover:bg-ink hover:text-paper" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a></div>
     </div>
+  </section>
+
+  <!-- 7 · นัดหมายที่ออฟฟิศ (v22) -->
+  <section class="ab-office scroll-mt-28" id="office" aria-labelledby="office-h">
+    <div class="wrap"><div class="ab-office__grid" data-rv>
+      <div>
+        <p class="hm-eyebrow">{{homeV4.location.office.label}}</p>
+        <h2 id="office-h" class="ab-h2">นัดหมายที่ออฟฟิศทีมดี นนทบุรี</h2>
+      </div>
+      <div class="ab-office__card">
+        <p class="ab-office__addr">{{{ph site.address}}}</p>
+        <p class="ab-body">{{{ph site.hours}}} · {{{ph homeV4.location.office.note}}}</p>
+        <div class="flex flex-wrap gap-3 mt-6">
+          <a class="btn btn-line btn-lg gap-2" href="{{site.mapUrl}}" target="_blank" rel="noopener"><span class="block size-5" aria-hidden="true">{{> icoPin}}</span>เปิดแผนที่ Google</a>
+          <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}#location">ดูการเดินทาง / นัดหมาย</a>
+        </div>
+      </div>
+    </div></div>
   </section>
 
 </main>
 {{> footer}}
-<script type="module" src="/src/js/page.js"></script>
+<script type="module" src="/src/js/about.js"></script>
 </body>
 </html>
