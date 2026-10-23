@@ -1,0 +1,17 @@
+{
+  "project": "TEAMDEE",
+  "wireframe_version": "v22",
+  "handoff_date": "2026-10-21",
+  "source_file": "TEAMDEE-Full-Website-Wireframe.html",
+  "sha256": "57529d1b5915f452257930c5a5f5d02b311e87c531faf7183d8eb5bcc7f5e1dd",
+  "status": "Wireframe and URL migration plan. All existing URL mappings preserved. New URLs flat; custom prefix only on new made-to-order pages. Live team-dee.com unchanged.",
+  "files": {
+    "PAGE-CONTENT.json": "b3beb042ff0ad0dc396ffc397bee4eca285c09757731214f526c89209469fc25",
+    "PAGE-MAP.json": "5fe78d8dabcb389573aefc38b95eaf4e1cace8d0803dd69c831283299882c282",
+    "SEM-LANDING-MAP.json": "a38f8f39f6860088690263e30672f9096c4a84ab84c7511c303288467d4562a8",
+    "START-HERE.html": "599df886531a7d88cf86b9bf9a5ec4cc20055ea4d7c09b4abfc7bb066a3986fc",
+    "TEAMDEE-Full-Website-Wireframe.html": "57529d1b5915f452257930c5a5f5d02b311e87c531faf7183d8eb5bcc7f5e1dd",
+    "URL-MIGRATION-MAP.html": "c122b3524ba88e7ba761688f871f453d8e415dcadca152b692e88299746ebfe1",
+    "URL-MIGRATION-MAP.json": "2c5df519719a58454f6e198fae2cd087783343b298ce3a61fe8d41c2e1846502"
+  }
+}

@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แผนเว็บ TEAMDEE v22</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF6C00; --orange-ink: #B34A00; --orange-tint: #FFF1E3;
+    --ink: #000; --ink-2: #4A4A4C; --ink-3: #5E5E61;
+    --paper: #fff; --shell: #FAF9F7; --line: #E5E2DC; --line-2: #C4BFB4;
+    --ok: #0F6B41; --ok-tint: #E4F2EA; --alert: #A32E12; --alert-tint: #FCEBE4;
+    --r: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--shell); color: var(--ink); font: 400 16px/1.6 'Noto Sans Thai', system-ui, sans-serif; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 768px) { .wrap { padding: 0 32px; } }
+  h1, h2, h3 { margin: 0; line-height: 1.3; }
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  .eyebrow { font-size: 14px; font-weight: 700; color: var(--ink-2); display: inline-flex; align-items: center; gap: 8px; }
+  .eyebrow::before { content: ''; width: 10px; height: 10px; border-radius: 3px; background: var(--orange); }
+  h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 800; margin-top: 6px; }
+  h3 { font-size: 18px; font-weight: 700; }
+  .lead { color: var(--ink-2); max-width: 72ch; margin: 8px 0 0; }
+
+  header.top { background: var(--paper); border-bottom: 3px solid var(--orange); padding: 36px 0 32px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .04em; font-size: 15px; }
+  .brand b { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: var(--orange); font-size: 14px; letter-spacing: 0; }
+  header.top h1 { font-size: clamp(30px, 4.6vw, 50px); font-weight: 800; margin-top: 18px; }
+  header.top h1 span { color: var(--orange-ink); }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; color: var(--ink-2); font-size: 15px; }
+  .count { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 26px; }
+  @media (min-width: 768px) { .count { grid-template-columns: repeat(4, 1fr); } }
+  .count div { background: var(--shell); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; }
+  .count div.hot { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .count small { display: block; font-size: 14px; color: var(--ink-2); font-weight: 600; }
+  .count .hot small { color: #D8D8D8; }
+  .count strong { display: block; font-size: 30px; font-weight: 800; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .count em { font-style: normal; font-size: 14px; color: var(--ink-3); }
+  .count .hot em { color: var(--orange); font-weight: 700; }
+
+  /* ---------- เรื่องที่ต้องเคาะ ---------- */
+  .ask { display: grid; gap: 12px; margin-top: 22px; }
+  @media (min-width: 900px) { .ask { grid-template-columns: repeat(2, 1fr); } }
+  .q { background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--orange); border-radius: var(--r); padding: 16px 18px; }
+  .q .n { font-size: 13px; font-weight: 800; color: var(--orange-ink); }
+  .q p { margin: 6px 0 0; color: var(--ink-2); font-size: 15px; }
+  .q .rec { margin-top: 10px; font-size: 15px; background: var(--shell); border-radius: 10px; padding: 8px 12px; }
+  .q .rec b { color: var(--ink); }
+
+  /* ---------- Gantt ---------- */
+  .gantt-box { margin-top: 22px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); overflow-x: auto; }
+  .gantt { display: grid; min-width: 1040px; position: relative; }
+  .g-h { font-size: 12px; text-align: center; padding: 8px 0 6px; border-bottom: 1px solid var(--line); color: var(--ink-3); line-height: 1.25; font-variant-numeric: tabular-nums; }
+  .g-h b { display: block; font-size: 14px; color: var(--ink); }
+  .g-h.we { background: var(--shell); }
+  .g-h.today b { color: var(--paper); background: var(--orange-ink); border-radius: 6px; margin: 0 3px; }
+  .g-h.key b { color: var(--ink); background: var(--orange); border-radius: 6px; margin: 0 3px; }
+  .g-lane { grid-column: 1; padding: 10px 12px; font-size: 14px; font-weight: 700; border-bottom: 1px solid var(--line); background: var(--paper); position: sticky; left: 0; z-index: 2; display: flex; align-items: center; }
+  .g-cell { border-bottom: 1px solid var(--line); border-left: 1px solid #F1EEE9; min-height: 46px; }
+  .g-cell.we { background: var(--shell); }
+  .bar { align-self: center; margin: 6px 2px; padding: 4px 8px; border-radius: 8px; font-size: 12.5px; font-weight: 700; line-height: 1.3; z-index: 1; overflow: hidden; }
+  .bar.pt { border-radius: 999px; text-align: center; padding: 4px 2px; white-space: nowrap; overflow: visible; }
+  .l-web { background: var(--orange); color: var(--ink); }
+  .l-sys { background: var(--ink); color: var(--paper); }
+  .l-data { background: var(--orange-tint); color: #6B3A0B; border: 1px dashed #E8A56A; }
+  .l-boss { background: #fff; color: var(--ink); border: 2px solid var(--ink); }
+  .l-seo { background: #EDEBE7; color: var(--ink); border: 1px solid var(--line-2); }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 14px; color: var(--ink-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+
+  /* ---------- ระยะงาน ---------- */
+  .phases { display: grid; gap: 14px; margin-top: 22px; }
+  .ph { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 20px; }
+  .ph-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+  .ph-h .no { font-size: 13px; font-weight: 800; background: var(--ink); color: var(--paper); border-radius: 6px; padding: 2px 8px; }
+  .ph-h .dt { font-size: 14px; font-weight: 700; color: var(--orange-ink); font-variant-numeric: tabular-nums; }
+  .ph ul { margin: 10px 0 0; padding-left: 20px; }
+  .ph li { margin: 4px 0; }
+  .ph li small { color: var(--ink-3); }
+  .ph .done-when { margin-top: 12px; font-size: 14.5px; background: var(--ok-tint); color: #0B4D2F; border-radius: 10px; padding: 8px 12px; }
+  .ph .needs { margin-top: 8px; font-size: 14.5px; background: var(--alert-tint); color: #7A230E; border-radius: 10px; padding: 8px 12px; }
+
+  /* ---------- ตาราง ---------- */
+  .tbl-box { margin-top: 22px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 760px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 13px; color: var(--ink-2); background: var(--shell); font-weight: 700; position: sticky; top: 0; }
+  td.k { font-weight: 600; }
+  tr.grp td { background: var(--shell); font-weight: 800; font-size: 14px; }
+  .st { display: inline-block; font-size: 13px; font-weight: 700; border-radius: 999px; padding: 1px 10px; white-space: nowrap; }
+  .st.ok { background: var(--ok-tint); color: var(--ok); }
+  .st.do { background: var(--orange-tint); color: #8A3F00; }
+  .st.wait { background: #EDEBE7; color: var(--ink-2); }
+  .st.bad { background: var(--alert-tint); color: var(--alert); }
+
+  .found { display: grid; gap: 10px; margin-top: 22px; }
+  @media (min-width: 900px) { .found { grid-template-columns: repeat(3, 1fr); } }
+  .found div { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; }
+  .found b { display: block; }
+  .found p { margin: 4px 0 0; font-size: 14.5px; color: var(--ink-2); }
+  footer { padding: 32px 0 56px; color: var(--ink-3); font-size: 14px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><b>TD</b> TEAMDEE · แผนเว็บไซต์</div>
+    <h1>ทำเว็บให้ตรง Handoff <span>v22</span> ทุกข้อ</h1>
+    <div class="meta">
+      <span>ทำแผน 22 ต.ค. 2026</span>
+      <span>ยึด START-HERE v22 (21 ต.ค.) · ZIP ตรวจแล้วตรงกับไฟล์ในโปรเจกต์ทุกไฟล์</span>
+      <span>ขึ้นจริง 9 พ.ย. · แอด 15 พ.ย.</span>
+    </div>
+    <div class="count">
+      <div><small>ข้อใน Handoff ที่ทำแล้ว</small><strong>22</strong><em>จาก 40 ข้อ</em></div>
+      <div><small>ต้องทำต่อ (ฝั่งเว็บ)</small><strong>10</strong><em>ระยะ 0–5 + หลังเปิด</em></div>
+      <div><small>รอข้อมูล / สิทธิ์จากทีม</small><strong>8</strong><em>เจ้าของ: พี่ทัช</em></div>
+      <div class="hot"><small>เหลือถึงวันขึ้นจริง</small><strong>18 วัน</strong><em>ทำงานได้จริง ~12 วัน</em></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">ต้องเคาะก่อนเริ่ม</span>
+    <h2>4 เรื่องที่ผมตัดสินใจแทนไม่ได้</h2>
+    <p class="lead">เรียงจากเรื่องที่กระทบวันขึ้นจริงมากที่สุด ทุกข้อมีทางที่ผมเสนอไว้แล้ว ตอบแค่ "เอาตามที่เสนอ" ก็เริ่มได้</p>
+    <div class="ask">
+      <div class="q">
+        <div class="n">1 · ขวางวันขึ้นจริง</div>
+        <h3>สิทธิ์เข้า WordPress เว็บจริง + Search Console</h3>
+        <p>บทความเดิม 12 เรื่อง หมวดบทความ 3 หมวด และหน้าเดิมอย่าง /services/ /pdpa/ /calculations/ อยู่ใน CMS เว็บจริงที่สร้างด้วย Elementor Pro ต้องเห็นของจริงบน staging ว่าแสดงผลกับธีมใหม่ได้ ไม่งั้นเปลี่ยนธีมวันที่ 9 แล้วหน้าพวกนี้อาจพัง</p>
+        <div class="rec"><b>เสนอ:</b> ขอพี่ทัชเชิญผมเป็นผู้ใช้ WordPress + Search Console แบบมีสิทธิ์เท่าที่ต้องใช้ ภายใน 30 ต.ค. (ไม่ส่งรหัสผ่านในแชท) แล้วทำ staging จากสำเนาเว็บจริง</div>
+      </div>
+      <div class="q">
+        <div class="n">2 · ฟอร์มขอราคา</div>
+        <h3>ข้อมูลในฟอร์มจะส่งไปที่ไหน</h3>
+        <p>ตอนนี้ฟอร์มยังไม่ได้ส่งข้อมูลไปที่ไหน แค่คัดลอกข้อความแล้วพาไป LINE ซึ่ง v22 สั่งให้เชื่อมระบบรับข้อมูลจริง</p>
+        <div class="rec"><b>เสนอ:</b> ใช้ฟอร์มของ WordPress ส่งเข้าอีเมลทีมขาย และยังพาไป LINE ต่อเหมือนเดิม ไม่ต้องใช้ระบบนอก (ถ้าจะเก็บลง Supabase ต้องคุยแยก ตามกฎข้อ 3) · ต้องได้อีเมลที่รับฟอร์มกับชื่อคนตอบลูกค้า</div>
+      </div>
+      <div class="q">
+        <div class="n">3 · ชื่อหน้า</div>
+        <h3>title หน้า /corporate/ กับ /size-chart/</h3>
+        <p>2 หน้านี้ผมเคยปรับตามที่อาร์ตสั่ง (เน้น "ยูนิฟอร์ม" และใส่ทั้ง "ไซซ์" กับ "ไซส์") แต่ v22 กำหนด title ไว้อีกแบบ</p>
+        <div class="rec"><b>เสนอ:</b> title ใช้ตาม v22 ส่วน "ยูนิฟอร์ม" และ "ไซส์" ย้ายไปอยู่ใน description กับหัวข้อรอง Google ยังเห็นคำนี้ และไม่ขัด v22</div>
+      </div>
+      <div class="q">
+        <div class="n">4 · คลังแบบเสื้อ</div>
+        <h3>ใช้รูปจากหน้าแกลเลอรีเว็บจริงได้ไหม</h3>
+        <p>หน้าแกลเลอรีเดิมบนเว็บจริงมี 55–78 รูปต่อหน้า คลังของเรามี 33 แบบ ถ้าเอาขึ้นไปแทนตอนนี้ หน้าที่ติดอันดับอยู่จะเหลือรูปไม่กี่รูป</p>
+        <div class="rec"><b>เสนอ:</b> ดึงรูปจากเว็บจริงเข้าคลังก่อน (เป็นรูปของทีมดีเอง) แล้วให้ทีมดีไซน์ยืนยันรหัสแบบกับกลุ่มลูกค้าทีหลัง จะทำหน้า /design-[รหัส]/ ก็ต่อเมื่อได้รหัสจริงแล้วเท่านั้น</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">ตรวจรอบนี้เจออะไร</span>
+    <h2>ปัญหาที่ต้องแก้ก่อนทำอย่างอื่น</h2>
+    <div class="found">
+      <div><b>หน้า /blog/ ลิงก์เสีย 7 ลิงก์</b><p>ลิงก์ไปบทความร่าง /blog/…/ ซึ่งไม่ได้ส่งออกไป WordPress เปิดแล้วเจอ 404 (ลองบน WordPress ในเครื่องแล้ว)</p></div>
+      <div><b>/blog/ ใหม่ทำให้บทความเดิมไม่มีลิงก์เข้า</b><p>/blog/ บนเว็บจริงเป็น "Knowledge Hub" ที่ลิงก์ไปบทความเดิมทั้ง 12 เรื่องกับหมวดบทความ ส่วนของเราไม่มีลิงก์ไปบทความพวกนั้นเลย</p></div>
+      <div><b>เนื้อหาบางกว่าเว็บจริงครึ่งหนึ่ง</b><p>หน้าแรก /corporate/ /education/ /sport/ /event/ ของเรามีตัวหนังสือราว 50–60% ของเว็บจริง ซึ่ง v22 สั่งไว้ว่าต้องย้ายเนื้อหาเดิมที่มีผลกับ SEO มาด้วย</p></div>
+    </div>
+    <p class="lead"><b>อัปเดต 22 ต.ค. (หลังเคาะ):</b> ระยะ 0–1 เสร็จ · ระยะ 2–4 ทำส่วนที่ไม่ต้องรอแล้ว · รายการที่ยังรอ ดู PLAN.md หัวข้อ "ยังเหลือ (รอ)"</p>
+    <p class="lead">แก้แล้วในรอบนี้ (มีเทสกันพลาดเพิ่มอีก 3 ข้อ รวมเป็น 87/87): ข้อความ "[ยืนยันบริการ]" ในกล่องดูรูป · ข้อความ "ต้นแบบสำหรับคุยภายใน" ใน footer ทุกหน้า · ข้อความต้นแบบในฟอร์มติดต่อ · หน้านโยบาย/เงื่อนไขที่ยังเป็นร่าง ตั้งไม่ส่งออกแล้ว ให้เว็บจริงใช้หน้าเดิม · ปุ่ม LINE ชี้ @teamdee จริงทุกปุ่ม · ไม่มีคำว่าโรงงานบนเว็บจริงแล้ว</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">ไทม์ไลน์</span>
+    <h2>22 ต.ค. → 15 พ.ย.</h2>
+    <p class="lead">เสาร์–อาทิตย์เป็นช่องสีเทา ขีดส้มอ่อนเส้นประคือของที่ต้องได้จากทีม ถ้าได้ช้า ส่วนนั้นจะยังซ่อนอยู่บนเว็บจริง ไม่ทำให้วันขึ้นจริงเลื่อน ยกเว้นเรื่องสิทธิ์เข้าเว็บจริง (เรื่องที่ 1)</p>
+    <div class="gantt-box"><div class="gantt" id="gantt" aria-label="แผนภูมิเวลา"></div></div>
+    <div class="legend">
+      <span><i class="l-web"></i>งานหน้าเว็บ</span>
+      <span><i class="l-sys"></i>ระบบ / WordPress</span>
+      <span><i class="l-seo"></i>SEO</span>
+      <span><i class="l-data"></i>รอข้อมูลจากทีม</span>
+      <span><i class="l-boss"></i>อาร์ต / พี่ทัชตัดสินใจ</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">ทำทีละระยะ</span>
+    <h2>6 ระยะ ทุกระยะจบด้วยหลักฐาน</h2>
+    <div class="phases">
+      <div class="ph">
+        <div class="ph-h"><span class="no">ระยะ 0</span><h3>ปิดงานค้าง + แก้ /blog/</h3><span class="dt">22–23 ต.ค.</span></div>
+        <ul>
+          <li>/blog/ เป็นฮับบทความตาม v22: ลิงก์ไปบทความเดิม 12 เรื่อง + หมวด 3 หมวด (URL เดิมทุกชั้น) + คู่มือ 7 เล่ม · ตัดลิงก์ไปบทความร่างบนเว็บจริง</li>
+          <li>เทสใหม่: ลิงก์ภายในทุกลิงก์บนหน้าที่ส่งออก ต้องไปหน้าที่ส่งออก หรือเป็น URL เดิมในตาราง URL 44 รายการ</li>
+          <li>ไล่เปิด 46 หน้าบน WordPress ในเครื่อง ดู console error</li>
+          <li>commit งานรอบ 0–5 <small>(รอคำสั่งอาร์ต)</small></li>
+        </ul>
+        <div class="done-when">เสร็จเมื่อ: เทสลิงก์ผ่าน · 0 error ใน 46 หน้า</div>
+      </div>
+      <div class="ph">
+        <div class="ph-h"><span class="no">ระยะ 1</span><h3>หน้าแรกตามลำดับ v22</h3><span class="dt">24–28 ต.ค.</span></div>
+        <ul>
+          <li>รื้อจาก 11 ส่วน (โครง v4) เป็น 17 ส่วนตาม v22: Hero 2 ชุด → 6 จุดเด่น → <b>สถิติเหนือโลโก้</b> → โลโก้หนึ่งแถว → เข้าใจคนสั่ง → <b>3 บริการหลัก</b> → 5 กลุ่มลูกค้า → รีวิว → ยังไม่มีแบบ → แบบเสื้อพิมพ์ลายตามกลุ่ม → ทีมดีช่วยดูแล → ผลงาน 4 ประเภท + ภาพลูกค้า → ขอประเมินราคา → ชำระเงิน/เอกสาร → FAQ → <b>เรื่องราว/สถานที่หลัง FAQ</b> → คู่มือ/ข่าวสาร → รับประกัน/หลังการขาย</li>
+          <li>title / H1 / description ตาม PAGE-MAP (เปลี่ยนแล้ววันนี้) · ส่วนที่ยังไม่มีของจริง (สถิติ โลโก้ รีวิว คลิป เงื่อนไข 7/30 วัน บัตรเครดิต) ซ่อนบนเว็บจริงด้วยกติกาเดียวกับหน้าสินค้า</li>
+          <li>ตรวจ 3 ขนาดจอ + design-critic + anti-slop + accessibility</li>
+        </ul>
+        <div class="done-when">เสร็จเมื่อ: ลำดับหัวข้อตรง PAGE-CONTENT v22 (มีเทสตรวจ) · screenshot 3 ขนาด · axe 0</div>
+      </div>
+      <div class="ph">
+        <div class="ph-h"><span class="no">ระยะ 2</span><h3>เนื้อหาเดิมไม่หาย (SEO)</h3><span class="dt">27 ต.ค.–31 ต.ค.</span></div>
+        <ul>
+          <li>เทียบเนื้อหา 18 หน้าที่เราจะขึ้นไปแทน กับเว็บจริงทีละหัวข้อ เก็บย่อหน้าและคำถามที่ยังถูกต้องเข้าไปในส่วนของ v22 ที่ตรงเรื่องกัน (ไม่ใช้ PAGE-CONTENT แทนเนื้อหาเดิมแบบอัตโนมัติ)</li>
+          <li>/education/ เก็บบริบทเดิม (สถานศึกษา รุ่น คณะ มหาวิทยาลัย) แล้วลิงก์ไปหน้าเฉพาะใหม่</li>
+          <li>แกลเลอรี 4 หน้าเดิม (/corporate-shirts/ /sports-shirt/ /educations-shirt/ /event-shirts/): ใส่รูปจากเว็บจริงเข้าคลัง <small>(เรื่องที่ 4)</small> · ตรวจชนิดงานก่อนจำกัดว่าเป็นพิมพ์ลาย</li>
+          <li>เทียบคำค้นจาก Search Console ต่อหน้า <small>(ถ้าได้สิทธิ์แล้ว)</small> · title /corporate/ /size-chart/ <small>(เรื่องที่ 3)</small></li>
+        </ul>
+        <div class="done-when">เสร็จเมื่อ: ตารางเทียบ 18 หน้า (เก็บอะไร / ตัดอะไร พร้อมเหตุผล) · ตัวหนังสือแต่ละหน้าไม่น้อยกว่าเว็บจริงโดยไม่มีเหตุผล</div>
+      </div>
+      <div class="ph">
+        <div class="ph-h"><span class="no">ระยะ 3</span><h3>ปุ่มขอราคา + ฟอร์มรับจริง</h3><span class="dt">29 ต.ค.–2 พ.ย.</span></div>
+        <ul>
+          <li>ปุ่มขอราคาทุกปุ่มส่งประเภทเสื้อ + กลุ่มลูกค้า + รหัสแบบ (ตอนนี้ส่งได้แค่สินค้ากับกลุ่ม ยังไม่ส่งรหัสแบบ) · ปุ่ม "ส่งคุยใน LINE" ในกล่องรูปแนบรหัสแบบไปด้วย</li>
+          <li>ฟอร์มส่งข้อมูลเข้าระบบจริง <small>(เรื่องที่ 2)</small> → หน้า /thank-you/ เดิม (noindex) ยังทำงาน</li>
+          <li>วัดผลผ่าน GTM: กดปุ่ม LINE / โทร / ส่งฟอร์ม พร้อมบอกว่ามาจากหน้าไหน</li>
+        </ul>
+        <div class="done-when">เสร็จเมื่อ: ส่งฟอร์มทดสอบแล้วถึงอีเมลจริง · event ขึ้นใน GTM Preview</div>
+        <div class="needs">ต้องได้: อีเมลที่รับฟอร์ม · คนรับผิดชอบตอบ · GTM container ID</div>
+      </div>
+      <div class="ph">
+        <div class="ph-h"><span class="no">ระยะ 4</span><h3>Staging จากสำเนาเว็บจริง</h3><span class="dt">2–5 พ.ย.</span></div>
+        <ul>
+          <li>สำเนาเว็บจริงขึ้น staging (noindex ทั้งเว็บ) แล้วติดธีมใหม่</li>
+          <li>ไล่ตรวจ 44 URL เดิม: ตอบ 200 ที่ URL เดิม · บทความ 12 เรื่อง หมวด 3 หมวด และหน้าเดิม (/calculations/ /collar-styles/ /production-techniques/ /services/ /pdpa/ /privacy-policy/ /terms-conditions/) แสดงถูกกับธีมใหม่ ทั้งที่ทำด้วย Elementor</li>
+          <li>/serviecs/ → /services/ และ /terms/ → /terms-conditions/ ยัง redirect · /test-page/ /thank-you/ ตั้ง noindex และเอาออกจาก Sitemap (ตรวจหน้า test ก่อนลบจริง)</li>
+          <li>แบนเนอร์คุกกี้ (Complianz) · canonical · sitemap · ไม่สร้าง redirect จากชื่อแผน v20/v21</li>
+          <li>เก็บรายงานก่อนย้าย: index, คลิก, 404 จาก Search Console</li>
+        </ul>
+        <div class="done-when">เสร็จเมื่อ: สคริปต์ตรวจ 44 URL บน staging ผ่านทั้งหมด · screenshot หน้าเดิมทุกหน้า</div>
+        <div class="needs">ต้องได้: สิทธิ์ WordPress / hosting / Search Console <small>(เรื่องที่ 1)</small> ภายใน 30 ต.ค.</div>
+      </div>
+      <div class="ph">
+        <div class="ph-h"><span class="no">ระยะ 5</span><h3>ตรวจทั้งเว็บ → ขึ้นจริง → ติดตาม</h3><span class="dt">5–15 พ.ย.</span></div>
+        <ul>
+          <li>ตรวจตาม Handoff ข้อ 6: มือถือ · ฟอร์มจริง · ลิงก์ · ตัวกรองแบบเสื้อ · รหัสแบบ · วัดผล · นโยบายข้อมูล · รูปบีบอัด + alt · วิดีโอโหลดเมื่อกด · ใช้คีย์บอร์ดได้</li>
+          <li>/code-review + /security-review (ฟอร์มรับข้อมูลลูกค้า) → /release</li>
+          <li><b>9 พ.ย.</b> เปลี่ยนธีมบนเว็บจริง · ส่ง Sitemap · ตรวจ 44 URL บนเว็บจริงทันที</li>
+          <li>9–14 พ.ย. ดู 404 / index ทุกวัน · <b>15 พ.ย.</b> เปิดแอดเฉพาะแคมเปญที่ "พร้อมยิง" (ตารางด้านล่าง)</li>
+        </ul>
+        <div class="done-when">เสร็จเมื่อ: รายงานก่อน/หลังย้าย · ไม่มี URL เดิมตอบ 404</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">เทียบ Handoff ทีละข้อ</span>
+    <h2>ทุกข้อใน START-HERE อยู่ตรงไหนของแผน</h2>
+    <div class="tbl-box">
+      <table>
+        <thead><tr><th style="width:44%">ข้อใน Handoff v22</th><th>สถานะ</th><th>ทำที่ / หมายเหตุ</th></tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="3">แผน URL</td></tr>
+          <tr><td class="k">9 หน้ารับสั่งทำใหม่ใช้ /custom-…/ · แบบ คู่มือ บทความใช้ชั้นเดียว</td><td><span class="st ok">ทำแล้ว</span></td><td>รอบ 0 · มีเทสเทียบ PAGE-MAP</td></tr>
+          <tr><td class="k">URL เดิม 44 รายการคงเดิมทุกชั้น · ไม่ redirect จากชื่อแผน v20/v21</td><td><span class="st ok">ทำแล้ว</span></td><td>เทส lock = URL เดิมเท่านั้น</td></tr>
+          <tr><td class="k">/corporate/ /size-chart/ เป็นหน้าหลักที่ URL เดิม + รักษาเนื้อหา SEO เดิม</td><td><span class="st do">ระยะ 2</span></td><td>URL ถูกแล้ว · เนื้อหายังบางกว่าเว็บจริง</td></tr>
+          <tr><td class="k">สินค้า /embroidery/ /sublimation/ /screen-printing/ · รีวิว /project/ · บทความ /blog/ · ติดต่อ /contact-us/</td><td><span class="st ok">ทำแล้ว</span></td><td>/blog/ ต้องแก้ในระยะ 0</td></tr>
+          <tr><td class="k">รักษา 12 บทความเดิม + หมวดบทความ + หน้าเดิม (/calculations/ /collar-styles/ /production-techniques/ /services/) ย้ายจาก CMS เดิม</td><td><span class="st do">ระยะ 4</span></td><td>/blog/ ลิงก์ครบแล้ว · เหลือตรวจบน staging</td></tr>
+          <tr><td class="k">ไม่เพิ่มหน้าราคาใหม่ ไม่ลบ /calculations/</td><td><span class="st ok">ทำแล้ว</span></td><td>/calculations/ ใช้ของ CMS เดิม</td></tr>
+          <tr><td class="k">/education/ คงบริบทเดิม แล้วลิงก์หน้าเฉพาะใหม่ · หน้ารวมแบบเดิมตรวจชนิดงานก่อน</td><td><span class="st do">ระยะ 2</span></td><td></td></tr>
+          <tr><td class="k">test-page / thank-you → noindex + ออกจาก Sitemap · หน้าขอบคุณยังทำงาน</td><td><span class="st ok">ทำแล้ว</span></td><td>ธีมบังคับ noindex + ออกจาก Sitemap (Rank Math / WordPress)</td></tr>
+          <tr><td class="k">ร่างใน PAGE-CONTENT ไม่แทนเนื้อหาเดิมอัตโนมัติ · ใช้ข้อมูล Search Console ก่อนตัด/รวม</td><td><span class="st do">ระยะ 2</span></td><td>ต้องได้สิทธิ์ (เรื่องที่ 1)</td></tr>
+          <tr class="grp"><td colspan="3">โครงหน้าและเนื้อหา</td></tr>
+          <tr><td class="k">ชื่อหน้าสินค้า "สั่งทำเสื้อโปโลปัก" / "สั่งทำเสื้อสกรีน" · คำว่าโลโก้อยู่ในคำบรรยาย</td><td><span class="st ok">ทำแล้ว</span></td><td>รอบ 3</td></tr>
+          <tr><td class="k">/project/ หน้าเดียว ไม่มีตัวกรอง/หน้ารายกลุ่ม/รายโครงการ · กดขยายภาพในหน้า</td><td><span class="st ok">ทำแล้ว</span></td><td>รอบ 4</td></tr>
+          <tr><td class="k">ตัด /use-cases/ · หน้าแรก Section 03 มี 5 การ์ดตรงเข้าหน้ากลุ่ม</td><td><span class="st ok">ทำแล้ว</span></td><td>จัดลำดับใหม่ในระยะ 1</td></tr>
+          <tr><td class="k">หน้ากลุ่มลูกค้า 10 หน้า เข้าถึงผ่านเมนูและลิงก์เกี่ยวข้อง</td><td><span class="st ok">ทำแล้ว</span></td><td>รอบ 4</td></tr>
+          <tr><td class="k">ชื่อกลุ่มมี / คั่น และขึ้นต้นด้วย "เสื้อ"</td><td><span class="st ok">ทำแล้ว</span></td><td>uses.json</td></tr>
+          <tr><td class="k">คลังแบบเป็นของพิมพ์ลาย แยกตามกลุ่ม มีรหัสส่งต่อไปขอราคา</td><td><span class="st ok">ทำแล้ว</span></td><td>ส่งรหัสไปฟอร์ม/LINE แล้ว · เพิ่มรูปจากเว็บจริง 250 แบบ · รอถอดรหัส/ยืนยันชนิดงาน</td></tr>
+          <tr><td class="k">หน้ารีวิว: Hero → โลโก้+สถิติ → รีวิว → คลิป → เรื่องราว → ภาพลูกค้า → ติดต่อ</td><td><span class="st wait">รอข้อมูล</span></td><td>โครงทำแล้ว · เว็บจริงซ่อนส่วนที่ยังไม่มีของจริง</td></tr>
+          <tr><td class="k">โลโก้ลูกค้าต้องจริง · ห้ามอ้างเป็นเจ้าของโรงงาน</td><td><span class="st ok">ทำแล้ว</span></td><td>เทสใหม่วันนี้: ไม่มีคำว่าโรงงานบนเว็บจริง</td></tr>
+          <tr><td class="k">หน้าแรกตามลำดับ v22: 3 บริการ · โลโก้แถวเดียว · สถิติเหนือโลโก้ · เรื่องราว/สถานที่หลัง FAQ</td><td><span class="st ok">ทำแล้ว</span></td><td>22 ต.ค. · มีเทสลำดับหัวข้อ</td></tr>
+          <tr><td class="k">หน้ากลุ่มลูกค้ามีภาพลูกค้าหลายแถว แยกจากคลิป · หน้าสินค้าไม่มีแกลเลอรีภาพลูกค้าใหญ่</td><td><span class="st ok">ทำแล้ว</span></td><td>รอภาพเพิ่ม</td></tr>
+          <tr><td class="k">บริบทโรงพยาบาล/โรงแรม/เกษตรในเสื้อบริษัท · รัฐวิสาหกิจ/ทหาร/ตำรวจในเสื้อหน่วยงาน</td><td><span class="st ok">ทำแล้ว</span></td><td>ตรวจแล้วมีครบ · ภาพและรีวิวรอของจริง</td></tr>
+          <tr><td class="k">งานด่วน: ตรวจคิวก่อนยืนยัน ไม่รับรองจำนวนวัน</td><td><span class="st ok">ทำแล้ว</span></td><td>FAQ + CTA ตรวจคิว</td></tr>
+          <tr><td class="k">ออฟฟิศ 264 ถนนเลี่ยงเมืองนนท์ · หมุด/เวลา/ที่จอดรอยืนยัน</td><td><span class="st ok">ทำแล้ว</span></td><td>เปลี่ยนวันนี้ · หมุด Google รอ</td></tr>
+          <tr class="grp"><td colspan="3">งานผู้พัฒนา (Handoff ข้อ 6)</td></tr>
+          <tr><td class="k">URL จริงแยกหน้า ไม่ใช้ hash route</td><td><span class="st ok">ทำแล้ว</span></td><td>46 หน้าส่งออกเป็นหน้า WordPress</td></tr>
+          <tr><td class="k">ประเภทข้อมูลใน CMS: สินค้า กลุ่มลูกค้า แบบเสื้อ รีวิว บทความ ข้อมูลบริษัท</td><td><span class="st wait">หลังเปิด</span></td><td>ตอนนี้แก้ที่ไฟล์ข้อมูลแล้วส่งออก · ย้ายแบบเสื้อกับรีวิวเข้า CMS หลัง 15 พ.ย. (ต้องคุยแยก)</td></tr>
+          <tr><td class="k">แทน [ ] และรหัส WF ด้วยข้อมูลที่อนุมัติ · ไม่เผยแพร่หน้าร่างเป็นหน้า SEO</td><td><span class="st ok">ทำแล้ว</span></td><td>เว็บจริงตัดทิ้ง · บทความร่างเป็น noindex · มีเทส</td></tr>
+          <tr><td class="k">ปุ่มขอราคาส่งประเภทเสื้อ กลุ่มลูกค้า รหัสแบบ + เชื่อม LINE/ฟอร์ม/ระบบรับข้อมูล</td><td><span class="st ok">ทำแล้ว</span></td><td>ฟอร์มส่งอีเมลผ่าน WordPress · รอใส่อีเมลรับฟอร์ม</td></tr>
+          <tr><td class="k">Title / Meta / H1 / URL / ลิงก์ภายในตรงหน้า</td><td><span class="st ok">ทำแล้ว</span></td><td>รวม /corporate/ /size-chart/ ตาม v22</td></tr>
+          <tr><td class="k">แผน URL เก่า → ใหม่ก่อนย้าย</td><td><span class="st ok">ทำแล้ว</span></td><td>URL เดิมไม่เปลี่ยน · มี redirect เดิม 2 ตัวต้องรักษา (ระยะ 4)</td></tr>
+          <tr><td class="k">บีบอัดรูป · alt จากภาพจริง · วิดีโอโหลดเมื่อกด · ใช้คีย์บอร์ดได้</td><td><span class="st do">ระยะ 5</span></td><td>webp + alt + axe ทำแล้ว · วิดีโอยังไม่มี</td></tr>
+          <tr><td class="k">ทดสอบมือถือ ฟอร์มจริง ลิงก์ ตัวกรอง รหัสแบบ วัดผล นโยบายข้อมูล</td><td><span class="st do">ระยะ 5</span></td><td></td></tr>
+          <tr><td class="k">staging noindex แต่เว็บจริงห้ามติด noindex ทั้งเว็บ</td><td><span class="st do">ระยะ 4, 5</span></td><td>จะมีสคริปต์ตรวจวันขึ้นจริง</td></tr>
+          <tr><td class="k">ตรวจ canonical, internal links, sitemap, รูป, ฟอร์ม, analytics, Search Console</td><td><span class="st do">ระยะ 4, 5</span></td><td></td></tr>
+          <tr><td class="k">รายงานก่อน/หลังย้าย: 404 · index · คลิก · ผู้ติดต่อ</td><td><span class="st do">ระยะ 4, 5</span></td><td></td></tr>
+          <tr class="grp"><td colspan="3">ข้อมูลที่ต้องยืนยัน (Handoff ข้อ 3 และ 5) · เจ้าของ: พี่ทัช</td></tr>
+          <tr><td class="k">สถิติ 8 ปี (ปี 2018) / 2,800+ องค์กร / 10,000+ งาน · บริษัทจดทะเบียน 19 ม.ค. 2021</td><td><span class="st wait">รอยืนยัน</span></td><td>ซ่อนบนเว็บจริงจนยืนยัน</td></tr>
+          <tr><td class="k">ตัวอย่างผ้าฟรี · แจ้งปัญหา 7 วัน · แบบเดิมราคาเดิม 30 วัน · บัตรเครดิต/วางบิล/ใบกำกับภาษี</td><td><span class="st wait">รอยืนยัน</span></td><td>ต้องได้ข้อความเงื่อนไขที่ตรวจแล้ว</td></tr>
+          <tr><td class="k">ขั้นต่ำ · เวลาผลิต · ราคาแต่ละสินค้า · คุณสมบัติผ้า</td><td><span class="st wait">รอข้อมูล</span></td><td>ส่วนราคาในหน้าสินค้าซ่อนจนได้ตาราง</td></tr>
+          <tr><td class="k">รีวิว ภาพลูกค้า คลิป โลโก้ลูกค้า พร้อมสิทธิ์เผยแพร่</td><td><span class="st wait">รอข้อมูล</span></td><td></td></tr>
+          <tr><td class="k">ภาพออฟฟิศ ทีมงาน ขั้นตอนผลิต · ความสัมพันธ์กับโรงงาน · หมุดเข้าพบ</td><td><span class="st wait">รอข้อมูล</span></td><td>ส่วน "คนและสถานที่" หน้าเกี่ยวกับซ่อนอยู่</td></tr>
+          <tr><td class="k">ไฟล์แบบพิมพ์ลายความละเอียดสูง + รหัสจริง + สิทธิ์ใช้</td><td><span class="st wait">รอข้อมูล</span></td><td>เรื่องที่ 4</td></tr>
+          <tr><td class="k">สิทธิ์โดเมน/โฮสติ้ง/CMS/Analytics/Search Console (เชิญเข้า ไม่ส่งรหัสผ่าน)</td><td><span class="st bad">ขวางวันขึ้น</span></td><td>เรื่องที่ 1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">SEM · 15 พ.ย.</span>
+    <h2>หน้าปลายทางแอด 18 แถว</h2>
+    <p class="lead">หน้าปลายทางมีครบทั้ง 18 แถวแล้ว แต่ v22 ย้ำว่า "มีโครง" ยังไม่เท่ากับ "พร้อมยิง" แถวไหนยิงได้วันที่ 15 ขึ้นกับว่าได้ข้อมูลจริงทันหรือไม่</p>
+    <div class="tbl-box">
+      <table>
+        <thead><tr><th>แถว</th><th>คำค้น</th><th>หน้าปลายทาง</th><th>พร้อมยิงเมื่อ</th></tr></thead>
+        <tbody>
+          <tr><td>1.1</td><td>โปโล</td><td>/embroidery/ · /sublimation/</td><td>ทีม SEM แยกคำโปโลปัก/โปโลพิมพ์ลาย · ไม่มีหน้าโปโลรวม</td></tr>
+          <tr><td>1.2</td><td>ยูนิฟอร์ม</td><td>/corporate/</td><td>มีผลงาน + รีวิวจริง</td></tr>
+          <tr><td>1.3</td><td>ราคา</td><td>/embroidery/ /sublimation/ /screen-printing/</td><td>มีตารางราคา + ขั้นต่ำจริง</td></tr>
+          <tr><td>1.4</td><td>ตามธุรกิจ</td><td>/custom-staff-shirts/ · /corporate/</td><td>มีเคสจริง</td></tr>
+          <tr><td>2.1</td><td>โรงงาน / รับผลิตเสื้อ</td><td>/</td><td>ยืนยันสถานะโรงงาน · ตอนนี้ห้ามใช้คำว่าโรงงาน</td></tr>
+          <tr><td>2.2</td><td>ราชการ / รัฐวิสาหกิจ</td><td>/custom-organization-shirts/</td><td>ภาพ + รีวิว + เงื่อนไขจัดซื้อ</td></tr>
+          <tr><td>3.1</td><td>พิมพ์ลาย</td><td>/sublimation/</td><td>พร้อมเมื่อมีราคา</td></tr>
+          <tr><td>3.2</td><td>กีฬา</td><td>/sport/ /custom-badminton-shirts/ /custom-running-shirts/</td><td>เลือก URL ตามคำค้น</td></tr>
+          <tr><td>3.3</td><td>เสื้อวอร์ม</td><td>/custom-printed-warmup-shirts/</td><td>สเปก ผ้า ไซซ์ ราคา ภาพจริง</td></tr>
+          <tr><td>4.1</td><td>กิจกรรม / Outing</td><td>/event/</td><td>ภาพ + รีวิวจริง</td></tr>
+          <tr><td>4.3</td><td>งานด่วน</td><td>/event/ + หน้าสินค้า 3 หน้า</td><td>พร้อม (FAQ + ตรวจคิวมีแล้ว)</td></tr>
+          <tr><td>4.4</td><td>รุ่น / ชมรม</td><td>/custom-class-shirts/ /custom-baseball-shirts/ /custom-oversize-jerseys/</td><td>สเปกสินค้า</td></tr>
+          <tr><td>5.1</td><td>ปัก</td><td>/embroidery/ · /embroidered-polo-order-guide/</td><td>พร้อมเมื่อมีราคา</td></tr>
+          <tr><td>5.2</td><td>สกรีน</td><td>/screen-printing/</td><td>สเปก + เงื่อนไขจริง</td></tr>
+          <tr><td>5.3</td><td>Brand</td><td>/ · /project/</td><td>หลังระยะ 1</td></tr>
+          <tr><td>6</td><td>นนทบุรี</td><td>/contact-us/ · /about-us/</td><td>หมุด Google + เวลา + ภาพจริง</td></tr>
+          <tr><td>7.1</td><td>คณะ</td><td>/custom-university-shirts/</td><td>แบบ + รีวิวเฉพาะกลุ่ม</td></tr>
+          <tr><td>7.2</td><td>โรงเรียน</td><td>/education/</td><td>หลังระยะ 2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">ไฟล์อ้างอิง: docs/spec/teamdee-v22 (START-HERE · PAGE-MAP · PAGE-CONTENT · URL-MIGRATION-MAP · SEM-LANDING-MAP) · แผนแทน docs/plans/launch-plan.html เดิม · รายละเอียดทีละงานจะเขียนลง PLAN.md ก่อนเริ่มแต่ละระยะ</div>
+</footer>
+
+<script>
+/* แถบเวลา: [แถว, งาน, วันเริ่ม (ต.ค.=10/พ.ย.=11), วันจบ, สี] */
+(function () {
+  const days = []
+  for (let d = new Date(2026, 9, 22); d <= new Date(2026, 10, 15); d.setDate(d.getDate() + 1)) days.push(new Date(d))
+  const idx = (m, d) => days.findIndex((x) => x.getMonth() === m - 1 && x.getDate() === d)
+  const lanes = ['ระยะ 0', 'ระยะ 1 หน้าแรก', 'ระยะ 2 SEO เดิม', 'ระยะ 3 ฟอร์ม', 'ระยะ 4 staging', 'ระยะ 5 ตรวจ/ขึ้น', 'ข้อมูลจากทีม', 'ตัดสินใจ']
+  const bars = [
+    [0, 'แก้ /blog/ · ปิดงานค้าง', [10, 22], [10, 23], 'l-web'],
+    [1, 'หน้าแรก 17 ส่วนตาม v22', [10, 24], [10, 28], 'l-web'],
+    [2, 'เทียบเนื้อหา 18 หน้า + แกลเลอรี', [10, 27], [10, 31], 'l-seo'],
+    [3, 'ขอราคา + ฟอร์มรับจริง + GTM', [10, 29], [11, 2], 'l-web'],
+    [4, 'staging · ตรวจ 44 URL · หน้าเดิม', [11, 2], [11, 5], 'l-sys'],
+    [5, 'ตรวจทั้งเว็บ · /release', [11, 5], [11, 8], 'l-sys'],
+    [5, 'ขึ้นจริง', [11, 9], [11, 9], 'l-boss pt'],
+    [5, 'ดู 404 / index ทุกวัน', [11, 10], [11, 14], 'l-seo'],
+    [5, 'แอด', [11, 15], [11, 15], 'l-boss pt'],
+    [6, 'สิทธิ์ WP + Search Console', [10, 22], [10, 30], 'l-data'],
+    [6, 'อีเมลฟอร์ม · ราคา · สถิติ · รีวิว · ภาพ', [10, 26], [11, 6], 'l-data'],
+    [7, 'เคาะ 4 เรื่อง', [10, 22], [10, 23], 'l-boss'],
+  ]
+  const g = document.getElementById('gantt')
+  g.style.gridTemplateColumns = `150px repeat(${days.length}, minmax(34px, 1fr))`
+  const wd = ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส']
+  const el = (cls, html, style) => { const e = document.createElement('div'); e.className = cls; if (html) e.innerHTML = html; if (style) e.style.cssText = style; g.append(e); return e }
+  el('g-h', '', 'grid-row:1;grid-column:1;position:sticky;left:0;background:#fff;z-index:2')
+  days.forEach((d, i) => {
+    const we = d.getDay() === 0 || d.getDay() === 6
+    const key = (d.getMonth() === 10 && (d.getDate() === 9 || d.getDate() === 15))
+    const today = d.getMonth() === 9 && d.getDate() === 22
+    el('g-h' + (we ? ' we' : '') + (today ? ' today' : '') + (key ? ' key' : ''), `<b>${d.getDate()}</b>${wd[d.getDay()]}`, `grid-row:1;grid-column:${i + 2}`)
+  })
+  lanes.forEach((l, r) => {
+    el('g-lane', l, `grid-row:${r + 2}`)
+    days.forEach((d, i) => el('g-cell' + (d.getDay() === 0 || d.getDay() === 6 ? ' we' : ''), '', `grid-row:${r + 2};grid-column:${i + 2}`))
+  })
+  bars.forEach(([r, t, a, b, c]) => el('bar ' + c, t, `grid-row:${r + 2};grid-column:${idx(...a) + 2} / ${idx(...b) + 3}`))
+})()
+</script>
+</body>
+</html>

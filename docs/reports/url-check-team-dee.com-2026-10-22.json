@@ -1,0 +1,408 @@
+{
+ "base": "https://team-dee.com",
+ "staging": false,
+ "checked": 44,
+ "failed": 2,
+ "results": [
+  {
+   "url": "/choose-uniform-manufacturer-checklist/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/choose-uniform-manufacturer-checklist/",
+   "problems": []
+  },
+  {
+   "url": "/garment-production-cost-structure-bulk-order/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/garment-production-cost-structure-bulk-order/",
+   "problems": []
+  },
+  {
+   "url": "/event-sports-day-t-shirt-timeline-management/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/event-sports-day-t-shirt-timeline-management/",
+   "problems": []
+  },
+  {
+   "url": "/how-to-start-clothing-brand-production-guide/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/how-to-start-clothing-brand-production-guide/",
+   "problems": []
+  },
+  {
+   "url": "/sports-running-shirt-fabric-guide/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/sports-running-shirt-fabric-guide/",
+   "problems": []
+  },
+  {
+   "url": "/what-is-dft-shirt-printing-durability-guide/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/what-is-dft-shirt-printing-durability-guide/",
+   "problems": []
+  },
+  {
+   "url": "/polo-shirt-size-chart-uniform-guide/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/polo-shirt-size-chart-uniform-guide/",
+   "problems": []
+  },
+  {
+   "url": "/sublimation-sportswear-designs/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/sublimation-sportswear-designs/",
+   "problems": []
+  },
+  {
+   "url": "/how-to-choose-garment-factory-checklist/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/how-to-choose-garment-factory-checklist/",
+   "problems": []
+  },
+  {
+   "url": "/polo-shirt-fabric-guide/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/polo-shirt-fabric-guide/",
+   "problems": []
+  },
+  {
+   "url": "/how-to-design-sportswear-color-guide/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/how-to-design-sportswear-color-guide/",
+   "problems": []
+  },
+  {
+   "url": "/shirt-production-techniques-guide/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/shirt-production-techniques-guide/",
+   "problems": []
+  },
+  {
+   "url": "/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/",
+   "problems": []
+  },
+  {
+   "url": "/corporate/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/corporate/",
+   "problems": []
+  },
+  {
+   "url": "/sport/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/sport/",
+   "problems": []
+  },
+  {
+   "url": "/education/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/education/",
+   "problems": []
+  },
+  {
+   "url": "/size-chart/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/size-chart/",
+   "problems": []
+  },
+  {
+   "url": "/sublimation/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/sublimation/",
+   "problems": []
+  },
+  {
+   "url": "/blog/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/blog/",
+   "problems": []
+  },
+  {
+   "url": "/sports-shirt/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/sports-shirt/",
+   "problems": []
+  },
+  {
+   "url": "/calculations/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/calculations/",
+   "problems": []
+  },
+  {
+   "url": "/contact-us/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/contact-us/",
+   "problems": []
+  },
+  {
+   "url": "/fabric-technology/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/fabric-technology/",
+   "problems": []
+  },
+  {
+   "url": "/project/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/project/",
+   "problems": []
+  },
+  {
+   "url": "/screen-printing/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/screen-printing/",
+   "problems": []
+  },
+  {
+   "url": "/embroidery/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/embroidery/",
+   "problems": []
+  },
+  {
+   "url": "/production-techniques/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/production-techniques/",
+   "problems": []
+  },
+  {
+   "url": "/collar-styles/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/collar-styles/",
+   "problems": []
+  },
+  {
+   "url": "/event/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/event/",
+   "problems": []
+  },
+  {
+   "url": "/services/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/services/",
+   "problems": []
+  },
+  {
+   "url": "/about-us/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/about-us/",
+   "problems": []
+  },
+  {
+   "url": "/educations-shirt/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/educations-shirt/",
+   "problems": []
+  },
+  {
+   "url": "/event-shirts/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/event-shirts/",
+   "problems": []
+  },
+  {
+   "url": "/corporate-shirts/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/corporate-shirts/",
+   "problems": []
+  },
+  {
+   "url": "/thank-you/",
+   "action": "KEEP_NOINDEX",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/thank-you/",
+   "problems": [
+    "/thank-you/: ต้องมี noindex"
+   ]
+  },
+  {
+   "url": "/terms-conditions/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/terms-conditions/",
+   "problems": []
+  },
+  {
+   "url": "/privacy-policy/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/privacy-policy/",
+   "problems": []
+  },
+  {
+   "url": "/pdpa/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/pdpa/",
+   "problems": []
+  },
+  {
+   "url": "/test-page/",
+   "action": "KEEP_NOINDEX",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/test-page/",
+   "problems": [
+    "/test-page/: ต้องมี noindex"
+   ]
+  },
+  {
+   "url": "/category/sportswear-sublimation/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/category/sportswear-sublimation/",
+   "problems": []
+  },
+  {
+   "url": "/category/fabric-technique/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/category/fabric-technique/",
+   "problems": []
+  },
+  {
+   "url": "/category/purchasing-guide/",
+   "action": "KEEP",
+   "status": 200,
+   "location": "",
+   "robots": "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "canonical": "https://team-dee.com/category/purchasing-guide/",
+   "problems": []
+  },
+  {
+   "url": "/serviecs/",
+   "action": "PRESERVE_REDIRECT",
+   "status": 301,
+   "location": "/services/",
+   "robots": "",
+   "canonical": "",
+   "problems": []
+  },
+  {
+   "url": "/terms/",
+   "action": "PRESERVE_REDIRECT",
+   "status": 301,
+   "location": "https://team-dee.com/terms-conditions/",
+   "robots": "",
+   "canonical": "",
+   "problems": []
+  }
+ ]
+}

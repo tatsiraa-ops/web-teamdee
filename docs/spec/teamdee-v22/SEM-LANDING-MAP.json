@@ -1,0 +1,292 @@
+{
+  "version": "v22",
+  "status": "แผนเสนอ ไม่ได้แก้บัญชีโฆษณา ทุกหน้าต้องตรวจข้อมูลจริงและระบบก่อนเปิด SEM",
+  "row_count": 18,
+  "groups": [
+    {
+      "id": "1.1",
+      "intent": "โปโล",
+      "routes": [
+        {
+          "prototype": "#polo",
+          "proposed_url": "/embroidery/"
+        },
+        {
+          "prototype": "#printed",
+          "proposed_url": "/sublimation/"
+        }
+      ],
+      "readiness_note": "แยกคำโปโลปักกับโปโลพิมพ์ลายตามเจตนา คำโปโลกว้างให้ทบทวนข้อความโฆษณา ไม่มีหน้าโปโลรวม"
+    },
+    {
+      "id": "1.2",
+      "intent": "ยูนิฟอร์ม",
+      "routes": [
+        {
+          "prototype": "#business",
+          "proposed_url": "/corporate/"
+        }
+      ],
+      "readiness_note": "เติมผลงานและรีวิวจริง"
+    },
+    {
+      "id": "1.3",
+      "intent": "ราคา",
+      "routes": [
+        {
+          "prototype": "#polo",
+          "proposed_url": "/embroidery/"
+        },
+        {
+          "prototype": "#printed",
+          "proposed_url": "/sublimation/"
+        },
+        {
+          "prototype": "#screen",
+          "proposed_url": "/screen-printing/"
+        }
+      ],
+      "readiness_note": "ยังไม่มีหน้าราคารวม ใช้ส่วนราคาในหน้าสินค้าตามประเภท รอตารางราคาและขั้นต่ำจริง"
+    },
+    {
+      "id": "1.4",
+      "intent": "ตามธุรกิจ",
+      "routes": [
+        {
+          "prototype": "#shop",
+          "proposed_url": "/custom-staff-shirts/"
+        },
+        {
+          "prototype": "#business",
+          "proposed_url": "/corporate/"
+        }
+      ],
+      "readiness_note": "มีบริบทธุรกิจเพิ่ม รอเคสจริง"
+    },
+    {
+      "id": "2.1",
+      "intent": "โรงงาน / รับผลิตเสื้อ",
+      "routes": [
+        {
+          "prototype": "#home",
+          "proposed_url": "/"
+        }
+      ],
+      "readiness_note": "คำว่าโรงงานรอยืนยันสถานะธุรกิจ คำรับผลิตเสื้อใช้เมื่อเนื้อหาและข้อเสนอรองรับ"
+    },
+    {
+      "id": "2.2",
+      "intent": "ราชการ / รัฐวิสาหกิจ",
+      "routes": [
+        {
+          "prototype": "#organization",
+          "proposed_url": "/custom-organization-shirts/"
+        }
+      ],
+      "readiness_note": "รอภาพ รีวิว และยืนยันเงื่อนไขจัดซื้อเฉพาะ"
+    },
+    {
+      "id": "3.1",
+      "intent": "พิมพ์ลาย",
+      "routes": [
+        {
+          "prototype": "#printed",
+          "proposed_url": "/sublimation/"
+        }
+      ],
+      "readiness_note": "รวมเสื้อโปโลพิมพ์ลาย / คอปก"
+    },
+    {
+      "id": "3.2",
+      "intent": "กีฬา",
+      "routes": [
+        {
+          "prototype": "#sport",
+          "proposed_url": "/sport/"
+        },
+        {
+          "prototype": "#badminton",
+          "proposed_url": "/custom-badminton-shirts/"
+        },
+        {
+          "prototype": "#running",
+          "proposed_url": "/custom-running-shirts/"
+        }
+      ],
+      "readiness_note": "เลือก URL ให้ตรงคำค้น"
+    },
+    {
+      "id": "3.3",
+      "intent": "เสื้อวอร์ม",
+      "routes": [
+        {
+          "prototype": "#warmup",
+          "proposed_url": "/custom-printed-warmup-shirts/"
+        }
+      ],
+      "readiness_note": "รอสเปก ผ้า ไซซ์ ราคา และภาพจริง"
+    },
+    {
+      "id": "4.1",
+      "intent": "กิจกรรม / Outing",
+      "routes": [
+        {
+          "prototype": "#activity",
+          "proposed_url": "/event/"
+        }
+      ],
+      "readiness_note": "เติมภาพและรีวิวจริง"
+    },
+    {
+      "id": "4.3",
+      "intent": "งานด่วน",
+      "routes": [
+        {
+          "prototype": "#activity",
+          "proposed_url": "/event/"
+        },
+        {
+          "prototype": "#polo",
+          "proposed_url": "/embroidery/"
+        },
+        {
+          "prototype": "#printed",
+          "proposed_url": "/sublimation/"
+        },
+        {
+          "prototype": "#screen",
+          "proposed_url": "/screen-printing/"
+        }
+      ],
+      "readiness_note": "มี FAQ และ CTA ตรวจคิว ไม่รับรองจำนวนวัน เลือกสินค้าให้ตรงคำค้น"
+    },
+    {
+      "id": "4.4",
+      "intent": "รุ่น / ชมรม",
+      "routes": [
+        {
+          "prototype": "#class",
+          "proposed_url": "/custom-class-shirts/"
+        },
+        {
+          "prototype": "#baseball",
+          "proposed_url": "/custom-baseball-shirts/"
+        },
+        {
+          "prototype": "#oversize",
+          "proposed_url": "/custom-oversize-jerseys/"
+        }
+      ],
+      "readiness_note": "เลือกรุ่นหรือทรงตามคำค้น รอสเปกสินค้า"
+    },
+    {
+      "id": "5.1",
+      "intent": "ปัก",
+      "routes": [
+        {
+          "prototype": "#polo",
+          "proposed_url": "/embroidery/"
+        },
+        {
+          "prototype": "#guide-embroider",
+          "proposed_url": "/embroidered-polo-order-guide/"
+        }
+      ],
+      "readiness_note": "หน้าโปโลปักเป็นหน้าบริการ คู่มือเป็นลิงก์เสริม ไม่ถือว่ารับปักทุกวัสดุ"
+    },
+    {
+      "id": "5.2",
+      "intent": "สกรีน",
+      "routes": [
+        {
+          "prototype": "#screen",
+          "proposed_url": "/screen-printing/"
+        }
+      ],
+      "readiness_note": "รอสเปกและเงื่อนไขจริง"
+    },
+    {
+      "id": "5.3",
+      "intent": "Brand",
+      "routes": [
+        {
+          "prototype": "#home",
+          "proposed_url": "/"
+        },
+        {
+          "prototype": "#works",
+          "proposed_url": "/project/"
+        }
+      ],
+      "readiness_note": "ใช้รีวิวเป็นลิงก์เสริม"
+    },
+    {
+      "id": "6",
+      "intent": "นนทบุรี",
+      "routes": [
+        {
+          "prototype": "#contact",
+          "proposed_url": "/contact-us/"
+        },
+        {
+          "prototype": "#about",
+          "proposed_url": "/about-us/"
+        }
+      ],
+      "readiness_note": "ยืนยัน 264 แล้ว รอหมุด เวลาทำการและภาพจริง"
+    },
+    {
+      "id": "7.1",
+      "intent": "คณะ",
+      "routes": [
+        {
+          "prototype": "#faculty",
+          "proposed_url": "/custom-university-shirts/"
+        }
+      ],
+      "readiness_note": "เติมแบบและรีวิวเฉพาะกลุ่ม"
+    },
+    {
+      "id": "7.2",
+      "intent": "โรงเรียน",
+      "routes": [
+        {
+          "prototype": "#education",
+          "proposed_url": "/education/"
+        }
+      ],
+      "readiness_note": "รวมเสื้อโรงเรียน / เสื้อกีฬาสี"
+    }
+  ],
+  "sitelinks": [
+    {
+      "label": "รีวิวลูกค้า",
+      "prototype": "#works",
+      "proposed_url": "/project/"
+    },
+    {
+      "label": "ตารางไซซ์และวิธีวัด",
+      "prototype": "#guide-size",
+      "proposed_url": "/size-chart/"
+    },
+    {
+      "label": "เตรียมโลโก้และข้อมูล",
+      "prototype": "#guide-files",
+      "proposed_url": "/artwork-preparation-guide/"
+    },
+    {
+      "label": "จัดส่งและหลังการขาย",
+      "prototype": "#guide-delivery",
+      "proposed_url": "/delivery-after-sales-guide/"
+    }
+  ],
+  "developer_notes": [
+    "หน้ารีวิวมีหน้าเดียว /project/ ไม่มีตัวกรองและหน้ารายโครงการ",
+    "ตัดหน้ารวม /use-cases/ แต่คง URL หน้ากลุ่มลูกค้าเฉพาะ",
+    "ใช้ CTA และรีวิวในหน้าลูกค้า/หน้าสินค้าเอง แล้วส่งดูรีวิวเพิ่มเติมไปหน้ารวม",
+    "ติดตามคลิก LINE / โทร แยกจากส่งฟอร์มสำเร็จและคุณภาพผู้ติดต่อ",
+    "ไม่มีหน้าโปโลรวมหรือหน้าราคาใหม่ในรอบนี้ แต่คง /calculations/ เดิมไว้",
+    "รักษา /corporate/ และ /size-chart/ ตาม URL เดิม อ่าน URL-MIGRATION-MAP.html ก่อนย้ายเว็บ",
+    "v22: หน้าใหม่ใช้ URL ชั้นเดียว เติม custom เฉพาะหน้ารับสั่งทำใหม่; คง URL ที่ใช้อยู่เดิมทั้งหมด รวมหมวดบทความหลายชั้น"
+  ]
+}
