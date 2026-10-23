@@ -13,6 +13,20 @@ export const nudgesFor = (items, path) => items.filter((x) => clean(x.href) !== 
 /** การ์ดถัดไปแบบวนรอบ · ไม่มีการ์ด = -1 */
 export const nextNudge = (count, i) => (count > 0 ? (i + 1) % count : -1)
 
+/** เลื่อนพ้น hero แล้วหรือยัง (กล่องของ hero เทียบกับจอ) · การ์ดขึ้นหลังจากนี้ จะได้ไม่บังปุ่มใน hero */
+export const pastHero = (rect) => rect.bottom <= 0
+
+/** กล่องสองกล่อง (left/top/right/bottom) ทับกันไหม · ชิดขอบพอดีไม่นับ */
+export const overlaps = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom
+
+/* ของที่กดได้จริงในเนื้อหา · รวม summary (อ่านเพิ่มเติม) และกล่องเลื่อนที่กด Tab เข้าได้ (tabindex=0)
+   ไม่รวม main/section ที่ได้โฟกัสจากโค้ด (tabindex=-1) · ตรวจซ้ำ 23 ต.ค.: ปิดการ์ดแนะนำแล้วโฟกัสไป main → ปุ่มลอยหายทั้งหน้า */
+export const HIT = 'a[href], button, input, select, textarea, summary, [role="tab"], [tabindex="0"]'
+/** ตัวที่โฟกัสอยู่ควรทำให้ปุ่มลอยหลบไหม */
+export const blocksFloat = (el) => !!el && el.matches(HIT)
+/** ปุ่มลอยควรหลบไหม · stacks = ผลของ elementsFromPoint ทีละจุดใต้ปุ่มลอย · หลบเมื่อเจอปุ่ม/ลิงก์ของเนื้อหา (ไม่ใช่ของปุ่มลอยเอง) */
+export const dodgeFrom = (stacks, floats) => stacks.some((stack) => stack.some((el) => !floats.contains(el) && el.closest?.(HIT)))
+
 export const QUIET_MS = 24 * 60 * 60 * 1000
 
 /** ค่าที่เก็บไว้ตอนกดปิด (เวลาเป็นเลข ms) ยังไม่ครบเวลาเงียบ = ยังไม่โชว์ */
@@ -25,7 +39,7 @@ const KEY = 'td-nudge-off'
 const read = () => { try { return localStorage.getItem(KEY) } catch { return null } }
 const write = (v) => { try { localStorage.setItem(KEY, v) } catch { /* โหมดส่วนตัว เก็บไม่ได้ก็แค่ขึ้นใหม่รอบหน้า */ } }
 
-export function initFloats({ delay = 6000, every = 7000 } = {}) {
+export function initFloats({ every = 7000 } = {}) {
   const root = document.querySelector('[data-floats]')
   if (!root) return
   const cta = root.querySelector('[data-float-cta]')
@@ -46,9 +60,42 @@ export function initFloats({ delay = 6000, every = 7000 } = {}) {
   }
   window.addEventListener('scroll', onScroll, { passive: true })
   onScroll()
+  /* ปุ่มลอยหลบ (โปร่งและกดทะลุได้) เมื่อทับปุ่ม/ลิงก์ในเนื้อหา หรือทับตัวที่กำลังโฟกัส (WCAG 2.4.11 · ตรวจหน้าแรก 22 ต.ค.: ทับลิงก์ส่วน 11 และปุ่มในกล่องส้ม) */
+  const wide = window.matchMedia('(min-width: 1024px)')
+  let dodge = false
+  let raf = 0
+  let boxDodge = false
+  const check = () => {
+    raf = 0
+    /* การ์ดแนะนำ (ทุกขนาดจอ · มือถืออยู่เหนือแถบล่าง): หลบเมื่อทับตัวที่กำลังโฟกัส (WCAG 2.4.11 · ตรวจ 23 ต.ค.) */
+    if (box?.isConnected && box.classList.contains('is-on')) {
+      const f = document.activeElement
+      const b = box.getBoundingClientRect()
+      const next = !!b.width && blocksFloat(f) && !box.contains(f) && overlaps(b, f.getBoundingClientRect())
+      if (next !== boxDodge) { boxDodge = next; box.classList.toggle('is-dodge', next) }
+    }
+    if (!cta || !cta.classList.contains('is-on') || !wide.matches) return
+    const r = cta.getBoundingClientRect()
+    if (!r.width) return
+    const xs = [r.left + 8, (r.left + r.right) / 2, r.right - 8]
+    const ys = [r.top + 8, (r.top + r.bottom) / 2, r.bottom - 8]
+    const stacks = xs.flatMap((x) => ys.map((y) => document.elementsFromPoint(x, y)))
+    const focused = document.activeElement
+    const onFocus = blocksFloat(focused) && !root.contains(focused) && overlaps(r, focused.getBoundingClientRect())
+    const next = onFocus || dodgeFrom(stacks, root)
+    if (next !== dodge) { dodge = next; cta.classList.toggle('is-dodge', dodge) }
+  }
+  const later = () => { if (!raf) raf = requestAnimationFrame(check) }
+  window.addEventListener('scroll', later, { passive: true })
+  window.addEventListener('resize', later, { passive: true })
+  document.addEventListener('focusin', later)
+  document.addEventListener('focusout', later)
+  /* เลย์เอาต์ขยับโดยไม่เลื่อนจอ (FAQ กาง · hero สลับ · ดูคำถามเพิ่ม) ก็ตรวจใหม่ */
+  if ('ResizeObserver' in window) new ResizeObserver(later).observe(document.body)
+
   const footer = document.querySelector('footer')
   if (footer && 'IntersectionObserver' in window) {
-    new IntersectionObserver(([e]) => { atFooter = e.isIntersecting; sync() }, { rootMargin: '0px 0px -80px 0px' }).observe(footer)
+    new IntersectionObserver((list) => { atFooter = list[list.length - 1].isIntersecting; sync() }, { rootMargin: '0px 0px -80px 0px' }).observe(footer)
   }
 
   if (!box || isDismissed(read(), Date.now())) return
@@ -87,11 +134,19 @@ export function initFloats({ delay = 6000, every = 7000 } = {}) {
   box.querySelector('[data-nudge-close]')?.addEventListener('click', () => {
     closed = true
     stop()
-    /* ปุ่มปิดกำลังจะหายไป · ย้ายโฟกัสไปที่เนื้อหาหลัก ไม่ให้คนใช้คีย์บอร์ดหลุดกลับไปต้นหน้า */
+    /* ปุ่มปิดกำลังจะหายไป · ย้ายโฟกัสไปที่ปุ่ม/ลิงก์แรกที่อยู่ในจอตอนนี้ กด Tab ต่อจากตรงที่อ่านอยู่
+       ไม่ใช่ <main> ทั้งก้อน ที่ทำให้ Tab ถัดไปเด้งกลับไปต้นหน้า (agent a11y 23 ต.ค.) */
     const main = document.getElementById('main')
     if (main && box.contains(document.activeElement)) {
-      if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1')
-      main.focus({ preventScroll: true })
+      const near = [...main.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]')].find((el) => {
+        const r = el.getBoundingClientRect()
+        return r.width && r.top >= 0 && r.bottom <= innerHeight && !el.closest('[inert], [hidden]')
+      })
+      if (near) near.focus({ preventScroll: true })
+      else {
+        if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1')
+        main.focus({ preventScroll: true })
+      }
     }
     write(String(Date.now()))
     box.classList.remove('is-on')
@@ -99,8 +154,10 @@ export function initFloats({ delay = 6000, every = 7000 } = {}) {
     setTimeout(() => box.remove(), 400)
   })
 
-  /* เด้งขึ้นเมื่อครบเวลา หรือเลื่อนลงไปก่อนก็ขึ้นเลย อย่างไหนถึงก่อน · ไม่ขึ้นทับตอนเปิดรูปขยาย */
+  /* เด้งขึ้นเมื่อเลื่อนพ้น hero (ส่วนแรกของหน้า) แล้วเท่านั้น · เดิมตั้งเวลา 6 วิ แล้วไปบังปุ่มใน hero ที่จอ 375 และ 1024 (22 ต.ค. 2026)
+     หน้าที่ไม่มี hero ขึ้นเมื่อเลื่อนลง 600px · ไม่ขึ้นทับตอนเปิดรูปขยาย */
   let opened = false
+  const hero = document.querySelector('[data-hero-team], #main > section, #main > .hero-wrap')
   const open = () => {
     if (opened) return
     opened = true
@@ -110,7 +167,8 @@ export function initFloats({ delay = 6000, every = 7000 } = {}) {
     requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add('is-on')))
     play()
   }
-  const onFirstScroll = () => { if (window.scrollY > 600 && !html.classList.contains('lb-on')) open() }
+  const ready = () => (hero ? pastHero(hero.getBoundingClientRect()) : window.scrollY > 600)
+  const onFirstScroll = () => { if (ready() && !html.classList.contains('lb-on')) open() }
   window.addEventListener('scroll', onFirstScroll, { passive: true })
-  setTimeout(open, delay)
+  onFirstScroll()
 }

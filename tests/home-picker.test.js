@@ -43,3 +43,10 @@ test('คำแนะนำบอกจำนวนที่เลือกด�
   assert.equal(planFor(uses, pricing, 'corp', '200+').ctaText, 'คำนวณราคา 200 ตัวขึ้นไป')
   assert.equal(planFor(uses, pricing, 'corp', '21-50').ctaText, 'คำนวณราคา 21–50 ตัว')
 })
+
+import { faqMoreLabel } from '../src/js/faq-more.js'
+
+test('FAQ มือถือ: ป้ายปุ่มบอกจำนวนที่ซ่อน · เปิดแล้วเป็นย่อกลับ', () => {
+  assert.equal(faqMoreLabel(5, false), 'ดูอีก 5 คำถาม')
+  assert.equal(faqMoreLabel(5, true), 'ย่อคำถามกลับ')
+})

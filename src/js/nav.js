@@ -5,7 +5,10 @@
 export function initNav() {
   const roots = [...document.querySelectorAll('[data-mega-root]')]
 
+  /* เมนูที่เปิดค้างด้วยการคลิก ไม่ปิดเองตอนเมาส์ออก */
+  const pinned = new WeakSet()
   const close = (root) => {
+    pinned.delete(root)
     const btn = root.querySelector('[data-mega-btn]')
     const panel = root.querySelector('[data-mega-panel]')
     btn.setAttribute('aria-expanded', 'false')
@@ -31,8 +34,13 @@ export function initNav() {
 
   for (const root of roots) {
     const btn = root.querySelector('[data-mega-btn]')
+    /* ชี้ 100ms เมนูเปิดเองแล้ว คนที่ชี้แล้วคลิกต่อ = อยากให้ค้าง ไม่ใช่ปิด (agent ตรวจโค้ด 23 ต.ค.) */
     btn.addEventListener('click', () => {
-      isOpen(root) ? close(root) : open(root)
+      clearTimeout(timer)
+      if (isOpen(root) && !pinned.has(root)) { pinned.add(root); return }
+      if (isOpen(root)) return close(root)
+      open(root)
+      pinned.add(root)
     })
     btn.addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
@@ -56,7 +64,7 @@ export function initNav() {
       timer = setTimeout(() => open(root), 100)
     })
     root.addEventListener('pointerleave', () => {
-      if (!fine.matches) return
+      if (!fine.matches || pinned.has(root)) return
       clearTimeout(timer)
       timer = setTimeout(() => close(root), 300)
     })
@@ -79,6 +87,7 @@ export function initNav() {
   const menu = document.getElementById('mobileMenu')
   const openBtn = document.querySelector('[data-menu-open]')
   function closeMobile() {
+    if (!menu || menu.hidden) return
     menu.hidden = true
     document.body.style.overflow = ''
     openBtn?.setAttribute('aria-expanded', 'false')
@@ -92,5 +101,16 @@ export function initNav() {
       menu.querySelector('[data-menu-close]')?.focus()
     })
     menu.querySelector('[data-menu-close]')?.addEventListener('click', closeMobile)
+    /* เป็น dialog: กด Tab วนอยู่ในเมนู ไม่หลุดไปหน้าข้างหลังที่มองไม่เห็น */
+    menu.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return
+      const list = [...menu.querySelectorAll('a[href], button:not([disabled])')].filter((el) => el.offsetParent !== null)
+      const first = list[0]
+      const last = list[list.length - 1]
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+    })
+    /* เมนูมือถือซ่อนด้วย xl:hidden · หมุนจอหรือขยายหน้าต่างเกิน 1280 ตอนเปิดอยู่ ต้องปิดให้หน้าเลื่อนได้ */
+    window.matchMedia('(min-width: 1280px)').addEventListener?.('change', (e) => { if (e.matches) closeMobile() })
   }
 }

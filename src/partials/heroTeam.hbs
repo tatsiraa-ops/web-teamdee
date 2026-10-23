@@ -1,33 +1,54 @@
-{{!-- hero หน้าแรก · Wireframe v4 มี 2 สไลด์ แต่อาร์ตเลือกใช้แค่สไลด์ 02 สินค้าและบริการ (21 ต.ค. 2026)
-     เสื้อ 3D 5 ตัว (มีโลโก้ลูกค้า ต้องขออนุญาตก่อนขึ้นจริง) · ปุ่ม ดูแบบเสื้อ / ช่วยเลือกให้ทีมฉัน
-     ตัวหนังสือส้มบนพื้นขาวได้แค่ 2.8:1 พาดหัวจึงเป็นดำ แล้วขีดเส้นโค้งส้มใต้คำแทน --}}
-<section class="th" data-hero-team aria-labelledby="th-h1">
+{{!-- hero หน้าแรก · Wireframe v22 มี 2 ชุด: 01 เสื้อทีม / เสื้อบริษัท · 02 เสื้อกีฬา / เสื้อกิจกรรม (อาร์ตเคาะให้สลับกัน 22 ต.ค. 2026 · src/js/hero-sets.js)
+     H1 ตัวเดียวไม่เปลี่ยน (คำค้นหลัก) · สลับพาดหัวรอง เสื้อ 5 ตัว และปุ่มรอง · ปุ่มหลักไลน์คงที่ทุกชุด (แอดนับกดไลน์เป็นผล · ตกลง 21 ต.ค.)
+     เสื้อทุกตัวมีโลโก้/ชื่อทีมลูกค้าจริง ต้องขออนุญาตก่อนขึ้นจริง · ตัวหนังสือส้มบนพื้นขาวได้แค่ 2.8:1 พาดหัวจึงเป็นดำ แล้วขีดเส้นโค้งส้มใต้คำแทน --}}
+<section class="th" data-hero-team data-hero-sets aria-labelledby="th-h1">
   <svg class="th-arc" viewBox="0 0 1440 760" preserveAspectRatio="none" aria-hidden="true"><path d="M0 760V250C260 70 560 0 760 0c260 0 520 90 680 230v530z"/></svg>
 
   <div class="wrap th-head">
-    <h1 id="th-h1" class="th-h1"><span class="th-kick">โรงงานรับผลิตเสื้อโปโล ยูนิฟอร์ม และเสื้อทีม</span><span class="inline-block">เสื้อทีมที่ทุกคน</span> <span class="th-mark">ภูมิใจจะใส่<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M4 17C70 6 170 3 296 11"/></svg></span></h1>
-    <p class="th-lead">{{homeV4.hero.sub}}</p>
-    <p class="th-pillars">{{homeV4.hero.pillars}}</p>
+    <h1 id="th-h1" class="th-kick">รับทำเสื้อทีม เสื้อบริษัท พร้อมโลโก้</h1>
   </div>
 
-  <div class="th-stage">
-    <ul class="th-line" aria-label="ตัวอย่างเสื้อที่ทีมดีออกแบบ 5 แบบ">
-      {{#each teamLineup}}
-      <li class="th-shirt{{#if this.lead}} is-lead{{/if}}" style="--i:{{@index}}">
-        <img class="th-front" src="{{this.frontSmall}}" srcset="{{this.frontSmall}} 440w, {{this.front}} 880w" sizes="(min-width:1240px) 290px, (min-width:768px) 23vw, 44vw" width="880" height="1080" alt="{{this.alt}}"{{#if this.lead}} fetchpriority="high"{{/if}}{{#if @first}} loading="lazy"{{/if}}{{#if @last}} loading="lazy"{{/if}} decoding="async">
-      </li>
+  <div class="th-sets">
+    {{#each homeV4.hero.sets}}
+    <div class="th-slide{{#if @first}} is-warm{{else}} is-off{{/if}}" id="th-set-{{this.id}}" role="tabpanel" tabindex="0" aria-labelledby="th-tab-{{this.id}}" data-set-panel{{#unless @first}} inert{{/unless}}>
+      <div class="wrap th-head">
+        <p class="th-h1"><span class="inline-block">{{{ph this.pre}}}</span> <span class="th-mark">{{{ph this.mark}}}<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="100" d="M4 17C70 6 170 3 296 11"/></svg></span></p>
+        {{#if this.leadH2}}<h2 class="th-lead">{{{ph this.lead}}}</h2>{{else}}<p class="th-lead">{{{ph this.lead}}}</p>{{/if}}
+        <p class="th-pillars">{{{ph this.pillars}}}</p>
+      </div>
+      <div class="th-stage">
+        <ul class="th-line" aria-label="{{this.stage}}">
+          {{#each (lookup @root this.lineup)}}
+          <li class="th-shirt{{#if this.lead}} is-lead{{/if}}" style="--i:{{@index}}">
+            <img class="th-front" src="{{this.frontSmall}}" srcset="{{this.frontSmall}} 440w, {{this.front}} 880w" sizes="(min-width:1240px) 290px, (min-width:768px) 23vw, 44vw" width="880" height="1080" alt="{{this.alt}}"{{#if @../first}}{{#if this.lead}} fetchpriority="high"{{/if}}{{#if @first}} loading="lazy"{{/if}}{{#if @last}} loading="lazy"{{/if}}{{else}} loading="lazy"{{/if}} decoding="async">
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  {{!-- แถบเลือกชุด (tablist) · ไม่มีปุ่มหยุด (อาร์ตสั่ง 22 ต.ค.) หยุดเองเมื่อชี้/โฟกัส/กดเลือกชุด · เส้นใต้ชุดที่เปิดอยู่วิ่งจนเต็มแล้วสลับ ให้เห็นว่ากำลังจะเปลี่ยน (อาร์ต 22 ต.ค.: ไม่เอาปุ่มแคปซูล และห้ามทับเสื้อ) --}}
+  <div class="wrap th-ctrl">
+    <div class="th-tabs" role="tablist" aria-label="เลือกชุดเสื้อที่จะดู">
+      {{#each homeV4.hero.sets}}
+      <button type="button" role="tab" id="th-tab-{{this.id}}" aria-controls="th-set-{{this.id}}" aria-selected="{{#if @first}}true{{else}}false{{/if}}" tabindex="{{#if @first}}0{{else}}-1{{/if}}" data-set-tab="{{this.id}}"><span class="th-tab__bar" aria-hidden="true"></span><b>{{this.no}}</b>{{this.tab}}<span class="th-tab-more"> / {{this.tabMore}}</span></button>
       {{/each}}
-    </ul>
+    </div>
   </div>
 
   <div class="wrap th-foot">
-    {{!-- ปุ่มหลักเป็นทางติดต่อ เพราะแอดนับกดไลน์เป็นผล (ตกลง 21 ต.ค.) · ปุ่มของ v4 (ดูแบบเสื้อ / ช่วยเลือกให้ทีมฉัน) อยู่ถัดมา --}}
     <div class="flex flex-wrap justify-center gap-3">
-      <a class="btn btn-orange btn-lg" href="{{site.lineUrl}}" data-track="line">ทัก LINE ทีมดี</a>
-      <a class="btn btn-line btn-lg" href="{{url 'designs'}}">ดูแบบเสื้อ</a>
+      <a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line" data-where="hero"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>{{homeV4.hero.cta}}</a>
+      {{#each homeV4.hero.sets}}
+      <a class="btn btn-line btn-lg" href="{{this.cta2.to}}" data-set-only="{{this.id}}"{{#unless @first}} hidden{{/unless}}>{{this.cta2.label}}</a>
+      {{/each}}
     </div>
-    <p class="th-have"><a href="{{url 'uses' 'index'}}">ช่วยเลือกให้ทีมฉัน</a><span aria-hidden="true">·</span><a href="{{url 'contact'}}">{{homeV4.hero.haveDesign}}</a></p>
-    <p class="th-note">ภาพจำลองแบบเสื้อที่ทีมดีออกแบบ</p>
+    {{!-- บรรทัดความเชื่อมั่นใต้ปุ่ม (agent มุมคนซื้อ 3 ตัวชี้ว่าจอแรกไม่มีอะไรให้เชื่อใจ · อาร์ตเคาะ 22 ต.ค.) --}}
+    <ul class="th-checks" aria-label="จุดเด่นการสั่งทำกับทีมดี">{{#each homeV4.hero.proof}}<li>{{{ph this}}}</li>{{/each}}</ul>
+    <p class="th-have">{{!-- G: ตอบภายใน 5 นาที + 3D ใน 24 ชม. จาก Brand Strategy v2 (อาร์ตเคาะ 23 ต.ค.) · ผูกกับเวลาทำการ ไม่ให้เข้าใจว่าตอบ 24 ชม. --}}<span>{{{ph homeV4.hero.reply}}} <span class="inline-block">(ทุกวัน {{site.hoursShort}})</span> · {{{ph homeV4.hero.trust}}}</span><a href="{{haveDesignLine}}" data-track="line" data-where="hero-have"><span>{{{ph homeV4.hero.haveDesign}}}</span><span class="arw" aria-hidden="true">&rarr;</span></a></p>
+    <p class="th-note">{{{ph homeV4.hero.note}}}</p>
   </div>
 
 </section>

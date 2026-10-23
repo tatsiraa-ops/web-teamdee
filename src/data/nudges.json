@@ -4,7 +4,7 @@
     { "key": "designs", "kicker": "แบบเสื้อ", "title": "เลือกลายที่ชอบ ส่งรหัสคุยใน LINE ได้เลย", "img": "/img/design/d05-540.webp" },
     { "key": "products", "id": "warmup", "kicker": "สินค้าใหม่", "title": "เสื้อวอร์มพิมพ์ลาย สีและลายเข้าชุดกับทีม", "icon": "spark" },
     { "key": "projects", "kicker": "ผลงานจริง", "title": "ดูทีมที่ใส่เสื้อทีมดีในวันงานจริง", "img": "/img/real/r05-320.jpg" },
-    { "key": "products", "id": "special", "kicker": "เสื้อแบบพิเศษ", "title": "Jersey Oversize และเสื้อเบสบอล ทรงที่ไม่ซ้ำใคร", "img": "/img/design/d12-540.webp" },
+    { "key": "products", "id": "baseball", "kicker": "เสื้อเบสบอล", "title": "ทรงลำลองที่คนในทีมหยิบใส่ต่อในวันธรรมดา", "img": "/img/mockup/m08.jpg" },
     { "key": "guides", "id": "size", "kicker": "คู่มือไซซ์", "title": "วัดตัวก่อนสั่ง เทียบตารางไซซ์ได้เอง", "icon": "ruler" }
   ]
 }

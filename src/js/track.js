@@ -16,6 +16,12 @@ export const classifyLink = ({ href = '', track } = {}) => {
   return null
 }
 
+/** td_where = ปุ่มนี้อยู่ตรงไหน · data-where ที่ตัวปุ่ม/กล่องที่ครอบมาก่อน แล้วค่อย id ของส่วน แล้วค่อย header/footer/nav */
+export const whereOf = ({ own, scope, landmark } = {}) => own || scope || landmark || ''
+
+/** ส่งสัญญาณเอง (ฟอร์มติดต่อเรียกตอนส่งเข้าระบบสำเร็จจริง) */
+export const trackEvent = (kind, extra = {}) => push(kind, extra)
+
 const push = (kind, extra = {}) => {
   const event = eventFor(kind)
   if (!event) return
@@ -29,7 +35,7 @@ export function initTracking() {
     if (!a) return
     const kind = classifyLink({ href: a.getAttribute('href') || '', track: a.dataset.track })
     if (kind === 'line' || kind === 'phone') {
-      push(kind, { td_link: a.getAttribute('href') || '', td_where: a.closest('[aria-labelledby], header, footer, nav')?.id || a.closest('header, footer, nav')?.tagName.toLowerCase() || '' })
+      push(kind, { td_link: a.getAttribute('href') || '', td_where: whereOf({ own: a.closest('[data-where]')?.dataset.where, scope: a.closest('section[id]')?.id, landmark: a.closest('header, footer, nav')?.tagName.toLowerCase() }) })
     }
   }, { capture: true })
 
@@ -39,7 +45,8 @@ export function initTracking() {
   document.addEventListener('wpcf7mailsent', () => { cf7 = true; push('form', { td_form: 'cf7' }) })
   document.addEventListener('submit', (e) => {
     const f = e.target
-    if (cf7 || f.matches('[role="search"], .wpcf7-form, #homePick')) return
+    /* #contactForm นับเองตอนส่งสำเร็จ (contact-page.js) ไม่นับตอนกดแล้วกรอกไม่ครบ */
+    if (cf7 || f.matches('[role="search"], .wpcf7-form, #homePick, #contactForm')) return
     push('form', { td_form: f.id || f.getAttribute('name') || '' })
   }, { capture: true })
 

@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { classifyLink, eventFor, KINDS } from '../src/js/track.js'
+import { classifyLink, eventFor, KINDS, whereOf } from '../src/js/track.js'
 
 test('ลิงก์ไลน์นับเป็น line · ทั้ง line.me, lin.ee และที่ติด data-track="line" (ตอนยังไม่มีลิงก์จริง)', () => {
   assert.equal(classifyLink({ href: 'https://line.me/R/ti/p/@teamdee' }), 'line')
@@ -32,4 +32,11 @@ test('ชื่อ event ที่ส่งเข้า dataLayer ตายต�
   assert.equal(eventFor('form'), 'td_form_submit')
   assert.equal(eventFor('calc'), 'td_calc_result')
   assert.equal(eventFor('xx'), null)
+})
+
+test('td_where: data-where ของปุ่มมาก่อน แล้วค่อย id ของส่วน แล้วค่อยชื่อ landmark (agent ตรวจโค้ด 23 ต.ค.: 4 ปุ่มหลักหน้าแรกส่งค่าว่าง)', () => {
+  assert.equal(whereOf({ own: 'hero', scope: 'faq', landmark: 'nav' }), 'hero')
+  assert.equal(whereOf({ scope: 'faq', landmark: 'footer' }), 'faq')
+  assert.equal(whereOf({ landmark: 'footer' }), 'footer')
+  assert.equal(whereOf({}), '')
 })

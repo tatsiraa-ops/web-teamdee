@@ -113,13 +113,21 @@ export function initRails() {
     const next = box.querySelector('[data-rail-next]')
     if (!prev || !next) continue
     const step = () => Math.max(200, rail.clientWidth * 0.8)
+    /* aria-disabled ไม่ใช่ disabled · ปุ่มที่ disabled ตอนโฟกัสอยู่ทำให้โฟกัสหลุดไปต้นหน้า (agent a11y 23 ต.ค.) */
+    const off = (btn, on) => btn.setAttribute('aria-disabled', String(on))
     const sync = () => {
-      prev.disabled = rail.scrollLeft < 4
-      next.disabled = rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 4
-      box.classList.toggle('is-static', prev.disabled && next.disabled)
+      const atStart = rail.scrollLeft < 4
+      const atEnd = rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 4
+      off(prev, atStart)
+      off(next, atEnd)
+      box.classList.toggle('is-static', atStart && atEnd)
     }
-    prev.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: smooth }))
-    next.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: smooth }))
+    const go = (btn, dir) => btn.addEventListener('click', () => {
+      if (btn.getAttribute('aria-disabled') === 'true') return
+      rail.scrollBy({ left: dir * step(), behavior: smooth })
+    })
+    go(prev, -1)
+    go(next, 1)
     rail.addEventListener('scroll', sync, { passive: true })
     addEventListener('resize', sync)
     sync()
@@ -132,32 +140,31 @@ export function initGalleryFilter() {
   if (!bar) return
   const items = [...document.querySelectorAll('#pickGrid [data-uses]')]
   const count = document.querySelector('[data-gallery-count]')
+  /* หน้าแรกโชว์ไม่เกิน 10 แบบ (มือถือ 6 แบบ ให้หน้าสั้นลง · อาร์ตเคาะ 23 ต.ค. ข้อ B) ที่เหลือดูต่อในหน้าแบบเสื้อ */
+  const small = window.matchMedia('(max-width: 767px)')
+  const apply = (b) => {
+    const id = b.dataset.use
+    const limit = small.matches ? 6 : 10
+    const match = items.filter((it) => !id || it.dataset.uses.split(' ').includes(id))
+    for (const it of items) it.hidden = !match.slice(0, limit).includes(it)
+    if (count) count.textContent = `${id ? b.textContent.trim() : 'ทุกกลุ่มลูกค้า'} · ${Math.min(limit, match.length)} จาก ${match.length} แบบ`
+  }
+  const current = () => bar.querySelector('[aria-pressed="true"]') || bar.querySelector('[data-use]')
   bar.addEventListener('click', (e) => {
     const b = e.target.closest('[data-use]')
     if (!b) return
     for (const x of bar.querySelectorAll('[data-use]')) x.setAttribute('aria-pressed', String(x === b))
-    const id = b.dataset.use
-    /* หน้าแรกโชว์ไม่เกิน 10 แบบ ที่เหลือดูต่อในหน้าแบบเสื้อ */
-    const match = items.filter((it) => !id || it.dataset.uses.split(' ').includes(id))
-    for (const it of items) it.hidden = !match.slice(0, 10).includes(it)
-    if (count) count.textContent = `${id ? b.textContent.trim() : 'ทุกกลุ่มลูกค้า'} · ${Math.min(10, match.length)} จาก ${match.length} แบบ`
+    apply(b)
   })
+  small.addEventListener('change', () => apply(current()))
+  /* ตอนเปิดหน้าไม่ให้ช่องสถานะ (aria-live) ประกาศเอง · ประกาศเฉพาะตอนผู้ใช้กดกรอง */
+  const live = count?.getAttribute('aria-live')
+  count?.setAttribute('aria-live', 'off')
+  apply(current())
+  if (count && live) requestAnimationFrame(() => count.setAttribute('aria-live', live))
 }
 
 /* แถบโลโก้ · ปุ่มหยุด/เล่น (WCAG 2.2.2 ของที่เคลื่อนไหวเกิน 5 วินาทีต้องหยุดได้) */
-export function initMarquee() {
-  const m = document.querySelector('[data-marquee]')
-  const b = document.querySelector('[data-marquee-toggle]')
-  if (!m || !b) return
-  b.addEventListener('click', () => {
-    const paused = m.classList.toggle('is-paused')
-    b.setAttribute('aria-pressed', String(paused))
-    b.querySelector('[data-ico-pause]').hidden = paused
-    b.querySelector('[data-ico-play]').hidden = !paused
-    b.querySelector('[data-marquee-label]').textContent = paused ? 'เล่นแถบโลโก้' : 'หยุดแถบโลโก้'
-  })
-}
-
 /* แท็บผลงาน 4 หมวด · ลูกศรซ้ายขวาสลับแท็บ · เปลี่ยนแท็บแล้วจัดปุ่มเลื่อนของแถวใหม่ */
 export function initTabs() {
   const list = document.querySelector('[data-tabs]')
@@ -190,3 +197,4 @@ export function initMarqueeOffscreen() {
   if (!m || !('IntersectionObserver' in window)) return
   new IntersectionObserver(([en]) => m.classList.toggle('is-off', !en.isIntersecting)).observe(m)
 }
+

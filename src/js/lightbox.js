@@ -1,3 +1,4 @@
+import { lineUrlFor } from './contact-send.js'
 /* กล่องดูรูปใหญ่ ใช้ร่วมกันทั้งหน้าผลงานและหน้ารีวิว
    ทำเองไม่พึ่งไลบรารี เพราะต้องการแค่ เปิด ปิด เลื่อนซ้ายขวา และต้องคุม focus ให้ถูก
    ใช้ <dialog> เพราะได้ modal จริง กด Esc ปิดได้เอง และของข้างหลังกด Tab ไม่ถึง */
@@ -35,7 +36,8 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
     <button type="button" class="lb__btn lb__close" aria-label="ปิด">${svg(ICON.close)}</button>
     <div class="lb__bar">
       <a class="btn btn-orange btn-sm lb__save" href="#" download>เซฟรูป</a>
-      <a class="btn btn-sm bg-paper text-ink border-paper lb__line" href="#" data-track="line" target="_blank" rel="noopener">ส่งคุยใน LINE</a>
+      <a class="btn btn-sm bg-paper text-ink border-paper lb__line" href="#" data-track="line" data-where="lightbox" target="_blank" rel="noopener">ส่งคุยใน LINE</a>
+      <a class="btn btn-sm bg-transparent text-paper border-paper/50 lb__quote" href="#" hidden>ขอราคาแบบนี้</a>
       <p class="lb__hint">มือถือกดค้างที่รูปเพื่อบันทึก · คอมคลิกขวา</p>
     </div>
     <button type="button" class="lb__btn lb__prev" aria-label="รูปก่อนหน้า">${svg(ICON.prev)}</button>
@@ -66,7 +68,7 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
     const code = el.dataset.code && /^TD-/.test(el.dataset.code) ? el.dataset.code : ''
     cap.querySelector('.lb__code').textContent = code
     cap.querySelector('.lb__meta').textContent = el.dataset.meta || (code ? '' : src.alt)
-    cap.querySelector('.lb__note').textContent = code ? 'สีที่เห็นเป็นแนวอ้างอิง ปรับได้ [ยืนยันบริการ]' : ''
+    cap.querySelector('.lb__note').textContent = code ? 'สีที่เห็นเป็นแนวอ้างอิง ปรับสีและรายละเอียดได้ตามเทคนิคที่รองรับ' : ''
     count.textContent = `${at + 1} จาก ${items.length}`
     /* ปุ่มเซฟตั้งชื่อไฟล์เป็นรหัสแบบ เพื่อให้ไฟล์ที่ลูกค้าส่งเข้าไลน์บอกได้เองว่าแบบไหน */
     const save = dlg.querySelector('.lb__save')
@@ -76,7 +78,10 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
       const ext = (/\.(webp|png|jpe?g)(?:$|\?)/i.exec(img.src) || [, 'jpg'])[1]
       save.setAttribute('download', `TEAMDEE${code ? '-' + code : ''}.${ext}`)
     }
-    if (line) line.href = dlg.dataset.lineUrl || '#'
+    /* มีรหัสแบบ = เปิดแชท LINE พร้อมข้อความ "สนใจแบบเสื้อรหัส …" · ปุ่มขอราคาพารหัสไปฟอร์ม */
+    if (line) line.href = lineUrlFor(code, dlg.dataset.lineUrl || '#')
+    const quote = dlg.querySelector('.lb__quote')
+    if (quote) { quote.hidden = !code; quote.href = `${dlg.dataset.contactUrl || '/contact-us/'}?code=${encodeURIComponent(code)}&from=${encodeURIComponent(location.pathname)}` }
     const solo = items.length < 2
     dlg.querySelector('.lb__prev').hidden = solo
     dlg.querySelector('.lb__next').hidden = solo
