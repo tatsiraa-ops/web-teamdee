@@ -1,0 +1,145 @@
+{
+  "_note": "บทความเดิม 12 เรื่องบน team-dee.com (URL-MIGRATION-MAP v22: KEEP ทุก URL) · ดึงจากหน้าสาธารณะ 22 ต.ค. 2026 · ตัวบทความยังอยู่ใน CMS เดิม หน้านี้ใช้แค่ลิงก์ ชื่อ คำโปรย รูปปก · บทความใหม่ใน CMS ต้องเพิ่มที่นี่จนกว่าจะดึงจาก WordPress อัตโนมัติ",
+  "cats": [
+    {
+      "id": "purchasing-guide",
+      "name": "คู่มือจัดซื้อ & สั่งผลิต",
+      "url": "/category/purchasing-guide/",
+      "n": 8
+    },
+    {
+      "id": "fabric-technique",
+      "name": "เจาะลึกเนื้อผ้า & เทคนิคผลิต",
+      "url": "/category/fabric-technique/",
+      "n": 3
+    },
+    {
+      "id": "sportswear-sublimation",
+      "name": "เสื้อกีฬา & งานพิมพ์ลาย",
+      "url": "/category/sportswear-sublimation/",
+      "n": 1
+    }
+  ],
+  "items": [
+    {
+      "slug": "what-is-dft-shirt-printing-durability-guide",
+      "url": "/what-is-dft-shirt-printing-durability-guide/",
+      "title": "สกรีนเสื้อ DFT คืออะไร? ทนไหม ซักแล้วลอกหรือไม่ เจาะลึกก่อนสั่งทำ",
+      "excerpt": "ไขข้อข้องใจ สกรีนเสื้อ DFT(DTF) คืออะไร ทนไหม ซักกี่ครั้งถึงเริ่มลอก พร้อมเจาะลึก 3 ปัจจัยที่ทำให้ฟิล์มแตก และตารางเทียบกับ DTG และบล็อกสกรีน อ่านก่อนสั่งผลิตเสื้อทีม",
+      "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-4@2x-1024x513.png",
+      "date": "2026-10-05",
+      "dateTh": "5 ต.ค. 2026",
+      "cat": "fabric-technique"
+    },
+    {
+      "slug": "sports-running-shirt-fabric-guide",
+      "url": "/sports-running-shirt-fabric-guide/",
+      "title": "เจาะลึก 4 เนื้อผ้าเสื้อกีฬา เสื้อวิ่งยอดนิยม ระบายเหงื่อดี ไม่บาดผิว",
+      "excerpt": "คู่มือเลือกเนื้อผ้าเสื้อกีฬาและเสื้อวิ่ง เจาะลึก 4 สเปกผ้าไมโคร: ดาวกระจาย ลูกกอล์ฟ ทรีคอต Endurance แห้งไว ระบายอากาศดี วิ่งระยะไกลไม่บาดผิว พร้อมตารางเทียบสเปก",
+      "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-2@2x-1024x513.jpg",
+      "date": "2026-10-05",
+      "dateTh": "5 ต.ค. 2026",
+      "cat": "fabric-technique"
+    },
+    {
+      "slug": "polo-shirt-size-chart-uniform-guide",
+      "url": "/polo-shirt-size-chart-uniform-guide/",
+      "title": "เทียบ ตารางไซซ์เสื้อโปโล ยูนิฟอร์มพนักงาน สั่งผลิตล็อตใหญ่ไม่หลุดสเปก",
+      "excerpt": "คู่มือเทียบ ตารางไซซ์เสื้อโปโล ยูนิฟอร์มพนักงาน เจาะลึกความต่าง Body vs Garment Measurement จุดวัด POM ค่าเผื่อความหลวม และตารางไซซ์จริง SS–7XL สั่งล็อตใหญ่ได้พอดีตัว",
+      "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-3@2x-1024x513.png",
+      "date": "2026-10-05",
+      "dateTh": "5 ต.ค. 2026",
+      "cat": "purchasing-guide"
+    },
+    {
+      "slug": "how-to-start-clothing-brand-production-guide",
+      "url": "/how-to-start-clothing-brand-production-guide/",
+      "title": "5 สเต็ปสั่ง ผลิตเสื้อแบรนด์ตัวเอง สเปกพรีเมียม คุมงบอยู่ ไม่เสี่ยงจมทุน",
+      "excerpt": "คู่มือสร้างแบรนด์เสื้อผ้าฉบับสมบูรณ์ 5 ขั้นตอนสั่ง ผลิตเสื้อแบรนด์ตัวเอง ตั้งแต่การล็อกสเปกผ้า GSM, การทำ Tech Pack, บริหาร MOQ, อนุมัติ Sample จนถึงตรวจรับงานมาตรฐาน AQL 2.5",
+      "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-6@2x-1024x513.png",
+      "date": "2026-10-05",
+      "dateTh": "5 ต.ค. 2026",
+      "cat": "purchasing-guide"
+    },
+    {
+      "slug": "garment-production-cost-structure-bulk-order",
+      "url": "/garment-production-cost-structure-bulk-order/",
+      "title": "เจาะโครงสร้าง ราคาสั่งผลิตเสื้อ ล็อต 100 - 10,000 ตัว คิดจากอะไรบ้าง?",
+      "excerpt": "ราคาสั่งผลิตเสื้อระดับอุตสาหกรรมไม่ได้ตั้งขึ้นตามความพึงพอใจ แต่คำนวณจาก สมการต้นทุนมาตรฐานสากล ที่ผูกติดกับ 3 ปัจจัยหลักคือ ต้นทุนเนื้อผ้า (55%–70%),",
+      "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-5@2x-1024x513.png",
+      "date": "2026-10-05",
+      "dateTh": "5 ต.ค. 2026",
+      "cat": "purchasing-guide"
+    },
+    {
+      "slug": "event-sports-day-t-shirt-timeline-management",
+      "url": "/event-sports-day-t-shirt-timeline-management/",
+      "title": "จัดการไทม์ไลน์ สั่งทำเสื้อกิจกรรม กีฬาสีองค์กร ให้ทันวันงาน ไม่โดนเท",
+      "excerpt": "คู่มือวางไทม์ไลน์ สั่งทำเสื้อกิจกรรม และกีฬาสีองค์กร เจาะลึก Lead Time งานสกรีน Sublimation และ DFT วางแผน Backward Planning สกัด 4 จุดคอขวด ส่งมอบทัน 100%",
+      "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-7@2x-1024x513.png",
+      "date": "2026-10-05",
+      "dateTh": "5 ต.ค. 2026",
+      "cat": "purchasing-guide"
+    },
+    {
+      "slug": "sublimation-sportswear-designs",
+      "url": "/sublimation-sportswear-designs/",
+      "title": "50+ แบบเสื้อกีฬาพิมพ์ลาย สุดเท่ปี 2026 เซฟเรฟไปสั่งทำได้เลย",
+      "excerpt": "ส่อง 50+ ไอเดียแบบเสื้อกีฬาพิมพ์ลายสุดเท่ อัปเดตปี 2026 ครบทั้งลายเสื้อฟุตบอลสวยๆ เสื้อวิ่งพิมพ์ลาย เสื้อกีฬาสี และอีสปอร์ต เซฟเรฟไปสั่งทำเสื้อกีฬาพิมพ์ลายกับ TEAMDEE ขึ้นม็อกอัป 3D ฟรี ไม่มีขั้นต่ำ",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-5.webp",
+      "date": "2026-09-08",
+      "dateTh": "8 ก.ย. 2026",
+      "cat": "sportswear-sublimation"
+    },
+    {
+      "slug": "shirt-production-techniques-guide",
+      "url": "/shirt-production-techniques-guide/",
+      "title": "สกรีน DFT งานปัก หรือพิมพ์ลาย? เลือก เทคนิคการผลิตเสื้อ แบบไหนให้เหมาะกับทีม",
+      "excerpt": "เทียบชัด 3 เทคนิคการผลิตเสื้อยอดนิยม งานปักคอมพิวเตอร์ สกรีนเสื้อ DFT และพิมพ์ลายซับลิเมชัน ทำเสื้อบริษัทหรือเสื้อทีมควรเลือกแบบไหนให้ตอบโจทย์ภาพลักษณ์ คุ้มค่างบประมาณ และตรงตามสเปกการใช้งาน",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-6.webp",
+      "date": "2026-09-08",
+      "dateTh": "8 ก.ย. 2026",
+      "cat": "fabric-technique"
+    },
+    {
+      "slug": "polo-shirt-fabric-guide",
+      "url": "/polo-shirt-fabric-guide/",
+      "title": "ทริคเลือกเนื้อผ้า สั่งผลิตเสื้อโปโล พนักงาน ใส่สบาย ไม่ยับ ไม่ต้องรีด",
+      "excerpt": "เจาะลึก 3 เนื้อผ้าเสื้อโปโลยอดฮิตสำหรับพนักงานออฟฟิศ ทั้งผ้าไมโคร จูติไมโคร และดรายเทค สั่งผลิตเสื้อโปโลแบบไหนใส่สบาย ระบายอากาศดี ไม่ต้องรีด เช็กก่อนสั่งได้ที่นี่",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-4.webp",
+      "date": "2026-09-08",
+      "dateTh": "8 ก.ย. 2026",
+      "cat": "purchasing-guide"
+    },
+    {
+      "slug": "how-to-design-sportswear-color-guide",
+      "url": "/how-to-design-sportswear-color-guide/",
+      "title": "4 เคล็ดลับ ออกแบบเสื้อกีฬา ให้สีสดตรงปก ภาพไม่แตกเมื่อผลิตจริง",
+      "excerpt": "เจาะลึก 4 ทริคเตรียมไฟล์ ออกแบบเสื้อกีฬา ให้สีสดตรงปก งานพิมพ์ไม่แตก ไม่เบลอ เทียบชัดเจนระหว่าง RGB กับ CMYK พร้อมเทคนิคส่ง ผลิตเสื้อพิมพ์ลาย ให้ได้งานตรงตามสเปกและ CI แบรนด์",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-7.webp",
+      "date": "2026-09-08",
+      "dateTh": "8 ก.ย. 2026",
+      "cat": "purchasing-guide"
+    },
+    {
+      "slug": "how-to-choose-garment-factory-checklist",
+      "url": "/how-to-choose-garment-factory-checklist/",
+      "title": "5 เช็กลิสต์เลือกโรงงานรับผลิตเสื้อ ไม่ให้โดนเท งานตรงสเปก ส่งตรงเวลา",
+      "excerpt": "วิธีคัดกรองโรงงานรับผลิตเสื้อไม่ให้โดนเทงาน ส่อง 5 มาตรฐานโรงงานผลิตเสื้อครบวงจร งานตัดเย็บประณีต มีแบบ 3D ตรวจก่อนตัดเย็บจริง ส่งตรงเวลา ไม่มีบวกเพิ่ม",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-3.webp",
+      "date": "2026-09-08",
+      "dateTh": "8 ก.ย. 2026",
+      "cat": "purchasing-guide"
+    },
+    {
+      "slug": "choose-uniform-manufacturer-checklist",
+      "url": "/choose-uniform-manufacturer-checklist/",
+      "title": "5 เช็กลิสต์เลือกบริษัทรับผลิตเสื้อยูนิฟอร์ม สวยตรงปก ไม่โดนเท",
+      "excerpt": "หมดปัญหาเสื้อไม่ตรงปก รวม 5 เช็กลิสต์เลือกบริษัทรับผลิตเสื้อยูนิฟอร์มและสั่งผลิตเสื้อโปโลองค์กรระดับมืออาชีพ เนื้อผ้าพรีเมียม ขึ้นแบบ 3D ฟรี พร้อมใบกำกับภาษีเต็มรูปแบบ",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-2.webp",
+      "date": "2026-09-08",
+      "dateTh": "8 ก.ย. 2026",
+      "cat": "purchasing-guide"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{{!-- แม่แบบหน้ารายละเอียดแบบ /design-[รหัส]/ (v22: H1 → ภาพหน้า-หลัง → รายละเอียดและสิ่งที่ต้องตรวจ → ไปต่อจากแบบนี้ → ก่อนสั่งผลิต) · ข้อมูลจาก src/js/design-page.js --}}
+<section class="band-hero relative overflow-hidden">
+  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+  <div class="wrap relative py-12 md:py-16 grid lg:grid-cols-[1fr_1.1fr] gap-10 items-center">
+    <div>
+      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'designs'}}">แบบเสื้อ</a>{{#if designItem.use}}<span aria-hidden="true">/</span><a href="{{url 'galleries' designItem.use.id}}">{{designItem.use.name}}</a>{{/if}}<span aria-hidden="true">/</span><span aria-current="page">{{designItem.code}}</span></nav>
+      {{#unless wp}}<p class="pending-ribbon mt-6">แม่แบบหน้าแบบเสื้อตาม v22 · รหัส TD ในต้นแบบยังไม่ใช่รหัสจริง (รอถอดรหัส GFN… จากทีมดีไซน์) · ได้รหัสจริง ภาพ และสิทธิใช้งานแล้วจึงสร้างหน้าแบบละหน้า</p>{{/unless}}
+      <h1 class="t-display text-[clamp(30px,4.4vw,52px)] text-ink mt-6">{{designItem.h1}}</h1>
+      <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[48ch] mt-4">{{designItem.lead}}</p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a class="btn btn-orange btn-lg" href="{{designItem.quoteHref}}">ขอราคาจากแบบ {{designItem.code}}</a>
+      </div>
+    </div>
+    <figure class="bg-paper border border-line rounded-plate overflow-hidden">
+      <img src="{{designItem.img}}" width="1080" height="720" alt="แบบ{{designItem.garmentName}} รหัส {{designItem.code}} ด้านหน้าและด้านหลัง" class="w-full h-auto" fetchpriority="high">
+    </figure>
+  </div>
+</section>
+
+<section class="wrap section">
+  <h2 class="t-display text-[clamp(24px,3vw,34px)]">รายละเอียดและสิ่งที่ต้องตรวจ</h2>
+  <div class="overflow-x-auto border-2 border-ink rounded-card mt-6 max-w-[860px]" tabindex="0" role="region" aria-label="รายละเอียดแบบ เลื่อนซ้ายขวาได้">
+    <table class="w-full min-w-[480px] text-[17px]">
+      <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">หัวข้อ</th><th scope="col" class="text-left font-bold px-5 py-4">ข้อมูลประกอบการตัดสินใจ</th></tr></thead>
+      <tbody>{{#each designItem.rows}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4 whitespace-nowrap">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}</tbody>
+    </table>
+  </div>
+</section>
+
+<section class="bg-shell border-y border-line">
+  <div class="wrap section grid md:grid-cols-2 gap-10">
+    <div>
+      <h2 class="t-display text-[clamp(24px,3vw,34px)]">ไปต่อจากแบบนี้</h2>
+      <ul class="mt-5 space-y-1">
+        {{#if designItem.use}}<li><a class="pp-more" href="{{url 'uses' designItem.use.id}}">สั่งทำ{{designItem.use.name}}<span class="arw" aria-hidden="true">&rarr;</span></a></li>{{/if}}
+        <li><a class="pp-more" href="{{url 'products' 'print'}}">ดูสเปกเสื้อพิมพ์ลาย<span class="arw" aria-hidden="true">&rarr;</span></a></li>
+        <li><a class="pp-more" href="{{#if designItem.use}}{{url 'galleries' designItem.use.id}}{{else}}{{url 'designs'}}{{/if}}">ดูแบบอื่น<span class="arw" aria-hidden="true">&rarr;</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="t-display text-[clamp(24px,3vw,34px)]">ก่อนสั่งผลิต</h2>
+      <p class="t-body mt-4">ส่งรหัสแบบพร้อมสีทีม โลโก้ และข้อความที่ต้องการ ทีมดีตรวจแบบและปรับให้ก่อนยืนยันผลิต</p>
+      <a class="pp-more mt-3 inline-flex" href="{{url 'guides' 'logo'}}">เตรียมโลโก้และรายการสั่งทำ<span class="arw" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>

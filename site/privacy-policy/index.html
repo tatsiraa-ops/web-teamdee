@@ -3,7 +3,7 @@
 <head>
   {{> head}}
   <title>นโยบายความเป็นส่วนตัว | TEAMDEE</title>
-  <meta name="description" content="นโยบายความเป็นส่วนตัวของ TEAMDEE บริษัท ดีดี ฟินิกซ์ จำกัด อธิบายว่าเราเก็บข้อมูลอะไรจากการติดต่อสั่งทำเสื้อ ใช้ทำอะไร เก็บนานแค่ไหน และคุณขอแก้หรือลบได้อย่างไร">
+  <meta name="description" content="แม่แบบข้อมูลความเป็นส่วนตัว รอตรวจสอบตามระบบและกระบวนการใช้งานจริง">
 </head>
 <body>
 {{> siteHeader}}
@@ -45,9 +45,9 @@
       <h2 class="t-display text-[clamp(22px,2.6vw,30px)] mt-12">ติดต่อเรื่องข้อมูลส่วนบุคคล</h2>
       <dl class="mt-5 divide-y divide-line border-t border-line">
         <div class="flex flex-wrap justify-between gap-4 py-3.5"><dt class="t-sm">ผู้ควบคุมข้อมูล</dt><dd class="text-[17px] font-bold">บริษัท ดีดี ฟินิกซ์ จำกัด</dd></div>
-        <div class="flex flex-wrap justify-between gap-4 py-3.5"><dt class="t-sm">ที่อยู่จดทะเบียน</dt><dd class="text-[17px] font-bold">[รอยืนยันจากฝ่ายบริษัท]</dd></div>
+{{#unless wp}}        <div class="flex flex-wrap justify-between gap-4 py-3.5"><dt class="t-sm">ที่อยู่จดทะเบียน</dt><dd class="text-[17px] font-bold">[รอยืนยันจากฝ่ายบริษัท]</dd></div>{{/unless}}
         <div class="flex flex-wrap justify-between gap-4 py-3.5"><dt class="t-sm">โทรศัพท์</dt><dd class="text-[17px] font-bold tabular-nums"><a class="hover:underline decoration-orange decoration-2 underline-offset-4" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a></dd></div>
-        <div class="flex flex-wrap justify-between gap-4 py-3.5"><dt class="t-sm">อีเมลเรื่องข้อมูลส่วนบุคคล</dt><dd class="text-[17px] font-bold">[รอยืนยัน]</dd></div>
+{{#unless wp}}        <div class="flex flex-wrap justify-between gap-4 py-3.5"><dt class="t-sm">อีเมลเรื่องข้อมูลส่วนบุคคล</dt><dd class="text-[17px] font-bold">[รอยืนยัน]</dd></div>{{/unless}}
       </dl>
       <p class="t-xs mt-6">ปรับปรุงล่าสุด 1 ต.ค. 2026</p>
     </div>

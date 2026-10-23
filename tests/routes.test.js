@@ -8,13 +8,13 @@ const url = makeUrl(routes)
 
 test('หน้าเดี่ยวคืน URL ตรงตามตาราง', () => {
   assert.equal(url('home'), '/')
-  assert.equal(url('contact'), '/contact/')
+  assert.equal(url('contact'), '/contact-us/')
   assert.equal(url('calculations'), '/calculations/')
 })
 
 test('หน้าที่มีหลายตัวรับได้ทั้ง key คู่ id และแบบจุด', () => {
   assert.equal(url('products', 'print'), '/sublimation/')
-  assert.equal(url('products.jersey'), '/oversize/')
+  assert.equal(url('products.jersey'), '/custom-oversize-jerseys/')
   assert.equal(url('guides', 'size'), '/size-chart/')
 })
 
@@ -43,14 +43,14 @@ test('URL ล็อกทุกตัวต้องมีหน้าอยู�
 test('แปลง URL กลับเป็นชนิดหน้าและ id ได้', () => {
   const map = pageFor(routes, ['gov-docs'])
   assert.deepEqual(map['/sublimation/'], { kind: 'products', id: 'print' })
-  assert.deepEqual(map['/solutions/'], { kind: 'uses', id: 'index' })
+  assert.deepEqual(map['/sport/'], { kind: 'uses', id: 'sport' })
   assert.deepEqual(map['/blog/gov-docs/'], { kind: 'articles', id: 'gov-docs' })
-  assert.deepEqual(map['/contact/'], { kind: 'contact', id: null })
+  assert.deepEqual(map['/contact-us/'], { kind: 'contact', id: null })
 })
 
 test('ตั้ง URL ซ้ำสองหน้าต้องพังทันที', () => {
-  const bad = { ...routes, faq: '/contact/' }
-  assert.throws(() => pageFor(bad, []), /\/contact\//)
+  const bad = { ...routes, faq: '/contact-us/' }
+  assert.throws(() => pageFor(bad, []), /\/contact-us\//)
   assert.doesNotThrow(() => pageFor(routes, ['a']))
 })
 

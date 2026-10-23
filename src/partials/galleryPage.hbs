@@ -1,0 +1,63 @@
+{{!-- แกลเลอรีแบบเสื้อพิมพ์ลายรายกลุ่ม 10 หน้า ตาม Wireframe v22 (22 ต.ค. 2026)
+     ข้อความ: src/data/design-pages.json · แบบ: designs.json ที่ติดแท็กกลุ่มนี้ (vite designsFor)
+     กลุ่มที่ยังไม่มีแบบ: หน้าแจ้งตรงๆ + noindex (ตั้งใน index.html ของหน้า) จนกว่าจะมีแบบจริง --}}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"แบบเสื้อ","item":"{{site.baseUrl}}{{url 'designs'}}"},{"@type":"ListItem","position":3,"name":"{{dp.h1}}"}]}</script>
+
+<section class="band-hero relative overflow-hidden">
+  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+  <div class="wrap relative py-12 md:py-16">
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'designs'}}">แบบเสื้อ</a><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
+    <h1 class="t-display text-[clamp(30px,4.4vw,52px)] text-ink mt-7 max-w-[24ch]">{{dp.h1}}</h1>
+    <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[60ch] mt-5">{{dp.lead}}</p>
+    <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-ink hover:border-ink mt-8 max-sm:whitespace-normal max-sm:text-center" href="{{url 'uses' item.id}}">{{dp.back}}</a>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+    <h2 class="t-display text-[clamp(24px,3vw,34px)]">{{dp.gridH}}</h2>
+    <a class="pp-more" href="{{url 'designs'}}">ดูแบบเสื้อพิมพ์ลายทุกกลุ่ม<span class="arw" aria-hidden="true">&rarr;</span></a>
+  </div>
+  {{#if gallery.items.length}}
+  <p class="t-sm tabular-nums mb-5" role="status">{{gallery.items.length}} แบบ · กดขยาย เซฟรูป (มีรหัสอยู่ในภาพ) แล้วส่งคุยใน LINE</p>
+  <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" id="galGrid" data-line-url="{{site.lineUrl}}">
+    {{#each gallery.items}}
+    {{#if this.square}}
+    <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="" data-meta="แบบจากคลังผลงานทีมดี">
+      <img src="{{this.img}}" width="1080" height="1080" loading="lazy" decoding="async" alt="{{this.alt}}" class="w-full h-full object-contain">
+    </figure>
+    {{else}}
+    <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="{{this.code}}" data-meta="{{this.meta}}">
+      <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 33vw, 50vw" width="1080" height="720" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง" class="w-full h-full object-contain">
+    </figure>
+    {{/if}}
+    {{/each}}
+  </div>
+  {{else}}
+  <div class="bg-shell border border-line rounded-plate p-7 md:p-9">
+    <p class="t-lead max-w-[56ch]">ยังไม่มีแบบ{{item.name}}ขึ้นในคลังบนเว็บ ส่งภาพอ้างอิงหรือเล่าโจทย์มาให้ทีมออกแบบช่วยคิดได้ หรือดูแบบกลุ่มอื่นเป็นแนวทางก่อน</p>
+    {{#unless wp}}<p class="pending-ribbon mt-5">รอแบบจริงของกลุ่มนี้จากทีมดีไซน์ · หน้านี้ตั้ง noindex ไว้จนกว่าจะมีแบบ</p>{{/unless}}
+    <div class="flex flex-wrap gap-3 mt-6">
+      <a class="btn btn-orange" href="{{site.lineUrl}}" data-track="line">ส่งภาพอ้างอิงทาง LINE</a>
+      <a class="btn btn-line" href="{{url 'designs'}}">ดูแบบเสื้อทุกกลุ่ม</a>
+    </div>
+  </div>
+  {{/if}}
+</section>
+
+<section class="bg-shell border-y border-line">
+  <div class="wrap section grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+    <div>
+      <h2 class="t-display text-[clamp(24px,3vw,34px)]">{{dp.checkH}}</h2>
+      <ul class="mt-5 space-y-2.5">{{#each dp.check}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
+    </div>
+    <div class="bg-paper border border-line rounded-plate p-7">
+      <h2 class="t-display text-[clamp(22px,2.6vw,30px)]">{{dp.cta.h}}</h2>
+      <p class="t-body mt-3">{{dp.cta.p}}</p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <a class="btn btn-orange gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+        <a class="btn btn-line" href="{{url 'contact'}}?u={{item.id}}&amp;from=designs">ฝากข้อมูลให้ติดต่อกลับ</a>
+      </div>
+    </div>
+  </div>
+</section>

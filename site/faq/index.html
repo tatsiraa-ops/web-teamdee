@@ -2,36 +2,36 @@
 <html lang="th">
 <head>
   {{> head}}
-  <title>คำถามที่พบบ่อย · สั่งทำเสื้อทีมต้องรู้อะไรบ้าง | TEAMDEE</title>
-  <meta name="description" content="รวมคำตอบเรื่องสั่งทำเสื้อทีม 7 หมวด เริ่มต้นเลือกสินค้า ผ้าและไซซ์ ราคาและการชำระเงิน การอนุมัติแบบ ระยะเวลาผลิต จัดส่งหลังการขาย และเอกสารบริษัท ถามทางไลน์ได้">
+  <title>คำถามก่อนสั่งทำเสื้อทีม | TEAMDEE</title>
+  <meta name="description" content="รวมคำถามเรื่องแบบเสื้อ โลโก้ ผ้า ไซซ์ การขอราคา ขั้นต่ำ ระยะเวลาผลิต การจัดส่ง และบริการหลังรับเสื้อจากทีมดี">
 </head>
 <body>
 {{> siteHeader active="learn"}}
 
 <main id="main">
-  <section class="band-ink relative overflow-hidden">
+  <section class="band-hero relative overflow-hidden">
     <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
     <div class="wrap relative py-12 md:py-16">
       <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>คู่มือและบทความ</span><span aria-hidden="true">/</span><span aria-current="page">คำถามที่พบบ่อย</span></nav>
-      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-7">คำถามที่พบบ่อย</h1>
-      <p class="text-[18px] leading-[1.8] text-paper/75 max-w-[58ch] mt-5">คำตอบชุดเดียวกับที่ทีมขายใช้ตอบ ทุกข้อมีลิงก์ของตัวเอง กดที่คำถามแล้วคัดลอกลิงก์ส่งต่อได้เลย</p>
+      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">คำถามก่อนสั่งทำเสื้อทีม</h1>
+      <p class="text-[18px] leading-[1.8] text-ink-2 max-w-[58ch] mt-5">คำตอบชุดเดียวกับที่ทีมขายใช้ตอบ ทุกข้อมีลิงก์ของตัวเอง กดที่คำถามแล้วคัดลอกลิงก์ส่งต่อได้เลย</p>
     </div>
   </section>
 
-  <!-- 1 · คำถามสำคัญ 5-6 ข้อ · ชุดเดียวกับหน้าแรก -->
+  <!-- 1 · คำถามสำคัญ · ชุดเดียวกับหน้าแรก (ไม่เขียนจำนวนข้อในหัวข้อ เพราะเว็บจริงตัดข้อที่ยังรอยืนยัน) -->
   <section class="wrap section" aria-labelledby="top-h">
     <div class="max-w-[68ch] mb-7">
       <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามสำคัญ</span>
-      <h2 id="top-h" class="t-display text-[clamp(26px,3.4vw,42px)]">หกข้อที่คนถามก่อนตัดสินใจ</h2>
+      <h2 id="top-h" class="t-display text-[clamp(26px,3.4vw,42px)]">คำถามที่คนถามบ่อยก่อนตัดสินใจ</h2>
     </div>
     <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
       {{#each faq.home}}
       <div class="hs-accordion border-b border-line" id="top-{{@index}}">
-        <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-5 min-h-tap font-bold text-[18px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-controls="topp-{{@index}}">
+        <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-5 min-h-tap font-bold text-[18px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-expanded="false" aria-controls="topp-{{@index}}">
           <span>{{this.[0]}}</span>
           <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
-        <div id="topp-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region">
+        <div id="topp-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
           <p class="t-body pb-6">{{this.[1]}}</p>
         </div>
       </div>
@@ -58,11 +58,11 @@
         <div class="hs-accordion-group border-t-2 border-ink mt-5">
           {{#each this.items}}
           <div class="hs-accordion border-b border-line scroll-mt-28" id="{{../id}}-{{@index}}">
-            <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-5 min-h-tap font-bold text-[18px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-controls="{{../id}}-{{@index}}-a">
+            <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-5 min-h-tap font-bold text-[18px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-expanded="false" aria-controls="{{../id}}-{{@index}}-a">
               <span>{{this.[0]}}</span>
               <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
             </button>
-            <div id="{{../id}}-{{@index}}-a" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region">
+            <div id="{{../id}}-{{@index}}-a" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
               <p class="t-body pb-4">{{this.[1]}}</p>
               <p class="pb-6"><a class="text-[15px] font-semibold text-ink-3 underline decoration-line-2 underline-offset-4 hover:text-ink inline-flex items-center min-h-[44px]" href="#{{../id}}-{{@index}}" data-copy-link>คัดลอกลิงก์คำถามนี้</a></p>
             </div>
@@ -83,11 +83,11 @@
 
   <section class="band-orange">
     <div class="wrap py-14 md:py-20 text-center">
-      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">ยังไม่เจอคำตอบ</h2>
-      <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[46ch] mx-auto mt-4">ถามทีมดีได้โดยตรง ตอบตามเวลาทำการจริง</p>
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">ยังมีเรื่องที่อยากถาม? คุยกับทีมดีได้เลย</h2>
+      <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[46ch] mx-auto mt-4">บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้</p>
       <div class="flex flex-wrap justify-center gap-3 mt-8">
-        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
-        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+        <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a>
       </div>
     </div>
   </section>

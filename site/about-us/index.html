@@ -2,116 +2,92 @@
 <html lang="th">
 <head>
   {{> head}}
-  <title>รู้จักทีมดี · Team Identity Partner ที่ช่วยคิด ช่วยจัดการ ช่วยจบงาน | TEAMDEE</title>
-  <meta name="description" content="ทีมดีคือใคร ทำไมถึงเรียกตัวเองว่า Team Identity Partner จุดเริ่มต้น วิธีทำงาน แนวคิด 3WIN คนและสถานที่จริงในโรงงาน และข้อมูลบริษัทที่ตรวจสอบได้ นัดเข้าดูได้">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"TEAMDEE","legalName":"บริษัท ดีดี ฟินิกซ์ จำกัด","description":"โรงงานรับออกแบบและผลิตเสื้อทีมครบวงจร","telephone":"{{site.phonePrimary}}","url":"{{site.baseUrl}}","logo":"{{site.baseUrl}}/apple-touch-icon.png"}</script>
+  <title>รู้จักทีมดี บริการรับทำเสื้อทีมในนนทบุรี | TEAMDEE</title>
+  <meta name="description" content="รู้จัก TEAMDEE ทีมงาน วิธีดูแลการสั่งทำเสื้อ และออฟฟิศในนนทบุรี พร้อมข้อมูลสถานที่และการติดต่อก่อนเริ่มทำเสื้อทีม">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"TEAMDEE","legalName":"บริษัท ดีดี ฟินิกซ์ จำกัด","description":"รับทำเสื้อทีม ช่วยออกแบบและดูแลรายละเอียดจนส่งมอบ","telephone":"{{site.phonePrimary}}","url":"{{site.baseUrl}}","logo":"{{site.baseUrl}}/apple-touch-icon.png"}</script>
 </head>
 <body>
 {{> siteHeader active="about"}}
 
 <main id="main">
 
-  <!-- 0 · ทางลัดในหน้า -->
-  <section class="band-ink relative overflow-hidden">
-    <img src="/img/hero/factory-sign.jpg" alt="" width="1600" height="1067" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-[0.18]">
-    <div class="absolute inset-0 bg-[linear-gradient(150deg,rgba(0,0,0,.8)_0%,rgba(0,0,0,.92)_60%,#000_100%)]"></div>
+  <!-- โครงตาม Wireframe v22 (about): จุดเริ่มต้น → ช่วยคิด·จัดการ·จบงาน → 3WIN → ทีมงาน/ออฟฟิศ/การผลิต → ข้อมูลบริษัท → ติดต่อ → นัดหมายที่ออฟฟิศ
+       v22 + storytelling: ไม่อ้างว่าเป็นเจ้าของโรงงาน (ทีมดีประสานงานผลิตกับโรงงานพาร์ตเนอร์) -->
+  <section class="band-hero relative overflow-hidden">
     <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
     <div class="wrap relative py-14 md:py-20">
       <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">รู้จักทีมดี</span></nav>
-      <h1 class="t-display text-[clamp(32px,5vw,62px)] text-paper mt-7">เราไม่ได้ขายเสื้อ เราสร้างตัวตนของทีม</h1>
-      <p class="text-[19px] leading-[1.75] text-paper/75 max-w-[54ch] mt-6">{{site.belief}}</p>
-
+      <h1 class="t-display text-[clamp(32px,5vw,62px)] text-ink mt-7">รู้จัก TEAMDEE บริการรับทำเสื้อทีมในนนทบุรี</h1>
+      <p class="text-[19px] leading-[1.75] text-ink-2 max-w-[58ch] mt-6">ทีมดีช่วยคิดแบบ ช่วยจัดการรายละเอียด และช่วยประสานงานจนรับเสื้อ ทำความรู้จักทีมงาน สถานที่ และขั้นตอนการทำงานก่อนเริ่มสั่งทำ</p>
+      <p class="text-[18px] font-bold text-ink mt-4">{{site.belief}}</p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a class="btn btn-orange btn-lg" href="{{url 'projects'}}">ดูผลงาน</a>
+        <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">ติดต่อทีมดี</a>
+      </div>
       <nav class="chiprail mt-9" aria-label="ทางลัดในหน้า">
-        <a class="chip" href="#who">ทีมดีคือใคร</a>
         <a class="chip" href="#story">จุดเริ่มต้น</a>
         <a class="chip" href="#how">วิธีทำงาน</a>
         <a class="chip" href="#win">3WIN</a>
-        <a class="chip" href="#place">คนและสถานที่</a>
+        <a class="chip" href="#team">ทีมงานและออฟฟิศ</a>
         <a class="chip" href="#company">ข้อมูลบริษัท</a>
+        <a class="chip" href="#office">นัดหมาย</a>
       </nav>
     </div>
   </section>
 
-  <!-- 1 · ทีมดีคือใคร -->
-  <section class="wrap section scroll-mt-28" id="who" aria-labelledby="who-h">
-    <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
-      <div>
-        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>{{site.positioning}}</span>
-        <h2 id="who-h" class="t-display text-[clamp(28px,3.8vw,46px)]">Team Identity Partner แปลว่าอะไรสำหรับคุณ</h2>
-        <p class="t-body mt-5">แปลว่าเราไม่ได้รอให้คุณส่งไฟล์มาแล้วผลิตตามนั้น แต่เข้าไปช่วยตั้งแต่ตอนที่คุณยังไม่รู้ว่าอยากได้อะไร</p>
-        <p class="t-body mt-4">เสื้อทีมไม่ใช่แค่เครื่องแต่งกาย แต่เป็นสิ่งที่คนในทีมใส่แล้วรู้สึกว่าเป็นพวกเดียวกัน และเป็นสิ่งที่คนนอกเห็นแล้วจำองค์กรคุณได้ งานของเราคือทำให้สองอย่างนี้เกิดขึ้นพร้อมกัน</p>
-        <ul class="grid sm:grid-cols-2 gap-4 mt-8">
-          {{#each site.pillars}}
-          <li class="border-l-4 border-orange pl-4 py-1">
-            <p class="text-[15px] font-bold tracking-[0.12em] text-ink-3">{{this.en}}</p>
-            <p class="text-[18px] font-bold mt-0.5">{{this.th}}</p>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-      <figure class="relative">
-        <div class="overflow-hidden rounded-plate bg-shell aspect-[4/3]">
-          <img src="/img/real/r25.jpg" alt="ทีมงานและลูกค้าของ TEAMDEE ในวันส่งมอบงานจริง" width="900" height="675" loading="lazy" decoding="async" class="w-full h-full object-cover">
-        </div>
-        <figcaption class="tag tag-ink absolute left-4 bottom-4">งานผลิตจริง</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- 2 · จุดเริ่มต้น -->
+  <!-- 1 · จุดเริ่มต้น (เรื่องจาก teamdee-storytelling · ปี 2018 ยืนยันแล้ว 22 ต.ค.) -->
   <section class="bg-shell border-y border-line scroll-mt-28" id="story" aria-labelledby="story-h">
     <div class="wrap section">
       <div class="max-w-[68ch] mb-9">
-        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoClock}}</span>จุดเริ่มต้น</span>
-        <h2 id="story-h" class="t-display text-[clamp(28px,3.8vw,46px)]">เราเริ่มจากการทำเสื้อให้ทีมกีฬา</h2>
-        <p class="t-lead mt-4">แล้วค่อยๆ ขยายมาทำให้องค์กร หน่วยงาน และสถานศึกษา เพราะโจทย์ที่เจอซ้ำๆ คือเรื่องเดียวกัน คนสั่งอยากให้คนใส่ภูมิใจ</p>
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoClock}}</span>{{homeV4.location.story.year}}</span>
+        <h2 id="story-h" class="t-display text-[clamp(28px,3.8vw,46px)]">จุดเริ่มต้นของทีมดี</h2>
+        <p class="t-lead mt-4">{{homeV4.location.story.h}}</p>
+        {{#each homeV4.location.story.p}}<p class="t-body mt-4">{{this}}</p>{{/each}}
       </div>
-
       <ol class="border-t-2 border-ink">
         <li class="why-row"><span class="why-row__no">01</span><div class="why-row__body"><h3 class="why-row__t">เริ่มจากเสื้อทีมกีฬา</h3><p class="why-row__d">งานแรกๆ คือเสื้อแข่งที่ต้องทำชื่อและเบอร์รายคน ซึ่งสอนเราเรื่องความแม่นของรายละเอียดตั้งแต่วันแรก</p></div><span class="why-row__ico">{{> icoShirt}}</span></li>
         <li class="why-row"><span class="why-row__no">02</span><div class="why-row__body"><h3 class="why-row__t">ขยายมาทำงานองค์กร</h3><p class="why-row__d">โจทย์เปลี่ยนจากความเร็วเป็นความสม่ำเสมอ เพราะองค์กรต้องสั่งซ้ำและสีต้องตรงทุกล็อต</p></div><span class="why-row__ico">{{> icoDoc}}</span></li>
-        <li class="why-row"><span class="why-row__no">03</span><div class="why-row__body"><h3 class="why-row__t">ทำครบในที่เดียว</h3><p class="why-row__d">พิมพ์ ปัก และสกรีนฟิล์ม อยู่ในที่เดียวกัน ทำให้คุมคุณภาพและคุมเวลาได้เองโดยไม่ต้องส่งต่อให้ใคร</p></div><span class="why-row__ico">{{> icoPrinter}}</span></li>
+        <li class="why-row"><span class="why-row__no">03</span><div class="why-row__body"><h3 class="why-row__t">ทำเสื้อที่เดียวครบ จบที่ทีมดี</h3><p class="why-row__d">ลูกค้าคุยกับทีมเดียวตั้งแต่ออกแบบ ตรวจรายละเอียด ประสานการผลิต จนส่งถึงมือ ไม่ต้องตามงานหลายที่เอง</p></div><span class="why-row__ico">{{> icoPrinter}}</span></li>
         <li class="why-row"><span class="why-row__no">04</span><div class="why-row__body"><h3 class="why-row__t">วันนี้ในชื่อ TEAMDEE</h3><p class="why-row__d">ในนามบริษัท ดีดี ฟินิกซ์ จำกัด ทำงานกับทั้งบริษัทเอกชน หน่วยงานภาครัฐ สถานศึกษา ทีมกีฬา และผู้จัดกิจกรรม</p></div><span class="why-row__ico">{{> icoSpark}}</span></li>
       </ol>
-      <p class="t-xs mt-7 max-w-[60ch]">[ปีที่ก่อตั้งและลำดับเหตุการณ์รอยืนยันจากฝ่ายบริษัท — ข้อมูลเดิมระบุไม่ตรงกันระหว่างเว็บไซต์กับคู่มือแบรนด์]</p>
     </div>
   </section>
 
-  <!-- 3 · วิธีทำงาน -->
-  <section class="band-ink relative overflow-hidden scroll-mt-28" id="how" aria-labelledby="how-h">
+  <!-- 2 · ช่วยคิด ช่วยจัดการ ช่วยจบงาน -->
+  <section class="band-soft relative overflow-hidden scroll-mt-28" id="how" aria-labelledby="how-h">
     <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
     <div class="wrap section">
       <div class="max-w-[68ch] mb-11">
         <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoCube}}</span>วิธีทำงาน</span>
-        <h2 id="how-h" class="t-display text-[clamp(28px,3.8vw,46px)] text-paper">ช่วยคิด ช่วยจัดการ ช่วยจบงาน</h2>
-        <p class="text-[18px] leading-[1.8] text-paper/70 mt-4">สามคำนี้ไม่ใช่คำขวัญ นี่คือสิ่งที่เราทำจริงในทุกงาน</p>
+        <h2 id="how-h" class="t-display text-[clamp(28px,3.8vw,46px)] text-ink">ช่วยคิด · ช่วยจัดการ · ช่วยจบงาน</h2>
+        <p class="text-[18px] leading-[1.8] text-ink-2 mt-4">สามคำนี้ไม่ใช่คำขวัญ นี่คือสิ่งที่เราทำจริงในทุกงาน</p>
       </div>
       <ol class="grid md:grid-cols-3 gap-8">
         <li>
-          <p class="t-display text-[44px] text-orange leading-none tabular-nums">01</p>
-          <h3 class="text-[23px] text-paper mt-3">ช่วยคิด</h3>
-          <p class="text-[17px] leading-[1.75] text-paper/70 mt-2.5">ลูกค้าส่วนใหญ่มาหาเราตอนยังไม่มีแบบ เราถามว่าใครใส่ ใส่ตอนไหน อยากให้คนเห็นแล้วรู้สึกยังไง แล้วดีไซเนอร์ขึ้นแบบ 3D ให้ดู แก้จนพอใจ</p>
+          <p class="t-display text-[44px] text-ink leading-none tabular-nums">01</p>
+          <h3 class="text-[23px] text-ink mt-3">ช่วยคิด</h3>
+          <p class="text-[17px] leading-[1.75] text-ink-2 mt-2.5">ลูกค้าส่วนใหญ่มาหาเราตอนยังไม่มีแบบ เราถามว่าใครใส่ ใส่ตอนไหน อยากให้คนเห็นแล้วรู้สึกยังไง แล้วดีไซเนอร์ขึ้นแบบ 3D ให้ดู แก้จนพอใจ</p>
         </li>
         <li>
-          <p class="t-display text-[44px] text-orange leading-none tabular-nums">02</p>
-          <h3 class="text-[23px] text-paper mt-3">ช่วยจัดการ</h3>
-          <p class="text-[17px] leading-[1.75] text-paper/70 mt-2.5">เรื่องที่ทำให้งานช้าไม่ใช่การผลิต แต่คือการรวบรวมไซซ์จากหลายคน การอนุมัติหลายขั้น และเอกสารจัดซื้อ เราช่วยทั้งสามเรื่องนี้</p>
+          <p class="t-display text-[44px] text-ink leading-none tabular-nums">02</p>
+          <h3 class="text-[23px] text-ink mt-3">ช่วยจัดการ</h3>
+          <p class="text-[17px] leading-[1.75] text-ink-2 mt-2.5">เรื่องที่ทำให้งานช้าไม่ใช่การผลิต แต่คือการรวบรวมไซซ์จากหลายคน การอนุมัติหลายขั้น และเอกสารจัดซื้อ เราช่วยทั้งสามเรื่องนี้</p>
         </li>
         <li>
-          <p class="t-display text-[44px] text-orange leading-none tabular-nums">03</p>
-          <h3 class="text-[23px] text-paper mt-3">ช่วยจบงาน</h3>
-          <p class="text-[17px] leading-[1.75] text-paper/70 mt-2.5">ถ่ายรูปงานจริงให้ดูก่อนแพ็ก ส่งถึงที่ และเก็บสเปกทั้งหมดไว้ให้ รอบหน้าสั่งซ้ำแจ้งแค่จำนวนกับไซซ์</p>
+          <p class="t-display text-[44px] text-ink leading-none tabular-nums">03</p>
+          <h3 class="text-[23px] text-ink mt-3">ช่วยจบงาน</h3>
+          <p class="text-[17px] leading-[1.75] text-ink-2 mt-2.5">ถ่ายรูปงานจริงให้ดูก่อนแพ็ก ส่งถึงที่ และเก็บสเปกทั้งหมดไว้ให้ รอบหน้าสั่งซ้ำแจ้งแค่จำนวนกับไซซ์</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <!-- 4 · 3WIN -->
+  <!-- 3 · 3WIN -->
   <section class="wrap section scroll-mt-28" id="win" aria-labelledby="win-h">
     <div class="max-w-[68ch] mb-9">
       <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShield}}</span>3WIN</span>
-      <h2 id="win-h" class="t-display text-[clamp(28px,3.8vw,46px)]">งานจะสำเร็จก็ต่อเมื่อชนะทั้งสามฝ่าย</h2>
-      <p class="t-lead mt-4">เสื้อที่สวยแต่คนใส่ไม่ยอมใส่ คืองานที่ล้มเหลว เราวัดผลงานจากสามข้อนี้</p>
+      <h2 id="win-h" class="t-display text-[clamp(28px,3.8vw,46px)]">คนสั่งมั่นใจ คนใส่ภูมิใจ คนเห็นจดจำ</h2>
+      <p class="t-lead mt-4">งานจะสำเร็จก็ต่อเมื่อชนะทั้งสามฝ่าย เสื้อที่สวยแต่คนใส่ไม่ยอมใส่ คืองานที่ล้มเหลว เราวัดผลงานจากสามข้อนี้</p>
     </div>
     <div class="grid md:grid-cols-3 gap-5">
       <div class="bg-shell border border-line rounded-plate p-7">
@@ -129,33 +105,45 @@
     </div>
   </section>
 
-  <!-- 5 · คนและสถานที่ -->
-  <section class="bg-shell border-y border-line scroll-mt-28" id="place" aria-labelledby="place-h">
+  <!-- 4 · ทีมงาน ออฟฟิศ และการผลิต (v22) · ภาพทีมงาน/ออฟฟิศ/ขั้นตอนผลิตรอชุดภาพจริง · ไม่อ้างเป็นเจ้าของโรงงาน -->
+  <section class="bg-shell border-y border-line scroll-mt-28" id="team" aria-labelledby="team-h">
     <div class="wrap section">
-      <div class="max-w-[68ch] mb-9">
-        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPin}}</span>คนและสถานที่</span>
-        <h2 id="place-h" class="t-display text-[clamp(28px,3.8vw,46px)]">พิมพ์ ปัก สกรีน อยู่ที่เดียวกัน</h2>
-        <p class="t-lead mt-4">นัดเข้ามาดูหน้างานได้ ทั้งเครื่องปัก เครื่องพิมพ์ และห้องตัดเย็บ อยากเห็นของจริงก่อนตัดสินใจก็บอกได้</p>
+      <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
+        <div>
+          <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>{{site.positioning}}</span>
+          <h2 id="team-h" class="t-display text-[clamp(28px,3.8vw,46px)]">ทีมงาน ออฟฟิศ และการผลิต</h2>
+          <p class="t-lead mt-4">TEAMDEE — คู่คิดเรื่องเสื้อทีมที่นนทบุรี ตั้งแต่โจทย์แรกจนถึงวันที่ทุกคนได้ใส่</p>
+          <p class="t-body mt-5">เราไม่ได้รอให้คุณส่งไฟล์มาแล้วผลิตตามนั้น แต่เข้าไปช่วยตั้งแต่ตอนที่คุณยังไม่รู้ว่าอยากได้อะไร เสื้อทีมไม่ใช่แค่เครื่องแต่งกาย แต่เป็นสิ่งที่คนในทีมใส่แล้วรู้สึกว่าเป็นพวกเดียวกัน และคนนอกเห็นแล้วจำองค์กรคุณได้</p>
+          <ul class="grid sm:grid-cols-2 gap-4 mt-8">
+          {{#each site.pillars}}
+          <li class="border-l-4 border-orange pl-4 py-1">
+            <p class="text-[15px] font-bold tracking-[0.12em] text-ink-3">{{this.en}}</p>
+            <p class="text-[18px] font-bold mt-0.5">{{this.th}}</p>
+          </li>
+          {{/each}}
+          </ul>
+          <div class="flex flex-wrap gap-x-6 mt-8"><a class="pp-more" href="#office">ดูแผนที่ออฟฟิศ<span class="arw" aria-hidden="true">&rarr;</span></a><a class="pp-more" href="{{url 'contact'}}">ติดต่อ / นัดหมาย<span class="arw" aria-hidden="true">&rarr;</span></a></div>
+        </div>
+        <figure class="relative">
+          <div class="overflow-hidden rounded-plate bg-paper aspect-[4/3]">
+            <img src="/img/real/r25.jpg" alt="ทีมงานและลูกค้าของ TEAMDEE ในวันส่งมอบงานจริง" width="900" height="675" loading="lazy" decoding="async" class="w-full h-full object-cover">
+          </div>
+          <figcaption class="tag tag-ink absolute left-4 bottom-4">งานผลิตจริง</figcaption>
+        </figure>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <figure class="relative"><div class="overflow-hidden rounded-plate aspect-[3/4] bg-paper"><img src="/img/tech/print.jpg" alt="เครื่องพิมพ์ลายซับลิเมชันในโรงงาน TEAMDEE" width="600" height="800" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="t-sm mt-3 font-semibold">งานพิมพ์ลาย</figcaption></figure>
-        <figure class="relative"><div class="overflow-hidden rounded-plate aspect-[3/4] bg-paper"><img src="/img/tech/embroid.jpg" alt="เครื่องปักคอมพิวเตอร์กำลังปักโลโก้ลงบนเสื้อโปโล" width="600" height="800" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="t-sm mt-3 font-semibold">งานปัก</figcaption></figure>
-        <figure class="relative"><div class="overflow-hidden rounded-plate aspect-[3/4] bg-paper"><img src="/img/tech/screen.jpg" alt="งานสกรีนฟิล์มดิจิทัลบนเสื้อในโรงงาน" width="600" height="800" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="t-sm mt-3 font-semibold">งานสกรีนฟิล์ม</figcaption></figure>
-        <figure class="relative"><div class="overflow-hidden rounded-plate aspect-[3/4] bg-paper"><img src="/img/hero/factory-sign.jpg" alt="ป้ายหน้าโรงงานและสำนักงานของ TEAMDEE" width="600" height="800" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="t-sm mt-3 font-semibold">โรงงานและสำนักงาน</figcaption></figure>
-      </div>
-      <p class="t-xs mt-7 max-w-[64ch]">ภาพทั้งหมดถ่ายจากสถานที่จริง ไม่ได้สร้างด้วย AI · [ภาพทีมงานและขั้นตอน QC รอชุดภาพจากฝ่ายผลิต]</p>
+      {{#unless wp}}<p class="pending-ribbon mt-8">รอชุดภาพทีมงาน ออฟฟิศ และขั้นตอนผลิตจริง · ความสัมพันธ์กับโรงงานพาร์ตเนอร์ต้องยืนยันก่อนใช้ภาพหรือถ้อยคำ · บนเว็บจริงแสดงเฉพาะข้อความและภาพที่ยืนยันแล้ว</p>{{/unless}}
     </div>
   </section>
 
-  <!-- 6 · ข้อมูลบริษัท -->
+  <!-- 5 · ข้อมูลบริษัท (v22) -->
   <section class="wrap section scroll-mt-28" id="company" aria-labelledby="company-h">
     <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
       <div>
         <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoDoc}}</span>ข้อมูลบริษัท</span>
-        <h2 id="company-h" class="t-display text-[clamp(28px,3.6vw,44px)]">ตรวจสอบเราได้</h2>
-        <p class="t-lead mt-5">เราจดทะเบียนเป็นนิติบุคคล ขอเอกสารประกอบการจัดซื้อได้ทุกฉบับ และนัดเข้ามาดูสถานที่จริงได้</p>
+        <h2 id="company-h" class="t-display text-[clamp(28px,3.6vw,44px)]">ข้อมูลบริษัทที่ตรวจสอบได้</h2>
+        <p class="t-lead mt-5">เราจดทะเบียนเป็นนิติบุคคล ขอเอกสารประกอบการจัดซื้อได้ทุกฉบับ และนัดเข้ามาพบทีมที่ออฟฟิศได้</p>
         <div class="flex flex-wrap gap-3 mt-8">
-          <a class="btn btn-orange btn-lg" href="{{url 'contact'}}">นัดเข้าดูโรงงาน</a>
+          <a class="btn btn-orange btn-lg" href="{{url 'contact'}}">นัดเข้าพบที่ออฟฟิศ</a>
           <a class="btn btn-line btn-lg" href="{{url 'projects'}}">ดูผลงาน</a>
         </div>
       </div>
@@ -163,8 +151,9 @@
       <dl class="divide-y divide-line border-t-2 border-ink">
         <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">ชื่อจดทะเบียน</dt><dd class="text-[18px] font-bold text-right">บริษัท ดีดี ฟินิกซ์ จำกัด</dd></div>
         <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">ชื่อทางการค้า</dt><dd class="text-[18px] font-bold text-right">{{site.brand}}</dd></div>
-        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">เลขทะเบียนนิติบุคคล</dt><dd class="text-[18px] font-bold text-right text-ink-3">[รอยืนยัน]</dd></div>
-        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">ที่อยู่จดทะเบียน</dt><dd class="text-[18px] font-bold text-right text-ink-3">[รอยืนยัน]</dd></div>
+{{#unless wp}}        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">เลขทะเบียนนิติบุคคล</dt><dd class="text-[18px] font-bold text-right text-ink-3">[รอยืนยัน]</dd></div>{{/unless}}
+{{#unless wp}}        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">วันจดทะเบียน</dt><dd class="text-[18px] font-bold text-right text-ink-3">[รอยืนยัน: 19 มกราคม 2021]</dd></div>{{/unless}}
+{{#unless wp}}        <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">ที่อยู่จดทะเบียน</dt><dd class="text-[18px] font-bold text-right text-ink-3">[รอยืนยัน]</dd></div>{{/unless}}
         <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">สถานที่เข้าพบ</dt><dd class="text-[18px] font-bold text-right max-w-[32ch]">{{site.address}}</dd></div>
         <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">เวลาทำการ</dt><dd class="text-[18px] font-bold text-right">{{site.hours}}</dd></div>
         <div class="flex flex-wrap justify-between gap-4 py-4"><dt class="t-sm">โทรศัพท์</dt><dd class="text-[18px] font-bold text-right tabular-nums"><a class="hover:underline decoration-orange decoration-2 underline-offset-4" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a></dd></div>
@@ -176,12 +165,23 @@
 
   <section class="band-orange">
     <div class="wrap py-14 md:py-20 text-center">
-      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">อยากคุยกับทีมดี</h2>
-      <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">เล่าโจทย์มาได้เลย ไม่ต้องมีแบบ ไม่ต้องรู้ชื่อเสื้อ</p>
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย</h2>
+      <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[48ch] mx-auto mt-4">บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้</p>
       <div class="flex flex-wrap justify-center gap-3 mt-8">
-        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
-        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+        <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a>
       </div>
+    </div>
+  </section>
+
+  <!-- 7 · นัดหมายที่ออฟฟิศ (v22) -->
+  <section class="wrap section scroll-mt-28" id="office" aria-labelledby="office-h">
+    <div class="max-w-[68ch]">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPin}}</span>{{homeV4.location.office.label}}</span>
+      <h2 id="office-h" class="t-display text-[clamp(28px,3.6vw,44px)]">นัดหมายที่ออฟฟิศทีมดี นนทบุรี</h2>
+      <p class="t-lead mt-4">{{site.address}}</p>
+      <p class="t-body mt-3">{{site.hours}} · {{homeV4.location.office.note}}</p>
+      <a class="pp-more mt-5 inline-flex" href="{{url 'contact'}}#location">ดูที่ตั้ง / การเดินทาง / นัดหมาย<span class="arw" aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 

@@ -44,7 +44,7 @@
   "id": "w2",
   "title": "โปโลพนักงานหน้าร้าน เชนร้านกาแฟ",
   "group": "corp",
-  "groupName": "เสื้อประจำปีบริษัท",
+  "groupName": "เสื้อพนักงานร้านค้า",
   "qty": 180,
   "tech": "ปัก",
   "event": "2 มี.ค. 2569",
@@ -76,6 +76,9 @@
   "home": true,
   "img": "/img/real/r02.jpg",
   "use": "corp",
+  "alsoUse": [
+   "shop"
+  ],
   "product": "polo",
   "helped": "เก็บสเปกผ้า สี และตำแหน่งปักไว้เป็นชุดมาตรฐาน คุมสีให้ตรงรหัสแบรนด์ทุกล็อต รอบถัดไปลูกค้าแจ้งแค่จำนวน",
   "result": null,
@@ -199,6 +202,9 @@
   "home": false,
   "img": "/img/real/r05.jpg",
   "use": "sport",
+  "alsoUse": [
+   "badminton"
+  ],
   "product": "print",
   "helped": "เลือกผ้าระบายอากาศสำหรับกีฬาในร่ม ทำชื่อและเบอร์แยกรายคนในล็อตเดียว",
   "result": null,
@@ -281,6 +287,9 @@
   "home": false,
   "img": "/img/real/r07.jpg",
   "use": "event",
+  "alsoUse": [
+   "running"
+  ],
   "product": "print",
   "helped": "ช่วยกระจายไซซ์จากสถิติงานปีก่อน คุมต้นทุนต่อตัว และวางโลโก้สปอนเซอร์หลายเจ้าให้อ่านออกทุกเจ้า",
   "result": null,
@@ -363,6 +372,9 @@
   "home": false,
   "img": "/img/real/r09.jpg",
   "use": "edu",
+  "alsoUse": [
+   "faculty"
+  ],
   "product": "print",
   "helped": "ดราฟโลโก้คณะใหม่จากไฟล์เดิมที่ความละเอียดไม่พอ แล้วขึ้นแบบให้ตัวแทนรุ่นโหวตก่อนผลิต",
   "result": null,

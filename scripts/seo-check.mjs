@@ -1,7 +1,16 @@
 /* อ่านค่า SEO จาก HTML หนึ่งหน้า · ใช้ใน tests/seo-pages.test.js · ไม่มี dependency */
 
 /** หน้าภายในที่ไม่ขึ้นเว็บจริง · export-wp ข้าม และเทส SEO ไม่ตรวจ */
-export const INTERNAL_PAGES = new Set(['/ui/', '/hero-storyboard/'])
+export const INTERNAL_PAGES = new Set(['/ui/', '/hero-storyboard/', '/design-sample/'])
+
+/** หน้านี้ส่งขึ้นธีม WordPress ไหม · บทความร่างใต้ /blog/…/ อยู่แค่ในต้นแบบ
+    v22: ใช้ 12 บทความเดิมจาก CMS ถ้าส่งขึ้นไป ธีมจะเปิด URL ใหม่ที่เนื้อหาเราเขียนเอง */
+/** หน้าเดิมบนเว็บจริงที่ v22 ไม่มีต้นแบบ · เก็บเนื้อหาเดิมจาก CMS ไว้ (START-HERE v22) · ธีมห้ามเอาหน้าร่างไปทับ */
+/* หน้าที่เว็บจริงมีเนื้อหาใน CMS อยู่แล้ว และของเรายังไม่พร้อมแทน → ไม่ export ให้ WordPress ใช้หน้าเดิม
+   privacy / terms: ร่างของเรายังไม่ผ่านการตรวจทางกฎหมาย (22 ต.ค. 2026) */
+export const CMS_PAGES = new Set(['/calculations/', '/collar-styles/', '/privacy-policy/', '/terms-conditions/'])
+
+export const isExported = (route) => !INTERNAL_PAGES.has(route) && !CMS_PAGES.has(route) && !/^\/blog\/.+\//.test(route)
 const text = (s) => s.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim()
 /* ค่า attribute ทั้งแบบ "..." '...' ไม่มีเครื่องหมายคำพูด และแบบไม่มีค่า (alt เฉยๆ = ข้อความว่าง) · ไม่มี attribute = undefined */
 const attr = (tag, name) => {

@@ -21,7 +21,10 @@
   "img": "/img/customer/co04.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co04-320.webp"
+  "imgSmall": "/img/customer/co04-320.webp",
+  "uses": [
+   "running"
+  ]
  },
  {
   "img": "/img/customer/co05.webp",
@@ -33,7 +36,10 @@
   "img": "/img/customer/co06.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co06-320.webp"
+  "imgSmall": "/img/customer/co06-320.webp",
+  "uses": [
+   "shop"
+  ]
  },
  {
   "img": "/img/customer/co07.webp",
@@ -75,7 +81,10 @@
   "img": "/img/customer/co13.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co13-320.webp"
+  "imgSmall": "/img/customer/co13-320.webp",
+  "uses": [
+   "faculty"
+  ]
  },
  {
   "img": "/img/customer/co14.webp",
@@ -93,13 +102,19 @@
   "img": "/img/customer/co16.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co16-320.webp"
+  "imgSmall": "/img/customer/co16-320.webp",
+  "uses": [
+   "gov"
+  ]
  },
  {
   "img": "/img/customer/co17.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co17-320.webp"
+  "imgSmall": "/img/customer/co17-320.webp",
+  "uses": [
+   "gov"
+  ]
  },
  {
   "img": "/img/customer/co18.webp",
@@ -123,25 +138,37 @@
   "img": "/img/customer/co21.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co21-320.webp"
+  "imgSmall": "/img/customer/co21-320.webp",
+  "uses": [
+   "gov"
+  ]
  },
  {
   "img": "/img/customer/co22.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co22-320.webp"
+  "imgSmall": "/img/customer/co22-320.webp",
+  "uses": [
+   "gov"
+  ]
  },
  {
   "img": "/img/customer/co23.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co23-320.webp"
+  "imgSmall": "/img/customer/co23-320.webp",
+  "uses": [
+   "gov"
+  ]
  },
  {
   "img": "/img/customer/co24.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co24-320.webp"
+  "imgSmall": "/img/customer/co24-320.webp",
+  "uses": [
+   "gov"
+  ]
  },
  {
   "img": "/img/customer/co25.webp",
@@ -177,7 +204,10 @@
   "img": "/img/customer/co30.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co30-320.webp"
+  "imgSmall": "/img/customer/co30-320.webp",
+  "uses": [
+   "badminton"
+  ]
  },
  {
   "img": "/img/customer/co31.webp",
@@ -213,7 +243,10 @@
   "img": "/img/customer/ev01.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev01-320.webp"
+  "imgSmall": "/img/customer/ev01-320.webp",
+  "uses": [
+   "class"
+  ]
  },
  {
   "img": "/img/customer/ev02.webp",
@@ -231,7 +264,10 @@
   "img": "/img/customer/ev04.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev04-320.webp"
+  "imgSmall": "/img/customer/ev04-320.webp",
+  "uses": [
+   "class"
+  ]
  },
  {
   "img": "/img/customer/ev05.webp",
@@ -273,19 +309,28 @@
   "img": "/img/customer/ev11.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev11-320.webp"
+  "imgSmall": "/img/customer/ev11-320.webp",
+  "uses": [
+   "faculty"
+  ]
  },
  {
   "img": "/img/customer/ev12.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev12-320.webp"
+  "imgSmall": "/img/customer/ev12-320.webp",
+  "uses": [
+   "running"
+  ]
  },
  {
   "img": "/img/customer/ev13.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev13-320.webp"
+  "imgSmall": "/img/customer/ev13-320.webp",
+  "uses": [
+   "gov"
+  ]
  },
  {
   "img": "/img/customer/ev14.webp",
@@ -315,7 +360,10 @@
   "img": "/img/customer/ev18.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev18-320.webp"
+  "imgSmall": "/img/customer/ev18-320.webp",
+  "uses": [
+   "class"
+  ]
  },
  {
   "img": "/img/customer/ev19.webp",
@@ -345,13 +393,19 @@
   "img": "/img/customer/ev23.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev23-320.webp"
+  "imgSmall": "/img/customer/ev23-320.webp",
+  "uses": [
+   "class"
+  ]
  },
  {
   "img": "/img/customer/ev24.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev24-320.webp"
+  "imgSmall": "/img/customer/ev24-320.webp",
+  "uses": [
+   "running"
+  ]
  },
  {
   "img": "/img/customer/ev25.webp",
@@ -369,19 +423,28 @@
   "img": "/img/customer/ev27.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev27-320.webp"
+  "imgSmall": "/img/customer/ev27-320.webp",
+  "uses": [
+   "running"
+  ]
  },
  {
   "img": "/img/customer/ev28.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev28-320.webp"
+  "imgSmall": "/img/customer/ev28-320.webp",
+  "uses": [
+   "running"
+  ]
  },
  {
   "img": "/img/customer/ev29.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev29-320.webp"
+  "imgSmall": "/img/customer/ev29-320.webp",
+  "uses": [
+   "running"
+  ]
  },
  {
   "img": "/img/customer/ev30.webp",
@@ -411,7 +474,10 @@
   "img": "/img/customer/sc04.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc04-320.webp"
+  "imgSmall": "/img/customer/sc04-320.webp",
+  "uses": [
+   "class"
+  ]
  },
  {
   "img": "/img/customer/sc05.webp",
@@ -435,19 +501,28 @@
   "img": "/img/customer/sc08.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc08-320.webp"
+  "imgSmall": "/img/customer/sc08-320.webp",
+  "uses": [
+   "faculty"
+  ]
  },
  {
   "img": "/img/customer/sc09.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc09-320.webp"
+  "imgSmall": "/img/customer/sc09-320.webp",
+  "uses": [
+   "class"
+  ]
  },
  {
   "img": "/img/customer/sc10.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc10-320.webp"
+  "imgSmall": "/img/customer/sc10-320.webp",
+  "uses": [
+   "faculty"
+  ]
  },
  {
   "img": "/img/customer/sc11.webp",
@@ -471,7 +546,10 @@
   "img": "/img/customer/sc14.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc14-320.webp"
+  "imgSmall": "/img/customer/sc14-320.webp",
+  "uses": [
+   "shop"
+  ]
  },
  {
   "img": "/img/customer/sc15.webp",
@@ -501,13 +579,19 @@
   "img": "/img/customer/sp02.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp02-320.webp"
+  "imgSmall": "/img/customer/sp02-320.webp",
+  "uses": [
+   "gov"
+  ]
  },
  {
   "img": "/img/customer/sp03.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp03-320.webp"
+  "imgSmall": "/img/customer/sp03-320.webp",
+  "uses": [
+   "badminton"
+  ]
  },
  {
   "img": "/img/customer/sp04.webp",
@@ -525,7 +609,10 @@
   "img": "/img/customer/sp06.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp06-320.webp"
+  "imgSmall": "/img/customer/sp06-320.webp",
+  "uses": [
+   "badminton"
+  ]
  },
  {
   "img": "/img/customer/sp07.webp",
@@ -537,7 +624,10 @@
   "img": "/img/customer/sp08.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp08-320.webp"
+  "imgSmall": "/img/customer/sp08-320.webp",
+  "uses": [
+   "badminton"
+  ]
  },
  {
   "img": "/img/customer/sp09.webp",
@@ -549,19 +639,28 @@
   "img": "/img/customer/sp10.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp10-320.webp"
+  "imgSmall": "/img/customer/sp10-320.webp",
+  "uses": [
+   "badminton"
+  ]
  },
  {
   "img": "/img/customer/sp11.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp11-320.webp"
+  "imgSmall": "/img/customer/sp11-320.webp",
+  "uses": [
+   "badminton"
+  ]
  },
  {
   "img": "/img/customer/sp12.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp12-320.webp"
+  "imgSmall": "/img/customer/sp12-320.webp",
+  "uses": [
+   "badminton"
+  ]
  },
  {
   "img": "/img/customer/sp13.webp",
@@ -609,7 +708,10 @@
   "img": "/img/customer/sp20.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp20-320.webp"
+  "imgSmall": "/img/customer/sp20-320.webp",
+  "uses": [
+   "badminton"
+  ]
  },
  {
   "img": "/img/customer/sp21.webp",
@@ -621,7 +723,10 @@
   "img": "/img/customer/sp22.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp22-320.webp"
+  "imgSmall": "/img/customer/sp22-320.webp",
+  "uses": [
+   "badminton"
+  ]
  },
  {
   "img": "/img/customer/sp23.webp",
@@ -658,287 +763,5 @@
   "cat": "sports",
   "catName": "เสื้อกีฬา",
   "imgSmall": "/img/customer/sp28-320.webp"
- },
- {
-  "img": "/img/real/r01.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/real/r01-320.jpg"
- },
- {
-  "img": "/img/real/r02.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/real/r02-320.jpg"
- },
- {
-  "img": "/img/real/r03.jpg",
-  "cat": "school",
-  "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/real/r03-320.jpg"
- },
- {
-  "img": "/img/real/r04.jpg",
-  "cat": "corporate",
-  "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/real/r04-320.jpg"
- },
- {
-  "img": "/img/real/r05.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/real/r05-320.jpg"
- },
- {
-  "img": "/img/real/r06.jpg",
-  "cat": "event",
-  "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/real/r06-320.jpg"
- },
- {
-  "img": "/img/real/r07.jpg",
-  "cat": "corporate",
-  "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/real/r07-320.jpg"
- },
- {
-  "img": "/img/real/r08.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/real/r08-320.jpg"
- },
- {
-  "img": "/img/real/r09.jpg",
-  "cat": "event",
-  "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/real/r09-320.jpg"
- },
- {
-  "img": "/img/real/r10.jpg",
-  "cat": "event",
-  "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/real/r10-320.jpg"
- },
- {
-  "img": "/img/real/r11.jpg",
-  "cat": "event",
-  "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/real/r11-320.jpg"
- },
- {
-  "img": "/img/real/r12.jpg",
-  "cat": "corporate",
-  "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/real/r12-320.jpg"
- },
- {
-  "img": "/img/real/r13.jpg",
-  "cat": "corporate",
-  "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/real/r13-320.jpg"
- },
- {
-  "img": "/img/real/r14.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/real/r14-320.jpg"
- },
- {
-  "img": "/img/real/r15.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/real/r15-320.jpg"
- },
- {
-  "img": "/img/real/r16.jpg",
-  "cat": "corporate",
-  "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/real/r16-320.jpg"
- },
- {
-  "img": "/img/real/r17.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/real/r17-320.jpg"
- },
- {
-  "img": "/img/real/r18.jpg",
-  "cat": "school",
-  "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/real/r18-320.jpg"
- },
- {
-  "img": "/img/real/r19.jpg",
-  "cat": "event",
-  "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/real/r19-320.jpg"
- },
- {
-  "img": "/img/real/r20.jpg",
-  "cat": "corporate",
-  "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/real/r20-320.jpg"
- },
- {
-  "img": "/img/real/r21.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/real/r21-320.jpg"
- },
- {
-  "img": "/img/real/r22.jpg",
-  "cat": "school",
-  "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/real/r22-320.jpg"
- },
- {
-  "img": "/img/real/r23.jpg",
-  "cat": "corporate",
-  "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/real/r23-320.jpg"
- },
- {
-  "img": "/img/real/r24.jpg",
-  "cat": "school",
-  "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/real/r24-320.jpg"
- },
- {
-  "img": "/img/real/r25.jpg",
-  "cat": "corporate",
-  "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/real/r25-320.jpg"
- },
- {
-  "img": "/img/real/r26.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/real/r26-320.jpg"
- },
- {
-  "img": "/img/real/r27.jpg",
-  "cat": "event",
-  "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/real/r27-320.jpg"
- },
- {
-  "img": "/img/real/r28.jpg",
-  "cat": "event",
-  "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/real/r28-320.jpg"
- },
- {
-  "img": "/img/work/w01.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w01-320.jpg"
- },
- {
-  "img": "/img/work/w02.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w02-320.jpg"
- },
- {
-  "img": "/img/work/w03.jpg",
-  "cat": "corporate",
-  "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/work/w03-320.jpg"
- },
- {
-  "img": "/img/work/w04.jpg",
-  "cat": "event",
-  "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/work/w04-320.jpg"
- },
- {
-  "img": "/img/work/w05.jpg",
-  "cat": "event",
-  "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/work/w05-320.jpg"
- },
- {
-  "img": "/img/work/w06.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w06-320.jpg"
- },
- {
-  "img": "/img/work/w07.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w07-320.jpg"
- },
- {
-  "img": "/img/work/w08.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w08-320.jpg"
- },
- {
-  "img": "/img/work/w09.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w09-320.jpg"
- },
- {
-  "img": "/img/work/w10.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w10-320.jpg"
- },
- {
-  "img": "/img/work/w11.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w11-320.jpg"
- },
- {
-  "img": "/img/work/w12.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w12-320.jpg"
- },
- {
-  "img": "/img/work/w13.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w13-320.jpg"
- },
- {
-  "img": "/img/work/w14.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w14-320.jpg"
- },
- {
-  "img": "/img/work/w15.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w15-320.jpg"
- },
- {
-  "img": "/img/work/w17.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w17-320.jpg"
- },
- {
-  "img": "/img/work/w18.jpg",
-  "cat": "school",
-  "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/work/w18-320.jpg"
- },
- {
-  "img": "/img/work/w21.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w21-320.jpg"
- },
- {
-  "img": "/img/work/w23.jpg",
-  "cat": "sports",
-  "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/work/w23-320.jpg"
  }
 ]

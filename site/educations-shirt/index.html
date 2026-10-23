@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>แบบเสื้อโรงเรียน / เสื้อกีฬาสี พิมพ์ลาย | TEAMDEE</title>
+  <meta name="description" content="ข้อมูลแบบเสื้อโรงเรียน / เสื้อกีฬาสี พิมพ์ลาย เพื่อเลือกแบบและวางรายละเอียดการสั่งทำกับทีมดี">
+  {{#unless gallery.items.length}}<meta name="robots" content="noindex">{{/unless}}
+</head>
+<body>
+{{> siteHeader active="designs"}}
+<main id="main">
+{{> galleryPage}}
+</main>
+{{> footer}}
+<script type="module" src="/src/js/gallery-page.js"></script>
+</body>
+</html>

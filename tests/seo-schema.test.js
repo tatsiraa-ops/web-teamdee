@@ -27,3 +27,15 @@ test('ldJson กันปิดแท็ก script ในข้อความ',
   assert.ok(!ldJson({ a: '</script>' }).includes('</script>'))
   assert.equal(JSON.parse(ldJson({ a: '</script>' })).a, '</script>')
 })
+
+test('LocalBusiness มี @id ให้ Google รวมกับ schema ของปลั๊กอิน · เบอร์ +66 · ที่อยู่แยกช่อง · ปีก่อตั้ง · sameAs (agent SEO 23 ต.ค.)', () => {
+  const b = businessSchema({ brand: 'TEAMDEE', baseUrl: 'https://team-dee.com', phonePrimaryTel: '0975495941', address: '264 ถนนเลี่ยงเมืองนนท์ ตำบลตลาดขวัญ อำเภอเมืองนนทบุรี จังหวัดนนทบุรี 11000', ogImage: '/img/a.jpg', foundedYear: 2018, lineUrl: 'https://line.me/R/ti/p/@teamdee' })
+  assert.equal(b['@id'], 'https://team-dee.com/#business')
+  assert.equal(b.telephone, '+66975495941')
+  assert.equal(b.foundingDate, '2018')
+  assert.deepEqual(b.sameAs, ['https://line.me/R/ti/p/@teamdee'])
+  assert.equal(b.address.postalCode, '11000')
+  assert.equal(b.address.streetAddress, '264 ถนนเลี่ยงเมืองนนท์')
+  assert.equal(b.address.addressLocality, 'อำเภอเมืองนนทบุรี')
+  assert.equal(b.address.addressRegion, 'นนทบุรี')
+})

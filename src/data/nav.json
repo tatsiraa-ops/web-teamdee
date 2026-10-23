@@ -1,0 +1,42 @@
+{
+  "_note": "เมนูหลักตาม Wireframe v22 (header ของ TEAMDEE-Full-Website-Wireframe.html · อาร์ตยืนยันด้วยภาพ 22 ต.ค. 2026) · ชื่อและลำดับต้องตรง v22 · tests/v22-structure.test.js ตรวจ · to = key ใน routes.json",
+  "home": { "label": "หน้าแรก", "to": "home", "active": "home", "_note": "เพิ่มจาก v22 ตามที่อาร์ตสั่ง 22 ต.ค. 2026 (v22 ใช้โลโก้กดกลับหน้าแรกอย่างเดียว)" },
+  "products": {
+    "label": "สั่งทำเสื้อ", "active": "products",
+    "groups": [{ "h": "", "items": [
+      ["สั่งทำเสื้อโปโลปัก", "products.polo"],
+      ["สั่งทำเสื้อพิมพ์ลาย", "products.print"],
+      ["สั่งทำเสื้อสกรีน", "products.screen"],
+      ["สั่งทำเสื้อวอร์มพิมพ์ลาย", "products.warmup"],
+      ["สั่งทำเสื้อเบสบอล", "products.baseball"],
+      ["สั่งทำเสื้อเจอร์ซีย์ Oversize", "products.jersey"]
+    ] }]
+  },
+  "uses": {
+    "label": "เสื้อสำหรับทีมคุณ", "active": "use",
+    "groups": [
+      { "h": "ธุรกิจและหน่วยงาน", "items": [["สั่งทำเสื้อบริษัท", "uses.corp"], ["สั่งทำเสื้อพนักงานร้านค้า", "uses.shop"], ["สั่งทำเสื้อหน่วยงาน", "uses.gov"]] },
+      { "h": "โรงเรียน รุ่น และชมรม", "items": [["สั่งทำเสื้อโรงเรียน / เสื้อกีฬาสี", "uses.edu"], ["สั่งทำเสื้อรุ่น / เสื้อชมรม", "uses.class"], ["สั่งทำเสื้อคณะ / เสื้อมหาวิทยาลัย", "uses.faculty"]] },
+      { "h": "กีฬา", "items": [["สั่งทำเสื้อกีฬา", "uses.sport"], ["สั่งทำเสื้อแบดมินตัน / เสื้อแบด / เสื้อก๊วนแบด", "uses.badminton"], ["สั่งทำเสื้อวิ่ง / เสื้องานวิ่ง", "uses.running"]] },
+      { "h": "อีเวนต์และกิจกรรม", "items": [["สั่งทำเสื้ออีเวนต์ / เสื้อกิจกรรม / เสื้อ Outing", "uses.event"]] }
+    ]
+  },
+  "designs": { "label": "แบบเสื้อพิมพ์ลาย", "to": "designs", "active": "designs" },
+  "works": { "label": "รีวิวลูกค้า", "to": "projects", "active": "works" },
+  "learn": {
+    "label": "คู่มือและบทความ", "active": "learn",
+    "groups": [
+      { "h": "คู่มือสั่งทำ", "items": [
+        ["วิธีสั่งเสื้อพิมพ์ลาย", "guides.print"],
+        ["วิธีสั่งเสื้อสกรีน", "guides.screen"],
+        ["วิธีสั่งเสื้อโปโลปัก", "guides.polo"],
+        ["เลือกผ้าเสื้อทีม", "guides.fabric"],
+        ["ตารางไซซ์และวิธีวัด", "guides.size"],
+        ["เตรียมโลโก้และข้อมูล", "guides.logo"],
+        ["จัดส่งและหลังการขาย", "guides.delivery"]
+      ] },
+      { "h": "", "items": [["บทความและไอเดีย", "blog"], ["คำถามที่พบบ่อย", "faq"]] }
+    ]
+  },
+  "about": { "label": "รู้จักทีมดี", "to": "about", "active": "about" }
+}

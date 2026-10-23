@@ -2,8 +2,8 @@
 <html lang="th">
 <head>
   {{> head}}
-  <title>แบบเสื้อ · เลือกแบบที่ชอบ เซฟรูปส่งคุยใน LINE ได้เลย | TEAMDEE</title>
-  <meta name="description" content="รวมแบบเสื้อที่ TEAMDEE ออกแบบและผลิตจริง เห็นทั้งด้านหน้าและด้านหลัง กรองตามสินค้า การใช้งาน สไตล์ และสี ทุกแบบมีรหัสในภาพ เซฟรูปส่งคุยกับทีมขายได้ทันที">
+  <title>แบบเสื้อพิมพ์ลาย สำหรับบริษัท กีฬา และกิจกรรม | TEAMDEE</title>
+  <meta name="description" content="แบบเสื้อพิมพ์ลาย · หาแนวกราฟิกเสื้อพิมพ์ลายตามกลุ่มลูกค้า ดูสีและรูปแบบที่ชอบ พร้อมใช้รหัสแบบคุยต่อเรื่องโลโก้ ข้อความ และรายละเอียดกับทีมดี">
 </head>
 <body>
 {{> siteHeader active="designs"}}
@@ -11,16 +11,23 @@
 <main id="main">
 
   <!-- 1 · ชื่อหน้า + ค้นหา + ตัวกรอง -->
-  <section class="band-ink relative overflow-hidden">
+  <section class="band-hero relative overflow-hidden">
     <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
     <div class="wrap relative py-12 md:py-16">
       <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">แบบเสื้อ</span></nav>
-      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-7">แบบเสื้อ</h1>
-      <p class="text-[18px] leading-[1.75] text-paper/75 max-w-[56ch] mt-5">เลือกแบบที่ชอบ กดขยาย เซฟรูป แล้วส่งคุยกับทีมดีใน LINE ได้เลย ทุกแบบมีรหัสอยู่ในภาพ ทีมขายเห็นแล้วรู้ทันทีว่าหมายถึงแบบไหน</p>
+      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">{{dp.h1}}</h1>
+      <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[56ch] mt-5">{{dp.lead}}</p>
     </div>
   </section>
 
+  <!-- v22 · เลือกแบบตามงานที่ใช้ → แกลเลอรีรายกลุ่ม -->
+  <section class="wrap pt-12 md:pt-14">
+    <h2 class="t-display text-[clamp(24px,3vw,34px)]">{{dp.pillsH}}</h2>
+    <div class="chiprail mt-5">{{#each dp.pills}}<a class="chip" href="{{url this.to}}">{{this.t}}{{#if this.n}} <span class="tabular-nums opacity-60">{{this.n}}</span>{{/if}}</a>{{/each}}</div>
+  </section>
+
   <section class="wrap section">
+    <h2 class="t-display text-[clamp(24px,3vw,34px)] mb-6">{{dp.filterH}}</h2>
     <form class="flex flex-wrap gap-2.5 max-w-[560px]" id="designSearch" role="search" onsubmit="return false">
       <label class="sr-only" for="dq">ค้นหาชื่อสินค้า ชื่อแบบ หรือรหัสแบบ</label>
       <input class="input flex-1 min-w-[220px]" id="dq" name="q" type="search" placeholder="ค้นหา เช่น โปโล หรือ TD-0012" autocomplete="off">
@@ -88,7 +95,7 @@
     <!-- 3 · ยังไม่เจอแบบที่ชอบ · แสดงตลอด -->
     <p class="t-body mt-10 hidden" id="designEmpty">ไม่พบแบบที่ตรงกับที่เลือก ลองล้างตัวกรองหรือเปลี่ยนคำค้น</p>
     <div class="bg-shell border border-line rounded-plate p-7 md:p-9 mt-10">
-      <h2 class="t-display text-[clamp(22px,2.8vw,32px)]">ยังไม่เจอแบบที่ชอบ</h2>
+      <h2 class="t-display text-[clamp(22px,2.8vw,32px)]">{{dp.cta.h}}</h2>
       <p class="t-lead mt-3 max-w-[52ch]">แบบในหน้านี้เป็นแค่ตัวอย่างที่เคยทำ งานของคุณออกแบบใหม่ได้ทั้งหมด</p>
       <div class="flex flex-wrap gap-3 mt-6">
         <button class="btn btn-line" type="button" id="designReset2">ล้างตัวกรอง</button>
@@ -102,11 +109,11 @@
 
   <section class="band-orange">
     <div class="wrap py-14 md:py-20 text-center">
-      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">ชอบแบบไหน ส่งมาบอกเรา</h2>
-      <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">เซฟรูปที่ชอบแล้วทักมาพร้อมจำนวนกับวันงาน ดีไซเนอร์จะปรับให้เป็นแบบของทีมคุณ</p>
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">ชอบแบบไหน ส่งมาบอกเรา</h2>
+      <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[48ch] mx-auto mt-4">เซฟรูปที่ชอบแล้วทักมาพร้อมจำนวนกับวันงาน ดีไซเนอร์จะปรับให้เป็นแบบของทีมคุณ</p>
       <div class="flex flex-wrap justify-center gap-3 mt-8">
-        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
-        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+        <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}">กรอกฟอร์ม</a>
       </div>
     </div>
   </section>

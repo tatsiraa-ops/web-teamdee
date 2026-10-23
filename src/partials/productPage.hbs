@@ -1,253 +1,241 @@
+{{!-- หน้าสินค้า 6 หน้า ตาม Wireframe v22 (22 ต.ค. 2026) · 14 ส่วนเรียงตาม v22
+     ข้อความ: src/data/product-pages.json (สร้างจาก wireframe ด้วย scripts/v22/product-pages.mjs)
+     ข้อมูลจริงที่มีอยู่แล้วมาแทนช่อง [วงเล็บ] ของ v22: แบบเสื้อรหัส TD · ผ้า · สเปกทรง/คอ/ออปชั่น · ตารางไซซ์ · ผลงาน
+     src/js/product-view.js ตัดข้อความที่ยังรอยืนยันออกบนเว็บจริง · ต้นแบบโชว์พร้อมป้าย --}}
 {{#if productLd}}<script type="application/ld+json">{{{productLd}}}</script>
-{{/if}}<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"สินค้าและบริการ"},{{#if parentItem}}{"@type":"ListItem","position":3,"name":"{{parentItem.name}}","item":"{{site.baseUrl}}{{url 'products' parentItem.id}}"},{"@type":"ListItem","position":4,"name":"{{item.name}}"}{{else}}{"@type":"ListItem","position":3,"name":"{{item.name}}"}{{/if}}]}</script>
+{{/if}}<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"{{item.name}}"}]}</script>
 
-<!-- 1 · ภาพจริง + คำอธิบาย + เงื่อนไขที่ยืนยันแล้ว -->
-<section class="band-ink relative overflow-hidden">
+<!-- 01 · hero -->
+<section class="band-hero relative overflow-hidden">
   <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
   <div class="wrap relative py-12 md:py-18">
-    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>สินค้าและบริการ</span><span aria-hidden="true">/</span>{{#if parentItem}}<a href="{{url 'products' parentItem.id}}">{{parentItem.name}}</a><span aria-hidden="true">/</span>{{/if}}<span aria-current="page">{{#if item.navName}}{{item.navName}}{{else}}{{item.name}}{{/if}}</span></nav>
-    {{#if item.hidden}}
-    <p class="mt-6 inline-block border-2 border-orange rounded-card px-4 py-3 text-[16px] font-semibold text-paper">หน้านี้รองรับไว้ ยังไม่เปิดในเมนูและยังไม่ให้ Google เก็บ · เปิดเมื่อบริการพร้อม [รอยืนยัน]</p>
-    {{/if}}
-
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>สินค้าและบริการ</span><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
     <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center mt-8">
       <div>
-        <h1 class="t-display text-[clamp(32px,4.8vw,60px)] text-paper">{{#if item.navName}}{{item.navName}}{{else}}{{item.name}}{{/if}}</h1>
-        <p class="text-[19px] leading-[1.75] text-paper/75 max-w-[52ch] mt-5">{{item.lead}}</p>
-        <p class="text-[17px] leading-[1.7] text-paper/60 max-w-[52ch] mt-3">เหมาะกับ {{item.who}}</p>
-        {{#if parentItem}}
-        <p class="text-[16px] leading-[1.7] text-paper/75 max-w-[52ch] mt-4 border-l-2 border-orange pl-4">เป็นทรงหนึ่งของ<a class="font-bold text-paper underline decoration-orange decoration-2 underline-offset-4" href="{{url 'products' parentItem.id}}">{{parentItem.name}}</a> ใช้เทคนิค ผ้า และปัจจัยราคาเดียวกัน หน้านี้เล่าเฉพาะทรง ไซซ์ และภาพของทรงนี้</p>
-        {{/if}}
-
-        <dl class="grid grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-4 mt-8 border-t border-paper/20 pt-6">
-          <div><dt class="text-[15px] font-semibold text-paper/60">สั่งขั้นต่ำ</dt><dd class="text-[18px] font-bold text-paper/70 mt-1">[ยืนยัน]</dd></div>
-          <div><dt class="text-[15px] font-semibold text-paper/60">ระยะผลิต</dt><dd class="text-[18px] font-bold text-paper/70 mt-1">[ยืนยัน]</dd></div>
-          <div><dt class="text-[15px] font-semibold text-paper/60">ราคาเริ่ม</dt><dd class="text-[18px] font-bold text-paper/70 mt-1">[ยืนยัน]</dd></div>
+        <h1 class="t-display text-[clamp(32px,4.6vw,56px)] text-ink">{{pp.hero.h1}}</h1>
+        <p class="text-[19px] leading-[1.75] text-ink-2 max-w-[52ch] mt-5">{{pp.hero.lead}}</p>
+        {{#if item.seoLine}}<p class="text-[17px] leading-[1.7] text-ink-2 max-w-[56ch] mt-3">{{item.seoLine}}</p>{{/if}}
+        {{#if pp.hero.facts.length}}
+        <dl class="flex flex-wrap gap-x-8 gap-y-3 mt-8 border-t border-line pt-6">
+          {{#each pp.hero.facts}}<div><dt class="text-[15px] font-semibold text-ink-3">{{this.k}}</dt><dd class="text-[17px] font-bold text-ink-2 mt-1">{{this.v}}</dd></div>{{/each}}
         </dl>
-        <p class="text-[15px] text-paper/60 mt-4">เงื่อนไขสามข้อนี้รอฝ่ายผลิตยืนยันก่อนเผยแพร่ ระหว่างนี้ถามทีมขายได้โดยตรง</p>
-
+        {{/if}}
         <div class="flex flex-wrap gap-3 mt-9">
-          <a class="btn btn-orange btn-lg" href="{{url 'contact'}}?p={{item.id}}">สอบถามเสื้อแบบนี้</a>
-          <a class="btn btn-lg bg-transparent text-paper border-paper/45 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'designs'}}?product={{item.id}}">ดูแบบเสื้อ</a>
+          <a class="btn btn-orange btn-lg max-sm:whitespace-normal max-sm:text-center max-sm:py-3" href="{{url 'contact'}}?p={{item.id}}">{{pp.hero.cta}}</a>
+          <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-ink hover:border-ink" href="#options">ดูแบบและตัวเลือก</a>
         </div>
       </div>
-
       <figure class="relative">
         <div class="overflow-hidden rounded-plate bg-paper aspect-[3/2]">
-          {{#if item.img}}<img src="{{item.img}}" alt="{{item.name}} ด้านหน้าและด้านหลัง ผลิตโดย TEAMDEE" width="1080" height="720" fetchpriority="high" decoding="async" class="w-full h-full object-contain">{{else}}<div class="img-pending" role="img" aria-label="ยังไม่มีภาพ{{item.name}}">{{item.imgNote}}</div>{{/if}}
+          {{#if item.img}}<img src="{{item.img}}" alt="{{item.name}} ด้านหน้าและด้านหลัง แบบที่ทีมดีผลิต" width="1080" height="720" fetchpriority="high" decoding="async" class="w-full h-full object-contain">
+          {{else}}<span class="prod-noimg" role="img" aria-label="ยังไม่มีภาพ{{item.name}}"><span class="block size-14">{{> icoShirt}}</span><span>{{item.name}}</span></span>{{/if}}
         </div>
-        <figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-4 top-4 max-w-[calc(100%-2rem)]">{{#if item.imgNote}}{{item.imgNote}}{{else}}{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}{{/if}}</figcaption>
+        {{#if item.img}}<figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-4 top-4 max-w-[calc(100%-2rem)]">{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}</figcaption>{{/if}}
       </figure>
     </div>
   </div>
 </section>
 
-<!-- 2 · แบบเสื้อตัวอย่าง · ยังไม่มีแบบในคลังก็บอกตรงๆ ไม่ซ่อนทั้งส่วน -->
-<section class="wrap section" id="ex">
+{{#if pp.toc.length}}
+<nav class="border-b border-line bg-paper" aria-label="ข้ามไปยังหัวข้อในหน้านี้">
+  <div class="wrap chiprail py-3">
+    {{#each pp.toc}}<a class="chip" href="#{{this.key}}">{{this.t}}</a>{{/each}}
+  </div>
+</nav>
+{{/if}}
+
+<!-- 02 · แบบและตัวเลือก -->
+<section class="wrap section" id="options">
   <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
-    <div class="max-w-[60ch]">
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>แบบเสื้อตัวอย่าง</span>
-      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{#if productDesigns.length}}ชอบแบบไหน กดขยายแล้วเซฟไปคุยต่อ{{else}}แบบ {{item.name}} กำลังทยอยขึ้นเว็บ{{/if}}</h2>
+    <div class="max-w-[62ch]">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>แบบและตัวเลือก</span>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.options.h}}</h2>
+      {{#each pp.options.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
     </div>
-    {{#if productDesigns.length}}<a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'designs'}}?product={{item.id}}" id="prodAll">ดูแบบ{{item.name}}ทั้งหมด &rarr;</a>{{/if}}
+    {{#each pp.options.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
   </div>
-  {{#if productTags.length}}
-  <!-- แท็กในหน้า · เสื้อวิ่ง / ฟุตบอล ยังไม่แยกหน้า (Wireframe v2 ส่วน 2b) -->
-  <div class="chiprail mb-6" id="prodTags" data-show="6">
-    <span class="text-[15px] font-bold mr-1">ทรงเสื้อ</span>
-    <button class="chip" type="button" data-tag="all" aria-pressed="true">ทั้งหมด <span class="tabular-nums opacity-60">{{productDesigns.length}}</span></button>
-    {{#each productTags}}<button class="chip" type="button" data-tag="{{this.garment}}" data-q="{{this.name}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
-  </div>
-  <p class="t-sm tabular-nums -mt-2 mb-6" id="prodCount" role="status">แสดง 6 จาก {{productDesigns.length}} แบบ · ดูครบในแกลเลอรี</p>
-  {{/if}}
-  {{#if productDesigns.length}}
-  <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" id="prodGrid" data-line-url="{{site.lineUrl}}">
-    {{#each productDesigns}}
-    <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="{{this.code}}" data-meta="{{this.meta}}" data-garment="{{this.garment}}"{{#unless (lt @index 6)}} hidden{{/unless}}>
-      <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 33vw, 50vw"
-           width="1080" height="720" loading="lazy" decoding="async"
-           alt="แบบ{{this.garmentName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง" class="w-full h-full object-contain">
-    </figure>
+
+  <ol class="grid md:grid-cols-3 gap-4">
+    {{#each pp.options.cards}}
+    <li class="pp-card"><span class="pp-card__no">{{inc @index}}</span><h3 class="text-[20px] mt-3">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</li>
     {{/each}}
+  </ol>
+
+  {{#if pp.options.specTabs.length}}
+  <div class="spec-tabs mt-10" data-tabs>
+    <h3 class="text-[19px] mb-4">ตัวเลือกที่ผลิตได้</h3>
+    <div class="chiprail" role="tablist" aria-label="ตัวเลือกที่ผลิตได้">
+      {{#each pp.options.specTabs}}<button class="spec-tab" role="tab" type="button" id="t-{{this.id}}" aria-controls="p-{{this.id}}" aria-selected="{{#if @first}}true{{else}}false{{/if}}"{{#unless @first}} tabindex="-1"{{/unless}}>{{this.t}}</button>{{/each}}
+    </div>
+    {{#each pp.options.specTabs}}
+    <div role="tabpanel" id="p-{{this.id}}" aria-labelledby="t-{{this.id}}" tabindex="0" class="mt-5 overflow-x-auto border-2 border-ink rounded-card max-w-[860px]"{{#unless @first}} hidden{{/unless}}>
+      <table class="w-full min-w-[420px] text-[17px]">
+        <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ตัวเลือก</th><th scope="col" class="text-left font-bold px-5 py-4">หมายเหตุ</th></tr></thead>
+        <tbody>{{#each (lookup ../pp.options.spec this.id)}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}</tbody>
+      </table>
+    </div>
+    {{/each}}
+    <p class="t-xs mt-3"><a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'guides' 'collar'}}">คู่มือทรงคอ · เลือกคอให้เหมาะกับงาน</a></p>
   </div>
-  {{else}}
-  <div class="bg-shell border border-line rounded-plate p-7 md:p-9">
-    <p class="t-lead max-w-[56ch]">ยังไม่มีแบบ {{item.name}} ขึ้นในคลังบนเว็บ <span class="text-ink-3">[รอรูปแบบจริงจากทีมดีไซน์]</span> ทักมาขอดูงานที่เคยทำได้ หรือดูแบบสินค้าอื่นเป็นแนวทางก่อน</p>
-    <div class="flex flex-wrap gap-3 mt-6">
-      <a class="btn btn-orange" href="{{site.lineUrl}}" data-track="line">ขอดูแบบทางไลน์</a>
-      <a class="btn btn-line" href="{{url 'designs'}}">ดูแบบเสื้อทั้งหมด</a>
+  {{/if}}
+
+  {{#if productDesigns.length}}
+  <div class="mt-14" id="ex">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+      <h3 class="t-display text-[clamp(22px,2.6vw,30px)]">เลือกกราฟิกพร้อมรหัสแบบ กดขยายแล้วเซฟไปคุยต่อ</h3>
+      <a class="pp-more" href="{{url 'designs'}}?product={{item.id}}" id="prodAll">ดูแบบ{{item.name}}ทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a>
+    </div>
+    {{#if productTags.length}}
+    <div class="chiprail mb-6" id="prodTags" data-show="6">
+      <span class="text-[15px] font-bold mr-1">ทรงเสื้อ</span>
+      <button class="chip" type="button" data-tag="all" aria-pressed="true">ทั้งหมด <span class="tabular-nums opacity-60">{{productDesigns.length}}</span></button>
+      {{#each productTags}}<button class="chip" type="button" data-tag="{{this.garment}}" data-q="{{this.name}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
+    </div>
+    <p class="t-sm tabular-nums -mt-2 mb-6" id="prodCount" role="status">แสดง 6 จาก {{productDesigns.length}} แบบ · ดูครบในแกลเลอรี</p>
+    {{/if}}
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" id="prodGrid" data-line-url="{{site.lineUrl}}">
+      {{#each productDesigns}}
+      <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="{{this.code}}" data-meta="{{this.meta}}" data-garment="{{this.garment}}"{{#unless (lt @index 6)}} hidden{{/unless}}>
+        <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 33vw, 50vw" width="1080" height="720" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง" class="w-full h-full object-contain">
+      </figure>
+      {{/each}}
     </div>
   </div>
   {{/if}}
 </section>
 
-{{#if childProducts.length}}
-<!-- 2b · ทรงเสื้อที่พิมพ์ลายได้ · หน้าลูกต้องมีเนื้อหาต่างจริง -->
-<section class="wrap pb-16 md:pb-24" id="shapes">
-  <div class="max-w-[60ch] mb-8">
-    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>{{tech.shapesTitle}}</span>
-    <h2 class="t-display text-[clamp(26px,3.4vw,42px)]">เทคนิคเดียวกัน หลายทรง</h2>
-  </div>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-    {{#each childProducts}}
-    <a href="{{url 'products' this.id}}" class="group flex flex-col border border-line rounded-plate overflow-hidden">
-      <div class="relative bg-paper aspect-[3/2]">
-        <img src="{{this.img}}" alt="{{this.name}}" width="1080" height="720" loading="lazy" decoding="async" class="w-full h-full object-contain">
-        <span class="tag tag-ink absolute left-3 top-3 max-w-[calc(100%-1.5rem)]">{{#if this.imgNote}}{{this.imgNote}}{{else}}{{#if (eq this.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}{{/if}}</span>
-      </div>
-      <div class="p-6 grow">
-        <h3 class="text-[20px] group-hover:underline decoration-orange decoration-2 underline-offset-4">{{this.name}} &rarr;</h3>
-        <p class="t-sm mt-2">{{this.childNote}}</p>
-      </div>
-    </a>
-    {{/each}}
-    {{#if productTags.length}}
-    <div class="flex flex-col border border-line rounded-plate bg-shell p-6">
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        {{#each productTags}}<img src="{{this.sample.imgSmall}}" alt="ตัวอย่างแบบ{{this.name}} รหัส {{this.sample.code}}" width="540" height="360" loading="lazy" decoding="async" class="w-full aspect-[3/2] object-contain bg-paper border border-line rounded-card">{{/each}}
-      </div>
-      <h3 class="text-[20px]">{{#each productTags}}{{this.name}}{{#unless @last}} / {{/unless}}{{/each}}</h3>
-      <p class="t-sm mt-2 grow">ใช้ผ้าและเทคนิคเดียวกับหน้านี้ ยังไม่แยกหน้า กดดูแบบจากแท็ก</p>
-      <div class="flex flex-wrap gap-2 mt-5">
-        {{#each productTags}}<a class="chip" href="?tag={{this.garment}}#ex" data-tag-link="{{this.garment}}">{{this.name}}</a>{{/each}}
-      </div>
+<!-- 03 · ผ้า -->
+{{#if pp.fabric.show}}
+<section class="bg-shell border-y border-line" id="fabric">
+  <div class="wrap section">
+    <div class="max-w-[62ch] mb-8">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoCube}}</span>ผ้า</span>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.fabric.h}}</h2>
+      {{#each pp.fabric.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
     </div>
+    {{#if pp.fabric.fabrics.length}}
+    <ul class="pp-fabrics">
+      {{#each pp.fabric.fabrics}}
+      <li>{{#if this.img}}<img src="{{this.img}}" alt="ผิว{{this.name}}ระยะใกล้" width="120" height="120" loading="lazy" decoding="async">{{else}}<span class="pp-fabrics__no" aria-hidden="true"></span>{{/if}}<div><h3 class="text-[18px]">{{this.name}}</h3><p class="t-sm mt-1">{{this.use}}</p></div></li>
+      {{/each}}
+    </ul>
     {{/if}}
+    {{#unless wp}}{{#if pp.fabric.table}}<p class="pending-ribbon mt-6">ตารางสเปกผ้าของ v22 รอข้อมูลจริง (ส่วนผสม / น้ำหนัก) · บนเว็บจริงซ่อนไว้</p>{{/if}}{{/unless}}
+    {{#each pp.fabric.notes}}<p class="t-sm mt-5">{{this}}</p>{{/each}}
+    <div class="flex flex-wrap gap-3 mt-7">
+      <a class="btn btn-line" href="{{url 'contact'}}?p={{item.id}}&amp;from=fabric">ขอดูตัวอย่างผ้า</a>
+      {{#each pp.fabric.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+    </div>
   </div>
 </section>
 {{/if}}
 
-<!-- 3 · สิ่งที่ปรับได้ · 4 · สามทางเริ่มต้น -->
-<section class="bg-shell border-y border-line">
-  <div class="wrap section grid lg:grid-cols-2 gap-10 lg:gap-16">
+<!-- 04 · รายละเอียดงาน (ปัก / ลาย / สกรีน / ซิป ฯลฯ) -->
+{{#if pp.detail.show}}
+<section class="wrap section" id="detail">
+  <div class="max-w-[62ch] mb-8">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>รายละเอียดงาน</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.detail.h}}</h2>
+    {{#each pp.detail.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
+  </div>
+  <ol class="grid md:grid-cols-3 gap-4">
+    {{#each pp.detail.cards}}<li class="pp-card"><span class="pp-card__no">{{inc @index}}</span><h3 class="text-[20px] mt-3">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</li>{{/each}}
+  </ol>
+  {{#if pp.detail.table}}
+  <div class="overflow-x-auto border-2 border-ink rounded-card mt-8 max-w-[860px]" tabindex="0" role="region" aria-label="ตารางรายละเอียด เลื่อนซ้ายขวาได้">
+    <table class="w-full min-w-[420px] text-[17px]">
+      <thead class="bg-ink text-paper"><tr>{{#each pp.detail.table.head}}<th scope="col" class="text-left font-bold px-5 py-4">{{this}}</th>{{/each}}</tr></thead>
+      <tbody>{{#each pp.detail.table.rows}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}</tbody>
+    </table>
+  </div>
+  {{/if}}
+  {{#each pp.detail.links}}<a class="pp-more mt-6" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+</section>
+{{/if}}
+
+<!-- 05 · ราคา -->
+{{#if pp.price.show}}
+<section class="bg-shell border-y border-line" id="price">
+  <div class="wrap section grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-start">
     <div>
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoCube}}</span>สิ่งที่ปรับได้</span>
-      <h2 class="t-display text-[clamp(26px,3.2vw,40px)]">เปลี่ยนได้ตามทีมคุณ</h2>
-      <div class="chiprail mt-6">
-        {{#each item.adjustable}}<span class="chip">{{this}}</span>{{/each}}
-      </div>
-      <p class="t-sm mt-5 max-w-[46ch]">{{tech.adjustNote}}</p>
-      {{#if tech.limits.length}}
-      <h3 class="text-[18px] mt-7">ข้อจำกัดของ{{tech.name}}</h3>
-      <ul class="mt-3 space-y-2">
-        {{#each tech.limits}}<li class="flex gap-3 text-[16px] leading-[1.6] text-ink-2"><span class="block size-1.5 rounded-full bg-orange shrink-0 mt-2.5" aria-hidden="true"></span><span>{{this}}</span></li>{{/each}}
-      </ul>
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoTag}}</span>ราคา</span>
+      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{pp.price.h}}</h2>
+      {{#if pp.price.factors.length}}
+      <h3 class="text-[19px] mt-7">{{pp.price.factorsTitle}}</h3>
+      <ul class="mt-3 space-y-2.5">{{#each pp.price.factors}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
       {{/if}}
-      <p class="t-sm mt-6 max-w-[46ch]"><b class="text-ink">ก่อนผลิตได้ดู:</b> {{tech.preview.d}}</p>
+      {{#if pp.price.need}}
+      <h3 class="text-[19px] mt-7">{{pp.price.need.h}}</h3>
+      <ul class="mt-3 space-y-2.5">{{#each pp.price.need.items}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
+      {{/if}}
+      <p class="t-xs mt-6 max-w-[44ch]">ราคายืนยันอยู่ในใบเสนอราคา · <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'calculations'}}">คำนวณราคาเบื้องต้น</a></p>
     </div>
-
     <div>
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>สามทางเริ่มต้น</span>
-      <h2 class="t-display text-[clamp(26px,3.2vw,40px)]">ไม่มีแบบก็เริ่มได้</h2>
-      <ol class="mt-6 border-t-2 border-ink">
-        <li class="why-row"><span class="why-row__no">01</span><div class="why-row__body"><h3 class="why-row__t">เลือกแบบที่มีอยู่แล้ว</h3><p class="why-row__d">เปิดแกลเลอรี เซฟรูปแบบที่ชอบ ส่งมาในไลน์ แล้วบอกว่าอยากเปลี่ยนตรงไหน</p></div></li>
-        <li class="why-row"><span class="why-row__no">02</span><div class="why-row__body"><h3 class="why-row__t">ส่งภาพอ้างอิงหรือสเก็ตช์</h3><p class="why-row__d">มีรูปที่ชอบจากที่ไหนก็ส่งมาได้ เราออกแบบใหม่ให้เป็นของทีมคุณ ไม่ลอกของใคร</p></div></li>
-        <li class="why-row"><span class="why-row__no">03</span><div class="why-row__body"><h3 class="why-row__t">เล่าโจทย์ให้ทีมดีคิดให้</h3><p class="why-row__d">บอกแค่ว่าใครใส่ ใส่ตอนไหน อยากให้คนเห็นแล้วรู้สึกยังไง ที่เหลือเราคิดมาให้ดู</p></div></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- 5 · ทรง ไซซ์ ผ้า คอ ออปชั่น · แท็บ + ตารางสเปกจากข้อมูลกลาง -->
-<section class="wrap section" id="spec">
-  <div class="max-w-[68ch] mb-8">
-    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoRuler}}</span>สเปกที่เลือกได้</span>
-    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">ทรง ไซซ์ ผ้า คอ และออปชั่น</h2>
-    <p class="t-lead mt-4">แสดงเฉพาะตัวเลือกที่ใช้กับ{{item.name}}ได้จริง</p>
-  </div>
-
-  <div class="spec-tabs" data-tabs>
-    <div class="chiprail" role="tablist" aria-label="หมวดสเปก">
-      <button class="spec-tab" role="tab" type="button" id="t-shape" aria-controls="p-shape" aria-selected="true">ทรง</button>
-      <button class="spec-tab" role="tab" type="button" id="t-size" aria-controls="p-size" aria-selected="false" tabindex="-1">ไซซ์</button>
-      <button class="spec-tab" role="tab" type="button" id="t-fabric" aria-controls="p-fabric" aria-selected="false" tabindex="-1">ผ้า</button>
-      <button class="spec-tab" role="tab" type="button" id="t-collar" aria-controls="p-collar" aria-selected="false" tabindex="-1">คอ</button>
-      <button class="spec-tab" role="tab" type="button" id="t-option" aria-controls="p-option" aria-selected="false" tabindex="-1">ออปชั่น</button>
-    </div>
-
-    <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-12 items-start mt-7">
-      <figure class="relative">
-        <div class="overflow-hidden rounded-plate bg-paper border border-line aspect-[3/2]">
-          {{#if item.img}}<img src="{{item.img}}" alt="ทรงของ{{item.name}}" width="1080" height="720" loading="lazy" decoding="async" class="w-full h-full object-contain">{{else}}<div class="img-pending" role="img" aria-label="ยังไม่มีภาพทรง{{item.name}}">{{item.imgNote}}</div>{{/if}}
-        </div>
-        <figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-3 top-3 max-w-[calc(100%-1.5rem)]">{{#if item.imgNote}}{{item.imgNote}}{{else}}{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}{{/if}}</figcaption>
-      </figure>
-
-      <div>
-        <div role="tabpanel" id="p-shape" aria-labelledby="t-shape" tabindex="0" class="overflow-x-auto border-2 border-ink rounded-card">
-          <table class="w-full min-w-[420px] text-[17px]">
-            <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ตัวเลือก</th><th scope="col" class="text-left font-bold px-5 py-4">หมายเหตุ</th></tr></thead>
-            <tbody>
-              {{#each item.spec.shape}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}
-            </tbody>
-          </table>
-        </div>
-
-        <div role="tabpanel" id="p-size" aria-labelledby="t-size" tabindex="0" hidden>
-          <div class="overflow-x-auto border-2 border-ink rounded-card">
-            <table class="w-full min-w-[420px] text-[17px]">
-              <caption class="text-left font-bold text-[18px] px-5 py-4 border-b-2 border-ink">หน่วยเป็น{{sizing.unit}} วัดจากตัวเสื้อวางราบ</caption>
-              <thead class="bg-ink text-paper"><tr>
-                <th scope="col" class="text-left font-bold px-5 py-4">ไซซ์</th>
-                <th scope="col" class="text-right font-bold px-5 py-4">รอบอก</th>
-                <th scope="col" class="text-right font-bold px-5 py-4">ความยาว</th>
-                <th scope="col" class="text-right font-bold px-5 py-4">ไหล่</th>
-              </tr></thead>
-              <tbody>
-                {{#each sizing.sizes}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-3.5">{{this.size}}</th><td class="px-5 py-3.5 text-right tabular-nums">{{this.chest}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.length}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.shoulder}}</td></tr>{{/each}}
-              </tbody>
-            </table>
-          </div>
-          <p class="t-xs mt-3">{{sizing.tolerance}} · <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'guides' 'size'}}">วิธีวัดและแม่แบบเก็บไซซ์</a></p>
-        </div>
-
-        <div role="tabpanel" id="p-fabric" aria-labelledby="t-fabric" tabindex="0" hidden>
-          <ul class="divide-y divide-line border-t-2 border-ink">
-            {{#each tech.fabrics}}<li class="flex items-baseline justify-between gap-6 py-3.5"><span class="text-[17px] font-bold">{{this.name}}</span><span class="t-sm text-right max-w-[30ch]">{{this.use}}</span></li>{{/each}}
-          </ul>
-          <p class="t-sm mt-4">{{tech.fabricLead}} · {{item.spec.fabricNote}} · <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'guides' 'fabric'}}">คู่มือเลือกผ้า</a></p>
-        </div>
-
-        <div role="tabpanel" id="p-collar" aria-labelledby="t-collar" tabindex="0" hidden>
-          <div class="overflow-x-auto border-2 border-ink rounded-card">
-          <table class="w-full min-w-[420px] text-[17px]">
-            <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ตัวเลือก</th><th scope="col" class="text-left font-bold px-5 py-4">หมายเหตุ</th></tr></thead>
-            <tbody>
-              {{#each item.spec.collar}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}
-            </tbody>
-          </table>
-          </div>
-          <p class="t-xs mt-3"><a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'guides' 'collar'}}">คู่มือทรงคอ · เลือกคอให้เหมาะกับงาน</a></p>
-        </div>
-
-        <div role="tabpanel" id="p-option" aria-labelledby="t-option" tabindex="0" hidden class="overflow-x-auto border-2 border-ink rounded-card">
-          <table class="w-full min-w-[420px] text-[17px]">
-            <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ตัวเลือก</th><th scope="col" class="text-left font-bold px-5 py-4">หมายเหตุ</th></tr></thead>
-            <tbody>
-              {{#each item.spec.option}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}
-            </tbody>
-          </table>
-        </div>
-        <p class="scroll-hint">ปัดตารางไปทางขวาเพื่อดูคอลัมน์ที่เหลือ</p>
+      {{#if pp.price.box}}
+      <div class="bg-paper border border-line rounded-plate p-7"><p class="text-[22px] font-bold">{{pp.price.box.strong}}</p><p class="t-body mt-2">{{pp.price.box.p}}</p><p class="t-xs mt-2">{{pp.price.box.small}}</p></div>
+      {{/if}}
+      {{#unless pp.price.confirmed}}
+      <div class="bg-paper border-2 border-ink rounded-plate p-7 {{#if pp.price.box}}mt-5{{/if}}">
+        <p class="text-[22px] font-bold">ขอราคาตามแบบและจำนวนของทีมคุณ</p>
+        <p class="t-body mt-2">ส่งรหัสแบบหรือภาพอ้างอิง จำนวนคร่าว ๆ และวันที่ต้องใช้ ทีมดีแจ้งราคาต่อตัวให้ ออกแบบฟรี ขั้นต่ำ 10 ตัว</p>
+        <a class="btn btn-orange mt-5 gap-2" href="{{priceAsk}}"><span class="block size-5">{{> icoChat}}</span>ขอราคาทางไลน์</a>
+        {{#unless wp}}<p class="pending-ribbon mt-4">รอตารางราคาจากทีม (แบบเดียวกับโปโลปักและเบสบอลใน prices.json) · ได้แล้วกล่องนี้หายเอง ตารางราคาขึ้นแทน</p>{{/unless}}
       </div>
+      {{/unless}}
+      {{#if pp.price.table}}
+      <div class="overflow-x-auto border-2 border-ink rounded-card mt-5" tabindex="0" role="region" aria-label="ตารางราคา เลื่อนซ้ายขวาได้">
+        <table class="w-full min-w-[420px] text-[17px]">
+          <thead class="bg-ink text-paper"><tr>{{#each pp.price.table.head}}<th scope="col" class="text-left font-bold px-4 py-4 whitespace-nowrap">{{this}}</th>{{/each}}</tr></thead>
+          <tbody>{{#each pp.price.table.rows}}<tr class="border-t border-line">{{#each this}}<td class="px-4 py-3.5 text-ink-2 whitespace-nowrap tabular-nums{{#if @first}} font-semibold text-ink{{/if}}">{{this}}</td>{{/each}}</tr>{{/each}}</tbody>
+        </table>
+      </div>
+      {{/if}}
+      {{#each pp.price.notes}}<p class="t-sm mt-4">{{this}}</p>{{/each}}
     </div>
   </div>
 </section>
+{{/if}}
 
-<!-- 6 · การใช้งานที่เกี่ยวข้อง + งานจริง -->
-<section class="bg-shell border-y border-line">
+<!-- 06 · ชวนขอราคา -->
+<section class="band-soft">
+  <div class="wrap py-12 md:py-14 flex flex-wrap items-center justify-between gap-6">
+    <div class="max-w-[56ch]"><h2 class="t-display text-[clamp(24px,3vw,34px)] text-ink">{{pp.quote.h}}</h2><p class="text-[17px] leading-[1.7] text-ink-2 mt-2">{{pp.quote.p}}</p></div>
+    <a class="btn btn-orange btn-lg max-sm:whitespace-normal max-sm:text-center max-sm:py-3" href="{{url 'contact'}}?p={{item.id}}">{{pp.quote.cta}}</a>
+  </div>
+</section>
+
+<!-- 07 · เบื้องหลังการผลิต -->
+{{#if pp.production.show}}
+<section class="wrap section" id="production">
+  <div class="max-w-[62ch] mb-8">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPrinter}}</span>การผลิต</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.production.h}}</h2>
+  </div>
+  <div class="grid {{#if productionPhoto}}lg:grid-cols-[1.2fr_0.8fr]{{/if}} gap-10 items-start">
+  <ol class="mt-2 border-t-2 border-ink max-w-[860px]">
+    {{#each pp.production.cards}}<li class="why-row"><span class="why-row__no">0{{inc @index}}</span><div class="why-row__body"><h3 class="why-row__t">{{this.h}}</h3>{{#each this.p}}<p class="why-row__d">{{this}}</p>{{/each}}</div></li>{{/each}}
+  </ol>
+  {{#if productionPhoto}}<figure><div class="overflow-hidden rounded-plate bg-shell aspect-[3/4] max-w-[420px]"><img src="{{productionPhoto.img}}" alt="{{productionPhoto.alt}}" width="900" height="1200" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="t-sm mt-3">{{productionPhoto.cap}}</figcaption></figure>{{/if}}
+  </div>
+  {{#unless productionPhoto}}{{#unless wp}}<p class="pending-ribbon mt-6">รอภาพขั้นตอนผลิตจริงของสินค้านี้ · ข้อความด้านบนขึ้นเว็บจริงได้ ภาพยังไม่มี</p>{{/unless}}{{/unless}}
+  {{#each pp.production.notes}}<p class="t-sm mt-3">{{this}}</p>{{/each}}
+</section>
+{{/if}}
+
+<!-- 08 · ผลงานจริง -->
+{{#if pp.work.show}}
+<section class="bg-shell border-y border-line" id="work">
   <div class="wrap section">
-    <div class="max-w-[68ch] mb-8">
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>ใครใช้เสื้อแบบนี้</span>
-      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">งานที่เลือก{{item.name}}</h2>
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <div class="max-w-[62ch]">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>เสื้อจริง</span>
+        <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.work.h}}</h2>
+      </div>
+      <a class="pp-more" href="{{url 'projects'}}">ดูผลงานและรีวิวทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a>
     </div>
-    <div class="chiprail mb-9">
-      {{#each relatedUses}}<a class="chip" href="{{url 'uses' this.id}}">{{this.name}}</a>{{/each}}
-    </div>
-
-    {{#if productWorks.length}}
+    {{#if pp.work.real.length}}
     <div class="grid md:grid-cols-3 gap-5">
-      {{#each productWorks}}
+      {{#each pp.work.real}}
       <article class="bg-paper border border-line rounded-plate overflow-hidden flex flex-col">
         <div class="relative aspect-[4/3] bg-shell">
           <img src="{{this.img}}" alt="ทีมใส่{{this.title}}จริง" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover">
@@ -264,98 +252,116 @@
       </article>
       {{/each}}
     </div>
-
-    <div class="grid md:grid-cols-3 gap-5 mt-5">
-      {{#each productWorks}}{{> reviewSlot}}{{/each}}
-    </div>
     {{else}}
+    {{#unless wp}}<p class="pending-ribbon">ยังไม่มีงาน{{item.name}}ที่ได้รับอนุญาตให้เผยแพร่ · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
+    <div class="grid md:grid-cols-3 gap-5 mt-4">
+      {{#each pp.work.cards}}<article class="pp-card"><span class="img-pending">{{this.img}}</span><h3 class="text-[19px] mt-4">{{this.h}}</h3>{{#each this.facts}}<p class="t-sm mt-1">{{this}}</p>{{/each}}</article>{{/each}}
+    </div>
+    {{/if}}
+  </div>
+</section>
+{{/if}}
+
+<!-- 09 · รีวิว · ยังไม่มีรีวิวที่ได้รับอนุญาต ต้นแบบเท่านั้น -->
+{{#if pp.reviews.show}}
+<section class="wrap section" id="reviews">
+  <h2 class="t-display text-[clamp(26px,3.4vw,40px)]">{{pp.reviews.h}}</h2>
+  {{#unless wp}}<p class="pending-ribbon mt-4">รอคำรีวิว ภาพ คลิป คะแนน และแหล่งที่มาจริงที่ได้รับอนุญาต · ไม่แสดงดาวหรือคำชมสมมติ · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
+</section>
+{{/if}}
+
+<!-- 10 · ทรงและไซซ์ -->
+<section class="wrap section" id="size">
+  <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
+    <div>
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoRuler}}</span>ไซซ์</span>
+      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{pp.size.h}}</h2>
+      {{#if pp.size.title}}<h3 class="text-[19px] mt-6">{{pp.size.title}}</h3>{{/if}}
+      {{#each pp.size.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}
+      {{#each pp.size.links}}<a class="pp-more mt-5" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+    </div>
+    <div>
+      <div class="overflow-x-auto border-2 border-ink rounded-card" tabindex="0" role="region" aria-label="ตารางไซซ์ เลื่อนซ้ายขวาได้">
+        <table class="w-full min-w-[420px] text-[17px]">
+          <caption class="text-left font-bold text-[18px] px-5 py-4 border-b-2 border-ink">หน่วยเป็น{{sizing.unit}} วัดจากตัวเสื้อวางราบ · ตารางกลาง ตรวจตามทรงที่สั่งจริง</caption>
+          <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ไซซ์</th><th scope="col" class="text-right font-bold px-5 py-4">รอบอก</th><th scope="col" class="text-right font-bold px-5 py-4">ความยาว</th><th scope="col" class="text-right font-bold px-5 py-4">ไหล่</th></tr></thead>
+          <tbody>{{#each pp.size.sizes}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-3.5">{{this.size}}</th><td class="px-5 py-3.5 text-right tabular-nums">{{this.chest}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.length}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.shoulder}}</td></tr>{{/each}}</tbody>
+        </table>
+      </div>
+      <p class="t-xs mt-3">{{sizing.tolerance}}</p>
+      {{#each pp.size.notes}}<p class="t-xs mt-1">{{this}}</p>{{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- 11 · ขั้นตอนสั่งทำ -->
+<section class="bg-shell border-y border-line" id="order">
+  <div class="wrap section grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-start">
+    <div>
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoClock}}</span>ขั้นตอน</span>
+      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{pp.order.h}}</h2>
+      <ol class="mt-6 border-t-2 border-ink">
+        {{#each pp.order.steps}}<li class="why-row"><span class="why-row__no">0{{inc @index}}</span><div class="why-row__body"><h3 class="why-row__t">{{this.h}}</h3>{{#if this.p}}<p class="why-row__d">{{this.p}}</p>{{/if}}</div></li>{{/each}}
+      </ol>
+      {{#each pp.order.links}}<a class="pp-more mt-5" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+    </div>
+    {{#if pp.order.payment.p.length}}
     <div class="bg-paper border border-line rounded-plate p-7">
-      <p class="t-body">ยังไม่มีงาน{{item.name}}ที่ได้รับอนุญาตให้เผยแพร่บนเว็บ ไม่ได้แปลว่าเราไม่เคยทำ ถามทีมขายได้เลยว่าเคยทำให้ใครบ้าง</p>
-      <a class="btn btn-orange mt-5" href="{{site.lineUrl}}" data-track="line">ถามทีมดีทางไลน์</a>
+      <h3 class="text-[19px]">{{pp.order.payment.h}}</h3>
+      <ul class="mt-4 space-y-2.5">{{#each pp.order.payment.p}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
     </div>
     {{/if}}
   </div>
 </section>
 
-<!-- 7 · ปัจจัยราคา + ขั้นตอนสั่ง -->
-<section class="wrap section">
-  <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
-    <div>
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoTag}}</span>ราคา</span>
-      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">ราคาขึ้นกับอะไรบ้าง</h2>
-      <ul class="mt-6 space-y-3">
-        {{#each tech.price}}<li class="flex gap-3 text-[17px] leading-[1.6]"><span class="block size-5 shrink-0 mt-1 text-orange">{{> (lookup this 'icon')}}</span><span><b>{{this.t}}</b> {{this.d}}</span></li>{{/each}}
-      </ul>
-      <p class="t-xs mt-6 max-w-[40ch]">บอกจำนวนกับโจทย์มา ทีมดีตีราคาให้ได้โดยไม่ต้องมีแบบ ราคายืนยันอยู่ในใบเสนอราคา · <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'calculations'}}">คำนวณราคาเบื้องต้น</a></p>
-    </div>
-
-    <div>
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoClock}}</span>ขั้นตอน</span>
-      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">ห้าช่วงตั้งแต่ทักมาจนของถึงมือ</h2>
-      <ol class="mt-6 border-t-2 border-ink">
-        <li class="why-row"><span class="why-row__no">01</span><div class="why-row__body"><h3 class="why-row__t">รับโจทย์</h3><p class="why-row__d">บอกว่าใครใส่ ประมาณกี่ตัว ใช้วันไหน</p></div></li>
-        <li class="why-row"><span class="why-row__no">02</span><div class="why-row__body"><h3 class="why-row__t">ออกแบบ · {{tech.preview.t}}</h3><p class="why-row__d">{{tech.preview.d}}</p></div></li>
-        <li class="why-row"><span class="why-row__no">03</span><div class="why-row__body"><h3 class="why-row__t">ยืนยันสเปกและออเดอร์</h3><p class="why-row__d">สรุปแบบ ผ้า สี ไซซ์ และจำนวนเป็นลายลักษณ์อักษร</p></div></li>
-        <li class="why-row"><span class="why-row__no">04</span><div class="why-row__body"><h3 class="why-row__t">ผลิตและอัปเดต</h3><p class="why-row__d">ถ่ายรูปงานจริงให้ดูก่อนแพ็ก</p></div></li>
-        <li class="why-row"><span class="why-row__no">05</span><div class="why-row__body"><h3 class="why-row__t">จัดส่ง</h3><p class="why-row__d">ส่งถึงที่ และเก็บสเปกไว้ให้สั่งซ้ำ</p></div></li>
-      </ol>
-      <a class="inline-flex items-center min-h-[44px] mt-5 font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'guides' guideId}}">อ่านคู่มือสั่ง{{item.name}}ฉบับเต็ม &rarr;</a>
-    </div>
+<!-- 12 · คำถามก่อนสั่ง -->
+{{#if pp.faq.show}}
+<section class="wrap section" id="faq">
+  <div class="max-w-[68ch] mb-8">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามที่พบบ่อย</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.faq.h}}</h2>
   </div>
-</section>
-
-<!-- 8 · FAQ เฉพาะสินค้า -->
-<section class="bg-shell border-y border-line">
-  <div class="wrap section">
-    <div class="max-w-[68ch] mb-8">
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามที่พบบ่อย</span>
-      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">เรื่องที่ถามบ่อยก่อนสั่ง{{item.name}}</h2>
-    </div>
-    <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
-      {{#each productFaq}}
-      <div class="hs-accordion border-b border-line" id="pfaq-{{@index}}">
-        <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-6 min-h-tap font-bold text-[19px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-controls="pfaq-panel-{{@index}}">
-          <span>{{this.[0]}}</span>
-          <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-        </button>
-        <div id="pfaq-panel-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region" aria-labelledby="pfaq-{{@index}}">
-          <p class="t-body pb-7 max-w-[62ch]">{{this.[1]}}</p>
-        </div>
+  <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
+    {{#each pp.faq.items}}
+    <div class="hs-accordion border-b border-line" id="pfaq-{{@index}}">
+      <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-6 min-h-tap font-bold text-[19px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-expanded="false" aria-controls="pfaq-panel-{{@index}}">
+        <span>{{this.[0]}}</span>
+        <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+      <div id="pfaq-panel-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+        <p class="t-body pb-7 max-w-[62ch]">{{this.[1]}}</p>
       </div>
-      {{/each}}
     </div>
-    <a class="inline-flex items-center min-h-[44px] mt-6 font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'faq'}}">คำถามที่พบบ่อยฉบับเต็ม &rarr;</a>
-  </div>
-</section>
-
-<!-- สินค้าอื่น -->
-<section class="wrap section">
-  <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
-    <h2 class="t-display text-[clamp(26px,3.2vw,40px)]">สินค้าอื่นที่เราทำ</h2>
-  </div>
-  <div class="grid sm:grid-cols-3 gap-5">
-    {{#each relatedProducts}}
-    <a href="{{url 'products' this.id}}" class="group flex flex-col">
-      <div class="relative overflow-hidden rounded-plate bg-paper border border-line aspect-[3/2]">
-        {{#if this.img}}<img src="{{this.img}}" alt="{{this.name}}" width="1080" height="720" loading="lazy" decoding="async" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.04]">
-        {{else}}{{!-- สินค้าที่ยังไม่มีรูปจริง (เสื้อวอร์ม · หน้ารวมเสื้อแบบพิเศษ) · ไม่ใส่ img src ว่าง และไม่ใช้รูปของสินค้าอื่นแทน --}}
-        <span class="prod-noimg" aria-hidden="true"><span class="block size-12">{{> icoShirt}}</span><span>{{this.name}}</span></span>{{/if}}
-      </div>
-      <h3 class="text-[19px] mt-3 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.name}}</h3>
-      <p class="t-xs mt-1">{{this.short}}</p>
-    </a>
     {{/each}}
   </div>
+  <div class="flex flex-wrap gap-x-6 gap-y-2 mt-6">
+    <a class="pp-more" href="{{url 'faq'}}">คำถามที่พบบ่อยฉบับเต็ม<span class="arw" aria-hidden="true">&rarr;</span></a>
+    {{#each pp.faq.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+  </div>
+</section>
+{{/if}}
+
+<!-- 13 · เลือกตามงานที่ใช้ -->
+<section class="bg-shell border-y border-line">
+  <div class="wrap section">
+    <h2 class="t-display text-[clamp(24px,3vw,36px)]">{{pp.uses.h}}</h2>
+    {{#if pp.uses.links.length}}<div class="chiprail mt-6">{{#each pp.uses.links}}<a class="chip" href="{{url this.to}}">{{this.t}}</a>{{/each}}</div>{{/if}}
+    {{#if pp.uses.compare.length}}
+    <p class="t-body mt-6">อยากเปรียบเทียบกับงานแบบอื่น?
+      {{#each pp.uses.compare}}<a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url this.to}}">{{this.t}}</a>{{#unless @last}} · {{/unless}}{{/each}}
+    </p>
+    {{/if}}
+  </div>
 </section>
 
-<!-- CONVERT -->
+<!-- 14 · เริ่มสั่ง -->
 <section class="band-orange">
   <div class="wrap py-14 md:py-20 text-center">
-    <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">อยากได้{{item.name}}สำหรับทีมคุณ</h2>
-    <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">บอกแค่ใครใส่ จำนวนประมาณ และใช้วันไหน ก็เริ่มได้แล้ว ไม่มีแบบก็ไม่เป็นไร</p>
+    <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">{{pp.contact.h}}</h2>
+    <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[52ch] mx-auto mt-4">{{pp.contact.p}}</p>
     <div class="flex flex-wrap justify-center gap-3 mt-8">
-      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
-      <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}?p={{item.id}}">กรอกฟอร์ม</a>
+      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+      <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper max-sm:whitespace-normal" href="{{url 'contact'}}?p={{item.id}}">{{pp.contact.cta}}</a>
     </div>
   </div>
 </section>

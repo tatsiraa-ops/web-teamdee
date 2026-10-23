@@ -2,110 +2,112 @@
 <html lang="th">
 <head>
   {{> head}}
-  <title>ผลงานและรีวิว · งานจริงที่ทีมดีช่วยตั้งแต่โจทย์จนจบงาน | TEAMDEE</title>
-  <meta name="description" content="งานเสื้อทีมที่ TEAMDEE ส่งมอบแล้ว เล่าตั้งแต่โจทย์ที่ลูกค้าเอามา สินค้าที่ใช้ และสิ่งที่เราช่วย พร้อมภาพจากหน้างานจริงและเสียงลูกค้า กรองตามกลุ่มงานได้">
+  <title>รีวิวลูกค้าทีมดี / ภาพลูกค้าใส่เสื้อจริง | TEAMDEE</title>
+  <meta name="description" content="ดูโลโก้ลูกค้า รีวิวข้อความ คลิป และภาพลูกค้าใช้งานจริง รวมในหน้าเดียว พร้อมข้อมูลเพื่อเริ่มสั่งทำเสื้อกับทีมดี">
 </head>
 <body>
 {{> siteHeader active="works"}}
 
 <main id="main">
-
-  <!-- 1 · คำอธิบาย + ตัวกรองตามบริบท -->
-  <section class="band-ink relative overflow-hidden">
+  {{!-- หน้ารีวิวหน้าเดียวตาม Wireframe v22 (22 ต.ค. 2026) · ไม่มีตัวกรอง ไม่มีหน้ารายกลุ่ม
+       ข้อความ: src/data/works-page.json · เรื่องราว: works.json · ภาพลูกค้า: customers.json
+       โลโก้ สถิติ รีวิว คลิป ยังรอข้อมูลจริงและสิทธิ์เผยแพร่ → ต้นแบบเท่านั้น
+       การ์ดเรื่องราวไม่แสดงจำนวนตัว วันผลิต หรือคำพูดลูกค้า จนกว่าทีมขายยืนยัน --}}
+  <section class="band-hero relative overflow-hidden">
     <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-    <div class="wrap relative py-12 md:py-16">
-      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">ผลงานและรีวิว</span></nav>
-      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-7">งานจริงที่ทีมดีช่วยตั้งแต่โจทย์จนจบงาน</h1>
-      <p class="text-[18px] leading-[1.75] text-paper/75 max-w-[58ch] mt-5">ทุกงานเล่าเหมือนกันสี่ข้อ โจทย์ที่ลูกค้าเอามา สินค้าที่ใช้ สิ่งที่เราช่วย และผลที่เกิดขึ้น เพื่อให้เทียบกับงานของคุณได้ว่าใกล้เคียงแค่ไหน</p>
+    <div class="wrap relative py-12 md:py-16 grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
+      <div>
+        <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">รีวิวลูกค้า</span></nav>
+        <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">{{wk.hero.h1}}</h1>
+        <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[56ch] mt-5">{{wk.hero.lead}}</p>
+        <div class="flex flex-wrap gap-3 mt-8">
+          <a class="btn btn-orange btn-lg" href="#stories">{{wk.hero.cta}}</a>
+          <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-ink hover:border-ink" href="#photos">{{wk.hero.cta2}}</a>
+        </div>
+      </div>
+      <ul class="grid grid-cols-3 gap-2" aria-hidden="true">{{#each wk.heroPhotos}}<li><img src="{{this.imgSmall}}" alt="" width="320" height="320" class="w-full aspect-square object-cover rounded-card" fetchpriority="{{#if @first}}high{{else}}low{{/if}}"></li>{{/each}}</ul>
     </div>
   </section>
 
-  <section class="wrap section">
-    <div class="space-y-4" id="workFilter">
-      <div class="chiprail">
-        <span class="text-[15px] font-bold mr-1">กลุ่มงาน</span>
-        <button class="chip" type="button" data-f="use" data-v="all" aria-pressed="true">ทั้งหมด <span class="tabular-nums opacity-60">{{workFilters.total}}</span></button>
-        {{#each workFilters.uses}}<button class="chip" type="button" data-f="use" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
-      </div>
-      <div class="chiprail">
-        <span class="text-[15px] font-bold mr-1">สินค้า</span>
-        <button class="chip" type="button" data-f="product" data-v="all" aria-pressed="true">ทุกประเภท</button>
-        {{#each workFilters.products}}<button class="chip" type="button" data-f="product" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
-      </div>
-      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
-        <p class="t-sm tabular-nums" id="workCount" role="status" aria-live="polite">แสดง {{workFilters.total}} งาน</p>
-        <button class="chip" type="button" id="workReset" hidden>ล้างตัวกรอง</button>
-      </div>
+  {{#if wk.brands.show}}
+  <section class="wrap pt-12" aria-labelledby="brands-h">
+    {{#unless wk.brands.logos.length}}{{#unless wp}}<p class="pending-ribbon">โลโก้ลูกค้ารอยืนยันและขออนุญาต · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}{{/unless}}
+    <h2 id="brands-h" class="t-display text-[clamp(22px,2.6vw,30px)]">{{wk.brands.h}}</h2>
+    <p class="t-body mt-2">{{wk.brands.p}}</p>
+    {{#if wk.brands.logos.length}}
+    <ul class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-9 gap-3 mt-6">{{#each wk.brands.logos}}<li class="bg-paper border border-line rounded-card aspect-square p-2 flex items-center justify-center"><img src="{{this}}" alt="โลโก้ลูกค้าทีมดี" width="200" height="200" loading="lazy" decoding="async" class="max-w-full max-h-full object-contain"></li>{{/each}}</ul>
+    {{/if}}
+    {{#if wk.brands.stats.length}}
+    <dl class="grid sm:grid-cols-3 gap-4 mt-6 max-w-[760px]">{{#each wk.brands.stats}}<div class="pp-card"><dt class="t-sm">{{this.t}}</dt><dd class="text-[20px] font-bold mt-1">{{this.n}}</dd></div>{{/each}}</dl>
+    <p class="t-xs mt-2">สถิติรวมทีมดี ณ ปี 2026 ไม่ใช่จำนวนรีวิวที่แสดงบนหน้านี้</p>
+    {{/if}}
+  </section>
+  {{/if}}
+
+  <!-- รีวิวและภาพลูกค้า (v22): ทางลัดไปแต่ละชนิดหลักฐาน · เว็บจริงเหลือเฉพาะส่วนที่มีของจริง -->
+  <nav class="wrap pt-12" aria-labelledby="jump-h">
+    <h2 id="jump-h" class="t-display text-[clamp(22px,2.6vw,30px)]">รีวิวและภาพลูกค้าทีมดี</h2>
+    <div class="flex flex-wrap gap-2 mt-4">
+      {{#unless wp}}<a class="chip" href="#reviews">ข้อความรีวิว</a><a class="chip" href="#videos">คลิปลูกค้า</a>{{/unless}}
+      <a class="chip" href="#stories">เรื่องราวลูกค้า</a><a class="chip" href="#photos">ภาพลูกค้า</a>
     </div>
+  </nav>
 
-    <!-- 2 · งานจริง · ชุดภาพ + เรื่องย่อสี่ข้อ -->
-    <div class="grid lg:grid-cols-2 gap-6 mt-8" id="workGrid" data-line-url="{{site.lineUrl}}">
+  {{#unless wp}}
+  <section class="wrap pt-12" id="reviews">
+    <h2 class="t-display text-[clamp(24px,3vw,36px)]">{{wk.reviews.h}}</h2>
+    <div class="grid md:grid-cols-3 gap-5 mt-6">{{#each works}}{{#if (lt @index 3)}}{{> reviewSlot}}{{/if}}{{/each}}</div>
+  </section>
+  <section class="wrap pt-12" id="videos">
+    <h2 class="t-display text-[clamp(24px,3vw,36px)]">{{wk.videos.h}}</h2>
+    {{#unless wp}}<p class="pending-ribbon mt-4">รอคลิปลูกค้าจริง (ภาพปก · ความยาว · คำบรรยาย) · โหลดคลิปเมื่อกดดูเท่านั้น · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
+  </section>
+  {{/unless}}
+
+  <section class="wrap section" id="stories">
+    <div class="max-w-[62ch] mb-8">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>งานจริง</span>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{wk.work.h}}</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
       {{#each works}}
-      <article class="border border-line rounded-plate overflow-hidden flex flex-col" data-use="{{this.use}}" data-product="{{this.product}}">
-        <figure class="relative aspect-[4/3] bg-shell" data-code="{{this.id}}">
-          <img src="{{this.img}}" alt="ทีมใส่{{this.title}}จริงในวันงาน" width="800" height="600" loading="lazy" decoding="async" class="w-full h-full object-cover">
-          <figcaption class="tag tag-ink absolute left-3 bottom-3">{{#if (eq this.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}</figcaption>
-        </figure>
-
-        <div class="p-6 md:p-7 flex flex-col grow">
+      <article class="bg-paper border border-line rounded-plate overflow-hidden flex flex-col" id="{{this.id}}">
+        <div class="relative aspect-[4/3] bg-shell"><img src="{{this.img}}" alt="ทีมใส่{{this.title}}จริงในวันงาน" width="800" height="600" loading="lazy" decoding="async" class="w-full h-full object-cover"><span class="tag tag-ink absolute left-3 bottom-3">งานผลิตจริง</span></div>
+        <div class="p-6 on-paper grow">
           <p class="t-xs">{{this.groupName}}</p>
-          <h2 class="text-[22px] mt-1">{{this.title}}</h2>
-          <p class="t-xs mt-1">[รอยืนยันชื่อองค์กร · ขออนุญาตเผยแพร่แล้ว]</p>
-
-          <dl class="mt-5 space-y-3.5 grow">
-            <div><dt class="text-[15px] font-bold text-ink-3">โจทย์</dt><dd class="text-[17px] leading-[1.7] text-ink-2 mt-1">{{this.brief}}</dd></div>
-            <div><dt class="text-[15px] font-bold text-ink-3">สินค้าที่ใช้</dt><dd class="text-[17px] leading-[1.7] text-ink-2 mt-1">{{#each this.spec}}{{this.[0]}} {{this.[1]}}{{#unless @last}} · {{/unless}}{{/each}}</dd></div>
-            <div><dt class="text-[15px] font-bold text-ink-3">ทีมดีช่วย</dt><dd class="text-[17px] leading-[1.7] text-ink-2 mt-1">{{this.helped}}</dd></div>
-            <div><dt class="text-[15px] font-bold text-ink-3">ผลที่ยืนยันได้</dt>
-              <dd class="text-[17px] leading-[1.7] mt-1">
-                {{#if this.result}}<span class="text-ink-2">{{this.result}}</span>
-                {{else}}<span class="text-ink-3">[รอตัวเลขยืนยันจากทีมขาย]</span>{{/if}}
-              </dd></div>
+          <h3 class="text-[20px] mt-1">{{this.title}}</h3>
+          <dl class="mt-3 space-y-2 text-[16px] leading-[1.6]">
+            <div><dt class="inline font-bold">โจทย์ </dt><dd class="inline text-ink-2">{{this.brief}}</dd></div>
+            <div><dt class="inline font-bold">ทีมดีช่วย </dt><dd class="inline text-ink-2">{{this.helped}}</dd></div>
           </dl>
-
-          <p class="t-xs mt-5 pt-4 border-t border-line tabular-nums">ผลิต {{baht this.qty}} ตัว · งาน{{this.tech}} · ใช้เวลา {{this.days}} วันทำการ · ใช้งานวันที่ {{this.event}}</p>
+          <a class="pp-more mt-3" href="{{url 'products' this.product}}">ข้อมูลสินค้า<span class="arw" aria-hidden="true">&rarr;</span></a>
         </div>
       </article>
       {{/each}}
     </div>
-
-    <div class="bg-shell border border-line rounded-plate p-7 md:p-9 mt-10 hidden" id="workEmpty">
-      <h2 class="t-display text-[clamp(22px,2.8vw,32px)]">ยังไม่มีงานในกลุ่มนี้บนเว็บ</h2>
-      <p class="t-lead mt-3 max-w-[52ch]">ไม่ได้แปลว่าเราไม่เคยทำ หน้านี้ลงเฉพาะงานที่ได้รับอนุญาตให้เผยแพร่แล้ว ถามมาได้เลยว่าเคยทำงานแบบไหนให้ใครบ้าง</p>
-      <div class="flex flex-wrap gap-3 mt-6">
-        <button class="btn btn-line" type="button" id="workReset2">ล้างตัวกรอง</button>
-        <a class="btn btn-orange" href="{{site.lineUrl}}" data-track="line">ถามทีมดีทางไลน์</a>
-      </div>
-    </div>
-
-    <p class="t-xs max-w-[70ch] mt-9">ตัวเลขจำนวนและระยะเวลาในหน้านี้เป็นข้อมูลตัวอย่างของต้นแบบ ชื่อองค์กรและผลลัพธ์ที่ยืนยันได้อยู่ระหว่างขออนุญาตและรวบรวมจากทีมขาย รูปทุกใบเป็นงานจริงจากโรงงานของเรา</p>
   </section>
 
-  <!-- 3 · รีวิว -->
-  <section class="bg-shell border-y border-line">
+  <section class="bg-shell border-y border-line" id="photos">
     <div class="wrap section">
-      <div class="max-w-[68ch] mb-9">
-        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>เสียงลูกค้า</span>
-        <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">ลูกค้าพูดถึงเราว่ายังไง</h2>
-        <p class="t-lead mt-4">ลงเฉพาะคำพูดจริงที่ได้รับอนุญาตให้เผยแพร่ ไม่มีรีวิวที่เขียนขึ้นเอง</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-5">
-        {{#each works}}{{#if (lt @index 6)}}{{> reviewSlot}}{{/if}}{{/each}}
-      </div>
+      <h2 class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch]">{{wk.photos.h}}</h2>
+      <p class="t-lead mt-3">{{wk.photos.p}}</p>
+      <ul class="pp-photos mt-8" aria-label="ภาพลูกค้าสวมเสื้อ">
+        {{#each wk.photos.items}}<li><img src="{{this.imgSmall}}" alt="ทีมลูกค้า{{this.catName}}ใส่เสื้อที่ทีมดีผลิต" width="320" height="320" loading="lazy" decoding="async"></li>{{/each}}
+      </ul>
     </div>
   </section>
 
   <section class="band-orange">
     <div class="wrap py-14 md:py-20 text-center">
-      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">อยากได้งานแบบนี้สำหรับทีมคุณ</h2>
-      <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[48ch] mx-auto mt-4">ดูสินค้าที่ใช้ หรือเล่าโจทย์ให้ทีมดีฟัง ใครใส่ กี่ตัว ใช้วันไหน แค่นี้ก็เริ่มได้</p>
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">{{wk.contact.h}}</h2>
+      <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[52ch] mx-auto mt-4">{{wk.contact.p}}</p>
       <div class="flex flex-wrap justify-center gap-3 mt-8">
-        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
-        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+        <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}">{{wk.contact.cta}}</a>
       </div>
+      <div class="flex flex-wrap justify-center gap-x-5 gap-y-1 mt-7">{{#each wk.contact.links}}<a class="font-semibold text-paper underline decoration-paper/60 decoration-2 underline-offset-4 inline-flex items-center min-h-[44px]" href="{{url this.to}}">{{this.t}}</a>{{/each}}</div>
     </div>
   </section>
-
 </main>
 {{> footer}}
 <script type="module" src="/src/js/works-page.js"></script>

@@ -14,20 +14,33 @@ export function faqSchema(items = []) {
   }
 }
 
+/** ที่อยู่ไทยแยกช่อง: เลขที่+ถนน · ตำบล · อำเภอ · จังหวัด · รหัสไปรษณีย์ */
+const thaiAddress = (s = '') => {
+  const m = /^(.*?)\s+ตำบล(\S+)\s+(อำเภอ\S+)\s+จังหวัด(\S+)\s+(\d{5})$/.exec(s)
+  if (!m) return { streetAddress: s }
+  return { streetAddress: m[1], addressLocality: m[3], addressRegion: m[4], postalCode: m[5] }
+}
+/** 0975495941 → +66975495941 */
+const intl = (tel = '') => (/^0\d{8,9}$/.test(tel) ? '+66' + tel.slice(1) : tel)
+
 export function businessSchema(site) {
   const abs = (p) => site.baseUrl + p
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
+    /* @id ให้ Google รวมเป็นธุรกิจเดียวกับ schema ที่ปลั๊กอิน SEO ใส่ ไม่นับเป็น 2 ธุรกิจ */
+    '@id': abs('/#business'),
     name: site.brand,
     legalName: 'บริษัท ดีดี ฟินิกซ์ จำกัด',
-    description: 'โรงงานรับผลิตเสื้อโปโล เสื้อยูนิฟอร์ม และเสื้อทีม ทั้งปักโลโก้และพิมพ์ลาย',
+    description: 'รับทำเสื้อทีม เสื้อบริษัท โปโลปักโลโก้ เสื้อพิมพ์ลาย และเสื้อสกรีน',
     url: abs('/'),
     logo: abs('/logo/teamdee-stacked.svg'),
     image: abs(site.ogImage),
-    telephone: site.phonePrimary,
+    telephone: intl(site.phonePrimaryTel) || site.phonePrimary,
     openingHours: site.openingHours,
-    address: { '@type': 'PostalAddress', streetAddress: site.address, addressRegion: 'นนทบุรี', addressCountry: 'TH' },
+    ...(site.foundedYear ? { foundingDate: String(site.foundedYear) } : {}),
+    address: { '@type': 'PostalAddress', addressRegion: 'นนทบุรี', ...thaiAddress(site.address), addressCountry: 'TH' },
+    ...(site.lineUrl ? { sameAs: [site.lineUrl] } : {}),
     areaServed: 'TH',
   }
 }

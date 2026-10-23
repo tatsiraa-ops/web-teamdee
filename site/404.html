@@ -4,7 +4,7 @@
   {{> head}}
   <title>ไม่พบหน้าที่ต้องการ | TEAMDEE</title>
   <meta name="robots" content="noindex">
-  <meta name="description" content="ไม่พบหน้าที่คุณกำลังหา อาจถูกย้ายหรือพิมพ์ที่อยู่ผิด เลือกไปหน้าที่คนเข้าบ่อยที่สุดได้จากตรงนี้ หรือทักไลน์ถามแอดมิน TEAMDEE ได้ทุกวัน">
+  <meta name="description" content="กลับไปเลือกสินค้า แบบเสื้อ หรือช่องทางติดต่อทีมดี">
 </head>
 <body>
 {{> siteHeader}}
@@ -14,10 +14,20 @@
     <div class="max-w-[56ch]">
       <p class="t-display text-[clamp(64px,12vw,140px)] leading-none tabular-nums border-b-8 border-orange inline-block pb-2">404</p>
       <h1 class="t-display text-[clamp(28px,4.4vw,52px)] mt-6">ไม่พบหน้าที่คุณต้องการ</h1>
-      <p class="t-lead mt-4">ลิงก์อาจเปลี่ยนแล้ว</p>
+      <p class="t-lead mt-4">ลิงก์อาจเปลี่ยนไป เลือกกลับไปดูสินค้าและแบบเสื้อ หรือติดต่อทีมดีได้เลย</p>
       <div class="flex flex-wrap gap-3 mt-8">
         <a class="btn btn-orange btn-lg" href="/">กลับหน้าแรก</a>
         <a class="btn btn-line btn-lg" href="{{url 'designs'}}">ดูแบบเสื้อ</a>
+      </div>
+    </div>
+  </section>
+  <section class="band-orange">
+    <div class="wrap py-14 md:py-20 text-center">
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย</h2>
+      <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[46ch] mx-auto mt-4">บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้</p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+        <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a>
       </div>
     </div>
   </section>

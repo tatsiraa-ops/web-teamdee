@@ -1,6 +1,6 @@
 {{!-- ตารางราคาตามประเภท × ช่วงจำนวน · เป็นข้อความ HTML ไม่ใช่รูป (Wireframe v2 /calculations/ ส่วน 3)
       ช่องที่ยังไม่ยืนยันขึ้น [ยืนยัน] ไม่ใช้ตัวเลขเก่า --}}
-<div class="overflow-x-auto border-2 border-ink rounded-card">
+<div class="overflow-x-auto border-2 border-ink rounded-card" tabindex="0" role="region" aria-label="ตารางราคา เลื่อนซ้ายขวาได้">
   <table class="w-full min-w-[640px] text-[17px]">
     <caption class="text-left font-bold text-[18px] px-5 py-4 border-b-2 border-ink">ราคาต่อตัวโดยประมาณ{{#if @root.pricing.vatIncluded}} รวม VAT 7%{{/if}} · รอเทียบ{{@root.pricing.source}}</caption>
     <thead class="bg-ink text-paper"><tr>

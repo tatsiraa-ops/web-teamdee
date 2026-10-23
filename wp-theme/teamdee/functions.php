@@ -10,6 +10,13 @@
 
 defined('ABSPATH') || exit;
 
+/* เนื้อหาทั้งเว็บเป็นภาษาไทย · ไม่พึ่งค่าภาษาของ WordPress (ในเครื่องเป็น en-US → โปรแกรมอ่านหน้าจออ่านไทยด้วยเสียงอังกฤษ และ Google เดาภาษาผิด) */
+add_filter('language_attributes', function ($output) {
+    /* หน้าแอดมินและหน้าล็อกอินใช้ภาษาที่ตั้งใน WordPress ตามเดิม */
+    if (is_admin() || (isset($GLOBALS['pagenow']) && $GLOBALS['pagenow'] === 'wp-login.php')) return $output;
+    return 'lang="th"';
+});
+
 const TD_BUILD = __DIR__ . '/build';
 
 add_action('after_setup_theme', function () {
@@ -96,6 +103,15 @@ add_filter('template_include', function ($template) {
 	return $template;
 }, 99);
 
+/* URL ที่ต้นแบบมีหน้า ห้าม WordPress เดา slug แล้ว 301 ไปหน้าชื่อคล้าย (เช่น /project/ → /projects/)
+   การเดานี้ทำงานก่อน template_include · เจอ 22 ต.ค. 2026 ตอนย้าย URL ตาม Wireframe v22 */
+add_filter('redirect_canonical', function ($redirect) {
+	return td_page() ? false : $redirect;
+});
+add_filter('do_redirect_guess_404_permalink', function ($guess) {
+	return td_page() ? false : $guess;
+});
+
 /* ---------- head ---------- */
 
 add_filter('pre_get_document_title', function ($title) {
@@ -110,6 +126,47 @@ add_filter('wp_robots', function (array $robots) {
 	}
 	return $robots;
 });
+
+/* หน้าระบบเดิมบนเว็บจริง (URL-MIGRATION-MAP v22: KEEP_NOINDEX) · ให้ทำงานต่อแต่ไม่ให้ Google เก็บ และเอาออกจาก Sitemap
+   บังคับจากธีม ใช้ได้ทั้งตอนมี Rank Math (เว็บจริง) และไม่มี (Sitemap ของ WordPress) */
+const TD_NOINDEX_SLUGS = ['thank-you', 'test-page'];
+
+/** หน้าที่ export มาแล้วตั้ง noindex ไว้ (บทความร่าง ค้นหา 404 แกลเลอรีที่ยังไม่มีแบบ) · v22: XML Sitemap ไม่ใส่หน้าร่าง ค้นหา 404 */
+function td_route_noindex(string $route): bool {
+	$p = td_page($route);
+	return $p && str_contains($p['robots'] ?? '', 'noindex');
+}
+
+/** route ของโพสต์/หน้า WordPress จากลิงก์ถาวร เพื่อเทียบกับ pages.json */
+function td_route_of_post(WP_Post $post): string {
+	$path = trim((string) wp_parse_url(get_permalink($post), PHP_URL_PATH), '/');
+	return $path === '' ? '/' : "/$path/";
+}
+
+/* บังคับจากธีมทั้งตอนมีและไม่มีปลั๊กอิน SEO · เดิมใช้ค่า robots ของต้นแบบเฉพาะตอนไม่มีปลั๊กอิน
+   แต่เว็บจริงใช้ Rank Math → หน้าร่างจะถูกเก็บเข้า Google และ Sitemap (เจอตอนไล่ผังเว็บ v22 · 22 ต.ค. 2026) */
+function td_is_noindex_page(): bool {
+	return is_page(TD_NOINDEX_SLUGS) || td_route_noindex(td_request_route());
+}
+add_filter('wp_robots', function (array $robots) {
+	if (td_is_noindex_page()) $robots['noindex'] = true;
+	return $robots;
+}, 20);
+add_filter('rank_math/frontend/robots', function ($robots) {
+	if (td_is_noindex_page()) { $robots['index'] = 'noindex'; }
+	return $robots;
+});
+add_filter('rank_math/sitemap/entry', function ($url, $type, $object) {
+	if ($type !== 'post' || !($object instanceof WP_Post)) return $url;
+	return (in_array($object->post_name, TD_NOINDEX_SLUGS, true) || td_route_noindex(td_route_of_post($object))) ? false : $url;
+}, 10, 3);
+add_filter('wp_sitemaps_posts_query_args', function (array $args, string $type) {
+	if ($type !== 'page') return $args;
+	$noindex = array_map(fn ($r) => trim($r, '/'), array_keys(array_filter(td_manifest()['pages'] ?? [], fn ($p) => str_contains($p['robots'] ?? '', 'noindex'))));
+	$ids = array_filter(array_map(fn ($slug) => get_page_by_path($slug)?->ID, [...TD_NOINDEX_SLUGS, ...array_filter($noindex, fn ($s) => $s !== '' && $s !== '404')]));
+	if ($ids) $args['post__not_in'] = array_merge($args['post__not_in'] ?? [], $ids);
+	return $args;
+}, 10, 2);
 
 add_action('wp_head', function () {
 	$p = td_current();
@@ -175,6 +232,80 @@ add_action('wp_body_open', function () {
 	printf('<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=%s" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>', esc_attr($id));
 });
 
+/* ---------- ฟอร์มติดต่อ /contact-us/ · ส่งเข้าอีเมลทีมขาย (แผน v22 ระยะ 3 · อาร์ตเคาะ 22 ต.ค. 2026) ----------
+   ตั้งอีเมลรับฟอร์มที่ ลักษณะ > ปรับแต่ง > TEAMDEE · เว้นว่าง = ปิด หน้าเว็บใช้ทางสำรอง (คัดลอกข้อความ + LINE)
+   กันสแปม: ช่องกันบอท (website) + จำกัด 5 ครั้ง / 10 นาที ต่อเครื่อง · ไม่รับไฟล์แนบ รับแค่ชื่อไฟล์
+   ไม่เก็บข้อมูลลูกค้าลงฐานข้อมูล ส่งอีเมลอย่างเดียว */
+
+add_action('customize_register', function (WP_Customize_Manager $c) {
+	$c->add_setting('teamdee_form_email', ['type' => 'option', 'default' => '', 'sanitize_callback' => 'sanitize_email']);
+	$c->add_control('teamdee_form_email', [
+		'section' => 'teamdee',
+		'label' => 'อีเมลรับฟอร์มติดต่อ',
+		'description' => 'อีเมลทีมขายที่รับข้อมูลจากหน้า /contact-us/ · เว้นว่าง = ปิดการส่ง (ลูกค้าคัดลอกข้อความแล้วส่งทาง LINE แทน)',
+	]);
+	$c->add_setting('teamdee_form_thanks', ['type' => 'option', 'default' => '/thank-you/', 'sanitize_callback' => fn ($v) => preg_match('#^/[a-z0-9/_-]*$#i', (string) $v) ? (string) $v : '/thank-you/']);
+	$c->add_control('teamdee_form_thanks', [
+		'section' => 'teamdee',
+		'label' => 'หน้าหลังส่งฟอร์มสำเร็จ',
+		'description' => 'ค่าเริ่มต้น /thank-you/ (หน้าเดิมบนเว็บจริง ใช้วัดผลแอด) · เว้นว่าง = แสดงข้อความในหน้าติดต่อ',
+	]);
+});
+
+function td_form_email(): string {
+	return (string) get_option('teamdee_form_email', '');
+}
+
+/* ค่าที่ JS ใช้ (src/js/contact-send.js) · พิมพ์เฉพาะหน้าติดต่อ */
+add_action('wp_head', function () {
+	$p = td_current();
+	if (!$p || ($p['route'] ?? '') !== '/contact-us/') return;
+	$cfg = [
+		'enabled' => td_form_email() !== '',
+		'endpoint' => admin_url('admin-post.php'),
+		'thanks' => (string) get_option('teamdee_form_thanks', '/thank-you/'),
+	];
+	printf("<script>window.TD_FORM=%s;</script>\n", wp_json_encode($cfg));
+}, 6);
+
+function td_contact_handle(): void {
+	$out = fn (array $body, int $code) => wp_send_json($body, $code);
+	$to = td_form_email();
+	if ($to === '') $out(['ok' => false, 'reason' => 'off'], 503);
+	if (!empty($_POST['website'])) $out(['ok' => true], 200); // บอท · ตอบเหมือนสำเร็จแต่ไม่ส่ง
+
+	$ip = isset($_SERVER['REMOTE_ADDR']) ? (string) $_SERVER['REMOTE_ADDR'] : '';
+	$key = 'td_contact_' . md5($ip);
+	$hits = (int) get_transient($key);
+	if ($hits >= 5) $out(['ok' => false, 'reason' => 'limit'], 429);
+	set_transient($key, $hits + 1, 10 * MINUTE_IN_SECONDS);
+
+	$f = static fn (string $k, bool $long = false) => mb_substr($long ? sanitize_textarea_field(wp_unslash($_POST[$k] ?? '')) : sanitize_text_field(wp_unslash($_POST[$k] ?? '')), 0, $long ? 3000 : 200);
+	$name = $f('name');
+	$tel = preg_replace('/[^0-9+\- ]/', '', $f('tel'));
+	if ($name === '' || strlen(preg_replace('/\D/', '', $tel)) < 9) $out(['ok' => false, 'reason' => 'invalid'], 400);
+	$email = sanitize_email(wp_unslash($_POST['email'] ?? ''));
+
+	$rows = [
+		'ชื่อ' => $name, 'เบอร์โทร' => $tel, 'องค์กร' => $f('org'), 'อีเมล' => $email,
+		'จำนวน' => $f('qty'), 'วันที่ต้องการใช้' => $f('date'), 'ใช้กับงาน' => $f('use'), 'สินค้าที่สนใจ' => $f('product'),
+		'เอกสารที่ต้องการ' => $f('docs'),
+		'มาจากหน้า' => $f('from'), 'ไฟล์ที่จะส่งตามทาง LINE' => $f('files'),
+	];
+	$body = '';
+	foreach ($rows as $label => $v) if ($v !== '') $body .= "{$label}: {$v}\n";
+	$note = $f('note', true);
+	if ($note !== '') $body .= "\nรายละเอียด:\n{$note}\n";
+	$body .= "\n— ส่งจากฟอร์มหน้า /contact-us/ ของ " . home_url('/');
+
+	$headers = ['Content-Type: text/plain; charset=UTF-8'];
+	if (is_email($email)) $headers[] = 'Reply-To: ' . $name . ' <' . $email . '>';
+	$ok = wp_mail($to, 'ขอราคา/ติดต่อจากเว็บ: ' . $name, $body, $headers);
+	$ok ? $out(['ok' => true], 200) : $out(['ok' => false, 'reason' => 'mail'], 500);
+}
+add_action('admin_post_nopriv_td_contact', 'td_contact_handle');
+add_action('admin_post_td_contact', 'td_contact_handle');
+
 /* ---------- สร้างหน้า (Page) ให้ครบตามต้นแบบ · เครื่องมือ > หน้าจากต้นแบบ ----------
    ให้ทุก URL มีหน้าใน WordPress ปลั๊กอิน SEO จะได้แก้ title / description ได้
    สร้างเฉพาะหน้าที่ยังไม่มี ไม่แก้ไม่ลบหน้าเดิม */
@@ -199,6 +330,13 @@ function td_sync_pages(): int {
 			'post_name' => trim($route, '/'),
 			'post_title' => $title ?: trim($route, '/'),
 			'post_content' => '<!-- เนื้อหาหน้านี้มาจากธีม TEAMDEE (build/pages) แก้ที่ต้นแบบแล้ว export ใหม่ · ช่องนี้ไม่ได้แสดงบนเว็บ -->',
+			/* เว็บจริงใช้ Rank Math (ปลั๊กอินคุม title / description / robots แทนธีม) → ตั้งค่าตามต้นแบบ v22 ให้ตั้งแต่สร้างหน้า
+			   หน้าเดิมที่มีอยู่แล้วไม่แตะ (เก็บ SEO เดิม) */
+			'meta_input' => [
+				'rank_math_title' => (string) ($p['title'] ?? ''),
+				'rank_math_description' => (string) ($p['description'] ?? ''),
+				'rank_math_robots' => str_contains($p['robots'] ?? '', 'noindex') ? ['noindex'] : ['index'],
+			],
 		]);
 		if ($id && !is_wp_error($id)) $n++;
 	}

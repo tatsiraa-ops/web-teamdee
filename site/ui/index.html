@@ -8,7 +8,7 @@
 </head>
 <body class="bg-paper">
 
-<div class="bg-orange text-ink text-[15px] py-2 font-semibold">
+<div class="bg-orange text-paper text-[15px] py-2 font-semibold">
   <div class="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-1">
     <span>Design Kit ไม่ใช่หน้าเว็บจริง มีไว้ให้ตรวจก่อนประกอบเป็นสิบหน้า</span>
     <span>ร่างที่ 6 · 6 ก.ย. 2026</span>
@@ -182,11 +182,11 @@
     <div class="grid md:grid-cols-2 gap-4">
       <div class="rounded-card bg-ok-tint border border-ok/25 p-6">
         <p class="font-bold text-ok mb-2">ถูก · ดำบนส้ม 6.6:1</p>
-        <div class="bg-orange text-ink rounded-md p-5 text-[19px] font-semibold">คำนวณราคาและวันที่ต้องเริ่มให้ทัน</div>
+        <div class="bg-orange text-paper rounded-md p-5 text-[19px] font-semibold">คำนวณราคาและวันที่ต้องเริ่มให้ทัน</div>
       </div>
       <div class="rounded-card bg-alert-tint border border-alert/25 p-6">
         <p class="font-bold text-alert mb-2">ผิด · ขาวบนส้ม 2.9:1 อ่านไม่ออก</p>
-        <div class="bg-orange text-ink rounded-md p-5 text-[19px] font-semibold">คำนวณราคาและวันที่ต้องเริ่มให้ทัน</div>
+        <div class="bg-orange text-paper rounded-md p-5 text-[19px] font-semibold">คำนวณราคาและวันที่ต้องเริ่มให้ทัน</div>
       </div>
     </div>
     <p class="kit-lbl">เทาทางการ #808285 ได้ 3.85:1 บนขาว ใช้เป็นตัวหนังสือไม่ได้ ใช้เป็นกราฟิกเท่านั้น สำหรับตัวหนังสือรองใช้เทาเข้มกว่า</p>
@@ -386,7 +386,7 @@
     <h2 class="t-display">D4 · การ์ด</h2>
     <div class="grid md:grid-cols-3 gap-4 mt-7">
       <a href="#d4" class="card card-link"><span class="tag">คนใส่คือพนักงานทั้งบริษัท</span><h3 class="text-[22px] mt-3">เสื้อประจำปีบริษัท</h3><p class="t-sm mt-2">ใส่ได้ทั้งงานเลี้ยงและวันทำงาน เป็นงานที่เราทำบ่อยที่สุด</p><div class="flex flex-wrap gap-2 mt-4"><span class="tag">100–600 ตัว</span></div></a>
-      <a href="#d4" class="card card-link bg-orange border-orange on-orange"><span class="tag">พิเศษ</span><h3 class="text-[22px] mt-3">ไม่แน่ใจว่างานอยู่กลุ่มไหน</h3><p class="t-sm mt-2 text-ink/80">เล่ามาเลยว่าใครจะใส่ กี่คน ใช้วันไหน</p><p class="font-bold mt-4">ปรึกษาฟรี &rarr;</p></a>
+      <a href="#d4" class="card card-link bg-orange border-orange on-orange"><span class="tag">พิเศษ</span><h3 class="text-[22px] mt-3">ไม่แน่ใจว่างานอยู่กลุ่มไหน</h3><p class="t-sm mt-2 text-ink/80">เล่ามาเลยว่าใครจะใส่ กี่คน ใช้วันไหน</p><p class="font-bold mt-4">ปรึกษาฟรี<span class="arw" aria-hidden="true">&rarr;</span></p></a>
       <div class="card relative overflow-hidden"><span class="tex-halftone absolute inset-0 opacity-50" aria-hidden="true"></span><h3 class="text-[22px] relative">การ์ดพื้นเท็กซ์เจอร์</h3><p class="t-sm mt-2 relative max-w-[24ch]">ใช้ halftone เป็นพื้นตอนอยากให้บล็อกเด่นโดยไม่ใช้สีทึบ จุดไล่ไปแน่นมุมล่างขวา เว้นมุมบนซ้ายไว้ให้ตัวหนังสือ</p></div>
     </div>
   </section>
@@ -406,7 +406,7 @@
       <div class="hs-accordion border-b border-line{{#if @first}} active{{/if}}" id="acc-{{@index}}">
         <button class="hs-accordion-toggle w-full flex items-center gap-4 py-6 text-left text-[19px] font-semibold min-h-tap" aria-controls="acc-c-{{@index}}" aria-expanded="{{#if @first}}true{{else}}false{{/if}}">
           <span class="flex-1">{{this.[0]}}</span>
-          <span class="w-9 h-9 rounded-full bg-orange text-ink grid place-items-center flex-none flex-shrink-0" aria-hidden="true">
+          <span class="w-9 h-9 rounded-full bg-orange text-paper grid place-items-center flex-none flex-shrink-0" aria-hidden="true">
             <svg class="hs-accordion-active:hidden" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg>
             <svg class="hidden hs-accordion-active:block" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M2 8h12"/></svg>
           </span>
@@ -475,7 +475,7 @@
     <p class="kit-lbl">Breadcrumb</p>
     <nav class="crumb2" aria-label="เส้นทาง"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'products' 'polo'}}">สินค้าและบริการ</a><span aria-hidden="true">/</span><span class="text-ink font-semibold">โปโลปักยูนิฟอร์ม</span></nav>
     <p class="kit-lbl">Pagination</p>
-    <nav class="pager" aria-label="หน้า"><a href="#d10" aria-label="ก่อนหน้า">&larr;</a><span aria-current="page">1</span><a href="#d10">2</a><a href="#d10">3</a><a href="#d10" aria-label="ถัดไป">&rarr;</a></nav>
+    <nav class="pager" aria-label="หน้า"><a href="#d10" aria-label="ก่อนหน้า">&larr;</a><span aria-current="page">1</span><a href="#d10">2</a><a href="#d10">3</a><a href="#d10" aria-label="ถัดไป"><span class="arw" aria-hidden="true">&rarr;</span></a></nav>
   </section>
 
   <!-- ===== D11 ว่างและโหลด ===== -->
@@ -556,7 +556,7 @@
       <a href="{{url 'projects'}}" class="grid md:grid-cols-[130px_1fr_170px] gap-4 md:gap-8 items-center py-6 border-b border-line group">
         <p class="t-display text-[clamp(32px,3.6vw,42px)] tabular-nums">{{baht this.qty}}<span class="block text-[15px] font-normal text-ink-3 mt-1">ตัว</span></p>
         <div><span class="tag">{{this.groupName}}</span><p class="text-[20px] font-bold mt-1.5 group-hover:underline decoration-orange decoration-2 underline-offset-4">{{this.title}}</p><div class="flex flex-wrap gap-x-5 gap-y-1 mt-2 t-sm"><span>ใช้วันที่ <b class="text-ink tabular-nums">{{this.event}}</b></span><span>ใช้เวลา <b class="text-ink tabular-nums">{{this.days}}</b> วันทำการ</span></div></div>
-        <p class="hidden md:block text-right font-bold text-ink-3 group-hover:underline decoration-orange decoration-2 underline-offset-4">ดูเคสเต็ม &rarr;</p>
+        <p class="hidden md:block text-right font-bold text-ink-3 group-hover:underline decoration-orange decoration-2 underline-offset-4">ดูเคสเต็ม<span class="arw" aria-hidden="true">&rarr;</span></p>
       </a>
       {{/if}}{{/each}}
     </div>

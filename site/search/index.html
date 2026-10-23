@@ -2,9 +2,9 @@
 <html lang="th">
 <head>
   {{> head}}
-  <title>ผลการค้นหา | TEAMDEE</title>
+  <title>ค้นหาสินค้าและแบบเสื้อ | TEAMDEE</title>
   <meta name="robots" content="noindex">
-  <meta name="description" content="ค้นหาสินค้า คู่มือ และแบบเสื้อของ TEAMDEE จากชื่อสินค้า ชื่อแบบ หรือรหัสแบบ">
+  <meta name="description" content="ค้นหาประเภทเสื้อ คู่มือ และรหัสแบบเสื้อในเว็บไซต์ทีมดี">
 </head>
 <body>
 {{> siteHeader}}
@@ -12,7 +12,7 @@
 <main id="main">
   <section class="wrap section">
     <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">ผลการค้นหา</span></nav>
-    <h1 class="t-display text-[clamp(28px,4vw,46px)] mt-6">ผลการค้นหา</h1>
+    <h1 class="t-display text-[clamp(28px,4vw,46px)] mt-6">ค้นหาสินค้าและแบบเสื้อ</h1>
 
     <form class="flex flex-wrap gap-2.5 mt-7 max-w-[560px]" id="searchForm" role="search" onsubmit="return false">
       <label class="sr-only" for="sq">ค้นหาชื่อสินค้า ชื่อแบบ หรือรหัสแบบ</label>
@@ -20,7 +20,8 @@
       <button class="btn btn-ink" type="submit">ค้นหา</button>
     </form>
 
-    <p class="t-sm mt-5 tabular-nums" id="searchCount" role="status" aria-live="polite"></p>
+    <h2 class="t-display text-[clamp(22px,2.6vw,30px)] mt-9">ผลการค้นหา</h2>
+    <p class="t-sm mt-2 tabular-nums" id="searchCount" role="status" aria-live="polite"></p>
 
     <!-- ผลลัพธ์ที่เป็นหน้าเว็บ -->
     <div class="mt-9 hidden" id="pageResults">
@@ -32,7 +33,7 @@
     <div class="mt-12 hidden" id="designResults">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <h2 class="t-display text-[clamp(22px,2.6vw,30px)]">แบบเสื้อ</h2>
-        <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'designs'}}" id="allDesigns">ดูแบบเสื้อทั้งหมด &rarr;</a>
+        <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'designs'}}" id="allDesigns">ดูแบบเสื้อทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 mt-5" id="designHits" data-line-url="{{site.lineUrl}}"></div>
     </div>
@@ -43,7 +44,7 @@
       <p class="t-lead mt-3 max-w-[52ch]">ลองเปลี่ยนคำค้น หรือดูแบบทั้งหมด ถ้ามีรูปที่ชอบอยู่แล้วส่งมาให้เราดูได้เลย</p>
       <div class="flex flex-wrap gap-3 mt-6">
         <a class="btn btn-line" href="{{url 'designs'}}">ดูแบบทั้งหมด</a>
-        <a class="btn btn-orange" href="{{site.lineUrl}}" data-track="line">ส่งภาพอ้างอิงทางไลน์</a>
+        <a class="btn btn-orange" href="{{site.lineUrl}}" data-track="line">ส่งภาพอ้างอิงทาง LINE</a>
       </div>
     </div>
 

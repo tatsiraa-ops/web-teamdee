@@ -2,77 +2,92 @@
 <html lang="th">
 <head>
   {{> head}}
-  <title>บทความและไอเดีย · เรื่องที่ควรรู้ก่อนสั่งทำเสื้อทีม | TEAMDEE</title>
-  <meta name="description" content="บทความช่วยตัดสินใจก่อนสั่งทำเสื้อทีม เลือกเสื้อให้เหมาะกับงาน เรื่องผ้าและเทคนิค ไอเดียเริ่มต้นเมื่อยังไม่มีแบบ และการวางแผนสั่งให้ทันกำหนด อ่านฟรีไม่ต้องสมัคร">
+  <title>บทความและไอเดียสั่งทำเสื้อทีม | TEAMDEE</title>
+  <meta name="description" content="ข้อมูลเลือกเสื้อทีม ผ้า ทรง และแนวกราฟิก พร้อมคำแนะนำเตรียมโลโก้ ไซซ์ จำนวน และกำหนดใช้งานก่อนสั่งผลิต">
 </head>
 <body>
 {{> siteHeader active="learn"}}
 
 <main id="main">
-  <section class="band-ink relative overflow-hidden">
+  <section class="band-hero relative overflow-hidden">
     <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
     <div class="wrap relative py-12 md:py-16">
       <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>คู่มือและบทความ</span><span aria-hidden="true">/</span><span aria-current="page">บทความและไอเดีย</span></nav>
-      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-paper mt-7">บทความและไอเดีย</h1>
-      <p class="text-[18px] leading-[1.75] text-paper/75 max-w-[56ch] mt-5">เรื่องที่ลูกค้าถามบ่อยก่อนตัดสินใจ เขียนให้อ่านจบแล้วตัดสินใจได้ ไม่ใช่อ่านจบแล้วต้องถามต่อ</p>
+      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">บทความสั่งทำเสื้อทีม: เลือกแบบ ผ้า และวางแผนผลิต</h1>
+      <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[56ch] mt-5">อ่านเพื่อช่วยเลือก วางแผน และเตรียมข้อมูลให้คุยต่อได้ง่าย</p>
     </div>
   </section>
 
-  <!-- 1 · บทความแนะนำที่ช่วยตัดสินใจ · เรื่องเด่น 1 + การ์ดข้าง 2 -->
+  <!-- 1 · เรื่องแนะนำ (v22) · บทความเดิมล่าสุดบนเว็บจริง 1 + การ์ดข้าง 2 · ข้อมูล src/data/legacy-posts.json -->
   <section class="wrap section" aria-labelledby="feat-h">
-    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>บทความแนะนำ</span>
-    <h2 id="feat-h" class="sr-only">บทความที่ช่วยตัดสินใจ</h2>
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>เรื่องแนะนำ</span>
+    <h2 id="feat-h" class="sr-only">เรื่องแนะนำ</h2>
     <div class="grid lg:grid-cols-[1.35fr_1fr] gap-8 lg:gap-10 mt-4 items-start">
-      {{#each articles.items}}{{#if this.featured}}
-      <a href="{{url 'articles' this.id}}" class="group flex flex-col">
-        <div class="overflow-hidden rounded-plate bg-shell aspect-[16/10]">
-          <img src="{{this.img}}" alt="{{this.title}}" width="960" height="600" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
+      {{#with legacyPosts.featured}}
+      <a href="{{this.url}}" class="group flex flex-col" data-legacy>
+        <div class="overflow-hidden rounded-plate bg-shell aspect-[2/1]">
+          <img src="{{this.img}}" alt="{{this.title}}" width="1024" height="512" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
         </div>
-        <p class="t-xs mt-5">{{this.catName}} · อัปเดต {{this.updated}}</p>
-        <h3 class="t-display text-[clamp(24px,3vw,36px)] mt-2 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
+        <p class="t-xs mt-5">{{this.catName}} · {{this.dateTh}}</p>
+        <h3 class="t-display text-[clamp(24px,3vw,34px)] mt-2 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
         <p class="t-lead mt-3">{{this.excerpt}}</p>
       </a>
-      {{/if}}{{/each}}
-
+      {{/with}}
       <div class="space-y-7">
-        {{#each articles.items}}{{#if this.side}}
-        <a href="{{url 'articles' this.id}}" class="group grid grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-4 items-start">
-          <div class="overflow-hidden rounded-card bg-shell aspect-[4/3]">
-            <img src="{{this.img}}" alt="{{this.title}}" width="400" height="300" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
+        {{#each legacyPosts.side}}
+        <a href="{{this.url}}" class="group grid grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-4 items-start" data-legacy>
+          <div class="overflow-hidden rounded-card bg-shell aspect-[2/1]">
+            <img src="{{this.img}}" alt="{{this.title}}" width="1024" height="512" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
           </div>
           <div>
             <h3 class="text-[19px] leading-snug transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
-            <p class="t-sm mt-1.5">{{this.excerpt}}</p>
-            <p class="t-xs mt-2">{{this.catName}} · {{this.updated}}</p>
+            <p class="t-xs mt-2">{{this.catName}} · {{this.dateTh}}</p>
           </div>
         </a>
-        {{/if}}{{/each}}
+        {{/each}}
       </div>
     </div>
   </section>
 
-  <!-- 2 · ตัวกรอง 4 แนว + การ์ด -->
-  <section class="bg-shell border-y border-line">
+  <!-- 2 · เลือกเรื่องที่สนใจ (v22) · กรองตามหมวดเดิม 3 หมวด + ลิงก์หน้าหมวดเดิม (URL เดิมทุกชั้น) -->
+  <section class="bg-shell border-y border-line" aria-labelledby="all-h">
     <div class="wrap section">
+      <h2 id="all-h" class="t-display text-[clamp(26px,3.4vw,40px)] mb-6">เลือกเรื่องที่สนใจ</h2>
       <div class="chiprail" id="artFilter" role="group" aria-label="เลือกหมวดบทความ">
-        <button class="chip" type="button" data-cat="all" aria-pressed="true">ทั้งหมด <span class="tabular-nums opacity-60">{{articleFilters.total}}</span></button>
-        {{#each articleFilters.cats}}<button class="chip" type="button" data-cat="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
-        <p class="t-sm sm:ml-auto tabular-nums" id="artCount" role="status" aria-live="polite">แสดง {{articleFilters.total}} เรื่อง</p>
+        <button class="chip" type="button" data-cat="all" aria-pressed="true">ทั้งหมด <span class="tabular-nums opacity-60">{{legacyPosts.items.length}}</span></button>
+        {{#each legacyPosts.cats}}<button class="chip" type="button" data-cat="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
+        <p class="t-sm sm:ml-auto tabular-nums" id="artCount" role="status" aria-live="polite">แสดง {{legacyPosts.items.length}} เรื่อง</p>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-9 mt-8" id="artGrid">
-        {{#each articles.items}}
-        <a href="{{url 'articles' this.id}}" data-cat="{{this.cat}}" class="group flex flex-col">
-          <div class="overflow-hidden rounded-plate bg-paper aspect-[4/3]">
-            <img src="{{this.img}}" alt="{{this.title}}" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
+        {{#each legacyPosts.items}}
+        <a href="{{this.url}}" data-cat="{{this.cat}}" class="group flex flex-col" data-legacy>
+          <div class="overflow-hidden rounded-plate bg-paper aspect-[2/1]">
+            <img src="{{this.img}}" alt="{{this.title}}" width="1024" height="512" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
           </div>
-          <h3 class="text-[21px] mt-4 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
-          <p class="t-sm mt-2 grow">{{this.excerpt}}</p>
-          <p class="t-xs mt-4 pt-3 border-t border-line">{{this.catName}} · อัปเดต {{this.updated}}</p>
+          <h3 class="text-[20px] leading-snug mt-4 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
+          <p class="t-sm mt-2 grow line-clamp-3">{{this.excerpt}}</p>
+          <p class="t-xs mt-4 pt-3 border-t border-line">{{this.catName}} · {{this.dateTh}}</p>
         </a>
         {{/each}}
       </div>
       <p class="t-sm mt-8 hidden" id="artEmpty">ยังไม่มีบทความในหมวดนี้ ลองเลือกหมวดอื่นดู</p>
+
+      <nav class="mt-10 pt-6 border-t border-line" aria-label="หมวดบทความ">
+        <p class="t-sm font-semibold">เปิดหน้าหมวดบทความ</p>
+        <ul class="flex flex-wrap gap-x-6 gap-y-1 mt-2">
+          {{#each legacyPosts.cats}}<li><a class="inline-flex items-center min-h-[44px] font-semibold underline decoration-orange decoration-2 underline-offset-4" href="{{this.url}}">{{this.name}}</a></li>{{/each}}
+        </ul>
+      </nav>
+
+      {{#unless wp}}
+      <div class="mt-10 pt-6 border-t border-line">
+        {{#unless wp}}<p class="pending-ribbon">หัวข้อบทความใหม่ตาม v22 · ร่าง noindex ยังไม่ลิงก์บนเว็บจริงจนกว่าทีมตรวจเนื้อหา</p>{{/unless}}
+        <ul class="mt-4 space-y-1">{{#each v22Posts}}<li><a class="inline-flex items-center min-h-[44px] underline decoration-orange decoration-2 underline-offset-4" href="{{url 'posts' this.id}}">{{this.title}}</a></li>{{/each}}</ul>
+        {{#unless wp}}<p class="pending-ribbon mt-6">ร่างบทความของเราเดิม (ต้นแบบเท่านั้น ไม่ export)</p>{{/unless}}
+        <ul class="mt-4 space-y-1">{{#each articles.items}}<li><a class="inline-flex items-center min-h-[44px] underline decoration-line-2 underline-offset-4" href="{{url 'articles' this.id}}">{{this.title}}</a></li>{{/each}}</ul>
+      </div>
+      {{/unless}}
     </div>
   </section>
 
@@ -80,7 +95,7 @@
   <section class="wrap section">
     <div class="max-w-[68ch] mb-7">
       <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoDoc}}</span>อยากอ่านละเอียดกว่านี้</span>
-      <h2 class="t-display text-[clamp(26px,3.4vw,42px)]">คู่มือลงรายละเอียดทีละขั้น</h2>
+      <h2 class="t-display text-[clamp(26px,3.4vw,42px)]">ต้องการขั้นตอนสั่งทำ?</h2>
       <p class="t-lead mt-4">บทความช่วยตัดสินใจ ส่วนคู่มือบอกว่าต้องทำอะไรบ้างตามลำดับ</p>
     </div>
     <div class="chiprail">
@@ -90,11 +105,11 @@
 
   <section class="band-orange">
     <div class="wrap py-14 md:py-20 text-center">
-      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-ink">อ่านแล้วยังไม่แน่ใจ</h2>
-      <p class="text-[18px] leading-[1.75] text-ink/85 max-w-[46ch] mx-auto mt-4">เล่าโจทย์ให้ทีมดีฟัง เราช่วยฟันธงให้ว่าควรใช้อะไร</p>
+      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย</h2>
+      <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[46ch] mx-auto mt-4">บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้</p>
       <div class="flex flex-wrap justify-center gap-3 mt-8">
-        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทักไลน์</a>
-        <a class="btn btn-lg bg-transparent text-ink border-ink/60 hover:bg-ink hover:text-paper hover:border-ink" href="{{url 'contact'}}">กรอกฟอร์ม</a>
+        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+        <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}?from=blog">ฝากข้อมูลให้ติดต่อกลับ</a>
       </div>
     </div>
   </section>

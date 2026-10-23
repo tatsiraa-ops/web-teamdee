@@ -1,0 +1,1025 @@
+{
+ "_note": "แบบเสื้อจากหน้าแกลเลอรีเดิมบน team-dee.com (4 หน้า URL เดิม) · ดึง 22 ต.ค. 2026 ตามที่อาร์ตเคาะ · ภาพมีรหัสแบบพิมพ์อยู่ในรูป (เช่น GFN…) แต่ยังไม่ได้ถอดรหัสลงข้อมูล · ชนิดงาน (พิมพ์ลาย/ปัก/สกรีน) ยังไม่ได้ตรวจ ต้องให้ทีมดีไซน์ยืนยันก่อนจำกัดว่าเป็นพิมพ์ลาย (handoff v22)",
+ "groups": {
+  "corp": {
+   "page": "/corporate-shirts/",
+   "items": [
+    {
+     "img": "/img/gallery/corp/001.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/1-3.webp"
+    },
+    {
+     "img": "/img/gallery/corp/002.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/2-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/003.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/3-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/004.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/4-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/005.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/5-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/006.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/6-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/007.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/7-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/008.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/8-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/009.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/9-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/010.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/10-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/011.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/11-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/012.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/12-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/013.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/13-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/014.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/14-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/015.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/16-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/016.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/17-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/017.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/18-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/018.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/19-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/019.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/20-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/020.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/21-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/021.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/22-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/022.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/23-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/023.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/24-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/024.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/25-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/025.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/26-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/026.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/27-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/027.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/28-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/028.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/29-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/029.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/30-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/030.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/31-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/031.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/32-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/032.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/33-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/033.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/34-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/034.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/35-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/035.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/36-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/036.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/37-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/037.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/38-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/038.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/39-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/039.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/40-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/040.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/41-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/041.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/42-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/042.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/43-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/043.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/44-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/044.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/45-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/045.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/46-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/046.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/47-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/047.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/48-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/048.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/49-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/049.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/50-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/050.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/51-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/051.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/52-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/052.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/53-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/053.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/54-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/054.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/55-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/055.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/56-7.webp"
+    },
+    {
+     "img": "/img/gallery/corp/056.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/57-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/057.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/58-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/058.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/59-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/059.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/60-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/060.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/61-6.webp"
+    },
+    {
+     "img": "/img/gallery/corp/061.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/62-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/062.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/63-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/063.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/64-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/064.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/65-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/065.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/66-5.webp"
+    },
+    {
+     "img": "/img/gallery/corp/066.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/67-4.webp"
+    },
+    {
+     "img": "/img/gallery/corp/067.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/68-4.webp"
+    },
+    {
+     "img": "/img/gallery/corp/068.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/69-4.webp"
+    },
+    {
+     "img": "/img/gallery/corp/069.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/70-4.webp"
+    },
+    {
+     "img": "/img/gallery/corp/070.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/Corp-1.webp"
+    },
+    {
+     "img": "/img/gallery/corp/071.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/57-4.webp"
+    },
+    {
+     "img": "/img/gallery/corp/073.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/05/teamdee-LOGO-23.webp"
+    }
+   ]
+  },
+  "sport": {
+   "page": "/sports-shirt/",
+   "items": [
+    {
+     "img": "/img/gallery/sport/001.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/2-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/002.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/4-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/003.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/5-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/004.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/6-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/005.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/7-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/006.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/8-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/007.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/9-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/008.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/10-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/009.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/11-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/010.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/12-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/011.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/13-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/012.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/14-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/013.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/15-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/014.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/16-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/015.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/17-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/016.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/18-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/017.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/19-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/018.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/20-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/019.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/21-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/020.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/22-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/021.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/23-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/022.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/24-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/023.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/25-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/024.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/26-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/025.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/27-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/026.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/28-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/027.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/29-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/028.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/30-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/029.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/31-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/030.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/32-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/031.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/33-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/032.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/34-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/033.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/35-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/034.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/36-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/035.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/37-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/036.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/38-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/037.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/39-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/038.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/40-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/039.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/41-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/040.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/42-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/041.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/43-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/042.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/44-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/043.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/45-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/044.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/46-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/045.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/47-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/046.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/48-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/047.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/50-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/048.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/51-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/049.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/52-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/050.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/53-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/051.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/55-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/052.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/56-6.webp"
+    },
+    {
+     "img": "/img/gallery/sport/053.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/57-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/054.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/58-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/055.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/59-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/056.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/60-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/057.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/61-5.webp"
+    },
+    {
+     "img": "/img/gallery/sport/058.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/62-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/059.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/63-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/060.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/64-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/061.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/65-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/062.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/66-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/063.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/67-3.webp"
+    },
+    {
+     "img": "/img/gallery/sport/064.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/68-3.webp"
+    },
+    {
+     "img": "/img/gallery/sport/065.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/69-3.webp"
+    },
+    {
+     "img": "/img/gallery/sport/066.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/70-3.webp"
+    },
+    {
+     "img": "/img/gallery/sport/067.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/71-2.webp"
+    },
+    {
+     "img": "/img/gallery/sport/068.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/72-2.webp"
+    },
+    {
+     "img": "/img/gallery/sport/070.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/SPOrt-1.webp"
+    },
+    {
+     "img": "/img/gallery/sport/071.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/29-4.webp"
+    },
+    {
+     "img": "/img/gallery/sport/073.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/05/teamdee-LOGO-23.webp"
+    }
+   ]
+  },
+  "edu": {
+   "page": "/educations-shirt/",
+   "items": [
+    {
+     "img": "/img/gallery/edu/001.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/1-5.webp"
+    },
+    {
+     "img": "/img/gallery/edu/002.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/2-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/003.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/3-7.webp"
+    },
+    {
+     "img": "/img/gallery/edu/004.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/5-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/005.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/6-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/006.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/7-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/007.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/9-6.webp"
+    },
+    {
+     "img": "/img/gallery/edu/008.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/10-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/009.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/11-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/010.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/13-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/011.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/14-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/012.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/15-7.webp"
+    },
+    {
+     "img": "/img/gallery/edu/013.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/16-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/014.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/17-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/015.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/18-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/016.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/19-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/017.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/20-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/018.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/21-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/019.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/22-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/020.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/23-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/021.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/24-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/022.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/25-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/023.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/26-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/024.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/27-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/025.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/28-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/026.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/29-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/027.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/30-7.webp"
+    },
+    {
+     "img": "/img/gallery/edu/028.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/31-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/029.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/33-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/030.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/34-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/031.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/35-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/032.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/36-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/033.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/37-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/034.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/38-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/035.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/39-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/036.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/40-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/037.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/41-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/038.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/42-9.webp"
+    },
+    {
+     "img": "/img/gallery/edu/039.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/43-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/040.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/44-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/041.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/45-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/042.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/46-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/043.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/47-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/044.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/48-7.webp"
+    },
+    {
+     "img": "/img/gallery/edu/045.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/49-7.webp"
+    },
+    {
+     "img": "/img/gallery/edu/046.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/50-7.webp"
+    },
+    {
+     "img": "/img/gallery/edu/047.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/51-8.webp"
+    },
+    {
+     "img": "/img/gallery/edu/048.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/38-4.webp"
+    },
+    {
+     "img": "/img/gallery/edu/050.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/05/teamdee-LOGO-23.webp"
+    }
+   ]
+  },
+  "event": {
+   "page": "/event-shirts/",
+   "items": [
+    {
+     "img": "/img/gallery/event/001.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/1-4.webp"
+    },
+    {
+     "img": "/img/gallery/event/002.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/2-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/003.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/3-1-2.webp"
+    },
+    {
+     "img": "/img/gallery/event/004.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/3-6.webp"
+    },
+    {
+     "img": "/img/gallery/event/005.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/4-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/006.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/5-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/007.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/6-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/008.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/7-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/009.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/8-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/010.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/10-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/011.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/11-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/012.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/12-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/013.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/13-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/014.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/15-6.webp"
+    },
+    {
+     "img": "/img/gallery/event/015.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/16-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/016.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/17-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/017.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/18-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/018.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/19-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/019.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/20-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/020.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/21-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/021.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/22-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/022.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/23-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/023.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/24-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/024.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/25-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/025.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/26-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/026.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/27-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/027.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/28-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/028.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/29-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/029.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/30-6.webp"
+    },
+    {
+     "img": "/img/gallery/event/030.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/31-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/031.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/32-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/032.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/33-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/033.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/34-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/034.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/35-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/035.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/36-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/036.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/37-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/037.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/39-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/038.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/40-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/039.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/38-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/040.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/41-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/041.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/42-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/042.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/43-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/043.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/44-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/044.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/45-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/045.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/46-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/046.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/47-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/047.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/48-6.webp"
+    },
+    {
+     "img": "/img/gallery/event/048.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/49-6.webp"
+    },
+    {
+     "img": "/img/gallery/event/049.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/51-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/050.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/52-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/051.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/53-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/052.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/54-6.webp"
+    },
+    {
+     "img": "/img/gallery/event/053.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/55-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/054.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/56-8.webp"
+    },
+    {
+     "img": "/img/gallery/event/055.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/57-7.webp"
+    },
+    {
+     "img": "/img/gallery/event/056.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/Event-1.webp"
+    },
+    {
+     "img": "/img/gallery/event/057.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/06/104-1.webp"
+    },
+    {
+     "img": "/img/gallery/event/059.webp",
+     "src": "https://team-dee.com/wp-content/uploads/2026/05/teamdee-LOGO-23.webp"
+    }
+   ]
+  }
+ }
+}

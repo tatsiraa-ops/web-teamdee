@@ -5,7 +5,7 @@
 // 3. แต่ละหน้า: เก็บส่วน head (CSS JS ฟอนต์ JSON-LD) กับ body ทั้งก้อน · บอก title / description / robots ไว้ใน pages.json
 // 4. เปลี่ยน path ไฟล์ /img/ /assets/ ... ให้ชี้เข้าโฟลเดอร์ธีม (ทั้ง HTML CSS JS)
 import { execSync } from 'node:child_process'
-import { INTERNAL_PAGES } from './seo-check.mjs'
+import { isExported } from './seo-check.mjs'
 import { makeRewrite } from './wp-rewrite.mjs'
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
@@ -18,7 +18,6 @@ const out = join(root, 'wp-theme/teamdee/build')
    ถ้าเว็บจริงติดตั้งใน sub-folder ต้องเปลี่ยนค่านี้ */
 const THEME_URL = process.env.TD_THEME_URL || '/wp-content/themes/teamdee/build'
 /* หน้าที่มีไว้ใช้ภายในต้นแบบ ไม่ขึ้นเว็บจริง */
-const SKIP = INTERNAL_PAGES
 
 execSync('npx vite build', { cwd: root, stdio: 'inherit', env: { ...process.env, TD_TARGET: 'wp' } })
 
@@ -54,7 +53,7 @@ const pages = {}
 for (const file of walk(dist)) {
   const rel = relative(dist, file).replace(/\\/g, '/')
   const route = rel === '404.html' ? '404' : '/' + rel.replace(/index\.html$/, '')
-  if (SKIP.has(route)) continue
+  if (!isExported(route)) continue
   const html = readFileSync(file, 'utf8')
   const head = pick(/<head>([\s\S]*?)<\/head>/, html) || ''
   const body = pick(/<body[^>]*>([\s\S]*)<\/body>/, html) || ''
@@ -69,8 +68,10 @@ for (const file of walk(dist)) {
     .replace(/<link rel="canonical"[^>]*>/i, '')
     .replace(/\n\s*\n/g, '\n')
     .trim()
-  writeFileSync(join(out, 'pages', `${slug}.head.html`), rewrite(headExtra) + '\n')
-  writeFileSync(join(out, 'pages', `${slug}.body.html`), rewrite(body.trim()) + '\n')
+  /* คอมเมนต์ภายใน (โน้ตทีม · ที่มาของข้อมูล) ไม่ต้องหลุดไปเว็บจริง (agent ความเร็ว 23 ต.ค.: หน้าแรกมี 17 จุด) */
+  const noNotes = (s) => s.replace(/<!--[\s\S]*?-->/g, '').replace(/\n\s*\n/g, '\n')
+  writeFileSync(join(out, 'pages', `${slug}.head.html`), rewrite(noNotes(headExtra)) + '\n')
+  writeFileSync(join(out, 'pages', `${slug}.body.html`), rewrite(noNotes(body.trim())) + '\n')
   pages[route] = {
     slug,
     title: decode(pick(/<title>([\s\S]*?)<\/title>/, head)),
