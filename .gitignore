@@ -12,3 +12,6 @@ wordpress-local/
 # ผลลัพธ์ build สำหรับธีม WordPress (สร้างใหม่ด้วย npm run export:wp)
 dist-wp/
 wp-theme/teamdee/build/
+
+# ไฟล์ต้นฉบับดึงจาก Google Drive (งานปักลูกค้า TD) · ยังไม่ได้อนุญาตให้ขึ้นเว็บ ไม่เอาเข้า git
+_drive/
