@@ -25,8 +25,8 @@ if (form) {
       $('sUnit').textContent = `${baht(r.perUnit)} บาท`
       $('sTotal').textContent = r.high === null ? `ตั้งแต่ ${baht(r.low)} บาท` : `${baht(r.low)}–${baht(r.high)} บาท`
     } else {
-      $('sUnit').innerHTML = `<span class="text-ink-3">[ยืนยันจาก${pricing.source}]</span>`
-      $('sTotal').innerHTML = '<span class="text-ink-3 text-[20px]">[ยอดประมาณ] บาท</span>'
+      $('sUnit').innerHTML = '<span class="text-ink-3">ขอใบเสนอราคา</span>'
+      $('sTotal').innerHTML = '<span class="text-ink-3 text-[20px]">ทีมดีประเมินให้</span>'
     }
 
     /* ส่งสิ่งที่เลือกไปกับปุ่มขอใบเสนอราคา ทีมขายจะเห็นในฟอร์มว่าลูกค้าดูอะไรมา */

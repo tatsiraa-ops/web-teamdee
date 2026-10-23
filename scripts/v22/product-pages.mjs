@@ -74,5 +74,20 @@ for (const [wid, pid] of Object.entries(ID)) {
     contact: { h: clean(con.h), p: texts(con.intro)[0] || '', cta: clean(con.links[0]?.t) },
   }
 }
+/* เวลาผลิตจริงแยกตามงาน (src/data/lead-times.json · อาร์ตให้ใช้ 23 ต.ค. 2026) แทนช่อง [รอยืนยัน] ของ v22
+   ช่องระยะผลิตบน hero + FAQ ที่ถามว่าใช้เวลากี่วัน */
+const LEAD = JSON.parse(readFileSync(join(root, 'src/data/lead-times.json'), 'utf8'))
+const leadText = (l) => `${l.days}${l.more ? ` · ${l.more}` : ''} ${LEAD.start}`
+for (const [pid, page] of Object.entries(out)) {
+  const l = LEAD[pid]
+  if (!l?.days) continue
+  for (const f of page.hero.facts) if (/ผลิต/.test(f.k)) f.v = leadText(l)
+  page.faq.items = page.faq.items.map(([q, a]) => {
+    if (!/กี่วัน|เวลาผลิต/.test(q)) return [q, a]
+    const min = /ขั้นต่ำ/.test(q) ? 'ขั้นต่ำ 10 ตัว ' : ''
+    return [q, `${min}${l.tech}ใช้เวลาผลิตประมาณ ${leadText(l)} ${LEAD.season} แจ้งวันรับเสื้อที่ต้องการเพื่อวางแผนงานก่อนยืนยัน`]
+  })
+}
+
 writeFileSync(join(root, 'src/data/product-pages.json'), JSON.stringify(out, null, 2) + '\n')
 console.log('product-pages.json:', Object.keys(out).filter((k) => k[0] !== '_').join(', '))

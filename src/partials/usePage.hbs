@@ -211,7 +211,8 @@
 <section class="band-soft">
   <div class="wrap py-12 md:py-14 flex flex-wrap items-center justify-between gap-6">
     <div class="max-w-[56ch]"><h2 class="t-display text-[clamp(24px,3vw,34px)] text-ink">{{up.schedule.h}}</h2><p class="text-[17px] leading-[1.7] text-ink-2 mt-2">{{up.schedule.p}}</p>
-      {{#unless wp}}<p class="pending-ribbon mt-3">รอข้อมูลจากทีม: ผลิตกี่วันทำการหลังยืนยันแบบ (แยกพิมพ์ลาย / ปัก) และคิวต่อเดือน · ได้แล้วจะบอกทันทีว่าทันวันที่เลือกไหม</p>{{/unless}}
+      {{!-- เวลาผลิตจริงแยกงาน (src/data/lead-times.json · 23 ต.ค.) --}}<p class="text-[16px] leading-[1.7] text-ink mt-2 font-semibold"><span class="inline-block">งานปักและบล็อกสกรีน {{leadTimes.polo.days}}</span> · <span class="inline-block">พิมพ์ลายเต็มตัว {{leadTimes.print.days}}</span> · <span class="inline-block">สกรีน {{leadTimes.screen.days}}</span> <span class="inline-block">{{leadTimes.start}}</span></p>
+      
     </div>
     <div class="flex flex-wrap items-end gap-3 w-full sm:w-auto">
       <div class="w-full sm:w-auto"><label class="label" for="useDate">วันที่ต้องใช้เสื้อ</label><input class="input sm:w-[200px]" id="useDate" type="date"></div>

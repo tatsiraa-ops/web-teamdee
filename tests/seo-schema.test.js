@@ -39,3 +39,12 @@ test('LocalBusiness มี @id ให้ Google รวมกับ schema ขอ
   assert.equal(b.address.addressLocality, 'อำเภอเมืองนนทบุรี')
   assert.equal(b.address.addressRegion, 'นนทบุรี')
 })
+
+test('LocalBusiness มีหมุด Google Maps (hasMap) และพิกัด (geo) เมื่อ site.json มีค่า (อาร์ตให้ใช้หมุดเดิม 23 ต.ค.)', () => {
+  const b = businessSchema({ brand: 'TEAMDEE', baseUrl: 'https://team-dee.com', address: 'x', ogImage: '/a.jpg', mapUrl: 'https://maps.app.goo.gl/abc', geo: { lat: 13.85, lng: 100.5 } })
+  assert.equal(b.hasMap, 'https://maps.app.goo.gl/abc')
+  assert.deepEqual(b.geo, { '@type': 'GeoCoordinates', latitude: 13.85, longitude: 100.5 })
+  const none = businessSchema({ brand: 'TEAMDEE', baseUrl: 'https://team-dee.com', address: 'x', ogImage: '/a.jpg' })
+  assert.equal(none.hasMap, undefined)
+  assert.equal(none.geo, undefined)
+})

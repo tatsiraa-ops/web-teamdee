@@ -48,10 +48,16 @@ test('ตัวเลือกที่ไม่มีอยู่จริง�
   assert.throws(() => estimate(data, { kind: 'round', band: 'a', options: ['x'] }), /x/)
 })
 
-test('ข้อมูลจริงตอนนี้ยังไม่มีราคายืนยัน ต้องไม่โชว์ตัวเลขใดเลย', () => {
+test('ราคาจริง (ตัวคำนวณเว็บเดิม · อาร์ตให้ใช้ 23 ต.ค.): พิมพ์ลายคอกลม/คอปกคิดได้ครบทุกช่วง · สกรีนยังไม่มีราคา ไม่โชว์ตัวเลข', () => {
   const real = JSON.parse(readFileSync(new URL('../src/data/pricing.json', import.meta.url), 'utf8'))
-  for (const k of real.kinds) for (const b of real.bands) {
-    const r = estimate(real, { kind: k.id, band: b.id, options: real.options.map((o) => o.id) })
+  const unit = (kind, band, options = []) => estimate(real, { kind, band, options }).perUnit
+  assert.equal(unit('round', '10-20'), 279)
+  assert.equal(unit('round', '200+'), 160)
+  assert.equal(unit('collar', '10-20'), 329)
+  assert.equal(unit('collar', '51-100'), 260)
+  assert.equal(unit('round', '51-100', ['sleeve', 'oversize', 'pocket']), 210 + 30 + 40 + 20)
+  for (const b of real.bands) {
+    const r = estimate(real, { kind: 'screen', band: b.id, options: [] })
     assert.equal(r.ok, false)
     assert.equal(r.perUnit, null)
   }

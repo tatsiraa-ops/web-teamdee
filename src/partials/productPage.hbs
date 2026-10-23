@@ -69,7 +69,7 @@
     </div>
     {{#each pp.options.specTabs}}
     <div role="tabpanel" id="p-{{this.id}}" aria-labelledby="t-{{this.id}}" tabindex="0" class="mt-5 overflow-x-auto border-2 border-ink rounded-card max-w-[860px]"{{#unless @first}} hidden{{/unless}}>
-      <table class="w-full min-w-[420px] text-[17px]">
+      <table class="w-full min-w-[320px] text-[17px]">
         <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ตัวเลือก</th><th scope="col" class="text-left font-bold px-5 py-4">หมายเหตุ</th></tr></thead>
         <tbody>{{#each (lookup ../pp.options.spec this.id)}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}</tbody>
       </table>
@@ -143,7 +143,7 @@
   </ol>
   {{#if pp.detail.table}}
   <div class="overflow-x-auto border-2 border-ink rounded-card mt-8 max-w-[860px]" tabindex="0" role="region" aria-label="ตารางรายละเอียด เลื่อนซ้ายขวาได้">
-    <table class="w-full min-w-[420px] text-[17px]">
+    <table class="w-full min-w-[320px] text-[17px]">
       <thead class="bg-ink text-paper"><tr>{{#each pp.detail.table.head}}<th scope="col" class="text-left font-bold px-5 py-4">{{this}}</th>{{/each}}</tr></thead>
       <tbody>{{#each pp.detail.table.rows}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}</tbody>
     </table>
@@ -172,7 +172,7 @@
     </div>
     <div>
       {{#if pp.price.box}}
-      <div class="bg-paper border border-line rounded-plate p-7"><p class="text-[22px] font-bold">{{pp.price.box.strong}}</p><p class="t-body mt-2">{{pp.price.box.p}}</p><p class="t-xs mt-2">{{pp.price.box.small}}</p></div>
+      <div class="pbox">{{#if pp.price.box.amount}}<p class="pbox__k">ราคาเริ่มต้น</p><p class="pbox__v"><span class="pbox__n">{{pp.price.box.amount}}</span> <span class="pbox__u">{{pp.price.box.unit}}</span></p>{{else}}<p class="text-[22px] font-bold">{{pp.price.box.strong}}</p>{{/if}}<p class="pbox__p">{{{ph pp.price.box.p}}}</p><p class="pbox__s">{{{ph pp.price.box.small}}}</p></div>
       {{/if}}
       {{#unless pp.price.confirmed}}
       <div class="bg-paper border-2 border-ink rounded-plate p-7 {{#if pp.price.box}}mt-5{{/if}}">
@@ -183,14 +183,17 @@
       </div>
       {{/unless}}
       {{#if pp.price.table}}
-      <div class="overflow-x-auto border-2 border-ink rounded-card mt-5" tabindex="0" role="region" aria-label="ตารางราคา เลื่อนซ้ายขวาได้">
-        <table class="w-full min-w-[420px] text-[17px]">
-          <thead class="bg-ink text-paper"><tr>{{#each pp.price.table.head}}<th scope="col" class="text-left font-bold px-4 py-4 whitespace-nowrap">{{this}}</th>{{/each}}</tr></thead>
-          <tbody>{{#each pp.price.table.rows}}<tr class="border-t border-line">{{#each this}}<td class="px-4 py-3.5 text-ink-2 whitespace-nowrap tabular-nums{{#if @first}} font-semibold text-ink{{/if}}">{{this}}</td>{{/each}}</tr>{{/each}}</tbody>
+      {{!-- ตารางราคาแบบใบเสนอราคา: เส้นบาง หัวเทาตัวเล็ก ตัวเลขชิดขวาหนา (อาร์ต 23 ต.ค.: แบบกรอบดำหนา "ดูเด็กเล่น") --}}
+      <div class="ptable mt-5" tabindex="0" role="region" aria-label="ตารางราคาต่อตัว">
+        <table>
+          <caption>ราคาต่อตัว (บาท) · รวม VAT 7%</caption>
+          <thead><tr>{{#each pp.price.table.head}}<th scope="col">{{{ph this}}}</th>{{/each}}</tr></thead>
+          <tbody>{{#each pp.price.table.rows}}<tr>{{#each this}}{{#if @first}}<th scope="row">{{this}}</th>{{else}}<td>{{this}}</td>{{/if}}{{/each}}</tr>{{/each}}</tbody>
         </table>
       </div>
+      {{#if (lt 3 pp.price.table.head.length)}}<p class="t-xs mt-2 md:hidden">ปัดตารางไปทางซ้ายเพื่อดูผ้าอื่น</p>{{/if}}
       {{/if}}
-      {{#each pp.price.notes}}<p class="t-sm mt-4">{{this}}</p>{{/each}}
+      {{#each pp.price.notes}}<p class="t-sm mt-4">{{{ph this}}}</p>{{/each}}
     </div>
   </div>
 </section>
@@ -282,7 +285,7 @@
     </div>
     <div>
       <div class="overflow-x-auto border-2 border-ink rounded-card" tabindex="0" role="region" aria-label="ตารางไซซ์ เลื่อนซ้ายขวาได้">
-        <table class="w-full min-w-[420px] text-[17px]">
+        <table class="w-full min-w-[320px] text-[17px]">
           <caption class="text-left font-bold text-[18px] px-5 py-4 border-b-2 border-ink">หน่วยเป็น{{sizing.unit}} วัดจากตัวเสื้อวางราบ · ตารางกลาง ตรวจตามทรงที่สั่งจริง</caption>
           <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ไซซ์</th><th scope="col" class="text-right font-bold px-5 py-4">รอบอก</th><th scope="col" class="text-right font-bold px-5 py-4">ความยาว</th><th scope="col" class="text-right font-bold px-5 py-4">ไหล่</th></tr></thead>
           <tbody>{{#each pp.size.sizes}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-3.5">{{this.size}}</th><td class="px-5 py-3.5 text-right tabular-nums">{{this.chest}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.length}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.shoulder}}</td></tr>{{/each}}</tbody>

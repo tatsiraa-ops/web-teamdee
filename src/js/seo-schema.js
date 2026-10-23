@@ -41,6 +41,8 @@ export function businessSchema(site) {
     ...(site.foundedYear ? { foundingDate: String(site.foundedYear) } : {}),
     address: { '@type': 'PostalAddress', addressRegion: 'นนทบุรี', ...thaiAddress(site.address), addressCountry: 'TH' },
     ...(site.lineUrl ? { sameAs: [site.lineUrl] } : {}),
+    ...(site.mapUrl ? { hasMap: site.mapUrl } : {}),
+    ...(site.geo ? { geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng } } : {}),
     areaServed: 'TH',
   }
 }

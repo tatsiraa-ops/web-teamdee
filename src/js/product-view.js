@@ -43,6 +43,9 @@ export function productView(pp, real, { forWp, has }) {
   const factors = strs(pri.factors)
   const need = pri.need ? { ...pri.need, items: strs(pri.need.items) } : null
   const box = pri.box && (!forWp || !anyPending(pri.box)) ? pri.box : null
+  /* "เริ่มต้น 160 บาท / ตัว" → ตัวเลขใหญ่ + หน่วยเล็ก แบบป้ายราคา (อาร์ต 23 ต.ค.: กล่องเดิมดูเด็กเล่น) */
+  const m = box && /^เริ่มต้น\s*([\d,]+)\s*(.*)$/.exec(box.strong || '')
+  if (m) Object.assign(box, { amount: m[1], unit: m[2] })
   v.price = sec({ ...pri, confirmed: !!real.price, factors, need: need && need.items.length ? need : null, box, table: table(pri.table), notes: strs(pri.notes).filter((n) => !forWp || !/รอข้อมูลจริง|รอราคา/.test(n)) }, factors.length > 0 || !!box)
 
   v.quote = sec({ ...pp.quote }, !!pp.quote.h)
