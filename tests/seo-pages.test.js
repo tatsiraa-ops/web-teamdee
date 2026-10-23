@@ -172,7 +172,8 @@ test('กล่องที่เลื่อนซ้ายขวาได้ (
 /* ตรวจซ้ำ 23 ต.ค.: ส่วนชำระเงิน/รับประกันรวมเข้า "ทุกออเดอร์ได้ครบ" แล้ว → HTML จริงต้องมีครบ ไม่ใช่แค่ข้อมูล */
 test('หน้าแรก: ทุกออเดอร์ได้ครบ 8 ข้อ มีใบกำกับภาษี เคลม 7 วัน สั่งเพิ่ม 30 วัน · ไม่มีส่วนชำระเงิน/รับประกันแยก', () => {
   const home = pages.find((p) => p.route === '/')
-  const get = home.html.slice(home.html.indexOf('aria-labelledby="get-h"'), home.html.indexOf('aria-label="ตัวเลขทีมดี"'))
+  /* อาร์ตลบหัวข้อส่วนนี้ (23 ต.ค.) · เริ่มนับจากรายการการ์ด */
+  const get = home.html.slice(home.html.indexOf('hm-benefits--get'), home.html.indexOf('aria-label="ตัวเลขทีมดี"'))
   assert.equal((get.match(/<li\b/g) || []).length, 8)
   for (const t of ['ใบกำกับภาษี', '7 วันหลังรับสินค้า', 'ภายใน 30 วัน']) assert.ok(get.replace(/<[^>]+>/g, '').includes(t), t)
   assert.ok(!home.html.includes('id="pay-h"') && !home.html.includes('id="care-h"'))

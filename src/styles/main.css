@@ -720,3 +720,37 @@ html.lb-on .fcta { visibility: hidden; opacity: 0; }
    ซ่อนปุ่มที่ต้องใช้ JS (เลือกชุด hero · ดูคำถามทั้งหมด) ไม่ให้กดแล้วไม่มีอะไรเกิดขึ้น · class js ใส่ใน head.hbs (ตรวจโค้ด 23 ต.ค.) */
 html:not(.js) .hs-accordion-content.hidden { display: block; }
 html:not(.js) .th-ctrl, html:not(.js) [data-faq-more] { display: none; }
+
+/* ตารางราคาหน้าสินค้า · แบบใบเสนอราคา (productPage.hbs) · เส้นบางสีเดียวกับเส้นแบ่งหน้า ไม่มีกรอบดำ/หัวดำทึบ
+   หัวคอลัมน์ตัวเล็กสีเทา ตัวเลขชิดขวา หนา ตัวเลขกว้างเท่ากัน ให้ไล่เทียบแนวตั้งได้ */
+.ptable { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: var(--radius-plate); overflow-x: auto; }
+.ptable table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.ptable caption { caption-side: top; text-align: left; padding: 16px 20px 4px; font-size: 14px; color: var(--color-ink-3); }
+.ptable thead th { padding: 10px 20px 12px; font-size: 14px; font-weight: 600; line-height: 1.35; color: var(--color-ink-3); text-align: right; vertical-align: bottom; border-bottom: 1px solid var(--color-ink); }
+.ptable thead th:first-child, .ptable tbody th { text-align: left; }
+.ptable tbody th, .ptable td { padding: 14px 20px; border-top: 1px solid var(--color-line); white-space: nowrap; }
+.ptable tbody tr:first-child th, .ptable tbody tr:first-child td { border-top: 0; }
+.ptable tbody th { font-weight: 400; color: var(--color-ink-2); font-size: 16px; }
+.ptable td { text-align: right; font-size: 18px; font-weight: 700; color: var(--color-ink); }
+.ptable tbody tr:hover { background: var(--color-shell); }
+/* ตารางหลายผ้า (โปโลปัก 7 คอลัมน์) ปัดข้างบนมือถือ · คอลัมน์จำนวนตรึงไว้ให้รู้ว่าแถวไหนคือกี่ตัว */
+.ptable thead th:first-child, .ptable tbody th { position: sticky; left: 0; z-index: 1; background: var(--color-paper); }
+.ptable tbody tr:hover th { background: var(--color-shell); }
+.ptable:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 2px; }
+@media (max-width: 479px) {
+  .ptable caption { padding: 14px 14px 2px; }
+  .ptable thead th, .ptable tbody th, .ptable td { padding-inline: 14px; }
+  .ptable td { font-size: 17px; }
+}
+
+/* ป้ายราคาเริ่มต้น (productPage.hbs) · ตัวเลขใหญ่ หน่วยเล็ก เส้นส้มบนกล่องเดียว ไม่ใช้พื้นส้ม */
+.pbox { background: var(--color-paper); border: 1px solid var(--color-line); border-top: 3px solid var(--color-orange); border-radius: var(--radius-plate); padding: 22px 24px 20px; }
+.pbox__k { font-size: 14px; font-weight: 600; color: var(--color-ink-3); }
+.pbox__v { display: flex; align-items: baseline; gap: 8px; margin-top: 2px; }
+.pbox__n { font-size: clamp(44px, 9vw, 56px); font-weight: 800; line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: var(--color-ink); }
+.pbox__u { font-size: 17px; font-weight: 600; color: var(--color-ink-2); }
+.pbox__p { margin-top: 12px; font-size: 16px; line-height: 1.6; color: var(--color-ink-2); }
+.pbox__s { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--color-line); font-size: 14px; line-height: 1.55; color: var(--color-ink-3); }
+
+/* วลีที่ห่อ inline-block ({{{ph}}}) ในลิงก์ที่ขีดเส้นใต้ · inline-block ไม่รับเส้นใต้จากลิงก์ เส้นเลยขาดเป็นท่อนเหลือแค่ช่องว่าง → ให้วลีขีดเองแบบเดียวกับลิงก์ */
+a > .inline-block { text-decoration: inherit; }

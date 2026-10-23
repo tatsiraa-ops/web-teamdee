@@ -3,6 +3,7 @@ import pricing from '../data/pricing.json'
 import routes from '../data/routes.json'
 import { makeUrl } from './routes.js'
 import { planFor } from './home-plan.js'
+import { visibleIndexes } from './real-grid.js'
 
 const url = makeUrl(routes)
 
@@ -192,9 +193,34 @@ export function initTabs() {
 }
 
 /* แถบโลโก้หยุดเมื่ออยู่นอกจอ */
+/* แถบที่วิ่งวน (โลโก้ลูกค้า · manifesto) หยุดเมื่อพ้นจอ ไม่กินเครื่องเปล่าๆ */
 export function initMarqueeOffscreen() {
-  const m = document.querySelector('[data-marquee]')
-  if (!m || !('IntersectionObserver' in window)) return
-  new IntersectionObserver(([en]) => m.classList.toggle('is-off', !en.isIntersecting)).observe(m)
+  if (!('IntersectionObserver' in window)) return
+  const io = new IntersectionObserver((list) => { for (const en of list) en.target.classList.toggle('is-off', !en.isIntersecting) })
+  for (const m of document.querySelectorAll('[data-marquee]')) io.observe(m)
 }
 
+
+/* กริดผลงานจริงหน้าแรก · กรองตามกลุ่มลูกค้า · คอม 8 รูป มือถือ 6 รูป (ตรรกะใน real-grid.js มีเทส) */
+export function initRealGrid() {
+  const bar = document.querySelector('[data-real-filter]')
+  const items = [...document.querySelectorAll('#realGrid > li')]
+  if (!bar || !items.length) return
+  const count = document.querySelector('[data-real-count]')
+  const small = window.matchMedia('(max-width: 767px)')
+  const cats = items.map((li) => li.dataset.cat)
+  const apply = (b, say = false) => {
+    const show = new Set(visibleIndexes(cats, b.dataset.cat, small.matches ? 6 : 8))
+    items.forEach((li, i) => { li.hidden = !show.has(i) })
+    if (say && count) count.textContent = `${b.textContent.trim()} · ${show.size} รูป`
+  }
+  const current = () => bar.querySelector('[aria-pressed="true"]') || bar.querySelector('[data-cat]')
+  bar.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-cat]')
+    if (!b) return
+    for (const x of bar.querySelectorAll('[data-cat]')) x.setAttribute('aria-pressed', String(x === b))
+    apply(b, true)
+  })
+  small.addEventListener('change', () => apply(current()))
+  apply(current())
+}

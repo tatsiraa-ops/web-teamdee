@@ -348,7 +348,6 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-cat__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .hm-cat__body { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px 22px; }
 .hm-cat__name { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 20px; font-weight: 700; }
-.hm-cat__name svg { color: var(--color-orange); flex: none; }
 .hm-cat__copy { font-size: 16px; line-height: 1.6; color: var(--color-ink-2); }
 
 /* ---------- รีวิว ---------- */
@@ -392,12 +391,32 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-videos h3 { font-size: 18px; margin-top: 12px; }
 
 /* ---------- CTA ---------- */
-.hm-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 32px; padding: 32px; border-radius: var(--hm-r); background: var(--hm-cream); border: 1px solid #F3E2D2; }
+/* CTA ยังไม่มีแบบ / มีแบบแล้ว · ใบสั่งงานสั้น: หัวข้อ | ต้องบอกอะไรบ้าง 3 ข้อ | ปุ่ม (ลดคำถาม "ต้องส่งอะไร" ก่อนทัก)
+   กล่องส้มใช้ตัวอักษรดำ: ขาวบน #FF6C00 ได้ ~2.9:1 ไม่ผ่าน AA · ดำบนส้ม ~7:1 */
+.hm-cta { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) auto; align-items: center; gap: 24px 40px; padding: 36px 40px; border-radius: var(--hm-r); background: var(--hm-cream); border: 1px solid #F3E2D2; --cta-rule: #EBD5C0; }
 .hm-cta h2 { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.3; }
-.hm-cta p { font-size: 17px; line-height: 1.7; color: var(--color-ink-2); margin-top: 6px; }
-.hm-cta--ink { background: var(--color-orange); border-color: var(--color-orange); color: var(--color-paper); }
-.hm-cta--ink p { color: var(--color-paper); }
+.hm-cta__main p { font-size: 17px; line-height: 1.7; color: var(--color-ink-2); margin-top: 8px; }
+.hm-cta--ink { background: var(--color-orange); border-color: var(--color-orange); color: var(--color-ink); --cta-rule: rgba(17, 17, 17, .22); }
+.hm-cta--ink .hm-cta__main p, .hm-cta--ink .hm-cta__sl { color: var(--color-ink); }
+.hm-cta__send { padding-left: 40px; border-left: 1px solid var(--cta-rule); }
+.hm-cta__sl { font-size: 14px; font-weight: 700; letter-spacing: .02em; color: var(--color-ink-2); }
+.hm-cta__send ol { counter-reset: cta; display: grid; gap: 10px; margin-top: 12px; }
+.hm-cta__send li { counter-increment: cta; display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 600; line-height: 1.4; }
+.hm-cta__send li::before { content: counter(cta); flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--color-ink); color: var(--color-paper); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .hm-cta__btns { display: flex; flex-wrap: wrap; gap: 10px; }
+/* ปุ่มในกล่อง CTA เรียงตั้ง · .hm-end__btns ใช้ class เดียวกันแต่เรียงแถวกลางจอ จึงจำกัดไว้ใน .hm-cta */
+.hm-cta .hm-cta__btns { flex-direction: column; flex-wrap: nowrap; min-width: 230px; }
+.hm-cta .hm-cta__btns .btn { justify-content: center; }
+@media (max-width: 1099px) {
+  .hm-cta { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .hm-cta .hm-cta__btns { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+}
+@media (max-width: 699px) {
+  .hm-cta { grid-template-columns: minmax(0, 1fr); padding: 26px 22px; gap: 20px; }
+  .hm-cta__send { padding: 18px 0 0; border-left: 0; border-top: 1px solid var(--cta-rule); }
+  .hm-cta .hm-cta__btns { flex-direction: column; min-width: 0; }
+  .hm-cta .hm-cta__btns .btn { width: 100%; }
+}
 
 /* ---------- ผลงาน 4 แถว ---------- */
 .hm-works { margin-top: 30px; }
@@ -480,7 +499,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-review__photo span { position: absolute; left: 12px; bottom: 12px; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,.94); font-size: 13px; font-weight: 700; }
 
 /* มือถือยังเป็น 2 คอลัมน์ ตัวหนังสือเล็กลง ไม่ให้ 4 หมวดยาวเกินจอ · ต้องอยู่ท้ายไฟล์ ไม่งั้นโดนขนาดปกติทับ */
-@media (max-width: 479px) { .hm-cats { gap: 10px; } .hm-cat__body { padding: 12px 12px 14px; gap: 4px; } .hm-cat__name { font-size: 16px; } .hm-cat__name svg { width: 14px; height: 14px; } .hm-cat__copy { font-size: 14px; line-height: 1.5; } }
+@media (max-width: 479px) { .hm-cats { gap: 10px; } .hm-cat__body { padding: 12px 12px 14px; gap: 4px; } .hm-cat__name { font-size: 16px; } .hm-cat__copy { font-size: 14px; line-height: 1.5; } }
 
 /* แผงกลุ่มลูกค้า · เตี้ยลง (อาร์ต 21 ต.ค.: "ยาวไป เอาแบบพอดีๆ") · ปุ่มเป็นลูกศรวงกลมมุมขวาบน ข้อความปุ่มยังอยู่ให้โปรแกรมอ่านจอ */
 .hm-panels--open { height: clamp(300px, 27vw, 350px); }
@@ -511,7 +530,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-marquee__row.is-reverse .hm-marquee__track { animation-direction: reverse; animation-duration: 80s; }
 .hm-marquee__track li { flex: none; display: grid; place-items: center; }
 .hm-marquee__track img { display: block; width: 168px; height: 72px; object-fit: contain; mix-blend-mode: multiply; }
-.hm-marquee:hover .hm-marquee__track, .hm-marquee:focus-within .hm-marquee__track, .hm-marquee.is-paused .hm-marquee__track { animation-play-state: paused; }
+/* เอาเมาส์วางไม่หยุด (อาร์ต 23 ต.ค.) · หยุดเฉพาะตอนพ้นจอ (.is-off) */
 @keyframes hm-marq { to { translate: -100% 0; } }
 /* ลดการเคลื่อนไหว · ไม่เลื่อนเอง ซ่อนชุดซ้ำ เลื่อนดูเองได้ */
 @media (prefers-reduced-motion: reduce) {
@@ -522,10 +541,9 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
   .hm-marquee__track[aria-hidden="true"] { display: none; }
 }
 @media (max-width: 639px) { .hm-marquee__track { gap: 24px; padding-right: 24px; } .hm-marquee__track img { width: 126px; height: 54px; } }
-/* แถบโลโก้อยู่ในกรอบ 1240 เหมือนส่วนอื่น (ไม่เต็มจอ) · ไม่มีกรอบการ์ด (อาร์ต 22 ต.ค.) ไฟล์ตัดขอบขาวแล้ว */
-.hm-marquee { max-width: 1240px; margin-inline: auto; }
-@media (min-width: 768px) { .hm-marquee { width: calc(100% - 80px); } }
-@media (max-width: 639px) { .hm-marquee { width: calc(100% - 40px); } }
+/* แถบโลโก้เต็มความกว้างจอ (อาร์ต 23 ต.ค.: "เอาแบบเต็มๆจอ") · ไม่มีกรอบการ์ด ไฟล์ตัดขอบขาวแล้ว · ขอบจางสั้นลงเหลือ 3% */
+.hm-marquee { width: 100%; max-width: none; margin-inline: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent); mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent); }
 
 /* ============================================================
    แก้ตามผลตรวจ 21 ต.ค. 2026
@@ -582,7 +600,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 /* จุดเด่น · ไอคอนเส้นชุดเดียวกับทั้งเว็บ */
 /* 6 ข้อ = 3 × 2 แถวเต็ม (auto-fit เดิมได้ 5 + 1 ใบเดี่ยว) */
 /* สิ่งที่ได้ทุกออเดอร์ (จุดเด่น 6 ข้อ) · การ์ด 3 × 2 แบบเดิม ยกระดับ: หัวข้อส่วน · ไอคอนในกรอบครีม · ป้าย "ฟรี" มุมขวาบน · ยกตัวตอนชี้ */
-.hm-get__head { text-align: center; margin-bottom: 32px; }
+.hm-get__head { text-align: left; margin-bottom: 32px; }
 .hm-get__title { font-size: clamp(28px, 3.2vw, 40px); line-height: 1.25; font-weight: 800; color: var(--color-ink); margin-top: 10px; }
 .hm-get__lead { font-size: 17px; line-height: 1.7; color: var(--color-ink-2); margin: 10px auto 0; max-width: 62ch; text-wrap: pretty; }
 .hm-benefits--get { gap: 16px; }
@@ -730,11 +748,262 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
   .hm-office { padding: 20px; gap: 12px; }
   .hm-office p { font-size: 15px; line-height: 1.6; }
   /* ปุ่มออฟฟิศเต็มความกว้างเท่ากัน ซ้อนกัน (แบ่งครึ่งแล้ว "นัด|หมาย" หัก) */
-  .hm-office .hm-cta__btns { width: 100%; flex-direction: column; gap: 8px; }
-  .hm-office .hm-cta__btns .btn { width: 100%; }
   .hm-work { width: 200px; }
   .hm-photos > li { width: 150px; }
 }
 
 /* หัว "ภาพลูกค้าใส่จริง" ต่อจากแถวผลงาน · .hm-head ตั้ง margin ไว้นอก @layer จึงทับ mt-14 ของ Tailwind (ตรวจโค้ด 23 ต.ค.) */
 .hm-head.hm-head--gap { margin-top: 56px; }
+
+/* ผลงานจริง · กริด 4 คอลัมน์ (มือถือ 2) แทนแถวเลื่อน · ชื่องาน 2 บรรทัดไม่ตัด (อาร์ต 23 ต.ค.) */
+.hm-real { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 20px; margin-top: 24px; }
+.hm-real > li[hidden] { display: none; }
+.hm-real__card { display: flex; flex-direction: column; gap: 6px; color: inherit; }
+.hm-real__img { display: block; aspect-ratio: 1; border-radius: var(--hm-r); overflow: hidden; background: var(--color-shell); }
+.hm-real__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+a.hm-real__card:hover .hm-real__img img { transform: scale(1.03); }
+.hm-real__t { margin-top: 8px; font-size: 17px; font-weight: 700; line-height: 1.4; color: var(--color-ink); }
+.hm-real__d { font-size: 15px; color: var(--color-ink-3); }
+.hm-real__card > .hm-real__img + .hm-real__d { margin-top: 8px; }
+a.hm-real__card:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 4px; border-radius: var(--hm-r); }
+@media (max-width: 767px) { .hm-real { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; } .hm-real__t { font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) { .hm-real__img img { transition: none; } }
+
+/* ── รอบ "ดีไซน์ใหม่ทั้งหมด" (อาร์ตเคาะ 23 ต.ค.) ── */
+/* หัวข้อทุกส่วนชิดซ้าย · คำกำกับสีเทาแทนเลข 0X */
+.hm-head { text-align: left; max-width: none; }
+.hm-head:not(.wrap) { margin-left: 0; margin-right: 0; }
+.wrap.hm-head { max-width: 1240px; }
+.hm-head > p:last-child { max-width: 62ch; }
+
+/* 3 · เรื่องราว + ข้อมูลบริษัท เป็นแถบเดียว */
+.hm-ab { display: grid; gap: 40px 72px; align-items: start; }
+@media (min-width: 1024px) { .hm-ab { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
+.hm-ab__year { display: flex; align-items: baseline; gap: 14px; font-size: 15px; font-weight: 600; color: var(--color-ink-3); }
+.hm-ab__year > span:first-child { font-size: clamp(48px, 6vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -.02em; color: var(--color-ink); }
+.hm-ab__story h3 { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.35; margin-top: 18px; max-width: 22ch; }
+.hm-ab__story p { font-size: 17px; line-height: 1.8; color: var(--color-ink-2); margin-top: 12px; max-width: 58ch; }
+.hm-ab__facts dl { border-top: 1px solid var(--color-ink); }
+.hm-ab__facts dl > div { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 4px 20px; padding: 14px 0; border-bottom: 1px solid var(--color-line); }
+.hm-ab__facts dt { font-size: 14px; font-weight: 600; color: var(--color-ink-3); padding-top: 2px; }
+.hm-ab__facts dd { font-size: 16px; line-height: 1.6; color: var(--color-ink); }
+.hm-ab__acts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 24px; }
+.hm-ab__note { font-size: 14px; color: var(--color-ink-3); margin-top: 12px; }
+@media (max-width: 479px) {
+  .hm-ab__facts dl > div { grid-template-columns: 1fr; gap: 2px; padding: 12px 0; }
+  .hm-ab__acts .btn { width: 100%; }
+}
+
+/* 7 · คนสั่งมั่นใจ / คนใส่ภูมิใจ / คนเห็นจดจำ = ข้อความใหญ่ 3 บรรทัด เส้นบางคั่น */
+.hm-exp .hm-values { gap: 0; border-top: 1px solid var(--color-ink); }
+.hm-exp .hm-values li { padding: 22px 0; border-top: 0; border-bottom: 1px solid var(--color-line); }
+.hm-exp .hm-values h3 { font-size: clamp(24px, 2.4vw, 30px); line-height: 1.25; }
+.hm-exp .hm-values p { font-size: 16px; margin-top: 6px; }
+@media (min-width: 640px) and (max-width: 1023px) { .hm-exp .hm-values { grid-template-columns: 1fr; } }
+
+/* 5 · การ์ดบริการ: กรอบรูปพื้นขาวเหมือนกันทุกใบ · รูปถ่าย (สกรีน) เต็มกรอบ */
+.hm-cat__img { background: var(--color-paper); border-bottom: 1px solid var(--color-line); }
+.hm-cat__img.is-cover img { object-fit: cover; }
+.hm-cat__name { font-size: 20px; }
+
+/* 6 · การ์ดบทความ: กรอบเดียวกัน ภาพเต็มกรอบเหมือนกันทุกใบ */
+.hm-news__img { border: 1px solid var(--color-line); }
+
+/* 8 · โลโก้ลูกค้าสีจริง (อาร์ต 23 ต.ค. เปลี่ยนจากโทนเทา: "เอาแบบสีๆได้") */
+
+/* แถบ manifesto · WE BUILD TEAM IDENTITY วิ่งช้าๆ บนพื้นส้มเต็มจอ (อาร์ตเลือก 23 ต.ค. · รอบ 3 "ใหญ่ไป ดูโหล" → ตัวเล็ก 13px ห่างตัวอักษรกว้าง แบบป้ายแบรนด์)
+   ฟอนต์อังกฤษของเล่ม (GC Tenwork) ยังไม่มีสิทธิ์ webfont → ใช้ Noto Sans Thai หนาสุด · ราว 35px/วินาที */
+.hm-mani { position: relative; overflow: hidden; background: var(--color-orange); color: var(--color-paper); padding-block: 13px; }
+.hm-mani__row { display: flex; width: max-content; }
+.hm-mani__track { display: flex; align-items: center; flex: none; gap: 28px; padding-right: 28px;
+  font-size: 13px; font-weight: 600; line-height: 1; letter-spacing: .32em; white-space: nowrap;
+  animation: hm-marq 60s linear infinite; }
+.hm-mani__ico { flex: none; height: 9px; width: auto; opacity: .85; }
+.hm-mani:hover .hm-mani__track, .hm-mani.is-off .hm-mani__track { animation-play-state: paused; }
+.hm-mani__still { display: none; }
+@media (max-width: 767px) { .hm-mani__track { animation-duration: 50s; } }
+@media (prefers-reduced-motion: reduce) {
+  .hm-mani__row { display: none; }
+  .hm-mani__still { display: block; text-align: center; font-size: 13px; font-weight: 600; line-height: 1.2; letter-spacing: .32em; padding-inline: 20px; }
+}
+
+/* สถิติวิ่งนับ (count-up.js) · ขึ้นทีละใบ → เส้นคั่นลากลง → ตัวเลขส้มวิ่งนับพร้อมแถบส้มใต้ตัวเลข → ถึงเป้าตัวเลขเด้งเป็นสีดำ หน่วยโผล่ตาม
+   .is-armed = JS พร้อมและไม่ได้ตั้งค่าลดการเคลื่อนไหว · ไม่มี JS หรือ reduce = เห็นค่าจริงนิ่งๆ */
+.hm-stat__v { display: inline-flex; align-items: baseline; gap: .08em; }
+.hm-stat__u { margin-left: .18em; }
+.hm-stat dd { position: relative; }
+.hm-stat__bar { display: block; height: 3px; width: 56px; margin: 12px auto 0; border-radius: 3px; background: var(--color-orange); transform-origin: left center; }
+.hm-stats--fit .hm-stat { position: relative; }
+.is-armed .hm-stat { opacity: 0; transform: translateY(28px); }
+.is-armed .hm-stat__n { color: var(--color-orange); display: inline-block; }
+.is-armed .hm-stat__u { opacity: 0; transform: translateY(.35em); display: inline-block; }
+.is-armed .hm-stat__bar { transform: scaleX(0); }
+.is-armed .hm-stat + .hm-stat { border-left-color: transparent; border-top-color: transparent; }
+.is-armed .hm-stat + .hm-stat::before { content: ''; position: absolute; left: -1px; top: 0; bottom: 0; width: 1px; background: var(--color-line); transform: scaleY(0); transform-origin: top; }
+.is-run .hm-stat { opacity: 1; transform: none; transition: opacity .7s ease-out, transform .9s cubic-bezier(.16, 1, .3, 1); transition-delay: calc(var(--i) * .22s); }
+.is-run .hm-stat + .hm-stat::before { transform: scaleY(1); transition: transform 1s cubic-bezier(.16, 1, .3, 1) calc(var(--i) * .22s + .2s); }
+.is-run .hm-stat__bar { transform: scaleX(1); transition: transform 2.2s cubic-bezier(.16, 1, .3, 1) calc(var(--i) * .22s); }
+.hm-stat.is-hit .hm-stat__n { color: var(--color-ink); transition: color .5s ease; animation: hm-stat-pop .55s cubic-bezier(.34, 1.56, .64, 1); }
+.hm-stat.is-hit .hm-stat__u { opacity: 1; transform: none; transition: opacity .4s ease-out, transform .55s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes hm-stat-pop { 0% { transform: scale(1); } 45% { transform: scale(1.08); } 100% { transform: scale(1); } }
+@media (max-width: 767px) {
+  .hm-stat__bar { margin-left: 0; }
+  .is-armed .hm-stat + .hm-stat::before { left: 0; right: 0; top: -1px; bottom: auto; width: auto; height: 1px; transform: scaleX(0); transform-origin: left; }
+  .is-run .hm-stat + .hm-stat::before { transform: scaleX(1); }
+}
+
+/* หัวข้อทุกส่วนกลับมาจัดกลาง (อาร์ต 23 ต.ค.: "ชิดไปทางขวา เอาไว้ตรงกลางดีๆ") · คำกำกับ ประโยคใต้หัวข้อ ลิงก์ดูทั้งหมด และแถวตัวกรองกลางตาม
+   ยกเว้นส่วนที่เป็น 2 คอลัมน์ (FAQ หัวข้อติดซ้าย · ทีมดีเข้าใจคนสั่ง) ยังชิดซ้ายตามเลย์เอาต์ */
+.hm-head, .hm-head.hm-head--left { text-align: center; margin-left: auto; margin-right: auto; }
+.hm-head > p:last-child { margin-inline: auto; }
+.hm-head--row { flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+.hm-head--row > div { max-width: 820px; }
+.hm-get__head { text-align: center; }
+.hm-sec .chiprail { justify-content: safe center; }
+.hm-head h2, .hm-head h3, .hm-head > p { margin-left: auto; margin-right: auto; }
+
+/* "ทีมดี เข้าใจคนสั่งเสื้อบริษัท" จัดกลางเหมือนส่วนอื่น (อาร์ต 23 ต.ค. "อันนี้ต่อ")
+   คอลัมน์เดียว: หัวข้อ → ย่อหน้า → ลิงก์ → 3 ข้อความใหญ่เรียงแถว 3 ช่อง (มือถือเรียงลง) → อ่านเพิ่มเติม · ภาพรอของจริง (ต้นแบบ) ไว้ท้าย */
+.hm-exp { grid-template-columns: minmax(0, 1fr) !important; justify-items: center; text-align: center; gap: 36px; }
+.hm-exp > div { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.hm-exp .hm-h2, .hm-exp__sub, .hm-exp__p { margin-inline: auto; }
+.hm-exp__p { max-width: 62ch; }
+.hm-exp > div > .flex { justify-content: center; }
+.hm-exp .hm-values { width: 100%; max-width: 1080px; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; border-top: 1px solid var(--color-ink); }
+.hm-exp .hm-values li { padding: 26px 20px; border-bottom: 0; }
+.hm-exp .hm-values li + li { border-left: 1px solid var(--color-line); }
+.hm-exp__ph { order: 2; width: 100%; max-width: 760px; aspect-ratio: 16 / 6; margin: 8px auto 0; }
+.hm-exp .hm-seo-more { width: 100%; text-align: center; }
+@media (max-width: 767px) {
+  .hm-exp .hm-values { grid-template-columns: minmax(0, 1fr) !important; }
+  .hm-exp .hm-values li { padding: 20px 0; }
+  .hm-exp .hm-values li + li { border-left: 0; border-top: 1px solid var(--color-line); }
+}
+/* อ่านเพิ่มเติม: เส้นใต้ขาดเป็นท่อน (วลี inline-block ไม่รับเส้นใต้) → ให้แต่ละวลีขีดเอง เครื่องหมาย + ไม่ขีด */
+.hm-seo-more summary { text-decoration: none; }
+.hm-seo-more summary > span .inline-block { text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+
+/* ทีมดี เข้าใจคนสั่ง · แบบ A (อาร์ตเลือก 23 ต.ค.) · แถบดำ: ปัญหาที่เคยเจอ (ขีดฆ่าส้มวิ่ง) → สิ่งที่ทีมดีทำให้ */
+.hm-pain { background: var(--color-ink); color: var(--color-paper); padding-block: clamp(64px, 8vw, 104px); text-align: left; }
+.hm-pain__k { font-size: 15px; font-weight: 700; line-height: 1.4; color: var(--color-orange); letter-spacing: .04em; }
+.hm-pain__h { font-size: clamp(32px, 4vw, 52px); line-height: 1.2; font-weight: 800; margin-top: 14px; max-width: 18ch; }
+.hm-pain__lead { font-size: 18px; line-height: 1.7; color: rgba(255,255,255,.72); margin-top: 16px; max-width: 52ch; }
+.hm-pain__list { margin-top: 48px; border-top: 1px solid rgba(255,255,255,.18); }
+.hm-pain__list li { display: grid; grid-template-columns: 56px minmax(0, 1fr) 48px minmax(0, 1.4fr); align-items: center; gap: 24px; padding: 28px 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+.hm-pain__n { font-size: 15px; font-weight: 700; color: rgba(255,255,255,.5); font-variant-numeric: tabular-nums; }
+.hm-pain__was { position: relative; justify-self: start; font-size: clamp(20px, 2.2vw, 28px); font-weight: 600; color: rgba(255,255,255,.5); }
+.hm-pain__was::after { content: ''; position: absolute; left: -4px; right: -4px; top: 54%; height: 3px; border-radius: 3px; background: var(--color-orange); }
+[data-pain].is-armed .hm-pain__was::after { transform: scaleX(0); transform-origin: left; }
+[data-pain].is-in .hm-pain__was::after { transform: scaleX(1); transition: transform .7s cubic-bezier(.16, 1, .3, 1); }
+[data-pain].is-in li:nth-child(2) .hm-pain__was::after { transition-delay: .3s; }
+[data-pain].is-in li:nth-child(3) .hm-pain__was::after { transition-delay: .6s; }
+[data-pain].is-armed .hm-pain__now { opacity: .3; transform: translateX(-12px); }
+[data-pain].is-in .hm-pain__now { opacity: 1; transform: none; transition: opacity .6s ease-out, transform .7s cubic-bezier(.16, 1, .3, 1); }
+[data-pain].is-in li:nth-child(1) .hm-pain__now { transition-delay: .35s; }
+[data-pain].is-in li:nth-child(2) .hm-pain__now { transition-delay: .65s; }
+[data-pain].is-in li:nth-child(3) .hm-pain__now { transition-delay: .95s; }
+.hm-pain__to { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--color-orange); color: var(--color-orange); }
+.hm-pain__now b { display: block; font-size: clamp(22px, 2.4vw, 32px); font-weight: 800; line-height: 1.3; }
+.hm-pain__now > span { display: block; font-size: 16px; color: rgba(255,255,255,.72); margin-top: 6px; }
+.hm-pain__foot { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 36px; font-size: 17px; font-weight: 700; color: rgba(255,255,255,.9); }
+.hm-pain__foot span::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-orange); margin-right: 10px; vertical-align: middle; }
+.hm-pain__links { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 20px; }
+.hm-pain .hm-more { color: var(--color-paper); }
+@media (max-width: 767px) {
+  .hm-pain__list li { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 22px 0; }
+  .hm-pain__n, .hm-pain__to { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { [data-pain] .hm-pain__was::after, [data-pain] .hm-pain__now { transition: none !important; } }
+
+
+
+/* 02 บริการ · ข้อมูลจริง 3 ช่องใต้คำอธิบาย (ราคาเริ่มต้น · เวลาผลิต · ขั้นต่ำ) เหมือนใบสเปกย่อ */
+/* ข้อมูลการ์ดบริการแบบใบเสนอราคา: บรรทัดละข้อ ป้ายซ้าย ค่าขวา (3 ช่องเท่ากันกว้าง ~98px ทำ "10–15 วันทำการ" ล้น · อาร์ต ok 23 ต.ค.) */
+.hm-cat__facts { display: grid; margin-top: 14px; border-top: 1px solid var(--color-line); }
+.hm-cat__facts > span { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--color-line); }
+.hm-cat__facts small { font-size: 14px; font-weight: 600; color: var(--color-ink-3); }
+.hm-cat__facts b { font-size: 15px; font-weight: 800; color: var(--color-ink); text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 767px) { .hm-cat__facts > span { padding: 6px 0; } .hm-cat__facts b { font-size: 14px; } }
+/* คำโปรยบริการ 2 บรรทัดยาวเท่ากัน ไม่ให้ "หน่วยงาน และทีมกีฬา" ลอยบรรทัดล่าง */
+#services .hm-head > p:last-child { text-wrap: balance; }
+
+/* 04 เคส FTI · เล่าเป็นเส้นทาง: จุดส้ม + เส้นต่อจากขั้นหนึ่งไปอีกขั้น วิ่งเติมทีละช่วงตอนเลื่อนมาเห็น (ไม่มี JS = เส้นเต็มนิ่งๆ) */
+.hm-case__no { display: flex; align-items: center; gap: 10px; margin-top: 18px; color: var(--color-ink-3); }
+.hm-case__no::before { content: ''; flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--color-orange); box-shadow: 0 0 0 4px rgba(255, 108, 0, .16); }
+.hm-case__no::after { content: ''; flex: 1; height: 2px; margin-right: -14px; border-radius: 2px;
+  background: linear-gradient(var(--color-orange), var(--color-orange)) left / 100% 100% no-repeat, var(--color-line); }
+.hm-case__steps li:last-child .hm-case__no::after { background: none; }
+html.rv .hm-case .hm-case__no::after { background-size: 0% 100%, auto; transition: background-size .9s cubic-bezier(.16, 1, .3, 1); }
+html.rv .hm-case.in .hm-case__no::after { background-size: 100% 100%, auto; }
+html.rv .hm-case.in li:nth-child(2) .hm-case__no::after { transition-delay: .35s; }
+html.rv .hm-case.in li:nth-child(3) .hm-case__no::after { transition-delay: .7s; }
+.hm-case__steps img { transition: transform .5s cubic-bezier(.16, 1, .3, 1); }
+.hm-case__steps li:hover img { transform: translateY(-4px); }
+.hm-case__t { margin-top: 8px; }
+@media (max-width: 767px) { .hm-case__no::after { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hm-case__steps img, html.rv .hm-case .hm-case__no::after { transition: none; } }
+
+/* 06 ขั้นตอน · ช่วยคิด / ช่วยจัดการ / ช่วยจบงาน เป็นคำกำกับส้มข้างเลข (เลิกใช้ "—" ในหัวข้อ) + เส้นต่อแบบเดียวกับเคส FTI */
+.hm-steps__no span { display: inline-flex; align-items: center; gap: 8px; color: var(--color-ink); font-size: 14px; letter-spacing: .04em; }
+.hm-steps__no span::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--color-orange); }
+.hm-steps__no::after { content: ''; flex: 1; align-self: center; height: 2px; margin-right: -28px; border-radius: 2px; background: var(--color-line); }
+.hm-steps li:last-child .hm-steps__no::after { display: none; }
+@media (max-width: 899px) { .hm-steps__no::after { display: none; } }
+
+/* สิ่งที่ได้ทุกออเดอร์ 4 × 2 (อาร์ตเลือก 22 ต.ค.) · เลิกการ์ดลอย 8 ใบ (ยกตัวตอนชี้ทั้งที่กดไม่ได้ = หลอกว่ากดได้) → ตารางเส้นบางกรอบเดียว แบบใบสเปก
+   ไอคอนไม่มีกล่องรอง · ป้าย "ฟรี" พื้นดำ (ขาวบนส้มได้ ~2.9:1 ไม่ผ่าน AA) */
+.hm-benefits--get { gap: 0; border: 1px solid var(--color-line); border-radius: var(--hm-r); overflow: hidden; background: var(--color-paper); }
+.hm-benefits--get li { border: 0; border-radius: 0; box-shadow: none; background: transparent; border-bottom: 1px solid var(--color-line); transition: background-color .2s var(--hm-ease); }
+@media (hover: hover) { .hm-benefits--get li:hover { translate: none; box-shadow: none; background: var(--hm-cream); } }
+.hm-benefits--get .hm-benefits__ico { width: 30px; height: 30px; padding: 0; border-radius: 0; background: none; margin-bottom: 18px; }
+.hm-benefits__tag { background: var(--color-ink); color: var(--color-paper); }
+.hm-benefits--get li:last-child { border-bottom: 0; }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hm-benefits--get li:nth-child(odd) { border-right: 1px solid var(--color-line); }
+  .hm-benefits--get li:nth-last-child(-n+2) { border-bottom: 0; }
+}
+@media (min-width: 1024px) {
+  .hm-benefits--get li:not(:nth-child(4n)) { border-right: 1px solid var(--color-line); }
+  .hm-benefits--get li:nth-last-child(-n+4) { border-bottom: 0; }
+}
+@media (max-width: 767px) {
+  .hm-benefits--get .hm-benefits__ico { width: 26px; height: 26px; margin-top: 2px; }
+  .hm-benefits--get li { grid-template-columns: 26px minmax(0, 1fr); padding: 16px; }
+}
+
+/* รหัสแบบ = สิ่งที่ลูกค้าต้องพิมพ์ส่งใน LINE · ป้ายในรูปเล็กอ่านไม่ออก → ป้ายตัวอักษรจริงมุมล่างซ้าย (alt มีรหัสอยู่แล้ว จึง aria-hidden) */
+.hm-design { position: relative; }
+.hm-design__code { position: absolute; left: 8px; bottom: 8px; padding: 3px 8px; border-radius: 6px; background: var(--color-paper); border: 1px solid var(--color-line); font-size: 13px; font-weight: 700; line-height: 1.3; letter-spacing: .02em; color: var(--color-ink); font-variant-numeric: tabular-nums; pointer-events: none; }
+/* pain band: ลูกศรในวงกลมดูเหมือนปุ่มที่กดไม่ได้ → ลูกศรเปล่า */
+.hm-pain__to { width: auto; height: auto; border: 0; border-radius: 0; }
+
+/* ── 03 กลุ่มลูกค้า · 5 การ์ดรูปแถวเดียว (อาร์ตเลือกแบบ A 23 ต.ค. จาก 3 แบบ · "เอารูปเด่น แสดงรูปมาทั้งหมด")
+   รูปทีมจริงเป็นสี่เหลี่ยมจัตุรัส (ต้นฉบับ 1:1 คนยืนเต็มกว้าง) ครอปแบบอื่นตัดหัว/เท้า หรือตัดคนริมภาพ
+   ข้อความอยู่ใต้รูป ไม่ทับรูป (เสื้อในรูปคือสินค้า) · คอม 5 · แท็บเล็ต 3 · มือถือ 2 ใบสุดท้ายเต็มกว้าง ── */
+.hm-uses { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+.hm-uses a { display: flex; flex-direction: column; height: 100%; color: inherit; }
+.hm-uses__img { display: block; aspect-ratio: 1; border-radius: 16px; overflow: hidden; background: var(--color-shell); }
+.hm-uses__img img { width: 100%; height: 100%; object-fit: cover; transition: scale .6s var(--hm-ease); }
+.hm-uses__t { margin-top: 14px; font-size: 20px; font-weight: 800; line-height: 1.3; }
+.hm-uses__go { margin-top: auto; padding-top: 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 700; }
+.hm-uses__go svg { color: var(--color-orange); transition: translate .25s var(--hm-ease); }
+@media (hover: hover) {
+  .hm-uses a:hover .hm-uses__img img { scale: 1.05; }
+  .hm-uses a:hover .hm-uses__go svg { translate: 3px 0; }
+  .hm-uses a:hover .hm-uses__t { text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+}
+.hm-uses a:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 6px; border-radius: 16px; }
+/* แท็บเล็ต: 3 บน + 2 ล่างกว้างขึ้น ไม่เหลือช่องโหว่ท้ายแถว */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hm-uses { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 28px 16px; }
+  .hm-uses > li { grid-column: span 2; }
+  .hm-uses > li:nth-child(n+4) { grid-column: span 3; }
+}
+@media (max-width: 639px) {
+  .hm-uses { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; }
+  .hm-uses > li:last-child { grid-column: span 2; }
+  .hm-uses > li:last-child .hm-uses__img { aspect-ratio: 16 / 9; }
+  .hm-uses__t { font-size: 17px; }
+  .hm-uses__go { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .hm-uses__img img, .hm-uses__go svg { transition: none; } }

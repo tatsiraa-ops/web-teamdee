@@ -17,21 +17,23 @@ test('เว็บจริง (หลังยืนยัน 22 ต.ค.): จ
   assert.equal(v.benefits.items.length, 8)
   assert.deepEqual(v.stats.items.map((x) => x.n), ['8 ปี', '2,800+ องค์กร', '10,000+ งาน'])
   assert.equal(v.show.stats, true)
-  assert.deepEqual(v.payment.items.map((x) => x.h), ['ออกใบเสร็จ / ใบกำกับภาษีได้'])
+  /* 23 ต.ค. พี่ทัชตอบ: วางบิลได้ · ไม่รับบัตรเครดิต (การ์ดบัตรเครดิตถูกลบ) */
+  assert.deepEqual(v.payment.items.map((x) => x.h), ['รองรับการวางบิล', 'ออกใบเสร็จ / ใบกำกับภาษีได้'])
   assert.equal(v.show.care, true)
   assert.equal(v.show.benefits, true)
 })
 
-test('เว็บจริง: FAQ ตัดข้อที่มีคำสัญญารอยืนยัน · เรื่องราวเก็บย่อหน้าที่ไม่มีวงเล็บ', () => {
+test('เว็บจริง: FAQ ชำระเงิน/บัตรเครดิตขึ้นได้หลังยืนยัน 23 ต.ค. · ไม่เหลือข้อรอยืนยัน · เรื่องราวเก็บย่อหน้าที่ไม่มีวงเล็บ', () => {
   const v = homeView(h, { forWp: true })
   const qs = v.faq.items.map(([q]) => q)
   assert.ok(qs.includes('ไม่มีแบบเริ่มคุยได้ไหม?'))
   assert.ok(qs.includes('ขอดูตัวอย่างผ้าหรือเสื้อตัวอย่างได้ไหม?'))
-  assert.ok(!qs.includes('ต้องชำระเงินอย่างไร?'))
-  assert.ok(!qs.includes('รับบัตรเครดิตและวางบิลได้ไหม?'))
+  assert.ok(qs.includes('ต้องชำระเงินอย่างไร?'))
+  assert.ok(qs.includes('รับบัตรเครดิตและวางบิลได้ไหม?'))
+  assert.equal(qs.length, h.faq.items.length)
   assert.equal(v.location.story.year, 'เริ่มปี 2018')
   assert.equal(v.location.story.p.length, 2)
-  assert.deepEqual(v.location.company.p, ['ขอเอกสารประกอบการจัดซื้อได้'])
+  assert.deepEqual(v.location.company.p, ['จดทะเบียนบริษัท 19 มกราคม 2021', 'ขอเอกสารประกอบการจัดซื้อได้'])
 })
 
 test('ต้นแบบ: เก็บทุกส่วนพร้อมป้ายรอข้อมูล', () => {

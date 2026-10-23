@@ -6,6 +6,8 @@ import handlebars from 'vite-plugin-handlebars'
 import tailwindcss from '@tailwindcss/vite'
 import { makeUrl, pageFor } from './src/js/routes.js'
 import { faqSchema, businessSchema, ldJson } from './src/js/seo-schema.js'
+import { buildRealGrid } from './src/js/real-grid.js'
+import { parseStat } from './src/js/count-up.js'
 import { productView, pending } from './src/js/product-view.js'
 import { useView } from './src/js/use-view.js'
 import { useCta, lineMessageUrl } from './src/js/use-cta.js'
@@ -69,6 +71,8 @@ const loadData = () => ({
   groups: json('groups.json'),
   works: json('works.json'),
   pricing: json('pricing.json'),
+  /* เวลาผลิตแยกงาน · หน้ากลุ่มลูกค้าส่วน "มีวันใช้แล้ว" (23 ต.ค.) */
+  leadTimes: json('lead-times.json'),
   faq: json('faq.json'),
   hero: json('hero.json'),
   sizing: json('sizing.json'),
@@ -167,11 +171,12 @@ const loadData = () => ({
   /* lines = จุดตัดบรรทัดชื่อกลุ่มในแผงแคบ ไม่ให้ภาษาไทยตัดกลางวลี (เช่น กีฬาและการ / แข่งขัน) */
   homeUses: (() => {
     const pick = {
-      corp: { lines: ['เสื้อบริษัท ร้านค้า', 'และยูนิฟอร์ม'], en: 'CORPORATE', photo: '/img/real/r23.jpg', alt: 'ทีมพนักงานบริษัทใส่เสื้อทีมสีแดงที่ทีมดีผลิต' },
-      gov: { lines: ['เสื้อหน่วยงาน', 'และองค์กร'], en: 'ORGANIZATION', photo: '/img/real/r26.jpg', alt: 'เจ้าหน้าที่หน่วยงานใส่เสื้อโปโลสีกรมท่าที่ทีมดีผลิต' },
-      edu: { lines: ['เสื้อโรงเรียน', 'และมหาวิทยาลัย'], en: 'EDUCATION', photo: '/img/real/r16.jpg', alt: 'นักเรียนใส่เสื้อโปโลสีขาวฟ้าที่ทีมดีผลิต' },
-      sport: { lines: ['เสื้อกีฬา', 'และการแข่งขัน'], en: 'SPORTS', photo: '/img/real/r17.jpg', alt: 'ทีมฟุตบอลใส่เสื้อลายทางแดงขาวที่ทีมดีผลิต' },
-      event: { lines: ['เสื้อกิจกรรม', 'และชมรม'], en: 'EVENTS', photo: '/img/real/r21.jpg', alt: 'นักวิ่งใส่เสื้อสีม่วงที่ทีมดีผลิต ในงานวิ่ง' },
+      /* why = ข้อสังเกตเฉพาะกลุ่ม ย่อจาก uses.json lead (ข้อความของทีมดีเอง) · แสดงในดัชนีกลุ่มลูกค้าหน้าแรก (อาร์ต 23 ต.ค. แบบ A) */
+      corp: { lines: ['เสื้อบริษัท ร้านค้า', 'และยูนิฟอร์ม'], en: 'CORPORATE', why: ['ภาพลักษณ์ที่ลูกค้าเห็น', 'งบ และกำหนดใช้ที่ชนกัน'], photo: '/img/real/r23.jpg', alt: 'ทีมพนักงานบริษัทใส่เสื้อทีมสีแดงที่ทีมดีผลิต' },
+      gov: { lines: ['เสื้อหน่วยงาน', 'และองค์กร'], en: 'ORGANIZATION', why: ['งานราชการแพ้ชนะกันที่เอกสารและรอบเวลา', 'ไม่ใช่ที่ลาย'], photo: '/img/real/r26.jpg', alt: 'เจ้าหน้าที่หน่วยงานใส่เสื้อโปโลสีกรมท่าที่ทีมดีผลิต' },
+      edu: { lines: ['เสื้อโรงเรียน', 'และมหาวิทยาลัย'], en: 'EDUCATION', why: ['มีรอบปฏิทินทุกปี', 'และต้องรวบรวมความเห็นหลายฝ่าย'], photo: '/img/real/r16.jpg', alt: 'นักเรียนใส่เสื้อโปโลสีขาวฟ้าที่ทีมดีผลิต' },
+      sport: { lines: ['เสื้อกีฬา', 'และการแข่งขัน'], en: 'SPORTS', why: ['ใส่ซ้ำทั้งฤดูกาล ผ้ากับทรงสำคัญกว่าลาย', 'ชื่อ-เบอร์แยกรายคน'], photo: '/img/real/r17.jpg', alt: 'ทีมฟุตบอลใส่เสื้อลายทางแดงขาวที่ทีมดีผลิต' },
+      event: { lines: ['เสื้อกิจกรรม', 'และชมรม'], en: 'EVENTS', why: ['จำนวนเยอะ สปอนเซอร์หลายเจ้า', 'และวันงานขยับไม่ได้'], photo: '/img/real/r21.jpg', alt: 'นักวิ่งใส่เสื้อสีม่วงที่ทีมดีผลิต ในงานวิ่ง' },
     }
     /* หน้าแรก Section 03 ตาม v22 = 5 การ์ด บริษัท กีฬา กิจกรรม โรงเรียน หน่วยงาน · กลุ่มอื่นเข้าทางเมนู */
     return json('uses.json').filter((u) => pick[u.id]).map((u) => ({ ...u, ...pick[u.id] }))
@@ -194,6 +199,12 @@ const loadData = () => ({
     for (let i = 0; mixed.length < 48 && lists.some((l) => l[i]); i++) for (const l of lists) if (l[i]) mixed.push(l[i])
     /* รูปลูกค้าแถวเดียว 12 รูป (เดิม 3 แถว ซ้ำกับส่วนอื่นมากไป) */
     const photoRows = [mixed.slice(0, 12)]
+    /* กริด "ผลงานจริง" (เคส + ภาพลูกค้า) แทน 2 แถวเลื่อน · รูปเคสใช้ไฟล์ -320.webp ถ้ามี (อาร์ต 23 ต.ค.) */
+    const realGrid = buildRealGrid(works, customers, { perCat: 4 })
+    for (const it of realGrid.items) {
+      const small = it.imgSmall || it.img.replace(/\.(jpg|webp)$/, '-320.webp')
+      if (!it.imgSmall && existsSync(resolve(root, 'public' + small))) it.imgSmall = small
+    }
     /* โลโก้ตัดขอบขาวแล้ววางกลางผืน 336×144 ขนาดตามพื้นที่ (img/client-fit จาก img/client · อาร์ตสั่ง 22 ต.ค.: ไม่เอากรอบ โลโก้ต้องอยู่กลาง) */
     const logoFiles = h.logos.show ? readdirSync(resolve(root, 'public/img/client-fit')).filter((f) => /\.(png|svg|webp)$/.test(f)).sort() : []
     const logoNames = json('client-logos.json')
@@ -203,12 +214,23 @@ const loadData = () => ({
     const v = homeView(h, { forWp, latestPosts: json('legacy-posts.json').items.slice(0, 2), years: new Date().getFullYear() - json('site.json').foundedYear })
     return {
       ...v,
-      cats: { ...h.cats, items: h.cats.items.map((c) => ({ ...c, product: pick(c.id) })) },
+      /* การ์ดบริการ: ข้อมูลจริงที่ยืนยันแล้ว 3 ช่อง (ราคาเริ่มต้น prices.json · เวลาผลิต lead-times.json · ขั้นต่ำ 10 ตัว) · อาร์ต 23 ต.ค. "ต้องดีที่สุด" */
+      cats: { ...h.cats, items: h.cats.items.map((c) => {
+        const box = json('prices.json')[c.id]?.box
+        const from = box && /([\d,]+)/.exec(box.strong)?.[1]
+        const lead = json('lead-times.json')[c.id]
+        return { ...c, product: pick(c.id), facts: [
+          { k: 'เริ่มต้น', v: from ? `${from} บาท/ตัว` : 'ประเมินตามแบบ' },
+          { k: 'ผลิต', v: lead ? lead.days.replace(/^DFT\s*/, '') : '' },
+          { k: 'ขั้นต่ำ', v: '10 ตัว' },
+        ].filter((f) => f.v) }
+      }) },
       logoRows: h.logos.show
         ? [logoFiles.slice(0, half), logoFiles.slice(half)].map((row) => row.map((f) => ({ img: `/img/client-fit/${f}`, alt: logoNames[f.replace(/\.\w+$/, '')] || '' })))
         : [1, 2].map((r) => Array.from({ length: 7 }, (_, i) => ({ ph: `โลโก้แบรนด์ ${r}-${i + 1}` }))),
       logoCount: logoFiles.length,
       photoRows,
+      realGrid,
       gallery: {
         ...h.gallery,
         items: printDesigns,
@@ -609,6 +631,8 @@ export default defineConfig({
         ph: (t) => phrases(t),
         /* ลิงก์แผนที่ · ช่องว่างและภาษาไทยใน query ต้อง encode */
         enc: (t) => encodeURIComponent(String(t ?? '')),
+        /* {{#with (stat this.n)}} แยกตัวเลข/+/หน่วย ให้สถิติหน้าแรกวิ่งนับได้ (src/js/count-up.js) */
+        stat: (t) => parseStat(t),
         /* {{url 'contact'}} · {{url 'products' this.id}} · {{url 'guides.size'}} — ลิงก์ภายในทุกตัวต้องผ่านตัวนี้ */
         url: (key, id) => url(key, typeof id === 'string' ? id : undefined),
       },

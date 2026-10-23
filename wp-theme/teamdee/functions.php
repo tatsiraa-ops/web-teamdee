@@ -184,7 +184,8 @@ add_action('wp_head', function () {
 		if ($blog) echo td_read_part($blog['slug'], 'head'); // phpcs:ignore
 	}
 	/* แถบผู้ดูแลของ WordPress สูง 32px ดันแถบเมนูที่ติดบนสุดลงมาไม่ให้ทับกัน */
-	echo "<style>.admin-bar [data-header]{top:32px}@media(max-width:782px){.admin-bar [data-header]{top:46px}}</style>\n";
+	/* จอ ≤600px แถบแอดมิน WP เลื่อนหายไปกับหน้า (position:absolute) header ต้องกลับไปติดขอบบน ไม่งั้นเหลือช่อง 46px เห็นเนื้อหาโผล่ */
+	echo "<style>.admin-bar [data-header]{top:32px}@media(max-width:782px){.admin-bar [data-header]{top:46px}}@media(max-width:600px){.admin-bar [data-header]{top:0}}</style>\n";
 }, 5);
 
 /* หน้าที่มาจากต้นแบบไม่ใช้ block editor ไม่ต้องโหลด CSS ของ block · ลดของที่ไม่ได้ใช้ */
