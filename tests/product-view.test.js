@@ -105,3 +105,14 @@ test('ยังไม่มีราคาจริง → confirmed false (ห�
     assert.equal(productView(pp, { ...real, price }, { forWp, has }).price.confirmed, true)
   }
 })
+
+/* แถบตัวเลขทีมดีใต้ hero (audit P6) · กติกาเดียวกับหน้ากลุ่มลูกค้า: เว็บจริงต้องเหลือตัวเลขที่ยืนยันแล้วอย่างน้อย 2 ตัว */
+test('ตัวเลขทีมดีใต้ hero: ตัดตัวที่รอยืนยัน · เหลือน้อยกว่า 2 ตัวซ่อนบนเว็บจริง', () => {
+  const two = { ...pp, trust: { stats: [{ n: '8 ปี', t: 'a' }, { n: '2,800+ องค์กร', t: 'b' }, { n: '[รอยืนยัน: 1 ล้าน]', t: 'c' }] } }
+  const wp = productView(two, real, { forWp: true, has })
+  assert.equal(wp.trust.show, true)
+  assert.deepEqual(wp.trust.stats.map((s) => s.n), ['8 ปี', '2,800+ องค์กร'])
+  const one = { ...pp, trust: { stats: [{ n: '8 ปี', t: 'a' }, { n: '[รอยืนยัน]', t: 'b' }] } }
+  assert.equal(productView(one, real, { forWp: true, has }).trust.show, false)
+  assert.equal(productView(pp, real, { forWp: false, has }).trust.show, false) // ไม่มีข้อมูลตัวเลข
+})

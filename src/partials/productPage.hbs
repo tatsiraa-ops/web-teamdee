@@ -1,37 +1,42 @@
-{{!-- หน้าสินค้า 6 หน้า ตาม Wireframe v22 (22 ต.ค. 2026) · 14 ส่วนเรียงตาม v22
+{{!-- หน้าสินค้า 6 หน้า ตาม Wireframe v22 (22 ต.ค. 2026) · หัวข้อ H2 ของ v22 อยู่ครบ (tests/v22-structure.test.js)
+     ลำดับส่วนสำหรับคนที่มาจากแอด (audit P9 · อาร์ตเคาะ 24 ต.ค. ข้อ 5): hero → ตัวเลข → ราคา → แบบ → เสื้อจริง → ชวนขอราคา → ผ้า → รายละเอียด
+     → ขั้นตอน → FAQ → ไซซ์ → การผลิต → ตามงาน → ปิดท้าย · เลขในคอมเมนต์แต่ละส่วนคือลำดับเดิมของ v22 · สารบัญเรียงตาม scripts/v22/product-pages.mjs ORDER
      ข้อความ: src/data/product-pages.json (สร้างจาก wireframe ด้วย scripts/v22/product-pages.mjs)
      ข้อมูลจริงที่มีอยู่แล้วมาแทนช่อง [วงเล็บ] ของ v22: แบบเสื้อรหัส TD · ผ้า · สเปกทรง/คอ/ออปชั่น · ตารางไซซ์ · ผลงาน
      src/js/product-view.js ตัดข้อความที่ยังรอยืนยันออกบนเว็บจริง · ต้นแบบโชว์พร้อมป้าย --}}
 {{#if productLd}}<script type="application/ld+json">{{{productLd}}}</script>
 {{/if}}<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"{{item.name}}"}]}</script>
 
-<!-- 01 · hero -->
+<!-- 01 · hero · จอแรกมือถือเป็นใบเสนอราคาย่อ (audit P2 · 2.3): H1 → รูป → ราคา → ขั้นต่ำ/เวลาผลิต → ปุ่ม LINE → เวลาตอบ แล้วค่อยย่อหน้าคำค้น
+     คอม: ข้อความซ้าย รูปขวา (grid 2 แถว รูปกินทั้งสองแถว) · มือถือ: เรียงตามลำดับใน HTML -->
 <section class="band-hero relative overflow-hidden">
   <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-  <div class="wrap relative py-12 md:py-18">
+  <div class="wrap relative pt-3 pb-10 md:pt-8 lg:py-16">
     <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>สินค้าและบริการ</span><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
-    <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center mt-8">
-      <div>
-        <h1 class="t-display text-[clamp(32px,4.6vw,56px)] text-ink">{{pp.hero.h1}}</h1>
-        <p class="text-[19px] leading-[1.75] text-ink-2 max-w-[52ch] mt-5">{{pp.hero.lead}}</p>
-        {{#if item.seoLine}}<p class="text-[17px] leading-[1.7] text-ink-2 max-w-[56ch] mt-3">{{item.seoLine}}</p>{{/if}}
-        {{#if pp.hero.facts.length}}
-        <dl class="flex flex-wrap gap-x-8 gap-y-3 mt-8 border-t border-line pt-6">
-          {{#each pp.hero.facts}}<div><dt class="text-[15px] font-semibold text-ink-3">{{this.k}}</dt><dd class="text-[17px] font-bold text-ink-2 mt-1">{{this.v}}</dd></div>{{/each}}
-        </dl>
-        {{/if}}
-        <div class="flex flex-wrap gap-3 mt-9">
-          <a class="btn btn-orange btn-lg max-sm:whitespace-normal max-sm:text-center max-sm:py-3" href="{{url 'contact'}}?p={{item.id}}">{{pp.hero.cta}}</a>
-          <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-ink hover:border-ink" href="#options">ดูแบบและตัวเลือก</a>
-        </div>
-      </div>
-      <figure class="relative">
-        <div class="overflow-hidden rounded-plate bg-paper aspect-[3/2]">
-          {{#if item.img}}<img src="{{item.img}}" alt="{{item.name}} ด้านหน้าและด้านหลัง แบบที่ทีมดีผลิต" width="1080" height="720" fetchpriority="high" decoding="async" class="w-full h-full object-contain">
+    <div class="grid gap-3 mt-1 lg:mt-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-x-16 lg:gap-y-0">
+      <h1 class="t-display text-[clamp(28px,4.6vw,56px)] text-ink lg:col-start-1 lg:row-start-1 lg:self-end">{{{ph pp.hero.h1}}}</h1>
+      <figure class="relative lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center"{{#unless item.img}}{{#unless item.panel}} hidden{{/unless}}{{/unless}}>
+        <div class="overflow-hidden rounded-plate bg-paper aspect-[16/10] lg:aspect-[3/2]">
+          {{#if item.img}}<img src="{{item.img}}"{{#if heroSrcset}} srcset="{{heroSrcset}}" sizes="(min-width:1024px) 46vw, 100vw"{{/if}} alt="{{item.name}} ด้านหน้าและด้านหลัง {{#if (eq item.imgKind 'real')}}งานที่ทีมดีผลิต{{else}}ภาพจำลอง{{/if}}" width="1080" height="720" fetchpriority="high" decoding="async" class="w-full h-full object-contain">
+          {{else if item.panel}}{{!-- เสื้อสกรีน: แผงตัวหนังสือแทนรูปเครื่อง DFT ที่พิสูจน์ที่มาไม่ได้ (24 ต.ค.) จนกว่าจะมีรูปงานสกรีนจริง --}}<span class="tech-panel" role="img" aria-label="{{item.name}} {{item.panel}}"><b lang="en" aria-hidden="true">{{item.panel}}</b></span>
           {{else}}<span class="prod-noimg" role="img" aria-label="ยังไม่มีภาพ{{item.name}}"><span class="block size-14">{{> icoShirt}}</span><span>{{item.name}}</span></span>{{/if}}
         </div>
-        {{#if item.img}}<figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-4 top-4 max-w-[calc(100%-2rem)]">{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}</figcaption>{{/if}}
+        {{#if item.img}}<figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-3 top-3 max-w-[calc(100%-1.5rem)]">{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}</figcaption>{{/if}}
       </figure>
+      <div class="lg:col-start-1 lg:row-start-2 lg:pt-6">
+        {{!-- ราคาแถวเดียวพร้อมจำนวน (src/js/prices.js heroPrice · ตัวเลขเดียวกับการ์ดหน้าแรก) · วอร์มยังไม่มีราคา ไม่โชว์แถวนี้ --}}
+        {{#if heroPrice}}<p class="hp">{{#if heroPrice.sub}}<b>{{heroPrice.v}}</b> <span>{{{ph heroPrice.sub}}}</span>{{else}}<span>ราคา</span> <b>{{heroPrice.v}}</b>{{/if}}</p>{{/if}}
+        {{#if pp.hero.make}}<p class="hp-make">{{{ph pp.hero.make}}}</p>{{/if}}
+        {{!-- ปุ่มหลัก LINE พร้อมข้อความชื่อสินค้า (audit P5) · โปโลปักมีปุ่มรองไปฟอร์มขอใบเสนอราคา (อาร์ตเคาะ 24 ต.ค. ข้อ 8) --}}
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 mt-3" data-where="pp-hero">
+          <a class="btn btn-orange btn-lg gap-2 max-sm:flex-1 max-sm:px-5 max-sm:min-h-[52px] max-sm:text-[18px]" href="{{priceAsk}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+          {{#if (eq pp.hero.second 'quote')}}<a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink max-sm:flex-1 max-sm:px-5 max-sm:min-h-[52px] max-sm:text-[18px]" href="{{url 'contact'}}?p={{item.id}}">ขอใบเสนอราคา</a>{{/if}}
+          {{#if pp.price.show}}<a class="pp-more" href="#price">{{#if pp.price.table}}ดูตารางราคา{{else}}ดูปัจจัยราคา{{/if}}<span class="ml-1" aria-hidden="true">&darr;</span></a>{{/if}}
+        </div>
+        <p class="hp-reply">{{{ph 'ตอบใน 5 นาที (8:30–21:00) · แบบ 3D ใน 24 ชม.'}}}</p>
+        {{!-- ย่อหน้าคำค้นของ v22 (tests/v22-structure.test.js · seo-keywords.json) · lead + seoLine รวมเป็นย่อหน้าเดียว --}}
+        <p class="text-[17px] leading-[1.75] text-ink-2 max-w-[56ch] mt-6 pt-5 border-t border-line">{{pp.hero.lead}}{{#if item.seoLine}} {{item.seoLine}}{{/if}}</p>
+      </div>
     </div>
   </div>
 </section>
@@ -44,34 +49,94 @@
 </nav>
 {{/if}}
 
+<!-- ตัวเลขทีมดีใต้ hero (audit P6) · markup เดียวกับหน้ากลุ่มลูกค้า (count-up.js ใน product-page.js) · ตัวเลขชุดเดียวกัน (scripts/v22/claims.mjs STATS) -->
+{{#if pp.trust.show}}
+<section class="wrap pp-trust pt-4 md:pt-10" aria-label="ตัวเลขทีมดี">
+  <dl class="hm-stats hm-stats--fit" data-countup>{{#each pp.trust.stats}}<div class="hm-stat" data-stat="{{this.n}}" style="--i:{{@index}}"><dt class="t-sm">{{this.t}}</dt><dd>{{#with (stat this.n)}}<span class="sr-only">{{../n}}</span><span class="hm-stat__v" aria-hidden="true"><span class="hm-stat__n" data-stat-n>{{baht this.n}}</span>{{this.plus}}<span class="hm-stat__u">{{this.unit}}</span></span><span class="hm-stat__bar" aria-hidden="true"></span>{{else}}{{this.n}}{{/with}}</dd></div>{{/each}}</dl>
+</section>
+{{/if}}
+
+<!-- 05 · ราคา -->
+{{#if pp.price.show}}
+<section class="bg-shell border-y border-line" id="price">
+  {{!-- คอม: ข้อความซ้าย กล่องราคาขวา แล้วตารางกว้างเต็มแถวข้างล่าง ไม่ให้คอลัมน์ผ้าโดนบีบ (audit P3: ตาราง 664px ถูกบีบในช่อง 546px) --}}
+  <div class="wrap section grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-x-16 lg:gap-y-10 items-start">
+    <div>
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoTag}}</span>ราคา</span>
+      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{{ph pp.price.h}}}</h2>
+      {{#if pp.price.factors.length}}
+      <h3 class="text-[19px] mt-7">{{pp.price.factorsTitle}}</h3>
+      <ul class="mt-3 space-y-2.5">{{#each pp.price.factors}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
+      {{/if}}
+      {{#if pp.price.need}}
+      <h3 class="text-[19px] mt-7">{{pp.price.need.h}}</h3>
+      <ul class="mt-3 space-y-2.5">{{#each pp.price.need.items}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
+      {{/if}}
+      <p class="t-xs mt-6 max-w-[44ch]">ราคายืนยันอยู่ในใบเสนอราคา</p>
+    </div>
+    <div>
+      {{#if pp.price.box}}
+      {{!-- กล่องราคาขั้นบันได (audit P3): ตัวเลขใหญ่ = ราคาที่จำนวนน้อยสุด → ราคาที่จำนวนมาก · บรรทัดรองบอกจำนวนของแต่ละปลาย (src/js/prices.js) --}}
+      <div class="pbox">{{#if pp.price.box.amount}}<p class="pbox__k">ราคาต่อตัว ตามจำนวนที่สั่ง</p><p class="pbox__v"><span class="pbox__n">{{pp.price.box.amount}}</span> <span class="pbox__u">{{pp.price.box.unit}}</span></p>{{else}}<p class="text-[22px] font-bold">{{pp.price.box.strong}}</p>{{/if}}<p class="pbox__p">{{{ph pp.price.box.p}}}</p><p class="pbox__s">{{{ph pp.price.box.small}}}</p></div>
+      {{/if}}
+      {{#if pp.price.calcHref}}<a class="pp-more mt-5" href="{{pp.price.calcHref}}">คำนวณราคาตามจำนวน<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}
+      {{#unless pp.price.confirmed}}
+      <div class="bg-paper border-2 border-ink rounded-plate p-7 {{#if pp.price.box}}mt-5{{/if}}">
+        <p class="text-[22px] font-bold">ขอราคาตามแบบและจำนวนของทีมคุณ</p>
+        <p class="t-body mt-2">ส่งรหัสแบบหรือภาพอ้างอิง จำนวนคร่าว ๆ และวันที่ต้องใช้ ทีมดีแจ้งราคาต่อตัวให้ ออกแบบฟรี ขั้นต่ำ 10 ตัว</p>
+        <a class="btn btn-orange mt-5 gap-2" href="{{priceAsk}}"><span class="block size-5">{{> icoChat}}</span>ขอราคาทางไลน์</a>
+        {{#unless wp}}<p class="pending-ribbon mt-4">รอตารางราคาจากทีม (ใส่ใน src/data/prices.json) · ได้แล้วกล่องนี้หายเอง ตารางราคาขึ้นแทน</p>{{/unless}}
+      </div>
+      {{/unless}}
+    </div>
+    {{#if pp.price.table}}
+    <div class="lg:col-span-2 min-w-0">
+      {{!-- ตารางราคาแบบใบเสนอราคา: เส้นบาง หัวเทาตัวเล็ก ตัวเลขชิดขวาหนา (อาร์ต 23 ต.ค.: แบบกรอบดำหนา "ดูเด็กเล่น") --}}
+      <div class="ptable" tabindex="0" role="region" aria-label="ตารางราคาต่อตัว">
+        <table>
+          <caption>ราคาต่อตัว (บาท) · รวม VAT 7%</caption>
+          <thead><tr>{{#each pp.price.table.head}}<th scope="col">{{{ph this}}}</th>{{/each}}</tr></thead>
+          <tbody>{{#each pp.price.table.rows}}<tr>{{#each this}}{{#if @first}}<th scope="row">{{this}}</th>{{else}}<td>{{this}}</td>{{/if}}{{/each}}</tr>{{/each}}</tbody>
+        </table>
+      </div>
+      {{#if (lt 3 pp.price.table.head.length)}}<p class="t-xs mt-2 md:hidden">ปัดตารางไปทางซ้ายเพื่อดูผ้าอื่น</p>{{/if}}
+      {{#if pp.price.included}}<p class="t-sm font-semibold text-ink mt-4">{{{ph pp.price.included}}}</p>{{/if}}
+      {{#each pp.price.notes}}<p class="t-sm mt-2">{{{ph this}}}</p>{{/each}}
+    </div>
+    {{else}}
+    {{#if pp.price.notes.length}}<div class="lg:col-span-2">{{#each pp.price.notes}}<p class="t-sm mt-2">{{{ph this}}}</p>{{/each}}</div>{{/if}}
+    {{/if}}
+  </div>
+</section>
+{{/if}}
+
 <!-- 02 · แบบและตัวเลือก -->
 <section class="wrap section" id="options">
   <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
     <div class="max-w-[62ch]">
       <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>แบบและตัวเลือก</span>
-      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.options.h}}</h2>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.options.h}}}</h2>
       {{#each pp.options.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
     </div>
     {{#each pp.options.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
   </div>
 
-  <ol class="grid md:grid-cols-3 gap-4">
-    {{#each pp.options.cards}}
-    <li class="pp-card"><span class="pp-card__no">{{inc @index}}</span><h3 class="text-[20px] mt-3">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</li>
-    {{/each}}
-  </ol>
+  {{!-- การ์ดตัวหนังสือ 3 ใบของ v22 พูดซ้ำกับแท็บสเปกและกริดแบบด้านล่าง → ตัดที่ scripts/v22/product-pages.mjs (audit P9) --}}
+  {{#if pp.options.cards.length}}<ol class="grid md:grid-cols-3 gap-4">
+    {{#each pp.options.cards}}<li class="pp-card"><span class="pp-card__no">{{inc @index}}</span><h3 class="text-[20px] mt-3">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</li>{{/each}}
+  </ol>{{/if}}
 
   {{#if pp.options.specTabs.length}}
-  <div class="spec-tabs mt-10" data-tabs>
+  <div class="spec-tabs mt-4" data-tabs>
     <h3 class="text-[19px] mb-4">ตัวเลือกที่ผลิตได้</h3>
     <div class="chiprail" role="tablist" aria-label="ตัวเลือกที่ผลิตได้">
       {{#each pp.options.specTabs}}<button class="spec-tab" role="tab" type="button" id="t-{{this.id}}" aria-controls="p-{{this.id}}" aria-selected="{{#if @first}}true{{else}}false{{/if}}"{{#unless @first}} tabindex="-1"{{/unless}}>{{this.t}}</button>{{/each}}
     </div>
     {{#each pp.options.specTabs}}
-    <div role="tabpanel" id="p-{{this.id}}" aria-labelledby="t-{{this.id}}" tabindex="0" class="mt-5 overflow-x-auto border-2 border-ink rounded-card max-w-[860px]"{{#unless @first}} hidden{{/unless}}>
-      <table class="w-full min-w-[320px] text-[17px]">
-        <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ตัวเลือก</th><th scope="col" class="text-left font-bold px-5 py-4">หมายเหตุ</th></tr></thead>
-        <tbody>{{#each (lookup ../pp.options.spec this.id)}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}</tbody>
+    <div role="tabpanel" id="p-{{this.id}}" aria-labelledby="t-{{this.id}}" tabindex="0" class="ptable ptable--text mt-5 max-w-[860px]"{{#unless @first}} hidden{{/unless}}>
+      <table>
+        <thead><tr><th scope="col">ตัวเลือก</th><th scope="col">หมายเหตุ</th></tr></thead>
+        <tbody>{{#each (lookup ../pp.options.spec this.id)}}<tr><th scope="row">{{this.[0]}}</th><td>{{this.[1]}}</td></tr>{{/each}}</tbody>
       </table>
     </div>
     {{/each}}
@@ -104,13 +169,69 @@
   {{/if}}
 </section>
 
+<!-- 08 · ผลงานจริง -->
+{{#if pp.work.show}}
+<section class="bg-shell border-y border-line" id="work">
+  <div class="wrap section">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <div class="max-w-[62ch]">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>เสื้อจริง</span>
+        <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.work.h}}}</h2>
+      </div>
+      <a class="pp-more" href="{{url 'projects'}}">ดูผลงานและรีวิวทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a>
+    </div>
+    {{#if pp.work.real.length}}
+    <div class="grid md:grid-cols-3 gap-5">
+      {{!-- 24 ต.ค.: ชื่องาน โจทย์ และ "ทีมดีช่วย" ใน works.json แต่งขึ้น → ลบ · เหลือรูปจริงที่เห็นว่าเป็นงานแบบนี้ + คำบรรยายตามที่เห็น (figcaption แทน alt ไม่ให้อ่านซ้ำ)
+           ไม่มีรูปที่ยืนยันเทคนิคได้ (เช่นโปโลปัก) → ส่วนนี้ซ่อนบนเว็บจริงเอง (product-view.js) --}}
+      {{#each pp.work.real}}
+      <figure class="bg-paper border border-line rounded-plate overflow-hidden flex flex-col">
+        <div class="relative aspect-[4/3] bg-shell">
+          <img src="{{this.img}}" alt="" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover">
+          <span class="tag tag-ink absolute left-3 bottom-3">งานผลิตจริง</span>
+        </div>
+        <figcaption class="px-6 py-4 on-paper t-sm">{{{ph this.alt}}}</figcaption>
+      </figure>
+      {{/each}}
+    </div>
+    {{else}}
+    {{#unless wp}}<p class="pending-ribbon">ยังไม่มีงาน{{item.name}}ที่ได้รับอนุญาตให้เผยแพร่ · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
+    <div class="grid md:grid-cols-3 gap-5 mt-4">
+      {{#each pp.work.cards}}<article class="pp-card"><span class="img-pending">{{this.img}}</span><h3 class="text-[19px] mt-4">{{this.h}}</h3>{{#each this.facts}}<p class="t-sm mt-1">{{this}}</p>{{/each}}</article>{{/each}}
+    </div>
+    {{/if}}
+  </div>
+</section>
+{{/if}}
+
+<!-- 09 · รีวิว · ยังไม่มีรีวิวที่ได้รับอนุญาต ต้นแบบเท่านั้น -->
+{{#if pp.reviews.show}}
+<section class="wrap section" id="reviews">
+  <h2 class="t-display text-[clamp(26px,3.4vw,40px)]">{{{ph pp.reviews.h}}}</h2>
+  {{#unless wp}}<p class="pending-ribbon mt-4">รอคำรีวิว ภาพ คลิป คะแนน และแหล่งที่มาจริงที่ได้รับอนุญาต · ไม่แสดงดาวหรือคำชมสมมติ · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
+</section>
+{{/if}}
+
+<!-- 06 · ชวนขอราคา · กล่องส้มตัวดำแบบหน้าแรก (audit P5) · ต้องส่ง 3 อย่างนี้ แยกตามสินค้า · LINE พิมพ์แม่แบบไว้ให้กรอก + ฟอร์ม + โทร -->
+<section class="wrap pg-cta" aria-labelledby="quote-h">
+  <div class="hm-cta hm-cta--ink" data-where="pp-quote">
+    <div class="hm-cta__main"><h2 id="quote-h">{{{ph pp.quote.h}}}</h2><p>{{{ph pp.quote.p}}}</p></div>
+    {{#if pp.quote.send.length}}<div class="hm-cta__send"><p class="hm-cta__sl">ส่ง 3 อย่างนี้ ทีมดีแจ้งราคาได้</p><ol>{{#each pp.quote.send}}<li><span>{{{ph this}}}</span></li>{{/each}}</ol></div>{{/if}}
+    <div class="hm-cta__btns">
+      <a class="btn btn-lg gap-2 bg-ink text-paper border-ink hover:bg-paper hover:text-ink" href="{{quoteLine}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ส่งข้อมูล</a>
+      <a class="btn btn-lg bg-transparent text-ink border-ink hover:bg-ink hover:text-paper" href="{{url 'contact'}}?p={{item.id}}">{{pp.quote.cta}}</a>
+      <a class="btn bg-transparent text-ink border-transparent underline decoration-2 underline-offset-4 tabular-nums hover:decoration-paper" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a>
+    </div>
+  </div>
+</section>
+
 <!-- 03 · ผ้า -->
 {{#if pp.fabric.show}}
 <section class="bg-shell border-y border-line" id="fabric">
   <div class="wrap section">
     <div class="max-w-[62ch] mb-8">
       <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoCube}}</span>ผ้า</span>
-      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.fabric.h}}</h2>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.fabric.h}}}</h2>
       {{#each pp.fabric.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
     </div>
     {{#if pp.fabric.fabrics.length}}
@@ -135,17 +256,17 @@
 <section class="wrap section" id="detail">
   <div class="max-w-[62ch] mb-8">
     <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>รายละเอียดงาน</span>
-    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.detail.h}}</h2>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.detail.h}}}</h2>
     {{#each pp.detail.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
   </div>
   <ol class="grid md:grid-cols-3 gap-4">
     {{#each pp.detail.cards}}<li class="pp-card"><span class="pp-card__no">{{inc @index}}</span><h3 class="text-[20px] mt-3">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</li>{{/each}}
   </ol>
   {{#if pp.detail.table}}
-  <div class="overflow-x-auto border-2 border-ink rounded-card mt-8 max-w-[860px]" tabindex="0" role="region" aria-label="ตารางรายละเอียด เลื่อนซ้ายขวาได้">
-    <table class="w-full min-w-[320px] text-[17px]">
-      <thead class="bg-ink text-paper"><tr>{{#each pp.detail.table.head}}<th scope="col" class="text-left font-bold px-5 py-4">{{this}}</th>{{/each}}</tr></thead>
-      <tbody>{{#each pp.detail.table.rows}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-4">{{this.[0]}}</th><td class="px-5 py-4 text-ink-2">{{this.[1]}}</td></tr>{{/each}}</tbody>
+  <div class="ptable ptable--text mt-8 max-w-[860px]" tabindex="0" role="region" aria-label="ตารางรายละเอียด">
+    <table>
+      <thead><tr>{{#each pp.detail.table.head}}<th scope="col">{{this}}</th>{{/each}}</tr></thead>
+      <tbody>{{#each pp.detail.table.rows}}<tr><th scope="row">{{this.[0]}}</th><td>{{this.[1]}}</td></tr>{{/each}}</tbody>
     </table>
   </div>
   {{/if}}
@@ -153,156 +274,12 @@
 </section>
 {{/if}}
 
-<!-- 05 · ราคา -->
-{{#if pp.price.show}}
-<section class="bg-shell border-y border-line" id="price">
-  <div class="wrap section grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-start">
-    <div>
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoTag}}</span>ราคา</span>
-      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{pp.price.h}}</h2>
-      {{#if pp.price.factors.length}}
-      <h3 class="text-[19px] mt-7">{{pp.price.factorsTitle}}</h3>
-      <ul class="mt-3 space-y-2.5">{{#each pp.price.factors}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
-      {{/if}}
-      {{#if pp.price.need}}
-      <h3 class="text-[19px] mt-7">{{pp.price.need.h}}</h3>
-      <ul class="mt-3 space-y-2.5">{{#each pp.price.need.items}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
-      {{/if}}
-      <p class="t-xs mt-6 max-w-[44ch]">ราคายืนยันอยู่ในใบเสนอราคา · <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'calculations'}}">คำนวณราคาเบื้องต้น</a></p>
-    </div>
-    <div>
-      {{#if pp.price.box}}
-      <div class="pbox">{{#if pp.price.box.amount}}<p class="pbox__k">ราคาเริ่มต้น</p><p class="pbox__v"><span class="pbox__n">{{pp.price.box.amount}}</span> <span class="pbox__u">{{pp.price.box.unit}}</span></p>{{else}}<p class="text-[22px] font-bold">{{pp.price.box.strong}}</p>{{/if}}<p class="pbox__p">{{{ph pp.price.box.p}}}</p><p class="pbox__s">{{{ph pp.price.box.small}}}</p></div>
-      {{/if}}
-      {{#unless pp.price.confirmed}}
-      <div class="bg-paper border-2 border-ink rounded-plate p-7 {{#if pp.price.box}}mt-5{{/if}}">
-        <p class="text-[22px] font-bold">ขอราคาตามแบบและจำนวนของทีมคุณ</p>
-        <p class="t-body mt-2">ส่งรหัสแบบหรือภาพอ้างอิง จำนวนคร่าว ๆ และวันที่ต้องใช้ ทีมดีแจ้งราคาต่อตัวให้ ออกแบบฟรี ขั้นต่ำ 10 ตัว</p>
-        <a class="btn btn-orange mt-5 gap-2" href="{{priceAsk}}"><span class="block size-5">{{> icoChat}}</span>ขอราคาทางไลน์</a>
-        {{#unless wp}}<p class="pending-ribbon mt-4">รอตารางราคาจากทีม (แบบเดียวกับโปโลปักและเบสบอลใน prices.json) · ได้แล้วกล่องนี้หายเอง ตารางราคาขึ้นแทน</p>{{/unless}}
-      </div>
-      {{/unless}}
-      {{#if pp.price.table}}
-      {{!-- ตารางราคาแบบใบเสนอราคา: เส้นบาง หัวเทาตัวเล็ก ตัวเลขชิดขวาหนา (อาร์ต 23 ต.ค.: แบบกรอบดำหนา "ดูเด็กเล่น") --}}
-      <div class="ptable mt-5" tabindex="0" role="region" aria-label="ตารางราคาต่อตัว">
-        <table>
-          <caption>ราคาต่อตัว (บาท) · รวม VAT 7%</caption>
-          <thead><tr>{{#each pp.price.table.head}}<th scope="col">{{{ph this}}}</th>{{/each}}</tr></thead>
-          <tbody>{{#each pp.price.table.rows}}<tr>{{#each this}}{{#if @first}}<th scope="row">{{this}}</th>{{else}}<td>{{this}}</td>{{/if}}{{/each}}</tr>{{/each}}</tbody>
-        </table>
-      </div>
-      {{#if (lt 3 pp.price.table.head.length)}}<p class="t-xs mt-2 md:hidden">ปัดตารางไปทางซ้ายเพื่อดูผ้าอื่น</p>{{/if}}
-      {{/if}}
-      {{#each pp.price.notes}}<p class="t-sm mt-4">{{{ph this}}}</p>{{/each}}
-    </div>
-  </div>
-</section>
-{{/if}}
-
-<!-- 06 · ชวนขอราคา -->
-<section class="band-soft">
-  <div class="wrap py-12 md:py-14 flex flex-wrap items-center justify-between gap-6">
-    <div class="max-w-[56ch]"><h2 class="t-display text-[clamp(24px,3vw,34px)] text-ink">{{pp.quote.h}}</h2><p class="text-[17px] leading-[1.7] text-ink-2 mt-2">{{pp.quote.p}}</p></div>
-    <a class="btn btn-orange btn-lg max-sm:whitespace-normal max-sm:text-center max-sm:py-3" href="{{url 'contact'}}?p={{item.id}}">{{pp.quote.cta}}</a>
-  </div>
-</section>
-
-<!-- 07 · เบื้องหลังการผลิต -->
-{{#if pp.production.show}}
-<section class="wrap section" id="production">
-  <div class="max-w-[62ch] mb-8">
-    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPrinter}}</span>การผลิต</span>
-    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.production.h}}</h2>
-  </div>
-  <div class="grid {{#if productionPhoto}}lg:grid-cols-[1.2fr_0.8fr]{{/if}} gap-10 items-start">
-  <ol class="mt-2 border-t-2 border-ink max-w-[860px]">
-    {{#each pp.production.cards}}<li class="why-row"><span class="why-row__no">0{{inc @index}}</span><div class="why-row__body"><h3 class="why-row__t">{{this.h}}</h3>{{#each this.p}}<p class="why-row__d">{{this}}</p>{{/each}}</div></li>{{/each}}
-  </ol>
-  {{#if productionPhoto}}<figure><div class="overflow-hidden rounded-plate bg-shell aspect-[3/4] max-w-[420px]"><img src="{{productionPhoto.img}}" alt="{{productionPhoto.alt}}" width="900" height="1200" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="t-sm mt-3">{{productionPhoto.cap}}</figcaption></figure>{{/if}}
-  </div>
-  {{#unless productionPhoto}}{{#unless wp}}<p class="pending-ribbon mt-6">รอภาพขั้นตอนผลิตจริงของสินค้านี้ · ข้อความด้านบนขึ้นเว็บจริงได้ ภาพยังไม่มี</p>{{/unless}}{{/unless}}
-  {{#each pp.production.notes}}<p class="t-sm mt-3">{{this}}</p>{{/each}}
-</section>
-{{/if}}
-
-<!-- 08 · ผลงานจริง -->
-{{#if pp.work.show}}
-<section class="bg-shell border-y border-line" id="work">
-  <div class="wrap section">
-    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
-      <div class="max-w-[62ch]">
-        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>เสื้อจริง</span>
-        <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.work.h}}</h2>
-      </div>
-      <a class="pp-more" href="{{url 'projects'}}">ดูผลงานและรีวิวทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a>
-    </div>
-    {{#if pp.work.real.length}}
-    <div class="grid md:grid-cols-3 gap-5">
-      {{#each pp.work.real}}
-      <article class="bg-paper border border-line rounded-plate overflow-hidden flex flex-col">
-        <div class="relative aspect-[4/3] bg-shell">
-          <img src="{{this.img}}" alt="ทีมใส่{{this.title}}จริง" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover">
-          <span class="tag tag-ink absolute left-3 bottom-3">งานผลิตจริง</span>
-        </div>
-        <div class="p-6 on-paper grow">
-          <p class="t-xs">{{this.groupName}}</p>
-          <h3 class="text-[19px] mt-1">{{this.title}}</h3>
-          <dl class="mt-3 space-y-2 text-[16px] leading-[1.6]">
-            <div><dt class="inline font-bold">โจทย์ </dt><dd class="inline text-ink-2">{{this.brief}}</dd></div>
-            <div><dt class="inline font-bold">ทีมดีช่วย </dt><dd class="inline text-ink-2">{{this.helped}}</dd></div>
-          </dl>
-        </div>
-      </article>
-      {{/each}}
-    </div>
-    {{else}}
-    {{#unless wp}}<p class="pending-ribbon">ยังไม่มีงาน{{item.name}}ที่ได้รับอนุญาตให้เผยแพร่ · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
-    <div class="grid md:grid-cols-3 gap-5 mt-4">
-      {{#each pp.work.cards}}<article class="pp-card"><span class="img-pending">{{this.img}}</span><h3 class="text-[19px] mt-4">{{this.h}}</h3>{{#each this.facts}}<p class="t-sm mt-1">{{this}}</p>{{/each}}</article>{{/each}}
-    </div>
-    {{/if}}
-  </div>
-</section>
-{{/if}}
-
-<!-- 09 · รีวิว · ยังไม่มีรีวิวที่ได้รับอนุญาต ต้นแบบเท่านั้น -->
-{{#if pp.reviews.show}}
-<section class="wrap section" id="reviews">
-  <h2 class="t-display text-[clamp(26px,3.4vw,40px)]">{{pp.reviews.h}}</h2>
-  {{#unless wp}}<p class="pending-ribbon mt-4">รอคำรีวิว ภาพ คลิป คะแนน และแหล่งที่มาจริงที่ได้รับอนุญาต · ไม่แสดงดาวหรือคำชมสมมติ · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
-</section>
-{{/if}}
-
-<!-- 10 · ทรงและไซซ์ -->
-<section class="wrap section" id="size">
-  <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
-    <div>
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoRuler}}</span>ไซซ์</span>
-      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{pp.size.h}}</h2>
-      {{#if pp.size.title}}<h3 class="text-[19px] mt-6">{{pp.size.title}}</h3>{{/if}}
-      {{#each pp.size.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}
-      {{#each pp.size.links}}<a class="pp-more mt-5" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
-    </div>
-    <div>
-      <div class="overflow-x-auto border-2 border-ink rounded-card" tabindex="0" role="region" aria-label="ตารางไซซ์ เลื่อนซ้ายขวาได้">
-        <table class="w-full min-w-[320px] text-[17px]">
-          <caption class="text-left font-bold text-[18px] px-5 py-4 border-b-2 border-ink">หน่วยเป็น{{sizing.unit}} วัดจากตัวเสื้อวางราบ · ตารางกลาง ตรวจตามทรงที่สั่งจริง</caption>
-          <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ไซซ์</th><th scope="col" class="text-right font-bold px-5 py-4">รอบอก</th><th scope="col" class="text-right font-bold px-5 py-4">ความยาว</th><th scope="col" class="text-right font-bold px-5 py-4">ไหล่</th></tr></thead>
-          <tbody>{{#each pp.size.sizes}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-3.5">{{this.size}}</th><td class="px-5 py-3.5 text-right tabular-nums">{{this.chest}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.length}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.shoulder}}</td></tr>{{/each}}</tbody>
-        </table>
-      </div>
-      <p class="t-xs mt-3">{{sizing.tolerance}}</p>
-      {{#each pp.size.notes}}<p class="t-xs mt-1">{{this}}</p>{{/each}}
-    </div>
-  </div>
-</section>
-
 <!-- 11 · ขั้นตอนสั่งทำ -->
 <section class="bg-shell border-y border-line" id="order">
   <div class="wrap section grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-start">
     <div>
       <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoClock}}</span>ขั้นตอน</span>
-      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{pp.order.h}}</h2>
+      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{{ph pp.order.h}}}</h2>
       <ol class="mt-6 border-t-2 border-ink">
         {{#each pp.order.steps}}<li class="why-row"><span class="why-row__no">0{{inc @index}}</span><div class="why-row__body"><h3 class="why-row__t">{{this.h}}</h3>{{#if this.p}}<p class="why-row__d">{{this.p}}</p>{{/if}}</div></li>{{/each}}
       </ol>
@@ -322,7 +299,7 @@
 <section class="wrap section" id="faq">
   <div class="max-w-[68ch] mb-8">
     <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามที่พบบ่อย</span>
-    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{pp.faq.h}}</h2>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.faq.h}}}</h2>
   </div>
   <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
     {{#each pp.faq.items}}
@@ -344,10 +321,52 @@
 </section>
 {{/if}}
 
+<!-- 10 · ทรงและไซซ์ -->
+<section class="bg-shell border-y border-line" id="size">
+  <div class="wrap section grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
+    <div>
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoRuler}}</span>ไซซ์</span>
+      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{{ph pp.size.h}}}</h2>
+      {{#if pp.size.title}}<h3 class="text-[19px] mt-6">{{pp.size.title}}</h3>{{/if}}
+      {{#each pp.size.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}
+      {{#each pp.size.links}}<a class="pp-more mt-5" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+    </div>
+    <div>
+      <div class="overflow-x-auto border-2 border-ink rounded-card" tabindex="0" role="region" aria-label="ตารางไซซ์ เลื่อนซ้ายขวาได้">
+        <table class="w-full min-w-[320px] text-[17px]">
+          <caption class="text-left font-bold text-[18px] px-5 py-4 border-b-2 border-ink">หน่วยเป็น{{sizing.unit}} วัดจากตัวเสื้อวางราบ · ตารางกลาง ตรวจตามทรงที่สั่งจริง</caption>
+          <thead class="bg-ink text-paper"><tr><th scope="col" class="text-left font-bold px-5 py-4">ไซซ์</th><th scope="col" class="text-right font-bold px-5 py-4">รอบอก</th><th scope="col" class="text-right font-bold px-5 py-4">ความยาว</th><th scope="col" class="text-right font-bold px-5 py-4">ไหล่</th></tr></thead>
+          <tbody>{{#each pp.size.sizes}}<tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-3.5">{{this.size}}</th><td class="px-5 py-3.5 text-right tabular-nums">{{this.chest}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.length}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.shoulder}}</td></tr>{{/each}}</tbody>
+        </table>
+      </div>
+      <p class="t-xs mt-3">{{sizing.tolerance}}</p>
+      {{#each pp.size.notes}}<p class="t-xs mt-1">{{this}}</p>{{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- 07 · เบื้องหลังการผลิต -->
+{{#if pp.production.show}}
+<section class="wrap section" id="production">
+  <div class="max-w-[62ch] mb-8">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPrinter}}</span>การผลิต</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.production.h}}}</h2>
+  </div>
+  <div class="grid {{#if productionPhoto}}lg:grid-cols-[1.2fr_0.8fr]{{/if}} gap-10 items-start">
+  <ol class="mt-2 border-t-2 border-ink max-w-[860px]">
+    {{#each pp.production.cards}}<li class="why-row"><span class="why-row__no">0{{inc @index}}</span><div class="why-row__body"><h3 class="why-row__t">{{this.h}}</h3>{{#each this.p}}<p class="why-row__d">{{this}}</p>{{/each}}</div></li>{{/each}}
+  </ol>
+  {{#if productionPhoto}}<figure><div class="overflow-hidden rounded-plate bg-shell aspect-[3/4] max-w-[420px]"><img src="{{productionPhoto.img}}" alt="{{productionPhoto.alt}}" width="900" height="1200" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="t-sm mt-3">{{productionPhoto.cap}}</figcaption></figure>{{/if}}
+  </div>
+  {{#unless productionPhoto}}{{#unless wp}}<p class="pending-ribbon mt-6">รอภาพขั้นตอนผลิตจริงของสินค้านี้ · ข้อความด้านบนขึ้นเว็บจริงได้ ภาพยังไม่มี</p>{{/unless}}{{/unless}}
+  {{#each pp.production.notes}}<p class="t-sm mt-3">{{this}}</p>{{/each}}
+</section>
+{{/if}}
+
 <!-- 13 · เลือกตามงานที่ใช้ -->
 <section class="bg-shell border-y border-line">
   <div class="wrap section">
-    <h2 class="t-display text-[clamp(24px,3vw,36px)]">{{pp.uses.h}}</h2>
+    <h2 class="t-display text-[clamp(24px,3vw,36px)]">{{{ph pp.uses.h}}}</h2>
     {{#if pp.uses.links.length}}<div class="chiprail mt-6">{{#each pp.uses.links}}<a class="chip" href="{{url this.to}}">{{this.t}}</a>{{/each}}</div>{{/if}}
     {{#if pp.uses.compare.length}}
     <p class="t-body mt-6">อยากเปรียบเทียบกับงานแบบอื่น?
@@ -358,13 +377,14 @@
 </section>
 
 <!-- 14 · เริ่มสั่ง -->
-<section class="band-orange">
-  <div class="wrap py-14 md:py-20 text-center">
-    <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">{{pp.contact.h}}</h2>
-    <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[52ch] mx-auto mt-4">{{pp.contact.p}}</p>
-    <div class="flex flex-wrap justify-center gap-3 mt-8">
-      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
-      <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper max-sm:whitespace-normal" href="{{url 'contact'}}?p={{item.id}}">{{pp.contact.cta}}</a>
-    </div>
+{{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
+<section class="hm-end" aria-labelledby="end-h">
+  <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
+  <div class="wrap relative hm-end__in">
+    <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
+    <h2 id="end-h">{{{ph pp.contact.h}}}</h2>
+    <p class="hm-end__lead">{{{ph pp.contact.p}}}</p>
+    <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{priceAsk}}" data-track="line" data-where="pp-end"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}?p={{item.id}}">{{pp.contact.cta}}</a></div>
+    <p class="hm-end__alt"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>
   </div>
 </section>

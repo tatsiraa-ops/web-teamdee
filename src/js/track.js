@@ -19,7 +19,10 @@ export const classifyLink = ({ href = '', track } = {}) => {
 /** td_where = ปุ่มนี้อยู่ตรงไหน · data-where ที่ตัวปุ่ม/กล่องที่ครอบมาก่อน แล้วค่อย id ของส่วน แล้วค่อย header/footer/nav */
 export const whereOf = ({ own, scope, landmark } = {}) => own || scope || landmark || ''
 
-/** ส่งสัญญาณเอง (ฟอร์มติดต่อเรียกตอนส่งเข้าระบบสำเร็จจริง) */
+/** ลิงก์ที่ส่งเข้า dataLayer · oaMessage มีข้อความงานของลูกค้าอยู่ใน URL ส่งแค่ชนิดลิงก์ (audit 2.4) */
+export const linkForTrack = (href = '') => (/line\.me\/R\/oaMessage/i.test(href) ? 'line.me/R/oaMessage' : href)
+
+/** ส่งสัญญาณเอง (หน้า /thank-you/ เรียกเมื่อมีธงจากหน้าติดต่อว่าส่งเข้าระบบสำเร็จจริง) */
 export const trackEvent = (kind, extra = {}) => push(kind, extra)
 
 const push = (kind, extra = {}) => {
@@ -35,7 +38,7 @@ export function initTracking() {
     if (!a) return
     const kind = classifyLink({ href: a.getAttribute('href') || '', track: a.dataset.track })
     if (kind === 'line' || kind === 'phone') {
-      push(kind, { td_link: a.getAttribute('href') || '', td_where: whereOf({ own: a.closest('[data-where]')?.dataset.where, scope: a.closest('section[id]')?.id, landmark: a.closest('header, footer, nav')?.tagName.toLowerCase() }) })
+      push(kind, { td_link: linkForTrack(a.getAttribute('href') || ''), td_where: whereOf({ own: a.closest('[data-where]')?.dataset.where, scope: a.closest('section[id]')?.id, landmark: a.closest('header, footer, nav')?.tagName.toLowerCase() }) })
     }
   }, { capture: true })
 
@@ -45,12 +48,13 @@ export function initTracking() {
   document.addEventListener('wpcf7mailsent', () => { cf7 = true; push('form', { td_form: 'cf7' }) })
   document.addEventListener('submit', (e) => {
     const f = e.target
-    /* #contactForm นับเองตอนส่งสำเร็จ (contact-page.js) ไม่นับตอนกดแล้วกรอกไม่ครบ */
-    if (cf7 || f.matches('[role="search"], .wpcf7-form, #homePick, #contactForm')) return
+    /* #contactForm นับที่หน้า /thank-you/ (thanks-page.js) หลังส่งสำเร็จจริง ไม่นับตอนกดแล้วกรอกไม่ครบหรือส่งไม่ถึง
+       #calc (เครื่องคำนวณ) ไม่มีการส่ง กด Enter ในช่องจำนวนแค่กันไว้ ไม่นับเป็นฟอร์ม */
+    if (cf7 || f.matches('[role="search"], .wpcf7-form, #homePick, #contactForm, #calc')) return
     push('form', { td_form: f.id || f.getAttribute('name') || '' })
   }, { capture: true })
 
-  /* เครื่องคำนวณราคา · calc-page.js ยิง td:calc หลังผู้ใช้เปลี่ยนตัวเลือกแล้วเห็นผล · นับครั้งเดียวต่อการเปิดหน้า */
+  /* เครื่องคำนวณราคา · calc-page.js ยิง td:calc (td_product · td_qty) หลังผู้ใช้หยุดเปลี่ยนตัวเลือกแล้วเห็นผล · นับครั้งเดียวต่อการเปิดหน้า */
   let calcSent = false
   document.addEventListener('td:calc', (e) => {
     if (calcSent) return

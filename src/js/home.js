@@ -47,3 +47,10 @@ if (!import.meta.env.TD_WP) {
 safe(() => initLightbox('#pickGrid', 'figure', 'ดูแบบเสื้อขนาดใหญ่'))
 
 ;[initRails, initMarqueeOffscreen, initTabs, initGalleryFilter, initRealGrid, initReveal].forEach(safe)
+
+/* แถบล่างมือถือหลบลงขณะปุ่ม LINE ของ hero ยังอยู่ในจอ (critique 24 ต.ค. · CSS html.is-hero-cta ใน main.css) */
+safe(() => {
+  const btn = document.querySelector('[data-where="hero"]')
+  if (!btn || !('IntersectionObserver' in window)) return
+  new IntersectionObserver(([en]) => document.documentElement.classList.toggle('is-hero-cta', en.isIntersecting)).observe(btn)
+})

@@ -1,41 +1,113 @@
-/* ประมาณราคาเบื้องต้น (/calculations/) · ใช้ทั้งในเบราว์เซอร์และในเทส
-   ราคาที่ยังไม่ยืนยันเก็บเป็น null ห้ามคิดเป็นศูนย์ คืน ok:false พร้อมบอกว่าขาดช่องไหน
-   หน้าเว็บจะโชว์ [ยืนยัน] แทนตัวเลข จนกว่าจะได้ใบราคาขายจริง */
-export const estimate = (data, { kind, band, options = [] }) => {
-  if (!data.kinds.some((k) => k.id === kind)) throw new Error(`ไม่มีประเภท "${kind}"`)
-  const b = data.bands.find((x) => x.id === band)
-  if (!b) throw new Error(`ไม่มีช่วงจำนวน "${band}"`)
-  const opts = options.map((id) => {
-    const o = data.options.find((x) => x.id === id)
+/* เครื่องคำนวณราคาเบื้องต้น (/calculations/) · ใช้ทั้งในเบราว์เซอร์และในเทส (tests/estimate.test.js)
+   ข้อมูล K มาจาก calcKinds(prices.json) (src/js/prices.js) · ราคาไฟล์เดียว
+   กติกา (audit 3.4):
+   - ยอดรวมเป็นตัวเลขเดียว = (ราคาต่อตัวของช่วงที่จำนวนตก + ออปชัน) × จำนวน ไม่ใช่ช่วงกว้าง
+   - ราคาที่ยังไม่มี (null) ห้ามคิดเป็นศูนย์ คืน ok:false ให้หน้าเว็บขึ้น "ทักถามราคา" แทนตัวเลข
+   - ออปชันนับเฉพาะสินค้าที่ prices.json ตั้ง options: true (พิมพ์ลาย · โปโล) */
+
+const fmt = (n) => Number(n).toLocaleString('en-US')
+const inBand = (b, q) => q >= b.min && (b.max === null || q <= b.max)
+const priceOf = (b, col) => b.price[col] ?? null
+
+const kindOf = (K, id) => {
+  const k = K.kinds.find((x) => x.id === id)
+  if (!k) throw new Error(`ไม่มีประเภท "${id}"`)
+  return k
+}
+
+/** คิดราคา · { kind, fabric, qty, options } → ผลพร้อมข้อความที่หน้าเว็บใช้ */
+export const estimate = (K, { kind, fabric, qty, options = [] }) => {
+  const k = kindOf(K, kind)
+  let fab = null
+  if (k.fabrics) {
+    fab = k.fabrics.find((f) => f.id === (fabric || k.fabric))
+    if (!fab) throw new Error(`ไม่มีผ้า "${fabric}"`)
+  }
+  const all = options.map((id) => {
+    const o = K.options.find((x) => x.id === id)
     if (!o) throw new Error(`ไม่มีออปชัน "${id}"`)
     return o
   })
+  const opts = k.options ? all : []
+  const add = opts.reduce((s, o) => s + o.add, 0)
+  const q = Number(qty)
+  const belowMin = !Number.isInteger(q) || q < K.minQty
+  const base = { kind: k, fabric: fab, qty: belowMin ? null : q, opts, add, vatIncluded: !!K.vatIncluded, minQty: K.minQty }
+  const none = { ok: false, band: null, base: null, unit: null, total: null, next: null }
+  if (belowMin) return { ...base, ...none, belowMin: true }
+  if (k.byDesign) return { ...base, ...none, byDesign: true }
 
-  const missing = []
-  const base = data.prices[kind]?.[band] ?? null
-  if (base === null) missing.push(`ราคา ${kind} ช่วง ${b.label}`)
-  for (const o of opts) if (o.add === null || o.add === undefined) missing.push(`ออปชัน ${o.name}`)
+  const col = fab ? fab.id : k.col
+  const i = k.bands.findIndex((b) => inBand(b, q))
+  const band = k.bands[i]
+  const price = priceOf(band, col)
+  if (price === null) return { ...base, ...none, band, ask: k.ask }
 
-  const ok = missing.length === 0
-  const perUnit = ok ? base + opts.reduce((s, o) => s + o.add, 0) : null
-  return {
-    ok,
-    missing,
-    perUnit,
-    low: ok ? perUnit * b.min : null,
-    high: ok && b.max !== null ? perUnit * b.max : null,
-    band: b,
-    vatIncluded: !!data.vatIncluded,
-  }
+  const unit = price + add
+  const total = unit * q
+  /* ชวนสั่งเพิ่มเฉพาะเมื่อยอดรวมของช่วงถัดไป (ที่จำนวนต้นช่วง) ต่ำกว่ายอดตอนนี้จริง */
+  const nb = k.bands[i + 1]
+  const np = nb ? priceOf(nb, col) : null
+  const next = np !== null && (np + add) * nb.min < total ? { more: nb.min - q, qty: nb.min, unit: np + add, total: (np + add) * nb.min } : null
+  return { ...base, ok: true, band, base: price, unit, total, next }
 }
 
-/* ค่าที่ส่งมากับลิงก์ (?kind=&band=) จากตัวช่วยเลือกหน้าแรก · ค่าไหนไม่มีในตารางให้เป็น null */
-export const readPrefill = (data, search) => {
-  const q = new URLSearchParams(search)
-  const kind = q.get('kind')
-  const band = q.get('band')
-  return {
-    kind: data.kinds.some((k) => k.id === kind) ? kind : null,
-    band: data.bands.some((b) => b.id === band) ? band : null,
-  }
+const MAX_QTY = 99999
+
+/** ค่าจาก URL (?kind=&qty=&fabric=&opt=a,b) · ค่าไหนไม่มีจริงเป็น null/[] · ?band=21-50 (ลิงก์เดิม) ใช้ต้นช่วง */
+export const readCalcQuery = (K, search) => {
+  const s = new URLSearchParams(search || '')
+  const k = K.kinds.find((x) => x.id === s.get('kind')) || null
+  const num = (v) => (/^\d{1,5}$/.test(v || '') ? Number(v) : null)
+  let qty = num(s.get('qty'))
+  if (qty === null) qty = num((/^(\d+)(?:-\d+|\+)$/.exec(s.get('band') || '') || [])[1])
+  if (qty !== null && (qty < K.minQty || qty > MAX_QTY)) qty = null
+  /* ผ้าที่รวมชิปกัน รับรหัสผ้าตัวไหนในกลุ่มก็ได้ */
+  const f = s.get('fabric')
+  const fabric = (f && k?.fabrics?.find((x) => x.cols.includes(f))?.id) || null
+  const options = k && !k.options ? [] : (s.get('opt') || '').split(',').filter((id) => K.options.some((o) => o.id === id))
+  return { kind: k ? k.id : null, qty, fabric, options: [...new Set(options)] }
+}
+
+/** สิ่งที่เลือกเป็น ?query สำหรับ history.replaceState · ใส่ผ้า/ออปชันเฉพาะสินค้าที่มี */
+export const calcSearch = (K, { kind, qty, fabric, options = [] }) => {
+  const k = kindOf(K, kind)
+  const parts = [`kind=${k.id}`]
+  if (Number.isInteger(qty)) parts.push(`qty=${qty}`)
+  if (k.fabrics && fabric) parts.push(`fabric=${encodeURIComponent(fabric)}`)
+  if (k.options && options.length) parts.push(`opt=${options.map(encodeURIComponent).join(',')}`)
+  return `?${parts.join('&')}`
+}
+
+/** ข้อความตั้งต้นในแชท LINE (oaMessage) · อยู่ใน URL จึงมีแค่เรื่องงาน ไม่มีชื่อ เบอร์ อีเมล หรือข้อมูลองค์กร */
+export const lineText = (r) => {
+  const k = r.kind
+  const rows = [
+    'ขอราคาเสื้อจากเครื่องคำนวณบนเว็บ',
+    `สินค้า: ${k.name}${k.include ? ` (${k.include})` : ''}`,
+    r.fabric && `ผ้า: ${r.fabric.name}`,
+    r.qty && `จำนวน: ${fmt(r.qty)} ตัว`,
+    r.opts.length && `ออปชัน: ${r.opts.map((o) => `${o.name} +${fmt(o.add)}`).join(' · ')}`,
+  ]
+  if (r.byDesign) rows.push('จะส่งโลโก้ + จำนวนสี ในแชทนี้ ให้ทีมดีประเมินราคา')
+  else if (r.ok) rows.push(`ราคาต่อตัว: ${fmt(r.unit)} บาท`, `ยอดรวม: ${fmt(r.total)} บาท${r.vatIncluded ? ' (รวม VAT 7%)' : ''}`)
+  else if (r.band) rows.push('ราคาต่อตัว: ขอให้ทีมดีประเมิน')
+  return rows.filter(Boolean).join('\n')
+}
+
+/** สรุปสั้นที่ส่งไปฟอร์มขอใบเสนอราคา (?from=) · ทีมขายเห็นว่าลูกค้าคิดราคาอะไรมา */
+export const fromText = (r) => [
+  '/calculations/',
+  r.kind.name,
+  r.fabric && `ผ้า${r.fabric.name.replaceAll(' · ', '/')}`,
+  r.qty && `${fmt(r.qty)} ตัว`,
+  ...r.opts.map((o) => o.name),
+  r.byDesign ? 'ประเมินตามแบบ' : r.ok ? `${fmt(r.unit)} บาท/ตัว · รวม ${fmt(r.total)} บาท` : r.band ? 'ขอให้ประเมินราคา' : '',
+].filter(Boolean).join(' · ')
+
+/** ยอดย่อในแถบล่างมือถือ (calc-03) · 2 บรรทัด */
+export const barText = (r) => {
+  if (r.belowMin) return { main: `ขั้นต่ำ ${fmt(r.minQty)} ตัว`, sub: '' }
+  if (r.ok) return { main: `${fmt(r.total)} บาท`, sub: `${fmt(r.unit)}/ตัว · ${fmt(r.qty)} ตัว` }
+  return { main: r.byDesign ? 'ทีมดีประเมินให้' : 'ทักถามราคา', sub: `${fmt(r.qty)} ตัว` }
 }

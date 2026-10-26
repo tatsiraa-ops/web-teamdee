@@ -67,15 +67,20 @@
 </footer>
 
 <nav data-where="mobile-bar" class="mobilebar fixed inset-x-0 bottom-0 z-[80] grid grid-cols-3 gap-px bg-ink border-t-2 border-ink lg:hidden" aria-label="ช่องทางติดต่อด่วน">
-  <a class="bg-orange text-paper flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{site.lineUrl}}" data-track="line">
+  <a class="bg-orange text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{site.lineUrl}}" data-track="line">
     <span class="block size-5" aria-hidden="true">{{> icoChat}}</span><span class="text-[16px]"><span class="inline-block">ทัก LINE</span> <span class="inline-block">ขอราคา</span></span>
   </a>
   <a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="tel:{{site.phonePrimaryTel}}">
     <span class="block size-5 text-orange" aria-hidden="true">{{> icoPhone}}</span><span class="text-[16px]">โทรเลย</span>
   </a>
-  <a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{#if designsHref}}{{designsHref}}{{else}}{{url 'designs'}}{{/if}}">
+  {{!-- ช่อง 3 เปลี่ยนต่อหน้าได้: {{> footer barHref="#contactForm" barLabel="กรอกฟอร์ม"}} (หน้าติดต่อ · audit C8)
+        barLive=true: JS ของหน้าเขียนข้อความในช่องนี้เอง (เครื่องคำนวณโชว์ยอดรวมสด · audit calc-03) --}}
+  {{#if barLabel}}<a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center transition-opacity" href="{{barHref}}"{{#if barLive}} data-bar-live{{/if}}>
+    <span class="block size-5 text-orange" aria-hidden="true" data-bar-ico>{{> icoDoc}}</span><span class="text-[16px]" data-bar-main>{{barLabel}}</span>{{#if barLive}}<span class="text-[13px] font-semibold text-ink-2 tabular-nums" data-bar-sub hidden></span>{{/if}}
+  </a>{{else}}<a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{#if designsHref}}{{designsHref}}{{else}}{{url 'designs'}}{{/if}}">
     <span class="block size-5 text-orange" aria-hidden="true">{{> icoShirt}}</span><span class="text-[16px]">ดูแบบเสื้อ</span>
-  </a>
+  </a>{{/if}}
 </nav>
 
-{{> floats}}
+{{!-- noFloats=true: ไม่มีปุ่มลอย LINE/โทร และการ์ดแนะนำ (หน้าติดต่อ หน้าขอบคุณ · audit C8) --}}
+{{#unless noFloats}}{{> floats}}{{/unless}}

@@ -70,7 +70,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .th-checks { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; margin-top: 22px; font-size: 16px; font-weight: 600; color: var(--color-ink-2); }
 .th-checks li { display: inline-flex; align-items: center; gap: 8px; }
 .th-checks li::before { content: ''; width: 18px; height: 18px; flex: none; border-radius: 50%; background: var(--color-orange)
-  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat; }
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat; }
 .th-note { font-size: 14px; color: var(--color-ink-3); margin: 0 0 14px; }
 
 /* ปุ่มสลับต้นแบบบนพื้นสว่าง */
@@ -139,7 +139,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-panel__short { display: block; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.85); margin-top: 8px; }
 .hm-panel__go { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; min-height: 44px; padding: 0 18px;
   border-radius: 999px; background: var(--color-paper); color: var(--color-ink); font-size: 16px; font-weight: 700; transition: background-color .18s; }
-.hm-panel a:hover .hm-panel__go, .hm-panel a:focus-visible .hm-panel__go { background: var(--color-orange); color: var(--color-paper); }
+.hm-panel a:hover .hm-panel__go, .hm-panel a:focus-visible .hm-panel__go { background: var(--color-orange); color: var(--color-ink); }
 .hm-panel a:focus-visible { outline-offset: 3px; }
 
 /* แท็บเล็ตลงมา · เลื่อนซ้ายขวาเป็นการ์ด ทุกใบเปิดคำอธิบาย ไม่ต้องขยาย */
@@ -177,7 +177,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-pick__bands { display: flex; flex-wrap: wrap; gap: 10px; }
 .hm-pick__bands .choice:has(:focus-visible) { outline: 3px solid var(--color-ink); outline-offset: 2px; }
 
-.hm-pick__result { margin-top: 28px; padding: 22px 24px; border-radius: var(--hm-r); background: var(--color-paper); border: 1px solid var(--color-line); border-left: 5px solid var(--color-orange); }
+.hm-pick__result { margin-top: 28px; padding: 22px 24px; border-radius: var(--hm-r); background: var(--color-paper); border: 1px solid var(--color-line); border-top: 3px solid var(--color-orange); }
 .hm-pick__label { font-size: 14px; font-weight: 700; color: var(--color-ink-3); }
 .hm-pick__main { font-size: 24px; font-weight: 800; line-height: 1.3; margin-top: 2px; }
 .hm-pick__why { font-size: 16px; line-height: 1.7; color: var(--color-ink-2); margin-top: 6px; }
@@ -310,9 +310,10 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .th-foot .th-checks { margin-top: 16px; gap: 4px 18px; font-size: 15px; }
 .th-foot .th-have { margin-top: 6px; }
 .th-foot .th-note { margin: 2px 0 0; font-size: 14px; }
-/* มือถือ: ตัดบรรทัดรองที่ 3 กับป้ายใต้ภาพ ให้ปุ่มหลักอยู่พ้นแถบล่าง · ข้อดี 4 ข้อเรียง 2×2 */
+/* มือถือ: ตัดบรรทัดรองที่ 3 ให้ปุ่มหลักอยู่พ้นแถบล่าง · ข้อดี 4 ข้อเรียง 2×2
+   ป้ายใต้ภาพ (บอกว่าเป็นแบบที่ออกแบบ ไม่ใช่รูปงานจริง) ต้องเห็นทุกจอ อยู่ใต้ปุ่มจึงไม่ดันปุ่มลง (audit 26 ต.ค. H8) */
 @media (max-width: 767px) {
-  .th-slide .th-pillars, .th-foot .th-note { display: none; }
+  .th-slide .th-pillars { display: none; }
   .th-foot .th-checks { display: grid; grid-template-columns: repeat(2, auto); justify-content: center; text-align: left; gap: 6px 14px; font-size: 14px; }
   .th-foot .th-have { font-size: 15px; }
 }
@@ -346,6 +347,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-cat__img { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; background: var(--color-shell); }
 /* รูปวาง absolute ให้กรอบคง 3:2 · รูปแนวตั้ง (เสื้อสกรีน) เคยดันการ์ดสูงกว่าใบอื่น */
 .hm-cat__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.hm-cat__img .tech-panel { position: absolute; inset: 0; }
 .hm-cat__body { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px 22px; }
 .hm-cat__name { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 20px; font-weight: 700; }
 .hm-cat__copy { font-size: 16px; line-height: 1.6; color: var(--color-ink-2); }
@@ -386,7 +388,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 @media (max-width: 899px) { .hm-videos { grid-template-columns: 1fr; max-width: 560px; } }
 .hm-video { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: var(--hm-r); overflow: hidden; background: var(--color-ink); color: var(--color-paper); }
-.hm-video__play { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--color-orange); color: var(--color-paper); }
+.hm-video__play { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--color-orange); color: var(--color-ink); }
 .hm-video__ph { position: absolute; inset: auto 0 0; padding: 10px 14px; font-size: 13px; color: rgba(255,255,255,.75); }
 .hm-videos h3 { font-size: 18px; margin-top: 12px; }
 
@@ -401,6 +403,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-cta__send { padding-left: 40px; border-left: 1px solid var(--cta-rule); }
 .hm-cta__sl { font-size: 14px; font-weight: 700; letter-spacing: .02em; color: var(--color-ink-2); }
 .hm-cta__send ol { counter-reset: cta; display: grid; gap: 10px; margin-top: 12px; }
+/* li เป็น flex (เลขวงกลม + ข้อความ) · ข้อความต้องห่อ <span> ก้อนเดียว ไม่งั้นวลี {{{ph}}} แต่ละก้อนกลายเป็น flex item แยก โดน gap 12px คั่นกลางประโยค */
 .hm-cta__send li { counter-increment: cta; display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 600; line-height: 1.4; }
 .hm-cta__send li::before { content: counter(cta); flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--color-ink); color: var(--color-paper); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .hm-cta__btns { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -574,6 +577,8 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 
 /* ขั้นตอน 01 เป็นภาพจำลองพื้นขาว · วางบนพื้นครีมให้เข้าชุดกับรูปถ่ายอีกสองรูป */
 .hm-steps li:first-child img { object-fit: contain; background: var(--hm-cream); padding: 12px; }
+/* ขั้น 02 · เสื้อ FTI ตัวจริงบนหุ่น (รูปสี่เหลี่ยมจัตุรัส) · ไม่ crop คอเสื้อกับชายเสื้อ (แทนรูปเครื่องปัก 24 ต.ค.) */
+.hm-steps img.is-contain { object-fit: contain; background: var(--color-paper); }
 
 /* แถบโลโก้หยุดเมื่อเลื่อนพ้นจอ (ไม่เปลืองเครื่อง) */
 .hm-marquee.is-off .hm-marquee__track { animation-play-state: paused; }
@@ -612,7 +617,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-benefits--get .hm-benefits__ico { display: grid; place-items: center; width: 52px; height: 52px; padding: 13px; border-radius: 14px; background: var(--hm-cream); margin-bottom: 14px; }
 .hm-benefits--get .hm-benefits__h { font-size: 20px; }
 .hm-benefits--get p:not(.hm-benefits__h) { font-size: 16px; }
-.hm-benefits__tag { position: absolute; top: 24px; right: 24px; display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: var(--color-orange); color: var(--color-paper); font-size: 14px; font-weight: 800; letter-spacing: .02em; }
+.hm-benefits__tag { position: absolute; top: 24px; right: 24px; display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: var(--color-orange); color: var(--color-ink); font-size: 14px; font-weight: 800; letter-spacing: .02em; }
 @media (prefers-reduced-motion: reduce) { .hm-benefits--get li { transition: none; } .hm-benefits--get li:hover { translate: none; } }
 .hm-benefits { display: grid; grid-template-columns: 1fr; gap: 12px; }
 @media (min-width: 640px) { .hm-benefits { grid-template-columns: repeat(2, 1fr); } }
@@ -635,6 +640,8 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 
 /* บริการ 3 */
 .hm-cats--3 { grid-template-columns: repeat(3, 1fr); }
+/* วิธีนับวันผลิตใต้การ์ดบริการ · ข้อความรองชิดซ้ายตามหัวข้อ */
+.hm-cats__note { margin-top: 20px; max-width: 72ch; font-size: 15px; line-height: 1.7; color: var(--color-ink-2); }
 @media (max-width: 767px) { .hm-cats--3 { grid-template-columns: 1fr; } }
 .hm-cat__more { font-size: 15px; font-weight: 700; color: var(--color-ink); margin-top: 6px; }
 
@@ -765,7 +772,7 @@ a.hm-real__card:hover .hm-real__img img { transform: scale(1.03); }
 .hm-real__t { margin-top: 8px; font-size: 17px; font-weight: 700; line-height: 1.4; color: var(--color-ink); }
 .hm-real__d { font-size: 15px; color: var(--color-ink-3); }
 .hm-real__card > .hm-real__img + .hm-real__d { margin-top: 8px; }
-a.hm-real__card:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 4px; border-radius: var(--hm-r); }
+a.hm-real__card:focus-visible { outline-offset: 4px; border-radius: var(--hm-r); } /* ใช้วงโฟกัสดำของทั้งเว็บ: ส้มบนขาว 2.8:1 ไม่ผ่าน 1.4.11 */
 @media (max-width: 767px) { .hm-real { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; } .hm-real__t { font-size: 16px; } }
 @media (prefers-reduced-motion: reduce) { .hm-real__img img { transition: none; } }
 
@@ -813,7 +820,8 @@ a.hm-real__card:focus-visible { outline: 2px solid var(--color-orange); outline-
 
 /* แถบ manifesto · WE BUILD TEAM IDENTITY วิ่งช้าๆ บนพื้นส้มเต็มจอ (อาร์ตเลือก 23 ต.ค. · รอบ 3 "ใหญ่ไป ดูโหล" → ตัวเล็ก 13px ห่างตัวอักษรกว้าง แบบป้ายแบรนด์)
    ฟอนต์อังกฤษของเล่ม (GC Tenwork) ยังไม่มีสิทธิ์ webfont → ใช้ Noto Sans Thai หนาสุด · ราว 35px/วินาที */
-.hm-mani { position: relative; overflow: hidden; background: var(--color-orange); color: var(--color-paper); padding-block: 13px; }
+/* ตัวหนังสือกับโลโก้คั่นเป็นดำบนส้ม (อาร์ตเคาะ 24 ต.ค. · ขาวบนส้มได้ 2.84:1) */
+.hm-mani { position: relative; overflow: hidden; background: var(--color-orange); color: var(--color-ink); padding-block: 13px; }
 .hm-mani__row { display: flex; width: max-content; }
 .hm-mani__track { display: flex; align-items: center; flex: none; gap: 28px; padding-right: 28px;
   font-size: 13px; font-weight: 600; line-height: 1; letter-spacing: .32em; white-space: nowrap;
@@ -924,6 +932,22 @@ a.hm-real__card:focus-visible { outline: 2px solid var(--color-orange); outline-
 .hm-cat__facts small { font-size: 14px; font-weight: 600; color: var(--color-ink-3); }
 .hm-cat__facts b { font-size: 15px; font-weight: 800; color: var(--color-ink); text-align: right; font-variant-numeric: tabular-nums; }
 @media (max-width: 767px) { .hm-cat__facts > span { padding: 6px 0; } .hm-cat__facts b { font-size: 14px; } }
+/* ราคาบอกจำนวน (audit home-02): บรรทัดเล็กใต้ราคา เช่น "ลดถึง 160 เมื่อสั่ง 200 ตัวขึ้นไป" */
+/* การ์ดแคบ (มือถือ 375 รูปอยู่ซ้าย): ป้ายกับราคาไม่หักกลางวลี "(10–20 ตัว)" · ไม่พอที่ก็ลงบรรทัดใหม่ทั้งก้อน ชิดขวา */
+.hm-cat__facts > span { flex-wrap: wrap; row-gap: 2px; }
+.hm-cat__facts small { white-space: nowrap; }
+.hm-cat__facts b { margin-left: auto; white-space: nowrap; }
+.hm-cat__facts b em { white-space: normal; }
+.hm-cat__facts b em { display: block; margin-top: 2px; font-style: normal; font-size: 13px; font-weight: 600; color: var(--color-ink-2); }
+/* การ์ดกดได้ทั้งใบด้วยลิงก์ชื่อบริการที่ขยายเต็มการ์ด · ลิงก์คำนวณราคาอยู่ชั้นบน กดแยกได้ */
+.hm-cat { position: relative; }
+.hm-cat__link { color: inherit; }
+.hm-cat__link::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+/* วงโฟกัสย้ายจากลิงก์ไปที่ทั้งการ์ด · ใช้วงดำ + ขอบขาวแบบเดียวกับทั้งเว็บ (main.css) เพราะส้มบนขาว 2.8:1 ไม่ผ่าน 1.4.11 */
+.hm-cat__link:focus-visible { outline: none; box-shadow: none; }
+.hm-cat:has(.hm-cat__link:focus-visible) { outline: 3px solid var(--color-ink); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-paper); }
+.hm-cat__calc { position: relative; z-index: 2; align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: 15px; font-weight: 700; color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.hm-cat__calc:hover { text-decoration-color: var(--color-ink); }
 /* คำโปรยบริการ 2 บรรทัดยาวเท่ากัน ไม่ให้ "หน่วยงาน และทีมกีฬา" ลอยบรรทัดล่าง */
 #services .hm-head > p:last-child { text-wrap: balance; }
 
@@ -992,7 +1016,7 @@ html.rv .hm-case.in li:nth-child(3) .hm-case__no::after { transition-delay: .7s;
   .hm-uses a:hover .hm-uses__go svg { translate: 3px 0; }
   .hm-uses a:hover .hm-uses__t { text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 3px; text-underline-offset: 5px; }
 }
-.hm-uses a:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 6px; border-radius: 16px; }
+.hm-uses a:focus-visible { outline-offset: 6px; border-radius: 16px; } /* วงโฟกัสดำของทั้งเว็บ */
 /* แท็บเล็ต: 3 บน + 2 ล่างกว้างขึ้น ไม่เหลือช่องโหว่ท้ายแถว */
 @media (min-width: 640px) and (max-width: 1023px) {
   .hm-uses { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 28px 16px; }
@@ -1007,3 +1031,23 @@ html.rv .hm-case.in li:nth-child(3) .hm-case__no::after { transition-delay: .7s;
   .hm-uses__go { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .hm-uses__img img, .hm-uses__go svg { transition: none; } }
+
+/* กล่อง CTA 2 ส่วน (หัวข้อ | ปุ่ม) ไม่มีรายการ 3 ข้อ · ใช้ในหน้ากลุ่มลูกค้า / หน้าสินค้า (24 ต.ค.) */
+.hm-cta.hm-cta--2 { grid-template-columns: minmax(0, 1fr) minmax(0, auto); }
+.hm-cta--2 .hm-cta__btns .label { display: block; font-size: 14px; font-weight: 700; color: var(--color-ink-2); margin-bottom: 6px; }
+@media (max-width: 1099px) { .hm-cta.hm-cta--2 { grid-template-columns: minmax(0, 1fr); } .hm-cta--2 .hm-cta__btns { grid-column: auto; } }
+.pg-cta { padding-block: 40px; }
+/* ลิงก์ต่อท้ายส่วนปิด (หน้าผลงาน) */
+.hm-end__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 22px; margin-top: 10px; }
+
+/* แถบรูปลูกค้าจริงใต้ hero (24 ต.ค.) · คอม 8 รูปเต็มกว้างวางนิ่ง · มือถือปัดแนวนอน snap */
+.hm-proof { padding-block: 28px 8px; }
+.hm-proof__row { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; padding-inline: 8px; }
+.hm-proof__row li { aspect-ratio: 1; border-radius: 12px; overflow: hidden; background: var(--color-shell); }
+.hm-proof__row img { width: 100%; height: 100%; object-fit: cover; }
+.hm-proof__cap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; margin-top: 10px; font-size: 15px; font-weight: 600; color: var(--color-ink-2); }
+@media (max-width: 767px) {
+  .hm-proof__row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-inline: 20px; }
+  .hm-proof__row::-webkit-scrollbar { display: none; }
+  .hm-proof__row li { flex: 0 0 38%; scroll-snap-align: start; }
+}

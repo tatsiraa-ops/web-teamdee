@@ -1,21 +1,22 @@
 {{!-- ตารางราคาตามประเภท × ช่วงจำนวน · เป็นข้อความ HTML ไม่ใช่รูป (Wireframe v2 /calculations/ ส่วน 3)
-      ช่องที่ยังไม่ยืนยันขึ้น [ยืนยัน] ไม่ใช้ตัวเลขเก่า --}}
-<div class="overflow-x-auto border-2 border-ink rounded-card" tabindex="0" role="region" aria-label="ตารางราคา เลื่อนซ้ายขวาได้">
-  <table class="w-full min-w-[640px] text-[17px]">
-    <caption class="text-left font-bold text-[18px] px-5 py-4 border-b-2 border-ink">ราคาต่อตัวโดยประมาณ{{#if @root.pricing.vatIncluded}} รวม VAT 7%{{/if}} · {{@root.pricing.source}}</caption>
-    <thead class="bg-ink text-paper"><tr>
-      <th scope="col" class="text-left font-bold px-5 py-4">ประเภท</th>
-      {{#each @root.pricing.bands as |b|}}<th scope="col" class="text-right font-bold px-4 py-4 whitespace-nowrap">{{b.label}} ตัว</th>{{/each}}
+      แบบใบเสนอราคา .ptable เดียวกับหน้าสินค้า (เดิมกรอบดำหนา อาร์ต "ดูเด็กเล่น" 23 ต.ค.)
+      ประเภทที่ไม่มีราคาตายตัว (byDesign · สกรีน) ขึ้น "ประเมินราคาตามแบบ" ทั้งแถว · ช่องเดี่ยวที่ยังไม่มีราคาขึ้น "สอบถาม" ไม่ใช้ตัวเลขเก่า --}}
+<div class="ptable" tabindex="0" role="region" aria-label="ตารางราคาต่อตัว เลื่อนซ้ายขวาได้">
+  <table class="min-w-[640px]">
+    <caption>ราคาต่อตัวโดยประมาณ{{#if @root.pricing.vatIncluded}} รวม VAT 7%{{/if}} · {{@root.pricing.source}}</caption>
+    <thead><tr>
+      <th scope="col">ประเภท</th>
+      {{#each @root.pricing.bands as |b|}}<th scope="col">{{b.qty}}</th>{{/each}}
     </tr></thead>
-    <tbody class="tabular-nums">
+    <tbody>
       {{#each @root.pricing.kinds as |k|}}
-      <tr class="border-t border-line">
-        <th scope="row" class="text-left font-bold px-5 py-4">{{k.name}}<span class="block text-[15px] font-normal text-ink-3">{{k.sub}}</span></th>
-        {{#each @root.pricing.bands as |b|}}<td class="px-4 py-4 text-right">{{#with (lookup (lookup @root.pricing.prices k.id) b.id) as |p|}}{{baht p}} บาท{{else}}<span class="text-ink-3">[ยืนยัน]</span>{{/with}}</td>{{/each}}
+      <tr>
+        <th scope="row"><b class="block text-ink font-bold">{{k.name}}</b><span class="block text-[14px] text-ink-3">{{k.sub}}</span></th>
+        {{#if k.byDesign}}<td class="ptable__note" colspan="{{@root.pricing.bands.length}}">ประเมินราคาตามแบบ · ขึ้นกับขนาดลายและจำนวนตำแหน่ง</td>{{else}}{{#each @root.pricing.bands as |b|}}<td>{{#with (lookup (lookup @root.pricing.prices k.id) b.id) as |p|}}{{baht p}}{{else}}<span class="text-ink-3 font-semibold">สอบถาม</span>{{/with}}</td>{{/each}}{{/if}}
       </tr>
       {{/each}}
     </tbody>
   </table>
-  <p class="px-5 py-4 bg-shell border-t border-line text-[16px]">ออปชันเสริมต่อตัว {{#each @root.pricing.options as |o|}}{{o.name}} +{{#if o.add}}{{baht o.add}} บาท{{else}}<span class="text-ink-3">[ยืนยัน]</span>{{/if}}{{#unless @last}} · {{/unless}}{{/each}}</p>
+  <p class="ptable__foot">หน่วยเป็นบาทต่อตัว · ออปชันเสริมต่อตัว {{#each @root.pricing.options as |o|}}<span class="inline-block">{{o.name}} +{{#if o.add}}{{baht o.add}} บาท{{else}}สอบถาม{{/if}}{{#unless @last}}&nbsp;·{{/unless}}</span> {{/each}}</p>
 </div>
 <p class="scroll-hint">ปัดตารางไปทางขวาเพื่อดูคอลัมน์ที่เหลือ</p>

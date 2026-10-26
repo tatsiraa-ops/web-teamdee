@@ -1,11 +1,13 @@
 import uses from '../data/uses.json'
-import pricing from '../data/pricing.json'
+import prices from '../data/prices.json'
 import routes from '../data/routes.json'
 import { makeUrl } from './routes.js'
 import { planFor } from './home-plan.js'
 import { visibleIndexes } from './real-grid.js'
+import { calcPricing } from './prices.js'
 
 const url = makeUrl(routes)
+const pricing = calcPricing(prices)
 
 /* ตัวช่วยเลือก 2 ขั้นหน้าแรก · เปลี่ยนคำแนะนำกับลิงก์คิดราคาตามที่เลือก (ตรรกะอยู่ใน home-plan.js มีเทส) */
 export function initHomePicker() {

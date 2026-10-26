@@ -99,7 +99,7 @@
 .ab-team { padding-block: 88px; background: var(--color-shell); border-block: 1px solid var(--color-line); }
 .ab-team__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px 80px; align-items: center; }
 .ab-pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; margin-top: 32px; }
-.ab-pillars li { padding: 4px 0 4px 16px; border-left: 4px solid var(--color-orange); }
+.ab-pillars li { padding: 12px 0 4px; border-top: 2px solid var(--color-ink); }
 .ab-pillars span { display: block; font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--color-ink-3); }
 .ab-pillars b { display: block; margin-top: 2px; font-size: 18px; }
 .ab-collage { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }

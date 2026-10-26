@@ -50,13 +50,17 @@ export function initFloats({ every = 7000 } = {}) {
   /* ขึ้นหลังเลื่อนพ้นช่วงแรกของหน้า · ถึง footer ซ่อน เพราะ footer มีช่องทางติดต่อชุดเดียวกันอยู่แล้ว */
   let scrolled = false
   let atFooter = false
+  let inHero = false
+  const heroEl = document.querySelector('[data-hero-team], #main > section, #main > .hero-wrap')
   const sync = () => {
     cta?.classList.toggle('is-on', scrolled && !atFooter)
-    box?.classList.toggle('is-away', atFooter)
+    /* การ์ดแนะนำหลบทั้งตอนถึง footer และตอนเลื่อนกลับขึ้นมาอยู่ใน hero (ตรวจ 24 ต.ค.: กลับมาทับปุ่ม LINE ของ hero) */
+    box?.classList.toggle('is-away', atFooter || inHero)
   }
   const onScroll = () => {
     const s = window.scrollY > 240
-    if (s !== scrolled) { scrolled = s; sync() }
+    const h = heroEl ? !pastHero(heroEl.getBoundingClientRect()) : false
+    if (s !== scrolled || h !== inHero) { scrolled = s; inHero = h; sync() }
   }
   window.addEventListener('scroll', onScroll, { passive: true })
   onScroll()

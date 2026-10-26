@@ -10,9 +10,9 @@
 
 <main id="main">
   {{!-- หน้ารีวิวหน้าเดียวตาม Wireframe v22 (22 ต.ค. 2026) · ไม่มีตัวกรอง ไม่มีหน้ารายกลุ่ม
-       ข้อความ: src/data/works-page.json · เรื่องราว: works.json · ภาพลูกค้า: customers.json
+       ข้อความ: src/data/works-page.json · รูปงานจริง: works.json (ไม่มีเรื่องเล่าแล้ว) + customers.json
        โลโก้ สถิติ รีวิว คลิป ยังรอข้อมูลจริงและสิทธิ์เผยแพร่ → ต้นแบบเท่านั้น
-       การ์ดเรื่องราวไม่แสดงจำนวนตัว วันผลิต หรือคำพูดลูกค้า จนกว่าทีมขายยืนยัน --}}
+       เรื่องราวลูกค้ารอเรื่องที่ลูกค้ายืนยัน (ห้ามแต่งจำนวนตัว วันผลิต หรือคำพูดลูกค้า) · เว็บจริงซ่อนส่วนนั้น --}}
   <section class="band-hero relative overflow-hidden">
     <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
     <div class="wrap relative py-12 md:py-16 grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
@@ -21,8 +21,9 @@
         <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">{{wk.hero.h1}}</h1>
         <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[56ch] mt-5">{{wk.hero.lead}}</p>
         <div class="flex flex-wrap gap-3 mt-8">
-          <a class="btn btn-orange btn-lg" href="#stories">{{wk.hero.cta}}</a>
-          <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-ink hover:border-ink" href="#photos">{{wk.hero.cta2}}</a>
+          {{!-- เว็บจริงไม่มีส่วนเรื่องราว (เรื่องเล่าเดิมแต่งขึ้น ลบ 24 ต.ค.) → ปุ่มเดียวพาไปภาพลูกค้า --}}
+          {{#if wp}}<a class="btn btn-orange btn-lg" href="#photos">{{wk.hero.cta2}}</a>{{else}}<a class="btn btn-orange btn-lg" href="#stories">{{wk.hero.cta}}</a>{{/if}}
+          {{#unless wp}}<a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink" href="#photos">{{wk.hero.cta2}}</a>{{/unless}}
         </div>
       </div>
       <ul class="grid grid-cols-3 gap-2" aria-hidden="true">{{#each wk.heroPhotos}}<li><img src="{{this.imgSmall}}" alt="" width="320" height="320" class="w-full aspect-square object-cover rounded-card" fetchpriority="{{#if @first}}high{{else}}low{{/if}}"></li>{{/each}}</ul>
@@ -49,7 +50,7 @@
     <h2 id="jump-h" class="t-display text-[clamp(22px,2.6vw,30px)]">รีวิวและภาพลูกค้าทีมดี</h2>
     <div class="flex flex-wrap gap-2 mt-4">
       {{#unless wp}}<a class="chip" href="#reviews">ข้อความรีวิว</a><a class="chip" href="#videos">คลิปลูกค้า</a>{{/unless}}
-      <a class="chip" href="#stories">เรื่องราวลูกค้า</a><a class="chip" href="#photos">ภาพลูกค้า</a>
+      {{#unless wp}}<a class="chip" href="#stories">เรื่องราวลูกค้า</a>{{/unless}}<a class="chip" href="#photos">ภาพลูกค้า</a>
     </div>
   </nav>
 
@@ -64,48 +65,38 @@
   </section>
   {{/unless}}
 
+  {{!-- เรื่องราวลูกค้า (v22): เรื่องเล่าเดิมใน works.json (โจทย์ · ทีมดีช่วย · ชื่องาน) แต่งขึ้นและไม่ตรงกับรูป → ลบ (อาร์ตเคาะ 24 ต.ค.)
+       ยังไม่มีเรื่องที่ลูกค้ายืนยัน · ต้นแบบเหลือหัวข้อ v22 + ป้าย · เว็บจริงซ่อนทั้งส่วน · รูปงานจริงย้ายไปรวมในภาพลูกค้าด้านล่าง --}}
+  {{#unless wp}}
   <section class="wrap section" id="stories">
-    <div class="max-w-[62ch] mb-8">
+    <div class="max-w-[62ch]">
       <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>งานจริง</span>
       <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{wk.work.h}}</h2>
-    </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      {{#each works}}
-      <article class="bg-paper border border-line rounded-plate overflow-hidden flex flex-col" id="{{this.id}}">
-        <div class="relative aspect-[4/3] bg-shell"><img src="{{this.img}}" alt="ทีมใส่{{this.title}}จริงในวันงาน" width="800" height="600" loading="lazy" decoding="async" class="w-full h-full object-cover"><span class="tag tag-ink absolute left-3 bottom-3">งานผลิตจริง</span></div>
-        <div class="p-6 on-paper grow">
-          <p class="t-xs">{{this.groupName}}</p>
-          <h3 class="text-[20px] mt-1">{{this.title}}</h3>
-          <dl class="mt-3 space-y-2 text-[16px] leading-[1.6]">
-            <div><dt class="inline font-bold">โจทย์ </dt><dd class="inline text-ink-2">{{this.brief}}</dd></div>
-            <div><dt class="inline font-bold">ทีมดีช่วย </dt><dd class="inline text-ink-2">{{this.helped}}</dd></div>
-          </dl>
-          <a class="pp-more mt-3" href="{{url 'products' this.product}}">ข้อมูลสินค้า<span class="arw" aria-hidden="true">&rarr;</span></a>
-        </div>
-      </article>
-      {{/each}}
+      <p class="pending-ribbon mt-4">รอเรื่องราวลูกค้าที่ลูกค้ายืนยันและอนุญาตให้เผยแพร่ · ไม่แต่งเรื่องหรือตัวเลขเอง · บนเว็บจริงซ่อนส่วนนี้</p>
     </div>
   </section>
+  {{/unless}}
 
   <section class="bg-shell border-y border-line" id="photos">
     <div class="wrap section">
       <h2 class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch]">{{wk.photos.h}}</h2>
       <p class="t-lead mt-3">{{wk.photos.p}}</p>
       <ul class="pp-photos mt-8" aria-label="ภาพลูกค้าสวมเสื้อ">
-        {{#each wk.photos.items}}<li><img src="{{this.imgSmall}}" alt="ทีมลูกค้า{{this.catName}}ใส่เสื้อที่ทีมดีผลิต" width="320" height="320" loading="lazy" decoding="async"></li>{{/each}}
+        {{#each wk.photos.items}}<li><img src="{{this.imgSmall}}" alt="{{#if this.alt}}{{this.alt}}{{else}}ทีมลูกค้า{{this.catName}}ใส่เสื้อที่ทีมดีผลิต{{/if}}" width="320" height="320" loading="lazy" decoding="async"></li>{{/each}}
       </ul>
     </div>
   </section>
 
-  <section class="band-orange">
-    <div class="wrap py-14 md:py-20 text-center">
-      <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">{{wk.contact.h}}</h2>
-      <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[52ch] mx-auto mt-4">{{wk.contact.p}}</p>
-      <div class="flex flex-wrap justify-center gap-3 mt-8">
-        <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
-        <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}">{{wk.contact.cta}}</a>
-      </div>
-      <div class="flex flex-wrap justify-center gap-x-5 gap-y-1 mt-7">{{#each wk.contact.links}}<a class="font-semibold text-paper underline decoration-paper/60 decoration-2 underline-offset-4 inline-flex items-center min-h-[44px]" href="{{url this.to}}">{{this.t}}</a>{{/each}}</div>
+  {{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end · 24 ต.ค.) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
+  <section class="hm-end" aria-labelledby="end-h">
+    <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
+    <div class="wrap relative hm-end__in">
+      <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
+      <h2 id="end-h">{{{ph wk.contact.h}}}</h2>
+      <p class="hm-end__lead">{{{ph wk.contact.p}}}</p>
+      <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}">{{wk.contact.cta}}</a></div>
+      <p class="hm-end__alt"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>
+      <p class="hm-end__links">{{#each wk.contact.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}</a>{{/each}}</p>
     </div>
   </section>
 </main>

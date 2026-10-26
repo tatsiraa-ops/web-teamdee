@@ -46,7 +46,8 @@
       {{/each}}
     </div>
     {{!-- บรรทัดความเชื่อมั่นใต้ปุ่ม (agent มุมคนซื้อ 3 ตัวชี้ว่าจอแรกไม่มีอะไรให้เชื่อใจ · อาร์ตเคาะ 22 ต.ค.) --}}
-    <ul class="th-checks" aria-label="จุดเด่นการสั่งทำกับทีมดี">{{#each homeV4.hero.proof}}<li>{{{ph this}}}</li>{{/each}}</ul>
+    {{!-- ติ๊ก 4 ข้อ (hero.proof) ตัดออก 24 ต.ค.: ซ้ำกับการ์ดจุดเด่น 8 ข้อใต้ hero คำต่อคำ (critique Impeccable P1 "คำสัญญาซ้ำ") --}}
+    <ul class="th-checks" hidden aria-label="จุดเด่นการสั่งทำกับทีมดี">{{#each homeV4.hero.proof}}<li>{{{ph this}}}</li>{{/each}}</ul>
     <p class="th-have">{{!-- G: ตอบภายใน 5 นาที + 3D ใน 24 ชม. จาก Brand Strategy v2 (อาร์ตเคาะ 23 ต.ค.) · ผูกกับเวลาทำการ ไม่ให้เข้าใจว่าตอบ 24 ชม. --}}<span>{{{ph homeV4.hero.reply}}} <span class="inline-block">(ทุกวัน {{site.hoursShort}})</span> · {{{ph homeV4.hero.trust}}}</span><a href="{{haveDesignLine}}" data-track="line" data-where="hero-have"><span>{{{ph homeV4.hero.haveDesign}}}</span><span class="arw" aria-hidden="true">&rarr;</span></a></p>
     <p class="th-note">{{{ph homeV4.hero.note}}}</p>
   </div>

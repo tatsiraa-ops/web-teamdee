@@ -16,23 +16,5 @@
     "fit": "object-cover",
     "pos": "object-[62%_center]",
     "alt": "เสื้อโปโล TEAMDEE ลายส้มขาว ตัดต่อแขนสองสี"
-  },
-  {
-    "img": "/img/hero/embroidery.jpg",
-    "w": 1280,
-    "h": 1600,
-    "bg": "bg-ink",
-    "fit": "object-cover",
-    "pos": "object-[center_46%]",
-    "alt": "เครื่องปักกำลังปักโลโก้ลงบนเสื้อโปโล"
-  },
-  {
-    "img": "/img/hero/factory-sign.jpg",
-    "w": 1600,
-    "h": 1067,
-    "bg": "bg-ink",
-    "fit": "object-cover",
-    "pos": "object-center",
-    "alt": "ป้ายหน้าโรงงาน TEAMDEE"
   }
 ]

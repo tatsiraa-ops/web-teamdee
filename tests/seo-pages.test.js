@@ -7,6 +7,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { inspectPage, INTERNAL_PAGES, CMS_PAGES as CMS } from '../scripts/seo-check.mjs'
+import { OLD_NARRATIVE, BLOCKLIST, MACHINE_IMG } from '../scripts/lib/clean-rules.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist-wp')
@@ -183,4 +184,38 @@ test('หน้าแรก: ปุ่ม LINE/โทรทุกจุดบอ
   const home = pages.find((p) => p.route === '/').html
   const missing = ['hero', 'hero-have', 'cta-design', 'cta-have', 'cta-end', 'mobile-menu', 'mobile-bar', 'float'].filter((w) => !home.includes(`data-where="${w}"`))
   assert.deepEqual(missing, [])
+})
+
+/* อาร์ตเคาะ 24 ต.ค.: เรื่องเล่าผลงานใน works.json แต่งขึ้น · แบบ TD-0002/0003 เป็นของ t around · รูปเครื่องจักรพิสูจน์ที่มาไม่ได้
+   ต้นข้อมูลตรวจที่ tests/clean-rules.test.js · ที่นี่ตรวจของที่ขึ้นเว็บจริงจริงๆ (HTML ทุกหน้า + JS ที่หน้าโหลด) */
+test('หน้าที่ export: ไม่มีเรื่องเล่าผลงานที่แต่ง · ไม่มีแบบ t around · ไม่มีรูปเครื่องจักร', () => {
+  const works = JSON.parse(readFileSync(join(root, 'src/data/works.json'), 'utf8'))
+  /* ถ้ามีใครเติม brief / helped / quote / qty กลับเข้า works.json ข้อความนั้นต้องไม่ขึ้นหน้าไหนเลย */
+  const narr = [...OLD_NARRATIVE, ...works.flatMap((w) => [w.brief, w.helped, w.quote, w.title, w.qty && `${Number(w.qty).toLocaleString('en-US')} ตัว`]).filter(Boolean)]
+  const text = (h) => h.replace(/<[^>]+>/g, ' ').replace(/&nbsp;|⁠/g, ' ').replace(/\s+/g, ' ')
+  const exported = pages.filter((p) => !CMS.has(p.route))
+  assert.deepEqual(exported.flatMap((p) => narr.filter((s) => text(p.html).includes(s) || p.html.includes(s)).map((s) => `${p.route}: ${s}`)), [])
+  assert.deepEqual(exported.filter((p) => /<dt[^>]*>\s*(โจทย์|ทีมดีช่วย)\s*<\/dt>/.test(p.html)).map((p) => p.route), [], 'การ์ดผลงานยังมีหัวข้อ โจทย์ / ทีมดีช่วย')
+  assert.deepEqual(exported.flatMap((p) => (p.html.match(BLOCKLIST) || []).map((m) => `${p.route}: ${m}`)), [])
+  assert.deepEqual(exported.flatMap((p) => (p.html.match(MACHINE_IMG) || []).map((m) => `${p.route}: ${m}`)), [])
+  const js = readdirSync(join(dist, 'assets')).filter((f) => f.endsWith('.js'))
+  assert.deepEqual(js.flatMap((f) => (readFileSync(join(dist, 'assets', f), 'utf8').match(BLOCKLIST) || []).map((m) => `${f}: ${m}`)), [])
+})
+
+/* ฟอร์มติดต่อบอกผลตรงๆ (อาร์ตเคาะ 24 ต.ค. ข้อ 6 · audit C2 C4 C8) */
+test('หน้าติดต่อ: ไม่มีช่องแนบไฟล์ · ไม่มีกล่องเขียว · มีกล่องส่งไม่ถึง · ไม่มีปุ่มลอย · หน้าขอบคุณเป็นหน้าธีม noindex', () => {
+  const contact = pages.find((p) => p.route === '/contact-us/')
+  const ty = pages.find((p) => p.route === '/thank-you/')
+  assert.ok(contact && ty, 'ไม่พบ /contact-us/ หรือ /thank-you/')
+  assert.ok(!/type="file"/.test(contact.html), 'ยังมีช่องแนบไฟล์')
+  assert.ok(!/bg-ok-tint|border-ok/.test(contact.html), 'ยังมีกล่องสีเขียว (ใช้ได้เฉพาะตอนส่งสำเร็จ ซึ่งไปหน้าขอบคุณแล้ว)')
+  assert.ok(contact.html.includes('id="formFail"') && contact.html.includes('ยังส่งไม่ถึงทีมดี') && contact.html.includes('id="failRetry"'))
+  assert.ok(contact.html.includes('data-copy'), 'ไม่มีปุ่มคัดลอกข้อความ')
+  for (const p of [contact, ty]) assert.ok(!/data-floats|data-nudge|data-float-cta/.test(p.html), `${p.route}: ยังมีปุ่มลอย/การ์ดแนะนำ`)
+  assert.equal(ty.noindex, true)
+  assert.equal(ty.h1.length, 1)
+  assert.ok(ty.html.includes('id="tyTel"') && ty.html.includes('ส่งโลโก้ / ไฟล์แบบทาง LINE'))
+  assert.ok(ty.html.includes('ทีมติดต่อกลับในเวลาทำการ') && !/หน้าทดสอบ/.test(ty.html))
+  /* "5 นาที" บนหน้าขอบคุณผูกกับ LINE เท่านั้น */
+  assert.deepEqual((ty.html.replace(/<[^>]+>/g, ' ').match(/.{0,20}5 นาที.{0,5}/g) || []).filter((m) => !/LINE/.test(m)), [])
 })

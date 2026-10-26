@@ -3,14 +3,15 @@
 <head>
   {{> head}}
   <title>รับทำเสื้อสกรีน สำหรับบริษัท ทีมงาน และกิจกรรม | TEAMDEE</title>
-  <meta name="description" content="สั่งทำเสื้อสกรีนสำหรับพนักงาน อีเวนต์ และชมรม เลือกตัวเสื้อพร้อมกำหนดขนาดและตำแหน่งลาย ให้ทีมดีตรวจไฟล์ ผ้า และวิธีสกรีนที่เหมาะกับงาน">
+  <meta name="description" content="สั่งทำเสื้อสกรีนสำหรับพนักงาน อีเวนต์ และชมรม เลือกตัวเสื้อพร้อมกำหนดขนาดและตำแหน่งลาย ให้ทีมดีตรวจไฟล์และผ้าก่อนสกรีน DFT">
 </head>
 <body>
 {{> siteHeader active="products"}}
 <main id="main">
 {{> productPage}}
 </main>
-{{> footer}}
+{{!-- ไม่มีแกลเลอรีแบบของสินค้านี้ · แถบล่างช่อง 3 พาไปราคาแทน "ดูแบบเสื้อ" (audit P5 · 2.4) --}}
+{{> footer barHref="#price" barLabel="ดูราคา"}}
 <script type="module" src="/src/js/product-page.js"></script>
 </body>
 </html>

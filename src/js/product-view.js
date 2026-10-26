@@ -22,6 +22,9 @@ export function productView(pp, real, { forWp, has }) {
 
   const v = {}
   v.hero = { ...pp.hero, facts: pp.hero.facts.filter((f) => ok(f.v)) }
+  /* ตัวเลขทีมดีใต้ hero (audit P6) · ตัวที่ยังรอยืนยันถูกตัด · เว็บจริงโชว์เมื่อเหลืออย่างน้อย 2 ตัว (กติกาเดียวกับหน้ากลุ่ม) */
+  const stats = (pp.trust?.stats || []).filter((s) => ok(s.n))
+  v.trust = sec({ ...pp.trust, stats }, stats.length >= 2 || (!forWp && stats.length > 0))
 
   const opt = pp.options
   /* สเปกที่ผลิตได้จริง (products.json) · แท็บ ทรง / คอ / ออปชั่น โชว์เฉพาะแท็บที่ยังมีแถว */
@@ -42,10 +45,8 @@ export function productView(pp, real, { forWp, has }) {
   const pri = real.price ? { ...pp.price, ...real.price } : pp.price
   const factors = strs(pri.factors)
   const need = pri.need ? { ...pri.need, items: strs(pri.need.items) } : null
+  /* กล่องราคาจริงมี amount / unit / p มาจาก src/js/prices.js แล้ว (ตัวเลขใหญ่ + หน่วยเล็ก · ไม่แกะเลขจากข้อความ) */
   const box = pri.box && (!forWp || !anyPending(pri.box)) ? pri.box : null
-  /* "เริ่มต้น 160 บาท / ตัว" → ตัวเลขใหญ่ + หน่วยเล็ก แบบป้ายราคา (อาร์ต 23 ต.ค.: กล่องเดิมดูเด็กเล่น) */
-  const m = box && /^เริ่มต้น\s*([\d,]+)\s*(.*)$/.exec(box.strong || '')
-  if (m) Object.assign(box, { amount: m[1], unit: m[2] })
   v.price = sec({ ...pri, confirmed: !!real.price, factors, need: need && need.items.length ? need : null, box, table: table(pri.table), notes: strs(pri.notes).filter((n) => !forWp || !/รอข้อมูลจริง|รอราคา/.test(n)) }, factors.length > 0 || !!box)
 
   v.quote = sec({ ...pp.quote }, !!pp.quote.h)

@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { claim } from './claims.mjs'
+import { claim, STATS } from './claims.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..')
 const read = (n) => JSON.parse(readFileSync(join(root, `docs/spec/teamdee-v22/extracted/${n}.json`), 'utf8'))
@@ -33,8 +33,7 @@ const cta = (s) => clean((s?.links || []).find((l) => !l.href)?.t)
 const empty = { intro: [], hints: [], cards: [], lists: [], tables: [], faq: [], links: [], payment: [], split: [] }
 const sections = (p, extra = {}) => Object.fromEntries(p.sections.map((s) => [extra[s.key] || (/^n\d+$/.test(s.key) ? 'related' : s.key), s]))
 
-/* 8 ปี (เริ่ม 2018) + 2,800+ องค์กร ยืนยันจาก Brand Strategy v2 · 10,000+ งาน อาร์ตยืนยัน (22 ต.ค.) */
-const STATS = [['8 ปี', 'ดูแลงานเสื้อทีม', true], ['2,800+ องค์กร', 'ลูกค้าที่ไว้วางใจ', true], ['10,000+ งาน', 'งานผลิตที่ดูแล', true]].map(([n, t, ok]) => ({ n: ok ? n : `[รอยืนยัน: ${n}]`, t }))
+/* ตัวเลขทีมดี (STATS) ย้ายไป claims.mjs ใช้ร่วมกับหน้าสินค้า (24 ต.ค.) */
 
 /* ขั้นตอน 01–03: ใน v22 หน้า 9 กลุ่ม (ยกเว้นบริษัท) เอารายการ "เตรียมข้อมูล" มาวางเป็นคำอธิบายขั้นตอน อ่านไม่รู้เรื่อง
    (agent ลูกค้า 22 ต.ค.) → เก็บหัวข้อขั้นตอนของ v22 แต่ใช้คำอธิบายกลางที่เป็นข้อเท็จจริงยืนยันแล้ว (Brand Strategy v2) เฉพาะขั้นที่ซ้ำ */
@@ -57,6 +56,8 @@ const steps = (plan) => {
 const PAYMENT_P = [
   'ออกใบเสร็จ / ใบกำกับภาษีได้',
   'ขอเอกสารจัดซื้อได้ ใบเสนอราคา ใบกำกับภาษีเต็มรูป หนังสือรับรองบริษัท ภ.พ.20 ใบส่งของ',
+  /* มัดจำ 50% ยืนยันแล้ว 23 ต.ค. · หน้าแรกกับ /faq/ บอกแล้ว หน้ากลุ่มต้องบอกเหมือนกัน (audit 26 ต.ค. H3) */
+  'มัดจำ 50% ก่อนเริ่มผลิต ชำระส่วนที่เหลือก่อนจัดส่ง',
   'วางบิลได้ตามเงื่อนไขที่ตกลงก่อนสั่ง (ไม่รับบัตรเครดิต)',
 ]
 
@@ -105,6 +106,10 @@ const shortenH2 = (id, page) => {
   return page
 }
 
+/* ลำดับส่วน: หลักฐานขึ้นครึ่งบน (audit use-04 · อาร์ตเคาะ 24 ต.ค. ข้อ 5 ให้ต่างจาก v22 ได้ · H2 ของ v22 ยังอยู่ครบ)
+   hero → แบบเสื้อ → ใบราคาย่อ → ตัวเลข → ผลงาน + ภาพลูกค้า → ยังไม่แน่ใจ → โจทย์ → บริบท → ทำไมทีมดี → วางงบ → วันที่ใช้ → FAQ → ทีม
+   สารบัญเรียงตามนี้ · ลำดับใน usePage.hbs ต้องตรงกัน */
+const ORDER = ['designs', 'products', 'work', 'photos', 'reviews', 'plan', 'faq']
 const uses = read('uses')
 const out = { _note: 'สร้างจาก Wireframe v22 ด้วย scripts/v22/use-pages.mjs (22 ต.ค. 2026) · [วงเล็บ] = รอข้อมูลจริง เว็บจริงซ่อนให้อัตโนมัติ' }
 for (const [wid, id] of Object.entries(USE)) {
@@ -117,7 +122,7 @@ for (const [wid, id] of Object.entries(USE)) {
   const team = g('team').split[0] || { h: '', p: [] }
   out[id] = {
     hero: { kicker: clean(p.hero.kicker), h1: clean(p.hero.h1), lead: clean(p.hero.lead), cta: clean(p.hero.buttons[0]), cta2: clean(p.hero.buttons[1]), facts: heroFacts(id, texts(p.hero.facts)), imgNote: p.hero.ph ? clean(p.hero.ph.t) : '' },
-    toc: p.hero.toc.map((t) => ({ t: clean(t.t), key: t.key === 'customer-photos' ? 'photos' : t.key })),
+    toc: p.hero.toc.map((t) => ({ t: clean(t.t), key: t.key === 'customer-photos' ? 'photos' : t.key })).sort((a, b) => ORDER.indexOf(a.key) - ORDER.indexOf(b.key)),
     trust: { h: clean(g('trust').h), stats: STATS, note: texts(g('trust').hints)[0] || '' },
     pain: { h: clean(g('pain').h), intro: texts(g('pain').intro), cards: cards(g('pain')) },
     contexts: sec.contexts ? { h: clean(g('contexts').h), cards: cards(g('contexts')), links: links(g('contexts')) } : null,

@@ -1,4 +1,5 @@
 import './page.js'
+import { initCountUp } from './count-up.js'
 import { initLightbox } from './lightbox.js'
 import { initTabs } from './tabs.js'
 import { shownFor } from './tag-filter.js'
@@ -45,3 +46,5 @@ if (bar && grid) {
   addEventListener('popstate', fromUrl)
   fromUrl()
 }
+
+initCountUp()

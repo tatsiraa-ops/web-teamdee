@@ -24,9 +24,13 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
   dlg.className = 'lb'
   dlg.setAttribute('aria-label', label)
   dlg.dataset.lineUrl = opts.lineUrl || grid.dataset.lineUrl || '#'
+  /* รูป → คำบรรยาย → ปุ่ม → ตัวนับ เรียงต่อกันตามปกติ (flex) ไม่ซ้อนด้วย absolute
+     เพราะปุ่มตัดเป็น 2 แถวบนมือถือแล้วไปทับคำเตือนเรื่องสี (audit 26 ต.ค. H5)
+     ปุ่มหลักคือส่งรหัสทาง LINE (จังหวะที่พร้อมทัก) · เซฟรูปเป็นลิงก์รอง
+     มือถือ: ลูกศรอยู่แถวล่างคู่ตัวนับ ไม่บังรูปกับป้ายรหัส · จอใหญ่ลูกศรอยู่ข้างรูป */
   dlg.innerHTML = `
     <figure class="lb__fig">
-      <img class="lb__img" alt="">
+      <div class="lb__stage"><img class="lb__img" alt=""></div>
       <figcaption class="lb__cap" id="lbCap">
         <span class="lb__code"></span>
         <span class="lb__meta"></span>
@@ -35,14 +39,15 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
     </figure>
     <button type="button" class="lb__btn lb__close" aria-label="ปิด">${svg(ICON.close)}</button>
     <div class="lb__bar">
-      <a class="btn btn-orange btn-sm lb__save" href="#" download>เซฟรูป</a>
-      <a class="btn btn-sm bg-paper text-ink border-paper lb__line" href="#" data-track="line" data-where="lightbox" target="_blank" rel="noopener">ส่งคุยใน LINE</a>
-      <a class="btn btn-sm bg-transparent text-paper border-paper/50 lb__quote" href="#" hidden>ขอราคาแบบนี้</a>
-      <p class="lb__hint">มือถือกดค้างที่รูปเพื่อบันทึก · คอมคลิกขวา</p>
+      <a class="btn btn-orange btn-sm lb__line" href="#" data-track="line" data-where="lightbox" target="_blank" rel="noopener">ส่งคุยใน LINE</a>
+      <a class="btn btn-sm bg-paper text-ink border-paper lb__quote" href="#" hidden>ขอราคาแบบนี้</a>
+      <p class="lb__hint"><a class="lb__save" href="#" download>เซฟรูป</a> หรือกดค้างที่รูปบนมือถือ</p>
     </div>
-    <button type="button" class="lb__btn lb__prev" aria-label="รูปก่อนหน้า">${svg(ICON.prev)}</button>
-    <button type="button" class="lb__btn lb__next" aria-label="รูปถัดไป">${svg(ICON.next)}</button>
-    <p class="lb__count" aria-live="polite"></p>`
+    <div class="lb__nav">
+      <button type="button" class="lb__btn lb__prev" aria-label="รูปก่อนหน้า">${svg(ICON.prev)}</button>
+      <p class="lb__count" aria-live="polite"></p>
+      <button type="button" class="lb__btn lb__next" aria-label="รูปถัดไป">${svg(ICON.next)}</button>
+    </div>`
   document.body.append(dlg)
 
   const img = dlg.querySelector('.lb__img')
@@ -79,12 +84,16 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
       save.setAttribute('download', `TEAMDEE${code ? '-' + code : ''}.${ext}`)
     }
     /* มีรหัสแบบ = เปิดแชท LINE พร้อมข้อความ "สนใจแบบเสื้อรหัส …" · ปุ่มขอราคาพารหัสไปฟอร์ม */
-    if (line) line.href = lineUrlFor(code, dlg.dataset.lineUrl || '#')
+    if (line) {
+      line.href = lineUrlFor(code, dlg.dataset.lineUrl || '#')
+      line.textContent = code ? `ส่งรหัส ${code} ทาง LINE` : 'ส่งคุยใน LINE'
+    }
     const quote = dlg.querySelector('.lb__quote')
     if (quote) { quote.hidden = !code; quote.href = `${dlg.dataset.contactUrl || '/contact-us/'}?code=${encodeURIComponent(code)}&from=${encodeURIComponent(location.pathname)}` }
     const solo = items.length < 2
     dlg.querySelector('.lb__prev').hidden = solo
     dlg.querySelector('.lb__next').hidden = solo
+    count.hidden = solo
   }
 
   const open = (el) => {

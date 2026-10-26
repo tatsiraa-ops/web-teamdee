@@ -188,12 +188,15 @@ add_action('wp_head', function () {
 	echo "<style>.admin-bar [data-header]{top:32px}@media(max-width:782px){.admin-bar [data-header]{top:46px}}@media(max-width:600px){.admin-bar [data-header]{top:0}}</style>\n";
 }, 5);
 
-/* หน้าที่มาจากต้นแบบไม่ใช้ block editor ไม่ต้องโหลด CSS ของ block · ลดของที่ไม่ได้ใช้ */
+/* หน้าที่มาจากต้นแบบไม่ใช้ block editor ไม่ต้องโหลด CSS ของ block · ลดของที่ไม่ได้ใช้
+   WP 6.9+ ธีม classic พิมพ์ global-styles ตอน wp_footer แล้วย้ายขึ้น <head> (wp_hoist_late_printed_styles)
+   dequeue ตอนนี้จึงไม่ทัน ต้องถอด hook ตอน wp_footer ด้วย ไม่งั้น body{padding:0} ของ WP ทับที่เว้นให้แถบล่างมือถือ (audit 26 ต.ค. H1) */
 add_action('wp_enqueue_scripts', function () {
 	if (!td_current()) return;
-	foreach (['wp-block-library', 'wp-block-library-theme', 'global-styles', 'classic-theme-styles'] as $h) {
+	foreach (['wp-block-library', 'wp-block-library-theme', 'global-styles', 'classic-theme-styles', 'wp-global-styles-placeholder'] as $h) {
 		wp_dequeue_style($h);
 	}
+	remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
 }, 100);
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
@@ -234,8 +237,9 @@ add_action('wp_body_open', function () {
 });
 
 /* ---------- ฟอร์มติดต่อ /contact-us/ · ส่งเข้าอีเมลทีมขาย (แผน v22 ระยะ 3 · อาร์ตเคาะ 22 ต.ค. 2026) ----------
-   ตั้งอีเมลรับฟอร์มที่ ลักษณะ > ปรับแต่ง > TEAMDEE · เว้นว่าง = ปิด หน้าเว็บใช้ทางสำรอง (คัดลอกข้อความ + LINE)
-   กันสแปม: ช่องกันบอท (website) + จำกัด 5 ครั้ง / 10 นาที ต่อเครื่อง · ไม่รับไฟล์แนบ รับแค่ชื่อไฟล์
+   ตั้งอีเมลรับฟอร์มที่ ลักษณะ > ปรับแต่ง > TEAMDEE · เว้นว่าง = ปิด หน้าเว็บใช้ทางสำรอง (ส่งต่อทาง LINE ที่พิมพ์ข้อความไว้ให้)
+   กันสแปม: ช่องกันบอท (website) + จำกัด 5 ครั้ง / 10 นาที ต่อเครื่อง · ไม่มีช่องแนบไฟล์ (อาร์ตเคาะ 24 ต.ค.) ไฟล์ส่งทาง LINE
+   ส่งสำเร็จ → หน้า /thank-you/ ของธีม (site/thank-you/ ในต้นแบบ) แสดงเบอร์ที่กรอก และยิง td_form_submit
    ไม่เก็บข้อมูลลูกค้าลงฐานข้อมูล ส่งอีเมลอย่างเดียว */
 
 add_action('customize_register', function (WP_Customize_Manager $c) {
@@ -243,13 +247,13 @@ add_action('customize_register', function (WP_Customize_Manager $c) {
 	$c->add_control('teamdee_form_email', [
 		'section' => 'teamdee',
 		'label' => 'อีเมลรับฟอร์มติดต่อ',
-		'description' => 'อีเมลทีมขายที่รับข้อมูลจากหน้า /contact-us/ · เว้นว่าง = ปิดการส่ง (ลูกค้าคัดลอกข้อความแล้วส่งทาง LINE แทน)',
+		'description' => 'อีเมลทีมขายที่รับข้อมูลจากหน้า /contact-us/ · เว้นว่าง = ปิดการส่ง (หน้าเว็บบอกลูกค้าว่ายังไม่ถึงทีม แล้วพาไปส่งทาง LINE แทน)',
 	]);
 	$c->add_setting('teamdee_form_thanks', ['type' => 'option', 'default' => '/thank-you/', 'sanitize_callback' => fn ($v) => preg_match('#^/[a-z0-9/_-]*$#i', (string) $v) ? (string) $v : '/thank-you/']);
 	$c->add_control('teamdee_form_thanks', [
 		'section' => 'teamdee',
 		'label' => 'หน้าหลังส่งฟอร์มสำเร็จ',
-		'description' => 'ค่าเริ่มต้น /thank-you/ (หน้าเดิมบนเว็บจริง ใช้วัดผลแอด) · เว้นว่าง = แสดงข้อความในหน้าติดต่อ',
+		'description' => 'ค่าเริ่มต้น /thank-you/ (หน้าเดิมบนเว็บจริง ใช้วัดผลแอด · ธีมแสดงหน้าขอบคุณของต้นแบบ) · ต้องขึ้นต้นด้วย / · ค่าว่างหรือผิดรูปแบบ = /thank-you/',
 	]);
 });
 
@@ -291,7 +295,7 @@ function td_contact_handle(): void {
 		'ชื่อ' => $name, 'เบอร์โทร' => $tel, 'องค์กร' => $f('org'), 'อีเมล' => $email,
 		'จำนวน' => $f('qty'), 'วันที่ต้องการใช้' => $f('date'), 'ใช้กับงาน' => $f('use'), 'สินค้าที่สนใจ' => $f('product'),
 		'เอกสารที่ต้องการ' => $f('docs'),
-		'มาจากหน้า' => $f('from'), 'ไฟล์ที่จะส่งตามทาง LINE' => $f('files'),
+		'มาจากหน้า' => $f('from'),
 	];
 	$body = '';
 	foreach ($rows as $label => $v) if ($v !== '') $body .= "{$label}: {$v}\n";

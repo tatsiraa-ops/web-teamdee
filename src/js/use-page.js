@@ -1,4 +1,5 @@
 import './page.js'
+import { initCountUp } from './count-up.js'
 import { initLightbox } from './lightbox.js'
 import { hrefWithDate } from './use-cta.js'
 
@@ -12,3 +13,5 @@ if (date && btn) {
   date.min = new Date().toISOString().slice(0, 10)
   date.addEventListener('change', () => btn.setAttribute('href', hrefWithDate(base, date.value)))
 }
+
+initCountUp()

@@ -8,7 +8,7 @@
 </head>
 <body class="bg-paper">
 
-<div class="bg-orange text-paper text-[15px] py-2 font-semibold">
+<div class="bg-orange text-ink text-[15px] py-2 font-semibold">
   <div class="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-1">
     <span>Design Kit ไม่ใช่หน้าเว็บจริง มีไว้ให้ตรวจก่อนประกอบเป็นสิบหน้า</span>
     <span>ร่างที่ 6 · 6 ก.ย. 2026</span>
@@ -181,11 +181,11 @@
     <p class="kit-lbl">กฎเหล็ก บนพื้นส้มใช้ตัวหนังสือดำเท่านั้น</p>
     <div class="grid md:grid-cols-2 gap-4">
       <div class="rounded-card bg-ok-tint border border-ok/25 p-6">
-        <p class="font-bold text-ok mb-2">ถูก · ดำบนส้ม 6.6:1</p>
-        <div class="bg-orange text-paper rounded-md p-5 text-[19px] font-semibold">คำนวณราคาและวันที่ต้องเริ่มให้ทัน</div>
+        <p class="font-bold text-ok mb-2">ถูก · ดำบนส้ม 7.4:1</p>
+        <div class="bg-orange text-ink rounded-md p-5 text-[19px] font-semibold">คำนวณราคาและวันที่ต้องเริ่มให้ทัน</div>
       </div>
       <div class="rounded-card bg-alert-tint border border-alert/25 p-6">
-        <p class="font-bold text-alert mb-2">ผิด · ขาวบนส้ม 2.9:1 อ่านไม่ออก</p>
+        <p class="font-bold text-alert mb-2">ผิด · ขาวบนส้ม 2.84:1 อ่านไม่ออก</p>
         <div class="bg-orange text-paper rounded-md p-5 text-[19px] font-semibold">คำนวณราคาและวันที่ต้องเริ่มให้ทัน</div>
       </div>
     </div>
@@ -208,7 +208,7 @@
       <div><p class="t-xs mb-1">Lead · 19 · Regular</p><p class="t-lead max-w-[52ch]">ไม่ใช่เสื้อที่ถูกสั่งให้ใส่ เราดูแลตั้งแต่โจทย์ขององค์กร จนถึงวันที่ทุกคนใส่พร้อมกัน</p></div>
       <div><p class="t-xs mb-1">Body · 18 · Regular · ขนาดพื้นฐาน</p><p class="t-body max-w-[60ch]">งานส่วนใหญ่ที่เราดูแลอยู่ที่ 50 ถึง 500 ตัว เพราะเป็นช่วงที่เราทำได้ดีที่สุดทั้งเรื่องราคาและเวลา</p></div>
       <div><p class="t-xs mb-1">Small 16 · Extra small 15</p><p class="t-sm">ราคารวมภาษีมูลค่าเพิ่มแล้ว ส่งฟรีทั่วประเทศ</p><p class="t-xs mt-1">เล็กที่สุดที่ยอมให้มี ใช้กับหมายเหตุเท่านั้น</p></div>
-      <div><p class="t-xs mb-1">ตัวเลข · tabular-nums</p><p class="t-display text-[clamp(44px,7vw,88px)] tabular-nums">420 · 51 · 210</p></div>
+      <div><p class="t-xs mb-1">ตัวเลข · tabular-nums</p><p class="t-display text-[clamp(44px,7vw,88px)] tabular-nums">0123456789</p></div>
     </div>
     <div class="rounded-card bg-shell border border-orange/25 p-6 mt-7">
       <p class="font-bold mb-1">GC Tenwork ยังไม่ได้ใส่</p>
@@ -406,7 +406,7 @@
       <div class="hs-accordion border-b border-line{{#if @first}} active{{/if}}" id="acc-{{@index}}">
         <button class="hs-accordion-toggle w-full flex items-center gap-4 py-6 text-left text-[19px] font-semibold min-h-tap" aria-controls="acc-c-{{@index}}" aria-expanded="{{#if @first}}true{{else}}false{{/if}}">
           <span class="flex-1">{{this.[0]}}</span>
-          <span class="w-9 h-9 rounded-full bg-orange text-paper grid place-items-center flex-none flex-shrink-0" aria-hidden="true">
+          <span class="w-9 h-9 rounded-full bg-orange text-ink grid place-items-center flex-none flex-shrink-0" aria-hidden="true">
             <svg class="hs-accordion-active:hidden" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg>
             <svg class="hidden hs-accordion-active:block" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M2 8h12"/></svg>
           </span>
@@ -510,18 +510,20 @@
     </div>
     <p class="kit-lbl">แบบที่ 2 · พื้นส้มทึบ ใช้กับหน้ากลุ่มลูกค้า</p>
     <div class="band-orange on-orange rounded-plate p-8 md:p-12 grid lg:grid-cols-2 gap-8 items-end">
-      <div><span class="tag">คนใส่คือพนักงานทั้งบริษัท</span><h3 class="t-display text-[clamp(26px,3.6vw,44px)] mt-3">เสื้อประจำปีบริษัท</h3><p class="t-lead mt-4 max-w-[40ch]">ปัญหาไม่ใช่ราคา แต่คือปีที่แล้วสั่งไปแล้วไม่มีใครใส่</p></div>
+      {{!-- ตัวอย่างโครงเท่านั้น · ประโยคนำเดิมเล่าปัญหาลูกค้าเหมือนเคสจริงที่ไม่มีใครยืนยัน (ชุดเดียวกับเรื่องเล่า works.json ที่ลบ 24 ต.ค.) ประโยคจริงมาจาก uses.json ของแต่ละกลุ่ม --}}
+      <div><span class="tag">คนใส่คือพนักงานทั้งบริษัท</span><h3 class="t-display text-[clamp(26px,3.6vw,44px)] mt-3">เสื้อประจำปีบริษัท</h3><p class="t-lead mt-4 max-w-[40ch]">[ประโยคนำของกลุ่มลูกค้า]</p></div>
       <div class="bg-paper rounded-card p-6 text-ink"><p class="t-xs">วันสุดท้ายที่ควรเริ่มบรีฟ</p><p class="t-display text-[clamp(26px,3.4vw,38px)] tabular-nums mt-1">26 ต.ค. 2569</p></div>
     </div>
     <p class="kit-lbl">แบบที่ 3 · พื้นดำ ใช้กับหน้าเคสหรือหน้าแบรนด์</p>
     <div class="tex-fabric rounded-plate p-8 md:p-12 text-paper relative overflow-hidden">
       <span class="watermark watermark--orange w-[280px] -left-14 -top-12">{{> logo}}</span>
-      <span class="tag tag-ink relative" style="background:var(--color-orange);color:var(--color-ink)">เสื้อประจำปีบริษัท</span>
-      <h3 class="t-display text-[clamp(26px,3.6vw,44px)] mt-3 relative">เสื้อประจำปี บริษัทประกันภัย</h3>
+      {{!-- ตัวอย่างโครงหัวหน้าเคสเท่านั้น · ชื่องานกับตัวเลขเดิมแต่งขึ้น (works.json ลบ 24 ต.ค.) ใส่ค่าจริงเมื่อมีเคสที่ลูกค้ายืนยัน --}}
+      <span class="tag tag-ink relative" style="background:var(--color-orange);color:var(--color-ink)">[กลุ่มลูกค้า]</span>
+      <h3 class="t-display text-[clamp(26px,3.6vw,44px)] mt-3 relative">[ชื่องานที่ลูกค้ายืนยัน]</h3>
       <div class="flex flex-wrap gap-x-10 gap-y-3 mt-6 relative">
-        <div><p class="t-display text-[32px] tabular-nums text-orange">420</p><p class="text-[15px] text-paper/70">ตัว</p></div>
-        <div><p class="t-display text-[32px] tabular-nums text-orange">17</p><p class="text-[15px] text-paper/70">วันทำการ</p></div>
-        <div><p class="t-display text-[32px] tabular-nums text-orange">3</p><p class="text-[15px] text-paper/70">สาขาที่ส่ง</p></div>
+        <div><p class="t-display text-[32px] tabular-nums text-orange">[จำนวน]</p><p class="text-[15px] text-paper/70">ตัว</p></div>
+        <div><p class="t-display text-[32px] tabular-nums text-orange">[จำนวน]</p><p class="text-[15px] text-paper/70">วันทำการ</p></div>
+        <div><p class="t-display text-[32px] tabular-nums text-orange">[ตัวเลข]</p><p class="text-[15px] text-paper/70">[ตัวเลขอื่นที่ลูกค้ายืนยัน]</p></div>
       </div>
     </div>
   </section>
@@ -552,13 +554,12 @@
     </div>
     <p class="kit-lbl">แถวผลงาน ตัวเลขเป็นตัวเอก</p>
     <div class="border-t-2 border-ink">
-      {{#each works}}{{#if this.home}}
+      {{!-- ตัวอย่างโครงแถวเท่านั้น · works.json ไม่มีจำนวนตัว วันงาน หรือชื่องานแล้ว (เรื่องเล่าเดิมแต่งขึ้น ลบ 24 ต.ค.) ใส่ค่าจริงเมื่อมีเคสที่ลูกค้ายืนยัน --}}
       <a href="{{url 'projects'}}" class="grid md:grid-cols-[130px_1fr_170px] gap-4 md:gap-8 items-center py-6 border-b border-line group">
-        <p class="t-display text-[clamp(32px,3.6vw,42px)] tabular-nums">{{baht this.qty}}<span class="block text-[15px] font-normal text-ink-3 mt-1">ตัว</span></p>
-        <div><span class="tag">{{this.groupName}}</span><p class="text-[20px] font-bold mt-1.5 group-hover:underline decoration-orange decoration-2 underline-offset-4">{{this.title}}</p><div class="flex flex-wrap gap-x-5 gap-y-1 mt-2 t-sm"><span>ใช้วันที่ <b class="text-ink tabular-nums">{{this.event}}</b></span><span>ใช้เวลา <b class="text-ink tabular-nums">{{this.days}}</b> วันทำการ</span></div></div>
+        <p class="t-display text-[clamp(32px,3.6vw,42px)] tabular-nums">[จำนวน]<span class="block text-[15px] font-normal text-ink-3 mt-1">ตัว</span></p>
+        <div><span class="tag">[กลุ่มลูกค้า]</span><p class="text-[20px] font-bold mt-1.5 group-hover:underline decoration-orange decoration-2 underline-offset-4">[ชื่องานที่ลูกค้ายืนยัน]</p><div class="flex flex-wrap gap-x-5 gap-y-1 mt-2 t-sm"><span>ใช้วันที่ <b class="text-ink tabular-nums">[วันงาน]</b></span><span>ใช้เวลา <b class="text-ink tabular-nums">[จำนวน]</b> วันทำการ</span></div></div>
         <p class="hidden md:block text-right font-bold text-ink-3 group-hover:underline decoration-orange decoration-2 underline-offset-4">ดูเคสเต็ม<span class="arw" aria-hidden="true">&rarr;</span></p>
       </a>
-      {{/if}}{{/each}}
     </div>
   </section>
 
@@ -650,7 +651,8 @@
     <h2 class="t-display">F4 · ตารางสเปก</h2>
     <p class="t-body max-w-[64ch]">ใช้ในหน้าเคส บอกว่างานนั้นทำด้วยอะไรบ้าง</p>
     <dl class="card max-w-[560px] mt-7">
-      {{#each works}}{{#if @first}}{{#each this.spec}}<div class="specrow2"><dt>{{this.[0]}}</dt><dd>{{this.[1]}}</dd></div>{{/each}}{{/if}}{{/each}}
+      {{!-- ตัวอย่างโครงตารางเท่านั้น · สเปกใน works.json เดิมแต่งขึ้น ลบ 24 ต.ค. --}}
+      <div class="specrow2"><dt>ผ้า</dt><dd>[ชนิดผ้า]</dd></div><div class="specrow2"><dt>ทรง</dt><dd>[ทรงเสื้อ]</dd></div><div class="specrow2"><dt>งานโลโก้</dt><dd>[เทคนิคและตำแหน่ง]</dd></div>
     </dl>
   </section>
 

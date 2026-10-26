@@ -9,45 +9,65 @@
 {{> siteHeader active="contact"}}
 
 <main id="main">
+  {{!-- จอแรกมือถือ (audit C1 · C3 · 2.3): H1 + บรรทัดเดียว → แถบสายตรง (เวลาตอบ · LINE ID · ปุ่ม LINE กับโทรแถวเดียว) → การ์ดฟอร์ม ชื่อกับเบอร์ก่อน
+       เป้า: ช่องกรอกแรกอยู่ในจอแรกที่ 375 · คอม: แถบสายตรงเป็นการ์ดขอบดำครึ่งขวาของ hero
+       หัวข้อตาม v22: H2 "เริ่มคุยกับทีมดี" ครอบ H3 "LINE ทีมดี" / "โทรหาเรา" / "ฝากข้อมูลให้ติดต่อกลับ" (หัวการ์ดฟอร์ม) --}}
   <section class="band-hero relative overflow-hidden">
     <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-    <div class="wrap relative py-12 md:py-16">
-      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">ติดต่อทีมดี</span></nav>
-      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">ติดต่อ TEAMDEE ปรึกษาและขอราคาสั่งทำเสื้อทีม</h1>
-      <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[58ch] mt-5">บอกประเภทเสื้อ จำนวนโดยประมาณ และวันที่ต้องการใช้ พร้อมแนบแบบหรือโลโก้ถ้ามี กรอกข้อมูลให้ติดต่อกลับ หรือเลือกช่องทาง LINE และโทรศัพท์</p>
-      <p class="text-[17px] text-ink-2 mt-3">ติดต่อทำเสื้อกับทีมดีได้ทั้งฟอร์ม LINE และโทร ไม่มีแบบก็เริ่มได้ กรอกเท่าที่รู้ ที่เหลือเราถามเอง</p>
+    <div class="wrap relative pt-3 pb-4 md:pt-8 md:pb-8 lg:py-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-x-16 gap-y-4 items-center">
+      <div>
+        <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">ติดต่อทีมดี</span></nav>
+        <h1 class="t-display text-[clamp(28px,4.6vw,56px)] text-ink mt-1 lg:mt-5">{{{ph 'ติดต่อ TEAMDEE ปรึกษาและขอราคาสั่งทำเสื้อทีม'}}}</h1>
+        <p class="text-[17px] leading-[1.65] text-ink-2 max-w-[52ch] mt-2">{{{ph 'ติดต่อทำเสื้อกับทีมดีได้ทั้ง LINE โทร และฟอร์ม ไม่มีแบบก็เริ่มได้'}}}</p>
+      </div>
+      {{!-- แถบสายตรง · "5 นาที" ผูกกับ LINE และโทรเท่านั้น ไม่ใช้กับฟอร์ม (audit 2.4) --}}
+      <section class="bg-paper border border-line rounded-plate p-4 lg:border-2 lg:border-ink lg:p-7" aria-labelledby="talk-h" data-where="contact-direct">
+        <h2 id="talk-h" class="text-[19px] font-bold lg:text-[28px]">เริ่มคุยกับทีมดี</h2>
+        <p class="t-sm mt-1">{{{ph 'LINE และโทร ตอบใน 5 นาที · ทุกวัน 8:30–21:00'}}} <span class="whitespace-nowrap">· LINE ID <strong class="text-ink">@teamdee</strong></span></p>
+        <div class="grid grid-cols-2 gap-3 mt-2 lg:mt-5">
+          <div>
+            <h3 class="text-[15px] font-bold text-ink-2 mb-1.5">LINE ทีมดี</h3>
+            <a class="btn btn-orange w-full gap-2 px-3" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE</a>
+          </div>
+          <div>
+            <h3 class="text-[15px] font-bold text-ink-2 mb-1.5">โทรหาเรา</h3>
+            <a class="btn w-full gap-2 px-3 tabular-nums bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink" href="tel:{{site.phonePrimaryTel}}"><span class="block size-5" aria-hidden="true">{{> icoPhone}}</span>{{site.phonePrimary}}</a>
+          </div>
+        </div>
+      </section>
     </div>
   </section>
 
-  <section class="wrap section">
+  <section class="wrap pt-3 pb-14 md:pt-8 lg:pb-20" id="form" data-where="contact-form">
     <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-start">
 
-      <!-- ฟอร์ม · หัวข้อตาม v22 -->
+      <!-- ฟอร์ม -->
       <div>
-        <h2 class="t-display text-[clamp(24px,3vw,34px)]">เริ่มคุยกับทีมดี</h2>
-        <p class="t-body mt-2 mb-7">ฝากข้อมูลให้ติดต่อกลับ</p>
-        <div class="card border-2 border-alert bg-alert-tint mb-7 hidden" id="formErrs" tabindex="-1" role="alert">
-          <h2 class="text-[19px] font-bold text-alert">ยังกรอกไม่ครบ</h2>
+        <div class="card border-2 border-alert bg-alert-tint mb-5 hidden" id="formErrs" tabindex="-1" role="alert">
+          <h3 class="text-[19px] font-bold text-alert">ยังต้องแก้ก่อนส่ง</h3>
           <ul class="mt-3 space-y-1.5" id="formErrsList"></ul>
         </div>
 
-        <!-- สถานะส่งสำเร็จ · อยู่ในหน้า ไม่สร้างหน้าใหม่ -->
-        <div class="card border-2 border-ok bg-ok-tint hidden" id="formDone" tabindex="-1" role="status">
-          <h2 class="t-display text-[clamp(22px,2.6vw,30px)] text-ok">เตรียมข้อมูลให้แล้ว</h2>
-          <p class="t-body mt-3" id="doneMsg"></p>
+        {{!-- ฟอร์มยังไม่เปิดรับ (ธีมยังไม่ตั้งอีเมลรับฟอร์ม · reason off) · ข้อมูลยังไม่ถึงทีมดี ห้ามใช้สีเขียวหรือคำว่าส่งแล้ว
+             ส่งสำเร็จจริงไปหน้า /thank-you/ · ส่งไม่ถึงใช้กล่อง #formFail ใต้ปุ่มส่ง (contact-page.js · audit C2) --}}
+        <div class="card border-2 border-ink hidden" id="formOff" tabindex="-1" data-where="form-off">
+          <h3 class="t-display text-[clamp(22px,2.6vw,30px)] text-ink">ส่งต่อทาง LINE อีกขั้นเดียว</h3>
+          <p class="t-body mt-3">ฟอร์มนี้ยังส่งเข้าระบบไม่ได้ ข้อมูลยังไม่ถึงทีมดี กดเปิด LINE แล้วกดส่งข้อความที่พิมพ์ไว้ให้ ถ้าข้อความไม่ขึ้น กดคัดลอกแล้ววางในแชท</p>
           <div class="flex flex-wrap gap-3 mt-6">
-            <a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line" id="doneLine"><span class="block size-5">{{> icoChat}}</span>เปิด LINE แล้ววางข้อความ</a>
-            <button class="btn btn-line btn-lg" type="button" id="doneBack">กลับไปแก้ข้อมูล</button>
+            <a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line" id="offLine"><span class="block size-5">{{> icoChat}}</span>เปิด LINE ส่งข้อความ</a>
+            <button class="btn btn-line btn-lg" type="button" data-copy>คัดลอกข้อความ</button>
           </div>
-          <p class="t-xs mt-5">ระหว่างรอ ดู <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'designs'}}">แบบเสื้อ</a> หรืออ่าน <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'guides' 'print'}}">คู่มือสั่งทำ</a> ไปก่อนได้</p>
+          <p class="t-xs mt-3 min-h-[1.5em]" data-copy-msg role="status"></p>
+          <p class="t-sm mt-4">LINE ID <strong class="text-ink">@teamdee</strong> · หรือโทร <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4 tabular-nums whitespace-nowrap" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a></p>
+          <button class="mt-4 inline-flex items-center min-h-[44px] font-semibold text-ink underline decoration-line-2 decoration-2 underline-offset-4 hover:decoration-ink" type="button" id="offBack">กลับไปแก้ข้อมูล</button>
         </div>
 
-        <form id="contactForm" novalidate>
+        <form id="contactForm" novalidate aria-labelledby="form-h">
           <input type="hidden" name="มาจากหน้า" id="cFrom">
-          <p class="t-sm"><span class="text-alert font-bold" aria-hidden="true">*</span> คือช่องที่ต้องกรอก ที่เหลือข้ามได้ ยิ่งบอกเยอะเรายิ่งตอบได้ตรง</p>
 
-          <fieldset class="card mt-5">
-            <legend class="text-[21px] font-bold">ติดต่อกลับยังไง</legend>
+          <div class="card max-sm:px-5 max-sm:pt-5">
+            <h3 id="form-h" class="text-[21px] font-bold">ฝากข้อมูลให้ติดต่อกลับ</h3>
+            <p class="t-sm mt-1"><span class="text-alert font-bold" aria-hidden="true">*</span> คือช่องที่ต้องกรอก ที่เหลือข้ามได้</p>
             <div class="grid sm:grid-cols-2 gap-3 mt-4">
               <div>
                 <label class="label" for="cName">ชื่อผู้ติดต่อ <span class="text-alert" aria-hidden="true">*</span></label>
@@ -56,27 +76,38 @@
               </div>
               <div>
                 <label class="label" for="cTel">เบอร์โทร <span class="text-alert" aria-hidden="true">*</span></label>
-                <input class="input tabular-nums" id="cTel" name="เบอร์โทร" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="cTel-err">
+                <input class="input tabular-nums" id="cTel" name="เบอร์โทร" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="cTel-err cTel-bad">
                 <p class="err" id="cTel-err" hidden>ยังไม่ได้กรอกเบอร์โทร ต้องใส่ก่อนส่ง</p>
-              </div>
-              <div>
-                <label class="label" for="cOrg">บริษัท / หน่วยงาน / ทีม</label>
-                <input class="input" id="cOrg" name="องค์กร" type="text" autocomplete="organization">
-              </div>
-              <div>
-                <label class="label" for="cMail">อีเมล</label>
-                <input class="input" id="cMail" name="อีเมล" type="email" autocomplete="email" inputmode="email" aria-describedby="cMail-help">
-                <p class="help" id="cMail-help">ใส่ไว้ถ้าต้องการให้ส่งใบเสนอราคาหรือเอกสารทางอีเมล</p>
+                <p class="err" id="cTel-bad" hidden>เบอร์โทรควรมี 9–10 หลัก เช่น 081-234-5678</p>
               </div>
             </div>
-            {{!-- ลูกค้าองค์กร / หน่วยงาน (agent ลูกค้า 22 ต.ค.: ไม่มีที่บอกว่าต้องการเอกสารอะไร) · รายการเดียวกับหน้าเกี่ยวกับและ FAQ --}}
-            <div class="mt-4" role="group" aria-labelledby="cDocs-h">
-              <p class="label" id="cDocs-h">เอกสารที่ต้องการ (ถ้ามี)</p>
-              <div class="flex flex-wrap gap-x-5 gap-y-1 mt-1">
-                {{#each contactDocs}}<label class="inline-flex items-center gap-2 min-h-[44px] text-[17px]"><input type="checkbox" name="เอกสาร" value="{{this}}" class="js-doc size-5 accent-[var(--color-ink)]">{{this}}</label>{{/each}}
+
+            {{!-- ข้อมูลองค์กรและเอกสารจัดซื้อ (audit C3) · พับไว้ให้ฟอร์มสั้น · กางเองเมื่อมาจากหน้ากลุ่ม B2B (?u= บริษัท หน่วยงาน ร้านค้า โรงเรียน คณะ · contact-page.js) --}}
+            <details class="group mt-5 border-t border-line pt-1" id="cOrgBox">
+              <summary class="flex items-start justify-between gap-3 min-h-[48px] py-2 cursor-pointer list-none font-bold text-[18px] leading-snug [&::-webkit-details-marker]:hidden"><span>{{{ph 'ข้อมูลองค์กร อีเมล และเอกสารจัดซื้อ'}}} <span class="inline-block text-[15px] font-semibold text-ink-3">(ถ้ามี)</span></span><svg class="shrink-0 mt-0.5 text-orange transition-transform group-open:rotate-45" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+              <div class="pb-2">
+                <p class="t-sm">{{{ph 'ออกเอกสารในนาม บริษัท ดีดี ฟินิกซ์ จำกัด (จดทะเบียน 19 ม.ค. 2021) · ราคารวม VAT 7% · องค์กรวางบิลได้ ไม่รับบัตรเครดิต'}}}</p>
+                <div class="grid sm:grid-cols-2 gap-3 mt-4">
+                  <div>
+                    <label class="label" for="cOrg">บริษัท / หน่วยงาน / ทีม</label>
+                    <input class="input" id="cOrg" name="องค์กร" type="text" autocomplete="organization">
+                  </div>
+                  <div>
+                    <label class="label" for="cMail">อีเมล</label>
+                    <input class="input" id="cMail" name="อีเมล" type="email" autocomplete="email" inputmode="email" aria-describedby="cMail-help">
+                    <p class="help" id="cMail-help">ใส่ไว้ถ้าต้องการให้ส่งใบเสนอราคาหรือเอกสารทางอีเมล</p>
+                  </div>
+                </div>
+                {{!-- รายการเดียวกับหน้าเกี่ยวกับและ FAQ (agent ลูกค้า 22 ต.ค.: ไม่มีที่บอกว่าต้องการเอกสารอะไร) --}}
+                <div class="mt-4" role="group" aria-labelledby="cDocs-h">
+                  <p class="label" id="cDocs-h">เอกสารที่ต้องการ</p>
+                  <div class="flex flex-wrap gap-x-5 gap-y-1 mt-1">
+                    {{#each contactDocs}}<label class="inline-flex items-center gap-2 min-h-[44px] text-[17px]"><input type="checkbox" name="เอกสาร" value="{{this}}" class="js-doc size-5 accent-[var(--color-ink)]">{{this}}</label>{{/each}}
+                  </div>
+                </div>
               </div>
-            </div>
-          </fieldset>
+            </details>
+          </div>
 
           <fieldset class="card mt-4">
             <legend class="text-[21px] font-bold">งานที่อยากทำ</legend>
@@ -84,7 +115,8 @@
             <div class="grid sm:grid-cols-2 gap-3 mt-4">
               <div>
                 <label class="label" for="cQty">จำนวนประมาณ (ตัว)</label>
-                <input class="input tabular-nums" id="cQty" name="จำนวน" type="number" min="1" step="1" inputmode="numeric" placeholder="ยังไม่แน่ใจก็ข้ามได้">
+                <input class="input tabular-nums" id="cQty" name="จำนวน" type="number" min="1" step="1" inputmode="numeric" aria-describedby="cQty-help">
+                <p class="help" id="cQty-help">ขั้นต่ำ 10 ตัว ยังไม่แน่ใจก็ข้ามได้</p>
               </div>
               <div>
                 <label class="label" for="cDate">วันที่ต้องการใช้</label>
@@ -110,12 +142,8 @@
             </div>
             <div class="mt-3">
               <label class="label" for="cNote">รายละเอียดหรือข้อมูลอ้างอิง</label>
-              <textarea class="input" id="cNote" name="รายละเอียด" rows="4" placeholder="เช่น อยากได้สีประมาณนี้ · เคยสั่งที่อื่นแล้วเจอปัญหาอะไร · มีรหัสแบบที่ชอบจากหน้าแบบเสื้อ"></textarea>
-            </div>
-            <div class="mt-3">
-              <label class="label" for="cFiles">แนบไฟล์ โลโก้ หรือภาพอ้างอิง</label>
-              <input class="input" id="cFiles" name="ไฟล์แนบ" type="file" multiple accept="image/*,.pdf,.ai,.eps,.svg,.csv,.xlsx">
-              <p class="help">รองรับรูป PDF ไฟล์เวกเตอร์ และตารางไซซ์ · ชื่อไฟล์จะถูกใส่ไว้ในข้อความให้ แล้วส่งไฟล์จริงตามไปในไลน์</p>
+              <textarea class="input" id="cNote" name="รายละเอียด" rows="4" aria-describedby="cNote-help"></textarea>
+              <p class="help" id="cNote-help">เช่น สีที่อยากได้ รหัสแบบที่ชอบจากหน้าแบบเสื้อ หรือปัญหาที่เคยเจอ · มีโลโก้หรือไฟล์แบบ ส่งทาง LINE หลังส่งฟอร์มได้เลย</p>
             </div>
           </fieldset>
 
@@ -124,30 +152,36 @@
             <div class="hidden" aria-hidden="true"><label>เว้นว่างไว้<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
             <button class="btn btn-orange btn-lg w-full" type="submit">ส่งข้อมูลให้ทีมดีติดต่อกลับ</button>
             <p class="t-xs mt-3" id="formMsg" role="status"></p>
+            {{!-- ส่งไม่ถึงทีมดี (error / network) · ฟอร์มและข้อมูลยังอยู่ครบ ข้อความ LINE ไม่มีชื่อและเบอร์ --}}
+            <div class="hidden mt-4 rounded-card border-2 border-alert bg-alert-tint p-5" id="formFail" tabindex="-1" role="alert" data-where="form-fail">
+              <h4 class="text-[19px] font-bold text-alert">ยังส่งไม่ถึงทีมดี</h4>
+              <p class="t-body mt-2" id="failMsg"></p>
+              <div class="flex flex-wrap gap-3 mt-4">
+                <a class="btn btn-orange gap-2" href="{{site.lineUrl}}" data-track="line" id="failLine"><span class="block size-5">{{> icoChat}}</span>ส่งทาง LINE</a>
+                <a class="btn btn-line gap-2 tabular-nums" href="tel:{{site.phonePrimaryTel}}"><span class="block size-5">{{> icoPhone}}</span>โทร {{site.phonePrimary}}</a>
+                <button class="btn btn-line" type="button" id="failRetry">ลองส่งอีกครั้ง</button>
+              </div>
+              <p class="t-sm mt-4">ข้อความ LINE ไม่ขึ้น? <button class="inline-flex items-center min-h-[44px] font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" type="button" data-copy>คัดลอกข้อความ</button> แล้ววางในแชท @teamdee</p>
+              <p class="t-xs min-h-[1.5em]" data-copy-msg role="status"></p>
+            </div>
             <p class="t-xs mt-4 pt-4 border-t border-line">การส่งฟอร์มยังไม่ถือเป็นการสั่งซื้อ เราจะติดต่อกลับเพื่อยืนยันรายละเอียดก่อน · อ่าน <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'privacy'}}">นโยบายความเป็นส่วนตัว</a></p>
           </div>
         </form>
       </div>
 
-      <!-- ช่องทางติดต่อ อยู่ใกล้ฟอร์ม -->
+      <!-- เวลาทำการ ที่ตั้ง เบอร์สำรอง · ปุ่ม LINE / โทรหลักอยู่ที่แถบสายตรงด้านบนแล้ว ไม่ซ้ำ -->
       <div class="lg:sticky lg:top-28 space-y-4">
-        <div class="bg-paper border-2 border-ink rounded-plate p-7">
-          <h2 class="t-display text-[clamp(22px,2.4vw,28px)] text-ink">อยากคุยเลยไม่ต้องกรอก</h2>
-          <p class="text-[17px] leading-[1.7] text-ink-2 mt-3">ทักไลน์หรือโทรมาได้โดยตรง</p>
-          <p class="text-[15px] text-ink-3 mt-2">ตอบกลับตามเวลาทำการจริง</p>
-          <div class="grid gap-3 mt-6">
-            <a class="btn btn-orange btn-lg w-full gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
-            <a class="btn btn-lg w-full gap-2 tabular-nums bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-ink hover:border-ink" href="tel:{{site.phonePrimaryTel}}"><span class="block size-5">{{> icoPhone}}</span>{{site.phonePrimary}}</a>
-            <a class="btn btn-lg w-full tabular-nums bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-ink hover:border-ink" href="tel:0864166449">{{site.phoneSecondary}}</a>
-          </div>
-          <dl class="mt-7 pt-6 border-t border-line space-y-3">
+        <div class="bg-paper border border-line rounded-plate p-7">
+          <h3 class="text-[19px] font-bold">เวลาทำการและที่ตั้ง</h3>
+          <dl class="mt-5 space-y-3">
             <div class="flex gap-3"><dt class="sr-only">เวลาทำการ</dt><span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoClock}}</span><dd class="text-[17px] text-ink-2 leading-[1.6]">{{site.hours}}</dd></div>
+            <div class="flex gap-3"><dt class="sr-only">เบอร์สำรอง</dt><span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoPhone}}</span><dd class="text-[17px] text-ink-2 leading-[1.6]">เบอร์สำรอง <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4 tabular-nums whitespace-nowrap" href="tel:0864166449">{{site.phoneSecondary}}</a></dd></div>
             <div class="flex gap-3"><dt class="sr-only">สถานที่เข้าพบ</dt><span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoPin}}</span><dd class="text-[17px] text-ink-2 leading-[1.6]">{{site.address}}<span class="block t-xs mt-1 text-ink-3">{{#unless wp}}ที่อยู่จดทะเบียนเป็นคนละที่ · [รอยืนยัน] · {{/unless}}กรุณาโทรนัดก่อนเดินทาง</span></dd></div>
           </dl>
 {{#unless wp}}          <div class="mt-6 pt-6 border-t border-line">
             <p class="t-xs text-ink-3">[QR ไลน์ รอไฟล์จากฝ่ายการตลาด]</p>
           </div>{{/unless}}
-          <a class="pp-more mt-6 inline-flex" href="#location">ที่ตั้งและการเดินทาง<span class="arw" aria-hidden="true">&rarr;</span></a>
+          <a class="pp-more mt-4 inline-flex" href="#location">ที่ตั้งและการเดินทาง<span class="arw" aria-hidden="true">&rarr;</span></a>
         </div>
 
         <div class="bg-shell border border-line rounded-plate p-7">
@@ -186,7 +220,8 @@
     </div>
   </section>
 </main>
-{{> footer}}
+{{!-- ปิดปุ่มลอยและการ์ดแนะนำ ไม่พาลูกค้าออกจากหน้าที่กำลังกรอก (audit C8) · แถบล่างช่อง 3 พาไปฟอร์ม --}}
+{{> footer noFloats=true barHref="#contactForm" barLabel="กรอกฟอร์ม"}}
 <script type="module" src="/src/js/contact-page.js"></script>
 </body>
 </html>

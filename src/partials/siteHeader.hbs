@@ -1,4 +1,4 @@
-<a class="sr-only focus:not-sr-only focus:absolute focus:z-[200] focus:left-2 focus:top-2 focus:bg-orange focus:text-paper focus:px-5 focus:py-3 focus:font-bold" href="#main">ข้ามไปเนื้อหาหลัก</a>
+<a class="sr-only focus:not-sr-only focus:absolute focus:z-[200] focus:left-2 focus:top-2 focus:bg-orange focus:text-ink focus:px-5 focus:py-3 focus:font-bold" href="#main">ข้ามไปเนื้อหาหลัก</a>
 
 <header class="sticky top-0 z-50 bg-paper border-b border-line relative" data-header>
   {{!-- เมนูหลักอยู่กลางแถบ (อาร์ต 21 ต.ค. 2026) · จอ 1400+ กลางจอพอดีด้วย grid 3 ช่อง · 1280–1399 ที่ไม่พอ กลางช่องระหว่างโลโก้กับปุ่ม --}}
@@ -64,7 +64,7 @@
 
     <span class="flex-1 xl:hidden"></span>
 
-    <a class="hidden sm:inline-flex justify-self-end btn btn-orange btn-sm{{#if (eq active 'contact')}} !bg-ink !border-ink !text-paper{{/if}}" href="{{url 'contact'}}">ติดต่อทีมดี</a>
+    <a class="hidden sm:inline-flex justify-self-end btn btn-orange btn-sm{{#if (eq active 'contact')}} !bg-ink !border-ink !text-paper{{/if}}" href="{{url 'contact'}}"{{#if (eq active 'contact')}} aria-current="page"{{/if}}>ติดต่อทีมดี</a>
 
     <button class="xl:hidden btn btn-line btn-sm gap-2" type="button" data-menu-open aria-expanded="false" aria-controls="mobileMenu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>

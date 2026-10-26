@@ -19,44 +19,6 @@
   "color": "น้ำเงิน"
  },
  {
-  "img": "/img/design/d02.webp",
-  "garment": "football",
-  "garmentName": "เสื้อฟุตบอล Jersey",
-  "tech": "print",
-  "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d02-540.webp",
-  "code": "TD-0002",
-  "product": [
-   "print"
-  ],
-  "use": [
-   "sport"
-  ],
-  "style": [
-   "graphic"
-  ],
-  "color": "แดง"
- },
- {
-  "img": "/img/design/d03.webp",
-  "garment": "football",
-  "garmentName": "เสื้อฟุตบอล Jersey",
-  "tech": "print",
-  "techName": "พิมพ์ลาย",
-  "imgSmall": "/img/design/d03-540.webp",
-  "code": "TD-0003",
-  "product": [
-   "print"
-  ],
-  "use": [
-   "sport"
-  ],
-  "style": [
-   "graphic"
-  ],
-  "color": "ดำ"
- },
- {
   "img": "/img/design/d04.webp",
   "garment": "badminton",
   "garmentName": "เสื้อแบดมินตัน",
@@ -199,7 +161,7 @@
   "imgSmall": "/img/design/d11-540.webp",
   "code": "TD-0011",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "edu"
@@ -295,7 +257,7 @@
   "imgSmall": "/img/design/d16-540.webp",
   "code": "TD-0016",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "sport"
@@ -314,7 +276,7 @@
   "imgSmall": "/img/design/d17-540.webp",
   "code": "TD-0017",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "sport"
@@ -448,7 +410,7 @@
   "imgSmall": "/img/design/d24-540.webp",
   "code": "TD-0024",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "edu"
@@ -486,7 +448,7 @@
   "imgSmall": "/img/design/d26-540.jpg",
   "code": "TD-0026",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "corp"
@@ -505,7 +467,7 @@
   "imgSmall": "/img/design/d27-540.jpg",
   "code": "TD-0027",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "corp"
@@ -524,7 +486,7 @@
   "imgSmall": "/img/design/d28-540.jpg",
   "code": "TD-0028",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "edu"
@@ -543,7 +505,7 @@
   "imgSmall": "/img/design/d29-540.jpg",
   "code": "TD-0029",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "corp"
@@ -562,7 +524,7 @@
   "imgSmall": "/img/design/d30-540.jpg",
   "code": "TD-0030",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "edu"
@@ -581,7 +543,7 @@
   "imgSmall": "/img/design/d31-540.jpg",
   "code": "TD-0031",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "edu"
@@ -600,7 +562,7 @@
   "imgSmall": "/img/design/d32-540.jpg",
   "code": "TD-0032",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "gov"
@@ -619,7 +581,7 @@
   "imgSmall": "/img/design/d33-540.jpg",
   "code": "TD-0033",
   "product": [
-   "polo"
+   "print"
   ],
   "use": [
    "sport"

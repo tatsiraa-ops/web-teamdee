@@ -76,13 +76,14 @@
 </section>
 
 <!-- CONVERT -->
-<section class="band-orange">
-  <div class="wrap py-14 md:py-20 text-center">
-    <h2 class="t-display text-[clamp(28px,4vw,48px)] text-paper">มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย</h2>
-    <p class="text-[18px] leading-[1.75] text-paper/90 max-w-[46ch] mx-auto mt-4">บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้</p>
-    <div class="flex flex-wrap justify-center gap-3 mt-8">
-      <a class="btn btn-lg bg-paper text-ink border-paper hover:bg-ink hover:text-paper hover:border-ink gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
-      <a class="btn btn-lg bg-transparent text-paper border-paper/70 hover:bg-paper hover:text-ink hover:border-paper" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a>
-    </div>
+{{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end · 24 ต.ค.) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
+<section class="hm-end" aria-labelledby="end-h">
+  <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
+  <div class="wrap relative hm-end__in">
+    <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
+    <h2 id="end-h">{{{ph "มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย"}}}</h2>
+    <p class="hm-end__lead">{{{ph "บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้"}}}</p>
+    <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a></div>
+    <p class="hm-end__alt"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>
   </div>
 </section>

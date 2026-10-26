@@ -7,8 +7,9 @@ export const INTERNAL_PAGES = new Set(['/ui/', '/hero-storyboard/', '/design-sam
     v22: ใช้ 12 บทความเดิมจาก CMS ถ้าส่งขึ้นไป ธีมจะเปิด URL ใหม่ที่เนื้อหาเราเขียนเอง */
 /** หน้าเดิมบนเว็บจริงที่ v22 ไม่มีต้นแบบ · เก็บเนื้อหาเดิมจาก CMS ไว้ (START-HERE v22) · ธีมห้ามเอาหน้าร่างไปทับ */
 /* หน้าที่เว็บจริงมีเนื้อหาใน CMS อยู่แล้ว และของเรายังไม่พร้อมแทน → ไม่ export ให้ WordPress ใช้หน้าเดิม
-   privacy / terms: ร่างของเรายังไม่ผ่านการตรวจทางกฎหมาย (22 ต.ค. 2026) */
-export const CMS_PAGES = new Set(['/calculations/', '/collar-styles/', '/privacy-policy/', '/terms-conditions/'])
+   privacy / terms: ร่างของเรายังไม่ผ่านการตรวจทางกฎหมาย (22 ต.ค. 2026)
+   /calculations/ เอาออกจากรายการแล้ว (อาร์ต 24 ต.ค. "คำนวณราคาเอาตามในเว็บของเรา") → ธีมแสดงเครื่องคำนวณของเราแทนหน้าเดิม */
+export const CMS_PAGES = new Set(['/collar-styles/', '/privacy-policy/', '/terms-conditions/'])
 
 export const isExported = (route) => !INTERNAL_PAGES.has(route) && !CMS_PAGES.has(route) && !/^\/blog\/.+\//.test(route)
 const text = (s) => s.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim()

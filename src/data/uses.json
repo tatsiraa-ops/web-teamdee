@@ -29,7 +29,7 @@
             "การอนุมัติแบบ",
             "เอกสารที่รองรับ"
         ],
-        "img": "/img/cat/corp.jpg",
+        "img": "/img/real/r23.jpg",
         "imgKind": "real",
         "imgPos": "object-center",
         "legacyIds": [
@@ -40,7 +40,7 @@
             {
                 "id": "polo",
                 "name": "เสื้อโปโลปัก",
-                "img": "/img/mockup/m02.jpg",
+                "img": "/img/mockup/polo-embroidery-scg.jpg",
                 "when": "เมื่อพนักงานต้องพบลูกค้าหรืออยู่หน้าร้าน",
                 "why": "งานปักให้ภาพลักษณ์ที่เป็นทางการกว่า และทนการซักบ่อยได้ดีกว่างานพิมพ์"
             },
@@ -66,7 +66,10 @@
         "id": "shop",
         "name": "เสื้อพนักงานร้านค้า",
         "shortName": "ร้านค้า",
-        "recommend": []
+        "recommend": [],
+        "img": "/img/customer/co06.webp",
+        "imgKind": "real",
+        "imgPos": "object-center"
     },
     {
         "id": "gov",
@@ -104,7 +107,7 @@
             {
                 "id": "polo",
                 "name": "เสื้อโปโลปัก",
-                "img": "/img/mockup/m02.jpg",
+                "img": "/img/mockup/polo-embroidery-scg.jpg",
                 "when": "เมื่อเป็นยูนิฟอร์มประจำที่ใส่ทุกวัน",
                 "why": "ทรงและสีสุภาพ งานปักดูเรียบร้อยและตรวจรับง่ายกว่า"
             },
@@ -148,7 +151,7 @@
             "การอนุมัติแบบ",
             "แยกสีตามทีม"
         ],
-        "img": "/img/cat/edu.jpg",
+        "img": "/img/real/r16.jpg",
         "imgKind": "real",
         "imgPos": "object-center",
         "legacyIds": [
@@ -165,7 +168,7 @@
             {
                 "id": "polo",
                 "name": "เสื้อโปโลปัก",
-                "img": "/img/mockup/m02.jpg",
+                "img": "/img/mockup/polo-embroidery-scg.jpg",
                 "when": "เมื่อเป็นเสื้อบุคลากรหรืออาจารย์",
                 "why": "ทรงสุภาพกว่าของนักศึกษา ใส่เข้าห้องประชุมและงานพิธีได้"
             },
@@ -183,14 +186,20 @@
         "id": "class",
         "name": "เสื้อรุ่น / เสื้อชมรม",
         "shortName": "รุ่น / ชมรม",
-        "recommend": []
+        "recommend": [],
+        "img": "/img/customer/ev04.webp",
+        "imgKind": "real",
+        "imgPos": "object-center"
     },
     {
         "id": "faculty",
         "name": "เสื้อคณะ / เสื้อมหาวิทยาลัย",
         "shortName": "คณะ / มหาวิทยาลัย",
         "recommend": [],
-        "seoLine": "เสื้อคณะ เสื้อมหาวิทยาลัย และเสื้อสาขา เล่าโจทย์ของคณะหรือสาขามา ทีมดีช่วยวางแบบและรวมไซซ์ให้"
+        "seoLine": "เสื้อคณะ เสื้อมหาวิทยาลัย และเสื้อสาขา เล่าโจทย์ของคณะหรือสาขามา ทีมดีช่วยวางแบบและรวมไซซ์ให้",
+        "img": "/img/customer/sc10.webp",
+        "imgKind": "real",
+        "imgPos": "object-center"
     },
     {
         "id": "sport",
@@ -222,7 +231,7 @@
             "รอบแข่งที่ขยับไม่ได้",
             "สั่งเพิ่มระหว่างฤดูกาล"
         ],
-        "img": "/img/cat/team.jpg",
+        "img": "/img/real/r17.jpg",
         "imgKind": "real",
         "imgPos": "object-center",
         "legacyIds": [
@@ -297,7 +306,7 @@
             "วันงานที่ขยับไม่ได้",
             "เผื่อจำนวนสำรอง"
         ],
-        "img": "/img/cat/activity.jpg",
+        "img": "/img/real/r21.jpg",
         "imgKind": "real",
         "imgPos": "object-center",
         "legacyIds": [
@@ -321,7 +330,7 @@
             {
                 "id": "polo",
                 "name": "เสื้อโปโลปัก",
-                "img": "/img/mockup/m02.jpg",
+                "img": "/img/mockup/polo-embroidery-scg.jpg",
                 "when": "เมื่อเป็นเสื้อทีมงานที่ต้องดูแยกจากผู้เข้าร่วม",
                 "why": "ทรงที่ดูเป็นเจ้าภาพมากกว่า ทำให้ผู้เข้าร่วมหาทีมงานเจอง่าย"
             }

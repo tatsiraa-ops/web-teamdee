@@ -16,6 +16,7 @@ import { homeView } from './src/js/home-view.js'
 import { guideView } from './src/js/guide-view.js'
 import { designDetail } from './src/js/design-page.js'
 import { phrases } from './src/js/phrases.js'
+import { calcPricing, calcKinds, calcHref, productPrice, priceFact, heroPrice, priceLine, useQuote } from './src/js/prices.js'
 
 const root = dirname(fileURLToPath(import.meta.url))
 /* ไฟล์หน้าเว็บอยู่ใน site/ วางโฟลเดอร์ตาม URL จริง เช่น site/sublimation/index.html → /sublimation/
@@ -24,6 +25,14 @@ const siteDir = resolve(root, 'site')
 /* build สำหรับธีม WordPress (scripts/export-wp.mjs ตั้ง TD_TARGET=wp) · ตัด hero ต้นแบบ ไม่ทำ sitemap เอง (ปลั๊กอิน SEO ทำ) */
 const forWp = process.env.TD_TARGET === 'wp'
 const json = (f) => JSON.parse(readFileSync(resolve(root, 'src/data', f), 'utf8'))
+
+/* srcset ของรูป hero (audit 2.7 · P2 · use-03): มีไฟล์ย่อคู่กันใน public/ (เช่น -540 · -320) จึงใส่ srcset · ไม่มีก็ใช้ไฟล์เดียว
+   bigW = ความกว้างไฟล์ใหญ่จริง (ตรวจด้วย sips 24 ต.ค.: mockup/design 1080 · real 760 · customer 640) */
+const srcsetOf = (img, small, smallW, bigW) => {
+  if (!img) return ''
+  const s = img.replace(/(\.\w+)$/, `-${small}$1`)
+  return existsSync(resolve(root, 'public' + s)) ? `${s} ${smallW}w, ${img} ${bigW}w` : ''
+}
 
 // นับจำนวนต่อหมวดให้ชิปตัวกรอง เรียงหมวดที่มีของเยอะสุดขึ้นก่อน
 const tally = (rows, key, nameKey) => {
@@ -45,7 +54,8 @@ const withMeta = () => {
   return json('designs.json').map((d) => ({
     ...d,
     meta: [
-      (d.product || []).map((x) => P[x]).join(' / '),
+      /* โปโลที่พิมพ์ลายทั้งตัวไม่ใช่โปโลปัก (audit 26 ต.ค. H6) · บอกทรงคู่กับเทคนิค */
+      (d.product || []).map((x) => (x === 'print' && d.garment === 'polo' ? 'เสื้อโปโลพิมพ์ลาย' : P[x])).join(' / '),
       (d.use || []).map((x) => U[x]).join(' / '),
       (d.style || []).map((x) => S[x]).join(' / '),
     ].filter(Boolean).join(' · '),
@@ -70,7 +80,10 @@ const loadData = () => ({
   techniques: json('techniques.json'),
   groups: json('groups.json'),
   works: json('works.json'),
-  pricing: json('pricing.json'),
+  /* เครื่องคำนวณ /calculations/ · สร้างจาก prices.json ไฟล์ราคาเดียวของเว็บ (src/js/prices.js) */
+  pricing: calcPricing(json('prices.json')),
+  /* ชิปขั้น 1 · ผ้าโปโล · ออปชัน · บรรทัดราคาใต้ H1 ของเครื่องคำนวณ (audit calc-01 calc-06) */
+  calculator: calcKinds(json('prices.json')),
   /* เวลาผลิตแยกงาน · หน้ากลุ่มลูกค้าส่วน "มีวันใช้แล้ว" (23 ต.ค.) */
   leadTimes: json('lead-times.json'),
   faq: json('faq.json'),
@@ -214,15 +227,19 @@ const loadData = () => ({
     const v = homeView(h, { forWp, latestPosts: json('legacy-posts.json').items.slice(0, 2), years: new Date().getFullYear() - json('site.json').foundedYear })
     return {
       ...v,
-      /* การ์ดบริการ: ข้อมูลจริงที่ยืนยันแล้ว 3 ช่อง (ราคาเริ่มต้น prices.json · เวลาผลิต lead-times.json · ขั้นต่ำ 10 ตัว) · อาร์ต 23 ต.ค. "ต้องดีที่สุด" */
-      cats: { ...h.cats, items: h.cats.items.map((c) => {
-        const box = json('prices.json')[c.id]?.box
-        const from = box && /([\d,]+)/.exec(box.strong)?.[1]
+      /* การ์ดบริการ: ข้อมูลจริงที่ยืนยันแล้ว 3 ช่อง (ราคา prices.json · เวลาผลิต lead-times.json · ขั้นต่ำ) · อาร์ต 23 ต.ค. "ต้องดีที่สุด"
+         ราคาต้องบอกจำนวนที่ใช้ได้ (audit home-02) · การ์ดที่เครื่องคำนวณคิดได้ มีลิงก์ "คำนวณราคาตามจำนวน" พร้อม ?kind= */
+      /* วิธีนับวันผลิตใต้การ์ดบริการ (เปิดทุกวัน · เริ่มนับวันถัดจากยืนยันแบบ · ช่วงคิวแน่น · งานด่วน) */
+      cats: { ...h.cats, leadNote: json('lead-times.json').note, items: h.cats.items.map((c) => {
+        const prices = json('prices.json')
+        const price = priceFact(prices, c.id)
         const lead = json('lead-times.json')[c.id]
-        return { ...c, product: pick(c.id), facts: [
-          { k: 'เริ่มต้น', v: from ? `${from} บาท/ตัว` : 'ประเมินตามแบบ' },
-          { k: 'ผลิต', v: lead ? lead.days.replace(/^DFT\s*/, '') : '' },
-          { k: 'ขั้นต่ำ', v: '10 ตัว' },
+        return { ...c, product: pick(c.id), calcHref: calcHref(prices, c.id, url('calculations')), facts: [
+          /* มีตัวเลข = "ราคารวม VAT" · สกรีนที่ประเมินตามแบบ = "ราคา" เฉยๆ */
+          { k: price?.sub ? 'ราคารวม VAT' : 'ราคา', v: price?.v || '', sub: price?.sub || '' },
+          /* สกรีนของทีมดีมีแค่ DFT (26 ต.ค.) · คงคำว่า DFT ไว้ให้รู้ว่าเป็นงานแบบไหน */
+          { k: 'ผลิต', v: lead ? lead.days : '' },
+          { k: 'ขั้นต่ำ', v: `${prices.minQty} ตัว` },
         ].filter((f) => f.v) }
       }) },
       logoRows: h.logos.show
@@ -231,6 +248,11 @@ const loadData = () => ({
       logoCount: logoFiles.length,
       photoRows,
       realGrid,
+      /* แถบรูปลูกค้าจริงใต้ hero (critique 24 ต.ค. "หลักฐานมาช้าเกิน" · อาร์ตเลือก "หลักฐานขึ้นก่อน") · สลับหมวด ไม่ซ้ำกับกริดผลงาน */
+      proofStrip: (() => {
+        const used = new Set(realGrid.items.map((x) => x.img))
+        return mixed.filter((c) => !used.has(c.img)).slice(0, 8)
+      })(),
       gallery: {
         ...h.gallery,
         items: printDesigns,
@@ -479,6 +501,8 @@ export default defineConfig({
         const base = { ...data, page, wp: forWp }
         /* หน้าแรก: ข้อมูลธุรกิจ + FAQ ให้ Google อ่าน (SEO เสื้อโปโล / ยูนิฟอร์ม 21 ต.ค. 2026) */
         if (at === '/') base.homeLd = [businessSchema(data.site), faqSchema(json('home.json').faq.items)].filter(Boolean).map(ldJson)
+        /* เครื่องคำนวณ: FAQ ราคาให้ Google อ่าน (audit calc-11) · เว็บจริงใช้ FAQ ที่ตัดข้อรอยืนยันแล้ว */
+        if (at === '/calculations/') base.calcLd = (() => { const s = faqSchema(data.faq.calc); return s && ldJson(s) })()
         const { kind, id } = page
         /* แม่แบบหน้าแบบเสื้อ (v22 /design-[รหัส]/) · ต้นแบบเท่านั้น ตัวอย่างใช้แบบแรกในคลัง */
         if (at === '/design-sample/') return { ...base, designItem: designDetail(data.designs[0], { uses: data.uses, contactHref: url('contact') }) }
@@ -502,19 +526,21 @@ export default defineConfig({
           const productWorks = data.works.filter((w) => w.product === id).slice(0, 3)
           /* หน้าสินค้าตาม Wireframe v22 (22 ต.ค. 2026) · ข้อความจาก product-pages.json + ข้อมูลจริงที่มีอยู่ */
           const has = (key) => { try { url(key); return true } catch { return false } }
-          const pp = productView(json('product-pages.json')[id], { works: productWorks, designs: productDesigns, tags: productTags, fabrics, spec: item.spec, sizes: data.sizing.sizes, price: json('prices.json')[id] }, { forWp, has })
+          const pp = productView(json('product-pages.json')[id], { works: productWorks, designs: productDesigns, tags: productTags, fabrics, spec: item.spec, sizes: data.sizing.sizes, price: productPrice(json('prices.json'), id, { calcUrl: url('calculations') }) }, { forWp, has })
           return {
             ...base,
             item,
             pp,
-            /* ภาพขั้นตอนผลิตจริงตามเทคนิค (ภาพถ่ายจากเว็บจริง team-dee.com) · คำบรรยายบอกขั้นตอน ไม่อ้างว่าเป็นโรงงานของทีมดี */
-            productionPhoto: ({
-              sublimation: { img: '/img/tech/print.webp', alt: 'เครื่องพิมพ์ลายลงกระดาษก่อนรีดลงผ้า (ซับลิเมชัน)', cap: 'ขั้นตอนพิมพ์ลายลงกระดาษก่อนรีดลงผ้า' },
-              embroidery: { img: '/img/tech/embroid.webp', alt: 'เครื่องปักกำลังปักโลโก้ลงเสื้อ', cap: 'ขั้นตอนปักโลโก้ด้วยเครื่องปัก' },
-              screen: { img: '/img/tech/screen.webp', alt: 'เครื่องพิมพ์ฟิล์มสำหรับงานสกรีนแบบ DFT', cap: 'ขั้นตอนพิมพ์ฟิล์มก่อนรีดลงเสื้อ (DFT)' },
-            })[item.technique] || null,
-            /* ยังไม่มีตารางราคา (prices.json) → ปุ่มขอราคาทาง LINE พร้อมข้อความตั้งต้น */
+            /* ภาพขั้นตอนผลิต: ยังไม่มี · รูปเครื่องพิมพ์ / เครื่องปัก / เครื่อง DFT เดิมพิสูจน์ที่มาไม่ได้ และทำให้ดูเหมือนทีมดีมีโรงงานเอง
+               (อาร์ตเคาะ 24 ต.ค. ให้เอาออกทุกที่ · tests/clean-rules.test.js) · ได้ภาพในโรงงานพาร์ตเนอร์ที่ได้รับอนุญาตแล้วค่อยใส่ พร้อมคำบรรยายว่าเป็นพาร์ตเนอร์ */
+            productionPhoto: null,
+            /* ปุ่ม LINE ใน hero / กล่องราคา / ส่วนปิด พร้อมชื่อสินค้า (audit P5) */
             priceAsk: lineMessageUrl(`ขอราคา${item.name} จำนวนประมาณ ... ตัว ใช้วันที่ ...`),
+            /* กล่องชวนขอราคา: LINE พิมพ์แม่แบบ 3 ข้อที่ต้องส่งไว้ให้กรอก (audit P5) · ไม่มีชื่อหรือเบอร์ลูกค้าใน URL */
+            quoteLine: lineMessageUrl([`ขอราคา${item.name}`, ...(pp.quote.send || []).map((x) => `- ${x}: `)].join('\n')),
+            /* จอแรกมือถือ (audit P2): ราคาแถวเดียวพร้อมจำนวน · วอร์มยังไม่มีราคา (ปุ่ม LINE ขอราคาอยู่ข้างล่างแล้ว) ไม่โชว์แถวนี้ */
+            heroPrice: (() => { const P = json('prices.json'); const h = heroPrice(P, id); return h && (h.sub || P.products[id]?.byDesign) ? h : null })(),
+            heroSrcset: srcsetOf(item.img, 540, 540, 1080),
             tech: { ...tech, fabrics },
             parentItem: item.parent ? data.allProducts.find((x) => x.id === item.parent) : null,
             childProducts: data.products.filter((x) => x.parent === id),
@@ -553,6 +579,14 @@ export default defineConfig({
           }
           const contextPhotos = (CTX[id] || []).map((x) => (x ? { img: x[0], alt: x[1] } : null))
           const up = useView(json('use-pages.json')[id], { designs: [...useDesigns, ...live].slice(0, 6), works: useWorks, photos: usePhotos, contextPhotos }, { forWp, has })
+          /* ส่วน 06 เป็นใบราคาย่อ (audit use-02) · แถวตามการ์ดสินค้าของกลุ่ม ราคาจาก prices.json · สินค้าที่ยังไม่มีราคาเปิด LINE พร้อมข้อความตั้งต้น */
+          const productName = (pid) => data.allProducts.find((x) => x.id === pid)?.name || ''
+          /* hero (audit use-03): ราคาบรรทัดเดียวของสินค้าตัวแรกในใบราคาย่อที่มีตารางราคา · รูปจริงมีไฟล์ -320 คู่กัน */
+          const P = json('prices.json')
+          const firstPriced = up.products.cards.map((c) => c.to.split('.')[1]).find((pid) => priceLine(P, pid))
+          up.hero.price = firstPriced ? { name: productName(firstPriced), line: priceLine(P, firstPriced), moq: `ขั้นต่ำ ${P.minQty} ตัว` } : null
+          up.hero.srcset = srcsetOf(item.img, 320, 320, item.img?.startsWith('/img/real/') ? 760 : 640)
+          up.products.quote = useQuote(json('prices.json'), up.products.cards, json('lead-times.json'), { askHref: (pid) => lineMessageUrl(`ขอราคา${productName(pid)} สำหรับ${item.shortName} จำนวนประมาณ ... ตัว`) })
           return {
             ...base,
             item,
@@ -576,7 +610,10 @@ export default defineConfig({
           const logos = lg.show && lg.approved ? readdirSync(resolve(root, 'public/img/client')).filter((f) => /\.(png|svg|webp)$/.test(f)).sort().map((f) => `/img/client/${f}`) : []
           const stats = wk.brands.stats.filter((x) => !forWp || !pending(x.n))
           const brands = { ...wk.brands, logos, stats, show: !forWp || logos.length > 0 || stats.length >= 2 }
-          return { ...base, wk: { ...wk, brands, heroPhotos: mixed.slice(0, 6), photos: { ...wk.photos, items: mixed }, contact: { ...wk.contact, links: wk.contact.links.filter((l) => has(l.to)) } } }
+          /* รูปงานจริงจาก works.json (r01–r09) ไม่มีเรื่องเล่าแล้ว (24 ต.ค.) → รวมเข้าภาพลูกค้า ใช้คำบรรยายตามที่เห็นในรูป
+             รูปที่ยังไม่แน่ใจกลุ่ม (works.use ว่าง) ขึ้นที่หน้านี้กับกริดหน้าแรกเท่านั้น ไม่ไปอยู่หน้ากลุ่มลูกค้า */
+          const workPhotos = data.works.map((w) => ({ imgSmall: w.img.replace(/\.(jpg|webp)$/, '-320.jpg'), catName: w.catName, alt: w.alt }))
+          return { ...base, wk: { ...wk, brands, heroPhotos: mixed.slice(0, 6), photos: { ...wk.photos, items: [...workPhotos, ...mixed] }, contact: { ...wk.contact, links: wk.contact.links.filter((l) => has(l.to)) } } }
         }
         if (kind === 'galleries') {
           const dp = json('design-pages.json').groups[id]

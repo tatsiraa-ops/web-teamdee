@@ -3,69 +3,97 @@
 <head>
   {{> head}}
   <title>คำนวณราคาเสื้อทีมเบื้องต้น · คำนวณงบผลิตเสื้อ | TEAMDEE</title>
-  <meta name="description" content="คำนวณราคาเสื้อทีมเบื้องต้นกับ TEAMDEE เลือกคอหรือเทคนิค ช่วงจำนวน และออปชัน ดูงบผลิตโดยประมาณรวม VAT 7% ราคาจริงขึ้นกับความซับซ้อนของแบบ ขอใบเสนอราคาทางไลน์">
+  <meta name="description" content="คำนวณราคาเสื้อทีมเบื้องต้นกับ TEAMDEE เลือกโปโลปัก เสื้อพิมพ์ลาย เบสบอล หรือ Jersey ใส่จำนวนจริง เห็นงบผลิตรวม VAT 7% เป็นยอดเดียว แล้วส่งใบประเมินทางไลน์ได้ทันที">
 </head>
 <body>
 {{> siteHeader active="learn"}}
 <main id="main">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"คู่มือและบทความ"},{"@type":"ListItem","position":3,"name":"คำนวณราคาเบื้องต้น"}]}</script>
+<!-- breadcrumb · "คู่มือและบทความ" เป็นแค่กลุ่มเมนู ไม่มีหน้า จึงไม่ใส่ในเส้นทาง (Google ต้องการ URL ทุกลำดับยกเว้นลำดับสุดท้าย · audit calc-11) -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"คำนวณราคาเบื้องต้น"}]}</script>
+{{#if calcLd}}<script type="application/ld+json">{{{calcLd}}}</script>{{/if}}
 
-<!-- 1 · หัวเรื่อง · คงคีย์เวิร์ดเดิมของหน้า -->
+<!-- 1 · หัวเรื่อง · คงคีย์เวิร์ดเดิมของหน้า · ใต้ H1 เหลือบรรทัดราคาเดียว (audit calc-06) -->
 <section class="band-hero relative overflow-hidden">
   <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-  <div class="wrap relative py-12 md:py-16">
-    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>คู่มือและบทความ</span><span aria-hidden="true">/</span><span aria-current="page">คำนวณราคาเบื้องต้น</span></nav>
-    <h1 class="t-display text-[clamp(30px,4.4vw,54px)] text-ink mt-7 max-w-[20ch]">คำนวณราคาเสื้อทีมเบื้องต้น</h1>
-    <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[58ch] mt-5">คำนวณงบประมาณการผลิตได้ง่ายๆ ราคาโดยประมาณรวม VAT 7% ราคาจริงขึ้นกับความซับซ้อนของแบบ</p>
-    <p class="mt-6 inline-block border-2 border-orange rounded-card px-4 py-3 text-[16px] font-semibold text-ink">ราคาเสื้อพิมพ์ลายคิดให้ทันที · เสื้อสกรีนกดขอใบเสนอราคาได้เลย</p>
+  <div class="wrap relative py-10 md:py-14">
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">คำนวณราคาเบื้องต้น</span></nav>
+    <h1 class="t-display text-[clamp(30px,4.4vw,54px)] text-ink mt-6 max-w-[20ch]">คำนวณราคาเสื้อทีมเบื้องต้น</h1>
+    <p class="text-[17px] md:text-[18px] leading-[1.7] text-ink-2 max-w-[64ch] mt-4 tabular-nums">{{calculator.lead}}</p>
   </div>
 </section>
 
-<!-- 2 · เครื่องคิด 3 ขั้น + สรุปราคา -->
+<!-- 2 · เครื่องคิด 3 ขั้น + สรุปราคา (audit 3.4 calc-01 calc-02 calc-04) · ราคาจาก prices.json ผ่าน calcKinds() · ตรรกะคิดราคาใน estimate.js มีเทส -->
 <section class="wrap section">
   <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-14 items-start">
-    <form id="calc" class="space-y-9" onsubmit="return false">
+    <form id="calc" class="space-y-9" action="#" novalidate>
       <fieldset>
-        <legend class="text-[20px] font-bold"><span class="text-ink-3 mr-2">ขั้น 1</span>เลือกคอหรือเทคนิค</legend>
+        <legend class="text-[20px] font-bold"><span class="text-ink-3 mr-2">ขั้น 1</span>เลือกเสื้อ</legend>
+        <p class="text-[15px] text-ink-3 mt-1">ตัวเลขคือราคาต่อตัวเมื่อสั่ง {{calculator.minQty}} ตัว รวม VAT</p>
         <div class="flex flex-wrap gap-2.5 mt-4">
-          {{#each pricing.kinds}}<label class="choice"><input class="sr-only" type="radio" name="kind" value="{{this.id}}"{{#if @first}} checked{{/if}}>{{this.name}} <span class="opacity-70 font-normal">{{this.sub}}</span></label>{{/each}}
+          {{#each calculator.kinds}}<label class="choice"><input class="sr-only" type="radio" name="kind" value="{{this.id}}"{{#if @first}} checked{{/if}}>{{this.name}} <span class="opacity-70 font-normal tabular-nums">{{#if this.byDesign}}{{this.sub}}{{else}}{{baht this.from}}{{/if}}</span></label>{{/each}}
         </div>
+        {{#each calculator.kinds}}{{#if this.fabrics}}
+        <fieldset class="mt-6" data-fab-for="{{this.id}}">
+          <legend class="text-[17px] font-bold">เลือกผ้า</legend>
+          <div class="flex flex-wrap gap-2.5 mt-3">
+            {{#each this.fabrics}}<label class="choice"><input class="sr-only" type="radio" name="fabric" value="{{this.id}}"{{#if @first}} checked{{/if}}>{{this.name}} <span class="opacity-70 font-normal tabular-nums">{{baht this.from}}</span></label>{{/each}}
+          </div>
+          {{#if this.include}}<p class="text-[16px] text-ink-2 mt-3">{{this.include}}</p>{{/if}}
+        </fieldset>
+        {{/if}}{{/each}}
       </fieldset>
 
       <fieldset>
         <legend class="text-[20px] font-bold"><span class="text-ink-3 mr-2">ขั้น 2</span>จำนวน (ตัว)</legend>
-        <div class="flex flex-wrap gap-2.5 mt-4">
-          {{#each pricing.bands}}<label class="choice tabular-nums"><input class="sr-only" type="radio" name="band" value="{{this.id}}"{{#if (eq this.id '51-100')}} checked{{/if}}>{{this.label}}</label>{{/each}}
+        <div class="flex items-center gap-2 mt-4">
+          <button type="button" class="qty-btn" data-q-step="-1" aria-label="ลดจำนวน 1 ตัว"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+          <label class="sr-only" for="qty">จำนวนตัว</label>
+          <input class="qty-in" id="qty" name="qty" type="number" inputmode="numeric" min="{{calculator.minQty}}" max="99999" step="1" value="30" aria-describedby="qBand qErr">
+          <button type="button" class="qty-btn" data-q-step="1" aria-label="เพิ่มจำนวน 1 ตัว"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <span class="text-[17px] font-semibold text-ink-2 ml-1">ตัว</span>
         </div>
+        <div class="flex flex-wrap gap-2.5 mt-4" role="group" aria-label="จำนวนที่เลือกได้เร็ว">
+          <button type="button" class="choice qty-chip tabular-nums" data-q="10" aria-pressed="false">10</button>
+          <button type="button" class="choice qty-chip tabular-nums" data-q="20" aria-pressed="false">20</button>
+          <button type="button" class="choice qty-chip tabular-nums" data-q="50" aria-pressed="false">50</button>
+          <button type="button" class="choice qty-chip tabular-nums" data-q="100" aria-pressed="false">100</button>
+        </div>
+        <p class="text-[16px] text-ink-2 mt-4 tabular-nums" id="qBand"></p>
+        <p class="text-[16px] font-bold text-ink mt-2" id="qErr" hidden>สั่งผลิตขั้นต่ำ {{calculator.minQty}} ตัว</p>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="optStep">
         <legend class="text-[20px] font-bold"><span class="text-ink-3 mr-2">ขั้น 3</span>ออปชัน <span class="text-[16px] font-normal text-ink-3">เลือกได้หลายข้อ</span></legend>
+        <p class="text-[15px] text-ink-3 mt-1">ไม่เลือก = แขนสั้น ทรงปกติ ไม่มีกระเป๋า ไม่บวกเพิ่ม</p>
         <div class="flex flex-wrap gap-2.5 mt-4">
-          {{#each pricing.options}}<label class="choice"><input class="sr-only" type="checkbox" name="opt" value="{{this.id}}">{{this.name}} <span class="opacity-70 font-normal">+{{#if this.add}}{{baht this.add}}{{else}}[ยืนยัน]{{/if}}</span></label>{{/each}}
+          {{#each calculator.options}}<label class="choice"><input class="sr-only" type="checkbox" name="opt" value="{{this.id}}">{{this.name}} <span class="opacity-70 font-normal tabular-nums">+{{baht this.add}}</span></label>{{/each}}
         </div>
       </fieldset>
     </form>
 
-    <aside class="lg:sticky lg:top-28 border-2 border-ink rounded-plate p-6 md:p-7" aria-labelledby="sumHead">
+    <aside class="calc-card lg:sticky lg:top-28 border-2 border-ink rounded-plate p-6 md:p-7 scroll-mt-24" id="calcCard" aria-labelledby="sumHead">
       <h2 id="sumHead" class="text-[22px]">สรุปราคาโดยประมาณ</h2>
-      <dl class="mt-5 space-y-3 text-[17px]" id="calcSum" aria-live="polite">
-        <div class="flex justify-between gap-4" id="rUnit" hidden><dt class="text-ink-2">ราคาต่อตัว</dt><dd class="font-bold text-right" id="sUnit"><span class="text-ink-3">[ยืนยันจาก{{pricing.source}}]</span></dd></div>
-        <div class="flex justify-between gap-4"><dt class="text-ink-2">× จำนวน</dt><dd class="font-bold tabular-nums text-right" id="sBand">51–100 ตัว</dd></div>
-        <div class="flex justify-between gap-4"><dt class="text-ink-2">ภาษี</dt><dd class="font-bold text-right">{{#if pricing.vatIncluded}}รวม VAT 7%{{else}}ยังไม่รวม VAT{{/if}}</dd></div>
-        <div class="flex justify-between gap-4 border-t-2 border-ink pt-4" id="rTotal" hidden><dt class="font-bold">ยอดประมาณ</dt><dd class="t-display text-[26px] tabular-nums text-right" id="sTotal"><span class="text-ink-3 text-[20px]">[ยอดประมาณ] บาท</span></dd></div>
-      </dl>
-      <!-- ยังไม่มีราคายืนยัน · บอกตรงๆ แทนการโชว์แถวตัวเลขที่ว่างทั้งหมด -->
-      <p class="text-[16px] leading-[1.7] mt-5 border-l-2 border-orange pl-4" id="sPending">เสื้อสกรีนราคาขึ้นกับจำนวนสีและขนาดลาย กดขอใบเสนอราคาด้านล่าง ทีมขายจะเห็นตัวเลือกที่คุณเลือกไว้ครบ</p>
-      <p class="t-xs mt-4" id="sNote">ราคาเบื้องต้น ไม่ใช่ใบเสนอราคา</p>
+      <div id="calcSum" aria-live="polite">
+        <p class="mt-3 text-[17px] font-bold" id="sProd"></p>
+        <p class="text-[15px] text-ink-3" id="sInc" hidden></p>
+        <dl class="mt-5 space-y-3 text-[17px] tabular-nums" id="sRows">
+          <div class="flex justify-between gap-4"><dt class="text-ink-2">ราคาต่อตัว<span class="block text-[14px] text-ink-3" id="sBand"></span></dt><dd class="font-bold text-right" id="sBase">–</dd></div>
+          <div class="flex justify-between gap-4" id="rOpt" hidden><dt class="text-ink-2">ออปชัน<span class="block text-[14px] text-ink-3" id="sOptNames"></span></dt><dd class="font-bold text-right" id="sOpt"></dd></div>
+          <div class="flex justify-between gap-4"><dt class="text-ink-2">× จำนวน</dt><dd class="font-bold text-right" id="sQty">–</dd></div>
+          <div class="flex justify-between items-end gap-4 border-t-2 border-ink pt-4"><dt class="font-bold">ยอดรวม<span class="block text-[14px] font-normal text-ink-3">{{#if calculator.vatIncluded}}รวม VAT 7% แล้ว{{else}}ยังไม่รวม VAT{{/if}}</span></dt><dd class="t-display text-[28px] text-right" id="sTotal">–</dd></div>
+        </dl>
+        <p class="text-[16px] leading-[1.6] mt-4 bg-shell rounded-card px-4 py-3" id="sNext" hidden></p>
+        <p class="text-[16px] leading-[1.7] mt-5" id="sPending" hidden></p>
+      </div>
       <div class="flex flex-col gap-2.5 mt-6">
-        <a class="btn btn-orange w-full" id="sQuote" href="{{url 'contact'}}?from=%2Fcalculations%2F">ขอใบเสนอราคาจริง</a>
-        <div class="grid grid-cols-2 gap-2.5">
-          <a class="btn btn-line" href="{{site.lineUrl}}" data-track="line">ทัก LINE ขอราคา</a>
-          <a class="btn btn-line tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร</a>
+        <a class="btn btn-orange w-full gap-2" id="sLine" href="{{site.lineUrl}}" data-track="line" data-where="calc-summary"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span><span id="sLineText">ส่งใบประเมินนี้ทาง LINE</span></a>
+        <div class="grid grid-cols-[1fr_auto] gap-2.5">
+          <a class="btn btn-line px-4" id="sQuote" href="{{url 'contact'}}?from=%2Fcalculations%2F">ขอใบเสนอราคา (ฟอร์ม)</a>
+          <a class="btn btn-line px-5 gap-2 tabular-nums" href="tel:{{site.phonePrimaryTel}}" data-where="calc-summary"><span class="block size-5 text-orange" aria-hidden="true">{{> icoPhone}}</span>โทร</a>
         </div>
       </div>
+      <p class="text-[14px] leading-[1.6] text-ink-3 mt-4">ตอบใน 5 นาที ทุกวัน 8:30–21:00 · ราคาเบื้องต้น ไม่ใช่ใบเสนอราคา</p>
     </aside>
   </div>
 </section>
@@ -113,12 +141,12 @@
       </div>
       {{/each}}
     </div>
-    <a class="btn btn-orange mt-8 gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+    <a class="btn btn-orange mt-8 gap-2" href="{{site.lineUrl}}" data-track="line" data-where="calc-faq" data-calc-line><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
   </div>
 </section>
 
 </main>
-{{> footer}}
+{{> footer barHref="#calcCard" barLabel="ดูยอดรวม" barLive=true}}
 <script type="module" src="/src/js/calc-page.js"></script>
 </body>
 </html>

@@ -90,6 +90,16 @@
 
   </div>
   <span id="after-hero" tabindex="-1"></span>
+
+  {{#if homeV4.proofStrip.length}}
+  {{!-- หลักฐานขึ้นก่อน (critique 24 ต.ค.): เสื้อที่ลูกค้าใส่จริงตั้งแต่จอที่ 2 · ไม่มี H2 (ลำดับหัวข้อ v22 คงเดิม) · ไม่วิ่ง คอมวางนิ่ง มือถือปัดได้ --}}
+  <section class="hm-proof" aria-label="ทีมจริงที่ใส่เสื้อทีมดี">
+    <ul class="hm-proof__row" tabindex="0" aria-label="ภาพทีมลูกค้า">
+      {{#each homeV4.proofStrip}}<li><img src="{{this.imgSmall}}" alt="ทีมลูกค้า{{this.catName}}ใส่เสื้อที่ทีมดีผลิต" width="320" height="320" loading="lazy" decoding="async"></li>{{/each}}
+    </ul>
+    <p class="wrap hm-proof__cap"><span>ทีมจริงที่ใส่เสื้อทีมดี</span><a class="hm-more" href="{{url 'projects'}}">ดูผลงานทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a></p>
+  </section>
+  {{/if}}
   {{!-- หน้าแรกตาม Wireframe v22 (22 ต.ค. 2026) · ข้อความ src/data/home.json · ส่วนที่รอข้อมูล src/js/home-view.js (เว็บจริงซ่อน)
        ลำดับ: hero 2 ชุดสลับกัน (01 เสื้อทีม/บริษัท · 02 กีฬา/กิจกรรม) → 6 จุดเด่น → สถิติ + โลโก้ → เข้าใจคนสั่ง → 02 บริการ 3 → 03 กลุ่มลูกค้า 5 → 04 รีวิว + คลิป → ยังไม่มีแบบ
        → 05 แบบเสื้อพิมพ์ลาย → 06 ทีมดีช่วยดูแล → 07 ผลงาน + ภาพลูกค้า → ขอประเมินราคา → ชำระเงิน/เอกสาร → 08 FAQ → 09 เรื่องราว/สถานที่ → 10 คู่มือ/ข่าวสาร → 11 รับประกัน --}}
@@ -175,18 +185,22 @@
     <ul class="hm-cats hm-cats--3">
       {{#each homeV4.cats.items}}
       <li data-rv style="--d:{{@index}}">
-        <a class="hm-cat" href="{{url 'products' this.id}}">
-          <span class="hm-cat__img{{#if this.fit}} is-{{this.fit}}{{/if}}">{{#if this.img}}<img src="{{this.img}}" alt="" width="1080" height="720" loading="lazy" decoding="async">{{else}}<span class="img-pending" role="img" aria-label="ยังไม่มีภาพ{{this.product.name}}">{{{ph this.imgNote}}}</span>{{/if}}</span>
+        {{!-- การ์ดทั้งใบกดได้ด้วยลิงก์ชื่อบริการ (ขยายเต็มการ์ด) · ลิงก์คำนวณราคาอยู่แยก ไม่ซ้อน <a> ใน <a> (audit home-02) --}}
+        <div class="hm-cat">
+          <span class="hm-cat__img{{#if this.fit}} is-{{this.fit}}{{/if}}">{{#if this.img}}<img src="{{this.img}}" alt="" width="1080" height="720" loading="lazy" decoding="async">{{else if this.panel}}{{!-- เสื้อสกรีน: แผงตัวหนังสือแทนรูปเครื่อง DFT ที่พิสูจน์ที่มาไม่ได้ (24 ต.ค.) · รูปในการ์ดเป็นของตกแต่ง ชื่อบริการอยู่ใต้รูป --}}<span class="tech-panel" aria-hidden="true"><b lang="en">{{this.panel}}</b></span>{{else}}<span class="img-pending" role="img" aria-label="ยังไม่มีภาพ{{this.product.name}}">{{{ph this.imgNote}}}</span>{{/if}}</span>
           <span class="hm-cat__body">
-            <span class="hm-cat__name">{{this.title}}</span>
+            <a class="hm-cat__name hm-cat__link" href="{{url 'products' this.id}}">{{this.title}}</a>
             <span class="hm-cat__copy">{{{ph this.copy}}}</span>
-            <span class="hm-cat__facts">{{#each this.facts}}<span><small>{{this.k}}</small><b>{{this.v}}</b></span>{{/each}}</span>
-            <span class="hm-cat__more">{{{ph this.more}}}<span class="arw" aria-hidden="true">&rarr;</span></span>
+            <span class="hm-cat__facts">{{#each this.facts}}<span><small>{{this.k}}</small><b>{{this.v}}{{#if this.sub}}<em>{{this.sub}}</em>{{/if}}</b></span>{{/each}}</span>
+            <span class="hm-cat__more" aria-hidden="true">{{{ph this.more}}}<span class="arw">&rarr;</span></span>
+            {{#if this.calcHref}}<a class="hm-cat__calc" href="{{this.calcHref}}">คำนวณราคาตามจำนวน<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}
           </span>
-        </a>
+        </div>
       </li>
       {{/each}}
     </ul>
+    {{!-- วิธีนับวันผลิต (src/data/lead-times.json · อาร์ตเคาะ 26 ต.ค.) ใต้การ์ดที่บอกจำนวนวัน --}}
+    {{#if homeV4.cats.leadNote}}<p class="hm-cats__note">{{{ph homeV4.cats.leadNote}}}</p>{{/if}}
   </section>
 
   <!-- 03 · 5 กลุ่มลูกค้า กดเข้าหน้ากลุ่ม (v22) -->
@@ -260,7 +274,7 @@
   <section class="wrap hm-sec hm-sec--tight" aria-labelledby="cta1-h">
     <div class="hm-cta" data-rv>
       <div class="hm-cta__main"><h2 id="cta1-h">{{{ph homeV4.cta1.title}}}</h2><p>{{{ph homeV4.cta1.lead}}}</p></div>
-      <div class="hm-cta__send"><p class="hm-cta__sl">{{homeV4.cta1.send.label}}</p><ol>{{#each homeV4.cta1.send.items}}<li>{{{ph this}}}</li>{{/each}}</ol></div>
+      <div class="hm-cta__send"><p class="hm-cta__sl">{{homeV4.cta1.send.label}}</p><ol>{{#each homeV4.cta1.send.items}}<li><span>{{{ph this}}}</span></li>{{/each}}</ol></div>
       <div class="hm-cta__btns"><a class="btn btn-orange btn-lg" href="{{site.lineUrl}}" data-track="line" data-where="cta-design">{{homeV4.cta1.cta}}</a><a class="btn btn-line btn-lg" href="#designs">{{homeV4.cta1.cta2}}</a></div>
     </div>
   </section>
@@ -303,7 +317,8 @@
         <p class="hm-steps__no">01<span>{{homeV4.steps.items.[0].[0]}}</span></p><h3>{{{ph homeV4.steps.items.[0].[1]}}}</h3><p>{{{ph homeV4.steps.items.[0].[2]}}}</p>
       </li>
       <li data-rv style="--d:1">
-        <img src="/img/hero/embroidery-640.jpg" alt="เครื่องปักกำลังปักโลโก้ทีมดีลงบนผ้า" width="640" height="800" loading="lazy" decoding="async">
+        {{!-- เดิมเป็นรูปเครื่องปัก (ที่มาพิสูจน์ไม่ได้ ตัวปักอ่านว่า teamD และสื่อว่ามีโรงงานเอง · ตัดออก 24 ต.ค.) → เสื้อ FTI ตัวจริงหลังผลิต (เคสในส่วนรีวิว) --}}
+        <img class="is-contain" src="/img/case/fti-front.jpg" srcset="/img/case/fti-front-400.webp 400w, /img/case/fti-front.webp 760w" sizes="(min-width:1024px) 360px, 96px" alt="เสื้อ FTI Outing 2026 ตัวจริงหลังผลิต" width="760" height="760" loading="lazy" decoding="async">
         <p class="hm-steps__no">02<span>{{homeV4.steps.items.[1].[0]}}</span></p><h3>{{{ph homeV4.steps.items.[1].[1]}}}</h3><p>{{{ph homeV4.steps.items.[1].[2]}}}</p>
       </li>
       <li data-rv style="--d:2">
@@ -327,7 +342,8 @@
 
   <!-- 07 · ผลงานแยกประเภท + ภาพลูกค้าใส่จริง (v22) · เว็บจริงไม่มีช่องรอภาพ ไม่มีแท็บที่ยังไม่มีงาน -->
   <section class="hm-sec hm-band" aria-labelledby="works-h">
-    {{!-- ผลงานจริง: เคสผลงาน + ภาพลูกค้าใส่จริง รวมเป็นกริดเดียวมีตัวกรอง แทน 2 แถวเลื่อนที่การ์ดขาดขอบและรูปซ้ำ (อาร์ตเคาะ 23 ต.ค.) --}}
+    {{!-- ผลงานจริง: เคสผลงาน + ภาพลูกค้าใส่จริง รวมเป็นกริดเดียวมีตัวกรอง แทน 2 แถวเลื่อนที่การ์ดขาดขอบและรูปซ้ำ (อาร์ตเคาะ 23 ต.ค.)
+         24 ต.ค.: การ์ดผลงานไม่มีชื่องาน/ลิงก์เรื่องเล่าแล้ว (works.json เดิมแต่งขึ้น) · เหลือหมวดและคำบรรยายตามที่เห็นในรูป --}}
     <header class="wrap hm-head hm-head--left hm-head--row" data-rv>
       <div><p class="hm-eyebrow">ผลงานจริง</p><h2 id="works-h">{{{ph homeV4.works.title}}}</h2><p>{{{ph homeV4.photos.title}}}</p></div>
       <a class="hm-more" href="{{url 'projects'}}"><span>{{{ph "ดูผลงานทั้งหมด"}}}</span><span class="arw" aria-hidden="true">&rarr;</span></a>
@@ -338,7 +354,7 @@
       </div>
       <p class="sr-only" role="status" aria-live="polite" data-real-count></p>
       <ul class="hm-real" id="realGrid">
-        {{#each homeV4.realGrid.items}}<li data-cat="{{this.cat}}"{{#unless (lt @index 8)}} hidden{{/unless}}>{{#if this.href}}<a class="hm-real__card" href="{{url 'projects'}}#{{this.href}}">{{else}}<div class="hm-real__card">{{/if}}<span class="hm-real__img"><img src="{{this.img}}"{{#if this.imgSmall}} srcset="{{this.imgSmall}} 320w, {{this.img}} 760w" sizes="(min-width:1024px) 300px, 50vw"{{/if}} alt="{{#if this.title}}{{this.title}}{{else}}ทีมลูกค้า{{this.meta}}ใส่เสื้อที่ทีมดีผลิต{{/if}}" width="760" height="760" loading="lazy" decoding="async"></span>{{#if this.title}}<span class="hm-real__t">{{{ph this.title}}}</span>{{/if}}<span class="hm-real__d">{{{ph this.meta}}}</span>{{#if this.href}}</a>{{else}}</div>{{/if}}</li>{{/each}}
+        {{#each homeV4.realGrid.items}}<li data-cat="{{this.cat}}"{{#unless (lt @index 8)}} hidden{{/unless}}><div class="hm-real__card"><span class="hm-real__img"><img src="{{this.img}}"{{#if this.imgSmall}} srcset="{{this.imgSmall}} 320w, {{this.img}} 760w" sizes="(min-width:1024px) 300px, 50vw"{{/if}} alt="{{#if this.alt}}{{this.alt}}{{else}}ทีมลูกค้า{{this.meta}}ใส่เสื้อที่ทีมดีผลิต{{/if}}" width="760" height="760" loading="lazy" decoding="async"></span><span class="hm-real__d">{{{ph this.meta}}}</span></div></li>{{/each}}
       </ul>
     </div>
   </section>
@@ -347,7 +363,7 @@
   <section class="wrap hm-sec hm-sec--tight" aria-labelledby="cta2-h">
     <div class="hm-cta hm-cta--ink" data-rv>
       <div class="hm-cta__main"><h2 id="cta2-h">{{{ph homeV4.cta2.title}}}</h2><p>{{{ph homeV4.cta2.lead}}}</p></div>
-      <div class="hm-cta__send"><p class="hm-cta__sl">{{homeV4.cta2.send.label}}</p><ol>{{#each homeV4.cta2.send.items}}<li>{{{ph this}}}</li>{{/each}}</ol></div>
+      <div class="hm-cta__send"><p class="hm-cta__sl">{{homeV4.cta2.send.label}}</p><ol>{{#each homeV4.cta2.send.items}}<li><span>{{{ph this}}}</span></li>{{/each}}</ol></div>
       {{!-- ปุ่มหลักไป LINE (แอดนับกดไลน์ · คนที่มีแบบแล้วพร้อมซื้อที่สุด) พร้อมข้อความตั้งต้น · ฟอร์มเป็นทางรอง (ตรวจหน้าแรก 22 ต.ค.) --}}
       <div class="hm-cta__btns"><a class="btn btn-lg gap-2 bg-ink text-paper border-ink hover:bg-paper hover:text-ink" href="{{haveDesignLine}}" data-track="line" data-where="cta-have"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>{{homeV4.cta2.lineCta}}</a><a class="btn btn-lg bg-transparent text-ink border-ink hover:bg-ink hover:text-paper" href="{{url 'contact'}}?from=quote">{{homeV4.cta2.formCta}}</a></div>
     </div>

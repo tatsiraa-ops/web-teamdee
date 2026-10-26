@@ -40,3 +40,12 @@ test('td_where: data-where ของปุ่มมาก่อน แล้ว�
   assert.equal(whereOf({ landmark: 'footer' }), 'footer')
   assert.equal(whereOf({}), '')
 })
+
+import { linkForTrack } from '../src/js/track.js'
+
+test('ลิงก์ LINE ที่พิมพ์ข้อความไว้ให้ (oaMessage) ส่งเข้า dataLayer แค่ line.me/R/oaMessage ไม่ส่งข้อความของลูกค้า', () => {
+  assert.equal(linkForTrack('https://line.me/R/oaMessage/@teamdee/?%E0%B8%82%E0%B8%AD'), 'line.me/R/oaMessage')
+  assert.equal(linkForTrack('https://line.me/R/ti/p/@teamdee'), 'https://line.me/R/ti/p/@teamdee')
+  assert.equal(linkForTrack('tel:0975495941'), 'tel:0975495941')
+  assert.equal(linkForTrack(''), '')
+})
