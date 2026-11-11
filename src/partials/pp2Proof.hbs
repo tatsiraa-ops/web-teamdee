@@ -1,0 +1,41 @@
+{{!-- รอบ 114 (อาร์ต "ทำมาแบบเยอะๆ" · "สมจริงมากๆ" · "ไม่เก่า"): แบนเนอร์ → แถบตัวเลข 5 ช่องซ้อนขอบแบนเนอร์ → 6 ขั้นสั่ง → เบื้องหลังงานพิมพ์ลาย 8 การ์ด (bento) → คลิป 6
+     ทำไมต้องสั่งทำเสื้อพิมพ์ลายกับทีมดี (อาร์ต 5 พ.ย. บอร์ด "โชว์ความน่าเชื่อถือการผลิต" → "เอาแบบไปเจนรูปจริงมา" → "รูปยังไม่โดน … ใส่คำไปในรูปเลยก็ได้")
+     แบบการ์ด PMK: แบนเนอร์ใหญ่ ภาพสมจริง + คำตัวใหญ่ซ้อนบนภาพ (HTML) · การ์ดภาพ 6 ขั้น แถบส้มไล่เข้ม คำตัวขาวหนาบนภาพ · บรรทัดแจ้งว่าเป็นภาพประกอบ · แถวคลิปจริงจากเพจทีมดี
+     ไม่ใช้คำว่าโรงงาน · ไม่มีโลโก้บนเครื่อง · ข้อความจากข้อเท็จจริงในเว็บ (pp-v2.json proof) --}}
+<section class="pp2-pf" aria-labelledby="pp2-pf-h">
+  <div class="wrap">
+    <header class="pp2-pf__head">
+      <h2 id="pp2-pf-h">{{{hl pp2.proof.h pp2.proof.accent}}}</h2>
+      <p>{{{ph pp2.proof.p}}}</p>
+    </header>
+    {{!-- 5 พ.ย. "อันนี้แอบโหล" → "เอาแบบเห็นเครื่องเต็มๆ ตัวหนังสือทำดีๆหน่อย": แบนเนอร์พื้นเข้ม คำซ้ายบนพื้นเรียบ (ไม่ทับภาพ) · ภาพเครื่องพิมพ์เต็มตัวขวา ขอบจางเข้าพื้น · เส้นทาง 5 จุดเต็มแถวล่าง --}}
+    {{!-- 5 พ.ย. อาร์ตเลือกแนว B โปสเตอร์ + "เอาตัวหนังสือแถวเดียวพอเพราะเราจะให้เครื่องเราเด่นๆ":
+         ภาพเครื่องพิมพ์จริงเต็มแบนเนอร์ (DSC06017) · แถบไล่ส้มเตี้ยๆ ที่ขอบล่าง · หัวข้อบรรทัดเดียว · ข้อเท็จจริงบรรทัดเดียว + ปุ่ม LINE --}}
+    <figure class="pp2-pf__ban">
+      <img src="{{pp2.proof.banner.img}}-1200.webp" srcset="{{pp2.proof.banner.img}}-760.webp 760w, {{pp2.proof.banner.img}}-1200.webp 1200w, {{pp2.proof.banner.img}}-1600.webp 1600w" sizes="(min-width:1280px) 1160px, 100vw" width="1600" height="1119" alt="{{pp2.proof.banner.alt}}" loading="lazy" decoding="async">
+      <figcaption class="pp2-pf__bt">
+        <p class="pp2-pf__bh">{{{ph pp2.proof.banner.h}}}</p>
+        <p class="pp2-pf__bs">{{{ph pp2.proof.banner.sub}}}</p>
+        <a class="cb cb--p cb--2l pp2-pf__cta" href="{{priceAsk}}" data-track="line" data-where="pp-proof"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__lbl"><span class="cb__t">ทัก LINE ขอราคา</span><span class="cb__sub" data-float-status><span class="cb__dot" aria-hidden="true"></span><span data-float-status-t>{{site.hours}}</span></span></span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </figcaption>
+    </figure>
+    <h3 class="pp2-pf__gh">{{pp2.proof.stepsH}}</h3>
+    <ol class="pp2-pf__steps" aria-label="ขั้นตอนสั่งทำเสื้อพิมพ์ลายกับทีมดี">
+      {{#each pp2.proof.steps}}<li class="pp2-pf__step"><img src="{{this.img}}-640.webp" srcset="{{this.img}}-640.webp 640w, {{this.img}}-1024.webp 1024w" sizes="(min-width:1024px) 380px, 84vw" width="1024" height="768" alt="{{this.alt}}" loading="lazy" decoding="async"><span class="pp2-pf__no" aria-hidden="true">0{{inc @index}}</span><div class="pp2-pf__band"><h4 class="pp2-pf__t">{{{ph this.h}}}</h4><p class="pp2-pf__s">{{{ph this.s}}}</p></div></li>{{/each}}
+    </ol>
+    <div class="pp2-pf__bts">
+      <div class="pp2-pf__bth"><h3 class="pp2-pf__gh">{{pp2.proof.btsH}}</h3><p>{{{ph pp2.proof.btsP}}}</p></div>
+      <ul class="pp2-pf__bento" aria-label="{{pp2.proof.btsH}}">
+        {{#each pp2.proof.bts}}<li class="pp2-pf__bc{{#if this.size}} pp2-pf__bc--{{this.size}}{{/if}}"><img src="{{this.img}}-1024.webp" srcset="{{this.img}}-640.webp 640w, {{this.img}}-1024.webp 1024w, {{this.img}}-1440.webp 1440w" sizes="{{#if this.size}}(min-width:1024px) 580px{{else}}(min-width:1024px) 290px{{/if}}, 84vw" width="1440" height="1080"{{#if this.pos}} style="object-position:{{this.pos}}"{{/if}} alt="{{this.alt}}" loading="lazy" decoding="async"><div class="pp2-pf__band"><h4 class="pp2-pf__t">{{{ph this.h}}}</h4><p class="pp2-pf__s">{{{ph this.s}}}</p></div></li>{{/each}}
+      </ul>
+    </div><!-- /bts -->
+    <p class="pp2-pf__note">{{pp2.proof.note}}</p>
+    {{#if pp2.proof.clipsV.length}}
+    {{!-- 5 พ.ย. อาร์ต "แสดงมาเลย": data-embed-auto = ตัวเล่น FB ขึ้นเองแบบหน้าแรก (video-slot.js · iframe lazy) --}}
+    <div class="pp2-pf__clips" data-embed-auto>
+      <h3 class="pp2-pf__ch">{{pp2.proof.clipsH}}</h3>
+      <ul class="vgrid pp2-pf__vgrid">{{#each pp2.proof.clipsV}}<li>{{> videoSlot v=this wp=@root.wp}}</li>{{/each}}</ul>
+    </div>
+    {{/if}}
+  </div>
+</section>

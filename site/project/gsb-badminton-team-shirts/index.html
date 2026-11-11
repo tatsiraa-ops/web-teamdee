@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>{{cs.title}} | TEAMDEE</title>
+  <meta name="description" content="{{cs.summary}}">
+  {{!-- หน้าเคสจากคลิป (casePage.hbs) · คลิปยังไม่พร้อม (videoReady) = noindex และไม่ export ขึ้น WordPress --}}
+  {{#unless cs.ready}}<meta name="robots" content="noindex">{{/unless}}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"ผลงานลูกค้า","item":"{{site.baseUrl}}{{url 'projects'}}"},{"@type":"ListItem","position":3,"name":"{{cs.customer}}"}]}</script>
+</head>
+<body>
+{{> siteHeader active="works"}}
+<main id="main">
+{{> casePage}}
+</main>
+{{> footer}}
+<script type="module" src="/src/js/page.js"></script>
+</body>
+</html>

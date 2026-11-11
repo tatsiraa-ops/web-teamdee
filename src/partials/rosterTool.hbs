@@ -1,0 +1,43 @@
+{{!-- เก็บไซซ์ทั้งทีม ระยะแรก (audit มือถือ 30 ต.ค. ข้อ 36) · โหลดเฉพาะ /size-chart/ (guidePage roster=true ในหัวข้อ collect)
+     วางรายชื่อจาก LINE / Excel → นับต่อไซซ์ + ธงบรรทัดที่ต้องตรวจ ทั้งหมดอยู่ในเครื่อง (src/js/roster.js · roster-ui.js · styles/roster.css)
+     ไม่มี JS = เห็นช่องและคำอธิบาย ใช้แม่แบบ CSV ด้านบนแทนได้ · data-sizes มาจาก sizing.json --}}
+<section class="rst" id="roster" aria-labelledby="roster-h" data-roster data-sizes="{{#each @root.sizing.sizes}}{{this.size}}:{{this.chest}} {{/each}}" data-where="size-roster">
+  <div class="rst__head">
+    <h3 id="roster-h">นับไซซ์ทั้งทีมจากรายชื่อในแชท</h3>
+    <p>คัดลอกรายชื่อจาก LINE, Excel หรือ Google Sheets มาวาง ระบบนับให้ทีละไซซ์ และบอกบรรทัดที่ต้องตรวจก่อนส่ง</p>
+  </div>
+  <p class="rst__privacy"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>รายชื่ออยู่ในเครื่องคุณ ลิงก์ LINE ส่งแค่ยอดต่อไซซ์ ชื่อคนส่งเมื่อคุณวางในแชทเอง</span></p>
+
+  <div class="rst__field">
+    <label class="rst__label" for="roster-input">รายชื่อ ไซซ์ และเบอร์เสื้อ <span>หนึ่งคนต่อบรรทัด</span></label>
+    <p class="rst__help" id="roster-help">เช่น <code>สมชาย L</code> <code>สมชาย, L, 10</code> <code>10 สมชาย XL</code> · เบอร์เสื้อไม่บังคับ · วางจากตาราง Excel ทั้งแถวได้เลย</p>
+    <textarea class="rst__input" id="roster-input" rows="8" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="roster-help roster-status"></textarea>
+    <div class="rst__tools">
+      <button type="button" class="rst__btn rst__btn--quiet" data-roster-template>เริ่มจากแม่แบบ</button>
+      <button type="button" class="rst__btn rst__btn--quiet" data-roster-clear disabled>ล้างรายชื่อ</button>
+      <button type="button" class="rst__btn rst__btn--quiet" data-roster-undo hidden>เอารายชื่อเดิมกลับมา</button>
+    </div>
+  </div>
+
+  <p class="rst__status" id="roster-status" role="status" aria-live="polite" data-roster-status>ยังไม่มีรายชื่อ วางรายชื่อ หรือกด "เริ่มจากแม่แบบ" เพื่อดูตัวอย่าง</p>
+
+  <div class="rst__result" data-roster-result hidden>
+    <h4 class="rst__h">สรุปไซซ์</h4>
+    <p class="rst__total"><b data-roster-total>0</b> ตัว <span data-roster-people></span></p>
+    <ul class="rst__sizes" data-roster-sizes aria-label="จำนวนต่อไซซ์"></ul>
+
+    <div class="rst__flags" data-roster-flags hidden>
+      <h4 class="rst__h" id="roster-flags-h" data-roster-flags-h>ต้องตรวจ</h4>
+      <p class="rst__note">กดที่บรรทัดเพื่อไปแก้ในช่องรายชื่อ บรรทัดที่ไม่มีไซซ์ยังไม่นับรวม</p>
+      <ol class="rst__flaglist" aria-labelledby="roster-flags-h" data-roster-flaglist></ol>
+    </div>
+
+    <div class="rst__actions">
+      <a class="cb cb--p rst__line" href="https://line.me/R/oaMessage/@teamdee/" target="_blank" rel="noopener" data-track="line" data-where="size-roster" data-roster-line><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ส่งสรุปทาง LINE</span></a>
+      <button type="button" class="rst__btn" data-roster-copy><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>คัดลอกรายชื่อทั้งหมด</button>
+      <button type="button" class="rst__btn" data-roster-csv><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>ดาวน์โหลดเป็น CSV</button>
+    </div>
+    <p class="rst__note" data-roster-line-note></p>
+    <p class="rst__done" role="status" aria-live="polite" data-roster-action-status></p>
+  </div>
+</section>

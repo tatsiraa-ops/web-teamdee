@@ -1,0 +1,34 @@
+{{!-- /sublimation/ ขั้นตอนสั่งผลิต · รอบ 136–138 (บอร์ด "ขั้นตอนสั่งผลิตเสื้อ" · อาร์ตเลือกแบบ B "การเดินทางของเสื้อ") · pp-v2.json print.steps · id="order" แทนส่วนขั้นตอนสั่งทำเดิม (ppOrder)
+     แผนที่ 5 ขั้น (ลิงก์ลงไปแต่ละขั้น) · ภาพใหญ่ซิกแซก เลขโตซ้อนขอบภาพ + ป้ายเวลา · เส้นทางประส้มโค้งเชื่อมทุกขั้น
+     ตั๋วชำระเงินแปะกลางทางตรงจังหวะที่จ่ายจริง (กราฟิกทางการ "ขั้นตอนการสั่งซื้อ") · ปิดด้วยภาพทีมใส่เสื้อตัวเดียวกัน + ปุ่ม LINE
+     ภาพทั้งหมดเจนจากแบบจริง BALAC CHULA สีกรม (TD-0365) · ไอคอน 3D st-* --}}
+{{#with pp2.steps}}
+<section class="pp2-stb" id="order" aria-labelledby="pp2-stb-h">
+  <div class="wrap">
+    <header class="pp2-stb__head">
+      <h2 id="pp2-stb-h">{{{hl h accent}}}</h2>
+      <p>{{{ph p}}}</p>
+    </header>
+    <nav class="pp2-stb__map" aria-label="ขั้นตอนสั่งผลิต">
+      <ol>{{#each items}}<li><a href="#step-{{inc @index}}"><img src="{{this.icon}}" width="240" height="240" alt="" loading="lazy" decoding="async"><b>{{this.n}}</b><span>{{this.t}}</span></a></li>{{/each}}</ol>
+      <p><img src="{{payIcon}}" width="240" height="240" alt="" loading="lazy" decoding="async"><span>{{mapPay}}</span></p>
+    </nav>
+    <div class="pp2-stb__road">
+      {{#each items}}<article class="pp2-stb__s pp2-stb__s--{{inc @index}}" id="step-{{inc @index}}">
+        <figure class="pp2-stb__ph"><img src="{{this.photo.img}}" srcset="{{this.photo.img}} 640w, {{this.photo.img2}} 1280w" sizes="(min-width: 1100px) 700px, 92vw" width="640" height="478" alt="{{this.photo.alt}}" loading="lazy" decoding="async"><span class="pp2-stb__n" aria-hidden="true">{{this.n}}</span>{{#if this.time}}<span class="pp2-stb__time">{{this.time}}</span>{{/if}}</figure>
+        <div class="pp2-stb__b">
+          <img class="pp2-stb__ico" src="{{this.icon}}" width="240" height="240" alt="" loading="lazy" decoding="async">
+          <h3>{{this.t}}</h3>
+          <ol class="pp2-stb__fl">{{#each this.flow}}<li>{{this}}</li>{{/each}}</ol>
+          <p>{{{ph this.note}}}</p>
+        </div>
+      </article>{{#with (lookup ../links @index)}}<div class="pp2-stb__go{{#if flip}} is-flip{{/if}}" data-between="{{at}}"><svg class="pp2-stb__path" viewBox="0 0 1000 140" preserveAspectRatio="none" aria-hidden="true"><path d="{{#if flip}}M700 0 C700 80 300 60 300 140{{else}}M300 0 C300 80 700 60 700 140{{/if}}" /></svg>{{#if pay}}<p class="pp2-stb__tix"><img src="{{@root.pp2.steps.payIcon}}" width="240" height="240" alt="" loading="lazy" decoding="async"><span class="pp2-stb__tt"><small>ชำระเงิน</small><b>{{pay.t}}</b><span>{{{ph pay.d}}}</span></span></p>{{/if}}</div><!-- /go -->{{/with}}{{/each}}
+    </div>
+    <figure class="pp2-stb__fin">
+      <img src="{{fin.img}}" srcset="{{fin.img}} 960w, {{fin.img2}} 1600w, {{fin.img3}} 2400w" sizes="(min-width: 1240px) 1200px, 100vw" width="960" height="407" alt="{{fin.alt}}" loading="lazy" decoding="async">
+      <figcaption><b>{{fin.h}}</b><span>{{{ph fin.p}}}</span><a class="cb cb--p" href="{{@root.priceAsk}}" data-track="line" data-where="pp-steps"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{fin.cta}}</span></a></figcaption>
+    </figure>
+    <p class="pp2-stb__note">{{photoNote}}</p>
+  </div>
+</section>
+{{/with}}

@@ -11,8 +11,10 @@ export const INTERNAL_PAGES = new Set(['/ui/', '/hero-storyboard/', '/design-sam
    /calculations/ เอาออกจากรายการแล้ว (อาร์ต 24 ต.ค. "คำนวณราคาเอาตามในเว็บของเรา") → ธีมแสดงเครื่องคำนวณของเราแทนหน้าเดิม */
 export const CMS_PAGES = new Set(['/collar-styles/', '/privacy-policy/', '/terms-conditions/'])
 
-export const isExported = (route) => !INTERNAL_PAGES.has(route) && !CMS_PAGES.has(route) && !/^\/blog\/.+\//.test(route)
-const text = (s) => s.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim()
+/* หน้าเคสจากคลิปใต้ /project/…/ (videos.json · 26 ต.ค.) อยู่แค่ในต้นแบบ จนกว่าคลิปพร้อมและสร้างหน้าใน WordPress แล้ว */
+export const isExported = (route) => !INTERNAL_PAGES.has(route) && !route.startsWith('/design-preview/') && !route.startsWith('/ui/') && !CMS_PAGES.has(route) && !/^\/blog\/.+\//.test(route) && !/^\/project\/.+\//.test(route)
+/* แท็กตัดบรรทัดไทย (t-nw · t-p · t-g จาก src/js/thai-break.js) อยู่กลางคำ ถอดทิ้งโดยไม่เว้นวรรค */
+const text = (s) => s.replace(/<\/?t-(?:nw|p|g)>/g, '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim()
 /* ค่า attribute ทั้งแบบ "..." '...' ไม่มีเครื่องหมายคำพูด และแบบไม่มีค่า (alt เฉยๆ = ข้อความว่าง) · ไม่มี attribute = undefined */
 const attr = (tag, name) => {
   const m = tag.match(new RegExp(`\\s${name}(?:\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+)))?(?=[\\s/>])`, 'i'))

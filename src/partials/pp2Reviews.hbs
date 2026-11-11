@@ -1,0 +1,26 @@
+{{!-- รีวิวลูกค้าเสื้อพิมพ์ลาย (5 พ.ย. บอร์ด "รีวิวลูกค้า") · คัดลอกจาก up2Reviews.hbs (/corporate/ · อาร์ตอนุมัติ) ทั้งโครง · ข้อมูล pp-v2.json print.reviews --}}
+<section class="hm-customer-proof up2-rv" id="reviews" aria-labelledby="up2-rv-h">
+  <div class="wrap">
+    <header class="up2-rv__head"><h2 id="up2-rv-h">{{{hl pp2.reviews.h pp2.reviews.accent}}}</h2><p>{{pp2.reviews.p}}</p></header>
+    <ul class="up2-rv__wall" id="pp2RvWall">
+      {{#each pp2.reviews.wall}}<li style="--r:{{this.r}}">{{#if this.review}}<button type="button" data-rv-open="{{this.review}}"><img src="{{this.small}}" srcset="{{this.small}} {{this.sw}}w, {{this.img}} 1200w" sizes="(min-width:1024px) 360px, 50vw" alt="{{this.alt}}" width="{{this.w}}" height="{{this.h}}" loading="lazy" decoding="async"></button>{{else}}<figure data-full="{{this.img}}"><img src="{{this.small}}" srcset="{{this.small}} {{this.sw}}w, {{this.img}} 1200w" sizes="(min-width:1024px) 360px, 50vw" alt="{{this.alt}}" width="{{this.w}}" height="{{this.h}}" loading="lazy" decoding="async"></figure>{{/if}}</li>{{/each}}
+    </ul>
+    <p class="up2-rv__tags">{{#each pp2.reviews.tags}}<span>#{{this}}</span>{{/each}}</p>
+    <div class="hm-rvb up2-rv__board" data-rvb>
+      <div class="hm-rvb__right">
+        <div class="hm-rvb__top"><p class="hm-rvb__label">รีวิวจากลูกค้าเสื้อพิมพ์ลาย</p><div class="hm-rvb__nav"><span class="hm-rvb__count tabular-nums" data-rvb-count aria-live="polite">1 / {{pp2.reviews.items.length}}</span><button type="button" class="hm-rvb__arw" data-rvb-step="-1" aria-label="รีวิวก่อนหน้า"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hm-rvb__arw" data-rvb-step="1" aria-label="รีวิวถัดไป"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
+        {{#each pp2.reviews.items}}
+        <article class="hm-rvb__item{{#if @first}} is-on{{/if}}" data-rvb-item data-use="{{this.use}}" aria-label="รีวิวจาก {{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}">
+          <div class="hm-rvb__card">
+            <img class="hm-rvb__pop" src="/img/icons/review-quote.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
+            <div class="hm-rvb__head"><span class="up2-rv__mono" aria-hidden="true">{{this.mono}}</span><p class="hm-rvb__who"><b>{{#if this.who}}{{{ph this.who}}}{{else}}{{{ph this.kind}}}{{/if}}</b><small>{{#if this.who}}{{this.kind}} · {{/if}}รีวิวจากแชทจริง</small></p></div>
+            <blockquote class="hm-rvb__q"><p>{{{ph this.quote}}}</p></blockquote>
+            <div class="hm-rvb__acts"><a class="cb cb--p hm-rvb__cta" href="{{this.line}}" data-track="line" data-where="pp-review"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">อยากได้เสื้อแบบนี้</span></a><a class="hm-rvb__all" href="/project/#reviews">ดูรีวิวทั้งหมด <span aria-hidden="true">→</span></a></div>
+          </div>
+        </article>
+        {{/each}}
+      </div>
+      <script type="application/json" data-rv-json>{{{json homeCustomerProof.allReviews}}}</script>
+    </div>
+  </div>
+</section>

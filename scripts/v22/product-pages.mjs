@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { claim, STATS } from './claims.mjs'
+import { fixProductCopy } from './copy-fixes.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..')
 const raw = JSON.parse(readFileSync(join(root, 'docs/spec/teamdee-v22/extracted/products.json'), 'utf8'))
@@ -36,10 +37,7 @@ const card = (c) => ({ h: clean(c.h), p: texts(c.p), img: c.ph ? clean(c.ph.t) :
 /* โจทย์ / สเปก / ทีมดีช่วย ติดกันเป็นก้อนเดียวใน wireframe · แยกเป็นรายการ */
 const facts = (s) => clean(s).split(/(?=(?:โจทย์|สเปก|ทีมดีช่วย):)/).map((x) => x.trim()).filter(Boolean)
 
-/* ลำดับส่วนสำหรับคนที่มาจากแอด (audit P9 · อาร์ตเคาะ 24 ต.ค. ข้อ 5 ให้ต่างจาก v22 ได้ · H2 ของ v22 ยังอยู่ครบ)
-   hero → ตัวเลขทีมดี → ราคา → แบบ → เสื้อจริง → ชวนขอราคา → ผ้า → รายละเอียด → ขั้นตอน → FAQ → ไซซ์ → การผลิต → ตามงาน → ปิดท้าย
-   สารบัญเรียงตามนี้ · ลำดับใน productPage.hbs ต้องตรงกัน */
-const ORDER = ['price', 'options', 'work', 'reviews', 'fabric', 'detail', 'order', 'faq', 'size', 'production']
+/* สารบัญเรียงตาม hero.toc ของ v22 (อาร์ตเคาะ 2 พ.ย. 2026 · แทนลำดับ 24 ต.ค. ข้อ 5 / 26 ต.ค.) · ลำดับใน productPage.hbs ต้องตรงกัน */
 /* ปุ่มรองใน hero (อาร์ตเคาะ 24 ต.ค. ข้อ 8): โปโลปักปุ่มหลัก LINE ปุ่มรองฟอร์มขอใบเสนอราคา · หน้าอื่นปุ่มรองเป็นลิงก์ "ดูตารางราคา" อย่างเดียว */
 const QUOTE_SECOND = new Set(['polo'])
 /* กล่องชวนขอราคา (audit P5): "ส่ง 3 อย่างนี้" แยกตามสินค้า · แตกจากย่อหน้าของ v22 ในส่วนเดียวกัน (quote.p) ไม่เพิ่มคำสัญญาใหม่ */
@@ -52,6 +50,97 @@ const SEND = {
   jersey: ['แนวกราฟิกและโลโก้', 'สัดส่วนเสื้อที่ต้องการ', 'จำนวนแยกไซซ์ และวันใช้งาน'],
 }
 const MIN = JSON.parse(readFileSync(join(root, 'src/data/prices.json'), 'utf8')).minQty
+const read = (f) => JSON.parse(readFileSync(join(root, 'src/data', f), 'utf8'))
+const DETAILS = read('download-designs.json').details
+const SPEC = Object.fromEntries(read('products.json').map((p) => [p.id, p.spec]))
+const PRINT_FABRICS = read('techniques.json').sublimation.fabricNames
+/* รูปจริงของการ์ดตัวเลือกและรายละเอียด (อาร์ตเคาะ 2 พ.ย. "เน้นใส่รูป") · เปิดดูรูปทุกใบแล้ว · ป้ายบอกตรงๆ ว่าเป็นภาพจริง ภาพ 3D หรือภาพแบบ
+   [ไฟล์, ป้าย, alt, fit] · fit = วางทั้งตัว (ภาพเสื้อตัวเดียวที่ครอปแล้วขาด) · รูปในหน้าเดียวกันห้ามซ้ำ (tests/v22-cards.test.js) */
+const MEDIA = JSON.parse(readFileSync(join(root, 'src/data/media-library.json'), 'utf8')).items
+const pic = ([file, tag, alt, fit]) => {
+  const m = MEDIA.find((x) => x.path.endsWith(`/${file}.webp`))
+  if (!m) throw new Error(`ไม่พบรูป ${file} ใน media-library.json`)
+  return { img: m.path, width: m.w, height: m.h, tag, alt, fit: !!fit }
+}
+const T3D = 'ภาพ 3D'
+const REAL = 'ภาพจริง'
+const MOCK = 'ภาพแบบ'
+const OPTION_PHOTO = {
+  polo: [
+    ['embroider-005', T3D, 'เสื้อโปโลปักสีกรมท่าล้วน ด้านหน้าและหลัง'],
+    ['embroider-014', T3D, 'เสื้อโปโลปักสีดำ ตัดต่อข้างลำตัวสีเหลือง'],
+    ['embroider-031', T3D, 'เสื้อโปโลปักสีกรมท่า ปกและขอบแขนสีขาว'],
+  ],
+  print: [
+    ['fti-front', REAL, 'เสื้อโปโลพิมพ์ลายสีแดงของทีม FTI บนหุ่น', true],
+    ['brand-049', REAL, 'เสื้อคอกลมพิมพ์ลายสีดำลายธงตาหมากรุกบนหุ่น', true],
+    ['m06', T3D, 'เสื้อคอปกพิมพ์ลายสีชมพู ปกและแขนต่างสี', true],
+  ],
+  screen: [
+    ['brand-058', T3D, 'เสื้อยืดสีดำ ด้านหน้าและหลัง'],
+    ['mockup-3d-entaneer', T3D, 'เสื้อสกรีนลายหน้าและหลังสีน้ำตาล'],
+    ['mockup-3d-chula', T3D, 'เสื้อสกรีนตัวอักษรที่อกสีขาว'],
+  ],
+  warmup: [
+    ['warmup-05', MOCK, 'เสื้อวอร์มซิปหน้าสีเทาขลิบส้ม ด้านหน้าและหลัง'],
+    ['warmup-06', MOCK, 'เสื้อวอร์มมีฮู้ดสีดำลายส้ม ด้านหน้าและหลัง'],
+    ['warmup-02', MOCK, 'เสื้อวอร์มพิมพ์ลายทีมกีฬาสีกรมท่าแดง ด้านหน้าและหลัง'],
+  ],
+  baseball: [
+    ['loose-113', MOCK, 'เสื้อเบสบอลสีดำขลิบชมพู เห็นทรงและแขน', true],
+    ['loose-105', MOCK, 'เสื้อเบสบอลสีขาวน้ำเงิน เห็นคอและแนวสาบกระดุม', true],
+    ['loose-099', REAL, 'ชื่อและเบอร์พิมพ์บนหลังเสื้อระยะใกล้'],
+  ],
+  jersey: [
+    ['d08', T3D, 'เสื้อเจอร์ซีย์สีแดงแบบ TD-0008 ด้านหน้าและหลัง', true],
+    ['d22', T3D, 'เสื้อเจอร์ซีย์แบบ TD-0022 ด้านหน้าและหลัง'],
+    ['d25', T3D, 'เสื้อเจอร์ซีย์สีเขียวแบบ TD-0025 ลายด้านหน้าและชื่อเบอร์ด้านหลัง', true],
+  ],
+}
+const DETAIL_PICS = {
+  polo: {
+    'ตำแหน่งและขนาด': ['embroider-020', T3D, 'เสื้อโปโลสีขาวปักโลโก้ที่อกซ้าย'],
+    'สีด้ายและความละเอียด': ['loose-123', REAL, 'งานปักโลโก้ TEAMDEE ด้ายสีส้มระยะใกล้'],
+    'ตรวจแบบก่อนผลิต': ['embroider-024', T3D, 'ภาพ 3D ตรวจแบบเสื้อโปโล ด้านหน้าและหลัง'],
+  },
+  print: {
+    'สีและลาย': ['brand-031', REAL, 'เสื้อพิมพ์ลายสีดำชมพูบนหุ่น เห็นสีและลาย', true],
+    'โลโก้และข้อความ': ['fti-back', REAL, 'ข้อความพิมพ์บนหลังเสื้อระยะใกล้'],
+    'ชื่อและเบอร์': ['d15', T3D, 'เสื้อพิมพ์ชื่อและเบอร์ด้านหลัง แบบ TD-0015', true],
+  },
+  warmup: {
+    'สีและลายทีม': ['warmup-03', MOCK, 'เสื้อวอร์มมีฮู้ดลายทีมสีน้ำเงินขาว'],
+    'ทรงและแขน': ['warmup-04', MOCK, 'เสื้อวอร์มซิปหน้าสีส้มกรมท่า เห็นทรงและแขน'],
+    'รายละเอียดตัวเสื้อ': ['warmup-01', MOCK, 'เสื้อวอร์มคอปกสีเทาม่วง เห็นคอและซิป'],
+  },
+  baseball: { 'สีและกราฟิก': ['loose-108', MOCK, 'เสื้อเบสบอลสีครีมดำ ลายทางและกราฟิกตัวอักษร', true] },
+  jersey: {
+    'ทรงและสัดส่วน': ['d23', T3D, 'เสื้อเจอร์ซีย์สีชมพูเทาแบบ TD-0023 ด้านหน้าและหลัง', true],
+    'ภาพสวมใส่': ['r17', REAL, 'ทีมลูกค้าใส่เสื้อทีมลายทางแดงขาวถ่ายรวม'],
+    'สีและลาย': ['d24', T3D, 'เสื้อเจอร์ซีย์แบบ TD-0024 สีน้ำเงินลายทาง', true],
+  },
+}
+/* การ์ด 3 ใบของ v22 กลับมาพร้อมรูปและปุ่ม (อาร์ตเคาะ 2 พ.ย. · แทน audit P9 ที่เคยตัดเพราะพูดซ้ำกับแท็บสเปก) · brief = ข้อความที่ v22 ส่งต่อให้ทีมขาย */
+const optionCards = (pid, s) => {
+  const list = s.cards.filter((c) => c.cta?.some((t) => /ปรึกษาตัวเลือกนี้|ให้ช่วยเลือกแนวนี้/.test(t)))
+  const briefs = s.links.filter((l) => l.brief)
+  return list.map((c, i) => ({ h: clean(c.h), p: texts(c.p), cta: clean(c.cta[0]), brief: clean(briefs[i].brief), ...pic(OPTION_PHOTO[pid][i]) }))
+}
+/* รูปจริงลงการ์ดรายละเอียด (download-designs.json): หัวการ์ด v22 → ไฟล์ · caption = ใช้ชื่อรูปแทนคำบรรยายของ wireframe ที่พูดเกินสิ่งที่เห็นในรูป */
+const DETAIL_PHOTO = {
+  baseball: { 'กระดุมและแนวสาบ': { file: 'loose-119' }, 'คอและทรง': { file: 'loose-120', caption: true } },
+}
+const detailCard = (pid, c) => {
+  if (DETAIL_PICS[pid]?.[c.h]) return { ...c, ...pic(DETAIL_PICS[pid][c.h]) }
+  const m = DETAIL_PHOTO[pid]?.[c.h]
+  const d = m && DETAILS.find((x) => x.img.includes(m.file))
+  if (m && !d) throw new Error(`ไม่พบรูป ${m.file} ใน download-designs.json`)
+  return d ? { ...c, p: m.caption ? [d.title] : c.p, img: d.img, imgSmall: d.imgSmall, width: d.width, height: d.height, alt: d.title } : c
+}
+/* การ์ดโปโลปักเป็นข้อความจริงอ่านได้โดยไม่มีรูป (ตรวจอะไรบ้าง) ไม่ใช่คำบรรยายรูปแบบสินค้าอื่น → เว็บจริงโชว์ (อาร์ต 2 พ.ย.: H2 งานปักต้องกลับมา) */
+const TEXT_CARDS = new Set(['polo'])
+/* v22 ใส่ลิงก์คู่มือไว้ทั้งในย่อหน้าและลิงก์ · เหลือลิงก์อย่างเดียว */
+const noLinkEcho = (s) => texts(s.intro).filter((t) => !links(s).some((l) => l.t === t))
 
 const out = { _note: 'สร้างจาก Wireframe v22 ด้วย scripts/v22/product-pages.mjs (22 ต.ค. 2026) · [วงเล็บ] = รอข้อมูลจริง เว็บจริงซ่อนให้อัตโนมัติ' }
 for (const [wid, pid] of Object.entries(ID)) {
@@ -67,13 +156,12 @@ for (const [wid, pid] of Object.entries(ID)) {
       cta: clean(p.hero.buttons[0]), second: QUOTE_SECOND.has(pid) ? 'quote' : 'price', imgNote: p.hero.ph ? clean(p.hero.ph.t) : '',
       facts: p.hero.facts.map((f) => { const [k, ...v] = f.split(':'); return { k: k.trim(), v: clean(v.join(':')) } }),
     },
-    toc: p.hero.toc.map((t) => ({ t: clean(t.t), key: t.key === 'embroidery' ? 'detail' : t.key })).sort((a, b) => ORDER.indexOf(a.key) - ORDER.indexOf(b.key)),
+    toc: p.hero.toc.map((t) => ({ t: clean(t.t), key: t.key === 'embroidery' ? 'detail' : t.key })),
     /* แถบความเชื่อใจใต้ hero (audit P6) · ตัวเลขชุดเดียวกับหน้ากลุ่มลูกค้า */
     trust: { stats: STATS },
-    /* การ์ดตัวหนังสือ 3 ใบของ v22 พูดซ้ำกับแท็บสเปก ทรง/คอ/ออปชั่น และกริดแบบในส่วนเดียวกัน (audit P9 "ตัดการ์ดตัวหนังสือ 3 ใบ") → ตัด เหลือหัวข้อ + คำนำ */
-    options: { h: clean(opt.h), intro: texts(opt.intro), cards: [], links: links(opt) },
+    options: { h: clean(opt.h), intro: texts(opt.intro), cards: optionCards(pid, opt), links: links(opt) },
     fabric: { h: clean(fab.h), intro: texts(fab.intro), notes: texts(fab.hints), table: fab.tables[0] || null, links: links(fab) },
-    detail: { h: clean(det.h), intro: texts(det.intro), cards: det.cards.map(card).filter((c) => c.h), table: det.tables[0] || null, links: links(det) },
+    detail: { h: clean(det.h), intro: noLinkEcho(det), cards: det.cards.map(card).filter((c) => c.h).map((c) => detailCard(pid, TEXT_CARDS.has(pid) ? { ...c, text: true } : c)), table: det.tables[0] || null, links: links(det) },
     price: {
       h: clean(pri.h),
       /* โปโลเป็นรายการ (ul) · หน้าอื่นเป็นย่อหน้า 2 ย่อหน้าใต้หัวข้อเดียว: ปัจจัย + ข้อมูลสำหรับขอราคา */
@@ -104,14 +192,59 @@ for (const [pid, page] of Object.entries(out)) {
   const l = LEAD[pid]
   if (!l?.days) continue
   for (const f of page.hero.facts) if (/ผลิต/.test(f.k)) f.v = leadText(l)
-  /* จอแรกมือถือ (audit P2) บรรทัดใต้ราคา "ขั้นต่ำ 10 ตัว · ผลิต X–Y วันทำการ" */
-  page.hero.make = `ขั้นต่ำ ${MIN} ตัว · ผลิต ${l.days}`
+  /* จอแรกมือถือ (audit P2) บรรทัดใต้ราคา "ขั้นต่ำ 10 ตัว · ผลิต X–Y วัน" */
+  page.hero.make = `ขั้นต่ำ ${pid === 'screen' ? 1 : MIN} ตัว · ผลิต ${l.days}${l.more ? ` · ${l.more}` : ''}`
   page.faq.items = page.faq.items.map(([q, a]) => {
     if (!/กี่วัน|เวลาผลิต/.test(q)) return [q, a]
-    const min = /ขั้นต่ำ/.test(q) ? 'ขั้นต่ำ 10 ตัว ' : ''
+    const min = /ขั้นต่ำ/.test(q) ? `ขั้นต่ำ ${pid === 'screen' ? 1 : 10} ตัว ` : ''
     return [q, `${min}${faqLead(l)} แจ้งวันรับเสื้อที่ต้องการเพื่อวางแผนงานก่อนยืนยัน`]
   })
 }
 
+/* ตารางรายละเอียดของ v22 มีช่อง [วงเล็บ] → เติมจากสเปกจริง (products.json · techniques.json) อาร์ต 2 พ.ย. · เฉพาะแถวที่ยืนยันแล้ว
+   - พิมพ์ลาย: ทุกแถวเป็นช่องรอ → เว็บจริงไม่มีส่วนรายละเอียด H2 v22 หาย
+   - Jersey: ใช้ผ้าชุดเดียวกับเสื้อพิมพ์ลาย (อาร์ตเคาะ 2 พ.ย.) → ไม่มีตารางรอสเปกผ้าแล้ว */
+const sure = (rows) => rows.filter(([, note]) => !/\[/.test(note)).map(([n]) => n)
+const shapes = sure(SPEC.print.shape)
+const sleeves = [...new Set(shapes.flatMap((n) => n.match(/แขน\S+/g) || []))]
+out.print.detail.table.rows = [
+  ['ทรงและไซซ์', `${shapes.join(' · ')}`],
+  ['ผ้า', PRINT_FABRICS.join(' · ')],
+  ['คอและแขน', [...sure(SPEC.print.collar), ...sleeves].join(' · ')],
+]
+out.jersey.detail.table.rows = out.jersey.detail.table.rows.map(([k, v]) => [k, k === 'ผ้า' ? PRINT_FABRICS.join(' · ') : v])
+out.jersey.fabric.table = null
+/* โปโล: ยังไม่มีรูปที่ยืนยันว่าเป็นงานปัก · รูปลูกค้าใส่โปโลขึ้นใต้หัวข้อนี้ ไม่เคลมว่าปัก (tests/v22-structure.test.js EXCEPT) */
+out.polo.work.photoH = 'เสื้อโปโลที่ลูกค้าองค์กรใส่จริง'
+
+/* หน้าสกรีนเขียนใหม่ตามราคาจริง (prices.json screen · FAQ ชุด faq.json screen) · เดิมแก้ใน product-pages.json ตรงๆ
+   ย้ายมาไว้ที่นี่ 30 ต.ค. รันใหม่แล้วไม่ทับกลับเป็น "ขั้นต่ำ 10 ตัว" ของ v22 */
+const FAQ = JSON.parse(readFileSync(join(root, 'src/data/faq.json'), 'utf8'))
+const sc = out.screen
+Object.assign(sc.hero, {
+  h1: 'รับทำเสื้อสกรีน\nให้ลายของคุณอยู่บนเสื้อที่ใช่',
+  lead: 'เสื้อคอตตอนสำหรับบริษัท ทีมงาน และกิจกรรม เลือก Premium C32 หรือ Oversize C20 พร้อมสกรีน DFT',
+  make: 'ไม่มีขั้นต่ำ · ผลิต 3–14 วัน ตามสเกล จุดสกรีน และความยากง่าย',
+})
+for (const f of sc.hero.facts) {
+  if (f.k === 'ขั้นต่ำ') f.v = '1 ตัว'
+  if (/ผลิต/.test(f.k)) f.v = '3–14 วัน ตามสเกลงานและจุดสกรีน'
+}
+sc.toc.splice(sc.toc.findIndex((t) => t.key === 'faq'), 0, { t: 'ขั้นตอนสั่ง', key: 'order' })
+sc.price.factorsTitle = 'เลือกทรง จำนวน และจุดที่ต้องการ'
+sc.price.factors = ['ราคาปกติ รวม VAT 7% ทุกไซซ์ราคาเดียวกัน', 'ตำแหน่งเพิ่มเติมคิดแยกตามขนาดลาย ไม่คิดเหมาราคาเดียวทุกจุด']
+sc.order.steps = [
+  { h: 'เลือกเสื้อและส่งลาย', p: 'บอกทรง สี จำนวน ขนาดลาย ตำแหน่ง และวันที่ต้องใช้ เพื่อสรุปราคา' },
+  { h: 'ออกแบบและยืนยัน', p: 'ออกแบบฟรี ปรับแบบได้ไม่จำกัดก่อนยืนยัน' },
+  { h: 'ผลิตและส่งถึงทีม', p: 'ชำระ 50% ก่อนผลิต ใช้เวลา 3–14 วันตามสเกล จุดสกรีน และความยากง่าย ชำระส่วนที่เหลือก่อนจัดส่ง' },
+]
+sc.order.payment.p = [
+  'ชำระ 50% ก่อนผลิต และอีก 50% เมื่อผลิตเสร็จก่อนจัดส่ง',
+  'ราคารวม VAT 7% ออกใบเสร็จและใบกำกับภาษีได้ จัดส่งฟรีทั่วไทย',
+  'หากพบตำหนิหรือความเสียหาย แจ้งภายใน 7 วันหลังรับสินค้า พร้อมเลขออเดอร์และภาพ โดยเสื้อสกรีนต้องยังไม่ผ่านการซักก่อนส่งเปลี่ยน',
+]
+sc.faq.items = FAQ.screen
+
+fixProductCopy(out)
 writeFileSync(join(root, 'src/data/product-pages.json'), JSON.stringify(out, null, 2) + '\n')
 console.log('product-pages.json:', Object.keys(out).filter((k) => k[0] !== '_').join(', '))

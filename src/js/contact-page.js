@@ -1,10 +1,13 @@
 import './page.js'
+import '../styles/page-contact.css'
+import '../styles/line-cta.css' // แบนเนอร์ LINE ใช้ร่วม /designs/ /project/ /contact-us/
 import site from '../data/site.json'
 import routes from '../data/routes.json'
-import { qs } from './lib.js'
+import { qs, todayLocal } from './lib.js'
 import { makeUrl } from './routes.js'
-import { sendContact, codeFromQuery, dateFromQuery, b2bPrefill, lineMessageUrl, lineSummary, outcomeOf, failText, telOk, thanksFlag } from './contact-send.js'
+import { contextFromPath, sendContact, codeFromQuery, dateFromQuery, prefillFor, emailLooksOk, qtyFromQuery, lineMessageUrl, lineSummary, outcomeOf, failText, telOk, thanksFlag, toAsciiDigits, cleanFrom } from './contact-send.js'
 import { trackEvent } from './track.js'
+import { openNow } from './nudge.js'
 
 const url = makeUrl(routes)
 
@@ -27,17 +30,18 @@ if (form) {
 
   /* hidden field บอกหน้าที่กดมา ให้ทีมขายรู้บริบทก่อนตอบ (Wireframe หน้าติดต่อ)
      ลำดับความน่าเชื่อ: ?from= ที่ปุ่มส่งมา > ?p= ?u= จากหน้าสินค้า/การใช้งาน > หน้าก่อนหน้าในเว็บเดียวกัน */
-  const fromProduct = qs('p')
-  const fromUse = qs('u')
+  const qProduct = qs('p')
+  const qUse = qs('u')
   /* id แปลกปลอมจาก URL ไม่ทำให้ฟอร์มพัง แค่ไม่ใช้ */
   const safe = (key, id) => {
     try {
-      return id ? url(key, id) : ''
+      const u = id ? url(key, id) : ''
+      return typeof u === 'string' ? u : '' // ?p=__proto__ ได้ object จากตาราง routes
     } catch {
       return ''
     }
   }
-  let from = qs('from') || safe('products', fromProduct) || safe('uses', fromUse)
+  let from = cleanFrom(qs('from')) || safe('products', qProduct) || safe('uses', qUse)
   if (!from && document.referrer) {
     try {
       const r = new URL(document.referrer)
@@ -46,6 +50,10 @@ if (form) {
       /* referrer อ่านไม่ได้ ก็ปล่อยว่าง */
     }
   }
+  /* ไม่มี ?p= ?u= → เดาจากหน้าที่มา (แกลเลอรี/หน้าแบบ = พิมพ์ลาย + กลุ่มนั้น · ตรวจมือถือ 30 ต.ค.) */
+  const ctx = qProduct || qUse ? { product: '', use: '' } : contextFromPath(from, routes)
+  const fromProduct = qProduct || ctx.product
+  const fromUse = qUse || ctx.use
   /* มาจากกล่องดูแบบ / ปุ่มขอราคาแบบนี้ (?code=) ใส่รหัสแบบไว้ให้ในรายละเอียด */
   const code = codeFromQuery(location.search)
   if (code && !$('cNote').value) $('cNote').value = `แบบที่สนใจ: ${code}\n`
@@ -61,20 +69,33 @@ if (form) {
     if (pick && !pick.value && USE_PRODUCT[fromUse]) pick.value = USE_PRODUCT[fromUse]
   }
 
-  const b2b = b2bPrefill(fromUse)
-  if (b2b) {
-    for (const box of document.querySelectorAll('.js-doc')) if (b2b.docs.includes(box.value)) box.checked = true
+  /* บริบทจากปุ่มที่ส่งมา (audit 26 ต.ค. M1): ขอเอกสาร / ขอใบเสนอราคา / หน้าคำนวณ / โปโลปัก / กลุ่มองค์กร / สั่งซ้ำ */
+  const pre = prefillFor({ use: fromUse, from: qs('from') || '', product: fromProduct })
+  if (pre) {
+    for (const box of document.querySelectorAll('.js-doc')) if (pre.docs.includes(box.value)) box.checked = true
     const help = $('cMail-help')
-    if (help) help.textContent = b2b.emailHelp
-    /* กล่องข้อมูลองค์กรและเอกสารจัดซื้อพับไว้ (audit C3) · มาจากหน้ากลุ่มที่ต้องมีเอกสารจัดซื้อ กางให้เลย */
+    if (help && pre.emailHelp) help.textContent = pre.emailHelp
+    /* กล่องข้อมูลองค์กรและเอกสารจัดซื้อพับไว้ (audit C3) · มาจากปุ่มที่ต้องมีเอกสารจัดซื้อ กางให้เลย */
     const orgBox = $('cOrgBox')
-    if (orgBox) orgBox.open = true
+    if (orgBox && pre.openOrg) orgBox.open = true
+    if (pre.reorder) {
+      const h = $('form-h')
+      if (h) h.textContent = 'สั่งซ้ำ / เพิ่มจำนวน · ฝากข้อมูลให้ติดต่อกลับ'
+    }
   }
+  /* จำนวนจากหน้าคำนวณ (?qty=) */
+  const wantQty = qtyFromQuery(location.search)
+  if (wantQty && !$('cQty').value) $('cQty').value = wantQty
+  /* อีเมลผิดรูปแบบ: เตือนใต้ช่อง ไม่บล็อกการส่ง */
+  const mail = $('cMail')
+  const mailBad = $('cMail-bad')
+  mail?.addEventListener('blur', () => { if (mailBad) mailBad.hidden = emailLooksOk(mail.value) })
 
-  $('cDate').min = new Date().toISOString().slice(0, 10)
+  $('cDate').min = todayLocal()
   /* มาจากช่อง "วันที่ต้องใช้เสื้อ" บนหน้ากลุ่มลูกค้า (?date=) */
   const wantDate = dateFromQuery(location.search)
-  if (wantDate && !$('cDate').value) $('cDate').value = wantDate
+  /* วันย้อนหลังจากลิงก์เก่าไม่เข้าฟอร์ม (2 พ.ย.) */
+  if (wantDate && wantDate >= todayLocal() && !$('cDate').value) $('cDate').value = wantDate
 
   /* ช่องว่าง = ข้อความ "ยังไม่ได้กรอก" · เบอร์กรอกแล้วแต่หลักไม่ครบ = ข้อความแยก (ธีมรับตั้งแต่ 9 หลัก ส่งไปก็ตีกลับ 400) */
   const checkField = (id) => {
@@ -90,9 +111,11 @@ if (form) {
     if (badMsg) badMsg.hidden = !filled || valid
     return ok
   }
+  /* ตรวจตอนออกจากช่องเฉพาะช่องที่พิมพ์แล้ว หรือหลังกดส่งครั้งแรก · แตะแล้วออกเฉยๆ ไม่ขึ้นแดง (ตรวจมือถือ 30 ต.ค.) */
+  let tried = false
   for (const id of REQUIRED) {
     const f = $(id)
-    f.addEventListener('blur', () => checkField(id))
+    f.addEventListener('blur', () => { if (tried || f.value.trim()) checkField(id) })
     f.addEventListener('input', () => {
       if (f.getAttribute('aria-invalid') === 'true') checkField(id)
     })
@@ -111,8 +134,9 @@ if (form) {
   }
 
   const readFields = () => ({
-    name: $('cName').value, tel: $('cTel').value, org: $('cOrg').value, email: $('cMail').value,
-    qty: $('cQty').value, date: $('cDate').value, product: pick?.selectedOptions[0]?.value ? pick.selectedOptions[0].text : '', note: $('cNote').value,
+    /* เลขไทย → อารบิกก่อนส่ง (server นับเฉพาะเลขอารบิก · 30 ต.ค.) */
+    name: $('cName').value, tel: toAsciiDigits($('cTel').value), org: $('cOrg').value, email: $('cMail').value,
+    qty: toAsciiDigits($('cQty').value), date: $('cDate').value, order: $('cOrder')?.value || '', product: pick?.selectedOptions[0]?.value ? pick.selectedOptions[0].text : '', note: $('cNote').value,
     use: useSel?.selectedOptions[0]?.value ? useSel.selectedOptions[0].text : '',
     docs: [...form.querySelectorAll('.js-doc:checked')].map((c) => c.value).join(', '),
     from: $('cFrom').value,
@@ -156,6 +180,7 @@ if (form) {
   }
 
   form.addEventListener('submit', async (e) => {
+    tried = true
     e.preventDefault()
     fail.classList.add('hidden')
     const bad = REQUIRED.filter((id) => !checkField(id))
@@ -192,10 +217,13 @@ if (form) {
     msg.className = 't-xs mt-3'
     msg.textContent = window.TD_FORM?.enabled ? 'กำลังส่งข้อมูล…' : ''
     const sent = await sendContact(fields, window.TD_FORM)
-    btn?.removeAttribute('disabled')
-    btn?.removeAttribute('aria-busy')
     msg.textContent = ''
     const out = outcomeOf(sent)
+    /* ส่งสำเร็จแล้วกำลังไปหน้าขอบคุณ: ปุ่มยังปิดไว้ กันกดซ้ำได้ข้อมูลซ้ำ (30 ต.ค.) */
+    if (out.view !== 'thanks') {
+      btn?.removeAttribute('disabled')
+      btn?.removeAttribute('aria-busy')
+    }
 
     if (out.view === 'thanks') {
       /* ฝากเบอร์ให้หน้าขอบคุณแสดง และให้หน้านั้นยิง td_form_submit · เก็บไม่ได้ (โหมดส่วนตัว) ยิงที่นี่แทน ดีกว่าไม่นับ */
@@ -231,4 +259,14 @@ if (form) {
     form.classList.remove('hidden')
     $('cName').focus()
   })
+}
+
+/* สถานะเปิด/ปิดในการ์ดออฟฟิศ (รอบ 170c · บอร์ด "เปิดให้บริการตามปกติ") ตามเวลาไทยจริง · ไม่มี JS = แสดงเวลาทำการเฉยๆ */
+for (const el of document.querySelectorAll('[data-open-status]')) {
+  const hours = el.dataset.hours || ''
+  const on = openNow(new Date(), hours)
+  const m = /(\d{2}):(\d{2})-/.exec(hours)
+  const t = el.querySelector('[data-open-t]')
+  el.classList.toggle('is-open', on)
+  if (t) t.textContent = on ? 'เปิดให้บริการอยู่ตอนนี้' : m ? `ตอนนี้ปิดแล้ว · เปิดอีกครั้ง ${+m[1]}:${m[2]} น.` : t.textContent
 }

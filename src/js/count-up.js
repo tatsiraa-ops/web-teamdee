@@ -19,9 +19,10 @@ export function initCountUp(root = document) {
   const items = [...box.querySelectorAll('[data-stat]')].map((el) => ({ el, s: parseStat(el.dataset.stat), num: el.querySelector('[data-stat-n]') })).filter((x) => x.s && x.num)
   if (!items.length) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) { box.classList.add('is-done'); return }
-  items.forEach(({ s, num }) => { num.textContent = statAt(s, 0) })
+  const mobile = matchMedia('(max-width: 767px)').matches
+  items.forEach(({ s, num }) => { num.textContent = statAt(s, mobile ? 1 : 0) })
   box.classList.add('is-armed')
-  const DUR = 2200
+  const DUR = mobile ? 650 : 2200
   const io = new IntersectionObserver((list) => {
     if (!list.some((e) => e.isIntersecting)) return
     io.disconnect()
@@ -30,8 +31,8 @@ export function initCountUp(root = document) {
     const frame = (now) => {
       let busy = false
       items.forEach(({ s, num, el }, i) => {
-        const t = (now - t0 - i * 220) / DUR
-        num.textContent = statAt(s, easeOut(Math.max(0, t)))
+        const t = (now - t0 - i * (mobile ? 0 : 220)) / DUR
+        num.textContent = statAt(s, mobile ? .85 + .15 * easeOut(Math.max(0, t)) : easeOut(Math.max(0, t)))
         if (t >= 1) el.classList.add('is-hit')
         else busy = true
       })

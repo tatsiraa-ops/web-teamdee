@@ -2,12 +2,15 @@
 <html lang="th">
 <head>
   {{> head}}
+  {{!-- CSS เฉพาะหน้าโหลดใน head (27 ต.ค.) · เดิม import ผ่าน JS → ตอนเปิดหน้ารูป/ไอคอนกางใหญ่แวบก่อน CSS มา --}}
+  <link rel="stylesheet" href="/src/styles/product-page.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/screen.css" data-page-css>
   <title>รับทำเสื้อสกรีน สำหรับบริษัท ทีมงาน และกิจกรรม | TEAMDEE</title>
   <meta name="description" content="สั่งทำเสื้อสกรีนสำหรับพนักงาน อีเวนต์ และชมรม เลือกตัวเสื้อพร้อมกำหนดขนาดและตำแหน่งลาย ให้ทีมดีตรวจไฟล์และผ้าก่อนสกรีน DFT">
 </head>
-<body>
+<body class="screen-page">
 {{> siteHeader active="products"}}
-<main id="main">
+<main id="main" class="screen-page">
 {{> productPage}}
 </main>
 {{!-- ไม่มีแกลเลอรีแบบของสินค้านี้ · แถบล่างช่อง 3 พาไปราคาแทน "ดูแบบเสื้อ" (audit P5 · 2.4) --}}

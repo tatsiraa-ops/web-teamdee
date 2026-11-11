@@ -1,0 +1,14 @@
+{{!-- จุดเด่นเสื้อพิมพ์ลาย + จุดขายทีมดี (อาร์ต 5 พ.ย. บอร์ด · ต่อจาก hero) · หัวข้อกลาง คำเน้นส้ม · บรรทัดรอง · ย่อหน้าสั้น · การ์ดไอคอน 3D ชุด CI 4 ใบ
+     ข้อความจากข้อมูลในเว็บเท่านั้น (pp-v2.json) · ไม่ยกเคลมจากภาพอ้างอิง (อันดับ 1 · ISO · โรงงาน) --}}
+<section class="pp2-hl" aria-labelledby="pp2-hl-h">
+  <div class="wrap">
+    <header class="pp2-hl__head">
+      <h2 id="pp2-hl-h">{{{hl pp2.highlight.h pp2.highlight.accent}}}</h2>
+      <p class="pp2-hl__sub">{{{ph pp2.highlight.sub}}}</p>
+      <p class="pp2-hl__p">{{{ph pp2.highlight.p}}}</p>
+    </header>
+    <ul class="pp2-hl__list">
+      {{#each pp2.highlight.items}}<li class="pp2-hl__item"><img class="pp2-hl__ico" src="{{this.icon}}" alt="" width="240" height="240" loading="lazy" decoding="async"><div><h3 class="pp2-hl__t">{{{ph this.h}}}</h3><p class="pp2-hl__s">{{{ph this.s}}}</p></div></li>{{/each}}
+    </ul>
+  </div>
+</section>

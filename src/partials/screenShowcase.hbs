@@ -1,0 +1,21 @@
+{{!-- Screen-specific material and print choices, based on owner-confirmed SAIFAH source. · ส่วน options + fabric + detail ตาม v22 · งานจริงแยกไป screenWork.hbs (2 พ.ย.) --}}
+<section class="wrap section screen-choice" id="options">
+  <header class="screen-heading"><span class="eyebrow">ตัวเสื้อ</span><h2 class="t-display">{{pp.options.h}}</h2><p class="t-lead">เริ่มจากทรงที่ทีมอยากใส่ แล้วค่อยเติมลายที่เป็นคุณ</p></header>
+  {{> ppOptCards}}
+  <div class="screen-material" id="fabric">
+    <figure class="screen-material__photo"><img src="/img/screen/studio-317.webp" width="1200" height="800" alt="ตัวอย่างเสื้อคอตตอนพับซ้อน ให้เห็นสีและผิวผ้า" loading="lazy"><figcaption>ดูสีบนจอ แล้วขอชิ้นผ้าจริงก่อนตัดสินใจ</figcaption></figure>
+    <div><h2 class="screen-subtitle">{{pp.fabric.h}}</h2>
+      <article class="screen-fit"><p class="screen-kicker">01 / PREMIUM</p><h3>Premium Cotton <span>C32 Comb</span></h3><p>Cotton 100% · คอกลม แขนสั้น</p><ul class="screen-colors" aria-label="สี Premium">{{#each screenColors}}<li><i style="--swatch:{{this.hex}}" aria-hidden="true"></i>{{this.name}}</li>{{/each}}</ul></article>
+      <article class="screen-fit"><p class="screen-kicker">02 / OVERSIZE</p><h3>Oversize Cotton <span>C20 Comb</span></h3><p>Cotton 100% · ทรงหลวม คอกลม แขนสั้น</p><ul class="screen-colors" aria-label="สี Oversize"><li><i style="--swatch:#fafafa" aria-hidden="true"></i>ขาว</li><li><i style="--swatch:#202020" aria-hidden="true"></i>ดำ</li></ul></article>
+      <a class="pp-more" href="{{ppNextLine.fabric}}" data-track="line">ขอดูตัวอย่างผ้า <span aria-hidden="true">→</span></a> <a class="pp-more" href="{{url 'guides.fabric'}}">วิธีเลือกผ้า <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+<section class="screen-print" id="detail"><div class="wrap section">
+  <header class="screen-heading"><span class="eyebrow">ลายของทีม</span><h2 class="t-display">{{pp.detail.h}}</h2><p class="t-lead">โลโก้เล็กที่อก หรือลายใหญ่ด้านหลัง เลือกให้พอดีกับเสื้อ</p></header>
+  <div class="screen-print__grid"><figure><img src="/img/screen/studio-455.webp" width="1200" height="800" alt="ภาพใกล้ตัวอักษรและโลโก้สกรีนสีดำบนเสื้อสีเทา" loading="lazy"><figcaption>ภาพใกล้งานสกรีนจริง · เห็นตัวอักษรและผิวผ้า</figcaption></figure>
+    <div><h3>เลือกตำแหน่ง แล้วเทียบขนาดลาย</h3><p>อกซ้าย / อกขวา / กลางอก / แขน / หลัง<br>ตรวจสัดส่วนลายบนไซซ์เสื้อก่อนยืนยันผลิต</p><div class="screen-included"><b>รวมสกรีน 1 จุด</b><span>ในราคาตัวเสื้อ · จุดถัดไปคิดตามขนาดด้านล่าง</span></div>
+    <table class="screen-extra"><caption>ราคาจุดเพิ่มเติม · บาท/จุด/ตัว</caption><thead><tr><th scope="col">ขนาดลาย (ซม.)</th><th scope="col">เพิ่ม</th></tr></thead><tbody>{{#each screenExtras}}<tr><th scope="row">{{this.size}}</th><td>+{{this.price}} บาท</td></tr>{{/each}}</tbody></table>
+    <a class="pp-more" href="{{url 'guides.screen'}}">ดูคู่มือสั่งเสื้อสกรีน <span aria-hidden="true">→</span></a></div>
+  </div>
+</div></section>

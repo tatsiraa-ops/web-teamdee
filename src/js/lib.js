@@ -5,3 +5,5 @@
 export const baht = (n) => Number(n).toLocaleString('en-US')
 
 export const qs = (k) => new URLSearchParams(location.search).get(k)
+/** วันนี้ YYYY-MM-DD ตามเวลาเครื่อง (toISOString เป็น UTC · ตี 0–7 เวลาไทยได้วันเมื่อวาน · 30 ต.ค.) */
+export const todayLocal = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`

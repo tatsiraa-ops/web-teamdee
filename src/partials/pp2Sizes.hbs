@@ -1,0 +1,43 @@
+{{!-- /sublimation/ ตารางไซซ์ · รอบ 133–134 (อาร์ต "ทำที่มีไปก่อน" · "ui ทำดีๆหน่อย ไปดูมาแล้วคิดดีๆก่อน") · pp-v2.json print.sizes
+     การ์ด "หาไซซ์": ภาพเสื้อจริง + เส้นวัด ตัวเลขเปลี่ยนตามไซซ์ที่เลือก (sizechart.js) · ผู้ใหญ่/เด็ก · นิ้ว/ซม.
+     ตารางแนวนอนเห็นครบโดยไม่ต้องกด (ไม่มี JS = นิ้ว + ไซซ์ M) · ตัวเลขจากกราฟิกทางการ "ตารางไซซ์ เสื้อทรงเดียวกันใส่ได้ทั้งชาย-หญิง"
+     เบสบอล/เจอร์ซีย์ Oversize ยังไม่มีตาราง → ภาพ + ปุ่ม LINE ขอตาราง · id="size" แทนส่วนไซซ์เดิม --}}
+{{#with pp2.sizes}}
+<section class="pp2-sz" id="size" aria-labelledby="pp2-sz-h" data-sz-root>
+  <div class="wrap">
+    <header class="pp2-sz__head">
+      <h2 id="pp2-sz-h">{{{hl h accent}}}</h2>
+      <p>{{{ph p}}}</p>
+    </header>
+    <div class="pp2-sz__card">
+      <figure class="pp2-sz__stage">
+        <img src="{{shirt.img}}" srcset="{{shirt.img}} 440w, {{shirt.img2}} 880w" sizes="(min-width: 1100px) 380px, 64vw" width="440" height="540" alt="{{shirt.alt}}" loading="lazy" decoding="async">
+        <span class="pp2-sz__ln pp2-sz__ln--w" aria-hidden="true"></span>
+        <span class="pp2-sz__ln pp2-sz__ln--h" aria-hidden="true"></span>
+        <span class="pp2-sz__bub pp2-sz__bub--w"><small>รอบอก</small><b data-sz-chest>40</b><i data-sz-u>นิ้ว</i></span>
+        <span class="pp2-sz__bub pp2-sz__bub--h"><small>ความยาว</small><b data-sz-len>27</b><i data-sz-u>นิ้ว</i></span>
+      </figure>
+      <div class="pp2-sz__ctl">
+        <div class="pp2-sz__segs">
+          <div class="pp2-sz__seg" role="group" aria-label="กลุ่มไซซ์"><button type="button" data-g-btn="adult" aria-pressed="true">ผู้ใหญ่</button><button type="button" data-g-btn="kids" aria-pressed="false">เด็ก</button></div>
+          <div class="pp2-sz__seg" role="group" aria-label="หน่วย"><button type="button" data-u-btn="in" aria-pressed="true">นิ้ว</button><button type="button" data-u-btn="cm" aria-pressed="false">ซม.</button></div>
+        </div>
+        <p class="pp2-sz__now"><span>ไซซ์ที่เลือก</span><b data-sz-name>M</b></p>
+        <div class="pp2-sz__picks" data-g="adult">{{#each adult}}<button type="button" class="pp2-sz__pick" data-g="adult" data-sz="{{this.[0]}}" data-chest="{{this.[1]}}" data-len="{{this.[2]}}" aria-pressed="{{#if (eq this.[0] "M")}}true{{else}}false{{/if}}">{{this.[0]}}</button>{{/each}}</div>
+        <div class="pp2-sz__picks" data-g="kids" hidden>{{#each kids}}<button type="button" class="pp2-sz__pick" data-g="kids" data-sz="{{this.[0]}}" data-chest="{{this.[1]}}" data-len="{{this.[2]}}" aria-pressed="false">{{this.[0]}}</button>{{/each}}</div>
+        <h3>{{measureH}}</h3>
+        <ol class="pp2-sz__how">{{#each measure}}<li><b>{{this.t}}</b><span>{{{ph this.d}}}</span></li>{{/each}}</ol>
+      </div>
+    </div>
+    <div class="pp2-sz__tables">
+      <table class="pp2-sz__t" id="sz-adult"><caption>ผู้ใหญ่ · <span data-sz-u>นิ้ว</span></caption><thead><tr><td></td>{{#each adult}}<th scope="col" data-c="{{this.[0]}}">{{this.[0]}}</th>{{/each}}</tr></thead><tbody><tr data-row="chest"><th scope="row">รอบอก</th>{{#each adult}}<td data-c="{{this.[0]}}" data-in="{{this.[1]}}">{{this.[1]}}</td>{{/each}}</tr><tr data-row="len"><th scope="row">ความยาว</th>{{#each adult}}<td data-c="{{this.[0]}}" data-in="{{this.[2]}}">{{this.[2]}}</td>{{/each}}</tr></tbody></table>
+      <table class="pp2-sz__t pp2-sz__t--kids" id="sz-kids"><caption>เด็ก · <span data-sz-u>นิ้ว</span></caption><thead><tr><td></td>{{#each kids}}<th scope="col" data-c="{{this.[0]}}">{{this.[0]}}</th>{{/each}}</tr></thead><tbody><tr data-row="chest"><th scope="row">รอบอก</th>{{#each kids}}<td data-c="{{this.[0]}}" data-in="{{this.[1]}}">{{this.[1]}}</td>{{/each}}</tr><tr data-row="len"><th scope="row">ความยาว</th>{{#each kids}}<td data-c="{{this.[0]}}" data-in="{{this.[2]}}">{{this.[2]}}</td>{{/each}}</tr></tbody></table>
+    </div>
+    <p class="pp2-sz__tol">{{{ph tol}}}</p>
+    <div class="pp2-sz__others">
+      <h3>{{othersH}}</h3>
+      <div class="pp2-sz__os">{{#each others}}<a class="pp2-sz__o pp2-sz__o--{{this.k}}" href="{{this.ask}}" data-track="line" data-where="pp-size"><img src="{{this.img}}" width="640" height="478" alt="{{this.alt}}" loading="lazy" decoding="async"><span><b>{{this.t}}</b><small>{{{ph ../othersP}}}</small><i>ขอตารางทาง LINE <span aria-hidden="true">↗</span></i></span></a>{{/each}}</div>
+    </div>
+  </div>
+</section>
+{{/with}}

@@ -15,13 +15,32 @@
     <h1 class="t-display text-[clamp(28px,4vw,46px)] mt-6">ค้นหาสินค้าและแบบเสื้อ</h1>
 
     <form class="flex flex-wrap gap-2.5 mt-7 max-w-[560px]" id="searchForm" role="search" onsubmit="return false">
-      <label class="sr-only" for="sq">ค้นหาชื่อสินค้า ชื่อแบบ หรือรหัสแบบ</label>
-      <input class="input flex-1 min-w-[220px]" id="sq" name="q" type="search" placeholder="ค้นหา เช่น โปโล หรือ TD-0012" autocomplete="off">
+      <label class="sr-only" for="sq">ค้นหาชื่อสินค้า ชื่อแบบ รหัสแบบ หรือคำถาม</label>
+      <input class="input flex-1 min-w-[220px]" id="sq" name="q" type="search" placeholder="เช่น โปโล ส่งกี่วัน หรือ TD-0012" autocomplete="off">
       <button class="btn btn-ink" type="submit">ค้นหา</button>
     </form>
 
     <h2 class="t-display text-[clamp(22px,2.6vw,30px)] mt-9">ผลการค้นหา</h2>
     <p class="t-sm mt-2 tabular-nums" id="searchCount" role="status" aria-live="polite"></p>
+
+    <!-- ลูกค้าเดิม: สั่งซ้ำ / ติดตามงาน ขึ้นบนสุดเมื่อคำค้นเป็นเรื่องนี้ (ตรวจมือถือ 30 ต.ค. ข้อ 6) · ลิงก์ชุดเดียวกับเมนู/ท้ายเว็บ -->
+    <div class="sr-acts" id="searchActions" data-sr-actions hidden>
+      <h2 class="sr-acts__h">ลูกค้าเดิม ทัก LINE ได้เลย</h2>
+      <p class="sr-acts__p">ข้อความพิมพ์รอไว้ให้แล้ว เติมเลขออเดอร์หรือชื่อหน่วยงานแล้วกดส่ง</p>
+      <div class="sr-acts__btns" data-sr-act-row>
+        <a class="cb cb--p" href="{{reorderLine}}" data-sr-act="reorder" data-track="line" data-where="search-reorder"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">สั่งซ้ำ / เพิ่มจำนวน</span></a>
+        <a class="cb cb--s" href="{{trackLine}}" data-sr-act="track" data-track="line" data-where="search-track"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ติดตามงาน</span></a>
+      </div>
+    </div>
+
+    <!-- คำตอบจากหน้าคำถาม (/faq/#ข้อ) ขึ้นก่อนหน้าอื่น · ลูกค้าพิมพ์เป็นคำถาม ("ส่งกี่วัน") ต้องได้คำตอบ ไม่ใช่รายชื่อหน้า -->
+    <div class="mt-9 hidden" id="faqResults">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="t-display text-[clamp(22px,2.6vw,30px)]">คำตอบจากคำถามที่พบบ่อย</h2>
+        <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'faq'}}" id="faqAll">ดูในหน้าคำถาม<span class="arw" aria-hidden="true">&rarr;</span></a>
+      </div>
+      <ul class="divide-y divide-line border-t-2 border-ink mt-4" id="faqList"></ul>
+    </div>
 
     <!-- ผลลัพธ์ที่เป็นหน้าเว็บ -->
     <div class="mt-9 hidden" id="pageResults">
@@ -38,27 +57,31 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 mt-5" id="designHits" data-line-url="{{site.lineUrl}}"></div>
     </div>
 
-    <!-- ไม่พบ -->
-    <div class="bg-shell border border-line rounded-plate p-7 md:p-9 mt-9 hidden" id="searchEmpty">
-      <h2 class="t-display text-[clamp(22px,2.8vw,32px)]">ไม่พบผลลัพธ์สำหรับ <span id="emptyTerm" class="text-orange"></span></h2>
-      <p class="t-lead mt-3 max-w-[52ch]">ลองเปลี่ยนคำค้น หรือดูแบบทั้งหมด ถ้ามีรูปที่ชอบอยู่แล้วส่งมาให้เราดูได้เลย</p>
-      <div class="flex flex-wrap gap-3 mt-6">
-        <a class="btn btn-line" href="{{url 'designs'}}">ดูแบบทั้งหมด</a>
-        <a class="btn btn-orange" href="{{site.lineUrl}}" data-track="line">ส่งภาพอ้างอิงทาง LINE</a>
+    <!-- ไม่พบ: ถามทีมดีทาง LINE พร้อมคำค้น (แบบเดียวกับ /faq/) · โทร · หน้าคำถาม · คำนวณราคา (ตรวจมือถือ 30 ต.ค. ข้อ 7) -->
+    <div class="fq-empty sr-empty mt-9" id="searchEmpty" hidden>
+      <h2 class="t-display text-[clamp(22px,2.8vw,32px)]">ไม่พบผลลัพธ์สำหรับ <span id="emptyTerm" class="text-orange-text"></span></h2>
+      <p class="fq-empty__p">ถามทีมดีทาง LINE ได้เลย ข้อความพิมพ์รอไว้ให้แล้ว หรือโทรคุยก็ได้</p>
+      <p class="fq-empty__bub" aria-hidden="true" data-sr-bub></p>
+      <div class="fq-empty__btns">
+        <a class="cb cb--p" href="{{site.lineUrl}}" data-track="line" data-where="search-empty" data-sr-ask><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ส่งคำถามนี้ทาง LINE</span></a>
+        <a class="cb cb--s" href="tel:{{site.phonePrimaryTel}}" data-where="search-empty"><span class="sr-empty__ico" aria-hidden="true">{{> icoPhone}}</span><span class="cb__t">โทร <span class="tabular-nums">{{site.phonePrimary}}</span></span></a>
       </div>
+      <p class="sr-more"><span>หรือดู</span><a href="{{url 'faq'}}">คำถามที่พบบ่อย</a><a href="{{url 'calculations'}}">คำนวณราคาเบื้องต้น</a><a href="{{url 'designs'}}">แบบเสื้อทั้งหมด</a></p>
     </div>
 
     <!-- ข้อมูลสำหรับสคริปต์ค้นหา · ไม่ต้องเรียก API -->
     <script type="application/json" id="searchIndex">
     {
       "pages": [
+        {{#each legacyPosts.items}}{"t":{{{json this.title}}},"d":{{{json this.excerpt}}},"u":{{{json this.url}}},"k":"บทความ"},{{/each}}
         {{#each products}}{"t":"{{this.name}}","d":"{{this.short}}","u":"{{url 'products' this.id}}","k":"สินค้า"},{{/each}}
-        {{#each uses}}{"t":"เสื้อ{{this.name}}","d":"{{this.short}}","u":"{{url 'uses' this.id}}","k":"การใช้งาน"},{{/each}}
+        {{#each uses}}{"t":"{{this.name}}","d":"{{#if this.short}}{{this.short}}{{else}}เสื้อ ราคา และขั้นตอนสำหรับกลุ่มนี้{{/if}}","u":"{{url 'uses' this.id}}","k":"การใช้งาน"},{{/each}}
         {{#each guides}}{"t":"{{this.name}}","d":"{{this.who}}","u":"{{url 'guides' this.id}}","k":"คู่มือ"},{{/each}}
         {"t":"คำนวณราคาเบื้องต้น","d":"เลือกคอ จำนวน และออปชัน ดูงบประมาณโดยประมาณ","u":"{{url 'calculations'}}","k":"คู่มือ"},
         {"t":"แบบเสื้อทั้งหมด","d":"แกลเลอรีแบบเสื้อพร้อมรหัส","u":"{{url 'designs'}}","k":"แบบเสื้อ"},
         {"t":"ผลงานและรีวิว","d":"งานจริงที่ส่งมอบแล้วและเสียงลูกค้า","u":"{{url 'projects'}}","k":"ผลงาน"},
         {"t":"คำถามที่พบบ่อย","d":"คำตอบ 7 หมวดเรื่องสั่งทำเสื้อ","u":"{{url 'faq'}}","k":"ข้อมูล"},
+        {{#each faqSearch}}{"t":{{{json this.q}}},"d":{{{json this.a}}},"u":"{{url 'faq'}}#{{this.id}}","k":"คำถาม"},{{/each}}
         {"t":"รู้จักทีมดี","d":"เราเป็นใคร ทำงานอย่างไร","u":"{{url 'about'}}","k":"บริษัท"},
         {"t":"ติดต่อทีมดี","d":"ไลน์ โทร และฟอร์มเล่าโจทย์","u":"{{url 'contact'}}","k":"ติดต่อ"}
       ],

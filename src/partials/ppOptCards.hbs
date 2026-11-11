@@ -1,0 +1,8 @@
+{{!-- การ์ดตัวเลือก 3 ใบตาม v22 พร้อมรูปจริง · ป้ายบอกประเภทภาพ · ปุ่มเปิด LINE พร้อมเรื่องของการ์ดนั้น (scripts/v22/product-pages.mjs · vite.config.js) --}}
+{{#if pp.options.cards.length}}<ul class="pp-cards grid md:grid-cols-3 gap-5 mb-12">
+  {{#each pp.options.cards}}<li class="pp-card">
+    <div class="pp-card__img relative{{#if this.fit}} pp-card__img--fit{{/if}}"><img src="{{this.img}}" data-sizes="(min-width:1240px) 379px, (min-width:768px) calc((100vw - 104px) / 3), calc(100vw - 40px)" width="{{this.width}}" height="{{this.height}}" alt="{{this.alt}}" loading="lazy" decoding="async"><span class="tag tag-ink absolute left-3 bottom-3">{{this.tag}}</span></div>
+    <h3 class="text-[20px]">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}
+    <a class="pp-more mt-2" href="{{this.line}}" data-track="line" data-where="pp-option">{{this.cta}}<span class="arw" aria-hidden="true">&rarr;</span></a>
+  </li>{{/each}}
+</ul>{{/if}}

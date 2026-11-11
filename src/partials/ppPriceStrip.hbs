@@ -1,0 +1,10 @@
+{{!-- แถบสรุปใต้ hero ตาม v22 (ขั้นต่ำ · ระยะผลิต · ราคา) · ราคา 3 ช่วงจาก prices.json (src/js/prices.js priceSummary) · สินค้าที่ยังไม่มีราคาแสดงแค่วิธีขอราคา --}}
+<section class="pp-strip" aria-label="สรุปราคาและเวลาผลิต">
+  <div class="wrap pp-strip__in">
+    <div class="pp-strip__facts">
+      {{#if pp.hero.make}}<p class="pp-strip__make">{{{ph pp.hero.make}}}</p>{{/if}}
+      {{#if pp.price.show}}<a class="pp-more" href="#price">{{#if priceStrip}}ดูตารางเต็ม{{else}}ดูวิธีขอราคา{{/if}}<span class="ml-1" aria-hidden="true">&darr;</span></a>{{/if}}
+    </div>
+    {{#if priceStrip}}<dl class="pp-strip__list" aria-label="ราคาต่อตัวตามจำนวน{{#if priceStrip.name}} {{priceStrip.name}}{{/if}}">{{#each priceStrip.rows}}<div><dt>{{this.qty}}</dt><dd class="tabular-nums">{{this.price}} <span>บาท/ตัว</span></dd></div>{{/each}}</dl>{{/if}}
+  </div>
+</section>

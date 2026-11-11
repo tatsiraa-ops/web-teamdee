@@ -4,7 +4,7 @@
   {{> head}}
   <title>ขอบคุณที่ติดต่อทีมดี | TEAMDEE</title>
   <meta name="robots" content="noindex">
-  <meta name="description" content="ทีมดีได้รับข้อมูลจากฟอร์มติดต่อแล้ว ส่งโลโก้หรือไฟล์แบบต่อทาง LINE ได้เลย">
+  <meta name="description" content="ติดต่อทีมดี ตรวจสอบการส่งข้อมูล และเตรียมรายละเอียดสำหรับสั่งทำเสื้อทีม">
 </head>
 <body>
 {{> siteHeader}}
@@ -14,12 +14,12 @@
      เวลาตอบ: "5 นาที" ใช้กับ LINE เท่านั้น ห้ามสัญญากับฟอร์ม · 3 ขั้นหลังส่งรอฝ่ายขายยืนยันลำดับจริงก่อนใส่ --}}
 <main id="main">
   <section class="band-hero relative overflow-hidden">
-    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
     <div class="wrap relative py-12 md:py-16">
-      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'contact'}}">ติดต่อทีมดี</a><span aria-hidden="true">/</span><span aria-current="page">ส่งข้อมูลแล้ว</span></nav>
+      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'contact'}}">ติดต่อทีมดี</a><span aria-hidden="true">/</span><span aria-current="page" id="tyCrumb">ยังไม่ได้ส่งข้อมูล</span></nav>
       <div class="max-w-[56rem]">
-        <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">{{{ph "ทีมดีได้รับข้อมูลของคุณแล้ว"}}}</h1>
-        <p class="text-[18px] leading-[1.75] text-ink-2 mt-5">ขอบคุณที่ติดต่อทีมดี <span class="inline-block">ทีมติดต่อกลับในเวลาทำการ</span> · อยากได้เร็วกว่านี้ <span class="inline-block">ทัก LINE (ตอบใน 5 นาที)</span></p>
+        <h1 id="tyHeading" class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">ยังไม่มีข้อมูลยืนยันการส่งฟอร์ม</h1>
+        <p id="tyLead" class="text-[18px] leading-[1.75] text-ink-2 mt-5">หากยังไม่ได้ส่งข้อมูล กรุณากรอกฟอร์มติดต่อ หรือทัก LINE เพื่อคุยกับทีมดี</p>
+        <a id="tyContact" class="btn btn-line mt-5" href="{{url 'contact'}}">ไปหน้าติดต่อทีมดี</a>
         <p class="text-[16px] text-ink-3 mt-2">เวลาทำการ {{site.hours}}</p>
 
         <div class="mt-7 max-w-[36rem] rounded-card border-2 border-ink bg-paper p-5" id="tyTel" hidden>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="flex flex-wrap gap-3 mt-8" data-where="thanks">
-          <a class="btn btn-orange btn-lg gap-2 max-sm:whitespace-normal max-sm:text-center" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ส่งโลโก้ / ไฟล์แบบทาง LINE</a>
+          <a class="cb cb--p max-sm:w-full" href="{{site.lineUrl}}" data-track="line"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ส่งโลโก้ / ไฟล์แบบทาง LINE</span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn btn-lg gap-2 tabular-nums bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink" href="tel:{{site.phonePrimaryTel}}"><span class="block size-5">{{> icoPhone}}</span>โทร {{site.phonePrimary}}</a>
         </div>
         <p class="t-sm mt-4">LINE ID <strong class="text-ink">@teamdee</strong></p>
@@ -37,7 +37,7 @@
   </section>
 
   <section class="wrap section" aria-labelledby="wait-h">
-    <h2 id="wait-h" class="t-display text-[clamp(22px,2.6vw,30px)]">ระหว่างรอทีมติดต่อกลับ</h2>
+    <h2 id="wait-h" class="t-display text-[clamp(22px,2.6vw,30px)]">เตรียมข้อมูลก่อนคุยกับทีมดี</h2>
     <ul class="mt-4 space-y-1">
       <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'guides' 'logo'}}">เตรียมไฟล์โลโก้ให้พร้อมผลิต<span class="arw" aria-hidden="true">&rarr;</span></a></li>
       <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'guides' 'size'}}">เก็บไซซ์คนในทีม<span class="arw" aria-hidden="true">&rarr;</span></a></li>

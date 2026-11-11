@@ -3,121 +3,106 @@
 <head>
   {{> head}}
   <title>แบบเสื้อพิมพ์ลาย สำหรับบริษัท กีฬา และกิจกรรม | TEAMDEE</title>
-  <meta name="description" content="แบบเสื้อพิมพ์ลาย · หาแนวกราฟิกเสื้อพิมพ์ลายตามกลุ่มลูกค้า ดูสีและรูปแบบที่ชอบ พร้อมใช้รหัสแบบคุยต่อเรื่องโลโก้ ข้อความ และรายละเอียดกับทีมดี">
+  <meta name="description" content="รวมแบบเสื้อทีมที่ทีมดีออกแบบ มีรหัส TD- ทุกแบบ เลือกตามกลุ่มลูกค้า ทรงเสื้อ สไตล์ และสี แล้วส่งรหัสทาง LINE ขอราคาได้ทันที">
+  {{!-- schema (ตรวจคำ SEO 26 ต.ค.): breadcrumb + รายการแบบเสื้อที่มีรหัส --}}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"แบบเสื้อ"}]}</script>
+  {{#if designsLd}}<script type="application/ld+json">{{{designsLd}}}</script>{{/if}}
 </head>
 <body>
 {{> siteHeader active="designs"}}
 
-<main id="main">
+<main id="main" data-dgv="c">
+  {{!-- รื้อหน้า 26 ต.ค. · ทำ 3 แบบ อาร์ตเลือกแบบ ค: แถบตัวกรองบน + เลือกเก็บหลายแบบแล้วส่งรหัสทาง LINE ครั้งเดียว
+       ตัวกรองเดิม (designs-page.js · design-filter.js มีเทส) · ถาดเลือก design-picks.js มีเทส · CSS main.css "หน้าแบบเสื้อ" --}}
 
-  <!-- 1 · ชื่อหน้า + ค้นหา + ตัวกรอง -->
-  <section class="band-hero relative overflow-hidden">
-    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-    <div class="wrap relative py-12 md:py-16">
-      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">แบบเสื้อ</span></nav>
-      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">{{dp.h1}}</h1>
-      <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[56ch] mt-5">{{dp.lead}}</p>
+  {{!-- รอบ 150 (6 พ.ย. บอร์ด "หน้าแบบเสื้อ" + "ไว้กลาง ภาพสองเอาออก"): หัวสั้นอยู่กลาง ไม่มี breadcrumb บนจอ (schema BreadcrumbList ยังอยู่ใน head) + ชิปกลุ่มลูกค้าเป็นตัวกรองบนหน้า (แทนแถวราคา ตัวเลข 91 และการ์ดกลุ่ม)
+       H2 "เลือกดูตามกลุ่มลูกค้า" ซ่อนไว้เหนือชิป (ผัง v22 + โปรแกรมอ่านหน้าจอ)
+       ชิป = ลิงก์ ?use= / ?garment= (ไม่มี JS ก็ใช้ได้) · designs-page.js ดักคลิกกรองทันที (chipApply / chipActive มีเทส) --}}
+  <section class="dg-hero">
+    <div class="wrap dg-hero__in">
+      <h1 class="t-display dg-hero__h">{{{hl dp.h1 dp.accent}}}</h1>
+      <p class="dg-hero__p">{{{ph dp.lead}}}</p>
+      <h2 class="sr-only" id="grpChips-h">{{dp.filterH}}</h2>
+      <nav class="dg-chips" id="dgChips" aria-labelledby="grpChips-h">{{#each dp.chips}}<a class="dg-chip" href="{{{this.href}}}"{{#if @first}} aria-current="true"{{/if}} data-axis="{{this.axis}}" data-val="{{this.val}}">{{this.t}}</a>{{/each}}</nav>
     </div>
   </section>
 
-  <!-- v22 · เลือกแบบตามงานที่ใช้ → แกลเลอรีรายกลุ่ม -->
-  <section class="wrap pt-12 md:pt-14">
-    <h2 class="t-display text-[clamp(24px,3vw,34px)]">{{dp.pillsH}}</h2>
-    <div class="chiprail mt-5">{{#each dp.pills}}<a class="chip" href="{{url this.to}}">{{this.t}}{{#if this.n}} <span class="tabular-nums opacity-60">{{this.n}}</span>{{/if}}</a>{{/each}}</div>
+  <section class="wrap dg-cat" aria-labelledby="dgCat-h">
+    <h2 id="dgCat-h" class="dg-h2">{{dp.pillsH}}</h2>
+    {{!-- ตัวกรอง: จอใหญ่ = แถบบนติดใต้หัวเว็บ ตัวเลือกเป็นปุ่มเปิดรายการ · มือถือ = แผ่นตัวกรอง --}}
+    <script type="application/json" id="designFacets">{"axes":[
+      {"id":"work","label":"งาน","all":"ทุกงาน","items":[{{#each designFilters.works}}{"id":"{{this.id}}","name":"{{this.name}}"{{#if this.none}},"none":true{{/if}} }{{#unless @last}},{{/unless}}{{/each}}]},
+      {"id":"use","label":"ใช้กับงาน","all":"ทุกงาน","items":[{{#each designFilters.uses}}{"id":"{{this.id}}","name":"{{this.name}}"}{{#unless @last}},{{/unless}}{{/each}}]},
+      {"id":"garment","label":"ทรงเสื้อ","all":"ทุกทรง","more":true,"items":[{{#each designFilters.garments}}{"id":"{{this.id}}","name":"{{this.name}}"}{{#unless @last}},{{/unless}}{{/each}}]},
+      {"id":"style","label":"สไตล์","all":"ทุกสไตล์","more":true,"items":[{{#each designFilters.styles}}{"id":"{{this.id}}","name":"{{this.name}}"}{{#unless @last}},{{/unless}}{{/each}}]},
+      {"id":"color","label":"สี","all":"ทุกสี","more":true,"items":[{{#each designFilters.colors}}{"id":"{{this.id}}","name":"{{this.name}}"}{{#unless @last}},{{/unless}}{{/each}}]}
+    ]}</script>
+
+    <div class="dz" id="dz">
+      <div class="dz__side" id="dzSide">
+        {{!-- ช่องค้นหา (อาร์ต 26 ต.ค. "ค้นหาทำดีๆ"): เม็ดยาสูงเท่าปุ่มตัวกรอง · พิมพ์แค่เลขก็เจอรหัส (design-filter.js textHit มีเทส) · ปุ่มล้าง · กด / เพื่อค้นหา --}}
+        <form class="dz-search" id="designSearch" role="search" onsubmit="return false">
+          <label class="sr-only" for="dq">ค้นหารหัสแบบหรือทรงเสื้อ</label>
+          <span class="dz-search__ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <input class="dz-search__in" id="dq" name="q" type="search" placeholder="ค้นหารหัส หรือทรงเสื้อ" autocomplete="off" enterkeyhint="search" spellcheck="false" aria-describedby="dqHint">
+          <kbd class="dz-search__kbd" aria-hidden="true">/</kbd>
+          <button class="dz-search__x" type="button" id="dqClear" aria-label="ล้างคำค้น" hidden><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          <span class="dz-search__hint" id="dqHint">พิมพ์แค่เลขก็ได้ เช่น 12 = TD-0012 · หรือ โปโล วิ่ง</span>
+          <button class="sr-only" type="submit">ค้นหา</button>
+        </form>
+        <div class="dz-bar" id="dzBar" hidden><button class="dz-bar__btn" type="button" id="dzOpen" aria-haspopup="dialog"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span>กรอง</span><b data-bar-n></b></button><span class="dz-bar__count" data-bar-count></span></div>
+        <dialog class="dz-sheet" id="dzSheet" aria-label="ตัวกรองแบบเสื้อ"><div class="dz-sheet__head"><b>ตัวกรอง</b><button type="button" class="dz-sheet__x" id="dzClose" aria-label="ปิด"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div id="dzSheetBody"></div><div class="dz-sheet__foot"><button type="button" class="btn btn-ink w-full" id="dzDone">ดูแบบ</button></div></dialog>
+
+        <div class="dz-filters" id="designFilter"></div>
+        {{#if designFilters.noDesigns.length}}<p class="dz-note">ยังไม่มีแบบในคลังสำหรับ{{#each designFilters.noDesigns}} <a href="{{url 'products' this.id}}">{{this.name}}</a>{{#unless @last}} ·{{/unless}}{{/each}} ดูตัวอย่างงานที่หน้าสินค้า</p>{{/if}}
+
+        {{!-- กำลังกรอง: ลบทีละอันได้ --}}
+        <div class="dz-active" id="designActive" role="group" hidden aria-label="ตัวกรองที่เลือกอยู่"></div>
+        <div class="dz-count">
+          <p class="t-sm tabular-nums" id="designCount" role="status" aria-live="polite">แสดง {{designFilters.total}} แบบ</p>
+          <button class="dz-reset" type="button" id="designReset" hidden>ล้างตัวกรอง</button>
+        </div>
+      </div>
+
+      <div class="dz__main">
+        {{!-- การ์ดแบบ: รูป (กดดูใหญ่) + รหัส + ปุ่มเลือกเก็บอย่างเดียว (อาร์ต 26 ต.ค. "มีแค่เลือกพอ ไม่เอาปุ่ม LINE") · ส่ง LINE ที่ถาดล่าง หรือในกล่องดูรูปใหญ่ --}}
+        <div class="dgrid" id="designGrid" data-line-url="{{site.lineUrl}}">
+          {{#each designs}}
+          <div class="dcard" data-code="{{this.code}}" data-meta="{{this.meta}}" data-full="{{this.img}}" data-work="{{this.work}}" data-garment="{{this.garment}}" data-product="{{#each this.product}}{{this}} {{/each}}"
+               data-use="{{#each this.use}}{{this}} {{/each}}" data-style="{{#each this.style}}{{this}} {{/each}}"
+               data-color="{{this.color}}" data-text="{{this.code}} {{this.garmentName}} {{this.techName}} {{this.color}}" data-thumb="{{#if this.thumbSmall}}{{this.thumbSmall}}{{else}}{{this.imgSmall}}{{/if}}">
+            {{!-- 6 พ.ย. "ทำรูปให้มันเต็มๆหน่อย": ภาพตัด 3:2 (thumb) ถ้ามี · กดดูใหญ่ใช้ data-full = ไฟล์เต็ม --}}
+            <figure class="dcard__fig{{#unless this.thumb}}{{#if this.thumbBoard}} board-thumb{{/if}}{{/unless}}">
+              {{#if this.thumb}}<img src="{{this.thumbSmall}}" srcset="{{this.thumbSmall}} 540w, {{this.thumb}} 1080w" sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"{{else}}<img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} {{#if this.width}}{{this.width}}{{else}}1080{{/if}}w" sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"{{/if}}
+                   width="1080" height="720" loading="lazy" decoding="async"
+                   alt="แบบ{{this.garmentName}} {{this.techName}} รหัส {{this.code}}">
+            </figure>
+            <div class="dcard__cap">
+              <p class="dcard__t"><b class="tabular-nums">{{this.code}}</b><span>{{this.garmentName}}</span></p>
+              <div class="dcard__act">
+                <button class="dcard__pick" type="button" aria-pressed="false" data-pick="{{this.code}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="dcard__plus" d="M12 5v14M5 12h14"/><path class="dcard__tick" d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="dcard__pick-t" data-pick-t>เลือก</span><span class="sr-only"> แบบ {{this.code}}</span></button>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+
+        <p class="dz-empty hidden" id="designEmpty">ไม่พบแบบที่ตรงกับที่เลือก ลองล้างตัวกรองหรือเปลี่ยนคำค้น</p>
+        {{!-- 6 พ.ย. อาร์ต "ทำตรงนี้มาดีๆ พวกรูปให้แสดงมาซัก 10 แถว": โหลดทีละ คอลัมน์ × 10 แถว · แถบความคืบหน้า + ปุ่มบอกจำนวนที่จะได้ (designs-page.js อัปเดต) --}}
+        <div class="dz-more">
+          <div class="dz-prog" id="designProg" role="progressbar" aria-label="จำนวนแบบที่ดูแล้ว" aria-valuemin="0" aria-valuenow="{{designFilters.total}}" aria-valuemax="{{designFilters.total}}"><span class="dz-prog__bar" aria-hidden="true"><i></i></span><span class="dz-prog__t" data-prog-t>ดูแล้ว {{designFilters.total}} จาก {{designFilters.total}} แบบ</span></div>
+          <button class="dz-more__btn" type="button" id="designMore">ดูแบบเพิ่ม</button>
+        </div><!-- /more -->
+      </div>
+    </div>
+
   </section>
 
-  <section class="wrap section">
-    <h2 class="t-display text-[clamp(24px,3vw,34px)] mb-6">{{dp.filterH}}</h2>
-    <form class="flex flex-wrap gap-2.5 max-w-[560px]" id="designSearch" role="search" onsubmit="return false">
-      <label class="sr-only" for="dq">ค้นหาชื่อสินค้า ชื่อแบบ หรือรหัสแบบ</label>
-      <input class="input flex-1 min-w-[220px]" id="dq" name="q" type="search" placeholder="ค้นหา เช่น โปโล หรือ TD-0012" autocomplete="off">
-      <button class="btn btn-ink" type="submit">ค้นหา</button>
-    </form>
+  {{!-- ถาดแบบที่เลือกไว้ (ชุดเดียวกับแกลเลอรีรายกลุ่ม · audit มือถือ 30 ต.ค. ข้อ 11) --}}
+  {{> pickTray where="design-tray" send="รหัส"}}
 
-    <div class="mt-8 space-y-4" id="designFilter">
-      {{#if designFilters.showProducts}}
-      <div class="chiprail">
-        <span class="text-[15px] font-bold mr-1">สินค้า</span>
-        <button class="chip" type="button" data-f="product" data-v="all" aria-pressed="true">ทั้งหมด</button>
-        {{#each designFilters.products}}<button class="chip" type="button" data-f="product" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
-      </div>
-      {{/if}}
-
-      {{#if designFilters.showUses}}
-      <div class="chiprail">
-        <span class="text-[15px] font-bold mr-1">การใช้งาน</span>
-        <button class="chip" type="button" data-f="use" data-v="all" aria-pressed="true">ทั้งหมด</button>
-        {{#each designFilters.uses}}<button class="chip" type="button" data-f="use" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
-      </div>
-      {{/if}}
-
-      {{#if designFilters.showStyles}}
-      <div class="chiprail">
-        <span class="text-[15px] font-bold mr-1">สไตล์</span>
-        <button class="chip" type="button" data-f="style" data-v="all" aria-pressed="true">ทั้งหมด</button>
-        {{#each designFilters.styles}}<button class="chip" type="button" data-f="style" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
-      </div>
-      {{/if}}
-
-      {{#if designFilters.showColors}}
-      <div class="chiprail">
-        <span class="text-[15px] font-bold mr-1">สี</span>
-        <button class="chip" type="button" data-f="color" data-v="all" aria-pressed="true">ทุกสี</button>
-        {{#each designFilters.colors}}<button class="chip" type="button" data-f="color" data-v="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
-      </div>
-      {{/if}}
-
-      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
-        <p class="t-sm tabular-nums" id="designCount" role="status" aria-live="polite">แสดง {{designFilters.total}} แบบ</p>
-        <button class="chip" type="button" id="designReset" hidden>ล้างตัวกรอง</button>
-      </div>
-    </div>
-
-    <!-- 2 · ตารางรูป · ขนาดและมุมเท่ากัน · รหัสอยู่ในภาพ -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 mt-7" id="designGrid" data-line-url="{{site.lineUrl}}">
-      {{#each designs}}
-      <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]"
-              data-code="{{this.code}}" data-meta="{{this.meta}}" data-product="{{#each this.product}}{{this}} {{/each}}"
-              data-use="{{#each this.use}}{{this}} {{/each}}" data-style="{{#each this.style}}{{this}} {{/each}}"
-              data-color="{{this.color}}" data-text="{{this.code}} {{this.garmentName}} {{this.techName}} {{this.color}}">
-        <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"
-             width="1080" height="720" loading="lazy" decoding="async"
-             alt="แบบ{{this.garmentName}}งาน{{this.techName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง"
-             class="w-full h-full object-contain">
-      </figure>
-      {{/each}}
-    </div>
-
-    <div class="flex justify-center mt-9">
-      <button class="btn btn-ink btn-lg" type="button" id="designMore">โหลดเพิ่ม</button>
-    </div>
-
-    <!-- 3 · ยังไม่เจอแบบที่ชอบ · แสดงตลอด -->
-    <p class="t-body mt-10 hidden" id="designEmpty">ไม่พบแบบที่ตรงกับที่เลือก ลองล้างตัวกรองหรือเปลี่ยนคำค้น</p>
-    <div class="bg-shell border border-line rounded-plate p-7 md:p-9 mt-10">
-      <h2 class="t-display text-[clamp(22px,2.8vw,32px)]">{{dp.cta.h}}</h2>
-      <p class="t-lead mt-3 max-w-[52ch]">แบบในหน้านี้เป็นแค่ตัวอย่างที่เคยทำ งานของคุณออกแบบใหม่ได้ทั้งหมด</p>
-      <div class="flex flex-wrap gap-3 mt-6">
-        <button class="btn btn-line" type="button" id="designReset2">ล้างตัวกรอง</button>
-        <a class="btn btn-line" href="{{url 'designs'}}">ดูแบบทั้งหมด</a>
-        <a class="btn btn-orange" href="{{url 'contact'}}">ส่งภาพอ้างอิงให้ทีมดี</a>
-      </div>
-    </div>
-
-    <p class="t-xs max-w-[70ch] mt-10">ทุกแบบเป็นงานที่ออกแบบและผลิตจริงโดยทีมดีไซเนอร์ของเรา ใช้เป็นแนวทางได้ แต่งานของคุณจะถูกออกแบบใหม่ให้เป็นของทีมคุณเอง รายละเอียดเทคนิคและผ้าดูได้ที่ <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'products' 'print'}}#spec">หน้าสินค้า</a></p>
-  </section>
-
-  {{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end · 24 ต.ค.) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
-  <section class="hm-end" aria-labelledby="end-h">
-    <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
-    <div class="wrap relative hm-end__in">
-      <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
-      <h2 id="end-h">{{{ph "ชอบแบบไหน ส่งมาบอกเรา"}}}</h2>
-      <p class="hm-end__lead">{{{ph "เซฟรูปที่ชอบแล้วทักมาพร้อมจำนวนกับวันงาน ดีไซเนอร์จะปรับให้เป็นแบบของทีมคุณ"}}}</p>
-      <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}">กรอกฟอร์ม</a></div>
-      <p class="hm-end__alt"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>
-    </div>
-  </section>
+  {{!-- ส่วนปิด (รอบ 151): แบนเนอร์ "แชทผ่าน LINE" แทนแถบเล็ก + กล่องแชทเดิม (ปุ่ม LINE ซ้ำกัน 2 ชุด) --}}
+  {{> lineCta c=designsLine href=designsCtaLine where="designs-line" href2=(url 'contact') q2="?from=%2Fdesigns%2F"}}
 
 </main>
 {{> footer}}

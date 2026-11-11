@@ -2,6 +2,12 @@
 <html lang="th">
 <head>
   {{> head}}
+  {{!-- CSS เฉพาะหน้าโหลดใน head (27 ต.ค.) · เดิม import ผ่าน JS → ตอนเปิดหน้ารูป/ไอคอนกางใหญ่แวบก่อน CSS มา --}}
+  <link rel="stylesheet" href="/src/styles/article-reader.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-blocks.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-material-lab.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-process-studio.css" data-page-css>
   <title>เช็กลิสต์สั่งทำเสื้อทีมก่อนยืนยันผลิต | TEAMDEE</title>
   <meta name="description" content="ข้อมูลเช็กลิสต์สั่งทำเสื้อทีมก่อนยืนยันผลิต เพื่อเลือกแบบและวางรายละเอียดการสั่งทำกับทีมดี">
   {{!-- บทความร่างตาม v22 · noindex จนกว่ามีผู้ตรวจและชื่อผู้เขียนจริง --}}

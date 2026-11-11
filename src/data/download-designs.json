@@ -1,0 +1,234 @@
+{
+  "proofs": [
+    {
+      "id": "fti",
+      "title": "FTI · เสื้อทีม Outing",
+      "design": {
+        "img": "/img/download-designs/loose-162.webp",
+        "imgSmall": "/img/download-designs/loose-162-540.webp",
+        "width": 1080,
+        "height": 1080
+      },
+      "real": {
+        "img": "/img/download-designs/loose-157.webp",
+        "imgSmall": "/img/download-designs/loose-157-540.webp",
+        "width": 811,
+        "height": 1080
+      },
+      "use": [
+        "corp",
+        "event"
+      ],
+      "product": [
+        "print"
+      ],
+      "note": "ดูการวางชื่อกิจกรรมที่อก และจังหวะลายสีครีมบริเวณไหล่กับแขน"
+    },
+    {
+      "id": "prd",
+      "title": "PRD · โปโลขาว–ม่วง",
+      "design": {
+        "img": "/img/download-designs/3d-082.webp",
+        "imgSmall": "/img/download-designs/3d-082-540.webp",
+        "width": 1079,
+        "height": 1080
+      },
+      "real": {
+        "img": "/img/download-designs/brand-015.webp",
+        "imgSmall": "/img/download-designs/brand-015-540.webp",
+        "width": 811,
+        "height": 1080
+      },
+      "use": [
+        "gov"
+      ],
+      "product": [
+        "print"
+      ],
+      "note": "ดูการแบ่งพื้นที่ขาว–ม่วง และตำแหน่ง PRD ที่อกซ้าย"
+    },
+    {
+      "id": "cash",
+      "title": "CASH · โปโลดำ–ชมพู",
+      "design": {
+        "img": "/img/download-designs/3d-083.webp",
+        "imgSmall": "/img/download-designs/3d-083-540.webp",
+        "width": 1080,
+        "height": 1080
+      },
+      "real": {
+        "img": "/img/download-designs/brand-031.webp",
+        "imgSmall": "/img/download-designs/brand-031-540.webp",
+        "width": 811,
+        "height": 1080
+      },
+      "use": [
+        "corp"
+      ],
+      "product": [
+        "print"
+      ],
+      "note": "ดูเส้นสีชมพูที่รับกับคอเสื้อ และข้อความ CASH กลางหน้าอก"
+    },
+    {
+      "id": "motor",
+      "title": "Motor Expo · เสื้อคอกลม",
+      "design": {
+        "img": "/img/download-designs/brand-048.webp",
+        "imgSmall": "/img/download-designs/brand-048-540.webp",
+        "width": 1080,
+        "height": 1080
+      },
+      "real": {
+        "img": "/img/download-designs/brand-049.webp",
+        "imgSmall": "/img/download-designs/brand-049-540.webp",
+        "width": 810,
+        "height": 1080
+      },
+      "use": [
+        "corp",
+        "event"
+      ],
+      "product": [
+        "print"
+      ],
+      "note": "ดูกราฟิกเฉียงและลายธงบนเสื้อคอกลม เมื่ออยู่บนตัวเสื้อจริง"
+    },
+    {
+      "id": "balac",
+      "title": "BALAC · เสื้อทีม",
+      "design": {
+        "img": "/img/download-designs/brand-064.webp",
+        "imgSmall": "/img/download-designs/brand-064-540.webp",
+        "width": 1080,
+        "height": 1080
+      },
+      "real": {
+        "img": "/img/download-designs/brand-068.webp",
+        "imgSmall": "/img/download-designs/brand-068-540.webp",
+        "width": 811,
+        "height": 1080
+      },
+      "use": [
+        "faculty",
+        "class",
+        "edu"
+      ],
+      "product": [
+        "print",
+        "jersey"
+      ],
+      "note": "ดูตัวอักษรชื่อคณะกลางอก และแถบสีบนตัวเสื้อ ใช้เป็นแนวลาย ส่วนขนาด Oversize ต้องยืนยันแยก"
+    },
+    {
+      "id": "worldwide",
+      "title": "Worldwide · เสื้อเบสบอล",
+      "design": {
+        "img": "/img/download-designs/loose-110.webp",
+        "imgSmall": "/img/download-designs/loose-110-540.webp",
+        "width": 462,
+        "height": 419
+      },
+      "real": {
+        "img": "/img/download-designs/loose-121.webp",
+        "imgSmall": "/img/download-designs/loose-121-540.webp",
+        "width": 810,
+        "height": 1080
+      },
+      "use": [
+        "sport",
+        "event"
+      ],
+      "product": [
+        "baseball"
+      ],
+      "note": "ดูตำแหน่งข้อความข้ามแนวกระดุม กุ๊นสีแดง และการไล่สีช่วงชายเสื้อ"
+    }
+  ],
+  "shapes": [
+    {
+      "title": "ฮู้ดซิปหน้า · คลุมฮู้ด",
+      "img": "/img/download-designs/loose-221.webp",
+      "imgSmall": "/img/download-designs/loose-221-540.webp",
+      "width": 1080,
+      "height": 1076,
+      "note": "เห็นรูปทรงเมื่อยกฮู้ดขึ้น"
+    },
+    {
+      "title": "ฮู้ดซิปหน้า · พับฮู้ด",
+      "img": "/img/download-designs/loose-222.webp",
+      "imgSmall": "/img/download-designs/loose-222-540.webp",
+      "width": 1080,
+      "height": 1076,
+      "note": "แนวฮู้ดแบบเดียวกันเมื่อพับลงด้านหลัง"
+    },
+    {
+      "title": "คอปกซิปหน้า",
+      "img": "/img/download-designs/loose-223.webp",
+      "imgSmall": "/img/download-designs/loose-223-540.webp",
+      "width": 1080,
+      "height": 1076,
+      "note": "ปกพับลงด้านข้างของแนวซิป"
+    },
+    {
+      "title": "คอปกซิปหน้า · ภาพทางเลือก",
+      "img": "/img/download-designs/loose-224.webp",
+      "imgSmall": "/img/download-designs/loose-224-540.webp",
+      "width": 1080,
+      "height": 1076,
+      "note": "ใช้เทียบแนวคอปกกับภาพก่อนหน้า ขนาดปกต้องยืนยันก่อนผลิต"
+    },
+    {
+      "title": "คอตั้งซิปหน้า",
+      "img": "/img/download-designs/loose-225.webp",
+      "imgSmall": "/img/download-designs/loose-225-540.webp",
+      "width": 1080,
+      "height": 1076,
+      "note": "คอเสื้อตั้งรอบคอ ไม่มีปกพับ"
+    },
+    {
+      "title": "คอจั๊มซิปหน้า",
+      "img": "/img/download-designs/loose-226.webp",
+      "imgSmall": "/img/download-designs/loose-226-540.webp",
+      "width": 1080,
+      "height": 1076,
+      "note": "คอจั๊มสั้น รับกับจั๊มที่ปลายแขนและชายเสื้อ"
+    }
+  ],
+  "details": [
+    {
+      "title": "โลโก้ TEAMDEE · ฝีเข็มระยะใกล้",
+      "product": "polo",
+      "img": "/img/download-designs/loose-123.webp",
+      "imgSmall": "/img/download-designs/loose-123-540.webp",
+      "width": 1080,
+      "height": 720
+    },
+    {
+      "title": "ตำแหน่งลายหน้าอก",
+      "product": "baseball",
+      "img": "/img/download-designs/loose-119.webp",
+      "imgSmall": "/img/download-designs/loose-119-540.webp",
+      "width": 810,
+      "height": 1080
+    },
+    {
+      "title": "แนวกระดุมและกุ๊นคอ",
+      "product": "baseball",
+      "img": "/img/download-designs/loose-120.webp",
+      "imgSmall": "/img/download-designs/loose-120-540.webp",
+      "width": 811,
+      "height": 1080
+    }
+  ],
+  "references": [
+    {
+      "title": "TOPLAND · ตัวอย่างการวางกราฟิกบนเสื้อ",
+      "product": "screen",
+      "img": "/img/download-designs/brand-058.webp",
+      "imgSmall": "/img/download-designs/brand-058-540.webp",
+      "width": 1080,
+      "height": 1079
+    }
+  ]
+}

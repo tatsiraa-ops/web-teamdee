@@ -1,0 +1,45 @@
+{{#if (eq item.id 'fabric')}}
+<section class="g-lab g-lab--fabric" aria-labelledby="fabric-lab-heading" data-fabric-lab>
+  <div class="g-lab__intro"><h2 id="fabric-lab-heading">มองใกล้ ๆ<br>แล้วค่อยเลือกผ้า</h2><p>ลายทอที่ต่างกัน เห็นได้ตั้งแต่ผิวผ้า<br>ลองวางสองชนิดเทียบกันก่อนคุยเรื่องการใช้งาน</p></div>
+  <div class="g-lab__samples">
+    <figure class="g-lab__sample" data-fabric-sample>
+      <div class="g-lab__select" hidden><label for="fabric-left">ผ้าฝั่งซ้าย</label><select id="fabric-left" data-fabric-select>{{#each @root.sizing.fabrics}}<option value="{{this.img}}" data-use="{{this.use}}"{{#if (eq @index 3)}} selected{{/if}}>{{this.name}}</option>{{/each}}</select></div>
+      <img src="/img/fabric/micro-wide.webp" alt="ภาพระยะใกล้ของผ้าเรียบไมโคร" width="1200" height="558" data-fabric-photo>
+      <figcaption><h3 data-fabric-name>ผ้าเรียบไมโคร</h3><p data-fabric-use>เสื้อแฟชั่น เสื้อกิจกรรมทั่วไป เสื้อช่าง</p></figcaption>
+    </figure>
+    <figure class="g-lab__sample" data-fabric-sample>
+      <div class="g-lab__select" hidden><label for="fabric-right">ผ้าฝั่งขวา</label><select id="fabric-right" data-fabric-select>{{#each @root.sizing.fabrics}}<option value="{{this.img}}" data-use="{{this.use}}"{{#if (eq @index 2)}} selected{{/if}}>{{this.name}}</option>{{/each}}</select></div>
+      <img src="/img/fabric/honeycomb-wide.webp" alt="ภาพระยะใกล้ของผ้ารังผึ้ง" width="1200" height="558" data-fabric-photo>
+      <figcaption><h3 data-fabric-name>ผ้ารังผึ้ง</h3><p data-fabric-use>เสื้อวิ่ง เสื้อแบดมินตัน เสื้อกีฬา</p></figcaption>
+    </figure>
+  </div>
+  <p class="g-lab__note">ภาพใช้เทียบลักษณะผิวผ้า ไม่ใช่มาตราส่วนเดียวกัน ความนุ่ม น้ำหนัก และการยืด ควรสัมผัสตัวอย่างจริงก่อนตัดสินใจ</p>
+  <p class="g-lab__status" role="status" aria-live="polite" data-fabric-status></p>
+</section>
+{{/if}}
+{{#if (eq item.id 'size')}}
+<section class="g-lab g-lab--size" aria-labelledby="size-lab-heading" data-measure-lab>
+  <div class="g-lab__measure-visual">
+    <svg class="g-lab__shirt" viewBox="0 0 640 600" role="img" aria-labelledby="measure-diagram-title measure-diagram-desc">
+      <title id="measure-diagram-title">ตำแหน่งวัดเสื้อวางราบ</title><desc id="measure-diagram-desc">รอบอกวัดใต้วงแขนแล้วคูณสอง ความยาววัดจากจุดสูงสุดของไหล่ถึงชายเสื้อ ไหล่วัดระหว่างตะเข็บไหล่สองข้าง ภาพประกอบไม่ใช่มาตราส่วนจริง</desc>
+      <defs><pattern id="shirt-grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#ddd" stroke-width=".6"/></pattern></defs>
+      <rect width="640" height="600" fill="url(#shirt-grid)"/>
+      <path class="g-lab__garment" d="M250 92 184 115 74 217 150 289 192 252 192 525Q320 541 448 525L448 252 490 289 566 217 456 115 390 92Q382 160 320 166Q258 160 250 92Z" fill="#fff" stroke="#222" stroke-width="3"/>
+      <path d="M250 92Q320 130 390 92M241 96Q248 178 320 181Q392 178 399 96M184 115 208 246M456 115 432 246M199 510Q320 526 441 510M84 207 160 278M556 207 480 278" fill="none" stroke="#999" stroke-width="2" stroke-dasharray="5 5"/>
+      <g class="g-lab__measure-line is-active" data-measure-line="chest"><path d="M192 265H448M192 250V280M448 250V280"/><circle cx="320" cy="265" r="21"/><text x="320" y="272">อก</text></g>
+      <g class="g-lab__measure-line" data-measure-line="length"><path d="M390 92V530M377 92H403M377 530H403"/><circle cx="390" cy="386" r="23"/><text x="390" y="393">ยาว</text></g>
+      <g class="g-lab__measure-line" data-measure-line="shoulder"><path d="M184 68H456M184 55V118M456 55V118"/><circle cx="320" cy="68" r="23"/><text x="320" y="75">ไหล่</text></g>
+    </svg>
+    <span class="g-lab__diagram-note">ภาพประกอบตำแหน่งวัด ไม่ใช่มาตราส่วนจริง</span>
+  </div>
+  <div class="g-lab__measure-copy"><h2 id="size-lab-heading">เริ่มที่เสื้อ<br>ที่คุณใส่สบาย</h2><p>วางเสื้อให้ราบ วัดตอนแห้งและเรียบ<br>อย่าดึงผ้าให้ตึง และไม่ใช้รอบตัวคนแทนขนาดเสื้อ</p>
+    <div class="g-lab__measure-buttons" role="group" aria-label="เลือกตำแหน่งวัด" hidden><button type="button" data-measure="chest" aria-pressed="true">รอบอก</button><button type="button" data-measure="length" aria-pressed="false">ความยาว</button><button type="button" data-measure="shoulder" aria-pressed="false">ไหล่</button></div>
+    <div class="g-lab__measure-answer" aria-live="polite">
+      <div data-measure-answer="chest"><h3>ใต้วงแขนถึงใต้วงแขน × 2</h3><p>วัดจากใต้วงแขนข้างหนึ่งไปอีกข้างหนึ่ง แล้วคูณสองเพื่อเทียบกับช่องรอบอกในตาราง</p></div>
+      <div data-measure-answer="length"><h3>จุดสูงสุดของไหล่ถึงชายเสื้อ</h3><p>วัดแนวยาวลงมาจากจุดสูงสุดของไหล่จนถึงชายเสื้อ ไม่เริ่มจากขอบคอด้านหน้า</p></div>
+      <div data-measure-answer="shoulder"><h3>ตะเข็บไหล่ถึงตะเข็บไหล่</h3><p>วัดจากตะเข็บไหล่ข้างหนึ่งไปอีกข้างหนึ่ง แล้วเทียบกับตารางของสินค้าและทรงที่ต้องการสั่ง</p></div>
+    </div>
+    <a class="g-lab__table-link" href="#table" data-guide-jump>วัดแล้ว ขอตารางไซซ์ที่ตรงกับทรง</a>
+  </div>
+</section>
+{{/if}}

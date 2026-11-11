@@ -1,34 +1,45 @@
-{{!-- มุมจอ 2 ฝั่ง ทุกหน้า · ตรรกะอยู่ที่ src/js/nudge.js --}}
-<div data-floats>
+{{!-- มุมจอ 2 ฝั่ง ทุกหน้า · ตรรกะอยู่ที่ src/js/nudge.js
+     อาร์ต 26 ต.ค. "แถบซ้ายล่างหาย เอากลับมาให้ดีกว่าเดิม น่าสนใจและน่ากด · CTA ขวาก็เช่นกัน"
+     ซ้าย: รูปใหญ่ + ป้ายหมวด + หัวข้อ + ปุ่มส้มบอกว่ากดแล้วไปไหน · ขวา: ป้ายสถานะตามเวลาทำการจริง + ปุ่ม LINE 2 บรรทัด + โทร
+     ป้ายคุกกี้ขึ้นอยู่ = ยกทั้งสองฝั่งขึ้นเหนือป้าย (--ck-lift จาก consent-ui.js) ไม่ซ่อน --}}
+<div data-floats data-hours="{{site.openingHours}}">
   <aside class="nudge" data-nudge hidden aria-label="แนะนำหน้าอื่นในเว็บ">
     <div class="nudge__bar">
-      <span class="nudge__count tabular-nums" data-nudge-count aria-hidden="true"></span>
       <button type="button" class="nudge__x" data-nudge-close aria-label="ปิดการ์ดแนะนำ">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
       </button>
     </div>
     {{#each nudges}}
-    <a class="nudge__item" data-nudge-item href="{{url this.key this.id}}" hidden>
-      <span class="nudge__pic" aria-hidden="true">
-        {{#if this.img}}<img src="{{this.img}}" alt="" width="96" height="96" loading="lazy" decoding="async">
-        {{else}}<span class="nudge__ico">{{#if (eq this.icon 'ruler')}}{{> icoRuler}}{{else}}{{> icoSpark}}{{/if}}</span>{{/if}}
-      </span>
+    <a class="nudge__item" data-nudge-item href="{{url this.key this.id}}{{this.hash}}" hidden>
+      {{!-- 170y (อาร์ต "แต่งการ์ดใหม่ ทั้งเว็บ"): รูปเต็มความสูงซ้าย · ไม่มีรูป = ไอคอน 3D ชุดเว็บ (kind=ico) --}}
+      <span class="nudge__pic{{#if this.crop}} nudge__pic--{{this.crop}}{{/if}}{{#if this.kind}} nudge__pic--{{this.kind}}{{/if}}" aria-hidden="true"><img data-src="{{this.img}}" alt="" width="112" height="112" decoding="async"></span>
+      {{!-- ไม่มีป้ายหมวดเหนือหัวข้อ (ปุ่มบอกปลายทางอยู่แล้ว) · หัวข้อแยกวลีตามช่องว่าง (ph) ให้ขึ้นบรรทัดตรงรอยต่อวลี ไม่ตัดกลางวลี (อาร์ต 26 ต.ค. "ตัดบรรทัดแปลกๆ") --}}
       <span class="nudge__txt">
-        <span class="nudge__k">{{this.kicker}}</span>
-        <span class="nudge__t">{{this.title}}</span>
-        <span class="nudge__go">ไปดู<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="nudge__t">{{{ph this.title}}}</span>
+        <span class="nudge__go">{{this.cta}}<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </span>
     </a>
     {{/each}}
     <span class="nudge__time" aria-hidden="true"></span>
   </aside>
 
+  {{!-- ปุ่มขวา: ลูกกลม LINE + ป้ายฟองแชทดำ (อาร์ตเลือกแบบ ข แล้วให้ทำให้ดีกว่าเดิม · 26 ต.ค.)
+       ลูกกลมเด้งก่อน ป้ายตาม · จุดออนไลน์ที่ลูกกลมขึ้นเฉพาะในเวลาทำการ · ชี้: แสงวิ่งบนป้าย ลูกศรขยับ ลูกกลมขยายเอียง · กด: ยุบ
+       ปุ่มโทรเป็นลูกกลมดำ ชี้/โฟกัสแล้วเบอร์โผล่ทางซ้าย · ตั้งค่าลดการเคลื่อนไหว = ไม่ขยับ
+       4 พ.ย. โฉมใหม่ (ชุดเดียวกับแท่นมือถือ): แท่นขาว ไอคอนโทร 3D ซ้าย ปุ่ม LINE เขียว 2 บรรทัดขวา · เบอร์โผล่เหนือไอคอนตอนชี้ --}}
   <nav class="fcta" data-float-cta data-where="float" aria-label="ติดต่อทีมดี">
-    <a class="fcta__btn fcta__btn--line" href="{{site.lineUrl}}" data-track="line">
-      <span class="fcta__ico" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา
+    <a class="fcta__btn fcta__btn--line" href="{{@root.pageLine}}" data-track="line">
+      {{!-- บรรทัดรอง = สถานะตามเวลาไทยจริง (nudge.js openNow) · ไม่มี JS = ข้อความกลาง ไม่อ้างว่าเปิดอยู่ --}}
+      <span class="fcta__lbl">
+        <span class="fcta__shine" aria-hidden="true"></span>
+        <span class="fcta__main">ทัก LINE ขอราคา<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fcta__sub" data-float-status><span class="fcta__dot" aria-hidden="true"></span><span data-float-status-t>ส่งรหัสแบบหรือรูปมาได้เลย</span></span>
+      </span>
+      <span class="fcta__orb" aria-hidden="true">{{> icoLine}}</span>
     </a>
-    <a class="fcta__btn fcta__btn--tel tabular-nums" href="tel:{{site.phonePrimaryTel}}">
-      <span class="fcta__ico" aria-hidden="true">{{> icoPhone}}</span>โทร {{site.phonePrimary}}
+    <a class="fcta__btn fcta__btn--tel tabular-nums" href="tel:{{site.phonePrimaryTel}}" aria-label="โทร {{site.phonePrimary}}">
+      <span class="fcta__num" aria-hidden="true">โทร {{site.phonePrimary}}</span>
+      <span class="fcta__orb fcta__orb--tel" aria-hidden="true"><img src="/img/icons/dock-phone.webp" alt="" width="240" height="240" decoding="async"></span>
     </a>
   </nav>
 </div>

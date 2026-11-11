@@ -1,0 +1,49 @@
+.g-studio{--studio-orange:var(--color-orange,#FF6C00);margin-block:36px 80px;color:#171717}
+.g-studio__heading{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:30px}
+.g-studio__heading h2{font-size:clamp(30px,3.5vw,48px);line-height:1.22;letter-spacing:-.025em;margin:0;font-weight:800}
+.g-studio__heading>p{max-width:350px;margin:0;color:#555;font-size:17px;line-height:1.8}
+.g-studio__workbench{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,1fr);background:#f3f3f3;border-radius:20px;overflow:hidden}
+.g-studio figure{margin:0;min-width:0}
+.g-studio__garment{position:relative;align-self:center;background:#fff}
+.g-studio__garment img{display:block;width:100%;height:auto;object-fit:contain}
+.g-studio figcaption{font-size:12px;line-height:1.6;color:#626262;padding:12px 20px}
+.g-studio__annotation{position:absolute;top:20px;left:20px;background:#fff;border:1px solid #dedede;padding:8px 12px;font-size:13px}
+.g-studio__inspector{padding:30px 34px;display:flex;flex-direction:column;justify-content:center}
+.g-studio__choices{display:flex;gap:0;border-bottom:1px solid #c6c6c6;margin-bottom:28px;flex-wrap:wrap}
+.g-studio__choices button{appearance:none;background:none;border:0;border-bottom:3px solid transparent;border-radius:0;color:#555;font:inherit;font-size:14px;font-weight:600;min-height:48px;padding:8px 12px;margin-bottom:-1px;cursor:pointer}
+.g-studio__choices button[aria-pressed=true]{color:#171717;border-bottom-color:var(--studio-orange)}
+.g-studio [data-studio-panel] h3{font-size:clamp(26px,2.4vw,34px);line-height:1.35;letter-spacing:-.015em;margin:0 0 18px}
+.g-studio [data-studio-panel] p{font-size:16px;line-height:1.85;margin:0 0 22px;max-width:42ch}
+.g-studio [data-studio-panel]+[data-studio-panel]{margin-top:24px}
+.g-studio[data-studio-ready] [data-studio-panel]+[data-studio-panel]{margin-top:0}
+.g-studio a{color:inherit;text-underline-offset:5px;text-decoration-thickness:1px;font-size:15px;font-weight:600;display:inline-block;padding-block:8px;min-height:44px}
+.g-studio a:hover{text-decoration-color:var(--studio-orange)}
+.g-studio button:focus-visible,.g-studio a:focus-visible{outline:3px solid #171717;outline-offset:4px}
+.g-studio [hidden]{display:none!important}
+.g-studio--polo .g-studio__workbench{background:#efefef}
+.g-studio--polo .g-studio__garment{background:#faf9f9}
+.g-studio__placement{padding:20px 20px 0;background:#fafafa}
+.g-studio__placement svg{display:block;width:100%;height:auto;max-height:440px}
+.g-studio__proof{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#f3f3f3;border-radius:20px;overflow:hidden}
+.g-studio__artwork{padding:25px 30px 10px;background-color:#fff;background-image:linear-gradient(45deg,#f1f1f1 25%,transparent 25%),linear-gradient(-45deg,#f1f1f1 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#f1f1f1 75%),linear-gradient(-45deg,transparent 75%,#f1f1f1 75%);background-size:24px 24px;background-position:0 0,0 12px,12px -12px,-12px 0}
+.g-studio__sample{color:var(--studio-orange);margin:auto;max-width:430px}
+.g-studio__sample svg{display:block;width:100%;height:auto}
+.g-studio__artwork figcaption{background:#fff;text-align:center;margin-top:20px}
+.g-studio__proof-controls{padding:32px 40px}
+.g-studio[data-studio-selection=capture] .g-studio__sample{filter:blur(2.3px)}
+.g-studio__footnote{font-size:14px;color:#606060;margin:18px 0 0;line-height:1.7}
+.g-studio__journey{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:40px 0 0;padding:0}
+.g-studio__journey li{position:relative;padding:0 38px 25px 0}
+.g-studio__journey li+li{padding-left:35px;border-left:1px solid #d5d5d5}
+.g-studio__journey li:not(:last-child):after{content:'';position:absolute;top:37px;left:120px;right:38px;height:2px;background:var(--studio-orange)}
+.g-studio__journey svg{width:92px;height:80px;color:#252525;display:block;margin-bottom:24px}
+.g-studio__journey h3{font-size:25px;line-height:1.4;margin:0 0 12px}
+.g-studio__journey p{font-size:16px;line-height:1.8;max-width:28ch;margin:0 0 8px;color:#555}
+.g-studio__delivery-note{display:grid;grid-template-columns:230px 1fr auto;gap:24px;align-items:center;padding:25px 28px;background:#f3f3f3;border-radius:12px;margin-top:15px}
+.g-studio__delivery-note strong{font-size:20px;line-height:1.5}.g-studio__delivery-note p{margin:0;line-height:1.8;font-size:15px}
+.g-studio__collars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.g-studio__collars figure{background:#f4f4f4;border-radius:16px;padding:30px}
+.g-studio__collars svg{display:block;width:100%;height:auto;max-height:220px}
+.g-studio__collars figcaption{font-size:15px;padding:24px 0 0}.g-studio__collars strong{display:block;font-size:23px;color:#222;margin-bottom:6px}
+@media(max-width:1000px){.g-studio__workbench{grid-template-columns:1.2fr 1fr}.g-studio__inspector{padding:24px}.g-studio__choices button{padding-inline:8px}.g-studio__proof-controls{padding:26px}.g-studio__delivery-note{grid-template-columns:1fr 2fr}.g-studio__delivery-note>a{grid-column:2}.g-studio__journey li{padding-right:22px}.g-studio__journey li+li{padding-left:22px}}
+@media(max-width:700px){.g-studio{margin-block:20px 48px}.g-studio__heading{display:block;margin-bottom:22px}.g-studio__heading h2{font-size:32px}.g-studio__heading>p{margin-top:14px;font-size:16px}.g-studio__workbench,.g-studio__proof{grid-template-columns:1fr;border-radius:14px}.g-studio__inspector,.g-studio__proof-controls{padding:22px}.g-studio__choices{margin-bottom:22px}.g-studio [data-studio-panel] h3{font-size:28px}.g-studio__annotation{top:12px;left:12px;font-size:11px}.g-studio__artwork{padding:20px}.g-studio__sample{max-width:300px}.g-studio__journey{grid-template-columns:1fr;margin-top:28px}.g-studio__journey li,.g-studio__journey li+li{padding:0 0 28px 94px;border-left:0;min-height:148px}.g-studio__journey svg{position:absolute;left:0;top:0;width:67px;height:62px}.g-studio__journey li:not(:last-child):after{top:76px;bottom:15px;height:auto;width:2px;left:32px;right:auto}.g-studio__journey h3{font-size:23px}.g-studio__delivery-note{display:block;padding:22px}.g-studio__delivery-note p{margin-top:12px}.g-studio__collars{gap:10px}.g-studio__collars figure{padding:12px}.g-studio__collars figcaption{font-size:12px}.g-studio__collars strong{font-size:17px}}

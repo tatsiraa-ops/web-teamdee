@@ -1,0 +1,47 @@
+{{!-- ช่องคลิปทีมดี (src/data/videos.json · PLAN.md "คลิปลูกค้าจาก IG") · ใช้: {{> videoSlot v=…}}
+     play = ปุ่มรูปปก กดแล้วค่อยโหลดวิดีโอ (src/js/video-slot.js) ไม่ฝัง Instagram/Facebook
+     embed = ตัวเล่น Facebook ขึ้นในหน้า (lazy) · link = การ์ดลิงก์ไปดูบน IG · wait = ต้นแบบโชว์กรอบรอไฟล์ (เว็บจริงไม่ส่งมาถึงตรงนี้ · videosFor forWp) --}}
+{{#if v.ready}}
+<figure class="vslot">
+  <button type="button" class="vslot__play" data-video="{{v.file}}" data-poster="{{v.poster}}"{{#if v.captions}} data-captions="{{v.captions}}"{{/if}} aria-label="เล่นคลิป {{v.title}} ความยาว {{v.clock}}">
+    <img src="{{v.poster}}" alt="" width="720" height="1280" loading="lazy" decoding="async">
+    <span class="vslot__btn" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="vslot__time tabular-nums" aria-hidden="true">{{v.clock}}</span>
+  </button>
+  <figcaption class="vslot__cap">{{v.title}}</figcaption>
+</figure>
+{{else if (eq v.mode "embed")}}
+{{!-- ตัวเล่น Facebook ขึ้นในหน้าเราเลย (อาร์ตขอ 26 ต.ค. "ให้มันขึ้นแบบนี้เลย") · loading=lazy = โหลดเมื่อเลื่อนมาใกล้ ไม่ถ่วงหน้าบนสุด
+     ลิงก์ "ดูบนเพจ" ไว้สำรอง เผื่อเครื่องที่บล็อกตัวเล่น Facebook --}}
+<figure class="vslot vslot--fb">
+  {{!-- ตัวเล่นโหลดเมื่อยินยอมหมวดสื่อจากภายนอก (media) แล้วเท่านั้น (PDPA · video-slot.js · 30 ต.ค. แยกจากหมวดโฆษณา) · ยังไม่ยินยอม = กรอบขออนุญาตเล่น --}}
+  <div class="vslot__frame">
+    <iframe data-src="{{v.embedSrc}}" title="คลิป {{v.title}} (ตัวเล่น Facebook)" loading="lazy" scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="vslot__gate">
+      <p class="vslot__t">{{v.title}}</p>
+      {{!-- กดแล้วเปิดหมวด "สื่อจากภายนอก (ตัวเล่น Facebook)" ต้องบอกให้รู้ก่อนกด (PDPA · ตรวจโค้ด 26 ต.ค. M3 · 30 ต.ค. ไม่พ่วงหมวดโฆษณาแล้ว) --}}
+      <p class="vslot__gp">คลิปนี้เล่นผ่านตัวเล่น Facebook เมื่อกดเล่น Facebook (Meta) จะได้รับข้อมูลการเข้าชม ไม่เปิดคุกกี้โฆษณาของทีมดี เปลี่ยนได้ที่ "ตั้งค่าคุกกี้" ท้ายหน้า</p>
+      <button type="button" class="btn btn-orange vslot__allow" data-allow-media>ยอมรับตัวเล่น Facebook และเล่นคลิป</button>
+    </div>
+  </div>
+  <figcaption class="vslot__note"><a href="{{v.link}}" target="_blank" rel="noopener">ดูบนเพจ Facebook ทีมดี<span class="sr-only"> (เปิดแท็บใหม่)</span></a></figcaption>
+</figure>
+{{else if (eq v.mode "link")}}
+{{!-- ยังไม่มีไฟล์บนเว็บ → การ์ดพาไปดูคลิปบนเพจทีมดี (อาร์ต 26 ต.ค.) · ไม่ฝังเพจ ไม่ดึงรูปจาก Meta มาเก็บ · เปิดแท็บใหม่ --}}
+<figure class="vslot vslot--link">
+  <a class="vslot__out" href="{{v.link}}" target="_blank" rel="noopener">
+    <span class="vslot__btn" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    {{#if v.clock}}<span class="vslot__time tabular-nums" aria-hidden="true">{{v.clock}}</span>{{/if}}
+    <span class="vslot__t">{{v.title}}</span>
+    <span class="vslot__go">ดูคลิปบน {{v.linkName}}<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg><span class="sr-only"> (เปิดแท็บใหม่)</span></span>
+  </a>
+  {{#unless wp}}<figcaption class="vslot__note">ต้นแบบ: ยังไม่มีไฟล์คลิปบนเว็บ ตอนนี้พาไปดูที่ {{v.linkName}}</figcaption>{{/unless}}
+</figure>
+{{else}}{{#unless wp}}
+<figure class="vslot vslot--wait">
+  <div class="vslot__box">
+    <p class="pending-ribbon">รอไฟล์คลิปต้นฉบับ{{#unless v.consent}} · ลูกค้ายินยอม{{/unless}}{{#unless v.music}} · สิทธิ์เพลง{{/unless}} · บนเว็บจริงซ่อนไว้</p>
+  </div>
+  <figcaption class="vslot__cap">{{v.title}}</figcaption>
+</figure>
+{{/unless}}{{/if}}

@@ -1,0 +1,37 @@
+{{!-- หน้าเคสลูกค้าจากคลิป (แนวทาง ก · 26 ต.ค. 2026 · PLAN.md "คลิปลูกค้าจาก IG") · ข้อมูล cs จาก videos.json ผ่าน vite.config.js (kind cases)
+     คลิปคือเนื้อหาหลักของหน้า (Google ให้ผลแบบวิดีโอเฉพาะหน้าแบบนี้) · ไม่แต่งเรื่อง คำพูด หรือตัวเลขเพิ่มจากที่ทีมดีโพสต์ไว้ --}}
+<section class="wrap pt-10 md:pt-14">
+  <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'projects'}}">{{#if wp}}ผลงานลูกค้า{{else}}รีวิวลูกค้า{{/if}}</a><span aria-hidden="true">/</span><span aria-current="page">{{cs.customer}}</span></nav>
+  <h1 class="t-display text-[clamp(28px,4vw,48px)] mt-6 max-w-[24ch]">{{cs.title}}</h1>
+  <p class="t-lead mt-4 max-w-[60ch]">{{cs.summary}}</p>
+</section>
+
+<section class="wrap section pt-8">
+  <div class="grid md:grid-cols-[minmax(0,360px)_minmax(0,1fr)] gap-10 lg:gap-16 items-start">
+    {{> videoSlot v=cs}}
+    <div>
+      <dl class="case-facts">
+        <div><dt>ลูกค้า</dt><dd>{{cs.customer}}</dd></div>
+        {{#if cs.productName}}<div><dt>งาน</dt><dd><a class="pp-more" href="{{cs.productHref}}">{{cs.productName}}</a></dd></div>{{/if}}
+        {{#if cs.useName}}<div><dt>กลุ่มลูกค้า</dt><dd><a class="pp-more" href="{{cs.useHref}}">{{cs.useName}}</a></dd></div>{{/if}}
+        {{#if cs.qty}}{{#if cs.qtyPending}}{{#unless wp}}<div><dt>จำนวน</dt><dd><span class="pending-ribbon">{{cs.qty}}</span></dd></div>{{/unless}}{{else}}<div><dt>จำนวน</dt><dd>{{cs.qty}}</dd></div>{{/if}}{{/if}}
+      </dl>
+
+      <h2 class="t-display text-[clamp(22px,2.6vw,30px)] mt-10">ลูกค้าพูดถึงงานนี้ในคลิป</h2>
+      {{#if cs.quotes.length}}
+      <ul class="case-quotes mt-4">{{#each cs.quotes}}<li><blockquote>{{this}}</blockquote></li>{{/each}}</ul>
+      {{else}}{{#unless wp}}<p class="pending-ribbon mt-4">รอคำพูดลูกค้าจากคลิป (ทีมพิมพ์ตามที่ลูกค้าพูด ไม่แต่งเอง) · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}{{/if}}
+
+      <p class="t-sm mt-8">คลิปนี้โพสต์ไว้ที่{{#if cs.links.ig}} <a class="underline decoration-orange underline-offset-4" href="{{cs.links.ig}}" target="_blank" rel="noopener">Instagram ทีมดี</a>{{/if}}{{#if cs.links.ig}}{{#if cs.links.fb}} และ{{/if}}{{/if}}{{#if cs.links.fb}} <a class="underline decoration-orange underline-offset-4" href="{{cs.links.fb}}" target="_blank" rel="noopener">เพจ Facebook ทีมดี</a>{{/if}}</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-shell border-y border-line" aria-labelledby="case-more-h">
+  <div class="wrap section">
+    <h2 id="case-more-h" class="t-display text-[clamp(24px,3vw,34px)]">อยากทำเสื้อทีมแบบนี้บ้าง</h2>
+    <p class="t-lead mt-3 max-w-[60ch]">เล่าการใช้งาน จำนวน และวันที่ต้องการรับเสื้อ ทีมดีช่วยเลือกแนวทางให้</p>
+    <div class="flex flex-wrap gap-3 mt-7"><a class="btn btn-orange btn-lg gap-2" href="{{@root.pageLine}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}">กรอกฟอร์ม</a></div>
+    <p class="mt-6 flex flex-wrap gap-x-6">{{#if cs.useHref}}<a class="pp-more" href="{{cs.useHref}}">สั่งทำ{{cs.useName}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}<a class="pp-more" href="{{url 'projects'}}">ดูผลงานลูกค้าทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a></p>
+  </div>
+</section>

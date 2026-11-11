@@ -10,6 +10,8 @@
       ["สั่งทำเสื้อวอร์มพิมพ์ลาย", "products.warmup"],
       ["สั่งทำเสื้อเบสบอล", "products.baseball"],
       ["สั่งทำเสื้อเจอร์ซีย์ Oversize", "products.jersey"]
+    ] }, { "h": "", "_note": "เพิ่มจาก v22 (อาร์ต 26 ต.ค. \"หน้าคำนวณไม่แสดงที่ไหนเลย\" · เดิมมีแค่ลิงก์ท้ายเว็บ บรรทัดราคา hero และหน้าสินค้า)", "items": [
+      ["คำนวณราคาเบื้องต้น", "calculations"]
     ] }]
   },
   "uses": {
@@ -21,7 +23,7 @@
       { "h": "อีเวนต์และกิจกรรม", "items": [["สั่งทำเสื้ออีเวนต์ / เสื้อกิจกรรม / เสื้อ Outing", "uses.event"]] }
     ]
   },
-  "designs": { "label": "แบบเสื้อพิมพ์ลาย", "to": "designs", "active": "designs" },
+  "designs": { "label": "แบบเสื้อ", "to": "designs", "active": "designs" },
   "works": { "label": "รีวิวลูกค้า", "to": "projects", "active": "works" },
   "learn": {
     "label": "คู่มือและบทความ", "active": "learn",

@@ -48,3 +48,17 @@ test('LocalBusiness มีหมุด Google Maps (hasMap) และพิก�
   assert.equal(none.hasMap, undefined)
   assert.equal(none.geo, undefined)
 })
+
+/* หน้า /designs/ (ตรวจคำ SEO 26 ต.ค.): รายการแบบเสื้อที่มีรหัส ให้ Google รู้ว่าหน้านี้เป็นคลังแบบ */
+test('designListSchema: ItemList แบบเสื้อมีรหัส ชื่อบอกรหัส ทรง งาน · รูปเป็น URL เต็ม · ไม่มีแบบ = null', async () => {
+  const { designListSchema } = await import('../src/js/seo-schema.js')
+  const s = designListSchema([
+    { code: 'TD-0001', garmentName: 'เสื้อฟุตบอล Jersey', techName: 'พิมพ์ลาย', img: '/img/design/d01.webp' },
+    { code: 'TD-0002', garmentName: 'เสื้อโปโล', techName: 'พิมพ์ลาย', img: '/img/design/d02.webp' },
+  ], 'https://team-dee.com')
+  assert.equal(s['@type'], 'ItemList')
+  assert.equal(s.numberOfItems, 2)
+  assert.deepEqual(s.itemListElement[0], { '@type': 'ListItem', position: 1, name: 'แบบเสื้อฟุตบอล Jersey งานพิมพ์ลาย รหัส TD-0001', image: 'https://team-dee.com/img/design/d01.webp' })
+  assert.equal(s.itemListElement[1].position, 2)
+  assert.equal(designListSchema([], 'https://team-dee.com'), null)
+})

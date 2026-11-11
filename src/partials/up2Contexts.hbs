@@ -1,0 +1,37 @@
+{{!-- ธุรกิจ/กิจกรรมที่ใช้เสื้อ · 11 พ.ย. แผงรูปลูกค้าจริง + รีวิว (เดิม โชว์รูมไดโอรามา 3D (4 พ.ย. อาร์ต "เอาแบบ ดีๆหน่อย แสดงภาพเต็มๆมาหน่อย ครีเอทได้เต็มที่")
+     ภาพ d3-* = เสื้อตัวใหญ่บนไดโอรามาจิ๋ว พื้นเทาอุ่นเดียวกันทุกภาพ → ทั้งส่วนใช้พื้นสีเดียวกัน ภาพกลืนพื้น ไม่มีกรอบ ไม่ครอป
+     ภาพใหญ่เต็มใบ + ข้อความสั้นข้างภาพ (หัวข้อ · งานนี้ต้องการ · ทีมดีจัดให้ 3 ข้อ · ปุ่ม LINE ตามสถานการณ์)
+     5 พ.ย. ตัดตัวนับ 01/06 และป้ายหมวดหน้าแต่ละข้อ (ไม่เน้นข้อความ) · ภาพจิ๋วครอปเข้าที่ตัวเสื้อ (-thumb)
+     ชั้นวางไดโอรามาจิ๋ว 6 ชิ้น = แท็บ WAI-ARIA (use-page.js · คลิก / ลูกศร / Home / End) · ไม่เปิดตอนชี้เมาส์ --}}
+<section class="up2-ctx" id="up2-ctx" aria-labelledby="up2-ctx-h">
+  <div class="wrap">
+    <header class="up2-ctx__head"><h2 id="up2-ctx-h">{{{hl up.contexts.h "แต่ละลักษณะธุรกิจ"}}}</h2>{{#if up.v2.contexts.lead}}<p>{{up.v2.contexts.lead}}</p>{{/if}}</header>
+    {{!-- 11 พ.ย. 2026 อาร์ต "ย้ายไว้ล่าง sub head ทำให้รู้ว่ากดเล่นได้ · ภาพสองเอารีวิวลูกค้าแต่ละอัน" (ทาง A)
+         คำนำ → แถบแท็บ (การ์ดภาพจิ๋วเสื้อ กรอบส้มเมื่อเลือก) → แผง (198c กว้างพิเศษ): ซ้ายไดโอรามาเดิม · ขวาข้อความ + แถวรูปจริงจากลูกค้า 2 รูป + รีวิวที่ตรงงาน → ‹ ตัวนับ › --}}
+    <div class="up2-ctx__room" data-ctx-gal>
+      <p class="up2-ctx__hint" id="up2-ctx-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L4.3 15.6a1.6 1.6 0 0 1 2.4-2.1L9 15.5"/></svg>{{up.v2.contexts.hint}}</p>
+      <div class="up2-ctx__shelf" role="tablist" aria-label="เลือกลักษณะงาน" aria-describedby="up2-ctx-hint">
+        {{#each up.v2.contexts.tabs}}<button type="button" role="tab" class="up2-ctx__pick" id="up2-ctx-tab-{{this.id}}" aria-controls="up2-ctx-{{this.id}}" aria-selected="{{#if @first}}true{{else}}false{{/if}}" tabindex="{{#if @first}}0{{else}}-1{{/if}}"><img class="up2-ctx__thumb" src="{{this.scene}}-thumb.webp" alt="" width="320" height="240" loading="lazy" decoding="async"><span class="up2-ctx__pname">{{this.name}}</span></button>{{/each}}
+      </div>
+      <div class="up2-ctx__views"><div class="up2-ctx__nav"><button type="button" class="up2-ctx__step" data-ctx-step="-1" aria-label="ลักษณะงานก่อนหน้า"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><span class="up2-ctx__count" aria-live="polite">1 / {{up.v2.contexts.tabs.length}}</span><button type="button" class="up2-ctx__step" data-ctx-step="1" aria-label="ลักษณะงานถัดไป"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
+        {{#each up.v2.contexts.tabs}}
+        <div class="up2-ctx__panel" role="tabpanel" id="up2-ctx-{{this.id}}" aria-labelledby="up2-ctx-tab-{{this.id}}"{{#unless @first}} hidden{{/unless}}>
+          <div class="up2-ctx__media"><figure class="up2-ctx__scene"><img class="up2-ctx__img" src="{{this.scene}}-1200.webp" srcset="{{this.scene}}-480.webp 480w, {{this.scene}}-760.webp 760w, {{this.scene}}-1200.webp 1200w" sizes="(min-width: 1024px) 680px, 100vw" alt="{{this.alt}}" width="1200" height="900" loading="lazy" decoding="async"></figure></div>
+          <div class="up2-ctx__body">
+            <h3>{{this.h}}</h3>
+            <p class="up2-ctx__need"><span class="up2-ctx__k">งานนี้ต้องการ</span>{{{ph this.need}}}</p>
+            <ul class="up2-ctx__gives" aria-label="ทีมดีจัดให้">{{#each this.gives}}<li class="up2-ctx__give"><span class="up2-ctx__gv">{{{ph this.v}}}</span></li>{{/each}}</ul>
+            <figure class="up2-ctx__proof"><figcaption class="up2-ctx__real">รูปจริงจากลูกค้า</figcaption><div class="up2-ctx__pp">{{#each this.photos}}<figure class="up2-ctx__ph up2-ctx__ph--{{inc @index}}"><img src="{{this.small}}" srcset="{{this.small}} 1x, {{this.img}} 2x" alt="{{this.alt}}" loading="lazy" decoding="async"></figure>{{/each}}</div></figure>
+            {{#if this.review}}<blockquote class="up2-ctx__rv"><p>{{{ph this.review.quote}}}</p><footer>{{this.review.who}} · รีวิวจากแชทจริง</footer></blockquote>{{/if}}
+            <a class="cb cb--p hm-line-cta up2-ctx__line" href="{{this.line}}" data-track="line" data-where="use-context-{{this.id}}"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ขอราคาเสื้อแบบนี้</span></a>
+          </div>
+        </div><!-- /panel -->
+        {{/each}}
+      </div>
+    </div>
+    <div class="up2-ctx__acts">
+      {{!-- 11 พ.ย. อาร์ต "cta ดีๆหน่อย": ปุ่มแคปซูลรูปลูกค้าวงกลม 3 วง (ตัวเดียวกับคลังรีวิว .rvw__all · home.css) --}}
+      {{#each up.contexts.links}}<a class="rvw__all" href="{{url this.to}}"><span class="rvw__faces" aria-hidden="true">{{#each @root.up.v2.contexts.faces}}<span style="background-image:url({{this}})"></span>{{/each}}</span><span class="rvw__all-t">{{this.t}}</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>{{/each}}
+    </div>
+  </div>
+</section>

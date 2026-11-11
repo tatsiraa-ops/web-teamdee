@@ -1,0 +1,60 @@
+/* โครงส่วนตาม Wireframe v22 ใช้ร่วมกันหน้าสินค้าและหน้ากลุ่มลูกค้า (2 พ.ย.): หัวข้อ → กริดเดียว → แถวปุ่มเดียว · ระยะส่วนเท่ากัน · หัวข้อขนาดเดียว */
+.section { padding-block: clamp(40px, 5vw, 64px); }
+main .eyebrow { display: none; }
+main section h2.t-display { font-size: clamp(24px, 2.8vw, 34px); line-height: 1.3; }
+/* หน้าสินค้า: #uses ใช้ id เดียวกับส่วนของหน้าแรก กฎ padding 88/112 ของ home.css รั่วมา (ข้อ 5) → ระยะส่วนเท่าส่วนอื่น */
+main #uses:has(> .wrap.section) { padding-block: 0; }
+.pp-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 20px; }
+/* แถบสรุปใต้ hero */
+.pp-strip { border-block: 1px solid var(--color-line); background: var(--color-paper); }
+.pp-strip__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 12px 32px; align-items: center; padding-block: 14px; }
+.pp-strip__make { font-size: 16px; font-weight: 700; line-height: 1.5; color: var(--color-ink); }
+.pp-strip__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+.pp-strip__list > div { padding-inline: 16px; border-left: 1px solid var(--color-line); }
+.pp-strip__list dt { font-size: 14px; color: var(--color-ink-2); }
+.pp-strip__list dd { margin: 0; font-size: 24px; font-weight: 800; line-height: 1.25; color: var(--color-ink); }
+.pp-strip__list dd span { font-size: 14px; font-weight: 600; color: var(--color-ink-2); }
+@media (max-width: 767px) {
+  .pp-strip__in { grid-template-columns: minmax(0, 1fr); }
+  .pp-strip__list > div { padding-inline: 10px; }
+  .pp-strip__list > div:first-child { padding-left: 0; border-left: 0; }
+  .pp-strip__list dt { font-size: 13px; }
+  .pp-strip__list dd { font-size: 20px; }
+  .pp-strip__list dd span { display: block; font-size: 13px; }
+}
+/* แถบชวนขอราคา */
+.pp-band { padding-block: 8px 48px; }
+.pp-band__send { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: 12px; font-size: 16px; color: var(--color-ink-2); }
+.pp-band__send li { display: flex; gap: 8px; align-items: baseline; }
+.pp-band__send li::before { content: ""; width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--color-orange); translate: 0 -2px; }
+/* หน้ากลุ่มลูกค้า: ราคาในแถบสรุป · แถบมีช่องวันที่ 2 คอลัมน์ */
+.pp-strip__price b { display: block; font-size: 22px; font-weight: 800; line-height: 1.3; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.pp-strip__price span { font-size: 14px; color: var(--color-ink-2); }
+.pp-strip + .ab-toc { margin-top: 0; }
+.pp-band--split { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px 48px; align-items: start; padding-top: 40px; }
+@media (max-width: 1023px) { .pp-band--split { grid-template-columns: minmax(0, 1fr); } }
+.pp-band { padding-top: 40px; }
+/* มือถือ (2 พ.ย. ข้อ 4 ลดความยาว): การ์ดขั้นตอนชิดกัน · การ์ดรูปเป็นราง (mobile-ui.js .pp-cards) · ไม่ตัดเนื้อหา */
+@media (max-width: 767px) {
+  .pp-steps { gap: 0; }
+  .pp-steps > .pp-card { padding: 14px 0 12px; }
+  .pp-steps > .pp-card h3 { margin-top: 4px; font-size: 18px; }
+  .pp-steps > .pp-card p { margin-top: 4px; }
+  .pp-cards.m-rail { margin-bottom: 0; }
+  .pp-cards.m-rail + .m-rail-controls { margin-bottom: 32px; }
+  .uq-card { padding: 22px 18px 18px; }
+}
+/* ข้อ 5 กริดเต็มแถวบนจอคอม: ผ้า 6 ชนิด 4+2 → 3+3 · การ์ดราคา 6 ใบ 4+2 → 3+3 */
+@media (min-width: 1024px) {
+  ul.pp-fabrics:has(> li:nth-child(6):last-child),
+  .uq-grid:has(> li:nth-child(6):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+/* แบบเสื้อหน้ากลุ่ม 2 คอลัมน์บนมือถือ: จำนวนคี่ ใบแรกเต็มแถว ไม่เหลือใบเดียวท้าย */
+@media (max-width: 1023px) {
+  #useGrid > :first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+}
+/* ข้อ 5 แท็บเล็ต (768–1023): ภาพลูกค้าแสดงทีละ 6 หรือ 12 ภาพ → 3 คอลัมน์เต็มแถว (เดิม 4 คอลัมน์ 4+2) · การ์ดราคา 3 ใบเรียงแถวเดียว (เดิม 2+1) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .up-photos, ul.pp-photos.m-rail.is-open { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .uq-grid:has(> li:nth-child(3):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+}

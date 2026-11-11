@@ -1,0 +1,80 @@
+/* แบนเนอร์ LINE ใช้ร่วม (lineCta.hbs) · ย้ายจาก page-designs.css ทั้งชุดตามเดิม (รอบ 164 ใช้ที่ /project/ ด้วย) */
+/* ---------- แบนเนอร์ "แชทผ่าน LINE" (รอบ 155 · lineCta.hbs · อาร์ต "cta ทำดีๆหน่อย ไปเจนอะไรมาได้เต็มที่") ----------
+   เขียว LINE เข้ม (ตัวขาวบน #04A443 = 3.28:1 ผ่าน AA ตัวใหญ่ · ตัวเล็ก ≥ 18.7px หนา) · ซ้ายข้อความ+ปุ่ม · ขวามือถือ 3D เจน ตั้งล้นขอบบน เอียง 4° · จอ = แชท HTML ขนาดตามมือถือ (cqw) */
+.lc { padding: 64px 0 72px; overflow-x: clip; } /* 6 พ.ย. "ช่องว่างเยอะเกิน": ปุ่มโหลดเพิ่ม→แถบ 206 → ~120 · มือถือ 3D อยู่ขวา ไม่ชนปุ่มกลาง */
+.lc__card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 560px; align-items: center; gap: 24px; min-height: 300px; padding: 44px 56px; border-radius: 30px; background: linear-gradient(110deg, #038A39 0%, #04A443 55%, #07B34C 100%); color: #fff; isolation: isolate; box-shadow: 0 30px 60px -40px rgb(3 90 35 / .7); }
+.lc__bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: inherit; pointer-events: none; background: linear-gradient(115deg, transparent 38%, rgb(255 255 255 / .09) 52%, transparent 66%), radial-gradient(50% 90% at 82% 100%, rgb(200 247 176 / .22), transparent 70%); }
+.lc__copy { display: grid; justify-items: start; gap: 18px; }
+.lc__head { display: flex; align-items: center; gap: 18px; }
+.lc__logo { display: block; flex: none; width: 72px; height: 72px; }
+.lc__logo svg { display: block; width: 100%; height: 100%; }
+.lc__title { margin: 0; font-size: clamp(34px, 3.6vw, 52px); font-weight: 900; line-height: 1.05; letter-spacing: -.01em; color: #fff; }
+.lc__live { display: inline-flex; align-items: center; gap: 8px; margin: 10px 0 0; padding: 3px 14px 3px 10px; border-radius: 999px; background: rgb(0 0 0 / .14); font-size: 18.7px; font-weight: 800; line-height: 1.35; color: #fff; }
+.lc__live i { width: 9px; height: 9px; border-radius: 50%; background: #C8F7B0; box-shadow: 0 0 0 3px rgb(200 247 176 / .35); animation: lc-live 2s ease-in-out infinite; }
+@keyframes lc-live { 50% { box-shadow: 0 0 0 6px rgb(200 247 176 / 0); } }
+.lc__sub { margin: 0; max-width: 36ch; font-size: 19px; font-weight: 700; line-height: 1.5; color: #fff; }
+.lc__btns { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 4px; }
+.lc__go { display: inline-flex; align-items: center; gap: 10px; min-height: 60px; padding: 0 30px; border-radius: 999px; background: #fff; font-size: 20px; font-weight: 800; white-space: nowrap; color: #038A39; text-decoration: none; box-shadow: 0 16px 28px -16px rgb(0 40 10 / .75); transition: transform .2s ease, box-shadow .2s ease; }
+@media (hover: hover) { .lc__go:hover { transform: translateY(-2px); box-shadow: 0 22px 34px -16px rgb(0 40 10 / .8); } .lc__go:hover svg { transform: translateX(4px); } }
+.lc__go svg { transition: transform .2s ease; }
+.lc__go:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.lc__alt { font-size: 15px; font-weight: 700; color: #fff; text-decoration: underline; text-decoration-color: rgb(255 255 255 / .55); text-underline-offset: 4px; }
+@media (hover: hover) { .lc__alt:hover { text-decoration-color: #fff; } }
+.lc__alt:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+/* มือถือ 3D: ชิดล่างการ์ด ล้นขึ้นบน · เงานุ่มบนพื้นเขียว · แชทในจอ */
+.lc__vis { position: relative; align-self: stretch; }
+.lc__chat { position: absolute; right: 40px; bottom: -44px; width: 228px; aspect-ratio: 457 / 900; container-type: inline-size; transform: rotate(4deg); filter: drop-shadow(0 30px 34px rgb(0 40 10 / .45)); }
+.lc__phimg { display: block; width: 100%; height: 100%; }
+.lc__scr { position: absolute; left: 6.4%; right: 6.4%; top: 9.5%; bottom: 3.2%; display: grid; align-content: start; gap: 3.6cqw; overflow: hidden; padding: 0 3.6cqw; border-radius: 0 0 11cqw 11cqw; font-size: 5.4cqw; color: #15171a; }
+.lc__bar { display: flex; align-items: center; gap: 3cqw; margin: 0 -3.6cqw; padding: 2cqw 4cqw 3.4cqw; border-bottom: 1px solid #dfe3e8; }
+.lc__bar b { display: block; font-size: 5.6cqw; font-weight: 800; line-height: 1.2; }
+.lc__bar small { display: block; font-size: 4.4cqw; color: #6b7076; }
+.lc__av { display: grid; place-items: center; flex: none; width: 12cqw; height: 12cqw; border-radius: 50%; background: #FF6C00; font-size: 5.6cqw; font-weight: 900; color: #17130f; }
+.lc__me { justify-self: end; display: grid; max-width: 92%; margin: 0; padding: 3.6cqw 4.6cqw; border-radius: 7cqw 7cqw 2cqw 7cqw; background: #C8F7B0; line-height: 1.55; }
+.lc__me i { display: inline-block; width: 12cqw; border-bottom: 1px solid rgb(0 0 0 / .35); }
+.lc__att { position: relative; justify-self: end; width: 72%; margin: 0; overflow: hidden; border: 1.6cqw solid #fff; border-radius: 6cqw; background: #fff; box-shadow: 0 4cqw 8cqw -5cqw rgb(0 0 0 / .4); }
+.lc__att img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+.lc__att figcaption { position: absolute; left: 2cqw; bottom: 2cqw; padding: .4cqw 3cqw; border-radius: 999px; background: #FF6C00; font-size: 4.2cqw; font-weight: 800; color: #17130f; }
+.lc__typing { display: flex; align-items: center; gap: 2.4cqw; margin: 0; }
+.lc__typing .lc__av { width: 9cqw; height: 9cqw; font-size: 4.4cqw; }
+.lc__dots { display: flex; gap: 1.4cqw; padding: 3.2cqw 4.2cqw; border-radius: 6cqw 6cqw 6cqw 2cqw; background: #fff; }
+.lc__dots i { width: 2.4cqw; height: 2.4cqw; border-radius: 50%; background: #9aa0a6; animation: lc-dot 1.2s ease-in-out infinite; }
+.lc__dots i:nth-child(2) { animation-delay: .15s; } .lc__dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes lc-dot { 0%, 60%, 100% { opacity: .35; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+/* ช่องพิมพ์ล่างจอ (ภาพประกอบ) */
+.lc__input { position: absolute; left: 3.6cqw; right: 3.6cqw; bottom: 5cqw; display: flex; align-items: center; gap: 2.4cqw; margin: 0; }
+.lc__plus { display: grid; place-items: center; width: 9cqw; height: 9cqw; border-radius: 50%; background: #dfe3e8; font-size: 6cqw; font-weight: 700; line-height: 1; color: #6b7076; }
+.lc__field { flex: 1; padding: 2.4cqw 4cqw; border-radius: 999px; background: #fff; font-size: 4.6cqw; color: #9aa0a6; }
+.lc__send { display: grid; place-items: center; width: 9cqw; height: 9cqw; border-radius: 50%; background: #06C755; color: #fff; }
+.lc__send svg { width: 4.4cqw; height: 4.4cqw; }
+/* เสื้อลายจริงลอยเข้าหามือถือ (รอบ 156) · การ์ดขาวมุมมน ภาพตัวหน้า + ป้ายรหัสส้มตัวดำ · ลอยขึ้นลงคนละจังหวะ · เส้นประจางนำทางเข้าจอ */
+.lc__trail { position: absolute; left: 0; top: 0; width: 72%; height: 100%; overflow: visible; fill: none; stroke: rgb(255 255 255 / .45); stroke-width: 2.5; stroke-dasharray: 2 10; stroke-linecap: round; pointer-events: none; }
+.lc__flies { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.lc__fly { position: absolute; width: var(--s, 100px); padding: 6px 6px 0; border-radius: 18px; background: #fff; box-shadow: 0 18px 30px -16px rgb(0 40 10 / .6); transform: rotate(var(--r, 0deg)); animation: lc-float 6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.lc__fly img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
+.lc__fly b { position: absolute; left: 8px; bottom: -9px; padding: 1px 9px; border-radius: 999px; background: #FF6C00; font-size: 12px; font-weight: 800; color: #17130f; }
+.lc__fly--1 { --s: 96px; --r: -9deg; --d: 0s; left: 2%; top: 46%; }
+.lc__fly--2 { --s: 108px; --r: 7deg; --d: -1.2s; left: 14%; top: -16%; }
+.lc__fly--3 { --s: 86px; --r: 4deg; --d: -2.4s; left: 26%; top: 70%; }
+.lc__fly--4 { --s: 118px; --r: -5deg; --d: -3.6s; left: 33%; top: 16%; }
+.lc__fly--5 { --s: 92px; --r: 9deg; --d: -4.8s; left: 41%; top: -22%; }
+@keyframes lc-float { 50% { translate: 0 -8px; } }
+@media (max-width: 1199px) { .lc__card { grid-template-columns: minmax(0, 1fr) 440px; } .lc__fly--3, .lc__fly--5 { display: none; } .lc__fly--4 { left: 22%; } }
+@media (max-width: 1023px) { .lc__card { grid-template-columns: minmax(0, 1fr) 260px; padding: 36px 36px; } .lc__chat { right: 10px; width: 200px; } .lc__flies, .lc__trail { display: none; } }
+@media (max-width: 767px) {
+  .lc { padding: 200px 0 48px; }
+  .lc__card { grid-template-columns: minmax(0, 1fr); gap: 0; min-height: 0; padding: 176px 22px 26px; border-radius: 26px; }
+  .lc__vis { position: absolute; inset: 0 0 auto; height: 0; }
+  .lc__chat { left: 50%; right: auto; bottom: auto; top: -210px; width: 180px; transform: translateX(-50%) rotate(4deg); }
+  .lc__flies { display: block; } .lc__trail { display: none; }
+  .lc__fly--3, .lc__fly--5 { display: none; }
+  .lc__fly--1 { --s: 76px; left: calc(50% - 168px); top: -96px; }
+  .lc__fly--2 { --s: 80px; left: calc(50% + 92px); top: -196px; }
+  .lc__fly--4 { display: block; --s: 84px; left: calc(50% + 96px); top: -70px; }
+  .lc__head { gap: 14px; }
+  .lc__logo { width: 54px; height: 54px; }
+  .lc__title { font-size: 34px; }
+  .lc__btns { display: grid; width: 100%; justify-items: center; }
+  .lc__go { justify-content: center; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .lc__dots i, .lc__live i, .lc__fly { animation: none; } .lc__dots i { opacity: .7; } .lc__go, .lc__go svg { transition: none; } }

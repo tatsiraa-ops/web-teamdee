@@ -53,6 +53,12 @@
     "event": "/event-shirts/"
   },
   "projects": "/project/",
+  "cases": {
+    "assumption": "/project/assumption-convent-school-shirts/",
+    "gsb": "/project/gsb-badminton-team-shirts/",
+    "junbi": "/project/junbi-taekwondo-team-shirts/",
+    "police": "/project/plaibang-bangkruai-police-team-shirts/"
+  },
   "blog": "/blog/",
   "faq": "/faq/",
   "about": "/about-us/",

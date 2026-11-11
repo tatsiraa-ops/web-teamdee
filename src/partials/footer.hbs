@@ -1,86 +1,106 @@
-<footer class="band-ink border-t-2 border-orange">
-  <div class="wrap pt-16 pb-10 md:pt-20 md:pb-12">
+{{!-- noFloats=true: ไม่มีปุ่มลอย LINE/โทร และการ์ดแนะนำ (หน้าติดต่อ หน้าขอบคุณ · audit C8) --}}
+{{!-- อยู่ก่อน <footer> ในลำดับ DOM ให้กด Tab ถึงปุ่มลอยก่อนที่ footer จะเข้าจอแล้วปุ่มหลบ (audit 26 ต.ค. M25) --}}
+{{#unless noFloats}}{{> floats}}{{/unless}}
+{{!-- 3 พ.ย. ปิดชั่วคราวตามอาร์ต (site.json cookieConsent) · เปิดคืนก่อนขึ้นเว็บจริง --}}{{#if site.cookieConsent}}{{> consentBar}}{{/if}}
+{{!-- ป๊อปอัปโฆษณาขึ้นได้ทุกหน้า รวมหน้าที่ปิดปุ่มลอย (อาร์ต 26 ต.ค. รอบ 2 "ต้องมีทุกหน้า") --}}
+{{> promoPopup}}
+{{!-- ท้ายเว็บ รื้อใหม่ (อาร์ต 26 ต.ค. "รื้อแล้วทำใหม่ ให้ดีกว่าเดิม รายละเอียดครบตามเดิม") · CSS main.css "ท้ายเว็บ"
+     แถวบน: แบรนด์ + สโลแกนตัวใหญ่ | ช่องทางติดต่อ 3 การ์ด (LINE เขียว + สถานะเวลาทำการจริง · โทร ส้ม · ขอใบเสนอราคา)
+     แถวกลาง: ลิงก์ 3 กลุ่มเดิมครบ + ติดต่อเรา (บริษัท ที่ตั้ง เวลาทำการ เบอร์สำรอง) · แถวล่าง: ลิขสิทธิ์ นโยบาย เงื่อนไข ตั้งค่าคุกกี้ กลับขึ้นด้านบน --}}
+<footer class="ft" data-hours="{{site.openingHours}}">
+  <div class="wrap ft__in">
 
-    <div class="flex flex-wrap items-end justify-between gap-6 pb-10 mb-10 border-b border-paper/15">
-      <div>
-        <span class="text-paper w-[190px] block">{{> logoHorizontal}}</span>
-        <p class="text-[17px] leading-[1.75] text-paper/65 mt-4 max-w-[40ch]">{{{ph site.tagline}}} · <span class="inline-block">{{site.positioning}}</span></p>
+    <div class="ft__top">
+      <div class="ft__brand">
+        <a class="ft__logo" href="/" aria-label="TEAMDEE หน้าแรก">{{> logoHorizontal}}</a>
+        <p class="ft__tag">{{{ph site.tagline}}} <span class="inline-block">· {{site.positioning}}</span></p>
+        <p class="ft__slogan" aria-hidden="true"><span>{{site.sloganA}}</span><span>{{site.sloganB}}</span></p>
       </div>
-      <a class="btn btn-orange" href="{{url 'contact'}}">ติดต่อทีมดี</a>
+      <ul class="ft__ch" aria-label="ช่องทางติดต่อทีมดี">
+        <li><a class="ftc ftc--line" href="{{@root.pageLine}}" data-track="line" data-where="footer"><span class="ftc__ico" aria-hidden="true">{{> icoLine}}</span><span class="ftc__t"><small>LINE @teamdee</small><b>ทัก LINE ขอราคา</b><span class="ftc__sub" data-float-status><span class="ftc__dot" aria-hidden="true"></span><span data-float-status-t>{{site.hours}}</span></span></span><span class="ftc__go" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ftc ftc--tel tabular-nums" href="tel:{{site.phonePrimaryTel}}" data-where="footer"><span class="ftc__ico" aria-hidden="true">{{> icoPhone}}</span><span class="ftc__t"><small>โทรหาเรา</small><b>{{site.phonePrimary}}</b></span><span class="ftc__go" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ftc" href="{{url 'contact'}}?from=quote" data-where="footer"><span class="ftc__ico" aria-hidden="true">{{> icoDoc}}</span><span class="ftc__t"><small>สำหรับองค์กร</small><b>ขอใบเสนอราคา</b></span><span class="ftc__go" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+      </ul>
     </div>
 
-    <div class="f-cols grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
-
+    <div class="ft__cols">
       <nav aria-labelledby="f-who">
-        <h2 id="f-who" class="text-[15px] font-bold text-paper/60">ตัวตนทีมดี</h2>
-        <ul class="mt-4 space-y-0.5">
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'about'}}">รู้จักทีมดี</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'projects'}}">รีวิวลูกค้า</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'about'}}#story">เรื่องราว</a></li>
+        <h2 id="f-who" class="ft__h">ตัวตนทีมดี</h2>
+        <ul class="ft__list">
+          <li><a href="{{url 'about'}}">รู้จักทีมดี</a></li>
+          <li><a href="{{url 'projects'}}">รีวิวลูกค้า</a></li>
+          <li><a href="{{url 'about'}}#story">เรื่องราว</a></li>
+          {{!-- ลูกค้าเดิม (ตรวจมือถือ 30 ต.ค.: เดิมไม่มีทางเข้า · ค้นหา "ติดตามงาน" ไม่เจอ) → LINE พร้อมช่องเลขออเดอร์ --}}
+          <li><a href="{{@root.reorderLine}}" data-track="line" data-where="footer-reorder">ลูกค้าเดิม: สั่งซ้ำ / เพิ่มจำนวน</a></li>
+          <li><a href="{{@root.trackLine}}" data-track="line" data-where="footer-track">ติดตามงาน</a></li>
         </ul>
       </nav>
 
       <nav aria-labelledby="f-find">
-        <h2 id="f-find" class="text-[15px] font-bold text-paper/60">หาเสื้อที่ต้องการ</h2>
-        <ul class="mt-4 space-y-0.5">
-          {{#each products}}<li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'products' this.id}}"><span>{{{ph this.menuName}}}</span></a></li>{{/each}}
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'home'}}#uses">เสื้อสำหรับทีมคุณ</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'designs'}}">แบบเสื้อพิมพ์ลาย</a></li>
+        <h2 id="f-find" class="ft__h">หาเสื้อที่ต้องการ</h2>
+        <ul class="ft__list">
+          {{#each products}}<li><a href="{{url 'products' this.id}}"><span>{{{ph this.menuName}}}</span></a></li>{{/each}}
+          <li><a href="{{url 'home'}}#uses">เสื้อสำหรับทีมคุณ</a></li>
+          <li><a href="{{url 'designs'}}">แบบเสื้อ</a></li>
         </ul>
       </nav>
 
       <nav aria-labelledby="f-info">
-        <h2 id="f-info" class="text-[15px] font-bold text-paper/60">ข้อมูลก่อนสั่ง</h2>
-        <ul class="mt-4 space-y-0.5">
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'guides' 'print'}}">วิธีสั่งเสื้อพิมพ์ลาย</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'guides' 'screen'}}">วิธีสั่งเสื้อสกรีน</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'guides' 'polo'}}">วิธีสั่งเสื้อโปโลปัก</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'guides' 'fabric'}}">เลือกผ้าเสื้อทีม</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'blog'}}">บทความและไอเดีย</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'faq'}}">คำถามที่พบบ่อย</a></li>
+        <h2 id="f-info" class="ft__h">ข้อมูลก่อนสั่ง</h2>
+        <ul class="ft__list">
+          <li><a href="{{url 'guides' 'print'}}">วิธีสั่งเสื้อพิมพ์ลาย</a></li>
+          <li><a href="{{url 'guides' 'screen'}}">วิธีสั่งเสื้อสกรีน</a></li>
+          <li><a href="{{url 'guides' 'polo'}}">วิธีสั่งเสื้อโปโลปัก</a></li>
+          <li><a href="{{url 'guides' 'fabric'}}">เลือกผ้าเสื้อทีม</a></li>
+          {{!-- หน้าทรงคอ (URL เดิม เก็บไว้) เดิมไม่มีลิงก์เข้าเลย (ตรวจ SEO 30 ต.ค.) --}}
+          <li><a href="{{url 'guides' 'collar'}}">ทรงคอเสื้อและปกเสื้อ</a></li>
+          <li><a href="{{url 'blog'}}">บทความและไอเดีย</a></li>
+          <li><a href="{{url 'calculations'}}">คำนวณราคาเบื้องต้น</a></li>
+          <li><a href="{{url 'faq'}}">คำถามที่พบบ่อย</a></li>
         </ul>
       </nav>
 
-      <section aria-labelledby="f-contact">
-        <h2 id="f-contact" class="text-[15px] font-bold text-paper/60">ติดต่อเรา</h2>
-        <ul class="mt-4 space-y-0.5">
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{site.lineUrl}}" data-track="line">ทัก LINE ขอราคา</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a></li>
-          <li><a class="flex items-center min-h-[44px] text-[17px] text-paper/80 hover:text-orange transition-colors" href="{{url 'contact'}}">กรอกฟอร์ม</a></li>
-        </ul>
-        <dl class="mt-5 space-y-3 text-[16px]">
-          <div class="flex gap-3"><dt class="sr-only">ที่ตั้ง</dt><span class="block size-5 text-orange shrink-0 mt-0.5" aria-hidden="true">{{> icoPin}}</span><dd class="text-paper/65 leading-[1.6]">{{{ph site.address}}}</dd></div>
-          <div class="flex gap-3"><dt class="sr-only">เวลาทำการ</dt><span class="block size-5 text-orange shrink-0 mt-0.5" aria-hidden="true">{{> icoClock}}</span><dd class="text-paper/65 leading-[1.6]">{{{ph site.hours}}}</dd></div>
+      <section class="ft__co" aria-labelledby="f-contact">
+        <h2 id="f-contact" class="ft__h">ติดต่อเรา</h2>
+        <dl class="ft__dl">
+          <div><dt class="sr-only">บริษัท</dt><span class="ft__i" aria-hidden="true">{{> icoDoc}}</span><dd><b>บริษัท ดีดี ฟินิกซ์ จำกัด</b></dd></div>
+          <div><dt class="sr-only">ที่ตั้ง</dt><span class="ft__i" aria-hidden="true">{{> icoPin}}</span><dd>{{site.address}}<a class="ft__map" href="{{site.mapUrl}}" target="_blank" rel="noopener">ดูแผนที่<span class="arw" aria-hidden="true">&rarr;</span></a></dd></div>
+          <div><dt class="sr-only">เวลาทำการ</dt><span class="ft__i" aria-hidden="true">{{> icoClock}}</span><dd>{{site.hours}}</dd></div>
+          <div><dt class="sr-only">เบอร์สำรอง</dt><span class="ft__i" aria-hidden="true">{{> icoPhone}}</span><dd>สำรอง <a class="tabular-nums" href="tel:0864166449" data-where="footer">{{site.phoneSecondary}}</a></dd></div>
         </dl>
         {{#unless wp}}<p class="t-xs text-paper/50 mt-5">[QR ไลน์ รอไฟล์จากฝ่ายการตลาด]</p>{{/unless}}
       </section>
-
     </div>
 
-    <div class="mt-14 pt-6 border-t border-paper/12 flex flex-wrap gap-x-8 gap-y-2 items-center">
-      <p class="text-[15px] text-paper/60">&copy; {{site.brand}} · บริษัท ดีดี ฟินิกซ์ จำกัด</p>
-      <a class="text-[15px] text-paper/60 hover:text-orange inline-flex items-center min-h-[44px]" href="{{url 'privacy'}}">นโยบายความเป็นส่วนตัว</a>
-      <a class="text-[15px] text-paper/60 hover:text-orange inline-flex items-center min-h-[44px]" href="{{url 'terms'}}">เงื่อนไขการใช้งาน</a>
-      {{#unless wp}}<p class="text-[15px] text-paper/60 max-w-[66ch]">{{site.prototypeNote}}</p>{{/unless}}
+    <div class="ft__bottom">
+      <p>&copy; {{site.brand}} · บริษัท ดีดี ฟินิกซ์ จำกัด</p>
+      <a href="{{url 'privacy'}}">นโยบายความเป็นส่วนตัว</a>
+      <a href="{{url 'terms'}}">เงื่อนไขการใช้งาน</a>
+      <button type="button" data-ck="open">ตั้งค่าคุกกี้</button>
+      <a class="ft__up" href="#main">กลับขึ้นด้านบน<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+      {{#unless wp}}<p class="ft__note">{{site.prototypeNote}}</p>{{/unless}}
     </div>
   </div>
 </footer>
 
-<nav data-where="mobile-bar" class="mobilebar fixed inset-x-0 bottom-0 z-[80] grid grid-cols-3 gap-px bg-ink border-t-2 border-ink lg:hidden" aria-label="ช่องทางติดต่อด่วน">
-  <a class="bg-orange text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{site.lineUrl}}" data-track="line">
-    <span class="block size-5" aria-hidden="true">{{> icoChat}}</span><span class="text-[16px]"><span class="inline-block">ทัก LINE</span> <span class="inline-block">ขอราคา</span></span>
+{{!-- แถบติดต่อด่วนมือถือ: แท่นดำลอย ชุดเดียวกับปุ่มขวาบนจอคอม (อาร์ต 26 ต.ค. "รองรับมือถือ ทำให้ดีที่สุด")
+     ปุ่ม LINE กลาง: แคปซูลเขียว ตัวขาวบรรทัดเดียว "ทัก LINE" (จอกว้างพอต่อ "ขอราคา") · สถานะตามเวลาจริงเป็นจุดที่ไอคอน + ข้อความสำหรับโปรแกรมอ่านหน้าจอ (nudge.js · data-float-status) · วงกระเพื่อม · โทร + ช่องที่ 3 เป็นไอคอนส้มป้ายขาว
+     ช่อง 3 เปลี่ยนต่อหน้าได้: {{> footer barHref="#contactForm" barLabel="กรอกฟอร์ม"}} (หน้าติดต่อ · audit C8)
+     barLive=true: JS ของหน้าเขียนข้อความในช่องนี้เอง (เครื่องคำนวณโชว์ยอดรวมสด · audit calc-03) --}}
+<nav data-where="mobile-bar" class="mobilebar lg:hidden" aria-label="ช่องทางติดต่อด่วน">
+  {{!-- ลำดับใน HTML = ที่ตาเห็น (โทร | LINE | ช่อง 3) ลำดับ Tab ตรงกัน (30 ต.ค. · เดิมใช้ CSS order สลับ)
+       4 พ.ย. โฉมใหม่: แท่นลอยขาว ไอคอน 3D dock-*.webp (สไตล์ชุดไอคอนที่อาร์ตอนุมัติ) · ปุ่ม LINE เขียวทึบ 2 บรรทัด (สถานะเวลาทำการ) --}}
+  <a class="mb__btn" href="tel:{{site.phonePrimaryTel}}">
+    <span class="mb__ico" aria-hidden="true"><img src="/img/icons/dock-phone.webp" alt="" width="240" height="240" decoding="async"></span><span class="mb__t">โทรเลย</span>
   </a>
-  <a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="tel:{{site.phonePrimaryTel}}">
-    <span class="block size-5 text-orange" aria-hidden="true">{{> icoPhone}}</span><span class="text-[16px]">โทรเลย</span>
+  <a class="mb__line" href="{{@root.pageLine}}" data-track="line">
+    <span class="mb__orb" aria-hidden="true">{{> icoLine}}</span>
+    <span class="mb__lbl"><span class="mb__main">ทัก LINE<span class="mb__x"> ขอราคา</span></span><span class="mb__sub" data-float-status><span class="mb__dot" aria-hidden="true"></span><span data-float-status-t>ส่งรหัสแบบมาได้เลย</span></span></span>
   </a>
-  {{!-- ช่อง 3 เปลี่ยนต่อหน้าได้: {{> footer barHref="#contactForm" barLabel="กรอกฟอร์ม"}} (หน้าติดต่อ · audit C8)
-        barLive=true: JS ของหน้าเขียนข้อความในช่องนี้เอง (เครื่องคำนวณโชว์ยอดรวมสด · audit calc-03) --}}
-  {{#if barLabel}}<a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center transition-opacity" href="{{barHref}}"{{#if barLive}} data-bar-live{{/if}}>
-    <span class="block size-5 text-orange" aria-hidden="true" data-bar-ico>{{> icoDoc}}</span><span class="text-[16px]" data-bar-main>{{barLabel}}</span>{{#if barLive}}<span class="text-[13px] font-semibold text-ink-2 tabular-nums" data-bar-sub hidden></span>{{/if}}
-  </a>{{else}}<a class="bg-paper text-ink flex flex-col items-center justify-center gap-0.5 min-h-[68px] px-2 font-bold leading-tight text-center" href="{{#if designsHref}}{{designsHref}}{{else}}{{url 'designs'}}{{/if}}">
-    <span class="block size-5 text-orange" aria-hidden="true">{{> icoShirt}}</span><span class="text-[16px]">ดูแบบเสื้อ</span>
+  {{#if barLabel}}<a class="mb__btn" href="{{barHref}}"{{#if barLive}} data-bar-live{{/if}}>
+    <span class="mb__ico" aria-hidden="true" data-bar-ico><img src="/img/icons/dock-doc.webp" alt="" width="240" height="240" decoding="async"></span><span class="mb__t" data-bar-main>{{barLabel}}</span>{{#if barLive}}<span class="mb__s tabular-nums" data-bar-sub hidden></span>{{/if}}
+  </a>{{else}}<a class="mb__btn" href="{{#if designsHref}}{{designsHref}}{{else}}{{url 'designs'}}{{/if}}">
+    <span class="mb__ico" aria-hidden="true"><img src="/img/icons/dock-shirt.webp" alt="" width="240" height="240" decoding="async"></span><span class="mb__t">ดูแบบเสื้อ</span>
   </a>{{/if}}
 </nav>
 
-{{!-- noFloats=true: ไม่มีปุ่มลอย LINE/โทร และการ์ดแนะนำ (หน้าติดต่อ หน้าขอบคุณ · audit C8) --}}
-{{#unless noFloats}}{{> floats}}{{/unless}}

@@ -62,3 +62,52 @@ test('ปุ่มลอยหลบเฉพาะตัวที่กดไ�
   assert.equal(blocksFloat(null), false)
   assert.ok(HIT.includes('summary') && HIT.includes('[tabindex="0"]'))
 })
+
+/* อาร์ต 26 ต.ค. "แถบซ้ายล่างหาย เอากลับมาให้ดีกว่าเดิม · CTA ขวาเช่นกัน" */
+import { openNow, liftFor, fillNudge } from '../src/js/nudge.js'
+
+test('ป้ายสถานะปุ่มขวา: เปิดทำการทุกวัน 08:30–21:00 ตามเวลาไทย', () => {
+  const at = (hhmm) => new Date(`2026-10-26T${hhmm}:00+07:00`)
+  assert.equal(openNow(at('08:29'), 'Mo-Su 08:30-21:00'), false)
+  assert.equal(openNow(at('08:30'), 'Mo-Su 08:30-21:00'), true)
+  assert.equal(openNow(at('20:59'), 'Mo-Su 08:30-21:00'), true)
+  assert.equal(openNow(at('21:00'), 'Mo-Su 08:30-21:00'), false)
+  /* อ่านรูปแบบไม่ออก = ไม่อ้างว่าเปิดอยู่ */
+  assert.equal(openNow(at('12:00'), 'ทุกวัน'), false)
+})
+
+test('การ์ดซ้ายกับปุ่มขวายกขึ้นเหนือป้ายคุกกี้ (เดิมซ่อนไปทั้งที่ยังไม่เลือกคุกกี้)', () => {
+  /* ป้ายไม่ขึ้น = ไม่ยก · ขึ้น = ระยะจากขอบล่างจอถึงขอบบนของป้าย */
+  assert.equal(liftFor(null, 900), 0)
+  assert.equal(liftFor({ top: 760 }, 900), 140)
+  assert.equal(liftFor({ top: 950 }, 900), 0)
+})
+
+test('ข้อความการ์ดใช้ตัวเลขจริงจากเว็บ ({designs} = จำนวนแบบที่มีรหัส)', () => {
+  assert.equal(fillNudge('แบบเสื้อพร้อมรหัส {designs} แบบ', { designs: 31 }), 'แบบเสื้อพร้อมรหัส 31 แบบ')
+  assert.equal(fillNudge('ไม่มีตัวแปร', { designs: 31 }), 'ไม่มีตัวแปร')
+})
+
+test('ยกเฉพาะฝั่งที่ป้ายคุกกี้ทับจริงในแนวนอน', async () => {
+  const { overlapsX } = await import('../src/js/nudge.js')
+  const bar = { left: 420, right: 1020 }
+  assert.equal(overlapsX(bar, { left: 24, right: 408 }), false)
+  assert.equal(overlapsX(bar, { left: 1116, right: 1416 }), false)
+  assert.equal(overlapsX({ left: 0, right: 375 }, { left: 12, right: 363 }), true)
+})
+
+/* 170y อาร์ต (แคปการ์ดเด้งซ้ายล่าง) → "แต่งการ์ดใหม่ ทั้งเว็บ": รูปเต็มความสูงฝั่งซ้าย (ไม่มีกรอบในกรอบ) · การ์ดไอคอนใช้ไอคอน 3D ชุดเว็บ
+   ปุ่มส้มก้อนใหญ่ → ลิงก์ตัวหนังสือมีลูกศร · ตัดตัวนับ 1/6 · ตรวจจาก dist-wp หน้า about (มีการ์ดแนะนำ) */
+test('การ์ดแนะนำโฉมใหม่: ทุกใบมีรูปหรือไอคอน 3D · ไม่มีไอคอนเส้น · ไม่มีตัวนับ', async () => {
+  const { readFileSync } = await import('node:fs')
+  const html = readFileSync(new URL('../dist-wp/about-us/index.html', import.meta.url), 'utf8')
+  const box = html.slice(html.indexOf('data-nudge'), html.indexOf('data-float-cta'))
+  const items = [...box.matchAll(/<a class="nudge__item"[\s\S]*?<\/a>/g)].map((m) => m[0])
+  assert.ok(items.length >= 5)
+  for (const it of items) {
+    assert.match(it, /<img [^>]*data-src="[^"]*\/img\/(icons|design|case|mockup)\/[^"]+\.webp"/)
+    assert.equal((it.match(/<svg/g) || []).length, 1, 'svg ได้แค่ลูกศร')
+    assert.match(it, /class="nudge__go"/)
+  }
+  assert.doesNotMatch(box, /nudge__count|nudge__ico"/)
+})

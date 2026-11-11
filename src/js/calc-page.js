@@ -1,6 +1,7 @@
 import './page.js'
+import '../styles/page-calculations.css' // CSS เฉพาะหน้านี้ ย้ายออกจาก main.css (30 ต.ค. รอบ 48)
 import prices from '../data/prices.json'
-import { estimate, readCalcQuery, calcSearch, lineText, fromText, barText } from './estimate.js'
+import { estimate, readCalcQuery, calcSearch, lineText, fromText, barText, tiers, shareText, lineShareUrl } from './estimate.js'
 import { lineMessageUrl } from './contact-send.js'
 import { baht } from './lib.js'
 import { calcKinds } from './prices.js'
@@ -16,6 +17,15 @@ if (form) {
   const qty = $('qty')
   const quote = $('sQuote')
   const quoteBase = quote.getAttribute('href').split('?')[0]
+  /* ส่งให้หัวหน้าดู · มีเมนูแชร์ของเครื่อง (มือถือ) ใช้อันนั้น · ไม่มี = ลิงก์ LINE share */
+  const share = $('sShare')
+  let shareUrl = location.href
+  let shareBody = ''
+  share?.addEventListener('click', (e) => {
+    if (!navigator.share) return
+    e.preventDefault()
+    navigator.share({ title: 'ใบประเมินราคาเบื้องต้น TEAMDEE', text: shareBody, url: shareUrl }).catch(() => {})
+  })
   const optStep = $('optStep')
   const fabSets = [...form.querySelectorAll('[data-fab-for]')]
   const minus = form.querySelector('[data-q-step="-1"]')
@@ -23,11 +33,16 @@ if (form) {
   /* ปุ่ม LINE ทุกจุดของหน้านี้ใช้ข้อความเดียวกัน (การ์ดสรุป · ใต้ FAQ · แถบล่างมือถือ · ปุ่มลอย) · audit calc-02 */
   const lines = [$('sLine'), ...document.querySelectorAll('[data-calc-line], [data-where="mobile-bar"] a[data-track="line"], [data-float-cta] a[data-track="line"]')]
   const bar = document.querySelector('[data-bar-live]')
+  const tierBox = $('tiers')
+  const tierRow = $('tierRow')
+  /* วันที่บนหัวใบประเมิน */
+  $('sDate').textContent = new Date().toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' })
 
   const MAX = Number(qty.max) || 99999
   /* ค่าที่พิมพ์ · ว่าง/ไม่ใช่ตัวเลข = NaN ให้ estimate บอกว่าต่ำกว่าขั้นต่ำ */
   const typed = () => (qty.value.trim() === '' ? NaN : Number(qty.value))
-  const clamp = (n) => Math.min(MAX, Math.max(K.minQty, Math.round(Number.isFinite(n) ? n : K.minQty)))
+  const minimum = () => K.kinds.find(k => k.id === form.querySelector('input[name="kind"]:checked').value)?.minQty || K.minQty
+  const clamp = (n) => Math.min(MAX, Math.max(minimum(), Math.round(Number.isFinite(n) ? n : minimum())))
 
   const state = () => ({
     kind: form.querySelector('input[name="kind"]:checked').value,
@@ -40,10 +55,13 @@ if (form) {
   /* true = ผู้ใช้ใส่ต่ำกว่าขั้นต่ำแล้วเราปรับให้ · โชว์บรรทัด "สั่งผลิตขั้นต่ำ 10 ตัว" */
   let raised = false
 
+  let sayT = 0
   const render = () => {
     const s = state()
     const r = estimate(K, s)
     const k = r.kind
+    qty.min = r.minQty
+    $('qErr').textContent = `สั่งผลิตขั้นต่ำ ${r.minQty} ตัว`
 
     /* ขั้นที่ไม่เกี่ยวกับสินค้านี้ซ่อนและปิด (ผ้าเฉพาะโปโล · ออปชันเฉพาะสินค้าที่ prices.json ตั้ง options) */
     for (const f of fabSets) { const on = f.dataset.fabFor === k.id; f.hidden = !on; f.disabled = !on }
@@ -51,9 +69,31 @@ if (form) {
     optStep.disabled = !k.options
 
     /* ขั้น 2 · ช่วงราคาที่ใช้ · ขั้นต่ำ */
-    $('qBand').textContent = r.band ? `ใช้ราคาช่วง ${r.band.qty}` : ''
+    /* 2 ก้อน ตัดบรรทัดได้เฉพาะระหว่างก้อน (มือถือ) */
+    const chunk = (t) => Object.assign(document.createElement('span'), { className: 'inline-block', textContent: t })
+    const qBand = $('qBand')
+    qBand.replaceChildren()
+    if (r.band) qBand.append(chunk(`ใช้ราคาช่วง ${r.band.qty} ·`), ' ', chunk('แตะช่วงอื่นเพื่อเปลี่ยนจำนวน'))
+    else qBand.append(chunk('ราคาต่อตัวตามจำนวน (ตัว)'))
+    /* แถบช่วงราคาสด (รื้อหน้า 26 ต.ค.) · ปุ่มมี data-q = ต้นช่วง ใช้ตัวจับคลิกเดียวกับชิปจำนวน */
+    const t = tiers(r)
+    /* สร้างปุ่มใหม่ทุกครั้ง · ถ้ากำลังโฟกัสปุ่มช่วงอยู่ ย้ายโฟกัสไปปุ่มช่วงที่เลือกใหม่ ไม่ให้โฟกัสหลุด */
+    const hadFocus = tierRow.contains(document.activeElement)
+    tierBox.hidden = !t.length
+    tierRow.replaceChildren(...t.map((x) => {
+      const b = Object.assign(document.createElement('button'), { type: 'button', className: 'tier' })
+      b.dataset.q = x.min
+      b.setAttribute('aria-pressed', String(x.on))
+      const price = x.unit === null ? 'ทักถาม' : baht(x.unit)
+      b.setAttribute('aria-label', `${x.qty} ${x.unit === null ? 'ทักถามราคา' : `${price} บาทต่อตัว`}`)
+      /* ป้ายบนปุ่มตัดคำว่า "ตัว" ออก (หัวแถบบอกหน่วยแล้ว) ให้ "1,001–2,000" อยู่บรรทัดเดียวบนจอ 320 · ชื่อเต็มอยู่ใน aria-label */
+      const short = x.qty.replace(' ตัวขึ้นไป', ' ขึ้นไป').replace(/ ตัว$/, '')
+      b.append(Object.assign(document.createElement('span'), { textContent: short }), Object.assign(document.createElement('b'), { textContent: price }))
+      return b
+    }))
+    if (hadFocus) tierRow.querySelector('[aria-pressed="true"]')?.focus()
     show($('qErr'), raised)
-    minus.disabled = !(typed() > K.minQty)
+    minus.disabled = !(typed() > r.minQty)
     for (const c of chips) c.setAttribute('aria-pressed', String(Number(c.dataset.q) === r.qty))
 
     /* การ์ดสรุป */
@@ -71,12 +111,15 @@ if (form) {
       $('sTotal').textContent = `${baht(r.total)} บาท`
     }
     const pending = r.belowMin
-      ? `สั่งผลิตขั้นต่ำ ${K.minQty} ตัว ใส่จำนวนตั้งแต่ ${K.minQty} ตัวขึ้นไป`
+      ? `สั่งผลิตขั้นต่ำ ${r.minQty} ตัว ใส่จำนวนตั้งแต่ ${r.minQty} ตัวขึ้นไป`
       : r.byDesign
-        ? 'เสื้อสกรีนราคาขึ้นกับจำนวนสีและขนาดลาย ทีมดีประเมินให้ · ส่งโลโก้ + จำนวนสี + จำนวนตัว ทาง LINE'
+        ? 'เสื้อสกรีนราคาขึ้นกับขนาดลายและจำนวนจุด ทีมดีประเมินให้ · ส่งโลโก้ + ตำแหน่งลาย + จำนวนตัว ทาง LINE'
         : !r.ok ? `${r.band.qty} ${r.ask}` : ''
     $('sPending').textContent = pending
     show($('sPending'), !!pending)
+    /* ประกาศยอดรวมครั้งเดียวหลังหยุดกด 0.5 วิ */
+    clearTimeout(sayT)
+    sayT = setTimeout(() => { $('calcSay').textContent = r.ok ? `ยอดรวมประมาณ ${baht(r.total)} บาท สำหรับ ${baht(r.qty)} ตัว` : pending }, 500)
 
     /* ชวนสั่งเพิ่ม · ขึ้นเฉพาะเมื่อยอดรวมลดลงจริง (estimate.js) */
     const next = $('sNext')
@@ -95,7 +138,13 @@ if (form) {
     $('sLineText').textContent = r.byDesign ? 'ส่งโลโก้ให้ประเมินทาง LINE' : 'ส่งใบประเมินนี้ทาง LINE'
     const href = lineMessageUrl(lineText(r))
     for (const a of lines) a.href = href
-    quote.href = `${quoteBase}?from=${encodeURIComponent(fromText(r))}`
+    /* ส่งให้หัวหน้าดู: ลิงก์ที่เปิดแล้วเห็นค่าเดิม (?kind=&qty=…) */
+    shareUrl = location.origin + location.pathname + calcSearch(K, { ...state(), qty: r.qty })
+    share.href = lineShareUrl(shareText(r, shareUrl))
+    /* เมนูแชร์ของเครื่องต่อ url ท้ายข้อความเอง → ตัดบรรทัดลิงก์ออก ไม่ให้ซ้ำ */
+    shareBody = shareText(r, shareUrl).replace(/\nดูใบประเมิน: .*$/, '')
+    /* ฟอร์มเลือกสินค้าและเติมจำนวนให้ (?p= ?qty=) · ติ๊กใบเสนอราคาเพราะมาจากหน้าคำนวณ (audit 26 ต.ค. M1) */
+    quote.href = `${quoteBase}?from=${encodeURIComponent(fromText(r))}${r.kind?.product ? `&p=${r.kind.product}` : ''}${r.qty ? `&qty=${r.qty}` : ''}`
 
     /* แถบล่างมือถือ ช่อง 3 · ยอดรวมสด แตะแล้วไปการ์ดสรุป (audit calc-03) */
     if (bar) {
@@ -136,21 +185,29 @@ if (form) {
   const settle = () => {
     const n = typed()
     /* Enter ยิงทั้ง change และ submit · ตั้งธงอย่างเดียว ไม่ล้าง (ล้างตอนพิมพ์จำนวนที่ถูก/กดปุ่ม) */
-    if (!(Number.isInteger(n) && n >= K.minQty)) raised = true
+    if (!(Number.isInteger(n) && n >= minimum())) raised = true
     qty.value = clamp(n)
   }
   form.addEventListener('change', (e) => {
-    if (e.target === qty) settle()
+    /* เปลี่ยนสินค้า: ขั้นต่ำเปลี่ยนตาม · สกรีน 1 ตัว → โปโล ปรับเป็นขั้นต่ำและบอกเหตุผล (2 พ.ย.) */
+    if (e.target.name === 'kind') raised = false
+    if (e.target === qty || e.target.name === 'kind') settle()
     changed()
   })
+  /* ระหว่างพิมพ์ต่ำกว่าขั้นต่ำ: บอก "ขั้นต่ำ" ทันที และทำยอดรวมให้จาง (ลองใช้จริง 30 ต.ค.: พิมพ์ 5 แล้วยอดยังโชว์ 30 ตัวเดิม) */
+  const stale = (on) => document.documentElement.classList.toggle('calc-stale', on)
   qty.addEventListener('input', () => {
     const n = typed()
-    if (Number.isInteger(n) && n >= K.minQty && n <= MAX) { raised = false; changed() }
+    if (Number.isInteger(n) && n >= minimum() && n <= MAX) { raised = false; stale(false); changed(); return }
+    const low = Number.isFinite(n) && n < minimum()
+    show($('qErr'), low)
+    stale(low)
   })
+  qty.addEventListener('blur', () => stale(false))
   form.addEventListener('click', (e) => {
     const step = e.target.closest('[data-q-step]')
     const chip = e.target.closest('[data-q]')
-    if (step) qty.value = clamp((Number.isFinite(typed()) ? typed() : K.minQty) + Number(step.dataset.qStep))
+    if (step) qty.value = clamp((Number.isFinite(typed()) ? typed() : minimum()) + Number(step.dataset.qStep))
     else if (chip) qty.value = chip.dataset.q
     else return
     raised = false
@@ -165,3 +222,4 @@ if (form) {
   }
   render()
 }
+

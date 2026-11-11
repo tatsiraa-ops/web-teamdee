@@ -1,0 +1,341 @@
+{
+  "_note": "รีวิวจริงจากแชทลูกค้า (อัลบั้ม LINE \"รีวิว\" 451 ภาพ · อาร์ตให้คัด 27 ต.ค.) · คำพูดถอดตรงตัวอักษร (ตัดได้ด้วย … เท่านั้น ห้ามแต่งเพิ่ม) · ใช้เฉพาะแชทที่ไม่มีร่องรอย FINIX · who = ชื่อทีม/องค์กรเฉพาะที่ลูกค้าบอกเองตอนอนุญาตให้ลงรีวิว ที่เหลือเป็นคำกลาง · ไม่ใส่ชื่อคน · src = เลขภาพในอัลบั้ม (แชท / รูปทีม) · use = corp | sport | school | event",
+  "items": [
+    {
+      "id": "np-connect",
+      "quote": "… เป็นร้านที่สั่งแบบไหนได้แบบนั้น ไม่มีปฎิเสธอะไรลูกค้าเลยน่ารักมากๆ ให้คำแนะนำ ไม่มีแบบเปลี่ยนกี่ครั้งแล้วจะมาว่าลูกค้าหรือคิดเงินเพิ่มเลย",
+      "who": "NP CONNECT",
+      "kind": "ทีมฟุตบอลบริษัท",
+      "use": "corp",
+      "img": "/img/review/rv11.webp",
+      "imgSmall": "/img/review/rv11-480.webp",
+      "src": "แชท 10 · รูป 11",
+      "gallery": [
+        {
+          "img": "/img/review/rv11.webp",
+          "imgSmall": "/img/review/rv11-480.webp"
+        },
+        {
+          "img": "/img/review/rv12.webp",
+          "imgSmall": "/img/review/rv12-480.webp"
+        }
+      ],
+      "short": "เป็นร้านที่สั่งแบบไหนได้แบบนั้น ไม่มีปฎิเสธอะไรลูกค้าเลย…"
+    },
+    {
+      "id": "krungthai-badminton",
+      "quote": "นักกีฬาทุกคนบอกว่าเสื้อใส่ดีมาก ถ้ามีจัดแข่งขัน จะใช้บริการอีกนะครับ",
+      "who": "ชมรมแบดมินตัน ธนาคารกรุงไทย",
+      "kind": "ชมรมกีฬา",
+      "use": "sport",
+      "img": "/img/review/rv72.webp",
+      "imgSmall": "/img/review/rv72-480.webp",
+      "src": "แชท 73 · รูป 72",
+      "gallery": [
+        {
+          "img": "/img/review/rv72.webp",
+          "imgSmall": "/img/review/rv72-480.webp"
+        },
+        {
+          "img": "/img/review/rv71.webp",
+          "imgSmall": "/img/review/rv71-480.webp"
+        }
+      ]
+    },
+    {
+      "id": "hr-outing",
+      "quote": "… ทางร้านค่อนข้างทำงานเร็ว ไว และปรับตามทุกอย่างที่ลูกค้าต้องการ ดีเลยค่ะ",
+      "who": "",
+      "kind": "ฝ่ายบุคคล งานกิจกรรมพนักงาน",
+      "use": "corp",
+      "img": "/img/review/rv58.webp",
+      "imgSmall": "/img/review/rv58-480.webp",
+      "src": "แชท 51 · รูป 58",
+      "gallery": [
+        {
+          "img": "/img/review/rv58.webp",
+          "imgSmall": "/img/review/rv58-480.webp"
+        },
+        {
+          "img": "/img/review/rv59.webp",
+          "imgSmall": "/img/review/rv59-480.webp"
+        },
+        {
+          "img": "/img/review/rv60.webp",
+          "imgSmall": "/img/review/rv60-480.webp"
+        },
+        {
+          "img": "/img/review/rv61.webp",
+          "imgSmall": "/img/review/rv61-480.webp"
+        },
+        {
+          "img": "/img/review/rv54.webp",
+          "imgSmall": "/img/review/rv54-480.webp"
+        }
+      ]
+    },
+    {
+      "id": "outing-fabric",
+      "quote": "สีสวยมาก ทุกคนชอบสุดๆ เนื้อผ้าใส่สบายตัว นิ่มเบา แห้งง่ายมาก ใส่ทำทุกกิจกรรมเลยครับ",
+      "who": "",
+      "kind": "เสื้อทริปเอาต์ติ้ง",
+      "use": "event",
+      "img": "/img/review/rv24.webp",
+      "imgSmall": "/img/review/rv24-480.webp",
+      "src": "แชท 30 · รูป 24",
+      "gallery": [
+        {
+          "img": "/img/review/rv24.webp",
+          "imgSmall": "/img/review/rv24-480.webp"
+        },
+        {
+          "img": "/img/review/rv22.webp",
+          "imgSmall": "/img/review/rv22-480.webp"
+        },
+        {
+          "img": "/img/review/rv20.webp",
+          "imgSmall": "/img/review/rv20-480.webp"
+        },
+        {
+          "img": "/img/review/rv21.webp",
+          "imgSmall": "/img/review/rv21-480.webp"
+        },
+        {
+          "img": "/img/review/rv28.webp",
+          "imgSmall": "/img/review/rv28-480.webp"
+        },
+        {
+          "img": "/img/review/rv29.webp",
+          "imgSmall": "/img/review/rv29-480.webp"
+        },
+        {
+          "img": "/img/review/rv27.webp",
+          "imgSmall": "/img/review/rv27-480.webp"
+        }
+      ]
+    },
+    {
+      "id": "runners",
+      "quote": "… ขอบคุณแอดมินมากๆ ที่ดูแลเป็นอย่างดีค่ะ ประสานทุกอย่างให้เรียบร้อย ถึงเราจะเรื่องเยอะไปหน่อย … ลายสกรีน ชัดนะคะ",
+      "who": "",
+      "kind": "กลุ่มนักวิ่ง",
+      "use": "sport",
+      "img": "/img/review/rv271.webp",
+      "imgSmall": "/img/review/rv271-480.webp",
+      "src": "แชท 270 · รูป 271",
+      "gallery": [
+        {
+          "img": "/img/review/rv271.webp",
+          "imgSmall": "/img/review/rv271-480.webp"
+        },
+        {
+          "img": "/img/review/rv269.webp",
+          "imgSmall": "/img/review/rv269-480.webp"
+        }
+      ],
+      "short": "ขอบคุณแอดมินมากๆ ที่ดูแลเป็นอย่างดีค่ะ ประสานทุกอย่างให้เรียบร้อย…"
+    },
+    {
+      "id": "print-fabric",
+      "quote": "เนื้อผ้าเบาสบาย ใส่แล้วไม่ร้อนสบายตัวดีครับ สีที่พิมพ์ลายก็ตรงกับแบบ ชอบมากครับ ไว้มีโอกาส จะกลับมาสั่งอีกนะครับ",
+      "who": "",
+      "kind": "ลูกค้าเสื้อพิมพ์ลาย",
+      "use": "sport",
+      "img": "",
+      "imgSmall": "",
+      "src": "แชท 244",
+      "gallery": [],
+      "short": "เนื้อผ้าเบาสบาย ใส่แล้วไม่ร้อนสบายตัวดีครับ สีที่พิมพ์ลายก็ตรงกับแบบ…"
+    },
+    {
+      "id": "shrine",
+      "quote": "สีสวยมากค่ะ ทุกคนชอบสี ลวดลายการตัดเย็บสวยงามมากผ้าใส่สบายมากค่ะ",
+      "who": "ศาลเจ้าแม่ทับทิม เกาะช้าง บ้านด่านใหม่",
+      "kind": "เสื้องานบุญ",
+      "use": "event",
+      "img": "/img/review/rv259.webp",
+      "imgSmall": "/img/review/rv259-480.webp",
+      "src": "แชท 260 · รูป 259",
+      "gallery": [
+        {
+          "img": "/img/review/rv259.webp",
+          "imgSmall": "/img/review/rv259-480.webp"
+        }
+      ],
+      "short": "สีสวยมากค่ะ ทุกคนชอบสี ลวดลายการตัดเย็บสวยงามมาก…"
+    },
+    {
+      "id": "hospital",
+      "quote": "สวย ถูกใจ เนื้อผ้าดีมากครับ ใส่สบาย",
+      "who": "",
+      "kind": "หน่วยงานโรงพยาบาล",
+      "use": "corp",
+      "img": "/img/review/rv417.webp",
+      "imgSmall": "/img/review/rv417-480.webp",
+      "src": "แชท 419 · รูป 417",
+      "gallery": [
+        {
+          "img": "/img/review/rv417.webp",
+          "imgSmall": "/img/review/rv417-480.webp"
+        },
+        {
+          "img": "/img/review/rv418.webp",
+          "imgSmall": "/img/review/rv418-480.webp"
+        }
+      ]
+    },
+    {
+      "id": "school-crossword",
+      "quote": "ได้รับเสื้อแล้ว สวยถูกใจมากค่าาา มีโอกาสจะสั่งอีกนะคะ",
+      "who": "ทีมครอสเวิร์ด เอแมท คำคม รร.ทุ่งศรีอุดม",
+      "kind": "ทีมแข่งขันโรงเรียน",
+      "use": "school",
+      "img": "/img/review/rv123.webp",
+      "imgSmall": "/img/review/rv123-480.webp",
+      "src": "แชท 125 · รูป 123",
+      "gallery": [
+        {
+          "img": "/img/review/rv123.webp",
+          "imgSmall": "/img/review/rv123-480.webp"
+        },
+        {
+          "img": "/img/review/rv124.webp",
+          "imgSmall": "/img/review/rv124-480.webp"
+        }
+      ]
+    },
+    {
+      "id": "school-sportsday",
+      "quote": "เสื้อสวยทุกปี แต่ปีนี้ใส่สบายไม่ร้อนคะ",
+      "who": "",
+      "kind": "เสื้อกีฬาสีโรงเรียน",
+      "use": "school",
+      "img": "/img/review/rv334.webp",
+      "imgSmall": "/img/review/rv334-480.webp",
+      "src": "แชท 336 · รูป 334",
+      "gallery": [
+        {
+          "img": "/img/review/rv334.webp",
+          "imgSmall": "/img/review/rv334-480.webp"
+        },
+        {
+          "img": "/img/review/rv333.webp",
+          "imgSmall": "/img/review/rv333-480.webp"
+        },
+        {
+          "img": "/img/review/rv335.webp",
+          "imgSmall": "/img/review/rv335-480.webp"
+        },
+        {
+          "img": "/img/review/rv326.webp",
+          "imgSmall": "/img/review/rv326-480.webp"
+        },
+        {
+          "img": "/img/review/rv327.webp",
+          "imgSmall": "/img/review/rv327-480.webp"
+        }
+      ]
+    },
+    {
+      "id": "nt-snooker",
+      "quote": "เสื้อสวยคับ",
+      "who": "ชมรมกีฬาบิลเลียดและสนุกเกอร์ NT บมจ.โทรคมนาคมแห่งชาติ",
+      "kind": "ชมรมกีฬาองค์กร",
+      "use": "corp",
+      "img": "/img/review/rv235.webp",
+      "imgSmall": "/img/review/rv235-480.webp",
+      "src": "แชท 236 · รูป 235",
+      "gallery": [
+        {
+          "img": "/img/review/rv235.webp",
+          "imgSmall": "/img/review/rv235-480.webp"
+        }
+      ]
+    },
+    {
+      "id": "swim-kids",
+      "quote": "สวยมากครับ ไว้เดี๋ยวใช้บริการอีกนะครับ",
+      "who": "",
+      "kind": "ทีมว่ายน้ำเยาวชน",
+      "use": "sport",
+      "img": "/img/review/rv128.webp",
+      "imgSmall": "/img/review/rv128-480.webp",
+      "src": "แชท 134 · รูป 128",
+      "gallery": [
+        {
+          "img": "/img/review/rv128.webp",
+          "imgSmall": "/img/review/rv128-480.webp"
+        },
+        {
+          "img": "/img/review/rv129.webp",
+          "imgSmall": "/img/review/rv129-480.webp"
+        },
+        {
+          "img": "/img/review/rv133.webp",
+          "imgSmall": "/img/review/rv133-480.webp"
+        }
+      ]
+    },
+    {
+      "id": "resort",
+      "quote": "ได้รับเสื้อแล้วค่ะสวยมากค่ะ",
+      "who": "นอนเลชมจันทร์คาเฟ่&รีสอร์ท",
+      "kind": "เสื้อพนักงานร้าน",
+      "use": "corp",
+      "img": "/img/review/rv384.webp",
+      "imgSmall": "/img/review/rv384-480.webp",
+      "src": "แชท 383 · รูป 384",
+      "gallery": [
+        {
+          "img": "/img/review/rv384.webp",
+          "imgSmall": "/img/review/rv384-480.webp"
+        },
+        {
+          "img": "/img/review/rv385.webp",
+          "imgSmall": "/img/review/rv385-480.webp"
+        },
+        {
+          "img": "/img/review/rv386.webp",
+          "imgSmall": "/img/review/rv386-480.webp"
+        }
+      ]
+    }
+  ],
+  "_noteStories": "เรื่องราว = เขียนจากแชทและรูปที่ลูกค้าส่งมาเท่านั้น (ป้ายในรูป · สิ่งที่ลูกค้าพิมพ์) · ไม่แต่งตัวเลข ไม่ใส่ชื่อที่ลูกค้าไม่ได้ให้ใส่",
+  "stories": [
+    {
+      "review": "outing-fabric",
+      "title": "ทริปเอาต์ติ้งเกาะช้าง 3 วัน ใส่เสื้อทีมทุกกิจกรรม",
+      "facts": [
+        "ทริปวันที่ 1–3 ตุลาคม 2569 ที่เกาะช้าง ตามป้ายที่ลูกค้าถือ",
+        "ลูกค้าเลือกผ้าดาวกระจาย",
+        "ใส่ทั้งวันเดินทาง นั่งเรือ และตกปลา"
+      ]
+    },
+    {
+      "review": "hr-outing",
+      "title": "สัมมนาบริษัทประจำปี เสื้อสีเดียวกันทั้งองค์กร",
+      "facts": [
+        "งานสัมมนาบริษัทประจำปี ทั้งในห้องประชุมและกิจกรรมนอกสถานที่",
+        "ด้านหลังเสื้อพิมพ์ข้อความ Together We Thrive",
+        "ฝ่ายบุคคลบอกว่าสั่งผลิตกับร้านหลายครั้งแล้ว"
+      ]
+    },
+    {
+      "review": "school-sportsday",
+      "title": "กีฬาสีโรงเรียน เสื้อลายทางแยกสีตามทีม",
+      "facts": [
+        "เสื้อลายทางหลายสี แยกตามสีทีมของนักเรียน",
+        "ลูกค้าบอกว่าเสื้อสวยทุกปี และปีนี้ใส่สบายไม่ร้อน"
+      ]
+    },
+    {
+      "review": "krungthai-badminton",
+      "title": "ชมรมแบดมินตันองค์กร ใส่ลงแข่งทั้งทีม",
+      "facts": [
+        "ชมรมแบดมินตันธนาคารกรุงไทย ตามชื่อที่ลูกค้าให้ใส่",
+        "นักกีฬาทุกคนบอกว่าเสื้อใส่ดีมาก และจะใช้บริการอีกเมื่อมีแข่ง"
+      ]
+    }
+  ]
+}

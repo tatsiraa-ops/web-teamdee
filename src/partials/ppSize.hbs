@@ -1,0 +1,28 @@
+{{!-- ส่วน Size ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 10 · ทรงและไซซ์ -->
+<section id="size">
+  <div class="wrap section grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
+    <div>
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoRuler}}</span>ไซซ์</span>
+      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{{ph pp.size.h}}}</h2>
+      {{#if pp.size.title}}<h3 class="text-[19px] mt-6">{{pp.size.title}}</h3>{{/if}}
+      {{#each pp.size.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}
+      {{#each pp.size.links}}<a class="pp-more mt-5" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+    </div>
+    <div>
+      {{#if (eq sizing.status 'draft')}}<p class="t-body mb-5">ทักแอดมินเพื่อขอตารางไซซ์ล่าสุดของสินค้าและทรงที่เลือกก่อนสรุปจำนวน</p>{{/if}}
+      {{#unless sizeDraftHidden}}
+      {{!-- ตารางแบบเดียวกับตารางราคา (เส้นบาง หัวเทา ตัวเลขชิดขวา · 26 ต.ค. แทนกรอบดำหนา) --}}
+      <div class="ptable pp-size" tabindex="0" role="region" aria-label="ตารางไซซ์ เลื่อนซ้ายขวาได้">
+        <table>
+          <caption>หน่วยเป็น{{sizing.unit}} วัดจากตัวเสื้อวางราบ · ตารางกลาง ตรวจตามทรงที่สั่งจริง</caption>
+          <thead><tr><th scope="col">ไซซ์</th><th scope="col">รอบอก</th><th scope="col">ความยาว</th><th scope="col">ไหล่</th></tr></thead>
+          <tbody>{{#each pp.size.sizes}}<tr><th scope="row">{{this.size}}</th><td>{{this.chest}}</td><td>{{this.length}}</td><td>{{this.shoulder}}</td></tr>{{/each}}</tbody>
+        </table>
+      </div>
+      <p class="t-xs mt-3">{{sizing.tolerance}}</p>
+      {{/unless}}
+      {{#each pp.size.notes}}<p class="t-xs mt-1">{{this}}</p>{{/each}}
+    </div>
+  </div>
+</section>

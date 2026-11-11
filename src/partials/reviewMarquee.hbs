@@ -1,0 +1,15 @@
+{{!-- รีวิว 2 แถวเลื่อนสวนกัน (หน้ารีวิวลูกค้า · อาร์ต 27 ต.ค. "เอาแบบสองแถวเลื่อนๆ สามารถกดรีวิวเพื่อดูอีกหลายๆรูปได้")
+     แถวเป็นกล่องเลื่อนข้างจริง review-marquee.js ขยับให้ (28 ต.ค. มือถือต้องปัดเองได้) · ชี้/โฟกัส/แตะ = หยุด · ลดการเคลื่อนไหว = ไม่วิ่งเอง · ชุดที่สองของแต่ละแถวซ้ำไว้ให้วนต่อเนื่อง (ซ่อนจากโปรแกรมอ่านจอ)
+     กดการ์ด = กล่องดูรูปทั้งชุดของลูกค้ารายนั้น (review-dialog.js) · ปุ่มหยุด/เล่น = WCAG 2.2.2 (มือถือไม่มีชี้ให้หยุด) · CSS main.css "รีวิว 2 แถว" --}}
+<div class="rvm" data-rvm>
+  {{#each reviewRows}}
+  <div class="rvm__row{{#if @index}} rvm__row--rev{{/if}}">
+    <ul class="rvm__track">
+      {{#each this}}<li>{{> reviewMini sizes=../../thumbSizes}}</li>{{/each}}
+      {{#each this}}<li class="rvm__dup" aria-hidden="true">{{> reviewMini dup=true sizes=../../thumbSizes}}</li>{{/each}}
+    </ul>
+  </div>
+  {{/each}}
+</div>
+<div class="wrap rvm__ctl"><button type="button" class="rvm__pause" data-rvm-pause data-on="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path class="rvm__pi" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/><path class="rvm__pl" d="M8 5.5v13l11-6.5z"/></svg><span>หยุดเลื่อน</span></button></div>
+<script type="application/json" data-rv-json>{{{json allReviews}}}</script>

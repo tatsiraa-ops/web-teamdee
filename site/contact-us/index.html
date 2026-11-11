@@ -8,122 +8,180 @@
 <body>
 {{> siteHeader active="contact"}}
 
+{{!-- รื้อรอบ 170c (9 พ.ย. อาร์ต "ไปคิดมาดีๆ" → เทียบบอร์ดทีละชิ้น → "เริ่มแก้ … เอาครีเอทมากกว่านี้"):
+     hero ตัวละคร 3D พนักงานทีมดีใส่หูฟัง + ฟองช่องทาง (Magnific GPT 2.5 high · แทนภาพคนในบอร์ด) · หัวข้อ "มีโจทย์เสื้อทีม คุยกับทีมดีได้เลย." ตามบอร์ด
+     การ์ด LINE เขียว LINE เรียบ ตัวใหญ่ · มือถือแชทอยู่ในกรอบ · นาฬิกาเป็นสติกเกอร์มีคำ HTML · การ์ดโทรแบบตัวหนังสือ (บอร์ด "โทรหาทีมดี")
+     แถบติดตามพื้นเทา · การ์ดออฟฟิศ (สถานะเปิด/ปิดจริง แผนที่ รูปจริง ป้าย LINE) คู่ฟอร์มพื้นครีม ในแถวเดียวกันแบบบอร์ด
+     ฟอร์ม id เดิมทั้งหมด (contact-page.js) · CSS page-contact.css "cx" · บล็อกปิดท้ายด้วย <!-- /id --> ให้ tests/contact-v3.test.js หาเจอ --}}
 <main id="main">
-  {{!-- จอแรกมือถือ (audit C1 · C3 · 2.3): H1 + บรรทัดเดียว → แถบสายตรง (เวลาตอบ · LINE ID · ปุ่ม LINE กับโทรแถวเดียว) → การ์ดฟอร์ม ชื่อกับเบอร์ก่อน
-       เป้า: ช่องกรอกแรกอยู่ในจอแรกที่ 375 · คอม: แถบสายตรงเป็นการ์ดขอบดำครึ่งขวาของ hero
-       หัวข้อตาม v22: H2 "เริ่มคุยกับทีมดี" ครอบ H3 "LINE ทีมดี" / "โทรหาเรา" / "ฝากข้อมูลให้ติดต่อกลับ" (หัวการ์ดฟอร์ม) --}}
-  <section class="band-hero relative overflow-hidden">
-    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-    <div class="wrap relative pt-3 pb-4 md:pt-8 md:pb-8 lg:py-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-x-16 gap-y-4 items-center">
-      <div>
-        <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">ติดต่อทีมดี</span></nav>
-        <h1 class="t-display text-[clamp(28px,4.6vw,56px)] text-ink mt-1 lg:mt-5">{{{ph 'ติดต่อ TEAMDEE ปรึกษาและขอราคาสั่งทำเสื้อทีม'}}}</h1>
-        <p class="text-[17px] leading-[1.65] text-ink-2 max-w-[52ch] mt-2">{{{ph 'ติดต่อทำเสื้อกับทีมดีได้ทั้ง LINE โทร และฟอร์ม ไม่มีแบบก็เริ่มได้'}}}</p>
-      </div>
-      {{!-- แถบสายตรง · "5 นาที" ผูกกับ LINE และโทรเท่านั้น ไม่ใช้กับฟอร์ม (audit 2.4) --}}
-      <section class="bg-paper border border-line rounded-plate p-4 lg:border-2 lg:border-ink lg:p-7" aria-labelledby="talk-h" data-where="contact-direct">
-        <h2 id="talk-h" class="text-[19px] font-bold lg:text-[28px]">เริ่มคุยกับทีมดี</h2>
-        <p class="t-sm mt-1">{{{ph 'LINE และโทร ตอบใน 5 นาที · ทุกวัน 8:30–21:00'}}} <span class="whitespace-nowrap">· LINE ID <strong class="text-ink">@teamdee</strong></span></p>
-        <div class="grid grid-cols-2 gap-3 mt-2 lg:mt-5">
-          <div>
-            <h3 class="text-[15px] font-bold text-ink-2 mb-1.5">LINE ทีมดี</h3>
-            <a class="btn btn-orange w-full gap-2 px-3" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE</a>
-          </div>
-          <div>
-            <h3 class="text-[15px] font-bold text-ink-2 mb-1.5">โทรหาเรา</h3>
-            <a class="btn w-full gap-2 px-3 tabular-nums bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink" href="tel:{{site.phonePrimaryTel}}"><span class="block size-5" aria-hidden="true">{{> icoPhone}}</span>{{site.phonePrimary}}</a>
-          </div>
+  <section class="cx-hero" aria-labelledby="cx-h1">
+    <div class="wrap">
+      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">ติดต่อทีมดี</span></nav>
+      <div class="cx-hero__in">
+        <div class="cx-hero__art" aria-hidden="true">
+          <img src="/img/contact/agent-900.webp" srcset="/img/contact/agent-560.webp 560w, /img/contact/agent-900.webp 900w" sizes="(min-width: 1024px) 520px, (min-width: 768px) 360px, 300px" width="900" height="698" alt="" fetchpriority="high" decoding="async">
         </div>
-      </section>
+        <div class="cx-hero__txt">
+          <h1 id="cx-h1" class="cx-h1"><span class="cx-h1__big"><span class="cx-h1__l1">มีโจทย์เสื้อทีม</span> <span class="cx-h1__l2 hm-hl">คุยกับทีมดีได้เลย.</span></span> <span class="cx-h1__sub"><span class="inline-block">ติดต่อทีมดี <span class="cx-h1__en">TEAMDEE</span></span> <span class="inline-block">ปรึกษาและขอราคาสั่งทำเสื้อทีม</span></span></h1>
+          <p class="cx-hero__p">{{{ph 'ติดต่อทำเสื้อกับทีมดี ปรึกษางานเสื้อ ส่งแบบขอราคา หรือติดตามออเดอร์ เลือกช่องทางที่สะดวกได้เลย'}}}</p>
+          <p class="cx-hero__tag"><span class="cx-hero__dot" aria-hidden="true"></span>{{site.hours}} <span class="cx-hero__sep" aria-hidden="true"></span> ยังไม่มีแบบก็เริ่มคุยได้</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="wrap pt-3 pb-14 md:pt-8 lg:pb-20" id="form" data-where="contact-form">
-    <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-start">
+  <section class="cx-ch" aria-labelledby="start-h">
+    <h2 id="start-h" class="sr-only">เริ่มคุยกับทีมดี</h2>
+    <div class="wrap cx-ch__grid">
+      <div class="cx-lc scroll-mt-28" id="line">
+        <div class="cx-lc__copy">
+          <div class="cx-lc__head">
+            <span class="cx-lc__logo" aria-hidden="true">{{> icoLine}}</span>
+            <div>
+              <h3 class="cx-lc__t">แชทผ่าน LINE</h3>
+              <p class="cx-lc__sub">ตอบไว ภายใน 5 นาที<span class="cx-lc__subs">ในเวลาทำการ</span></p>
+            </div>
+          </div>
+          <ul class="cx-lc__svc">
+            <li><img class="cx-lc__si" src="/img/icons/dock-doc.webp" width="240" height="240" alt="" loading="lazy" decoding="async">ส่งไฟล์ขอราคา</li>
+            <li><img class="cx-lc__si" src="/img/icons/faq-start.webp" width="240" height="240" alt="" loading="lazy" decoding="async">สอบถามเพิ่มเติม</li>
+            <li><img class="cx-lc__si" src="/img/icons/st-track.webp" width="240" height="240" alt="" loading="lazy" decoding="async">สั่งผลิต / ติดตามออเดอร์</li>
+          </ul>
+        </div>
+        <div class="cx-lc__vis" aria-hidden="true">
+          <div class="lc__chat" aria-hidden="true">
+            <img class="lc__phimg" src="/img/line-cta/phone-3d-560.webp" srcset="/img/line-cta/phone-3d-560.webp 284w, /img/line-cta/phone-3d-900.webp 457w" sizes="200px" width="457" height="900" alt="" loading="lazy" decoding="async">
+            <div class="lc__scr">
+              <p class="lc__bar"><span class="lc__av">T</span><span><b>TEAMDEE</b><small>@teamdee</small></span></p>
+              <p class="lc__me">{{#each contactLineMsg}}<span class="lc__ln">{{{ph this.t}}}{{#if this.q}}: <i></i>{{#if this.unit}} {{this.unit}}{{/if}}{{/if}}</span>{{/each}}</p>
+              <p class="lc__typing"><span class="lc__av">T</span><span class="lc__dots"><i></i><i></i><i></i></span></p>
+              <p class="lc__input"><span class="lc__plus">+</span><span class="lc__field">Aa</span><span class="lc__send"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M3 20.5 21 12 3 3.5v6.6l12 1.9-12 1.9z"/></svg></span></p>
+            </div>
+          </div>
+          <div class="cx-lc__sticker">
+            <img src="/img/contact/stopwatch-240.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+            <p><small>ตอบไว</small><b>5</b><span>นาที</span></p>
+          </div>
+        </div>
+        <a class="cx-lc__go" href="{{{contactLineUrl}}}" data-track="line" data-where="contact-line">เริ่มแชทเลย <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div><!-- /line -->
 
-      <!-- ฟอร์ม -->
-      <div>
-        <div class="card border-2 border-alert bg-alert-tint mb-5 hidden" id="formErrs" tabindex="-1" role="alert">
-          <h3 class="text-[19px] font-bold text-alert">ยังต้องแก้ก่อนส่ง</h3>
-          <ul class="mt-3 space-y-1.5" id="formErrsList"></ul>
+      <div class="cx-call scroll-mt-28" id="call">
+        <p class="cx-call__k"><img class="cx-call__ki" src="/img/icons/visit-phone.webp" width="240" height="240" alt="" loading="lazy" decoding="async">สะดวกคุยสาย</p>
+        <h3 class="cx-call__t">โทรหาทีมดี</h3>
+        <p class="cx-call__p">กดเบอร์เพื่อโทรคุยรายละเอียดงาน</p>
+        <ul class="cx-call__list">
+          <li><a class="cx-call__n tabular-nums" href="tel:{{site.phonePrimaryTel}}" data-where="contact-call"><span>{{site.phonePrimary}}</span><span class="cx-call__go">โทร <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+          <li><a class="cx-call__n tabular-nums" href="tel:0864166449" data-where="contact-call"><span>{{site.phoneSecondary}}</span><span class="cx-call__go">โทร <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+        </ul>
+        <p class="cx-call__foot"><img class="cx-call__fi" src="/img/icons/visit-clock.webp" width="240" height="240" alt="" loading="lazy" decoding="async">{{site.hours}}</p>
+      </div><!-- /call -->
+    </div>
+  </section>
+
+  <section class="wrap cx-followsec" id="follow" aria-labelledby="follow-h">
+    <div class="cx-follow">
+      <h2 id="follow-h" class="cx-follow__h">ติดตามเราได้ที่ :</h2>
+      <ul class="cx-follow__list">
+        <li><a class="cx-follow__a" href="https://www.facebook.com/teamdee" target="_blank" rel="noopener"><span class="cx-follow__ico cx-follow__ico--fb" aria-hidden="true">{{> icoFacebook}}</span><span>TEAMDEE ทีมดี</span><span class="sr-only"> บน Facebook (เปิดแท็บใหม่)</span></a></li>
+        <li><a class="cx-follow__a" href="https://www.instagram.com/teamdee_/" target="_blank" rel="noopener"><span class="cx-follow__ico cx-follow__ico--ig" aria-hidden="true">{{> icoInstagram}}</span><span>teamdee_</span><span class="sr-only"> บน Instagram (เปิดแท็บใหม่)</span></a></li>
+      </ul>
+{{#unless wp}}      <p class="pending-ribbon cx-follow__pend">รอยืนยัน TikTok / YouTube / ร้านค้าออนไลน์ ก่อนใส่เพิ่ม</p>
+{{/unless}}    </div>
+  </section><!-- /follow -->
+
+  <div class="wrap cx-pair">
+    {{!-- รอบ 170d (อาร์ต "ทำอันนี้ดีๆหน่อย"): หัวการ์ด = รูปหน้าออฟฟิศจริง + แถบไล่ส้มตัวขาว (สูตร pp2-pf__band · memory photo-card-gradient-band) + ป้ายสถานะเปิด/ปิด
+         ข้อมูลเป็นแถวไอคอน ไม่ซ้ำคำ "เวลาทำการ" · ตัดรูปไลน์ผลิต (ยังไม่ยืนยันว่าอาคารเดียวกัน) · ลิงก์นำทางเป็นปุ่มเดียวใต้แผนที่ --}}
+    <section class="cx-office scroll-mt-24" id="location" aria-labelledby="loc-h">
+      <figure class="cx-office__hero">
+        <img src="/img/visit/storefront-800.webp" srcset="/img/visit/storefront-480.webp 480w, /img/visit/storefront-800.webp 800w" sizes="(min-width: 1024px) 470px, 92vw" width="800" height="1000" alt="อาคารออฟฟิศทีมดี 3 ชั้น ป้าย TEAMDEE รับผลิตและออกแบบเสื้อครบวงจรหน้าอาคาร" loading="lazy" decoding="async">
+        <p class="cx-open" data-open-status data-hours="{{site.openingHours}}"><i aria-hidden="true"></i><span data-open-t>เวลาทำการ {{site.hoursShort}}</span></p>
+        <figcaption class="cx-office__band">
+          <h2 id="loc-h" class="cx-office__h">{{{ph 'ที่ตั้งทีมดี นนทบุรี / การเดินทาง'}}}</h2>
+          <span class="cx-office__sub">ออฟฟิศทีมดี สำหรับติดต่อ / เข้าพบ</span>
+        </figcaption>
+      </figure>
+      <div class="cx-office__body">
+        <ul class="cx-rows">
+          <li><img class="cx-rows__ico" src="/img/icons/visit-pin.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><div><b>{{site.address}}</b><span>{{{ph 'รับทำเสื้อ นนทบุรี และส่งทั่วประเทศ สั่งงานได้โดยไม่ต้องเดินทาง'}}}</span></div></li>
+          <li><img class="cx-rows__ico" src="/img/icons/visit-clock.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><div><b>{{site.hours}}</b><span>{{{ph 'กรุณานัดหมายก่อนเดินทาง ทีมดีเตรียมตัวอย่างผ้าและเสื้อไว้ให้ดู'}}}</span></div></li>
+        </ul>
+        <div class="cx-office__acts">
+          <a class="cx-linebadge" href="{{visitLine}}" data-track="line" data-where="contact-location"><span class="cx-linebadge__ico" aria-hidden="true">{{> icoLine}}</span><span><small>นัดเข้าพบ คลิกเลย!</small><b>@teamdee</b></span></a>
+          <a class="cx-office__tel tabular-nums" href="tel:{{site.phonePrimaryTel}}" data-where="contact-location"><img class="cx-office__ti" src="/img/icons/visit-phone.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><span><small>โทรนัดหมาย</small><b>{{site.phonePrimary}}</b></span></a>
+        </div>
+        {{!-- แผนที่ขึ้นทันที (ระบบคุกกี้ปิดอยู่ · site.json cookieConsent=false) · ค้นจากที่อยู่ เพราะหมุด Google Business Profile ยังชี้ 109/20 (mapUrlNote) --}}
+        <div class="cx-map"><iframe src="https://www.google.com/maps?q={{enc site.address}}&amp;output=embed" title="แผนที่ออฟฟิศทีมดี นนทบุรี" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+        <a class="cx-nav" href="{{site.mapUrl}}" target="_blank" rel="noopener"><img class="cx-nav__ico" src="/img/icons/st-track.webp" width="240" height="240" alt="" loading="lazy" decoding="async">นำทางด้วย Google Maps<span class="sr-only"> (เปิดแท็บใหม่)</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        {{#unless wp}}<p class="pending-ribbon mt-4">รอยืนยันหมุด Google Business Profile ที่ชี้ 264 · จุดสังเกตใกล้ออฟฟิศรออาร์ต</p>{{/unless}}
+      </div>
+    </section><!-- /location -->
+
+    <section class="cx-formsec scroll-mt-24" id="form" data-where="contact-form" aria-labelledby="form-h">
+        <div class="cf-errs hidden" id="formErrs" tabindex="-1" role="alert">
+          <h2 class="cf-errs__h">ยังต้องแก้ก่อนส่ง</h2>
+          <ul class="mt-2 space-y-1" id="formErrsList"></ul>
         </div>
 
         {{!-- ฟอร์มยังไม่เปิดรับ (ธีมยังไม่ตั้งอีเมลรับฟอร์ม · reason off) · ข้อมูลยังไม่ถึงทีมดี ห้ามใช้สีเขียวหรือคำว่าส่งแล้ว
              ส่งสำเร็จจริงไปหน้า /thank-you/ · ส่งไม่ถึงใช้กล่อง #formFail ใต้ปุ่มส่ง (contact-page.js · audit C2) --}}
-        <div class="card border-2 border-ink hidden" id="formOff" tabindex="-1" data-where="form-off">
-          <h3 class="t-display text-[clamp(22px,2.6vw,30px)] text-ink">ส่งต่อทาง LINE อีกขั้นเดียว</h3>
-          <p class="t-body mt-3">ฟอร์มนี้ยังส่งเข้าระบบไม่ได้ ข้อมูลยังไม่ถึงทีมดี กดเปิด LINE แล้วกดส่งข้อความที่พิมพ์ไว้ให้ ถ้าข้อความไม่ขึ้น กดคัดลอกแล้ววางในแชท</p>
-          <div class="flex flex-wrap gap-3 mt-6">
-            <a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line" id="offLine"><span class="block size-5">{{> icoChat}}</span>เปิด LINE ส่งข้อความ</a>
-            <button class="btn btn-line btn-lg" type="button" data-copy>คัดลอกข้อความ</button>
+        <div class="cf-off hidden" id="formOff" tabindex="-1" data-where="form-off">
+          <h3 class="cf-off__h">ส่งต่อทาง LINE อีกขั้นเดียว</h3>
+          <p class="cf-off__p">{{{ph 'ฟอร์มนี้ยังส่งเข้าระบบไม่ได้ ข้อมูลยังไม่ถึงทีมดี กดเปิด LINE แล้วกดส่งข้อความที่พิมพ์ไว้ให้ ถ้าข้อความไม่ขึ้น กดคัดลอกแล้ววางในแชท'}}}</p>
+          <div class="cf-btns">
+            <a class="cb cb--p" href="{{site.lineUrl}}" data-track="line" id="offLine"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">เปิด LINE ส่งข้อความ</span></a>
+            <button class="cb cb--s" type="button" data-copy>คัดลอกข้อความ</button>
           </div>
           <p class="t-xs mt-3 min-h-[1.5em]" data-copy-msg role="status"></p>
-          <p class="t-sm mt-4">LINE ID <strong class="text-ink">@teamdee</strong> · หรือโทร <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4 tabular-nums whitespace-nowrap" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a></p>
-          <button class="mt-4 inline-flex items-center min-h-[44px] font-semibold text-ink underline decoration-line-2 decoration-2 underline-offset-4 hover:decoration-ink" type="button" id="offBack">กลับไปแก้ข้อมูล</button>
+          <p class="t-sm mt-3">LINE ID <strong class="text-ink">@teamdee</strong> · หรือโทร <a class="cf-link tabular-nums whitespace-nowrap" href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a></p>
+          <button class="cf-back" type="button" id="offBack">กลับไปแก้ข้อมูล</button>
         </div>
 
-        <form id="contactForm" novalidate aria-labelledby="form-h">
+        {{!-- 30 ต.ค.: method=post + action เผื่อ JS ไม่โหลด (เดิมไม่มี method = GET ชื่อ เบอร์ อีเมลไปอยู่ใน URL และ log)
+             ธีมเปลี่ยน action เป็น admin_url() ของเว็บจริงตอนแสดงหน้า (functions.php td_body_live) · td_nojs มีเฉพาะตอนฟอร์มส่งเอง (JS ส่งผ่าน fetch ไม่มีช่องนี้)
+             maxlength ตรงกับที่ธีมตัด (200 · รายละเอียด 3000) --}}
+        <form id="contactForm" class="cf-form cx-form" method="post" action="/wp-admin/admin-post.php" novalidate aria-labelledby="form-h">
+          <input type="hidden" name="action" value="td_contact">
+          <input type="hidden" name="td_nojs" value="1">
           <input type="hidden" name="มาจากหน้า" id="cFrom">
-
-          <div class="card max-sm:px-5 max-sm:pt-5">
-            <h3 id="form-h" class="text-[21px] font-bold">ฝากข้อมูลให้ติดต่อกลับ</h3>
-            <p class="t-sm mt-1"><span class="text-alert font-bold" aria-hidden="true">*</span> คือช่องที่ต้องกรอก ที่เหลือข้ามได้</p>
-            <div class="grid sm:grid-cols-2 gap-3 mt-4">
-              <div>
-                <label class="label" for="cName">ชื่อผู้ติดต่อ <span class="text-alert" aria-hidden="true">*</span></label>
-                <input class="input" id="cName" name="ชื่อ" type="text" autocomplete="name" required aria-describedby="cName-err">
-                <p class="err" id="cName-err" hidden>ยังไม่ได้กรอกชื่อผู้ติดต่อ ต้องใส่ก่อนส่ง</p>
-              </div>
-              <div>
-                <label class="label" for="cTel">เบอร์โทร <span class="text-alert" aria-hidden="true">*</span></label>
-                <input class="input tabular-nums" id="cTel" name="เบอร์โทร" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="cTel-err cTel-bad">
-                <p class="err" id="cTel-err" hidden>ยังไม่ได้กรอกเบอร์โทร ต้องใส่ก่อนส่ง</p>
-                <p class="err" id="cTel-bad" hidden>เบอร์โทรควรมี 9–10 หลัก เช่น 081-234-5678</p>
-              </div>
-            </div>
-
-            {{!-- ข้อมูลองค์กรและเอกสารจัดซื้อ (audit C3) · พับไว้ให้ฟอร์มสั้น · กางเองเมื่อมาจากหน้ากลุ่ม B2B (?u= บริษัท หน่วยงาน ร้านค้า โรงเรียน คณะ · contact-page.js) --}}
-            <details class="group mt-5 border-t border-line pt-1" id="cOrgBox">
-              <summary class="flex items-start justify-between gap-3 min-h-[48px] py-2 cursor-pointer list-none font-bold text-[18px] leading-snug [&::-webkit-details-marker]:hidden"><span>{{{ph 'ข้อมูลองค์กร อีเมล และเอกสารจัดซื้อ'}}} <span class="inline-block text-[15px] font-semibold text-ink-3">(ถ้ามี)</span></span><svg class="shrink-0 mt-0.5 text-orange transition-transform group-open:rotate-45" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
-              <div class="pb-2">
-                <p class="t-sm">{{{ph 'ออกเอกสารในนาม บริษัท ดีดี ฟินิกซ์ จำกัด (จดทะเบียน 19 ม.ค. 2021) · ราคารวม VAT 7% · องค์กรวางบิลได้ ไม่รับบัตรเครดิต'}}}</p>
-                <div class="grid sm:grid-cols-2 gap-3 mt-4">
-                  <div>
-                    <label class="label" for="cOrg">บริษัท / หน่วยงาน / ทีม</label>
-                    <input class="input" id="cOrg" name="องค์กร" type="text" autocomplete="organization">
-                  </div>
-                  <div>
-                    <label class="label" for="cMail">อีเมล</label>
-                    <input class="input" id="cMail" name="อีเมล" type="email" autocomplete="email" inputmode="email" aria-describedby="cMail-help">
-                    <p class="help" id="cMail-help">ใส่ไว้ถ้าต้องการให้ส่งใบเสนอราคาหรือเอกสารทางอีเมล</p>
-                  </div>
-                </div>
-                {{!-- รายการเดียวกับหน้าเกี่ยวกับและ FAQ (agent ลูกค้า 22 ต.ค.: ไม่มีที่บอกว่าต้องการเอกสารอะไร) --}}
-                <div class="mt-4" role="group" aria-labelledby="cDocs-h">
-                  <p class="label" id="cDocs-h">เอกสารที่ต้องการ</p>
-                  <div class="flex flex-wrap gap-x-5 gap-y-1 mt-1">
-                    {{#each contactDocs}}<label class="inline-flex items-center gap-2 min-h-[44px] text-[17px]"><input type="checkbox" name="เอกสาร" value="{{this}}" class="js-doc size-5 accent-[var(--color-ink)]">{{this}}</label>{{/each}}
-                  </div>
-                </div>
-              </div>
-            </details>
+          <div class="cx-form__head">
+            <img class="cx-form__ico" src="/img/icons/talk-design.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+            <h2 id="form-h" class="cx-form__h">เล่าเรื่องเสื้อทีมของคุณ</h2>
+            <p class="cx-form__req"><span class="text-alert font-bold" aria-hidden="true">*</span> ข้อมูลจำเป็น</p>
           </div>
+          <p class="cx-form__p">{{{ph 'ฝากข้อมูลไว้ ทีมดีโทรหรือทัก LINE กลับในเวลาทำการ ช่องอื่นกรอกเท่าที่ทราบ'}}}</p>
 
-          <fieldset class="card mt-4">
-            <legend class="text-[21px] font-bold">งานที่อยากทำ</legend>
-            <p class="t-sm mt-1">ไม่รู้ก็ข้ามได้ทุกช่อง</p>
-            <div class="grid sm:grid-cols-2 gap-3 mt-4">
-              <div>
-                <label class="label" for="cQty">จำนวนประมาณ (ตัว)</label>
-                <input class="input tabular-nums" id="cQty" name="จำนวน" type="number" min="1" step="1" inputmode="numeric" aria-describedby="cQty-help">
-                <p class="help" id="cQty-help">ขั้นต่ำ 10 ตัว ยังไม่แน่ใจก็ข้ามได้</p>
-              </div>
-              <div>
-                <label class="label" for="cDate">วันที่ต้องการใช้</label>
-                <input class="input" id="cDate" name="วันที่ต้องการใช้" type="date">
-              </div>
+          <div class="cf-grid2 cx-form__grid">
+            <div>
+              <label class="label" for="cName">ชื่อผู้ติดต่อ <span class="text-alert" aria-hidden="true">*</span></label>
+              <input class="input" id="cName" name="ชื่อ" type="text" autocomplete="name" maxlength="200" required aria-describedby="cName-err" enterkeyhint="next" placeholder="ชื่อที่ให้เราเรียกคุณ">
+              <p class="err" id="cName-err" hidden>ยังไม่ได้กรอกชื่อผู้ติดต่อ ต้องใส่ก่อนส่ง</p>
             </div>
-            <div class="grid sm:grid-cols-2 gap-3 mt-3">
+            <div>
+              <label class="label" for="cTel">เบอร์โทร <span class="text-alert" aria-hidden="true">*</span></label>
+              <input class="input tabular-nums" id="cTel" name="เบอร์โทร" type="tel" autocomplete="tel" inputmode="tel" maxlength="200" required aria-describedby="cTel-err cTel-bad" enterkeyhint="next" placeholder="เบอร์ที่สะดวกให้ติดต่อ">
+              <p class="err" id="cTel-err" hidden>ยังไม่ได้กรอกเบอร์โทร ต้องใส่ก่อนส่ง</p>
+              <p class="err" id="cTel-bad" hidden>เบอร์โทรควรมี 9–10 หลัก เช่น 081-234-5678</p>
+            </div>
+            <div>
+              <label class="label" for="cOrg">บริษัท / หน่วยงาน / ทีม <span class="cx-opt">(ถ้ามี)</span></label>
+              <input class="input" id="cOrg" name="องค์กร" type="text" autocomplete="organization" maxlength="200" enterkeyhint="next" placeholder="ชื่อบริษัทหรือทีมของคุณ">
+            </div>
+            <div>
+              <label class="label" for="cMail">อีเมล <span class="cx-opt">(ถ้ามี)</span></label>
+              <input class="input" id="cMail" name="อีเมล" type="email" autocomplete="email" inputmode="email" maxlength="200" aria-describedby="cMail-help cMail-bad" enterkeyhint="next" placeholder="ชื่อ@บริษัท.co.th">
+              <p class="help" id="cMail-help">ไว้ส่งใบเสนอราคาและเอกสาร</p>
+              {{!-- เตือนอย่างเดียว ไม่บล็อก (audit 26 ต.ค. M2) --}}<p class="help !text-alert" id="cMail-bad" hidden>รูปแบบอีเมลดูไม่ครบ เช่น ชื่อ@บริษัท.co.th · ส่งได้ แต่ตรวจอีกนิดจะได้รับเอกสารแน่นอน</p>
+            </div>
+            <div>
+              <label class="label" for="cProduct">สนใจเสื้อแบบไหน</label>
+              {{!-- ตัวเลือกตาม Wireframe v4 · หน้ารวมเสื้อแบบพิเศษไม่อยู่ในรายการ เลือกทรงจริงแทน --}}
+              <select class="input" id="cProduct" name="สินค้าที่สนใจ">
+                <option value="">ยังไม่แน่ใจ / ให้ช่วยเลือก</option>
+                {{#each products}}<option value="{{this.id}}">{{this.name}}</option>{{/each}}
+              </select>
+            </div>
             <div>
               <label class="label" for="cUse">ใช้กับงาน</label>
               <select class="input" id="cUse" name="ใช้กับงาน">
@@ -132,93 +190,57 @@
               </select>
             </div>
             <div>
-              <label class="label" for="cProduct">สินค้า / บริการที่สนใจ</label>
-              {{!-- ตัวเลือกตาม Wireframe v4 · หน้ารวมเสื้อแบบพิเศษไม่อยู่ในรายการ เลือกทรงจริงแทน --}}
-              <select class="input" id="cProduct" name="สินค้าที่สนใจ">
-                <option value="">ยังไม่แน่ใจ / ให้ช่วยเลือก</option>
-                {{#each products}}<option value="{{this.id}}">{{this.name}}</option>{{/each}}
-              </select>
+              <label class="label" for="cQty">จำนวนประมาณ <span class="cx-opt">(ตัว)</span></label>
+              <input class="input tabular-nums" id="cQty" name="จำนวน" type="number" min="1" step="1" inputmode="numeric" aria-describedby="cQty-help" enterkeyhint="next" placeholder="เช่น 30">
+              <p class="help" id="cQty-help">ขั้นต่ำ 10 ตัว (เสื้อสกรีนเริ่ม 1 ตัว)</p>
             </div>
+            <div>
+              <label class="label" for="cDate">วันที่ต้องการใช้ <span class="cx-opt">(ถ้าทราบ)</span></label>
+              <input class="input" id="cDate" name="วันที่ต้องการใช้" type="date">
             </div>
-            <div class="mt-3">
-              <label class="label" for="cNote">รายละเอียดหรือข้อมูลอ้างอิง</label>
-              <textarea class="input" id="cNote" name="รายละเอียด" rows="4" aria-describedby="cNote-help"></textarea>
-              <p class="help" id="cNote-help">เช่น สีที่อยากได้ รหัสแบบที่ชอบจากหน้าแบบเสื้อ หรือปัญหาที่เคยเจอ · มีโลโก้หรือไฟล์แบบ ส่งทาง LINE หลังส่งฟอร์มได้เลย</p>
+            <div class="cx-form__full">
+              <label class="label" for="cNote">อยากเล่าอะไรให้ทีมดีฟังเพิ่ม?</label>
+              <textarea class="input" id="cNote" name="รายละเอียด" rows="3" maxlength="3000" aria-describedby="cNote-help" placeholder="เช่น ทำเสื้อไป Outing อยากได้โทนส้ม มีโลโก้แล้ว"></textarea>
+              <p class="help" id="cNote-help">{{{ph 'สีที่ต้องการ รหัสแบบจากหน้าแบบเสื้อ ตำแหน่งโลโก้ หรือข้อกำหนดของงาน · ไฟล์โลโก้ส่งทาง LINE หรืออีเมลภายหลังได้'}}}</p>
             </div>
-          </fieldset>
+          </div>
 
-          <div class="card mt-4">
+          {{!-- เอกสารจัดซื้อ (audit C3) · แสดงตลอด ไม่พับ · id cOrgBox คงไว้ให้ contact-page.js · เลขออเดอร์เดิมสำหรับสั่งซ้ำ/แจ้งปัญหา (audit M1) --}}
+          <fieldset class="cx-docs" id="cOrgBox" aria-describedby="cDocs-help">
+            <legend class="cx-docs__h" id="cDocs-h"><img class="cx-docs__ico" src="/img/icons/why-docs.webp" width="240" height="240" alt="" loading="lazy" decoding="async">เอกสารที่ต้องการ <span class="cf-sec__opt">(ถ้ามี)</span></legend>
+            <div class="cx-docs__list">
+              {{#each contactDocs}}<label class="cx-chip"><input class="js-doc" type="checkbox" name="เอกสาร" value="{{this}}"><span>{{this}}</span></label>{{/each}}
+            </div>
+            <p class="help mt-2" id="cDocs-help">{{{ph 'ออกเอกสารในนาม บริษัท ดีดี ฟินิกซ์ จำกัด · เลขผู้เสียภาษีและสาขา ส่งภายหลังทาง LINE หรืออีเมลได้'}}}</p>
+          </fieldset>
+          <div class="cx-order">
+            <label class="label" for="cOrder">เลขออเดอร์เดิม (กรณีสั่งซ้ำหรือแจ้งปัญหา)</label>
+            <input class="input tabular-nums" id="cOrder" name="เลขออเดอร์เดิม" type="text" autocomplete="off" maxlength="200" aria-describedby="cOrder-help" enterkeyhint="next">
+            <p class="help" id="cOrder-help">ดูได้จากใบเสนอราคาหรือแชท LINE เดิม</p>
+          </div>
+
+          <div class="cx-send">
             {{!-- ช่องกันบอท: คนไม่เห็น ไม่กรอก · บอทกรอกทุกช่อง → ธีมไม่ส่งอีเมล (functions.php td_contact) --}}
             <div class="hidden" aria-hidden="true"><label>เว้นว่างไว้<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-            <button class="btn btn-orange btn-lg w-full" type="submit">ส่งข้อมูลให้ทีมดีติดต่อกลับ</button>
+            <button class="cb cf-submit" type="submit"><span class="cb__t">ส่งข้อมูลให้ทีมดีติดต่อกลับ</span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
             <p class="t-xs mt-3" id="formMsg" role="status"></p>
             {{!-- ส่งไม่ถึงทีมดี (error / network) · ฟอร์มและข้อมูลยังอยู่ครบ ข้อความ LINE ไม่มีชื่อและเบอร์ --}}
-            <div class="hidden mt-4 rounded-card border-2 border-alert bg-alert-tint p-5" id="formFail" tabindex="-1" role="alert" data-where="form-fail">
-              <h4 class="text-[19px] font-bold text-alert">ยังส่งไม่ถึงทีมดี</h4>
+            <div class="cf-fail hidden" id="formFail" tabindex="-1" role="alert" data-where="form-fail">
+              <h3 class="cf-fail__h">ยังส่งไม่ถึงทีมดี</h3>
               <p class="t-body mt-2" id="failMsg"></p>
-              <div class="flex flex-wrap gap-3 mt-4">
-                <a class="btn btn-orange gap-2" href="{{site.lineUrl}}" data-track="line" id="failLine"><span class="block size-5">{{> icoChat}}</span>ส่งทาง LINE</a>
-                <a class="btn btn-line gap-2 tabular-nums" href="tel:{{site.phonePrimaryTel}}"><span class="block size-5">{{> icoPhone}}</span>โทร {{site.phonePrimary}}</a>
-                <button class="btn btn-line" type="button" id="failRetry">ลองส่งอีกครั้ง</button>
+              <div class="cf-btns">
+                <a class="cb cb--p" href="{{site.lineUrl}}" data-track="line" id="failLine"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ส่งทาง LINE</span></a>
+                <a class="cb cb--s tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a>
+                <button class="cb cb--s" type="button" id="failRetry">ลองส่งอีกครั้ง</button>
               </div>
-              <p class="t-sm mt-4">ข้อความ LINE ไม่ขึ้น? <button class="inline-flex items-center min-h-[44px] font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" type="button" data-copy>คัดลอกข้อความ</button> แล้ววางในแชท @teamdee</p>
+              <p class="t-sm mt-4">ข้อความ LINE ไม่ขึ้น? <button class="cf-link" type="button" data-copy>คัดลอกข้อความ</button> แล้ววางในแชท @teamdee</p>
               <p class="t-xs min-h-[1.5em]" data-copy-msg role="status"></p>
             </div>
-            <p class="t-xs mt-4 pt-4 border-t border-line">การส่งฟอร์มยังไม่ถือเป็นการสั่งซื้อ เราจะติดต่อกลับเพื่อยืนยันรายละเอียดก่อน · อ่าน <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url 'privacy'}}">นโยบายความเป็นส่วนตัว</a></p>
+            <p class="cf-fine">การส่งข้อมูลยังไม่ถือเป็นการสั่งซื้อ ทีมดีจะติดต่อกลับเพื่อยืนยันรายละเอียดก่อน · อ่าน <a class="cf-link" href="{{url 'privacy'}}">นโยบายความเป็นส่วนตัว</a></p>
           </div>
         </form>
-      </div>
-
-      <!-- เวลาทำการ ที่ตั้ง เบอร์สำรอง · ปุ่ม LINE / โทรหลักอยู่ที่แถบสายตรงด้านบนแล้ว ไม่ซ้ำ -->
-      <div class="lg:sticky lg:top-28 space-y-4">
-        <div class="bg-paper border border-line rounded-plate p-7">
-          <h3 class="text-[19px] font-bold">เวลาทำการและที่ตั้ง</h3>
-          <dl class="mt-5 space-y-3">
-            <div class="flex gap-3"><dt class="sr-only">เวลาทำการ</dt><span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoClock}}</span><dd class="text-[17px] text-ink-2 leading-[1.6]">{{site.hours}}</dd></div>
-            <div class="flex gap-3"><dt class="sr-only">เบอร์สำรอง</dt><span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoPhone}}</span><dd class="text-[17px] text-ink-2 leading-[1.6]">เบอร์สำรอง <a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4 tabular-nums whitespace-nowrap" href="tel:0864166449">{{site.phoneSecondary}}</a></dd></div>
-            <div class="flex gap-3"><dt class="sr-only">สถานที่เข้าพบ</dt><span class="block size-5 text-orange shrink-0 mt-1" aria-hidden="true">{{> icoPin}}</span><dd class="text-[17px] text-ink-2 leading-[1.6]">{{site.address}}<span class="block t-xs mt-1 text-ink-3">{{#unless wp}}ที่อยู่จดทะเบียนเป็นคนละที่ · [รอยืนยัน] · {{/unless}}กรุณาโทรนัดก่อนเดินทาง</span></dd></div>
-          </dl>
-{{#unless wp}}          <div class="mt-6 pt-6 border-t border-line">
-            <p class="t-xs text-ink-3">[QR ไลน์ รอไฟล์จากฝ่ายการตลาด]</p>
-          </div>{{/unless}}
-          <a class="pp-more mt-4 inline-flex" href="#location">ที่ตั้งและการเดินทาง<span class="arw" aria-hidden="true">&rarr;</span></a>
-        </div>
-
-        <div class="bg-shell border border-line rounded-plate p-7">
-          <h2 class="text-[19px] font-bold">ยังไม่พร้อมคุย</h2>
-          <ul class="mt-4 space-y-1">
-            <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'designs'}}">ดูแบบเสื้อก่อน<span class="arw" aria-hidden="true">&rarr;</span></a></li>
-            <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'faq'}}">อ่านคำถามที่พบบ่อย<span class="arw" aria-hidden="true">&rarr;</span></a></li>
-            <li><a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'guides' 'print'}}">อ่านคู่มือสั่งทำ<span class="arw" aria-hidden="true">&rarr;</span></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ที่ตั้งและการเดินทาง (v22) · หมุด Google Business Profile เส้นทาง และที่จอดรถยังรอยืนยัน → ลิงก์แผนที่ค้นจากที่อยู่ ไม่ฝังหมุด -->
-  <section class="bg-shell border-y border-line scroll-mt-28" id="location" aria-labelledby="loc-h">
-    <div class="wrap section grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-start">
-      <div>
-        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPin}}</span>ออฟฟิศทีมดี สำหรับติดต่อ / เข้าพบ</span>
-        <h2 id="loc-h" class="t-display text-[clamp(26px,3.4vw,40px)]">ที่ตั้งทีมดี นนทบุรี / การเดินทาง</h2>
-        <p class="t-lead mt-4">{{site.address}}</p>
-        <p class="t-body mt-3">{{site.hours}}</p>
-        <p class="t-body mt-3">รับทำเสื้อ นนทบุรี และส่งทั่วประเทศ คุยและสั่งผ่าน LINE ได้โดยไม่ต้องเดินทาง</p>
-      </div>
-      <div>
-        <ul class="space-y-3">
-          <li class="pp-dot">ทักทีมดีเพื่อนัดหมายและสอบถามตัวอย่างผ้า / เสื้อที่พร้อมให้ดูก่อนเดินทาง</li>
-          <li class="pp-dot">แจ้งจุดเริ่มต้นให้ทีมดีช่วยแนะนำการเดินทางและจุดจอดรถก่อนนัดหมาย</li>
-        </ul>
-        <div class="flex flex-wrap gap-3 mt-6">
-          <a class="btn btn-orange gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>นัดหมายเข้าพบ / ดูตัวอย่าง</a>
-          <a class="btn btn-line" href="{{site.mapUrl}}" target="_blank" rel="noopener">ดูแผนที่</a>
-        </div>
-        {{#unless wp}}<p class="pending-ribbon mt-5">รอยืนยันเส้นทาง จุดจอดรถ และลิงก์ Google Business Profile ให้ตรงกับจุดเข้าพบ · ยังไม่ใส่เวลาเดินทางโดยประมาณ</p>{{/unless}}
-      </div>
-    </div>
-  </section>
+    </section><!-- /form -->
+  </div>
 </main>
 {{!-- ปิดปุ่มลอยและการ์ดแนะนำ ไม่พาลูกค้าออกจากหน้าที่กำลังกรอก (audit C8) · แถบล่างช่อง 3 พาไปฟอร์ม --}}
 {{> footer noFloats=true barHref="#contactForm" barLabel="กรอกฟอร์ม"}}

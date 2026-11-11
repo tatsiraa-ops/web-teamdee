@@ -19,6 +19,12 @@
         <a class="btn btn-orange btn-lg" href="/">กลับหน้าแรก</a>
         <a class="btn btn-line btn-lg" href="{{url 'designs'}}">ดูแบบเสื้อ</a>
       </div>
+      {{!-- ค้นหาในเว็บ (หน้า /search/ ไม่มีทางเข้าจากหน้าอื่น · audit 26 ต.ค.) --}}
+      <form class="mt-8 flex gap-2 max-w-[480px]" action="{{url 'search'}}" method="get" role="search" aria-label="ค้นหาในเว็บทีมดี">
+        <label class="sr-only" for="nfq">ค้นหา</label>
+        <input class="input flex-1" id="nfq" name="q" type="search" placeholder="เช่น โปโล ไซซ์ หรือ TD-0012">
+        <button class="btn btn-ink" type="submit">ค้นหา</button>
+      </form>
     </div>
   </section>
   {{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end · 24 ต.ค.) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
@@ -28,7 +34,7 @@
       <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
       <h2 id="end-h">{{{ph "มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย"}}}</h2>
       <p class="hm-end__lead">{{{ph "บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้"}}}</p>
-      <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a></div>
+      <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{@root.pageLine}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a></div>
       <p class="hm-end__alt"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>
     </div>
   </section>

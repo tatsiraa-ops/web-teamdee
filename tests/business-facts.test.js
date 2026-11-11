@@ -30,8 +30,8 @@ test('สกรีนมีแค่ DFT: ไม่มีบล็อกสก�
   /* DFT วิธีเดียว ไม่คิดตามจำนวนสี · ไม่มีค่าเร่ง */
   assert.deepEqual(hits(/เลือกวิธีสกรีน|วิธีสกรีนที่เหมาะ|จำนวนสีและขนาดลาย|ความเร่งของกำหนดส่ง/g), [])
   const lead = read('src/data/lead-times.json')
-  assert.equal(lead.screen.days, 'DFT 7–10 วันทำการ')
-  assert.equal(lead.screen.more, undefined)
+  assert.equal(lead.screen.days, '3–14 วัน')
+  assert.match(lead.screen.more, /สเกลงาน.*จุดสกรีน.*ความยากง่าย/)
 })
 
 test('เวลาผลิต: เปิดทำการทุกวัน · นับวันถัดจากวันยืนยันแบบ · งานด่วนไม่มีค่าเร่ง · ไม่เหลือจุดเริ่มนับแบบเก่า', () => {
@@ -43,6 +43,8 @@ test('เวลาผลิต: เปิดทำการทุกวัน ·
   assert.match(lead.deposit, /วันที่โอน/)
   assert.match(lead.note, /เปิดทำการทุกวัน/)
   assert.ok(lead.note.includes(lead.start) && lead.note.includes(lead.deposit) && lead.note.includes(lead.season) && lead.note.includes(lead.rush), lead.note)
+  /* เปิดทำการทุกวัน → ใช้คำว่า "วัน" ไม่ใช้ "วันทำการ" (อาร์ตเคาะ 26 ต.ค.) */
+  assert.deepEqual(hits(/วันทำการ/g), [])
   assert.deepEqual(hits(/หลังสรุปแบบและชำระมัดจำ|ชำระมัดจำเรียบร้อยแล้ว|นับหลังสรุปแบบ/g), [])
 })
 

@@ -5,22 +5,17 @@ import { useCta, lineMessageUrl } from '../src/js/use-cta.js'
 const site = { lineUrl: 'https://line.me/R/ti/p/@teamdee', phonePrimary: '097-549-5941', phonePrimaryTel: '0975495941' }
 const item = (id, shortName) => ({ id, shortName })
 
-test('บริษัท หน่วยงาน ร้านค้า โรงเรียน คณะ: ปุ่มหลักขอใบเสนอราคา · ปุ่มรองโทร', () => {
-  for (const id of ['corp', 'gov', 'shop', 'edu', 'faculty']) {
-    const c = useCta(item(id, 'x'), site, '/contact-us/')
-    assert.equal(c.mode, 'quote', id)
-    assert.deepEqual(c.primary, { href: `/contact-us/?u=${id}`, label: 'ขอใบเสนอราคา' })
-    assert.deepEqual(c.secondary, { href: 'tel:0975495941', label: 'โทร 097-549-5941' })
-  }
-})
-
-test('กีฬา ก๊วน วิ่ง อีเวนต์ รุ่น: ปุ่มหลักทักไลน์พร้อมข้อความตั้งต้น · ปุ่มรองฟอร์มขอราคา', () => {
-  for (const id of ['sport', 'badminton', 'running', 'event', 'class']) {
+/* อาร์ตเคาะ 30 ต.ค. (ตรวจมือถือ ข้อ 3): ปุ่มหลักเป็น LINE ทุกกลุ่ม · ฟอร์มเป็นทางรอง (เดิมบริษัท/หน่วยงาน/ร้าน/โรงเรียน/คณะ ใช้ฟอร์มเป็นหลัก
+   แต่แถบล่างมือถือเน้น LINE ปุ่มเลยแย่งกันเอง) · กลุ่มที่ต้องมีเอกสารจัดซื้อ ทางรองเขียนว่าขอใบเสนอราคา */
+test('ทุกกลุ่ม: ปุ่มหลักทัก LINE พร้อมข้อความตั้งต้น · กลุ่มจัดซื้อ ทางรอง = ขอใบเสนอราคา (ฟอร์ม) · กลุ่มอื่น = ขอราคาผ่านฟอร์ม', () => {
+  for (const id of ['corp', 'gov', 'shop', 'edu', 'faculty', 'sport', 'badminton', 'running', 'event', 'class']) {
     const c = useCta(item(id, 'วิ่ง'), site, '/contact-us/')
     assert.equal(c.mode, 'line', id)
     assert.equal(c.primary.label, 'ทัก LINE ขอราคา')
     assert.equal(c.primary.href, lineMessageUrl('สนใจทำเสื้อวิ่ง ขอราคาและดูแบบ'))
-    assert.deepEqual(c.secondary, { href: `/contact-us/?u=${id}`, label: 'ขอราคาผ่านฟอร์ม' })
+    const quote = ['corp', 'gov', 'shop', 'edu', 'faculty'].includes(id)
+    assert.deepEqual(c.secondary, { href: `/contact-us/?u=${id}`, label: quote ? 'ขอใบเสนอราคา (ฟอร์ม)' : 'ขอราคาผ่านฟอร์ม' }, id)
+    assert.equal(c.docs, quote, `${id} บอกว่าขอเอกสารจัดซื้อได้`)
   }
 })
 
@@ -35,10 +30,10 @@ test('ลิงก์ LINE ข้อความตั้งต้นเข้�
 import { hrefWithDate } from '../src/js/use-cta.js'
 import { dateFromQuery } from '../src/js/contact-send.js'
 
-test('วันที่ต้องใช้เสื้อ: ฟอร์มได้ ?date= · LINE ต่อท้ายข้อความเป็นวันที่ไทย · วันที่ผิดรูปแบบไม่แตะลิงก์', () => {
+test('วันที่ต้องใช้เสื้อ: ฟอร์มได้ ?date= · LINE ต่อบรรทัดใหม่เป็นวันที่ไทย · วันที่ผิดรูปแบบไม่แตะลิงก์', () => {
   assert.equal(hrefWithDate('/contact-us/?u=corp', '2026-11-09'), '/contact-us/?u=corp&date=2026-11-09')
   const line = lineMessageUrl('สนใจทำเสื้อวิ่ง ขอราคาและดูแบบ')
-  assert.equal(hrefWithDate(line, '2026-11-09'), lineMessageUrl('สนใจทำเสื้อวิ่ง ขอราคาและดูแบบ · ต้องใช้เสื้อวันที่ 9 พ.ย. 2569'))
+  assert.equal(hrefWithDate(line, '2026-11-09'), lineMessageUrl('สนใจทำเสื้อวิ่ง ขอราคาและดูแบบ\nต้องใช้วันที่: 9 พ.ย. 2569'))
   assert.equal(hrefWithDate('/contact-us/?u=corp', '9/11/2026'), '/contact-us/?u=corp')
   assert.equal(hrefWithDate('tel:0975495941', '2026-11-09'), 'tel:0975495941')
 })

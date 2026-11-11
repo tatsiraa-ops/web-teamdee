@@ -1,0 +1,37 @@
+{{!-- /sublimation/ ทรงเสื้อ + คอเสื้อ · รอบ 196 แผงเลือกเสื้อ (10 พ.ย. 2026 อาร์ต "รวมให้ครบในที่เดียว ไม่ต้องเลื่อนเยอะ")
+     แผงเดียว: ซ้าย ขั้น 1 ทรงเสื้อ 3 ทรง (196c กดภาพ = เลือกทรง → คอที่ทรงนั้นไม่มีจาง · ราคาทรงอยู่บนภาพ (196d ไม่มีแถบสถานะ) · ↗ ไปหน้าทรง · type-collars.js) · ขวา ขั้น 2 คอ 13 ทรงตามตระกูล (196e ไม่แสดงราคา)
+     การ์ดคอเล็ก: รูปคอจริงจากงานลูกค้า (196b อาร์ต "รูปเจนไม่เอา เอารูปจริง") + ชื่อ + ต่างตรงไหน + จุดเด่น (196c อาร์ต "เอาไลน์ออก" ไม่มีปุ่ม LINE บนการ์ด)
+     ช่องท้ายแถวคอปก = ปก 2 แบบ · ช่องท้ายแถวทรงพิเศษ = ถามทรงคอทาง LINE · ภาพตัวอย่างแบบเสื้อ 4 ภาพเดิม → ลิงก์บรรทัดเดียว
+     ประวัติ: 130–132 โมเสก · 145 กริดคอ · 192 รวมส่วน · 193 กล่องเด้ง · 194 ห้องลองคอ · 195 เลือกคอตามงบ (ยาว 3,449px คอม) --}}
+{{#with pp2.types}}
+<section class="pp2-ty" id="options" aria-labelledby="pp2-ty-h">
+  <div class="wrap">
+    <header class="pp2-ty__head">
+      <h2 id="pp2-ty-h">{{{hl h accent}}}</h2>
+      <p>{{{dots p}}}</p>
+    </header>
+    <div class="spk">
+      <div class="spk__ty">
+        <header class="pp2-ty__step"><span class="pp2-ty__n" aria-hidden="true">1</span><div><h3 class="pp2-ty__sh">{{stepTy}}</h3><p>{{stepTyP}}</p></div></header>
+        <div class="spk__tys">
+          {{#each types}}<div class="spk__t spk__t--{{this.k}}"><button type="button" class="spk__pick" aria-pressed="{{#if @first}}true{{else}}false{{/if}}" data-ty="{{this.k}}" data-cols="{{this.cols}}"><img src="{{this.photo.img}}" srcset="{{this.photo.img}} 640w, {{this.photo.img2}} 1280w" sizes="(min-width: 1200px) 320px, (min-width: 768px) 31vw, 72vw" width="640" height="478" alt="{{this.photo.alt}}" loading="lazy" decoding="async"><span class="spk__tc"><b>{{this.t}}</b><small>{{{ph this.sub}}}</small></span></button>{{#if this.go}}<a class="spk__go" href="{{this.href}}" aria-label="ดูหน้า{{this.t}}"><span aria-hidden="true">↗</span></a>{{/if}}</div><!-- /t -->{{/each}}
+        </div>
+        <a class="spk__more" href="/designs/?product=print">{{moreT}} <span aria-hidden="true">↗</span></a>
+      </div>
+      {{#with ../pp2.collars}}<div class="pp2-col" id="collars">
+        <header class="pp2-ty__step"><span class="pp2-ty__n" aria-hidden="true">2</span><div><h3 class="pp2-ty__sh">{{../stepCol}}</h3><p>{{{ph p}}}</p></div></header>
+        {{!-- 196e อาร์ต "ไม่ต้องแสดงราคา และทำมาให้ดีๆ": ตระกูลคอ 6 กลุ่ม เต็ม 5×3 (คอกลม 2 + คอปก 2 + ปก · คอวี 4 + ห้าเหลี่ยม · คอจีน 2 + คางหมู 2 + ถาม) · subgrid --}}
+        <div class="cfx">
+          {{#each fams}}<div class="cfm" style="--n:{{#if this.polos}}{{inc this.items.length}}{{else}}{{this.items.length}}{{/if}}"><h4 class="cfm__h">{{this.t}}</h4><div class="cfm__cs">{{#each this.items}}<article class="ctz__c" data-k="{{this.k}}"><div class="ctz__pic"><img class="ctz__ph" src="{{this.img}}" srcset="{{this.img}} 480w, {{this.img2}} 800w" sizes="(min-width: 1200px) 200px, (min-width: 768px) 19vw, 44vw" width="480" height="356" alt="{{this.alt}}" loading="lazy" decoding="async"><span class="ctz__no">ทรงนี้ไม่มี</span></div><div class="ctz__b"><h5 class="ctz__n">{{this.t}}</h5><p class="ctz__d">{{{ph this.d}}}</p>{{#if this.x.length}}<p class="ctz__x">{{#each this.x}}<span>{{this}}</span>{{/each}}</p>{{/if}}</div></article>{{/each}}{{#if this.polos}}<figure class="pp2-col__pk" data-k="pk"><span class="ctz__no">ทรงนี้ไม่มี</span><div class="pp2-col__pkp">{{#each ../polos}}<div><img src="{{this.img}}" srcset="{{this.img}} 400w, {{this.img2}} 640w" sizes="(min-width: 1200px) 100px, 22vw" width="400" height="569" alt="{{this.alt}}" loading="lazy" decoding="async"><b>{{this.t}}</b></div>{{/each}}</div><figcaption class="ctz__b"><h5 class="ctz__n">{{../poloH}}</h5><p class="ctz__d">{{{ph ../poloP}}}</p></figcaption></figure><!-- /pk -->{{/if}}</div></div><!-- /fam -->{{/each}}
+          <div class="pp2-col__ask">
+            <img src="/img/icons/faq-ask.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+            <p><b>{{askH}}</b><span>{{{ph askP}}}</span></p>
+            <a class="cb cb--p" href="{{ask}}" data-track="line" data-where="pp-collars"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{askT}}</span></a>
+          </div><!-- /ask -->
+        </div><!-- /cfx -->
+        <p class="ctz__note">รูปคอจากงานจริงที่ทีมดีผลิต · กดทรงเสื้อด้านซ้าย คอที่ทรงนั้นไม่มีจะจางลง</p>
+      </div><!-- /pp2-col -->{{/with}}
+    </div><!-- /spk -->
+  </div>
+</section>
+{{/with}}

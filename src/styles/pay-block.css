@@ -1,0 +1,33 @@
+/* วิธีชำระเงิน (up2Pay.hbs /corporate/ · pp2Pay.hbs /sublimation/) · ย้ายจาก use-page.css 6 พ.ย. ให้ใช้ร่วมทั้งชิ้น */
+/* ---------- วิธีชำระเงิน (up2Pay.hbs · อาร์ต 4 พ.ย. "พื้นหลังขาว ชอบวางแบบเดิม ทำให้ดีกว่าเดิม") ----------
+   พื้นขาว ไม่มีการ์ด · รูปซ้อน 2 ใบบนแผ่นครีมทรงมน (--hm-studio) ซ้าย · ขวาข้อความกึ่งกลาง ตัวดำหนา · ชิปบัตรขอบบาง · เงื่อนไขเป็นป้ายครีม 3 อัน */
+.up2-pay { padding: 80px 0; background: #fff; }
+.up2-pay > .wrap { width: calc(100% - 64px); max-width: 1200px; padding-inline: 0; }
+.up2-pay__in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 64px; }
+.up2-pay__art { position: relative; width: 100%; max-width: 600px; aspect-ratio: 1.32; isolation: isolate; }
+.up2-pay__art::before { content: ''; position: absolute; z-index: -1; left: 10%; right: 4%; top: 12%; bottom: -6%; border-radius: 40px; background: var(--hm-studio); }
+.up2-pay__ph { position: absolute; display: block; height: auto; object-fit: cover; aspect-ratio: 4 / 3; border-radius: 20px; }
+.up2-pay__ph--back { top: 0; right: 0; width: 76%; box-shadow: 0 24px 48px -30px rgb(17 17 17 / .5); }
+.up2-pay__ph--front { left: 0; bottom: 0; width: 52%; border: 5px solid #fff; box-shadow: 0 20px 40px -22px rgb(17 17 17 / .55); }
+.up2-pay__copy { display: grid; justify-items: center; gap: 16px; text-align: center; }
+.up2-pay__line { margin: 0; font-size: clamp(19px, 1.6vw, 23px); font-weight: 800; line-height: 1.45; color: var(--color-ink); }
+.up2-pay__nw { display: inline-block; }
+.up2-pay__u { text-decoration: underline; text-decoration-color: #FF6C00; text-decoration-thickness: 3px; text-underline-offset: 7px; }
+.up2-pay__cards { display: flex; gap: 10px; margin: 0 0 6px; padding: 0; list-style: none; }
+.up2-pay__brand { display: grid; place-items: center; width: 104px; height: 58px; border: 1px solid rgb(17 17 17 / .1); border-radius: 14px; background: #fff; box-shadow: 0 6px 16px -12px rgb(17 17 17 / .35); }
+.up2-pay__terms { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.up2-pay__terms li { padding: 7px 14px; border-radius: 999px; background: #F2EEE9; font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--color-ink-2); }
+@media (max-width: 1023px) {
+  .up2-pay__in { grid-template-columns: 1fr; gap: 44px; }
+  .up2-pay__art { justify-self: center; }
+}
+@media (max-width: 767px) {
+  .up2-pay { padding: 48px 0 52px; }
+  .up2-pay > .wrap { width: auto; padding-inline: 20px; }
+  .up2-pay__in { gap: 36px; }
+  .up2-pay__art::before { border-radius: 28px; }
+  .up2-pay__copy { gap: 12px; }
+  .up2-pay__line { font-size: 18px; }
+  .up2-pay__brand { width: 92px; height: 52px; }
+  .up2-pay__terms li { font-size: 13px; padding: 6px 12px; }
+}

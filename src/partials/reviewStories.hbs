@@ -1,0 +1,23 @@
+{{!-- เรื่องราวจากทีมลูกค้า (หน้ารีวิวลูกค้า · 27 ต.ค. อาร์ต "ทำมาให้ครบๆ") · src/data/reviews.json stories
+     เขียนจากแชทและรูปที่ลูกค้าส่งมาเท่านั้น (ป้ายในรูป · สิ่งที่ลูกค้าพิมพ์) · ไม่แต่งตัวเลข · ชื่อเฉพาะที่ลูกค้าให้ใส่
+     รูปแรกของโมเสก: srcset ไฟล์ -480 (30 ต.ค.: มือถือเคยโหลดไฟล์ 1200px ~150–180KB ต่อเรื่อง · sizes = กว้างจริงหลัง object-fit cover)
+     รูปเล็ก 2 รูปขวา: data-sizes → srcset rvNN-480-320 / -480-400 / -480 (addSrcset ใน vite.config.js · 30 ต.ค. เดิมไฟล์ -480 ~36KB ทุกจอ) · sizes = กว้างหลัง cover (1.5 × สูงช่อง) · ไม่เกินไฟล์ -480
+     การ์ด 2×2 (28 ต.ค. เดิมเรียงทีละเรื่องสลับข้าง ยาวเกิน) · รูปโมเสกบน (กดดูทั้งชุด) เรื่องล่าง · มือถือเรียงเดียว --}}
+<ol class="sty">{{#each stories}}
+  <li class="sty__i">
+    <button type="button" class="sty__media" data-rv-open="{{this.r.id}}" aria-label="ดูรูปทั้งหมด {{this.r.gallery.length}} รูป ของ{{this.title}}">
+      <span class="sty__mosaic">{{#each this.r.gallery}}{{#if (lt @index 3)}}<span><img src="{{#if @first}}{{this.img}}{{else}}{{this.imgSmall}}{{/if}}"{{#if @first}}{{#if this.imgSmall}} srcset="{{this.imgSmall}} 480w, {{this.img}} 1200w" sizes="(min-width:1024px) 490px, (min-width:768px) 645px, 235px"{{/if}}{{else}} data-sizes="(min-width:1024px) 228px, (min-width:768px) calc(42vw - 34px), 110px"{{/if}} alt="" width="{{#if @first}}1200{{else}}480{{/if}}" height="{{#if @first}}800{{else}}320{{/if}}" loading="lazy" decoding="async"></span>{{/if}}{{/each}}</span>
+      <span class="sty__all"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 8"/></svg>ดูรูปทั้งหมด {{this.r.gallery.length}} รูป</span>
+    </button>
+    <div class="sty__txt">
+      <p class="sty__kind">{{this.r.kind}}</p>
+      <h3 class="sty__h">{{{ph this.title}}}</h3>
+      <ul class="sty__facts">{{#each this.facts}}<li>{{this}}</li>{{/each}}</ul>
+      <blockquote class="sty__q"><p>{{this.r.quote}}</p><footer>{{#if this.r.who}}{{this.r.who}}{{else}}{{this.r.kind}}{{/if}} · รีวิวจากแชทจริง</footer></blockquote>
+      <div class="sty__btns">
+        <a class="cb cb--p" href="{{this.r.line}}" data-track="line" data-where="story"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">อยากได้แบบนี้</span></a>
+        <button type="button" class="cb cb--s" data-rv-open="{{this.r.id}}">ดูรูปทั้งหมด</button>
+      </div>
+    </div>
+  </li>
+{{/each}}</ol>

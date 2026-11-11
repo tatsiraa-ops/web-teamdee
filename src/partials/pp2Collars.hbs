@@ -1,0 +1,29 @@
+{{!-- /sublimation/ คอเสื้อ · รอบ 145 (อาร์ต "อันนี้ลองทำมาใหม่ให้หน่อย เอาให้ดีกว่าเดิม") · pp-v2.json print.collars
+     14 ทรงจากกราฟิกทางการ LINE OA ทีมดี รวมคอวีมีปก 2 แบบเป็นทรงเดียว (อาร์ต "ซ้ำกันปะ") = 13 ทรง · กว้างพิเศษ · คอม 5 คอลัมน์รูปจัตุรัสใหญ่ (subgrid: กลุ่มกว้างตามจำนวนทรง --n)
+     เรียงกลุ่มให้เต็มแถว: คอกลม 2 + คอปก (2 + ปก 2 แบบ) · คอวี 4 + ห้าเหลี่ยม 1 · คอจีน 2 + คางหมู 2 + ถามทรงคอทาง LINE (อาร์ต "คอปก ปกเสื้อ" รวมกลุ่ม)
+     ชื่อทรง + สิ่งที่เพิ่มได้ (ผ้าแทรกคอ · สาปโชว์สี) อยู่บนแถบส้มในรูป แบบเดียวกับการ์ดผ้า · ≤1099 กลุ่มละบล็อก 3 คอลัมน์ · มือถือ 2 --}}
+{{#with pp2.collars}}
+<section class="pp2-col" id="collars" aria-labelledby="pp2-col-h">
+  <div class="wrap">
+    <header class="pp2-col__head">
+      <h2 id="pp2-col-h">{{{hl h accent}}}</h2>
+      <p>{{{ph p}}}</p>
+    </header>
+    <div class="pp2-col__grid">
+      {{#each fams}}<div class="pp2-col__fam" style="--n:{{#if this.polos}}{{inc this.items.length}}{{else}}{{this.items.length}}{{/if}}">
+        <h3>{{this.t}}</h3>
+        {{#each this.items}}<figure class="pp2-col__o"><img src="{{this.img}}" srcset="{{this.img}} 480w, {{this.img2}} 800w" sizes="(min-width: 1100px) min(262px, 19vw), (min-width: 768px) 30vw, 45vw" width="480" height="356" alt="{{this.alt}}" loading="lazy" decoding="async"><figcaption><h4>{{this.t}}</h4>{{#each this.x}}<span>{{this}}</span>{{/each}}</figcaption></figure>{{/each}}
+        {{#if this.polos}}<figure class="pp2-col__pk">
+          <div class="pp2-col__pkp">{{#each ../polos}}<div><img src="{{this.img}}" srcset="{{this.img}} 400w, {{this.img2}} 640w" sizes="(min-width: 1100px) 131px, (min-width: 768px) 15vw, 23vw" width="400" height="569" alt="{{this.alt}}" loading="lazy" decoding="async"><b>{{this.t}}</b></div>{{/each}}</div>
+          <figcaption><h4>{{../poloH}}</h4><span>{{{ph ../poloP}}}</span></figcaption>
+        </figure><!-- /pk -->{{/if}}
+      </div><!-- /fam -->{{/each}}
+      <div class="pp2-col__ask">
+        <img src="/img/icons/faq-ask.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+        <p><b>{{askH}}</b><span>{{{ph askP}}}</span></p>
+        <a class="cb cb--p" href="{{ask}}" data-track="line" data-where="pp-collars"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{askT}}</span></a>
+      </div><!-- /ask -->
+    </div>
+  </div>
+</section>
+{{/with}}

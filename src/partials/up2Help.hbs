@@ -1,0 +1,21 @@
+{{!-- ยังไม่แน่ใจ โฉมใหม่ (อาร์ต 3 พ.ย. "ไปดึง component มาใช้งาน") · คู่การ์ดชวนคุยของหน้าแรกทั้งชุด (hm-pair--talk: ยังไม่มีแบบ หรือ มีแบบแล้ว)
+     การ์ด 1 = หัวข้อ v22 "ยังไม่แน่ใจว่าเสื้อแบบไหนเหมาะกับทีม?" + ข้อความเดิม · การ์ด 2 = การ์ด "มีแบบแล้ว" ของหน้าแรก (หัวข้อเป็น H3 ให้ H2 ตรง v22) · LINE ข้อความตั้งต้นเดียวกับหน้าแรก --}}
+<div class="hm-pair hm-pair--talk hm-talk wrap up2-talk">
+  <section class="hm-talk__card is-new" aria-labelledby="up2-help-h">
+    <img class="hm-talk__pop" src="/img/icons/talk-design.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
+    <p class="hm-talk__kick">{{up.v2.help.kick}}</p>
+    <h2 id="up2-help-h">{{{hl up.help.h "เหมาะกับทีม?" "ยังไม่แน่ใจว่า"}}}</h2>
+    <p class="hm-talk__lead">{{up.help.p}}</p>
+    <div class="hm-talk__send"><p>ส่งมาแค่นี้</p><ul>{{#each up.v2.help.send}}<li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>{{this}}</li>{{/each}}</ul></div>
+    <div class="hm-talk__acts"><a class="cb cb--p hm-line-cta" href="{{cta.primary.href}}" data-track="line" data-where="use-help"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{up.help.cta}}</span></a></div>
+  </section>
+  <span class="hm-talk__or" aria-hidden="true">หรือ</span>
+  <div class="hm-talk__card is-ready">
+    <img class="hm-talk__pop" src="/img/icons/talk-quote.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
+    <p class="hm-talk__kick">มีแบบแล้ว</p>
+    <h3>{{{hl "มีแบบเสื้อแล้ว ขอประเมินราคาได้เลย" "ขอประเมินราคาได้เลย"}}}</h3>
+    <p class="hm-talk__lead">{{{ph "ส่งแบบ จำนวน และวันที่ต้องการรับเสื้อ ให้ทีมดีประเมินราคา และตรวจแผนผลิต"}}}</p>
+    <div class="hm-talk__send"><p>ส่งมาแค่นี้</p><ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>แบบเสื้อหรือโลโก้</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>จำนวน</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>วันที่ต้องการรับเสื้อ</li></ul></div>
+    <div class="hm-talk__acts"><a class="cb cb--p hm-line-cta" href="{{@root.ctaLine.have}}" data-track="line" data-where="use-have"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ขอประเมินราคา</span></a></div>
+  </div>
+</div><!-- /hm-pair -->

@@ -1,0 +1,15 @@
+{{!-- ย้ำจุดขาย โฉมใหม่ (อาร์ต 3 พ.ย. "ชอบแบบ PMK · ข้อมูลเดิม · เจนรูป" → "เรียงแถวเดียว ทำสีให้ดีๆ") · การ์ด 4 ใบแถวเดียว: รูปบน (Magnific GPT 2.5 high แบบสมจริง)
+     รอบ 8–9 (อาร์ต "แสดงเต็มๆมาดีๆ" → "กวาดตาเยอะไป"): แถวเดียว 4 รูปเต็มสัดส่วน 16:9 ไม่ครอป กว้าง 1400 · หัวข้อ (H3 v22) บรรทัดเดียว ตัวขาวบนเงาไล่ล่างรูป + เส้นส้มสั้นนำ --}}
+{{!-- 5 พ.ย. อาร์ต "ลองแบบขั้นตอน 1-4": ol + เลขขั้น CSS counter + เส้นส้มเชื่อม · ก่อนหน้า "ลองไอคอน 3D": การ์ดขาว ไอคอน 3D ชุด CI ใหญ่ + หัวข้อ (H3 v22) + ป้ายข้อเท็จจริง · ไม่มีภาพถ่าย --}}
+<section class="up2-why" aria-labelledby="up2-why-h">
+  <div class="wrap">
+    <header class="up2-why__head"><h2 id="up2-why-h">{{{hl up.benefits.h "จัดการง่ายขึ้น?"}}}</h2></header>
+    <ol class="up2-why__grid up2-why__steps">
+      {{#each up.benefits.cards}}{{#with (lookup ../up.v2.benefits.tiles @index)}}<li class="up2-why__tile">
+        <img class="up2-why__ico" src="{{this.icon}}" alt="" width="400" height="400" loading="lazy" decoding="async">
+        <h3 class="up2-why__tag">{{../h}}</h3>
+        {{#if this.fact}}<span class="up2-why__fact">{{this.fact}}</span>{{/if}}
+      </li>{{/with}}{{/each}}
+    </ol>
+  </div>
+</section>

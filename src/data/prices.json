@@ -5,39 +5,155 @@
     "polo": "Artboard 2 copy@2x.png (id 1hiDnUKH17dt5DNL8JYn8XXcpp3MpWh-j)",
     "baseball": "TD ตารางราคาเบสบอล.jpg (id 1CdGn-ctDA0fzT1MCnQWCINy0oZjLWuzx)",
     "jersey": "Artboard 2@2x-100.jpg \"ตารางราคาเสื้อ JERSEY (Oversize)\" (id 156eLZRiZJo00KAIY5VTsowE6xACAqJic · 8 ก.ย. 2026) · อาร์ตให้ลง 23 ต.ค. 2026",
-    "print": "ตัวคำนวณราคาเว็บเดิม team-dee.com/calculations/ (priceMatrix) · ค่าเพิ่ม แขนยาว / โอเวอร์ไซส์ / กระเป๋า ยกจากตัวคำนวณเดียวกัน · อาร์ตให้ใช้ 23 ต.ค. 2026"
+    "print": "ตัวคำนวณราคาเว็บเดิม team-dee.com/calculations/ (priceMatrix) · ค่าเพิ่ม แขนยาว / โอเวอร์ไซส์ / กระเป๋า ยกจากตัวคำนวณเดียวกัน · อาร์ตให้ใช้ 23 ต.ค. 2026",
+    "screen": "SAIFAH CONTENT Artboard 2 / 9 / 11 · เจ้าของงานยืนยันราคาปกติและเงื่อนไขร่วม 29 ต.ค. 2026"
   },
   "vatIncluded": true,
   "minQty": 10,
-  "included": ["VAT 7% + ใบกำกับเต็มรูป", "ส่งฟรีตั้งแต่ 10 ตัว", "ทุกไซซ์ราคาเดียว"],
+  "included": [
+    "VAT 7% + ใบกำกับเต็มรูป",
+    "ส่งฟรีทั่วไทย",
+    "ทุกไซซ์ราคาเดียว"
+  ],
   "_calc": "เครื่องคำนวณ /calculations/ · ชิปขั้น 1 มาจาก \"calc\" ของแต่ละสินค้า เรียงตามลำดับสินค้าในไฟล์นี้ · col = คอลัมน์ราคาที่ใช้ (ไม่ใส่ = คอลัมน์แรก) · สินค้าที่มีหลายผ้า (โปโล) ให้เลือกผ้า ผ้าที่ราคาเท่ากันทุกช่วงรวมเป็นชิปเดียว ชื่อชิปจาก \"chip\" · ตัวแรกของ calc คือ ?kind= ที่หน้าสินค้าลิงก์มา (audit calc-01)",
   "_options": "ค่าเพิ่มต่อตัว ใช้กับพิมพ์ลายและโปโลราคาเดียวกัน (อาร์ตเคาะ 24 ต.ค. ข้อ 7) · สินค้าที่ใช้ได้ตั้ง \"options\": true",
   "options": [
-    { "id": "sleeve", "name": "แขนยาว", "add": 30 },
-    { "id": "oversize", "name": "ทรง Oversize", "add": 40 },
-    { "id": "pocket", "name": "กระเป๋าอก", "add": 20 }
+    {
+      "id": "sleeve",
+      "name": "แขนยาว",
+      "add": 30
+    },
+    {
+      "id": "oversize",
+      "name": "ทรง Oversize",
+      "add": 40
+    },
+    {
+      "id": "pocket",
+      "name": "กระเป๋าอก",
+      "add": 20
+    }
   ],
   "products": {
     "polo": {
       "box": "from",
       "options": true,
-      "calc": [{ "kind": "polo", "name": "โปโลปัก" }],
-      "include": { "short": "รวมปัก 1 จุด", "long": "รวมปักโลโก้ 1 จุดที่หน้าอก" },
+      "calc": [
+        {
+          "kind": "polo",
+          "name": "โปโลปัก"
+        }
+      ],
+      "include": {
+        "short": "รวมปัก 1 จุด",
+        "long": "รวมปักโลโก้ 1 จุดที่หน้าอก"
+      },
       "cols": [
-        { "id": "juti", "name": "จูติ (JUTI)", "short": "ผ้าจูติ", "chip": "จูติ" },
-        { "id": "tc", "name": "TC Lacoste", "chip": "TC" },
-        { "id": "tricot", "name": "ทรีคอต (Tricot)", "chip": "ทรีคอต" },
-        { "id": "pique", "name": "ปีเก้ (Pique)", "chip": "ปีเก้" },
-        { "id": "endurance", "name": "Endurance", "chip": "Endurance" },
-        { "id": "drytech", "name": "ดรายเทค (Dry Tech)", "chip": "ดรายเทค" }
+        {
+          "id": "juti",
+          "name": "จูติ (JUTI)",
+          "short": "ผ้าจูติ",
+          "chip": "จูติ"
+        },
+        {
+          "id": "tc",
+          "name": "TC Lacoste",
+          "chip": "TC"
+        },
+        {
+          "id": "tricot",
+          "name": "ทรีคอต (Tricot)",
+          "chip": "ทรีคอต"
+        },
+        {
+          "id": "pique",
+          "name": "ปีเก้ (Pique)",
+          "chip": "ปีเก้"
+        },
+        {
+          "id": "endurance",
+          "name": "Endurance",
+          "chip": "Endurance"
+        },
+        {
+          "id": "drytech",
+          "name": "ดรายเทค (Dry Tech)",
+          "chip": "ดรายเทค"
+        }
       ],
       "bands": [
-        { "min": 10, "max": 50, "price": { "juti": 220, "tc": 260, "tricot": 260, "pique": 260, "endurance": 350, "drytech": 390 } },
-        { "min": 51, "max": 200, "price": { "juti": 210, "tc": 240, "tricot": 240, "pique": 240, "endurance": 320, "drytech": 370 } },
-        { "min": 201, "max": 500, "price": { "juti": 195, "tc": 220, "tricot": 220, "pique": 220, "endurance": 300, "drytech": 340 } },
-        { "min": 501, "max": 1000, "price": { "juti": 190, "tc": 210, "tricot": 210, "pique": 210, "endurance": 280, "drytech": 320 } },
-        { "min": 1001, "max": 2000, "price": { "juti": 180, "tc": 200, "tricot": 200, "pique": 200, "endurance": 260, "drytech": 310 } },
-        { "min": 2001, "max": null, "price": { "juti": 170, "tc": 190, "tricot": 190, "pique": 190, "endurance": 250, "drytech": 300 } }
+        {
+          "min": 10,
+          "max": 50,
+          "price": {
+            "juti": 220,
+            "tc": 260,
+            "tricot": 260,
+            "pique": 260,
+            "endurance": 350,
+            "drytech": 390
+          }
+        },
+        {
+          "min": 51,
+          "max": 200,
+          "price": {
+            "juti": 210,
+            "tc": 240,
+            "tricot": 240,
+            "pique": 240,
+            "endurance": 320,
+            "drytech": 370
+          }
+        },
+        {
+          "min": 201,
+          "max": 500,
+          "price": {
+            "juti": 195,
+            "tc": 220,
+            "tricot": 220,
+            "pique": 220,
+            "endurance": 300,
+            "drytech": 340
+          }
+        },
+        {
+          "min": 501,
+          "max": 1000,
+          "price": {
+            "juti": 190,
+            "tc": 210,
+            "tricot": 210,
+            "pique": 210,
+            "endurance": 280,
+            "drytech": 320
+          }
+        },
+        {
+          "min": 1001,
+          "max": 2000,
+          "price": {
+            "juti": 180,
+            "tc": 200,
+            "tricot": 200,
+            "pique": 200,
+            "endurance": 260,
+            "drytech": 310
+          }
+        },
+        {
+          "min": 2001,
+          "max": null,
+          "price": {
+            "juti": 170,
+            "tc": 190,
+            "tricot": 190,
+            "pique": 190,
+            "endurance": 250,
+            "drytech": 300
+          }
+        }
       ],
       "notes": [
         "ราคาต่อตัว (บาท) จากตารางราคาเสื้อโปโลปักของทีมดี · ปักเพิ่มจุด แจ้งราคาตอนประเมินงาน"
@@ -46,39 +162,237 @@
     "print": {
       "box": "steps",
       "options": true,
-      "calc": [{ "kind": "round", "name": "พิมพ์ลายคอกลม/คอวี", "col": "round" }, { "kind": "collar", "name": "พิมพ์ลายคอปก", "col": "collar" }],
+      "calc": [
+        {
+          "kind": "round",
+          "name": "พิมพ์ลายคอกลม/คอวี",
+          "col": "round"
+        },
+        {
+          "kind": "collar",
+          "name": "พิมพ์ลายคอปก",
+          "col": "collar"
+        }
+      ],
       "calcSub": "พิมพ์ลาย",
       "tail": "ราคาพิมพ์ลายทั้งตัว",
       "cols": [
-        { "id": "round", "name": "คอกลม / คอวี" },
-        { "id": "collar", "name": "คอปก / คอวีปก / คอปกคางหมู", "short": "คอปก" }
+        {
+          "id": "round",
+          "name": "คอกลม / คอวี"
+        },
+        {
+          "id": "collar",
+          "name": "คอปก / คอวีปก / คอปกคางหมู",
+          "short": "คอปก"
+        }
       ],
       "bands": [
-        { "min": 10, "max": 20, "price": { "round": 279, "collar": 329 } },
-        { "min": 21, "max": 50, "price": { "round": 230, "collar": 280 } },
-        { "min": 51, "max": 100, "price": { "round": 210, "collar": 260 } },
-        { "min": 101, "max": 199, "price": { "round": 180, "collar": 230 } },
-        { "min": 200, "max": null, "price": { "round": 160, "collar": 210 } }
+        {
+          "min": 10,
+          "max": 20,
+          "price": {
+            "round": 279,
+            "collar": 329
+          }
+        },
+        {
+          "min": 21,
+          "max": 50,
+          "price": {
+            "round": 230,
+            "collar": 280
+          }
+        },
+        {
+          "min": 51,
+          "max": 100,
+          "price": {
+            "round": 210,
+            "collar": 260
+          }
+        },
+        {
+          "min": 101,
+          "max": 199,
+          "price": {
+            "round": 180,
+            "collar": 230
+          }
+        },
+        {
+          "min": 200,
+          "max": null,
+          "price": {
+            "round": 160,
+            "collar": 210
+          }
+        }
       ],
       "notes": [
         "ราคาประเมินเบื้องต้น ราคาจริงตามความซับซ้อนของลาย ขนาดโลโก้ และชนิดผ้าที่เลือก · ออกแบบฟรี แก้แบบได้ไม่จำกัดครั้ง"
+      ],
+      "_fabrics": "ตารางทางการ \"รวมเนื้อผ้าทั้งหมด\" (อาร์ตส่งในแชท 10 พ.ย. 2026) + การ์ดผ้าใหม่ TEAMDEE-ผ้า*.png (Drive) · gsm = แกรม · add = บาท/ตัว บวกจากราคาพิมพ์ลาย (0 = ไม่บวกเพิ่ม) เก็บไว้เป็นข้อมูล — อาร์ต 10 พ.ย. \"ไม่ต้องแสดง +ตัง\" หน้าเว็บจึงแสดงแค่แกรม · หมายเหตุในตาราง: สั่งผลิตเริ่มต้น 10 ตัว (ตรง minQty)",
+      "fabrics": [
+        {
+          "id": "micro",
+          "name": "ผ้าเรียบไมโคร",
+          "gsm": 145,
+          "add": 0
+        },
+        {
+          "id": "drytech",
+          "name": "ผ้าดรายเทค",
+          "gsm": 145,
+          "add": 20
+        },
+        {
+          "id": "corn",
+          "name": "ผ้าเม็ดข้าวโพด",
+          "gsm": 145,
+          "add": 20
+        },
+        {
+          "id": "star",
+          "name": "ผ้าดาวกระจาย",
+          "gsm": 145,
+          "add": 20
+        },
+        {
+          "id": "rain",
+          "name": "ผ้าสายฝน",
+          "gsm": 145,
+          "add": 20
+        },
+        {
+          "id": "honeycomb",
+          "name": "ผ้ารังผึ้ง",
+          "gsm": 145,
+          "add": 20
+        },
+        {
+          "id": "square",
+          "name": "ผ้าสี่เหลี่ยม",
+          "gsm": 145,
+          "add": 20
+        },
+        {
+          "id": "rice",
+          "name": "ผ้าเม็ดข้าวสาร",
+          "gsm": 145,
+          "add": 20
+        },
+        {
+          "id": "stripe",
+          "name": "ผ้าลายริ้ว",
+          "gsm": 150,
+          "add": 20
+        },
+        {
+          "id": "golf",
+          "name": "ผ้าลายลูกกอล์ฟ",
+          "gsm": 150,
+          "add": 20
+        },
+        {
+          "id": "checker",
+          "name": "ผ้าหมากฮอส",
+          "gsm": 150,
+          "add": 20
+        },
+        {
+          "id": "thick",
+          "name": "ผ้าเรียบหนา",
+          "gsm": 160,
+          "add": 20
+        },
+        {
+          "id": "tricot",
+          "name": "ผ้าทรีคอต",
+          "gsm": 160,
+          "add": 40
+        },
+        {
+          "id": "endurance",
+          "name": "ผ้า Endurance",
+          "gsm": 210,
+          "add": 50
+        }
       ]
     },
     "baseball": {
       "box": "steps",
-      "calc": [{ "kind": "baseball", "name": "เบสบอล" }],
+      "calc": [
+        {
+          "kind": "baseball",
+          "name": "เบสบอล"
+        }
+      ],
       "tail": "ราคาพิมพ์ลายทั้งตัว",
       "ask": "ทักถามราคาได้เลย",
-      "cols": [{ "id": "price", "name": "ราคา / ตัว (บาท)" }],
+      "cols": [
+        {
+          "id": "price",
+          "name": "ราคา / ตัว (บาท)"
+        }
+      ],
       "bands": [
-        { "min": 10, "max": 20, "price": { "price": 359 } },
-        { "min": 21, "max": 50, "price": { "price": 310 } },
-        { "min": 51, "max": 100, "price": { "price": 290 } },
-        { "min": 101, "max": 200, "price": { "price": 270 } },
-        { "min": 201, "max": 300, "price": { "price": 250 } },
-        { "min": 301, "max": 500, "price": { "price": 240 } },
-        { "min": 501, "max": 999, "price": { "price": 230 } },
-        { "min": 1000, "max": null, "price": { "price": null } }
+        {
+          "min": 10,
+          "max": 20,
+          "price": {
+            "price": 359
+          }
+        },
+        {
+          "min": 21,
+          "max": 50,
+          "price": {
+            "price": 310
+          }
+        },
+        {
+          "min": 51,
+          "max": 100,
+          "price": {
+            "price": 290
+          }
+        },
+        {
+          "min": 101,
+          "max": 200,
+          "price": {
+            "price": 270
+          }
+        },
+        {
+          "min": 201,
+          "max": 300,
+          "price": {
+            "price": 250
+          }
+        },
+        {
+          "min": 301,
+          "max": 500,
+          "price": {
+            "price": 240
+          }
+        },
+        {
+          "min": 501,
+          "max": 999,
+          "price": {
+            "price": 230
+          }
+        },
+        {
+          "min": 1000,
+          "max": null,
+          "price": {
+            "price": null
+          }
+        }
       ],
       "notes": [
         "ราคาจากตารางราคาเสื้อเบสบอลของทีมดี · ออกแบบฟรี แก้แบบได้ไม่จำกัดครั้ง"
@@ -86,28 +400,174 @@
     },
     "jersey": {
       "box": "steps",
-      "calc": [{ "kind": "jersey", "name": "Jersey Oversize" }],
+      "calc": [
+        {
+          "kind": "jersey",
+          "name": "Jersey Oversize"
+        }
+      ],
       "tail": "ราคาพิมพ์ลายทั้งตัว",
       "ask": "ทักถามราคาได้เลย",
-      "cols": [{ "id": "price", "name": "ราคา / ตัว (บาท)" }],
+      "cols": [
+        {
+          "id": "price",
+          "name": "ราคา / ตัว (บาท)"
+        }
+      ],
       "bands": [
-        { "min": 10, "max": 20, "price": { "price": 359 } },
-        { "min": 21, "max": 50, "price": { "price": 310 } },
-        { "min": 51, "max": 100, "price": { "price": 290 } },
-        { "min": 101, "max": 200, "price": { "price": 270 } },
-        { "min": 201, "max": 300, "price": { "price": 250 } },
-        { "min": 301, "max": 500, "price": { "price": 240 } },
-        { "min": 501, "max": 999, "price": { "price": 230 } },
-        { "min": 1000, "max": null, "price": { "price": null } }
+        {
+          "min": 10,
+          "max": 20,
+          "price": {
+            "price": 359
+          }
+        },
+        {
+          "min": 21,
+          "max": 50,
+          "price": {
+            "price": 310
+          }
+        },
+        {
+          "min": 51,
+          "max": 100,
+          "price": {
+            "price": 290
+          }
+        },
+        {
+          "min": 101,
+          "max": 200,
+          "price": {
+            "price": 270
+          }
+        },
+        {
+          "min": 201,
+          "max": 300,
+          "price": {
+            "price": 250
+          }
+        },
+        {
+          "min": 301,
+          "max": 500,
+          "price": {
+            "price": 240
+          }
+        },
+        {
+          "min": 501,
+          "max": 999,
+          "price": {
+            "price": 230
+          }
+        },
+        {
+          "min": 1000,
+          "max": null,
+          "price": {
+            "price": null
+          }
+        }
       ],
       "notes": [
         "ราคาจากตารางราคาเสื้อ Jersey (Oversize) ของทีมดี · ออกแบบฟรี แก้แบบได้ไม่จำกัดครั้ง"
       ]
     },
     "screen": {
-      "byDesign": "ประเมินตามแบบ",
-      "calc": [{ "kind": "screen", "name": "สกรีน" }],
-      "calcSub": "ประเมินราคาตามแบบ"
+      "box": "steps",
+      "minQty": 1,
+      "calc": [
+        {
+          "kind": "screen",
+          "name": "สกรีน Premium",
+          "col": "premium"
+        },
+        {
+          "kind": "screen-oversize",
+          "name": "สกรีน Oversize",
+          "col": "oversize"
+        }
+      ],
+      "calcSub": "รวมสกรีน 1 จุด",
+      "include": {
+        "short": "รวมสกรีน 1 จุด",
+        "long": "รวมสกรีน 1 จุด · จุดเพิ่มเติมคิดตามขนาด 25–55 บาท/จุด/ตัว"
+      },
+      "included": [
+        "VAT 7% + ใบกำกับเต็มรูป",
+        "สกรีน 1 จุด",
+        "ส่งฟรีทั่วไทย",
+        "ทุกไซซ์ราคาเดียว"
+      ],
+      "cols": [
+        {
+          "id": "premium",
+          "name": "Premium C32"
+        },
+        {
+          "id": "oversize",
+          "name": "Oversize C20"
+        }
+      ],
+      "bands": [
+        {
+          "min": 1,
+          "max": 20,
+          "price": {
+            "premium": 290,
+            "oversize": 320
+          }
+        },
+        {
+          "min": 21,
+          "max": 50,
+          "price": {
+            "premium": 280,
+            "oversize": 310
+          }
+        },
+        {
+          "min": 51,
+          "max": 100,
+          "price": {
+            "premium": 260,
+            "oversize": 290
+          }
+        },
+        {
+          "min": 101,
+          "max": 300,
+          "price": {
+            "premium": 240,
+            "oversize": 270
+          }
+        },
+        {
+          "min": 301,
+          "max": 500,
+          "price": {
+            "premium": 220,
+            "oversize": 250
+          }
+        },
+        {
+          "min": 501,
+          "max": null,
+          "price": {
+            "premium": null,
+            "oversize": null
+          }
+        }
+      ],
+      "ask": "ขอราคาตามจำนวน",
+      "notes": [
+        "ราคาปกติ รวมตัวเสื้อและสกรีน 1 จุด · Premium มี 7 สี / Oversize มีเฉพาะขาวและดำ",
+        "จุดเพิ่มเติม: 7 × 10 ซม. +25 · 10 × 15 ซม. +30 · 15 × 20 ซม. +35 · 20 × 30 ซม. +45 · 30 × 40 ซม. +55 บาท/จุด/ตัว",
+        "ออกแบบฟรี · ชำระ 50% ก่อนผลิต และอีก 50% ก่อนจัดส่ง"
+      ]
     },
     "warmup": {
       "askLine": "ทัก LINE ขอราคา"

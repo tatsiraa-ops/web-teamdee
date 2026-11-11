@@ -1,0 +1,16 @@
+{{!-- hero หน้ากลุ่มโฉมใหม่ (อาร์ต 3 พ.ย. 2026 "เอาขนาด หรือการจัดวางแบบหน้าแรก" · use-v2.json)
+     ขนาดและการวางเท่าแบนเนอร์หน้าแรก: ภาพ 2304×800 (2.88:1) เต็มจอไม่ครอป · ข้อความเริ่ม 11.5% กว้าง 29% กลางแนวตั้ง · ตัวอักษรตาม vw ชุดเดียวกัน (th-o__*)
+     ภาพไม่มีตัวหนังสือ (Magnific GPT 2.5 high · องค์ประกอบสไลด์แรกหน้าแรก นายแบบนางแบบทีมดี + เสื้อโปโลแบบจริงลอยข้างละ 2 ตัว · 4 พ.ย.) · มือถือภาพ 3:4 ใน <picture> แบบ heroTeam.hbs
+     H1 ข้อความเดิมครบ: คำหลักดำ + คำค้นส้ม (แบบบรรทัดสองของหน้าแรก) · ปุ่ม LINE สองบรรทัดแบบหน้าแรก data-where="use-hero" --}}
+<section class="band-hero up2-hero" aria-labelledby="up2-h1">
+  <div class="up2-hero__reel">
+    <picture class="up2-hero__pic"><source media="(max-width: 767px)" srcset="{{up.v2.hero.mobileSmall}} 480w, {{up.v2.hero.mobile}} 768w" sizes="100vw" width="768" height="1024"><img class="up2-hero__img" src="{{up.v2.hero.small}}" srcset="/img/use-hero/corp-800.webp 800w, {{up.v2.hero.small}} 1280w, {{up.v2.hero.img}} 2304w" sizes="100vw" width="2304" height="800" alt="{{up.v2.hero.alt}}" fetchpriority="high" decoding="async"></picture>
+    <nav class="crumb2 up2-hero__crumb" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">{{firstName item.name}}</span></nav>
+    <div class="up2-hero__copy">
+      <p class="th-o__kick">{{up.v2.hero.kicker}}</p>
+      <h1 id="up2-h1" class="th-o__h"><span class="inline-block">{{{ph up.hero.h1p.main}}}</span>{{#if up.hero.h1p.rest}}<span class="sr-only"> / </span><span class="th-o__accent">{{{ph up.hero.h1p.rest}}}</span>{{/if}}</h1>
+      <p class="th-o__sub">{{up.hero.lead}}</p>
+      <a class="cb cb--p cb--2l th-o__cta" href="{{cta.primary.href}}" data-track="line" data-where="use-hero"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__lbl"><span class="cb__t">{{cta.primary.label}}</span><span class="cb__sub" data-float-status><span class="cb__dot" aria-hidden="true"></span><span data-float-status-t>{{site.hours}}</span></span></span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>

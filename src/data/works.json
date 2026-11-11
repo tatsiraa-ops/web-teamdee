@@ -7,7 +7,10 @@
   "catName": "เสื้อกีฬา",
   "alt": "ทีมฟุตบอลใส่เสื้อที่ทีมดีผลิต",
   "use": "sport",
-  "product": "print"
+  "product": "print",
+  "occ": "ทีมฟุตบอลฉลองหลังเตะกลางคืน",
+  "q": 3,
+  "photoGroup": "sport"
  },
  {
   "id": "w2",
@@ -17,7 +20,10 @@
   "catName": "เสื้อกีฬา",
   "alt": "ทีมโบว์ลิ่งใส่เสื้อที่ทีมดีผลิต",
   "use": "sport",
-  "product": "print"
+  "product": "print",
+  "occ": "ทีมโบว์ลิ่งหญิงในลานโบว์ลิ่ง",
+  "q": 3,
+  "photoGroup": "sport"
  },
  {
   "id": "w3",
@@ -27,7 +33,10 @@
   "catName": "เสื้อกีฬา",
   "alt": "ทีมกีฬาใส่เสื้อสีแดงที่ทีมดีผลิต",
   "use": "sport",
-  "product": null
+  "product": null,
+  "occ": "ทีมนักกีฬาเยาวชนบนอัฒจันทร์",
+  "q": 2,
+  "photoGroup": "sport"
  },
  {
   "id": "w4",
@@ -37,7 +46,10 @@
   "catName": "เสื้อองค์กร",
   "alt": "กลุ่มลูกค้าใส่เสื้อโปโลสีส้มอ่อนที่ทีมดีผลิต",
   "use": null,
-  "product": null
+  "product": null,
+  "occ": "สมาชิกถ่ายรวมในโบสถ์",
+  "q": 3,
+  "photoGroup": "gov"
  },
  {
   "id": "w5",
@@ -47,7 +59,10 @@
   "catName": "เสื้อกีฬา",
   "alt": "ทีมลูกค้าถือถ้วยรางวัล ใส่เสื้อลายฟ้าขาวที่ทีมดีผลิต",
   "use": "sport",
-  "product": "print"
+  "product": "print",
+  "occ": "ทีมนักกีฬาถ่ายรวมกับถ้วย",
+  "q": 3,
+  "photoGroup": "gov"
  },
  {
   "id": "w6",
@@ -57,7 +72,10 @@
   "catName": "เสื้ออีเวนต์",
   "alt": "กลุ่มลูกค้าในวันกิจกรรมกลางแจ้ง ใส่เสื้อสีเหลืองที่ทีมดีผลิต",
   "use": "event",
-  "product": null
+  "product": null,
+  "occ": "สมาชิกชมรมถ่ายรวมระหว่างทริป",
+  "q": 2,
+  "photoGroup": "class"
  },
  {
   "id": "w7",
@@ -67,7 +85,10 @@
   "catName": "เสื้อองค์กร",
   "alt": "กลุ่มลูกค้าถือใบประกาศ ใส่เสื้อโปโลลายชมพูที่ทีมดีผลิต",
   "use": null,
-  "product": "print"
+  "product": "print",
+  "occ": "พนักงานถือใบประกาศหน้าอาคาร",
+  "q": 2,
+  "photoGroup": "corp"
  },
  {
   "id": "w8",
@@ -77,7 +98,10 @@
   "catName": "เสื้ออีเวนต์",
   "alt": "ทีมลูกค้าใส่เสื้อลายน้ำเงินดำที่ทีมดีผลิต",
   "use": null,
-  "product": "print"
+  "product": "print",
+  "photoGroup": "class",
+  "occ": "สมาชิกทีมถ่ายรวมยามค่ำคืน",
+  "q": 2
  },
  {
   "id": "w9",
@@ -87,6 +111,93 @@
   "catName": "เสื้ออีเวนต์",
   "alt": "กลุ่มลูกค้าใส่เสื้อสีเขียวมะนาวที่ทีมดีผลิต",
   "use": null,
-  "product": null
+  "product": null,
+  "occ": "ทีมถ่ายรวมพร้อมอุปกรณ์",
+  "q": 2,
+  "photoGroup": "event"
+ },
+ {
+  "id": "w10",
+  "img": "/img/download-designs/brand-073.webp",
+  "imgKind": "real",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "alt": "เสื้อเจอร์ซีย์สีขาวพิมพ์ชื่อและเบอร์ด้านหลังที่ทีมดีผลิต",
+  "use": "sport",
+  "product": "jersey",
+  "occ": "ตัวจริงบนหุ่น ด้านหลัง",
+  "q": 3,
+  "photoGroup": "sport",
+  "fit": true
+ },
+ {
+  "id": "w11",
+  "img": "/img/download-designs/brand-085.webp",
+  "imgKind": "real",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "alt": "เสื้อเจอร์ซีย์สีแดงพิมพ์ชื่อทีมและเบอร์ที่ทีมดีผลิต",
+  "use": "sport",
+  "product": "jersey",
+  "occ": "ตัวจริงบนหุ่น ด้านหน้า",
+  "q": 3,
+  "photoGroup": "sport",
+  "fit": true
+ },
+ {
+  "id": "w12",
+  "img": "/img/download-designs/brand-099.webp",
+  "imgKind": "real",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "alt": "เสื้อเจอร์ซีย์ลายทางสีกรมคอปกที่ทีมดีผลิต",
+  "use": "sport",
+  "product": "jersey",
+  "occ": "ตัวจริงบนหุ่น ด้านหน้า",
+  "q": 3,
+  "photoGroup": "sport",
+  "fit": true
+ },
+ {
+  "id": "w13",
+  "img": "/img/download-designs/baseball-171.webp",
+  "imgKind": "real",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "alt": "เสื้อเบสบอลลายทางพิมพ์ชื่อทีมและเบอร์ที่ทีมดีผลิต",
+  "use": "sport",
+  "product": "baseball",
+  "occ": "ตัวจริงวางราบ",
+  "q": 3,
+  "photoGroup": "sport",
+  "fit": true
+ },
+ {
+  "id": "w14",
+  "img": "/img/download-designs/baseball-141.webp",
+  "imgKind": "real",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "alt": "เสื้อเบสบอลสีม่วงกระดุมหน้าที่ทีมดีผลิต",
+  "use": "sport",
+  "product": "baseball",
+  "occ": "ตัวจริงระยะใกล้",
+  "q": 3,
+  "photoGroup": "sport",
+  "fit": true
+ },
+ {
+  "id": "w15",
+  "img": "/img/download-designs/baseball-131.webp",
+  "imgKind": "real",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "alt": "ด้านหลังเสื้อเบสบอลพิมพ์ชื่อและเบอร์ที่ทีมดีผลิต",
+  "use": "sport",
+  "product": "baseball",
+  "occ": "ตัวจริงระยะใกล้",
+  "q": 3,
+  "photoGroup": "sport",
+  "fit": true
  }
 ]

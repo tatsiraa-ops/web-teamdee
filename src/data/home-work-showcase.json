@@ -1,0 +1,279 @@
+{
+  "polo": [
+    {
+      "img": "/img/download-designs/embroider-004.webp",
+      "caption": "โปโลสีดำ · โลโก้อกและข้อความหลัง",
+      "alt": "โปโลสีดำ · โลโก้อกและข้อความหลัง",
+      "kind": "แบบก่อนผลิต"
+    },
+    {
+      "img": "/img/download-designs/embroider-012.webp",
+      "caption": "โปโลสีขาว · โลโก้ U Service",
+      "alt": "โปโลสีขาว · โลโก้ U Service",
+      "kind": "แบบก่อนผลิต"
+    },
+    {
+      "img": "/img/download-designs/embroider-017.webp",
+      "caption": "โปโลสีกากี · ปกและขอบแขนสีขาว",
+      "alt": "โปโลสีกากี · ปกและขอบแขนสีขาว",
+      "kind": "แบบก่อนผลิต"
+    },
+    {
+      "img": "/img/download-designs/embroider-029.webp",
+      "caption": "โปโลสีกรม · โลโก้หน้าและหลัง",
+      "alt": "โปโลสีกรม · โลโก้หน้าและหลัง",
+      "kind": "แบบก่อนผลิต"
+    }
+  ],
+  "print": [
+    {
+      "img": "/img/customer/lc14.webp",
+      "alt": "เสื้อทีมฟุตบอล · ใส่ลงสนามจริง",
+      "caption": "เสื้อทีมฟุตบอล · ใส่ลงสนามจริง",
+      "kind": "ภาพงานจริง"
+    },
+    {
+      "img": "/img/customer/lc37.webp",
+      "alt": "เสื้อทีมแบดมินตัน · ใช้งานในคอร์ต",
+      "caption": "เสื้อทีมแบดมินตัน · ใช้งานในคอร์ต",
+      "kind": "ภาพงานจริง"
+    },
+    {
+      "img": "/img/customer/lc265.webp",
+      "alt": "เสื้อบริษัท · ลายและข้อความด้านหลัง",
+      "caption": "เสื้อบริษัท · ลายและข้อความด้านหลัง",
+      "kind": "ภาพงานจริง"
+    },
+    {
+      "img": "/img/customer/lc150.webp",
+      "alt": "โปโลพิมพ์ลาย · ใส่ร่วมกิจกรรม",
+      "caption": "โปโลพิมพ์ลาย · ใส่ร่วมกิจกรรม",
+      "kind": "ภาพงานจริง"
+    }
+  ],
+  "screen": [
+    {
+      "img": "/img/screen/studio-440.webp",
+      "alt": "เสื้อยืดสีเทาพร้อมงานสกรีนโลโก้",
+      "caption": "เสื้อสีเทา · ตำแหน่งโลโก้ด้านหน้า",
+      "kind": "ภาพงานจริง"
+    },
+    {
+      "img": "/img/screen/studio-376.webp",
+      "alt": "เสื้อสีเบจสกรีนตัวอักษร THAMMASAT UNIVERSITY",
+      "caption": "เสื้อสีเบจ · งานสกรีนตัวอักษร",
+      "kind": "ภาพงานจริง"
+    },
+    {
+      "img": "/img/screen/real-89.webp",
+      "caption": "เสื้อสีเทา · โลโก้ธุรกิจด้านหลัง",
+      "alt": "เสื้อสีเทา · โลโก้ธุรกิจด้านหลัง",
+      "kind": "ภาพงานจริง"
+    },
+    {
+      "img": "/img/screen/real-130.webp",
+      "caption": "เสื้อสีขาว · กราฟิกสีและตัวอักษร",
+      "alt": "เสื้อสีขาว · กราฟิกสีและตัวอักษร",
+      "kind": "ภาพงานจริง"
+    }
+  ],
+  "special": [
+    {
+      "img": "/img/warmup-collection/warmup-04.webp",
+      "alt": "แบบเสื้อวอร์มซิปหน้า WINNER สีส้มกรม ด้านหน้าและด้านหลัง",
+      "caption": "เสื้อวอร์ม · สีส้ม–กรม WINNER",
+      "kind": "แบบก่อนผลิต"
+    },
+    {
+      "img": "/img/warmup-collection/warmup-06.webp",
+      "alt": "แบบเสื้อวอร์มฮู้ด TEAMDEE สีดำส้ม ด้านหน้าและด้านหลัง",
+      "caption": "เสื้อวอร์มฮู้ด · สีดำ–ส้ม TEAMDEE",
+      "kind": "แบบก่อนผลิต"
+    },
+    {
+      "img": "/img/mockup/m08.webp",
+      "alt": "แบบเสื้อเบสบอลสีดำแดง ลายปลา ด้านหน้าและด้านหลัง",
+      "caption": "เสื้อเบสบอล · สีและลายของทีม",
+      "kind": "แบบก่อนผลิต"
+    },
+    {
+      "img": "/img/download-designs/loose-110.webp",
+      "caption": "เสื้อเบสบอล Worldwide · ไล่สีครีม–แดง",
+      "alt": "เสื้อเบสบอล Worldwide · ไล่สีครีม–แดง",
+      "kind": "ภาพงานจริง"
+    }
+  ],
+  "mannequin": [
+    {
+      "img": "/img/download-designs/brand-015.webp",
+      "imgSmall": "/img/download-designs/brand-015-540.webp",
+      "kind": "ภาพงานจริง",
+      "caption": "โปโลพิมพ์ลาย สีขาวม่วง",
+      "alt": "โปโลพิมพ์ลาย สีขาวม่วง เสื้อตัวจริงที่ทีมดีผลิต ถ่ายบนหุ่น"
+    },
+    {
+      "img": "/img/download-designs/brand-031.webp",
+      "imgSmall": "/img/download-designs/brand-031-540.webp",
+      "kind": "ภาพงานจริง",
+      "caption": "โปโลสีดำ ปกและอักษรสีชมพู",
+      "alt": "โปโลสีดำ ปกและอักษรสีชมพู เสื้อตัวจริงที่ทีมดีผลิต ถ่ายบนหุ่น"
+    },
+    {
+      "img": "/img/download-designs/brand-049.webp",
+      "imgSmall": "/img/download-designs/brand-049-540.webp",
+      "kind": "ภาพงานจริง",
+      "caption": "เสื้อคอกลมพิมพ์ลาย Motor Expo",
+      "alt": "เสื้อคอกลมพิมพ์ลาย Motor Expo เสื้อตัวจริงที่ทีมดีผลิต ถ่ายบนหุ่น"
+    },
+    {
+      "img": "/img/download-designs/brand-068.webp",
+      "imgSmall": "/img/download-designs/brand-068-540.webp",
+      "kind": "ภาพงานจริง",
+      "caption": "โปโลพิมพ์ลาย BALAC CHULA",
+      "alt": "โปโลพิมพ์ลาย BALAC CHULA เสื้อตัวจริงที่ทีมดีผลิต ถ่ายบนหุ่น"
+    },
+    {
+      "img": "/img/download-designs/brand-085.webp",
+      "imgSmall": "/img/download-designs/brand-085-540.webp",
+      "kind": "ภาพงานจริง",
+      "caption": "เสื้อกีฬาพิมพ์ลาย ชื่อและเบอร์",
+      "alt": "เสื้อกีฬาพิมพ์ลาย ชื่อและเบอร์ เสื้อตัวจริงที่ทีมดีผลิต ถ่ายบนหุ่น"
+    },
+    {
+      "img": "/img/download-designs/brand-099.webp",
+      "imgSmall": "/img/download-designs/brand-099-540.webp",
+      "kind": "ภาพงานจริง",
+      "caption": "โปโลพิมพ์ลายริ้ว สีกรม",
+      "alt": "โปโลพิมพ์ลายริ้ว สีกรม เสื้อตัวจริงที่ทีมดีผลิต ถ่ายบนหุ่น"
+    },
+    {
+      "img": "/img/download-designs/loose-157.webp",
+      "imgSmall": "/img/download-designs/loose-157-540.webp",
+      "kind": "ภาพงานจริง",
+      "caption": "โปโลพิมพ์ลาย FTI สีแดง",
+      "alt": "โปโลพิมพ์ลาย FTI สีแดง เสื้อตัวจริงที่ทีมดีผลิต ถ่ายบนหุ่น"
+    },
+    {
+      "img": "/img/download-designs/loose-121.webp",
+      "imgSmall": "/img/download-designs/loose-121-540.webp",
+      "kind": "ภาพงานจริง",
+      "caption": "เสื้อเบสบอล Worldwide ไล่สีครีม–แดง",
+      "alt": "เสื้อเบสบอล Worldwide ไล่สีครีม–แดง เสื้อตัวจริงที่ทีมดีผลิต ถ่ายบนหุ่น"
+    },
+    {
+      "img": "/img/download-designs/brand-073.webp",
+      "imgSmall": "/img/download-designs/brand-073-540.webp",
+      "kind": "ภาพงานจริง",
+      "caption": "เสื้อพิมพ์ลาย ชื่อและเบอร์ด้านหลัง",
+      "alt": "เสื้อพิมพ์ลาย ชื่อและเบอร์ด้านหลัง เสื้อตัวจริงที่ทีมดีผลิต ถ่ายบนหุ่น"
+    }
+  ],
+  "_note": "mannequin = แถวเสื้อจริงบนหุ่นหน้าแรก (บอร์ด Miro 3 พ.ย. 2026 \"เสื้อจริงใส่หุ่น\") · ภาพถ่ายเสื้อตัวจริงจาก download-designs ตรวจด้วยตาแล้ว · คำบรรยายบอกแค่สิ่งที่เห็นในรูป",
+  "byType": {
+    "print": [
+      {
+        "img": "/img/work-mannequin/print-1.webp",
+        "imgSmall": "/img/work-mannequin/print-1-540.webp",
+        "caption": "เสื้อฟุตบอลลายทาง สีกรม",
+        "alt": "เสื้อฟุตบอลลายทาง สีกรม บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/print-2.webp",
+        "imgSmall": "/img/work-mannequin/print-2-540.webp",
+        "caption": "เสื้อแบดมินตัน ไล่เฉดดำเทา",
+        "alt": "เสื้อแบดมินตัน ไล่เฉดดำเทา บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/print-3.webp",
+        "imgSmall": "/img/work-mannequin/print-3-540.webp",
+        "caption": "เสื้อแบดมินตัน สีพาสเทล",
+        "alt": "เสื้อแบดมินตัน สีพาสเทล บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/print-4.webp",
+        "imgSmall": "/img/work-mannequin/print-4-540.webp",
+        "caption": "เสื้อโปโลพิมพ์ลาย ไล่เฉดแดง",
+        "alt": "เสื้อโปโลพิมพ์ลาย ไล่เฉดแดง บนหุ่น"
+      }
+    ],
+    "polo": [
+      {
+        "img": "/img/work-mannequin/polo-1.webp",
+        "imgSmall": "/img/work-mannequin/polo-1-540.webp",
+        "caption": "โปโลสีดำ · โลโก้อกและข้อความหลัง",
+        "alt": "โปโลสีดำ · โลโก้อกและข้อความหลัง บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/polo-2.webp",
+        "imgSmall": "/img/work-mannequin/polo-2-540.webp",
+        "caption": "โปโลสีขาว · โลโก้ U Service",
+        "alt": "โปโลสีขาว · โลโก้ U Service บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/polo-3.webp",
+        "imgSmall": "/img/work-mannequin/polo-3-540.webp",
+        "caption": "โปโลสีกากี · ปกและขอบแขนสีขาว",
+        "alt": "โปโลสีกากี · ปกและขอบแขนสีขาว บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/polo-4.webp",
+        "imgSmall": "/img/work-mannequin/polo-4-540.webp",
+        "caption": "โปโลสีกรม · โลโก้หน้าและหลัง",
+        "alt": "โปโลสีกรม · โลโก้หน้าและหลัง บนหุ่น"
+      }
+    ],
+    "screen": [
+      {
+        "img": "/img/work-mannequin/screen-1.webp",
+        "imgSmall": "/img/work-mannequin/screen-1-540.webp",
+        "caption": "เสื้อสีเทา · ตำแหน่งโลโก้ด้านหน้า",
+        "alt": "เสื้อสีเทา · ตำแหน่งโลโก้ด้านหน้า บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/screen-2.webp",
+        "imgSmall": "/img/work-mannequin/screen-2-540.webp",
+        "caption": "เสื้อสีเบจ · งานสกรีนตัวอักษร",
+        "alt": "เสื้อสีเบจ · งานสกรีนตัวอักษร บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/screen-3.webp",
+        "imgSmall": "/img/work-mannequin/screen-3-540.webp",
+        "caption": "เสื้อสีเทา · โลโก้ธุรกิจด้านหลัง",
+        "alt": "เสื้อสีเทา · โลโก้ธุรกิจด้านหลัง บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/screen-4.webp",
+        "imgSmall": "/img/work-mannequin/screen-4-540.webp",
+        "caption": "เสื้อสีขาว · กราฟิกสีและตัวอักษร",
+        "alt": "เสื้อสีขาว · กราฟิกสีและตัวอักษร บนหุ่น"
+      }
+    ],
+    "special": [
+      {
+        "img": "/img/work-mannequin/special-1.webp",
+        "imgSmall": "/img/work-mannequin/special-1-540.webp",
+        "caption": "เสื้อวอร์ม · สีส้ม–กรม",
+        "alt": "เสื้อวอร์ม · สีส้ม–กรม บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/special-2.webp",
+        "imgSmall": "/img/work-mannequin/special-2-540.webp",
+        "caption": "เสื้อฮู้ดซิปหน้า · สีดำส้ม",
+        "alt": "เสื้อฮู้ดซิปหน้า · สีดำส้ม บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/special-3.webp",
+        "imgSmall": "/img/work-mannequin/special-3-540.webp",
+        "caption": "เสื้อ Jersey ปกซิป · ไล่เฉดดำส้ม",
+        "alt": "เสื้อ Jersey ปกซิป · ไล่เฉดดำส้ม บนหุ่น"
+      },
+      {
+        "img": "/img/work-mannequin/special-4.webp",
+        "imgSmall": "/img/work-mannequin/special-4-540.webp",
+        "caption": "เสื้อเบสบอล · ไล่เฉดครีมแดง",
+        "alt": "เสื้อเบสบอล · ไล่เฉดครีมแดง บนหุ่น"
+      }
+    ]
+  },
+  "_noteByType": "3 พ.ย. 2026 อาร์ต \"แต่ละหมวดไปเจนรูปใส่หุ่นมา 4 รูป\" · รูปเสื้อบนหุ่น Magnific GPT 2.5 high จากแบบจริงของทีมดี (ภาพอ้างอิง = แบบใน design-clean / work-crop / screen / mockup) · ใช้ในโชว์รูมผลงานหน้าแรก · ตรวจเทียบแบบต้นฉบับทีละรูป (อาร์ต 3 พ.ย. \"ห้ามมั่ว\") เจนใหม่ 4 รูปที่ไม่ตรง: โปโลกรมกระดุม 3 เม็ด · สกรีนมั่นคงโฮมฯ ลายด้านหลัง · Jersey ปกซิปโลโก้ตามตำแหน่ง · เบสบอลไม่มีปก (THAM MASAT ใช้รูปแรกตามอาร์ต)"
+}

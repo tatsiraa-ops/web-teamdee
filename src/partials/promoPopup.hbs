@@ -1,0 +1,30 @@
+{{!-- ป๊อปอัปโฆษณา · ข้อมูล src/data/promo.json · ตรรกะ promo.js + promo-popup.js (ขึ้นเมื่อเลื่อนเกินครึ่งหน้า · ครั้งเดียวต่อรอบ · "ไม่ต้องแสดงอีก" 30 วัน)
+     banner (รูปโฆษณา 1:1 จากดีไซเนอร์) = แสดงรูปอย่างเดียว ทั้งรูปกดไปทัก LINE
+     ไม่มี banner = การ์ดโฉมใหม่ (4 พ.ย. อาร์ต "ขออันนี้โฉมใหม่ไปเลย"): จอใหญ่การ์ดแนวนอน รูปซ้าย แผงขาวขวา · มือถือแผ่นเลื่อนขึ้นจากล่าง รูปบน
+       หัวข้อ (ท่อน accent สีส้ม) · บรรทัดรอง · 3 ขั้น · ปุ่ม LINE เป็นปุ่มแยก · "ไม่ต้องแสดงอีก" อยู่ในการ์ด · ไม่มีแท็กหัวข้อ (อยู่ทุกหน้า ล็อกลำดับหัวข้อ v22)
+     ปิดได้: กากบาท · Esc · กดพื้นหลัง (ไม่ขึ้นอีกในรอบนี้) · "ไม่ต้องแสดงอีก" (30 วัน) --}}
+{{#each promos}}
+<dialog class="promo{{#unless this.banner}} promo--card{{/unless}}" data-promo data-id="{{this.id}}" data-start="{{this.start}}" data-end="{{this.end}}" aria-label="{{this.title}}">
+  {{#if this.banner}}
+  <div class="promo__sq">
+    <a class="promo__link" href="{{this.ctaHref}}"{{#if this.ctaLine}} data-track="line"{{/if}} data-where="promo" data-promo-go>
+      <img class="promo__banner" src="{{this.banner}}" alt="{{this.alt}}" width="1080" height="1080" loading="lazy" decoding="async">
+    </a>
+    <button type="button" class="promo__x" data-promo-close aria-label="ปิดโฆษณา"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <p class="promo__never-out"><button type="button" class="promo__never" data-promo-never>ไม่ต้องแสดงอีก</button></p>
+  {{else}}
+  <div class="promo__card">
+    <div class="promo__media"><img class="promo__photo" src="{{this.img}}" data-sizes="(min-width:768px) 340px, 100vw" alt="{{this.photoAlt}}" width="760" height="760" loading="lazy" decoding="async"></div>
+    <div class="promo__body">
+      <p class="promo__h">{{#if this.accent}}{{{hl this.title this.accent}}}{{else}}{{{ph this.title}}}{{/if}}</p>
+      <p class="promo__p">{{{ph this.body}}}</p>
+      {{#if this.steps}}<ol class="promo__steps">{{#each this.steps}}<li><span class="promo__n" aria-hidden="true">{{inc @index}}</span><span>{{{ph this}}}</span></li>{{/each}}</ol>{{/if}}
+      <a class="promo__cta promo__cta--line" href="{{this.ctaHref}}"{{#if this.ctaLine}} data-track="line"{{/if}} data-where="promo" data-promo-go><span class="promo__ico" aria-hidden="true">{{#if this.ctaLine}}{{> icoLine}}{{else}}{{> icoChat}}{{/if}}</span><span>{{this.cta.t}}</span></a>
+      <button type="button" class="promo__never" data-promo-never>ไม่ต้องแสดงอีก</button>
+    </div>
+    <button type="button" class="promo__x" data-promo-close aria-label="ปิดโฆษณา"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  {{/if}}
+</dialog>
+{{/each}}

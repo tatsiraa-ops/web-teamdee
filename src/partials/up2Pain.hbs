@@ -1,0 +1,14 @@
+{{!-- ปัญหาคนสั่ง โฉมใหม่ (อาร์ต 3 พ.ย. "ชอบแบบ PMK แต่ทำให้ดีกว่า") · หัวข้อกลาง + ย่อหน้า → 3 คอลัมน์: ไอคอน 3D ชุดทีมดีในวงกลมพื้นสตูดิโอ
+     → ปัญหา (H3 v22) → บรรทัดส้มย่อคำตอบ (use-v2.json pain.short · ย่อจากข้อความเดิม) → "ทีมดีช่วย" ข้อความเต็มเดิม · ปุ่ม LINE กลาง --}}
+<section class="up2-pain" id="up2-pain" aria-labelledby="up2-pain-h">
+  <div class="wrap">
+    <header class="up2-pain__head">
+      <h2 id="up2-pain-h">{{{hl up.pain.h "มากกว่าเลือกแบบ"}}}</h2>
+      {{#each up.pain.intro}}<p class="up2-pain__lead">{{this}}</p>{{/each}}
+    </header>
+    <ol class="up2-pain__list">
+      {{#each up.pain.cards}}<li class="up2-pain__item"><span class="up2-pain__disc"><img src="/img/icons/{{lookup ../up.v2.pain.icons @index}}.webp" alt="" width="240" height="240" loading="lazy" decoding="async"></span><h3>{{this.h}}</h3><p class="up2-pain__hi">{{lookup ../up.v2.pain.short @index}}</p><p class="up2-pain__a"><b>ทีมดีช่วย</b> {{#each this.p}}{{this}}{{#unless @last}} {{/unless}}{{/each}}</p></li>{{/each}}
+    </ol>
+    <div class="up2-pain__acts"><a class="cb cb--p hm-line-cta" href="{{cta.primary.href}}" data-track="line" data-where="use-pain"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ให้ทีมดีช่วยดูแลงานเสื้อ</span></a><a class="hm-more" href="/team-shirt-order-checklist/">ดูเช็กลิสต์เตรียมสั่งเสื้อ <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>

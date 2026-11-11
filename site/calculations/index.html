@@ -3,146 +3,147 @@
 <head>
   {{> head}}
   <title>คำนวณราคาเสื้อทีมเบื้องต้น · คำนวณงบผลิตเสื้อ | TEAMDEE</title>
-  <meta name="description" content="คำนวณราคาเสื้อทีมเบื้องต้นกับ TEAMDEE เลือกโปโลปัก เสื้อพิมพ์ลาย เบสบอล หรือ Jersey ใส่จำนวนจริง เห็นงบผลิตรวม VAT 7% เป็นยอดเดียว แล้วส่งใบประเมินทางไลน์ได้ทันที">
+  <meta name="description" content="คำนวณราคาเสื้อทีมเบื้องต้นกับ TEAMDEE เลือกโปโลปัก เสื้อพิมพ์ลาย เสื้อสกรีน เบสบอล หรือ Jersey ใส่จำนวนจริง เห็นงบรวม VAT 7% แล้วส่งใบประเมินทาง LINE ได้ทันที">
 </head>
 <body>
-{{> siteHeader active="learn"}}
+{{> siteHeader active="products"}}
 <main id="main">
 
 <!-- breadcrumb · "คู่มือและบทความ" เป็นแค่กลุ่มเมนู ไม่มีหน้า จึงไม่ใส่ในเส้นทาง (Google ต้องการ URL ทุกลำดับยกเว้นลำดับสุดท้าย · audit calc-11) -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"คำนวณราคาเบื้องต้น"}]}</script>
 {{#if calcLd}}<script type="application/ld+json">{{{calcLd}}}</script>{{/if}}
 
+{{!-- รื้อทั้งหน้า 26 ต.ค. (อาร์ตเลือกแบบใบประเมิน "แต่ทำให้ใช้งานง่าย ไม่ต้องเลื่อนเยอะ"):
+     หัวเรื่องเตี้ย · เครื่องคิดจบในจอเดียวบนคอม (การ์ดเสื้อแนวนอน · จำนวน+ช่วงราคาอยู่แถวเดียวกัน) · ใบประเมินติดขวา
+     ตารางราคาเต็มพับไว้ (แถบช่วงราคาสดใต้จำนวนแทนแล้ว) · FAQ + ลิงก์ประกอบ + ปุ่ม LINE รวมเป็นส่วนเดียว · CSS main.css "หน้าคำนวณราคา" --}}
+
 <!-- 1 · หัวเรื่อง · คงคีย์เวิร์ดเดิมของหน้า · ใต้ H1 เหลือบรรทัดราคาเดียว (audit calc-06) -->
 <section class="band-hero relative overflow-hidden">
-  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-  <div class="wrap relative py-10 md:py-14">
+  <div class="wrap relative calc-hero">
     <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">คำนวณราคาเบื้องต้น</span></nav>
-    <h1 class="t-display text-[clamp(30px,4.4vw,54px)] text-ink mt-6 max-w-[20ch]">คำนวณราคาเสื้อทีมเบื้องต้น</h1>
-    <p class="text-[17px] md:text-[18px] leading-[1.7] text-ink-2 max-w-[64ch] mt-4 tabular-nums">{{calculator.lead}}</p>
+    <h1 class="t-display calc-hero__h">คำนวณราคาเสื้อทีมเบื้องต้น</h1>
+    <p class="calc-hero__p tabular-nums">{{{dots calculator.lead}}}</p>
   </div>
 </section>
 
-<!-- 2 · เครื่องคิด 3 ขั้น + สรุปราคา (audit 3.4 calc-01 calc-02 calc-04) · ราคาจาก prices.json ผ่าน calcKinds() · ตรรกะคิดราคาใน estimate.js มีเทส -->
-<section class="wrap section">
-  <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-14 items-start">
-    <form id="calc" class="space-y-9" action="#" novalidate>
-      <fieldset>
-        <legend class="text-[20px] font-bold"><span class="text-ink-3 mr-2">ขั้น 1</span>เลือกเสื้อ</legend>
-        <p class="text-[15px] text-ink-3 mt-1">ตัวเลขคือราคาต่อตัวเมื่อสั่ง {{calculator.minQty}} ตัว รวม VAT</p>
-        <div class="flex flex-wrap gap-2.5 mt-4">
-          {{#each calculator.kinds}}<label class="choice"><input class="sr-only" type="radio" name="kind" value="{{this.id}}"{{#if @first}} checked{{/if}}>{{this.name}} <span class="opacity-70 font-normal tabular-nums">{{#if this.byDesign}}{{this.sub}}{{else}}{{baht this.from}}{{/if}}</span></label>{{/each}}
+<!-- 2 · เครื่องคิด 3 ขั้น + ใบประเมิน (audit 3.4 calc-01 calc-02 calc-04) · ราคาจาก prices.json ผ่าน calcKinds() · ตรรกะคิดราคาใน estimate.js มีเทส -->
+<section class="wrap calc">
+  <div class="calc__grid">
+    <form id="calc" class="calc__form" action="#" novalidate>
+      <fieldset class="calc__step">
+        <legend class="calc__lg"><span class="calc__no" aria-hidden="true">1</span>เลือกเสื้อ <span class="calc__lg-sub">ราคาต่อตัวตามจำนวนขั้นต่ำของแต่ละสินค้า รวม VAT</span></legend>
+        <div class="kgrid">
+          {{#each calculator.kinds}}<label class="kcard"><input class="sr-only" type="radio" name="kind" value="{{this.id}}"{{#if @first}} checked{{/if}}>
+            <span class="kcard__img">{{#if this.img}}<img src="{{this.img.sm}}" alt="" width="540" height="367" loading="lazy" decoding="async">{{else}}<span class="kcard__ico">{{> icoPrinter}}</span>{{/if}}</span>
+            <span class="kcard__txt"><span class="kcard__t">{{#each this.nameParts}}<span>{{this}}</span> {{/each}}</span><span class="kcard__p tabular-nums">{{#if this.byDesign}}{{{ph this.sub}}}{{else}}<span class="inline-block"><b>{{baht this.from}}</b> บาท/ตัว</span>{{/if}}</span></span>
+          </label>{{/each}}
         </div>
         {{#each calculator.kinds}}{{#if this.fabrics}}
-        <fieldset class="mt-6" data-fab-for="{{this.id}}">
-          <legend class="text-[17px] font-bold">เลือกผ้า</legend>
-          <div class="flex flex-wrap gap-2.5 mt-3">
+        <fieldset class="calc__sub" data-fab-for="{{this.id}}">
+          <legend class="calc__sl">ผ้า{{#if this.include}} <span>· {{{ph this.include}}}</span>{{/if}}</legend>
+          <div class="calc__chips">
             {{#each this.fabrics}}<label class="choice"><input class="sr-only" type="radio" name="fabric" value="{{this.id}}"{{#if @first}} checked{{/if}}>{{this.name}} <span class="opacity-70 font-normal tabular-nums">{{baht this.from}}</span></label>{{/each}}
           </div>
-          {{#if this.include}}<p class="text-[16px] text-ink-2 mt-3">{{this.include}}</p>{{/if}}
         </fieldset>
         {{/if}}{{/each}}
       </fieldset>
 
-      <fieldset>
-        <legend class="text-[20px] font-bold"><span class="text-ink-3 mr-2">ขั้น 2</span>จำนวน (ตัว)</legend>
-        <div class="flex items-center gap-2 mt-4">
-          <button type="button" class="qty-btn" data-q-step="-1" aria-label="ลดจำนวน 1 ตัว"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
-          <label class="sr-only" for="qty">จำนวนตัว</label>
-          <input class="qty-in" id="qty" name="qty" type="number" inputmode="numeric" min="{{calculator.minQty}}" max="99999" step="1" value="30" aria-describedby="qBand qErr">
-          <button type="button" class="qty-btn" data-q-step="1" aria-label="เพิ่มจำนวน 1 ตัว"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-          <span class="text-[17px] font-semibold text-ink-2 ml-1">ตัว</span>
+      <fieldset class="calc__step">
+        <legend class="calc__lg"><span class="calc__no" aria-hidden="true">2</span>จำนวน</legend>
+        <div class="calc__qrow">
+          <div class="calc__qty">
+            <button type="button" class="qty-btn" data-q-step="-1" aria-label="ลดจำนวน 1 ตัว"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+            <label class="sr-only" for="qty">จำนวนตัว</label>
+            <input class="qty-in" id="qty" name="qty" type="number" inputmode="numeric" min="{{calculator.minQty}}" max="99999" step="1" value="30" aria-describedby="qBand qErr">
+            <button type="button" class="qty-btn" data-q-step="1" aria-label="เพิ่มจำนวน 1 ตัว"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <span class="calc__unit">ตัว</span>
+          </div>
         </div>
-        <div class="flex flex-wrap gap-2.5 mt-4" role="group" aria-label="จำนวนที่เลือกได้เร็ว">
-          <button type="button" class="choice qty-chip tabular-nums" data-q="10" aria-pressed="false">10</button>
-          <button type="button" class="choice qty-chip tabular-nums" data-q="20" aria-pressed="false">20</button>
-          <button type="button" class="choice qty-chip tabular-nums" data-q="50" aria-pressed="false">50</button>
-          <button type="button" class="choice qty-chip tabular-nums" data-q="100" aria-pressed="false">100</button>
+        <p class="calc__err" id="qErr" hidden>สั่งผลิตขั้นต่ำ {{calculator.minQty}} ตัว</p>
+        {{!-- แถบช่วงราคาสด (estimate.js tiers) · ช่วงที่ใช้อยู่พื้นดำ · แตะช่วงไหน = เปลี่ยนจำนวนเป็นต้นช่วงนั้น · แทนการเลื่อนลงไปดูตาราง --}}
+        <div class="tiers" id="tiers" hidden>
+          <p class="tiers__h" id="qBand"></p>
+          <div class="tiers__row" id="tierRow" role="group" aria-label="ราคาต่อตัวตามช่วงจำนวน แตะเพื่อเลือกจำนวนต้นช่วง"></div>
         </div>
-        <p class="text-[16px] text-ink-2 mt-4 tabular-nums" id="qBand"></p>
-        <p class="text-[16px] font-bold text-ink mt-2" id="qErr" hidden>สั่งผลิตขั้นต่ำ {{calculator.minQty}} ตัว</p>
       </fieldset>
 
-      <fieldset id="optStep">
-        <legend class="text-[20px] font-bold"><span class="text-ink-3 mr-2">ขั้น 3</span>ออปชัน <span class="text-[16px] font-normal text-ink-3">เลือกได้หลายข้อ</span></legend>
-        <p class="text-[15px] text-ink-3 mt-1">ไม่เลือก = แขนสั้น ทรงปกติ ไม่มีกระเป๋า ไม่บวกเพิ่ม</p>
-        <div class="flex flex-wrap gap-2.5 mt-4">
+      <fieldset class="calc__step" id="optStep">
+        <legend class="calc__lg"><span class="calc__no" aria-hidden="true">3</span>ออปชัน <span class="calc__lg-sub">ไม่เลือก = แขนสั้น ทรงปกติ ไม่บวกเพิ่ม</span></legend>
+        <div class="calc__chips">
           {{#each calculator.options}}<label class="choice"><input class="sr-only" type="checkbox" name="opt" value="{{this.id}}">{{this.name}} <span class="opacity-70 font-normal tabular-nums">+{{baht this.add}}</span></label>{{/each}}
         </div>
       </fieldset>
     </form>
 
-    <aside class="calc-card lg:sticky lg:top-28 border-2 border-ink rounded-plate p-6 md:p-7 scroll-mt-24" id="calcCard" aria-labelledby="sumHead">
-      <h2 id="sumHead" class="text-[22px]">สรุปราคาโดยประมาณ</h2>
-      <div id="calcSum" aria-live="polite">
-        <p class="mt-3 text-[17px] font-bold" id="sProd"></p>
-        <p class="text-[15px] text-ink-3" id="sInc" hidden></p>
-        <dl class="mt-5 space-y-3 text-[17px] tabular-nums" id="sRows">
-          <div class="flex justify-between gap-4"><dt class="text-ink-2">ราคาต่อตัว<span class="block text-[14px] text-ink-3" id="sBand"></span></dt><dd class="font-bold text-right" id="sBase">–</dd></div>
-          <div class="flex justify-between gap-4" id="rOpt" hidden><dt class="text-ink-2">ออปชัน<span class="block text-[14px] text-ink-3" id="sOptNames"></span></dt><dd class="font-bold text-right" id="sOpt"></dd></div>
-          <div class="flex justify-between gap-4"><dt class="text-ink-2">× จำนวน</dt><dd class="font-bold text-right" id="sQty">–</dd></div>
-          <div class="flex justify-between items-end gap-4 border-t-2 border-ink pt-4"><dt class="font-bold">ยอดรวม<span class="block text-[14px] font-normal text-ink-3">{{#if calculator.vatIncluded}}รวม VAT 7% แล้ว{{else}}ยังไม่รวม VAT{{/if}}</span></dt><dd class="t-display text-[28px] text-right" id="sTotal">–</dd></div>
+    {{!-- ใบประเมิน (อาร์ตเลือก): หัวใบ + วันที่ · ตรายาง "ราคาเบื้องต้น" · เส้นประ · ยอดรวมเส้นคู่ · ขอบล่างฟันปลา --}}
+    <aside class="slip scroll-mt-24" id="calcCard" aria-labelledby="sumHead" data-sticky>
+      <p class="slip__brand" aria-hidden="true"><span class="slip__logo">TEAMDEE</span><span>ใบประเมินราคาเบื้องต้น<br><span id="sDate"></span></span></p>
+      <h2 id="sumHead" class="slip__h">สรุปราคาโดยประมาณ</h2>
+      {{!-- ประกาศยอดรวมบรรทัดเดียว (calc-page.js · 30 ต.ค. · เดิม aria-live ครอบทั้งใบ อ่านหลายบรรทัดทุกครั้งที่กด) --}}
+      <p class="sr-only" role="status" id="calcSay"></p>
+      <div id="calcSum">
+        <p class="slip__prod" id="sProd"></p>
+        <p class="slip__inc" id="sInc" hidden></p>
+        <dl class="slip__rows tabular-nums" id="sRows">
+          <div><dt>ราคาต่อตัว<span id="sBand"></span></dt><dd id="sBase">–</dd></div>
+          <div id="rOpt" hidden><dt>ออปชัน<span id="sOptNames"></span></dt><dd id="sOpt"></dd></div>
+          <div><dt>× จำนวน</dt><dd id="sQty">–</dd></div>
+          <div class="slip__total"><dt>ยอดรวม<span>{{#if calculator.vatIncluded}}รวม VAT 7% แล้ว{{else}}ยังไม่รวม VAT{{/if}}</span></dt><dd id="sTotal">–</dd></div>
         </dl>
-        <p class="text-[16px] leading-[1.6] mt-4 bg-shell rounded-card px-4 py-3" id="sNext" hidden></p>
-        <p class="text-[16px] leading-[1.7] mt-5" id="sPending" hidden></p>
+        <p class="slip__next" id="sNext" hidden></p>
+        <p class="slip__pending" id="sPending" hidden></p>
       </div>
-      <div class="flex flex-col gap-2.5 mt-6">
-        <a class="btn btn-orange w-full gap-2" id="sLine" href="{{site.lineUrl}}" data-track="line" data-where="calc-summary"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span><span id="sLineText">ส่งใบประเมินนี้ทาง LINE</span></a>
-        <div class="grid grid-cols-[1fr_auto] gap-2.5">
-          <a class="btn btn-line px-4" id="sQuote" href="{{url 'contact'}}?from=%2Fcalculations%2F">ขอใบเสนอราคา (ฟอร์ม)</a>
-          <a class="btn btn-line px-5 gap-2 tabular-nums" href="tel:{{site.phonePrimaryTel}}" data-where="calc-summary"><span class="block size-5 text-orange" aria-hidden="true">{{> icoPhone}}</span>โทร</a>
+      <p class="hp-reply hp-pay">{{site.payLine}}</p>
+      <div class="slip__btns">
+        <a class="cb cb--p cb--2l" id="sLine" href="{{site.lineUrl}}" data-track="line" data-where="calc-summary"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__lbl"><span class="cb__t" id="sLineText">ส่งใบประเมินนี้ทาง LINE</span><span class="cb__sub" data-float-status><span class="cb__dot" aria-hidden="true"></span><span data-float-status-t>{{site.hours}}</span></span></span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="slip__alt">
+          <a id="sQuote" href="{{url 'contact'}}?from=%2Fcalculations%2F"><span class="slip__ico" aria-hidden="true">{{> icoDoc}}</span>ขอใบเสนอราคา</a>
+          <a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}" data-where="calc-summary" aria-label="โทรคุย {{site.phonePrimary}}"><span class="slip__ico" aria-hidden="true">{{> icoPhone}}</span>โทรคุย</a>
         </div>
+        {{!-- ส่งให้หัวหน้าดู (ตรวจมือถือ 30 ต.ค.) · มือถือเปิดเมนูแชร์ของเครื่อง · ไม่มีเมนูแชร์ = หน้าเลือกเพื่อนใน LINE · ลิงก์จำค่าที่เลือก --}}
+        <a class="slip__share" id="sShare" href="https://line.me/R/share" data-where="calc-share"><span class="slip__ico" aria-hidden="true">{{> icoUsers}}</span>ส่งให้หัวหน้า / ทีมดูใบประเมินนี้</a>
       </div>
-      <p class="text-[14px] leading-[1.6] text-ink-3 mt-4">ตอบใน 5 นาที ทุกวัน 8:30–21:00 · ราคาเบื้องต้น ไม่ใช่ใบเสนอราคา</p>
+      <p class="slip__note"><span class="inline-block">ราคาเบื้องต้น ไม่ใช่ใบเสนอราคา ·</span> <span class="inline-block">ทุกวัน {{site.hoursShort}}</span></p>
     </aside>
   </div>
 </section>
 
-<!-- 3 · ตารางราคาตามจำนวน · ข้อความ HTML ไม่ใช่ภาพ -->
-<section class="bg-shell border-y border-line">
-  <div class="wrap section">
-    <div class="max-w-[68ch] mb-8">
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoTag}}</span>ตารางราคา</span>
-      <h2 class="t-display text-[clamp(26px,3.4vw,42px)]">ราคาต่อตัวตามจำนวน</h2>
-      <p class="t-lead mt-4">แถวคือประเภทคอหรือเทคนิค คอลัมน์คือช่วงจำนวน ตัวเลขทุกช่องดึงจากข้อมูลกลางชุดเดียวกับเครื่องคิดด้านบน</p>
-    </div>
-    {{> priceTable}}
-  </div>
+<!-- 3 · ตารางราคาเต็ม (ข้อความ HTML ไม่ใช่ภาพ) · พับไว้ เปิดดูได้ · ใต้จำนวนมีแถบช่วงราคาสดแล้ว -->
+<section class="wrap calc-more">
+  <details class="calc-table">
+    <summary><span><h2 class="calc-table__h">ราคาต่อตัวตามจำนวน</h2><span class="calc-table__s">{{{dots "ตารางเสื้อพิมพ์ลายทุกช่วงจำนวน · ตัวเลขชุดเดียวกับเครื่องคิดด้านบน"}}}</span></span><span class="calc-table__btn" aria-hidden="true"><span class="calc-table__open">ดูตาราง</span><span class="calc-table__close">ซ่อนตาราง</span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+    <div class="calc-table__body">{{> priceTable}}</div>
+  </details>
 </section>
 
-<!-- 4 · ลิงก์ที่ต้องคงไว้ -->
-<section class="wrap section">
-  <h2 class="t-display text-[clamp(24px,3vw,36px)]">ข้อมูลที่ใช้ประกอบราคา</h2>
-  <ul class="grid sm:grid-cols-3 gap-4 mt-7">
-    <li><a class="flex items-center justify-between gap-3 min-h-[64px] border-2 border-line-2 hover:border-ink rounded-card px-5 font-bold" href="{{url 'guides' 'size'}}">ตารางไซซ์<span class="arw" aria-hidden="true">&rarr;</span></a></li>
-    <li><a class="flex items-center justify-between gap-3 min-h-[64px] border-2 border-line-2 hover:border-ink rounded-card px-5 font-bold" href="{{url 'guides' 'fabric'}}">แคตตาล็อกผ้า<span class="arw" aria-hidden="true">&rarr;</span></a></li>
-    <li><a class="flex items-center justify-between gap-3 min-h-[64px] border-2 border-line-2 hover:border-ink rounded-card px-5 font-bold" href="{{url 'guides' 'collar'}}">ทรงคอ<span class="arw" aria-hidden="true">&rarr;</span></a></li>
-  </ul>
-  <p class="t-body mt-6">ยังไม่แน่ใจว่าควรเลือกแบบไหน <a class="font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 inline-flex items-center min-h-[44px]" href="{{url 'contact'}}?from=%2Fcalculations%2F">ปรึกษาทีมดี<span class="arw" aria-hidden="true">&rarr;</span></a></p>
-</section>
-
-<!-- 5 · FAQ ราคา + ปรึกษา -->
-<section class="bg-shell border-y border-line">
-  <div class="wrap section">
-    <div class="max-w-[68ch] mb-8">
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามเรื่องราคา</span>
-      <h2 class="t-display text-[clamp(26px,3.4vw,42px)]">ถามบ่อยก่อนขอใบเสนอราคา</h2>
-    </div>
-    <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
+<!-- 4 · FAQ ราคา + ข้อมูลประกอบ + ปรึกษา (เดิมแยก 2 ส่วน ต้องเลื่อนยาว · รวมเป็นแถวเดียว) -->
+<section class="wrap calc-help">
+  <div class="calc-help__faq">
+    <h2 class="calc-help__h">ถามบ่อยก่อนขอใบเสนอราคา</h2>
+    <div class="hs-accordion-group calc-faq">
       {{#each faq.calc}}
-      <div class="hs-accordion border-b border-line" id="cfaq-{{@index}}">
-        <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-6 min-h-tap font-bold text-[19px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-expanded="false" aria-controls="cfaq-panel-{{@index}}">
-          <span>{{this.[0]}}</span>
-          <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      <div class="hs-accordion" id="cfaq-{{@index}}">
+        <button type="button" class="hs-accordion-toggle calc-faq__q" aria-expanded="false" aria-controls="cfaq-panel-{{@index}}">
+          <span>{{{ph this.[0]}}}</span>
+          <svg class="calc-faq__ico hs-accordion-active:rotate-45" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
         <div id="cfaq-panel-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
-          <p class="t-body pb-7 max-w-[62ch]">{{this.[1]}}</p>
+          <p class="calc-faq__a">{{this.[1]}}</p>
         </div>
       </div>
       {{/each}}
     </div>
-    <a class="btn btn-orange mt-8 gap-2" href="{{site.lineUrl}}" data-track="line" data-where="calc-faq" data-calc-line><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
   </div>
+  <aside class="calc-help__side" aria-labelledby="calc-info-h">
+    <h2 class="calc-help__h2" id="calc-info-h">ข้อมูลประกอบราคา</h2>
+    <ul class="calc-links">
+      <li><a href="{{url 'guides' 'size'}}"><span class="calc-links__ico" aria-hidden="true">{{> icoRuler}}</span>ตารางไซซ์<span class="arw" aria-hidden="true">&rarr;</span></a></li>
+      <li><a href="{{url 'guides' 'fabric'}}"><span class="calc-links__ico" aria-hidden="true">{{> icoSwatch}}</span>แคตตาล็อกผ้า<span class="arw" aria-hidden="true">&rarr;</span></a></li>
+      <li><a href="{{url 'contact'}}?from=collar-options"><span class="calc-links__ico" aria-hidden="true">{{> icoShirt}}</span>สอบถามตัวเลือกทรงคอ<span class="arw" aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+    <p class="calc-help__ask">{{{ph "ยังไม่แน่ใจว่าควรเลือกแบบไหน ทักมาให้ทีมดีช่วยเลือก"}}}</p>
+    <a class="cb cb--p" href="{{site.lineUrl}}" data-track="line" data-where="calc-faq" data-calc-line><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ทัก LINE ขอราคา</span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </aside>
 </section>
 
 </main>

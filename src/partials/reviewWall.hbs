@@ -1,0 +1,20 @@
+{{!-- คลังรีวิว · รูปลูกค้าจริงล้วน (10 พ.ย. 2026 อาร์ต "เอาแค่รูปมาพอ รูปลูกค้า เอาแบบเยอะๆ เอาให้น่าเชื่อถือ · จะเอาไปใส่อีกหลายๆหน้า")
+     รอบ 2 อาร์ต "cta ดีๆ · headline กลาง · รีวิวไม่ต้องเลื่อน แสดงเต็มๆ · กว้างพิเศษ · เยอะๆ 10 แถว"
+     ผนังรูปเรียงเต็มแถว: --r = กว้าง/สูงของรูป → CSS flex ให้สูงเท่ากันในแถว แสดงรูปเต็มไม่ตัด · ขอบล่างจาง + CTA กลาง · มือถือแสดง 20 รูปแรก
+     ใช้: {{> reviewWall}} (ทุกกลุ่ม) · {{> reviewWall items=reviewWall.groups.corp id="corp-reviews" title="…" tail="…"}} (เฉพาะกลุ่ม)
+     ข้อมูล vite.config.js reviewWall · กดรูป = ดูรูปใหญ่ (review-wall.js) · CSS home.css "คลังรีวิว" --}}
+<section class="hm-sec rvw-sec" id="{{or id "review-wall"}}" aria-labelledby="{{or id "review-wall"}}-h">
+  <header class="wrap hm-head rvw-sec__head">
+    <h2 id="{{or id "review-wall"}}-h">{{{hl (or title "ภาพจริงจากลูกค้าที่ใส่เสื้อทีมดี") (or tail "ใส่เสื้อทีมดี")}}}</h2>
+    <p>{{or sub "ส่วนหนึ่งจากภาพที่ลูกค้าส่งกลับมาหลังได้รับเสื้อ"}}</p>
+  </header>
+  <div class="rvw" data-rvw>
+    <ul class="rvw__grid" aria-label="ภาพลูกค้าใส่เสื้อทีมดี">
+      {{#each (or items @root.reviewWall.items)}}<li class="rvw__ph" style="--r:{{this.r}}"><img src="{{this.img}}" srcset="{{this.srcset}}" sizes="(min-width: 768px) {{this.sw}}px, 45vw" width="{{this.w}}" height="{{this.h}}" alt="{{this.alt}}" loading="lazy" decoding="async"></li>{{/each}}
+    </ul>
+    <div class="rvw__cta">
+      <a class="rvw__all" href="/project/#reviews"><span class="rvw__faces" aria-hidden="true">{{#each @root.reviewWall.faces}}<span style="background-image:url({{this}})"></span>{{/each}}</span><span class="rvw__all-t">ดูรีวิวลูกค้าทั้งหมด</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="cb cb--p rvw__line" href="{{or line @root.pageLine @root.site.lineUrl}}" data-track="line" data-where="review-wall" target="_blank" rel="noopener"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">อยากได้เสื้อแบบนี้ ทัก LINE</span></a>
+    </div>
+  </div>
+</section>

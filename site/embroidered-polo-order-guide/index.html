@@ -2,8 +2,14 @@
 <html lang="th">
 <head>
   {{> head}}
+  {{!-- CSS เฉพาะหน้าโหลดใน head (27 ต.ค.) · เดิม import ผ่าน JS → ตอนเปิดหน้ารูป/ไอคอนกางใหญ่แวบก่อน CSS มา --}}
+  <link rel="stylesheet" href="/src/styles/article-reader.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-blocks.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-material-lab.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-process-studio.css" data-page-css>
   <title>วิธีสั่งทำเสื้อโปโลปักโลโก้และตรวจแบบก่อนผลิต | TEAMDEE</title>
-  <meta name="description" content="แยกสเปกตัวเสื้อกับงานปักให้ชัด และรู้ว่าต้องอนุมัติอะไรในแต่ละขั้น">
+  <meta name="description" content="โปโลปักโลโก้สั่งทำอย่างไร แยกสเปกตัวเสื้อกับงานปักให้ชัด เลือกผ้า ปก ขลิบ ขนาดและสีด้ายของโลโก้ ตรวจแบบก่อนผลิต ขั้นต่ำ 10 ตัว ผลิตประมาณ 10–15 วัน">
 </head>
 <body>
 {{> siteHeader active="learn"}}

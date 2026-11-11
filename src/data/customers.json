@@ -3,19 +3,31 @@
   "img": "/img/customer/co01.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co01-320.webp"
+  "imgSmall": "/img/customer/co01-320.webp",
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมหน้าบริษัท",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมหน้าบริษัท · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co02.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co02-320.webp"
+  "imgSmall": "/img/customer/co02-320.webp",
+  "photoGroup": "gov",
+  "occ": "ทีมห้องแล็บโรงพยาบาลถ่ายรวม",
+  "q": 3,
+  "alt": "ทีมห้องแล็บโรงพยาบาลถ่ายรวม · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co03.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co03-320.webp"
+  "imgSmall": "/img/customer/co03-320.webp",
+  "photoGroup": "gov",
+  "occ": "บุคลากร รพ.ข้างเครื่องสแกน",
+  "q": 3,
+  "alt": "บุคลากร รพ.ข้างเครื่องสแกน · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co04.webp",
@@ -24,13 +36,21 @@
   "imgSmall": "/img/customer/co04-320.webp",
   "uses": [
    "running"
-  ]
+  ],
+  "photoGroup": "running",
+  "occ": "ชมรมวิ่งถ่ายรวมในสนามกรีฑา",
+  "q": 3,
+  "alt": "ชมรมวิ่งถ่ายรวมในสนามกรีฑา · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co05.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co05-320.webp"
+  "imgSmall": "/img/customer/co05-320.webp",
+  "photoGroup": "gov",
+  "occ": "ทีม รพ.สต. ถ่ายรวมหน้าอาคาร",
+  "q": 2,
+  "alt": "ทีม รพ.สต. ถ่ายรวมหน้าอาคาร · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co06.webp",
@@ -39,43 +59,65 @@
   "imgSmall": "/img/customer/co06-320.webp",
   "uses": [
    "shop"
-  ]
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานเต็นท์รถถืออั่งเปา",
+  "q": 3,
+  "alt": "พนักงานเต็นท์รถถืออั่งเปา · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co07.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co07-320.webp"
+  "imgSmall": "/img/customer/co07-320.webp",
+  "photoGroup": "gov",
+  "occ": "ทหารถ่ายรวมที่ลานในค่าย",
+  "q": 2,
+  "alt": "ทหารถ่ายรวมที่ลานในค่าย · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co08.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co08-320.webp"
+  "imgSmall": "/img/customer/co08-320.webp",
+  "alt": "ลูกค้าทีมดีใส่เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co09.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co09-320.webp"
+  "imgSmall": "/img/customer/co09-320.webp",
+  "photoGroup": "event",
+  "occ": "ผู้ร่วมงานกอล์ฟให้สัมภาษณ์",
+  "q": 2,
+  "alt": "ผู้ร่วมงานกอล์ฟให้สัมภาษณ์ · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co10.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co10-320.webp"
+  "imgSmall": "/img/customer/co10-320.webp",
+  "photoGroup": "event",
+  "occ": "ผู้ร่วมเสวนาบนเวทีงานกอล์ฟ",
+  "q": 2,
+  "alt": "ผู้ร่วมเสวนาบนเวทีงานกอล์ฟ · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co11.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co11-320.webp"
+  "imgSmall": "/img/customer/co11-320.webp",
+  "photoGroup": "event",
+  "occ": "ทีมงานอีเวนต์ทดลองขับรถ",
+  "q": 3,
+  "alt": "ทีมงานอีเวนต์ทดลองขับรถ · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co12.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co12-320.webp"
+  "imgSmall": "/img/customer/co12-320.webp",
+  "alt": "ลูกค้าทีมดีใส่เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co13.webp",
@@ -84,19 +126,31 @@
   "imgSmall": "/img/customer/co13-320.webp",
   "uses": [
    "faculty"
-  ]
+  ],
+  "photoGroup": "faculty",
+  "occ": "บุคลากรวิทยาลัยถ่ายรวม",
+  "q": 3,
+  "alt": "บุคลากรวิทยาลัยถ่ายรวม · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co14.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co14-320.webp"
+  "imgSmall": "/img/customer/co14-320.webp",
+  "photoGroup": "shop",
+  "occ": "เจ้าของร้านต้นไม้ในร้าน",
+  "q": 3,
+  "alt": "เจ้าของร้านต้นไม้ในร้าน · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co15.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co15-320.webp"
+  "imgSmall": "/img/customer/co15-320.webp",
+  "photoGroup": "corp",
+  "occ": "พนักงานโชว์เสื้อในออฟฟิศ",
+  "q": 3,
+  "alt": "พนักงานโชว์เสื้อในออฟฟิศ · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co16.webp",
@@ -105,7 +159,11 @@
   "imgSmall": "/img/customer/co16-320.webp",
   "uses": [
    "gov"
-  ]
+  ],
+  "photoGroup": "gov",
+  "occ": "เจ้าหน้าที่ใส่โปโลแขนยาว",
+  "q": 3,
+  "alt": "เจ้าหน้าที่ใส่โปโลแขนยาว · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co17.webp",
@@ -114,25 +172,38 @@
   "imgSmall": "/img/customer/co17-320.webp",
   "uses": [
    "gov"
-  ]
+  ],
+  "photoGroup": "gov",
+  "occ": "ทหารเรือถ่ายรวมริมแม่น้ำ",
+  "q": 3,
+  "alt": "ทหารเรือถ่ายรวมริมแม่น้ำ · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co18.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co18-320.webp"
+  "imgSmall": "/img/customer/co18-320.webp",
+  "alt": "ลูกค้าทีมดีใส่เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co19.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co19-320.webp"
+  "imgSmall": "/img/customer/co19-320.webp",
+  "photoGroup": "corp",
+  "occ": "พนักงานร่วมพิธีไหว้ในบริษัท",
+  "q": 3,
+  "alt": "พนักงานร่วมพิธีไหว้ในบริษัท · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co20.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co20-320.webp"
+  "imgSmall": "/img/customer/co20-320.webp",
+  "photoGroup": "corp",
+  "occ": "ทีมงานถ่ายรวมในห้องจัดเลี้ยง",
+  "q": 2,
+  "alt": "ทีมงานถ่ายรวมในห้องจัดเลี้ยง · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co21.webp",
@@ -141,7 +212,11 @@
   "imgSmall": "/img/customer/co21-320.webp",
   "uses": [
    "gov"
-  ]
+  ],
+  "photoGroup": "gov",
+  "occ": "ทีมเภสัชกรถ่ายรวมหน้าห้องยา",
+  "q": 3,
+  "alt": "ทีมเภสัชกรถ่ายรวมหน้าห้องยา · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co22.webp",
@@ -150,7 +225,11 @@
   "imgSmall": "/img/customer/co22-320.webp",
   "uses": [
    "gov"
-  ]
+  ],
+  "photoGroup": "class",
+  "occ": "สมาชิกชมรมถ่ายรวมในสำนักงาน",
+  "q": 2,
+  "alt": "สมาชิกชมรมถ่ายรวมในสำนักงาน · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co23.webp",
@@ -159,7 +238,11 @@
   "imgSmall": "/img/customer/co23-320.webp",
   "uses": [
    "gov"
-  ]
+  ],
+  "photoGroup": "gov",
+  "occ": "ทหารถ่ายรวมหน้าอาคารในค่าย",
+  "q": 2,
+  "alt": "ทหารถ่ายรวมหน้าอาคารในค่าย · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co24.webp",
@@ -168,37 +251,61 @@
   "imgSmall": "/img/customer/co24-320.webp",
   "uses": [
    "gov"
-  ]
+  ],
+  "photoGroup": "gov",
+  "occ": "ทหารชูกำปั้นถ่ายรวมในค่าย",
+  "q": 2,
+  "alt": "ทหารชูกำปั้นถ่ายรวมในค่าย · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co25.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co25-320.webp"
+  "imgSmall": "/img/customer/co25-320.webp",
+  "photoGroup": "corp",
+  "occ": "ชายใส่เสื้อโปโลในห้องทำงาน",
+  "q": 2,
+  "alt": "ชายใส่เสื้อโปโลในห้องทำงาน · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co26.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co26-320.webp"
+  "imgSmall": "/img/customer/co26-320.webp",
+  "photoGroup": "corp",
+  "occ": "ทีมงานประชุมเวิร์กช็อป",
+  "q": 3,
+  "alt": "ทีมงานประชุมเวิร์กช็อป · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co27.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co27-320.webp"
+  "imgSmall": "/img/customer/co27-320.webp",
+  "photoGroup": "corp",
+  "occ": "พนักงานถืออั่งเปาถ่ายรวม",
+  "q": 2,
+  "alt": "พนักงานถืออั่งเปาถ่ายรวม · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co28.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co28-320.webp"
+  "imgSmall": "/img/customer/co28-320.webp",
+  "photoGroup": "corp",
+  "occ": "พนักงานโพสท่าในงานกลางแจ้ง",
+  "q": 3,
+  "alt": "พนักงานโพสท่าในงานกลางแจ้ง · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co29.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co29-320.webp"
+  "imgSmall": "/img/customer/co29-320.webp",
+  "photoGroup": "faculty",
+  "occ": "ทีมแข่งหุ่นยนต์ถ่ายรวม",
+  "q": 2,
+  "alt": "ทีมแข่งหุ่นยนต์ถ่ายรวม · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co30.webp",
@@ -207,37 +314,61 @@
   "imgSmall": "/img/customer/co30-320.webp",
   "uses": [
    "badminton"
-  ]
+  ],
+  "photoGroup": "badminton",
+  "occ": "ผู้บริหารเปิดงานแข่งแบด",
+  "q": 3,
+  "alt": "ผู้บริหารเปิดงานแข่งแบด · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co31.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co31-320.webp"
+  "imgSmall": "/img/customer/co31-320.webp",
+  "photoGroup": "class",
+  "occ": "สมาชิกทีมถ่ายรวมที่ทางเดิน",
+  "q": 3,
+  "alt": "สมาชิกทีมถ่ายรวมที่ทางเดิน · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co32.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co32-320.webp"
+  "imgSmall": "/img/customer/co32-320.webp",
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมในงานฉลอง",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมในงานฉลอง · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co33.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co33-320.webp"
+  "imgSmall": "/img/customer/co33-320.webp",
+  "photoGroup": "edu",
+  "occ": "คณะครูถ่ายรวมในโรงเรียน",
+  "q": 2,
+  "alt": "คณะครูถ่ายรวมในโรงเรียน · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co34.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co34-320.webp"
+  "imgSmall": "/img/customer/co34-320.webp",
+  "photoGroup": "gov",
+  "occ": "เจ้าหน้าที่ถ่ายหน้าฉากงาน",
+  "q": 3,
+  "alt": "เจ้าหน้าที่ถ่ายหน้าฉากงาน · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/co35.webp",
   "cat": "corporate",
   "catName": "เสื้อองค์กร",
-  "imgSmall": "/img/customer/co35-320.webp"
+  "imgSmall": "/img/customer/co35-320.webp",
+  "photoGroup": "event",
+  "occ": "ค่ายเยาวชนถ่ายรวมกลางทุ่ง",
+  "q": 2,
+  "alt": "ค่ายเยาวชนถ่ายรวมกลางทุ่ง · เสื้อองค์กร"
  },
  {
   "img": "/img/customer/ev01.webp",
@@ -246,19 +377,28 @@
   "imgSmall": "/img/customer/ev01-320.webp",
   "uses": [
    "class"
-  ]
+  ],
+  "photoGroup": "class",
+  "occ": "สมาชิกชมรมถือไมค์เตรียมแสดง",
+  "q": 3,
+  "alt": "สมาชิกชมรมถือไมค์เตรียมแสดง · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev02.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev02-320.webp"
+  "imgSmall": "/img/customer/ev02-320.webp",
+  "photoGroup": "corp",
+  "occ": "ทีมเชียร์ถือพู่ในวันกีฬา",
+  "q": 3,
+  "alt": "ทีมเชียร์ถือพู่ในวันกีฬา · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev03.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev03-320.webp"
+  "imgSmall": "/img/customer/ev03-320.webp",
+  "alt": "ลูกค้าทีมดีใส่เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev04.webp",
@@ -267,43 +407,71 @@
   "imgSmall": "/img/customer/ev04-320.webp",
   "uses": [
    "class"
-  ]
+  ],
+  "photoGroup": "class",
+  "occ": "ศิษย์เก่างานคืนสู่เหย้า",
+  "q": 2,
+  "alt": "ศิษย์เก่างานคืนสู่เหย้า · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev05.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev05-320.webp"
+  "imgSmall": "/img/customer/ev05-320.webp",
+  "photoGroup": "event",
+  "occ": "ทีมงานโครงการถ่ายรวมกลางแจ้ง",
+  "q": 3,
+  "alt": "ทีมงานโครงการถ่ายรวมกลางแจ้ง · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev06.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev06-320.webp"
+  "imgSmall": "/img/customer/ev06-320.webp",
+  "photoGroup": "sport",
+  "occ": "ทีมกีฬาหญิงถ่ายรวมข้างสนาม",
+  "q": 3,
+  "alt": "ทีมกีฬาหญิงถ่ายรวมข้างสนาม · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev07.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev07-320.webp"
+  "imgSmall": "/img/customer/ev07-320.webp",
+  "photoGroup": "event",
+  "occ": "กลุ่มถ่ายรวมในห้องประชุม",
+  "q": 2,
+  "alt": "กลุ่มถ่ายรวมในห้องประชุม · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev08.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev08-320.webp"
+  "imgSmall": "/img/customer/ev08-320.webp",
+  "photoGroup": "sport",
+  "occ": "นักกีฬาหญิงข้างสนามวันแข่ง",
+  "q": 3,
+  "alt": "นักกีฬาหญิงข้างสนามวันแข่ง · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev09.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev09-320.webp"
+  "imgSmall": "/img/customer/ev09-320.webp",
+  "photoGroup": "sport",
+  "occ": "ทีมโบว์ลิ่งถ่ายรวมในลาน",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งถ่ายรวมในลาน · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev10.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev10-320.webp"
+  "imgSmall": "/img/customer/ev10-320.webp",
+  "photoGroup": "running",
+  "occ": "พนักงานชูเสื้องานวิ่ง",
+  "q": 2,
+  "alt": "พนักงานชูเสื้องานวิ่ง · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev11.webp",
@@ -312,7 +480,11 @@
   "imgSmall": "/img/customer/ev11-320.webp",
   "uses": [
    "faculty"
-  ]
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมนักกีฬารับเหรียญหลังแข่ง",
+  "q": 3,
+  "alt": "ทีมนักกีฬารับเหรียญหลังแข่ง · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev12.webp",
@@ -321,7 +493,11 @@
   "imgSmall": "/img/customer/ev12-320.webp",
   "uses": [
    "running"
-  ]
+  ],
+  "photoGroup": "running",
+  "occ": "กลุ่มนักวิ่งถ่ายรวมยามเช้า",
+  "q": 2,
+  "alt": "กลุ่มนักวิ่งถ่ายรวมยามเช้า · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev13.webp",
@@ -330,31 +506,51 @@
   "imgSmall": "/img/customer/ev13-320.webp",
   "uses": [
    "gov"
-  ]
+  ],
+  "photoGroup": "gov",
+  "occ": "เจ้าหน้าที่ร่วมงานกลางแจ้ง",
+  "q": 2,
+  "alt": "เจ้าหน้าที่ร่วมงานกลางแจ้ง · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev14.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev14-320.webp"
+  "imgSmall": "/img/customer/ev14-320.webp",
+  "photoGroup": "event",
+  "occ": "กองเชียร์ฉลองในวันแข่งกีฬา",
+  "q": 3,
+  "alt": "กองเชียร์ฉลองในวันแข่งกีฬา · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev15.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev15-320.webp"
+  "imgSmall": "/img/customer/ev15-320.webp",
+  "photoGroup": "event",
+  "occ": "ขบวนพาเหรดบนรถในวันกีฬาสี",
+  "q": 2,
+  "alt": "ขบวนพาเหรดบนรถในวันกีฬาสี · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev16.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev16-320.webp"
+  "imgSmall": "/img/customer/ev16-320.webp",
+  "photoGroup": "event",
+  "occ": "ทีมสวมถุงมือถ่ายรวมวันกีฬา",
+  "q": 3,
+  "alt": "ทีมสวมถุงมือถ่ายรวมวันกีฬา · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev17.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev17-320.webp"
+  "imgSmall": "/img/customer/ev17-320.webp",
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมในงานกิจกรรม",
+  "q": 2,
+  "alt": "พนักงานถ่ายรวมในงานกิจกรรม · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev18.webp",
@@ -363,31 +559,51 @@
   "imgSmall": "/img/customer/ev18-320.webp",
   "uses": [
    "class"
-  ]
+  ],
+  "photoGroup": "class",
+  "occ": "ทีมเต้นแต่งหน้าก่อนขึ้นแสดง",
+  "q": 3,
+  "alt": "ทีมเต้นแต่งหน้าก่อนขึ้นแสดง · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev19.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev19-320.webp"
+  "imgSmall": "/img/customer/ev19-320.webp",
+  "photoGroup": "class",
+  "occ": "เพื่อนร่วมรุ่นทำมือหัวใจ",
+  "q": 2,
+  "alt": "เพื่อนร่วมรุ่นทำมือหัวใจ · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev20.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev20-320.webp"
+  "imgSmall": "/img/customer/ev20-320.webp",
+  "photoGroup": "corp",
+  "occ": "ทีมงานโดรนใส่เสื้อทีม",
+  "q": 3,
+  "alt": "ทีมงานโดรนใส่เสื้อทีม · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev21.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev21-320.webp"
+  "imgSmall": "/img/customer/ev21-320.webp",
+  "photoGroup": "event",
+  "occ": "ทีมงานถ่ายรวมในวันจัดงาน",
+  "q": 3,
+  "alt": "ทีมงานถ่ายรวมในวันจัดงาน · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev22.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev22-320.webp"
+  "imgSmall": "/img/customer/ev22-320.webp",
+  "photoGroup": "sport",
+  "occ": "ทีมเทนนิสถ่ายรวมกับถ้วย",
+  "q": 3,
+  "alt": "ทีมเทนนิสถ่ายรวมกับถ้วย · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev23.webp",
@@ -396,7 +612,11 @@
   "imgSmall": "/img/customer/ev23-320.webp",
   "uses": [
    "class"
-  ]
+  ],
+  "photoGroup": "class",
+  "occ": "สมาชิกทีมโพสท่าหน้าฉาก",
+  "q": 3,
+  "alt": "สมาชิกทีมโพสท่าหน้าฉาก · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev24.webp",
@@ -405,19 +625,31 @@
   "imgSmall": "/img/customer/ev24-320.webp",
   "uses": [
    "running"
-  ]
+  ],
+  "photoGroup": "running",
+  "occ": "นักวิ่งเดินริมชายหาด",
+  "q": 3,
+  "alt": "นักวิ่งเดินริมชายหาด · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev25.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev25-320.webp"
+  "imgSmall": "/img/customer/ev25-320.webp",
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมหน้าอาคาร",
+  "q": 3,
+  "alt": "นักเรียนถ่ายรวมหน้าอาคาร · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev26.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev26-320.webp"
+  "imgSmall": "/img/customer/ev26-320.webp",
+  "photoGroup": "corp",
+  "occ": "พนักงานนั่งเชียร์ข้างสนาม",
+  "q": 3,
+  "alt": "พนักงานนั่งเชียร์ข้างสนาม · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev27.webp",
@@ -426,7 +658,11 @@
   "imgSmall": "/img/customer/ev27-320.webp",
   "uses": [
    "running"
-  ]
+  ],
+  "photoGroup": "running",
+  "occ": "นักวิ่งโชว์เหรียญหลังวิ่ง",
+  "q": 2,
+  "alt": "นักวิ่งโชว์เหรียญหลังวิ่ง · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev28.webp",
@@ -435,7 +671,11 @@
   "imgSmall": "/img/customer/ev28-320.webp",
   "uses": [
    "running"
-  ]
+  ],
+  "photoGroup": "running",
+  "occ": "กลุ่มนักวิ่งถ่ายรวมหลังจบงาน",
+  "q": 2,
+  "alt": "กลุ่มนักวิ่งถ่ายรวมหลังจบงาน · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev29.webp",
@@ -444,31 +684,48 @@
   "imgSmall": "/img/customer/ev29-320.webp",
   "uses": [
    "running"
-  ]
+  ],
+  "photoGroup": "running",
+  "occ": "ชมรมวิ่งออกวิ่งในเมือง",
+  "q": 3,
+  "alt": "ชมรมวิ่งออกวิ่งในเมือง · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/ev30.webp",
   "cat": "event",
   "catName": "เสื้ออีเวนต์",
-  "imgSmall": "/img/customer/ev30-320.webp"
+  "imgSmall": "/img/customer/ev30-320.webp",
+  "photoGroup": "event",
+  "occ": "ทีมงานถ่ายรวมในงานเทศกาลโคม",
+  "q": 2,
+  "alt": "ทีมงานถ่ายรวมในงานเทศกาลโคม · เสื้ออีเวนต์"
  },
  {
   "img": "/img/customer/sc01.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc01-320.webp"
+  "imgSmall": "/img/customer/sc01-320.webp",
+  "photoGroup": "edu",
+  "occ": "นักเรียนใส่เสื้อห้องเรียน",
+  "q": 3,
+  "alt": "นักเรียนใส่เสื้อห้องเรียน · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc02.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc02-320.webp"
+  "imgSmall": "/img/customer/sc02-320.webp",
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมในหอประชุม",
+  "q": 2,
+  "alt": "นักเรียนถ่ายรวมในหอประชุม · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc03.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc03-320.webp"
+  "imgSmall": "/img/customer/sc03-320.webp",
+  "alt": "ลูกค้าทีมดีใส่เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc04.webp",
@@ -477,25 +734,41 @@
   "imgSmall": "/img/customer/sc04-320.webp",
   "uses": [
    "class"
-  ]
+  ],
+  "photoGroup": "class",
+  "occ": "เพื่อนร่วมรุ่นถ่ายกับลูกบอล",
+  "q": 3,
+  "alt": "เพื่อนร่วมรุ่นถ่ายกับลูกบอล · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc05.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc05-320.webp"
+  "imgSmall": "/img/customer/sc05-320.webp",
+  "photoGroup": "event",
+  "occ": "ทีมงานต้อนรับในงานบุญที่วัด",
+  "q": 3,
+  "alt": "ทีมงานต้อนรับในงานบุญที่วัด · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc06.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc06-320.webp"
+  "imgSmall": "/img/customer/sc06-320.webp",
+  "photoGroup": "edu",
+  "occ": "บุคลากรถ่ายรวมกลางสนามหญ้า",
+  "q": 3,
+  "alt": "บุคลากรถ่ายรวมกลางสนามหญ้า · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc07.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc07-320.webp"
+  "imgSmall": "/img/customer/sc07-320.webp",
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมหน้าบ้านพัก",
+  "q": 3,
+  "alt": "นักเรียนถ่ายรวมหน้าบ้านพัก · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc08.webp",
@@ -504,7 +777,11 @@
   "imgSmall": "/img/customer/sc08-320.webp",
   "uses": [
    "faculty"
-  ]
+  ],
+  "photoGroup": "faculty",
+  "occ": "เชียร์ลีดเดอร์คณะในสตูดิโอ",
+  "q": 3,
+  "alt": "เชียร์ลีดเดอร์คณะในสตูดิโอ · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc09.webp",
@@ -513,7 +790,11 @@
   "imgSmall": "/img/customer/sc09-320.webp",
   "uses": [
    "class"
-  ]
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนค่ายถ่ายรวมริมน้ำ",
+  "q": 2,
+  "alt": "นักเรียนค่ายถ่ายรวมริมน้ำ · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc10.webp",
@@ -522,25 +803,41 @@
   "imgSmall": "/img/customer/sc10-320.webp",
   "uses": [
    "faculty"
-  ]
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมหน้าอาคาร",
+  "q": 2,
+  "alt": "นักเรียนถ่ายรวมหน้าอาคาร · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc11.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc11-320.webp"
+  "imgSmall": "/img/customer/sc11-320.webp",
+  "photoGroup": "edu",
+  "occ": "เด็กอนุบาลรับเหรียญวันกีฬา",
+  "q": 3,
+  "alt": "เด็กอนุบาลรับเหรียญวันกีฬา · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc12.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc12-320.webp"
+  "imgSmall": "/img/customer/sc12-320.webp",
+  "photoGroup": "edu",
+  "occ": "นักเรียนโชว์เหรียญวันกีฬา",
+  "q": 3,
+  "alt": "นักเรียนโชว์เหรียญวันกีฬา · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc13.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc13-320.webp"
+  "imgSmall": "/img/customer/sc13-320.webp",
+  "photoGroup": "edu",
+  "occ": "คุณครูถือพู่เชียร์ในโรงเรียน",
+  "q": 3,
+  "alt": "คุณครูถือพู่เชียร์ในโรงเรียน · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc14.webp",
@@ -549,31 +846,48 @@
   "imgSmall": "/img/customer/sc14-320.webp",
   "uses": [
    "shop"
-  ]
+  ],
+  "photoGroup": "edu",
+  "occ": "คุณครูใส่โปโลถ่ายรวมในอาคาร",
+  "q": 3,
+  "alt": "คุณครูใส่โปโลถ่ายรวมในอาคาร · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc15.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc15-320.webp"
+  "imgSmall": "/img/customer/sc15-320.webp",
+  "photoGroup": "edu",
+  "occ": "นักเรียนในเวทีแข่งหุ่นยนต์",
+  "q": 3,
+  "alt": "นักเรียนในเวทีแข่งหุ่นยนต์ · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc16.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc16-320.webp"
+  "imgSmall": "/img/customer/sc16-320.webp",
+  "photoGroup": "edu",
+  "occ": "นักเรียนบังคับหุ่นยนต์แข่ง",
+  "q": 3,
+  "alt": "นักเรียนบังคับหุ่นยนต์แข่ง · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sc17.webp",
   "cat": "school",
   "catName": "เสื้อมหาลัย โรงเรียน",
-  "imgSmall": "/img/customer/sc17-320.webp"
+  "imgSmall": "/img/customer/sc17-320.webp",
+  "photoGroup": "edu",
+  "occ": "ตัวแทนค่ายโอลิมปิกวิชาการ",
+  "q": 3,
+  "alt": "ตัวแทนค่ายโอลิมปิกวิชาการ · เสื้อมหาลัย โรงเรียน"
  },
  {
   "img": "/img/customer/sp01.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp01-320.webp"
+  "imgSmall": "/img/customer/sp01-320.webp",
+  "alt": "ลูกค้าทีมดีใส่เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp02.webp",
@@ -582,7 +896,11 @@
   "imgSmall": "/img/customer/sp02-320.webp",
   "uses": [
    "gov"
-  ]
+  ],
+  "photoGroup": "gov",
+  "occ": "ทหารรับมอบเสื้อกล้ามงานวิ่ง",
+  "q": 2,
+  "alt": "ทหารรับมอบเสื้อกล้ามงานวิ่ง · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp03.webp",
@@ -591,19 +909,31 @@
   "imgSmall": "/img/customer/sp03-320.webp",
   "uses": [
    "badminton"
-  ]
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถ่ายรวมในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดถ่ายรวมในคอร์ต · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp04.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp04-320.webp"
+  "imgSmall": "/img/customer/sp04-320.webp",
+  "photoGroup": "sport",
+  "occ": "ทีมยิงธนูพักระหว่างแข่ง",
+  "q": 3,
+  "alt": "ทีมยิงธนูพักระหว่างแข่ง · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp05.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp05-320.webp"
+  "imgSmall": "/img/customer/sp05-320.webp",
+  "photoGroup": "sport",
+  "occ": "ทีมกอล์ฟถ่ายรวมริมชายหาด",
+  "q": 2,
+  "alt": "ทีมกอล์ฟถ่ายรวมริมชายหาด · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp06.webp",
@@ -612,13 +942,21 @@
   "imgSmall": "/img/customer/sp06-320.webp",
   "uses": [
    "badminton"
-  ]
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถ่ายรวมหน้าคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดถ่ายรวมหน้าคอร์ต · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp07.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp07-320.webp"
+  "imgSmall": "/img/customer/sp07-320.webp",
+  "photoGroup": "badminton",
+  "occ": "ทีมพนักงานถ่ายรวมในคอร์ตแบด",
+  "q": 3,
+  "alt": "ทีมพนักงานถ่ายรวมในคอร์ตแบด · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp08.webp",
@@ -627,13 +965,21 @@
   "imgSmall": "/img/customer/sp08-320.webp",
   "uses": [
    "badminton"
-  ]
+  ],
+  "photoGroup": "badminton",
+  "occ": "ก๊วนแบดถ่ายรวมหลังเล่น",
+  "q": 3,
+  "alt": "ก๊วนแบดถ่ายรวมหลังเล่น · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp09.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp09-320.webp"
+  "imgSmall": "/img/customer/sp09-320.webp",
+  "photoGroup": "sport",
+  "occ": "ทีมกอล์ฟถ่ายรวมในสนาม",
+  "q": 3,
+  "alt": "ทีมกอล์ฟถ่ายรวมในสนาม · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp10.webp",
@@ -642,7 +988,11 @@
   "imgSmall": "/img/customer/sp10-320.webp",
   "uses": [
    "badminton"
-  ]
+  ],
+  "photoGroup": "badminton",
+  "occ": "นักแบดหญิงถ่ายรวมในคอร์ต",
+  "q": 3,
+  "alt": "นักแบดหญิงถ่ายรวมในคอร์ต · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp11.webp",
@@ -651,7 +1001,11 @@
   "imgSmall": "/img/customer/sp11-320.webp",
   "uses": [
    "badminton"
-  ]
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถ่ายรวมในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดถ่ายรวมในคอร์ต · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp12.webp",
@@ -660,49 +1014,75 @@
   "imgSmall": "/img/customer/sp12-320.webp",
   "uses": [
    "badminton"
-  ]
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดชูไม้ฉลองในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดชูไม้ฉลองในคอร์ต · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp13.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp13-320.webp"
+  "imgSmall": "/img/customer/sp13-320.webp",
+  "photoGroup": "sport",
+  "occ": "ทีมฟุตบอลถ่ายรวมในสนาม",
+  "q": 3,
+  "alt": "ทีมฟุตบอลถ่ายรวมในสนาม · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp14.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp14-320.webp"
+  "imgSmall": "/img/customer/sp14-320.webp",
+  "alt": "ลูกค้าทีมดีใส่เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp15.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp15-320.webp"
+  "imgSmall": "/img/customer/sp15-320.webp",
+  "photoGroup": "sport",
+  "occ": "นักเทควันโดเยาวชนโพสท่าในยิม",
+  "q": 3,
+  "alt": "นักเทควันโดเยาวชนโพสท่าในยิม · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp16.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp16-320.webp"
+  "imgSmall": "/img/customer/sp16-320.webp",
+  "photoGroup": "sport",
+  "occ": "นักเทควันโดเยาวชนโชว์เหรียญ",
+  "q": 3,
+  "alt": "นักเทควันโดเยาวชนโชว์เหรียญ · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp17.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp17-320.webp"
+  "imgSmall": "/img/customer/sp17-320.webp",
+  "photoGroup": "gov",
+  "occ": "พนักงานเชียร์งานโบว์ลิ่ง",
+  "q": 3,
+  "alt": "พนักงานเชียร์งานโบว์ลิ่ง · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp18.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp18-320.webp"
+  "imgSmall": "/img/customer/sp18-320.webp",
+  "photoGroup": "gov",
+  "occ": "ทีมฉลองหลังแข่งโบว์ลิ่ง",
+  "q": 3,
+  "alt": "ทีมฉลองหลังแข่งโบว์ลิ่ง · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp19.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp19-320.webp"
+  "imgSmall": "/img/customer/sp19-320.webp",
+  "alt": "ลูกค้าทีมดีใส่เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp20.webp",
@@ -711,13 +1091,18 @@
   "imgSmall": "/img/customer/sp20-320.webp",
   "uses": [
    "badminton"
-  ]
+  ],
+  "photoGroup": "badminton",
+  "occ": "นักแบดสองคนถ่ายในคอร์ต",
+  "q": 3,
+  "alt": "นักแบดสองคนถ่ายในคอร์ต · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp21.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp21-320.webp"
+  "imgSmall": "/img/customer/sp21-320.webp",
+  "alt": "ลูกค้าทีมดีใส่เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp22.webp",
@@ -726,42 +1111,4880 @@
   "imgSmall": "/img/customer/sp22-320.webp",
   "uses": [
    "badminton"
-  ]
+  ],
+  "photoGroup": "badminton",
+  "occ": "ก๊วนแบดถ่ายรวมในคอร์ต",
+  "q": 3,
+  "alt": "ก๊วนแบดถ่ายรวมในคอร์ต · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp23.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp23-320.webp"
+  "imgSmall": "/img/customer/sp23-320.webp",
+  "photoGroup": "running",
+  "occ": "ทีมนักวิ่งเยาวชนที่ลู่วิ่ง",
+  "q": 3,
+  "alt": "ทีมนักวิ่งเยาวชนที่ลู่วิ่ง · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp24.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp24-320.webp"
+  "imgSmall": "/img/customer/sp24-320.webp",
+  "photoGroup": "sport",
+  "occ": "นักฟุตบอลโชว์หลังเสื้อ",
+  "q": 3,
+  "alt": "นักฟุตบอลโชว์หลังเสื้อ · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp25.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp25-320.webp"
+  "imgSmall": "/img/customer/sp25-320.webp",
+  "photoGroup": "sport",
+  "occ": "นักเทควันโดเยาวชนบนเวที",
+  "q": 3,
+  "alt": "นักเทควันโดเยาวชนบนเวที · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp26.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp26-320.webp"
+  "imgSmall": "/img/customer/sp26-320.webp",
+  "photoGroup": "sport",
+  "occ": "นักกีฬาเยาวชนชูถ้วยรางวัล",
+  "q": 3,
+  "alt": "นักกีฬาเยาวชนชูถ้วยรางวัล · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp27.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp27-320.webp"
+  "imgSmall": "/img/customer/sp27-320.webp",
+  "photoGroup": "sport",
+  "occ": "นักยิงธนูง้างคันขณะแข่ง",
+  "q": 3,
+  "alt": "นักยิงธนูง้างคันขณะแข่ง · เสื้อกีฬา"
  },
  {
   "img": "/img/customer/sp28.webp",
   "cat": "sports",
   "catName": "เสื้อกีฬา",
-  "imgSmall": "/img/customer/sp28-320.webp"
+  "imgSmall": "/img/customer/sp28-320.webp",
+  "photoGroup": "sport",
+  "occ": "นักเทนนิสถือไม้ในคอร์ต",
+  "q": 3,
+  "alt": "นักเทนนิสถือไม้ในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc1.webp",
+  "imgSmall": "/img/customer/lc1-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถือถ้วยรางวัลหน้าฉาก",
+  "q": 3,
+  "alt": "ทีมแบดถือถ้วยรางวัลหน้าฉาก · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc14.webp",
+  "imgSmall": "/img/customer/lc14-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมฟุตบอลถ่ายรวมในสนามหญ้าเทียม",
+  "q": 3,
+  "alt": "ทีมฟุตบอลถ่ายรวมในสนามหญ้าเทียม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc37.webp",
+  "imgSmall": "/img/customer/lc37-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ก๊วนแบดถ่ายรวมกลางคอร์ต",
+  "q": 3,
+  "alt": "ก๊วนแบดถ่ายรวมกลางคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc65.webp",
+  "imgSmall": "/img/customer/lc65-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เด็กซ้อมแบดในคอร์ต",
+  "q": 3,
+  "alt": "เด็กซ้อมแบดในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc68.webp",
+  "imgSmall": "/img/customer/lc68-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เด็กโพสท่าในคอร์ตแบด",
+  "q": 3,
+  "alt": "เด็กโพสท่าในคอร์ตแบด · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc69.webp",
+  "imgSmall": "/img/customer/lc69-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เด็กถือไม้แบดถ่ายในคอร์ต",
+  "q": 3,
+  "alt": "เด็กถือไม้แบดถ่ายในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc70.webp",
+  "imgSmall": "/img/customer/lc70-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เด็กถือไม้แบดยืนบนคอร์ต",
+  "q": 3,
+  "alt": "เด็กถือไม้แบดยืนบนคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc80.webp",
+  "imgSmall": "/img/customer/lc80-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ผู้เล่นลาครอสระหว่างแข่ง",
+  "q": 3,
+  "alt": "ผู้เล่นลาครอสระหว่างแข่ง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc81.webp",
+  "imgSmall": "/img/customer/lc81-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมลาครอสถ่ายรวมข้างสนาม",
+  "q": 3,
+  "alt": "ทีมลาครอสถ่ายรวมข้างสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc97.webp",
+  "imgSmall": "/img/customer/lc97-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมกอล์ฟรับถ้วยบนกรีน",
+  "q": 2,
+  "alt": "ทีมกอล์ฟรับถ้วยบนกรีน · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc189.webp",
+  "imgSmall": "/img/customer/lc189-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "นักแบดกำลังตีในคอร์ต",
+  "q": 3,
+  "alt": "นักแบดกำลังตีในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc190.webp",
+  "imgSmall": "/img/customer/lc190-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "นักแบดเตรียมเสิร์ฟลูก",
+  "q": 3,
+  "alt": "นักแบดเตรียมเสิร์ฟลูก · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc194.webp",
+  "imgSmall": "/img/customer/lc194-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถ่ายรวมหลังแข่งกระชับมิตร",
+  "q": 2,
+  "alt": "ทีมแบดถ่ายรวมหลังแข่งกระชับมิตร · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc206.webp",
+  "imgSmall": "/img/customer/lc206-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "ทีมโบว์ลิ่งถือลูกยืนบนเลน",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งถือลูกยืนบนเลน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc207.webp",
+  "imgSmall": "/img/customer/lc207-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "ทีมโบว์ลิ่งถือลูกยืนบนเลน",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งถือลูกยืนบนเลน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc209.webp",
+  "imgSmall": "/img/customer/lc209-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "ทีมโบว์ลิ่งชูเหรียญหน้าฉากงาน",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งชูเหรียญหน้าฉากงาน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc232.webp",
+  "imgSmall": "/img/customer/lc232-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "ทีมปาเป้าถือลูกดอกหน้าเป้า",
+  "q": 3,
+  "alt": "ทีมปาเป้าถือลูกดอกหน้าเป้า · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc247.webp",
+  "imgSmall": "/img/customer/lc247-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถ่ายรวมข้างเน็ต",
+  "q": 3,
+  "alt": "ทีมแบดถ่ายรวมข้างเน็ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc261.webp",
+  "imgSmall": "/img/customer/lc261-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "พิธีเปิดงานแข่งแบด",
+  "q": 2,
+  "alt": "พิธีเปิดงานแข่งแบด · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc302.webp",
+  "imgSmall": "/img/customer/lc302-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถ่ายรวมข้างคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดถ่ายรวมข้างคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc314.webp",
+  "imgSmall": "/img/customer/lc314-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมฟุตบอลถ่ายรวมหลังเตะกลางคืน",
+  "q": 3,
+  "alt": "ทีมฟุตบอลถ่ายรวมหลังเตะกลางคืน · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc407.webp",
+  "imgSmall": "/img/customer/lc407-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมเทควันโดเด็กบนเวทีแข่ง",
+  "q": 2,
+  "alt": "ทีมเทควันโดเด็กบนเวทีแข่ง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc409.webp",
+  "imgSmall": "/img/customer/lc409-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักกีฬาเทควันโดเด็กในงานแข่ง",
+  "q": 3,
+  "alt": "นักกีฬาเทควันโดเด็กในงานแข่ง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc430.webp",
+  "imgSmall": "/img/customer/lc430-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักเทนนิสถือไม้ยืนข้างเน็ต",
+  "q": 3,
+  "alt": "นักเทนนิสถือไม้ยืนข้างเน็ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc432.webp",
+  "imgSmall": "/img/customer/lc432-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักเทนนิสโพสท่าตีในคอร์ต",
+  "q": 3,
+  "alt": "นักเทนนิสโพสท่าตีในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc433.webp",
+  "imgSmall": "/img/customer/lc433-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักเทนนิสโชว์หลังเสื้อชมรม",
+  "q": 3,
+  "alt": "นักเทนนิสโชว์หลังเสื้อชมรม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc435.webp",
+  "imgSmall": "/img/customer/lc435-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักเทควันโดยืนในโรงยิม",
+  "q": 2,
+  "alt": "นักเทควันโดยืนในโรงยิม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc6.webp",
+  "imgSmall": "/img/customer/lc6-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมในงานสัมมนา",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมในงานสัมมนา · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc145.webp",
+  "imgSmall": "/img/customer/lc145-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "ทีมงานถ่ายรวมหน้าป้ายกลุ่มชุมชน",
+  "q": 2,
+  "alt": "ทีมงานถ่ายรวมหน้าป้ายกลุ่มชุมชน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc198.webp",
+  "imgSmall": "/img/customer/lc198-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมหน้าอาคาร",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมหน้าอาคาร · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc202.webp",
+  "imgSmall": "/img/customer/lc202-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานใส่เสื้อทีมหน้าอาคาร",
+  "q": 2,
+  "alt": "พนักงานใส่เสื้อทีมหน้าอาคาร · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc203.webp",
+  "imgSmall": "/img/customer/lc203-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานใส่เสื้อทีมหน้าอาคาร",
+  "q": 3,
+  "alt": "พนักงานใส่เสื้อทีมหน้าอาคาร · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc205.webp",
+  "imgSmall": "/img/customer/lc205-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมทั้งแผนก",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมทั้งแผนก · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc237.webp",
+  "imgSmall": "/img/customer/lc237-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมหน้าสำนักงาน",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมหน้าสำนักงาน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc264.webp",
+  "imgSmall": "/img/customer/lc264-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทีมงานใส่เสื้อทีมในออฟฟิศ",
+  "q": 3,
+  "alt": "ทีมงานใส่เสื้อทีมในออฟฟิศ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc265.webp",
+  "imgSmall": "/img/customer/lc265-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทีมงานโชว์ลายหลังเสื้อ",
+  "q": 3,
+  "alt": "ทีมงานโชว์ลายหลังเสื้อ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc266.webp",
+  "imgSmall": "/img/customer/lc266-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทีมงานเซลฟี่ในออฟฟิศ",
+  "q": 2,
+  "alt": "ทีมงานเซลฟี่ในออฟฟิศ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc338.webp",
+  "imgSmall": "/img/customer/lc338-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานร้านถ่ายรวมหน้าป้ายร้าน",
+  "q": 3,
+  "alt": "พนักงานร้านถ่ายรวมหน้าป้ายร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc342.webp",
+  "imgSmall": "/img/customer/lc342-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานร้านรถถ่ายหน้าเต็นท์",
+  "q": 3,
+  "alt": "พนักงานร้านรถถ่ายหน้าเต็นท์ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc343.webp",
+  "imgSmall": "/img/customer/lc343-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมงานเลี้ยงกลางคืน",
+  "q": 2,
+  "alt": "พนักงานถ่ายรวมงานเลี้ยงกลางคืน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc349.webp",
+  "imgSmall": "/img/customer/lc349-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานร้านฉลองครบรอบ",
+  "q": 3,
+  "alt": "พนักงานร้านฉลองครบรอบ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc354.webp",
+  "imgSmall": "/img/customer/lc354-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทีมงานถ่ายรวมหน้ารถบรรทุก",
+  "q": 2,
+  "alt": "ทีมงานถ่ายรวมหน้ารถบรรทุก · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc357.webp",
+  "imgSmall": "/img/customer/lc357-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานนั่งเล่นหลังงานกลางคืน",
+  "q": 2,
+  "alt": "พนักงานนั่งเล่นหลังงานกลางคืน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc150.webp",
+  "imgSmall": "/img/customer/lc150-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ทริปไหว้พระใส่เสื้อทีม",
+  "q": 3,
+  "alt": "ทริปไหว้พระใส่เสื้อทีม · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc151.webp",
+  "imgSmall": "/img/customer/lc151-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ผู้ร่วมทริปโชว์ทุเรียน",
+  "q": 2,
+  "alt": "ผู้ร่วมทริปโชว์ทุเรียน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc153.webp",
+  "imgSmall": "/img/customer/lc153-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ทริปไหว้ศาลหลักเมือง",
+  "q": 3,
+  "alt": "ทริปไหว้ศาลหลักเมือง · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc154.webp",
+  "imgSmall": "/img/customer/lc154-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "สมาชิกสมาคมถ่ายรวมงานสัมมนา",
+  "q": 3,
+  "alt": "สมาชิกสมาคมถ่ายรวมงานสัมมนา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc171.webp",
+  "imgSmall": "/img/customer/lc171-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ทีมงานร่วมงานปีใหม่เมือง",
+  "q": 3,
+  "alt": "ทีมงานร่วมงานปีใหม่เมือง · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc180.webp",
+  "imgSmall": "/img/customer/lc180-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ทีมงานถ่ายรวมงานเทศกาลกลางคืน",
+  "q": 2,
+  "alt": "ทีมงานถ่ายรวมงานเทศกาลกลางคืน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc182.webp",
+  "imgSmall": "/img/customer/lc182-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ทีมงานถ่ายรวมงานเทศกาลกลางคืน",
+  "q": 2,
+  "alt": "ทีมงานถ่ายรวมงานเทศกาลกลางคืน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc183.webp",
+  "imgSmall": "/img/customer/lc183-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ทีมงานถ่ายรวมงานเทศกาลกลางคืน",
+  "q": 3,
+  "alt": "ทีมงานถ่ายรวมงานเทศกาลกลางคืน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc74.webp",
+  "imgSmall": "/img/customer/lc74-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาใส่เสื้อคณะถ่ายแฟชั่น",
+  "q": 3,
+  "alt": "นักศึกษาใส่เสื้อคณะถ่ายแฟชั่น · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc75.webp",
+  "imgSmall": "/img/customer/lc75-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาใส่เสื้อคณะถ่ายรวม",
+  "q": 3,
+  "alt": "นักศึกษาใส่เสื้อคณะถ่ายรวม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc93.webp",
+  "imgSmall": "/img/customer/lc93-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "เด็กๆ ใส่เสื้ออาสาในโรงเรียน",
+  "q": 3,
+  "alt": "เด็กๆ ใส่เสื้ออาสาในโรงเรียน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc135.webp",
+  "imgSmall": "/img/customer/lc135-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาใส่เสื้อสาขา",
+  "q": 3,
+  "alt": "นักศึกษาใส่เสื้อสาขา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc136.webp",
+  "imgSmall": "/img/customer/lc136-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ภาพใกล้ลายเสื้อสาขา",
+  "q": 3,
+  "alt": "ภาพใกล้ลายเสื้อสาขา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc137.webp",
+  "imgSmall": "/img/customer/lc137-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาใส่เสื้อสาขา",
+  "q": 3,
+  "alt": "นักศึกษาใส่เสื้อสาขา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc253.webp",
+  "imgSmall": "/img/customer/lc253-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ทีมแข่งหุ่นยนต์ถ่ายรวม",
+  "q": 3,
+  "alt": "ทีมแข่งหุ่นยนต์ถ่ายรวม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc276.webp",
+  "imgSmall": "/img/customer/lc276-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "เชียร์ลีดเดอร์คณะขึ้นแสดง",
+  "q": 3,
+  "alt": "เชียร์ลีดเดอร์คณะขึ้นแสดง · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc278.webp",
+  "imgSmall": "/img/customer/lc278-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "เชียร์ลีดเดอร์คณะขึ้นแสดง",
+  "q": 3,
+  "alt": "เชียร์ลีดเดอร์คณะขึ้นแสดง · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc281.webp",
+  "imgSmall": "/img/customer/lc281-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "เชียร์ลีดเดอร์คณะถ่ายในสตูดิโอ",
+  "q": 2,
+  "alt": "เชียร์ลีดเดอร์คณะถ่ายในสตูดิโอ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc368.webp",
+  "imgSmall": "/img/customer/lc368-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาใส่เสื้อหลักสูตรไปทริป",
+  "q": 2,
+  "alt": "นักศึกษาใส่เสื้อหลักสูตรไปทริป · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc375.webp",
+  "imgSmall": "/img/customer/lc375-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาใส่เสื้อหลักสูตรไปทริป",
+  "q": 3,
+  "alt": "นักศึกษาใส่เสื้อหลักสูตรไปทริป · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls3.webp",
+  "imgSmall": "/img/customer/ls3-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมในงานค่าย",
+  "q": 3,
+  "alt": "นักเรียนถ่ายรวมในงานค่าย · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls4.webp",
+  "imgSmall": "/img/customer/ls4-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนนั่งฟังในงานค่าย",
+  "q": 3,
+  "alt": "นักเรียนนั่งฟังในงานค่าย · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls9.webp",
+  "imgSmall": "/img/customer/ls9-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนค่ายหุ่นยนต์ถ่ายรวม",
+  "q": 2,
+  "alt": "นักเรียนค่ายหุ่นยนต์ถ่ายรวม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls58.webp",
+  "imgSmall": "/img/customer/ls58-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "เด็กฝึกแบดกับโค้ชในโรงยิม",
+  "q": 3,
+  "alt": "เด็กฝึกแบดกับโค้ชในโรงยิม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls59.webp",
+  "imgSmall": "/img/customer/ls59-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "เด็กฝึกตีแบดกับโค้ช",
+  "q": 2,
+  "alt": "เด็กฝึกตีแบดกับโค้ช · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls60.webp",
+  "imgSmall": "/img/customer/ls60-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "เด็กหัดตีลูกแบดกับโค้ช",
+  "q": 3,
+  "alt": "เด็กหัดตีลูกแบดกับโค้ช · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls61.webp",
+  "imgSmall": "/img/customer/ls61-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "เด็กรับเหรียญหลังจบคลาส",
+  "q": 2,
+  "alt": "เด็กรับเหรียญหลังจบคลาส · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls62.webp",
+  "imgSmall": "/img/customer/ls62-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "เด็กนั่งรอเรียนแบดในโรงยิม",
+  "q": 2,
+  "alt": "เด็กนั่งรอเรียนแบดในโรงยิม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls63.webp",
+  "imgSmall": "/img/customer/ls63-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ทีมโค้ชแนะนำคลาสแบด",
+  "q": 2,
+  "alt": "ทีมโค้ชแนะนำคลาสแบด · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls64.webp",
+  "imgSmall": "/img/customer/ls64-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "เด็กกระโดดข้ามรั้วฝึกซ้อม",
+  "q": 3,
+  "alt": "เด็กกระโดดข้ามรั้วฝึกซ้อม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls86.webp",
+  "imgSmall": "/img/customer/ls86-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถือถ้วยวันกีฬาสี",
+  "q": 3,
+  "alt": "นักเรียนถือถ้วยวันกีฬาสี · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls88.webp",
+  "imgSmall": "/img/customer/ls88-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนวันกีฬาสี",
+  "q": 3,
+  "alt": "นักเรียนวันกีฬาสี · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/ls89.webp",
+  "imgSmall": "/img/customer/ls89-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนฉลองถ้วยวันกีฬาสี",
+  "q": 3,
+  "alt": "นักเรียนฉลองถ้วยวันกีฬาสี · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc2.webp",
+  "imgSmall": "/img/customer/lc2-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "คู่ตีแบดกำลังเสิร์ฟในสนาม",
+  "q": 3,
+  "alt": "คู่ตีแบดกำลังเสิร์ฟในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc3.webp",
+  "imgSmall": "/img/customer/lc3-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ก๊วนแบดถ่ายรวมหลังเล่น",
+  "q": 3,
+  "alt": "ก๊วนแบดถ่ายรวมหลังเล่น · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc4.webp",
+  "imgSmall": "/img/customer/lc4-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ชมรมแบดถ่ายรวมหน้าป้ายงาน",
+  "q": 3,
+  "alt": "ชมรมแบดถ่ายรวมหน้าป้ายงาน · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc7.webp",
+  "imgSmall": "/img/customer/lc7-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานใส่โปโลในแคมป์บริษัท",
+  "q": 3,
+  "alt": "พนักงานใส่โปโลในแคมป์บริษัท · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc8.webp",
+  "imgSmall": "/img/customer/lc8-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานเซลฟี่ใส่โปโลบริษัท",
+  "q": 2,
+  "alt": "พนักงานเซลฟี่ใส่โปโลบริษัท · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc9.webp",
+  "imgSmall": "/img/customer/lc9-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานลงทะเบียนงานแคมป์",
+  "q": 2,
+  "alt": "พนักงานลงทะเบียนงานแคมป์ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc11.webp",
+  "imgSmall": "/img/customer/lc11-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมฟุตบอลถ่ายรวมหน้าสนาม",
+  "q": 3,
+  "alt": "ทีมฟุตบอลถ่ายรวมหน้าสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc12.webp",
+  "imgSmall": "/img/customer/lc12-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมฟุตบอลหันหลังโชว์เสื้อ",
+  "q": 3,
+  "alt": "ทีมฟุตบอลหันหลังโชว์เสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc16.webp",
+  "imgSmall": "/img/customer/lc16-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทริปบริษัทถ่ายรวมจุดชมวิว",
+  "q": 1,
+  "alt": "ทริปบริษัทถ่ายรวมจุดชมวิว · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc17.webp",
+  "imgSmall": "/img/customer/lc17-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานชูสองนิ้วหันหลังชมวิว",
+  "q": 1,
+  "alt": "พนักงานชูสองนิ้วหันหลังชมวิว · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc18.webp",
+  "imgSmall": "/img/customer/lc18-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทริปบริษัทถ่ายรวมริมทะเล",
+  "q": 1,
+  "alt": "ทริปบริษัทถ่ายรวมริมทะเล · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc19.webp",
+  "imgSmall": "/img/customer/lc19-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานเดินเล่นริมลำธาร",
+  "q": 2,
+  "alt": "พนักงานเดินเล่นริมลำธาร · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc20.webp",
+  "imgSmall": "/img/customer/lc20-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทริปบริษัทถ่ายรวมหน้าน้ำตก",
+  "q": 2,
+  "alt": "ทริปบริษัทถ่ายรวมหน้าน้ำตก · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc21.webp",
+  "imgSmall": "/img/customer/lc21-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทริปบริษัทถ่ายรวมหน้าศาลเจ้า",
+  "q": 3,
+  "alt": "ทริปบริษัทถ่ายรวมหน้าศาลเจ้า · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc22.webp",
+  "imgSmall": "/img/customer/lc22-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานยืนเรียงบนเรือข้ามฟาก",
+  "q": 3,
+  "alt": "พนักงานยืนเรียงบนเรือข้ามฟาก · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc23.webp",
+  "imgSmall": "/img/customer/lc23-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานทำมือหัวใจบนเรือ",
+  "q": 3,
+  "alt": "พนักงานทำมือหัวใจบนเรือ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc24.webp",
+  "imgSmall": "/img/customer/lc24-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถือป้ายหน้าสำนักงาน",
+  "q": 3,
+  "alt": "พนักงานถือป้ายหน้าสำนักงาน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc25.webp",
+  "imgSmall": "/img/customer/lc25-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานดำน้ำตื้นใส่เสื้อทริป",
+  "q": 1,
+  "alt": "พนักงานดำน้ำตื้นใส่เสื้อทริป · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc26.webp",
+  "imgSmall": "/img/customer/lc26-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานดำน้ำตื้นชูสองนิ้ว",
+  "q": 1,
+  "alt": "พนักงานดำน้ำตื้นชูสองนิ้ว · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc27.webp",
+  "imgSmall": "/img/customer/lc27-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานตกปลาบนเรือ",
+  "q": 2,
+  "alt": "พนักงานตกปลาบนเรือ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc28.webp",
+  "imgSmall": "/img/customer/lc28-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานนั่งเรือเที่ยวทะเล",
+  "q": 2,
+  "alt": "พนักงานนั่งเรือเที่ยวทะเล · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc29.webp",
+  "imgSmall": "/img/customer/lc29-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานยกนิ้วโป้งบนเรือ",
+  "q": 3,
+  "alt": "พนักงานยกนิ้วโป้งบนเรือ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc31.webp",
+  "imgSmall": "/img/customer/lc31-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เสื้อทีมแบดจริงด้านหน้า",
+  "q": 0,
+  "alt": "เสื้อทีมแบดจริงด้านหน้า · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc32.webp",
+  "imgSmall": "/img/customer/lc32-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เสื้อทีมแบดจริงด้านหลัง",
+  "q": 0,
+  "alt": "เสื้อทีมแบดจริงด้านหลัง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc33.webp",
+  "imgSmall": "/img/customer/lc33-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เสื้อทีมแบดจริงมุมเฉียง",
+  "q": 0,
+  "alt": "เสื้อทีมแบดจริงมุมเฉียง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc34.webp",
+  "imgSmall": "/img/customer/lc34-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เสื้อทีมแบดจริงมุมข้าง",
+  "q": 0,
+  "alt": "เสื้อทีมแบดจริงมุมข้าง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc38.webp",
+  "imgSmall": "/img/customer/lc38-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดกอดอกถ่ายมุมสูง",
+  "q": 3,
+  "alt": "ทีมแบดกอดอกถ่ายมุมสูง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc39.webp",
+  "imgSmall": "/img/customer/lc39-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดนั่งรวมข้างสนาม",
+  "q": 3,
+  "alt": "ทีมแบดนั่งรวมข้างสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc40.webp",
+  "imgSmall": "/img/customer/lc40-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถือไม้ยืนในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดถือไม้ยืนในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc41.webp",
+  "imgSmall": "/img/customer/lc41-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "สมาชิกทีมแบดถือไม้ยิ้ม",
+  "q": 3,
+  "alt": "สมาชิกทีมแบดถือไม้ยิ้ม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc43.webp",
+  "imgSmall": "/img/customer/lc43-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "นายแบบใส่เสื้อแบดสีดำ",
+  "q": 3,
+  "alt": "นายแบบใส่เสื้อแบดสีดำ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc44.webp",
+  "imgSmall": "/img/customer/lc44-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "นายแบบใส่เสื้อแบดมุมเฉียง",
+  "q": 3,
+  "alt": "นายแบบใส่เสื้อแบดมุมเฉียง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc45.webp",
+  "imgSmall": "/img/customer/lc45-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "นายแบบโชว์ลายหลังเสื้อแบด",
+  "q": 3,
+  "alt": "นายแบบโชว์ลายหลังเสื้อแบด · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc46.webp",
+  "imgSmall": "/img/customer/lc46-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "นายแบบใส่เสื้อแบดสีขาว",
+  "q": 3,
+  "alt": "นายแบบใส่เสื้อแบดสีขาว · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc47.webp",
+  "imgSmall": "/img/customer/lc47-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ผู้เล่นโชว์หลังเสื้อข้างเน็ต",
+  "q": 3,
+  "alt": "ผู้เล่นโชว์หลังเสื้อข้างเน็ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc49.webp",
+  "imgSmall": "/img/customer/lc49-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "กลุ่มสตรีถ่ายรวมบนเวที",
+  "q": 2,
+  "alt": "กลุ่มสตรีถ่ายรวมบนเวที · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc50.webp",
+  "imgSmall": "/img/customer/lc50-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "กลุ่มสตรีโพสท่าบนเวที",
+  "q": 2,
+  "alt": "กลุ่มสตรีโพสท่าบนเวที · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc53.webp",
+  "imgSmall": "/img/customer/lc53-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "โปโลสัมมนาจริงด้านหลัง",
+  "q": 0,
+  "alt": "โปโลสัมมนาจริงด้านหลัง · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc54.webp",
+  "imgSmall": "/img/customer/lc54-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "โปโลสัมมนาจริงด้านหน้า",
+  "q": 0,
+  "alt": "โปโลสัมมนาจริงด้านหน้า · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc55.webp",
+  "imgSmall": "/img/customer/lc55-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "โปโลสัมมนาจริงมุมเฉียง",
+  "q": 0,
+  "alt": "โปโลสัมมนาจริงมุมเฉียง · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc56.webp",
+  "imgSmall": "/img/customer/lc56-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "โปโลสัมมนาจริงมุมข้าง",
+  "q": 0,
+  "alt": "โปโลสัมมนาจริงมุมข้าง · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc58.webp",
+  "imgSmall": "/img/customer/lc58-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมในห้องสัมมนา",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมในห้องสัมมนา · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc59.webp",
+  "imgSmall": "/img/customer/lc59-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถือป้ายสัมมนากลางแจ้ง",
+  "q": 2,
+  "alt": "พนักงานถือป้ายสัมมนากลางแจ้ง · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc60.webp",
+  "imgSmall": "/img/customer/lc60-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานชูกำปั้นใต้ต้นไม้",
+  "q": 3,
+  "alt": "พนักงานชูกำปั้นใต้ต้นไม้ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc61.webp",
+  "imgSmall": "/img/customer/lc61-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ด้านหลังเสื้อโปโลสัมมนา",
+  "q": 3,
+  "alt": "ด้านหลังเสื้อโปโลสัมมนา · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc62.webp",
+  "imgSmall": "/img/customer/lc62-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานโชว์หลังโปโลในออฟฟิศ",
+  "q": 2,
+  "alt": "พนักงานโชว์หลังโปโลในออฟฟิศ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc66.webp",
+  "imgSmall": "/img/customer/lc66-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เด็กวิ่งวอร์มในคอร์ตแบด",
+  "q": 2,
+  "alt": "เด็กวิ่งวอร์มในคอร์ตแบด · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc67.webp",
+  "imgSmall": "/img/customer/lc67-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "เด็กหญิงรับลูกแบดในคอร์ต",
+  "q": 2,
+  "alt": "เด็กหญิงรับลูกแบดในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc71.webp",
+  "imgSmall": "/img/customer/lc71-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดนั่งอัฒจันทร์ข้างสนาม",
+  "q": 3,
+  "alt": "ทีมแบดนั่งอัฒจันทร์ข้างสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc72.webp",
+  "imgSmall": "/img/customer/lc72-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถือถ้วยรางวัล",
+  "q": 3,
+  "alt": "ทีมแบดถือถ้วยรางวัล · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc76.webp",
+  "imgSmall": "/img/customer/lc76-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาโชว์หลังเสื้อคณะ",
+  "q": 2,
+  "alt": "นักศึกษาโชว์หลังเสื้อคณะ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc82.webp",
+  "imgSmall": "/img/customer/lc82-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมลาครอสถ่ายรวมในสนาม",
+  "q": 3,
+  "alt": "ทีมลาครอสถ่ายรวมในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc84.webp",
+  "imgSmall": "/img/customer/lc84-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "สมาชิกโชว์ลายมังกรหลังเสื้อ",
+  "q": 3,
+  "alt": "สมาชิกโชว์ลายมังกรหลังเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc85.webp",
+  "imgSmall": "/img/customer/lc85-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถือถ้วยหน้าป้ายงาน",
+  "q": 3,
+  "alt": "ทีมแบดถือถ้วยหน้าป้ายงาน · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc86.webp",
+  "imgSmall": "/img/customer/lc86-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถ่ายรวมกลางคอร์ต",
+  "q": 2,
+  "alt": "ทีมแบดถ่ายรวมกลางคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc87.webp",
+  "imgSmall": "/img/customer/lc87-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถือถ้วยในสนาม",
+  "q": 3,
+  "alt": "ทีมแบดถือถ้วยในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc88.webp",
+  "imgSmall": "/img/customer/lc88-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถือถ้วยในสนาม",
+  "q": 3,
+  "alt": "ทีมแบดถือถ้วยในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc89.webp",
+  "imgSmall": "/img/customer/lc89-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถือถ้วยในสนาม",
+  "q": 3,
+  "alt": "ทีมแบดถือถ้วยในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc92.webp",
+  "imgSmall": "/img/customer/lc92-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "กลุ่มเด็กและครูถ่ายรวม",
+  "q": 3,
+  "alt": "กลุ่มเด็กและครูถ่ายรวม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc95.webp",
+  "imgSmall": "/img/customer/lc95-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "มอบรางวัลหลังเล่นกอล์ฟ",
+  "q": 2,
+  "alt": "มอบรางวัลหลังเล่นกอล์ฟ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc96.webp",
+  "imgSmall": "/img/customer/lc96-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "มอบรางวัลหลังเล่นกอล์ฟ",
+  "q": 2,
+  "alt": "มอบรางวัลหลังเล่นกอล์ฟ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc98.webp",
+  "imgSmall": "/img/customer/lc98-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมกอล์ฟถือถ้วยในสนาม",
+  "q": 3,
+  "alt": "ทีมกอล์ฟถือถ้วยในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc99.webp",
+  "imgSmall": "/img/customer/lc99-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมกอล์ฟถือถ้วยในสนาม",
+  "q": 3,
+  "alt": "ทีมกอล์ฟถือถ้วยในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc100.webp",
+  "imgSmall": "/img/customer/lc100-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมกอล์ฟถือถ้วยในสนาม",
+  "q": 3,
+  "alt": "ทีมกอล์ฟถือถ้วยในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc101.webp",
+  "imgSmall": "/img/customer/lc101-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "มอบรางวัลหลังเล่นกอล์ฟ",
+  "q": 2,
+  "alt": "มอบรางวัลหลังเล่นกอล์ฟ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc102.webp",
+  "imgSmall": "/img/customer/lc102-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "มอบรางวัลหลังเล่นกอล์ฟ",
+  "q": 2,
+  "alt": "มอบรางวัลหลังเล่นกอล์ฟ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc103.webp",
+  "imgSmall": "/img/customer/lc103-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "มอบรางวัลหลังเล่นกอล์ฟ",
+  "q": 2,
+  "alt": "มอบรางวัลหลังเล่นกอล์ฟ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc105.webp",
+  "imgSmall": "/img/customer/lc105-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมกอล์ฟถ่ายรวมกับถ้วย",
+  "q": 3,
+  "alt": "ทีมกอล์ฟถ่ายรวมกับถ้วย · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc106.webp",
+  "imgSmall": "/img/customer/lc106-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมกอล์ฟถ่ายรวมกับถ้วย",
+  "q": 3,
+  "alt": "ทีมกอล์ฟถ่ายรวมกับถ้วย · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc107.webp",
+  "imgSmall": "/img/customer/lc107-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ใส่โปโลนั่งรถกอล์ฟ",
+  "q": 3,
+  "alt": "ใส่โปโลนั่งรถกอล์ฟ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc108.webp",
+  "imgSmall": "/img/customer/lc108-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "มอบรางวัลหลังเล่นกอล์ฟ",
+  "q": 2,
+  "alt": "มอบรางวัลหลังเล่นกอล์ฟ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc109.webp",
+  "imgSmall": "/img/customer/lc109-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ใส่โปโลนั่งรถกอล์ฟ",
+  "q": 3,
+  "alt": "ใส่โปโลนั่งรถกอล์ฟ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc110.webp",
+  "imgSmall": "/img/customer/lc110-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมฟุตบอลเยาวชนถ่ายรวม",
+  "q": 3,
+  "alt": "ทีมฟุตบอลเยาวชนถ่ายรวม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc111.webp",
+  "imgSmall": "/img/customer/lc111-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "คุยแผนข้างสนามฟุตบอล",
+  "q": 3,
+  "alt": "คุยแผนข้างสนามฟุตบอล · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc112.webp",
+  "imgSmall": "/img/customer/lc112-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมฟุตบอลนั่งรวมในสนาม",
+  "q": 2,
+  "alt": "ทีมฟุตบอลนั่งรวมในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc113.webp",
+  "imgSmall": "/img/customer/lc113-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมฟุตบอลเยาวชนถ่ายรวม",
+  "q": 3,
+  "alt": "ทีมฟุตบอลเยาวชนถ่ายรวม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc114.webp",
+  "imgSmall": "/img/customer/lc114-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมฟุตบอลเยาวชนถ่ายรวม",
+  "q": 3,
+  "alt": "ทีมฟุตบอลเยาวชนถ่ายรวม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc115.webp",
+  "imgSmall": "/img/customer/lc115-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ใส่เสื้อทีมร่วมโต๊ะอาหาร",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมร่วมโต๊ะอาหาร · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc116.webp",
+  "imgSmall": "/img/customer/lc116-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ใส่เสื้อทีมร่วมโต๊ะอาหาร",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมร่วมโต๊ะอาหาร · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc117.webp",
+  "imgSmall": "/img/customer/lc117-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ใส่เสื้อทีมถ่ายรวมในงาน",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมถ่ายรวมในงาน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc118.webp",
+  "imgSmall": "/img/customer/lc118-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ใส่เสื้อทีมรับของรางวัล",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมรับของรางวัล · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc119.webp",
+  "imgSmall": "/img/customer/lc119-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ใส่เสื้อทีมถ่ายรวมในงาน",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมถ่ายรวมในงาน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc120.webp",
+  "imgSmall": "/img/customer/lc120-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ใส่เสื้อทีมถ่ายรวมในงาน",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมถ่ายรวมในงาน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc123.webp",
+  "imgSmall": "/img/customer/lc123-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ครูและนักเรียนใส่โปโลทีม",
+  "q": 3,
+  "alt": "ครูและนักเรียนใส่โปโลทีม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc124.webp",
+  "imgSmall": "/img/customer/lc124-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ครูและนักเรียนใส่โปโลทีม",
+  "q": 3,
+  "alt": "ครูและนักเรียนใส่โปโลทีม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc127.webp",
+  "imgSmall": "/img/customer/lc127-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทีมถ่ายรวมในห้องกิจกรรม",
+  "q": 3,
+  "alt": "ทีมถ่ายรวมในห้องกิจกรรม · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc128.webp",
+  "imgSmall": "/img/customer/lc128-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "เด็กใส่โปโลข้างสระว่ายน้ำ",
+  "q": 3,
+  "alt": "เด็กใส่โปโลข้างสระว่ายน้ำ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc129.webp",
+  "imgSmall": "/img/customer/lc129-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมว่ายน้ำโชว์ลายหลังเสื้อ",
+  "q": 3,
+  "alt": "ทีมว่ายน้ำโชว์ลายหลังเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc130.webp",
+  "imgSmall": "/img/customer/lc130-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมว่ายน้ำถ่ายรวมข้างสระ",
+  "q": 3,
+  "alt": "ทีมว่ายน้ำถ่ายรวมข้างสระ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc131.webp",
+  "imgSmall": "/img/customer/lc131-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมว่ายน้ำถ่ายรวมข้างสระ",
+  "q": 3,
+  "alt": "ทีมว่ายน้ำถ่ายรวมข้างสระ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc132.webp",
+  "imgSmall": "/img/customer/lc132-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมว่ายน้ำถ่ายรวมข้างสระ",
+  "q": 3,
+  "alt": "ทีมว่ายน้ำถ่ายรวมข้างสระ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc133.webp",
+  "imgSmall": "/img/customer/lc133-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมว่ายน้ำโชว์ลายหลังเสื้อ",
+  "q": 3,
+  "alt": "ทีมว่ายน้ำโชว์ลายหลังเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc138.webp",
+  "imgSmall": "/img/customer/lc138-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ใส่โปโลคณะถ่ายภาพในอาคาร",
+  "q": 3,
+  "alt": "ใส่โปโลคณะถ่ายภาพในอาคาร · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc139.webp",
+  "imgSmall": "/img/customer/lc139-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ใส่โปโลคณะถ่ายภาพในอาคาร",
+  "q": 3,
+  "alt": "ใส่โปโลคณะถ่ายภาพในอาคาร · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc140.webp",
+  "imgSmall": "/img/customer/lc140-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ใส่โปโลคณะถ่ายภาพในอาคาร",
+  "q": 3,
+  "alt": "ใส่โปโลคณะถ่ายภาพในอาคาร · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc141.webp",
+  "imgSmall": "/img/customer/lc141-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ใส่โปโลคณะถ่ายภาพในอาคาร",
+  "q": 3,
+  "alt": "ใส่โปโลคณะถ่ายภาพในอาคาร · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc142.webp",
+  "imgSmall": "/img/customer/lc142-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "โชว์ลายหลังเสื้อคณะ",
+  "q": 3,
+  "alt": "โชว์ลายหลังเสื้อคณะ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc144.webp",
+  "imgSmall": "/img/customer/lc144-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ใส่เสื้อทีมถ่ายรวมหน้าวัด",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมถ่ายรวมหน้าวัด · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc152.webp",
+  "imgSmall": "/img/customer/lc152-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ใส่โปโลทีมร่วมงานสัมมนา",
+  "q": 2,
+  "alt": "ใส่โปโลทีมร่วมงานสัมมนา · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc156.webp",
+  "imgSmall": "/img/customer/lc156-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "running"
+  ],
+  "photoGroup": "running",
+  "occ": "ใส่เสื้อทีมวิ่งในเมือง",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมวิ่งในเมือง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc157.webp",
+  "imgSmall": "/img/customer/lc157-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "running"
+  ],
+  "photoGroup": "running",
+  "occ": "ใส่เสื้อทีมวิ่งในเมือง",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมวิ่งในเมือง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc164.webp",
+  "imgSmall": "/img/customer/lc164-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "โค้ชดูแลนักกีฬาเทควันโด",
+  "q": 2,
+  "alt": "โค้ชดูแลนักกีฬาเทควันโด · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc165.webp",
+  "imgSmall": "/img/customer/lc165-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "โค้ชดูแลนักกีฬาเทควันโด",
+  "q": 2,
+  "alt": "โค้ชดูแลนักกีฬาเทควันโด · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc167.webp",
+  "imgSmall": "/img/customer/lc167-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "โค้ชดูแลนักกีฬาเทควันโด",
+  "q": 2,
+  "alt": "โค้ชดูแลนักกีฬาเทควันโด · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc169.webp",
+  "imgSmall": "/img/customer/lc169-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "running"
+  ],
+  "photoGroup": "running",
+  "occ": "ใส่เสื้อทีมวิ่งริมทุ่งนา",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมวิ่งริมทุ่งนา · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc170.webp",
+  "imgSmall": "/img/customer/lc170-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ใส่เสื้อทีมร่วมขบวนเดิน",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมร่วมขบวนเดิน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc173.webp",
+  "imgSmall": "/img/customer/lc173-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ใส่เสื้อทีมถ่ายภาพริมทุ่งนา",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมถ่ายภาพริมทุ่งนา · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc176.webp",
+  "imgSmall": "/img/customer/lc176-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ขบวนเดินพาเหรดบนถนน",
+  "q": 2,
+  "alt": "ขบวนเดินพาเหรดบนถนน · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc177.webp",
+  "imgSmall": "/img/customer/lc177-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ขบวนถือป้ายรุ่นเดินถนน",
+  "q": 3,
+  "alt": "ขบวนถือป้ายรุ่นเดินถนน · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc181.webp",
+  "imgSmall": "/img/customer/lc181-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ศิษย์เก่าถือป้ายรุ่นกลางคืน",
+  "q": 3,
+  "alt": "ศิษย์เก่าถือป้ายรุ่นกลางคืน · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc184.webp",
+  "imgSmall": "/img/customer/lc184-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ถ่ายรวมหน้าซุ้มงานกลางคืน",
+  "q": 2,
+  "alt": "ถ่ายรวมหน้าซุ้มงานกลางคืน · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc186.webp",
+  "imgSmall": "/img/customer/lc186-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ยืนหันหลังโชว์ลายหลังเสื้อ",
+  "q": 3,
+  "alt": "ยืนหันหลังโชว์ลายหลังเสื้อ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc187.webp",
+  "imgSmall": "/img/customer/lc187-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ถ่ายรวมหน้าร้านตอนค่ำ",
+  "q": 3,
+  "alt": "ถ่ายรวมหน้าร้านตอนค่ำ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc191.webp",
+  "imgSmall": "/img/customer/lc191-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ตีแบดในคอร์ทในร่ม",
+  "q": 3,
+  "alt": "ตีแบดในคอร์ทในร่ม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc192.webp",
+  "imgSmall": "/img/customer/lc192-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ตีแบดระหว่างแข่ง",
+  "q": 3,
+  "alt": "ตีแบดระหว่างแข่ง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc199.webp",
+  "imgSmall": "/img/customer/lc199-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานออกร้านขายอาหาร",
+  "q": 2,
+  "alt": "พนักงานออกร้านขายอาหาร · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc200.webp",
+  "imgSmall": "/img/customer/lc200-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานยืนหลังโต๊ะขนม",
+  "q": 2,
+  "alt": "พนักงานยืนหลังโต๊ะขนม · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc201.webp",
+  "imgSmall": "/img/customer/lc201-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานช่วยกันขนลังขึ้นรถ",
+  "q": 3,
+  "alt": "พนักงานช่วยกันขนลังขึ้นรถ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc204.webp",
+  "imgSmall": "/img/customer/lc204-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมหน้าอาคาร",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมหน้าอาคาร · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc212.webp",
+  "imgSmall": "/img/customer/lc212-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมโบว์ลิ่งถ่ายรวมหน้าเวที",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งถ่ายรวมหน้าเวที · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc213.webp",
+  "imgSmall": "/img/customer/lc213-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมโบว์ลิ่งชายยืนในเลน",
+  "q": 2,
+  "alt": "ทีมโบว์ลิ่งชายยืนในเลน · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc214.webp",
+  "imgSmall": "/img/customer/lc214-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมโบว์ลิ่งหญิงถือป้ายทีม",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งหญิงถือป้ายทีม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc215.webp",
+  "imgSmall": "/img/customer/lc215-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมโบว์ลิ่งถ่ายรวมหน้าเวที",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งถ่ายรวมหน้าเวที · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc216.webp",
+  "imgSmall": "/img/customer/lc216-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมโบว์ลิ่งถ่ายรวมหน้าเวที",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งถ่ายรวมหน้าเวที · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc217.webp",
+  "imgSmall": "/img/customer/lc217-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมโบว์ลิ่งรวมพลในสนาม",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งรวมพลในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc219.webp",
+  "imgSmall": "/img/customer/lc219-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมโบว์ลิ่งรวมพลในสนาม",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งรวมพลในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc224.webp",
+  "imgSmall": "/img/customer/lc224-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมโบว์ลิ่งถ่ายรวมหลังแข่ง",
+  "q": 3,
+  "alt": "ทีมโบว์ลิ่งถ่ายรวมหลังแข่ง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc227.webp",
+  "imgSmall": "/img/customer/lc227-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมปาเป้ารวมมือก่อนแข่ง",
+  "q": 3,
+  "alt": "ทีมปาเป้ารวมมือก่อนแข่ง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc228.webp",
+  "imgSmall": "/img/customer/lc228-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมปาเป้าหันหลังโชว์เสื้อ",
+  "q": 3,
+  "alt": "ทีมปาเป้าหันหลังโชว์เสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc230.webp",
+  "imgSmall": "/img/customer/lc230-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมปาเป้าหญิงโชว์เหรียญ",
+  "q": 3,
+  "alt": "ทีมปาเป้าหญิงโชว์เหรียญ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc231.webp",
+  "imgSmall": "/img/customer/lc231-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมปาเป้ายืนดูการแข่ง",
+  "q": 3,
+  "alt": "ทีมปาเป้ายืนดูการแข่ง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc233.webp",
+  "imgSmall": "/img/customer/lc233-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมปาเป้ายืนดูการแข่ง",
+  "q": 3,
+  "alt": "ทีมปาเป้ายืนดูการแข่ง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc235.webp",
+  "imgSmall": "/img/customer/lc235-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมสนุกเกอร์ถ่ายรวมข้างโต๊ะ",
+  "q": 3,
+  "alt": "ทีมสนุกเกอร์ถ่ายรวมข้างโต๊ะ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc238.webp",
+  "imgSmall": "/img/customer/lc238-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมหน้าอาคาร",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมหน้าอาคาร · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc239.webp",
+  "imgSmall": "/img/customer/lc239-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมหน้าป้ายบริษัท",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมหน้าป้ายบริษัท · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc241.webp",
+  "imgSmall": "/img/customer/lc241-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "หันหลังโชว์โลโก้ร้านในร้าน",
+  "q": 3,
+  "alt": "หันหลังโชว์โลโก้ร้านในร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc242.webp",
+  "imgSmall": "/img/customer/lc242-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "หันหลังโชว์โลโก้ร้านในร้าน",
+  "q": 3,
+  "alt": "หันหลังโชว์โลโก้ร้านในร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc243.webp",
+  "imgSmall": "/img/customer/lc243-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "เสื้อโปโลพับในถุงพร้อมส่ง",
+  "q": 0,
+  "alt": "เสื้อโปโลพับในถุงพร้อมส่ง · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc245.webp",
+  "imgSmall": "/img/customer/lc245-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดหันหลังโชว์ลายหลัง",
+  "q": 3,
+  "alt": "ทีมแบดหันหลังโชว์ลายหลัง · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc250.webp",
+  "imgSmall": "/img/customer/lc250-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมกับหุ่นยนต์",
+  "q": 3,
+  "alt": "นักเรียนถ่ายรวมกับหุ่นยนต์ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc251.webp",
+  "imgSmall": "/img/customer/lc251-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมกับหุ่นยนต์",
+  "q": 3,
+  "alt": "นักเรียนถ่ายรวมกับหุ่นยนต์ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc252.webp",
+  "imgSmall": "/img/customer/lc252-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมกับหุ่นยนต์",
+  "q": 2,
+  "alt": "นักเรียนถ่ายรวมกับหุ่นยนต์ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc254.webp",
+  "imgSmall": "/img/customer/lc254-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมกับหุ่นยนต์",
+  "q": 3,
+  "alt": "นักเรียนถ่ายรวมกับหุ่นยนต์ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc256.webp",
+  "imgSmall": "/img/customer/lc256-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมกับหุ่นยนต์",
+  "q": 2,
+  "alt": "นักเรียนถ่ายรวมกับหุ่นยนต์ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc259.webp",
+  "imgSmall": "/img/customer/lc259-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ถ่ายรวมหน้าศาลเจ้าริมน้ำ",
+  "q": 3,
+  "alt": "ถ่ายรวมหน้าศาลเจ้าริมน้ำ · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc269.webp",
+  "imgSmall": "/img/customer/lc269-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "running"
+  ],
+  "photoGroup": "running",
+  "occ": "นักวิ่งคล้องเหรียญถ่ายรวม",
+  "q": 2,
+  "alt": "นักวิ่งคล้องเหรียญถ่ายรวม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc271.webp",
+  "imgSmall": "/img/customer/lc271-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "running"
+  ],
+  "photoGroup": "running",
+  "occ": "นักวิ่งคล้องเหรียญถ่ายรวม",
+  "q": 3,
+  "alt": "นักวิ่งคล้องเหรียญถ่ายรวม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc272.webp",
+  "imgSmall": "/img/customer/lc272-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "เชียร์ลีดเดอร์เต้นในสนามกีฬา",
+  "q": 3,
+  "alt": "เชียร์ลีดเดอร์เต้นในสนามกีฬา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc273.webp",
+  "imgSmall": "/img/customer/lc273-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "เชียร์ลีดเดอร์นั่งพนมมือ",
+  "q": 3,
+  "alt": "เชียร์ลีดเดอร์นั่งพนมมือ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc274.webp",
+  "imgSmall": "/img/customer/lc274-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ทีมเชียร์แสดงในสนาม",
+  "q": 3,
+  "alt": "ทีมเชียร์แสดงในสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc275.webp",
+  "imgSmall": "/img/customer/lc275-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ทีมเชียร์แสดงในสนาม",
+  "q": 3,
+  "alt": "ทีมเชียร์แสดงในสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc277.webp",
+  "imgSmall": "/img/customer/lc277-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ทีมเชียร์แสดงในสนาม",
+  "q": 3,
+  "alt": "ทีมเชียร์แสดงในสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc279.webp",
+  "imgSmall": "/img/customer/lc279-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ทีมเชียร์แสดงในสนาม",
+  "q": 3,
+  "alt": "ทีมเชียร์แสดงในสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc280.webp",
+  "imgSmall": "/img/customer/lc280-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ทีมเชียร์แสดงในสนาม",
+  "q": 3,
+  "alt": "ทีมเชียร์แสดงในสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc284.webp",
+  "imgSmall": "/img/customer/lc284-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมเทควันโดถ่ายรวมในงาน",
+  "q": 2,
+  "alt": "ทีมเทควันโดถ่ายรวมในงาน · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc285.webp",
+  "imgSmall": "/img/customer/lc285-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักกีฬารับลายเซ็นบนเสื้อ",
+  "q": 2,
+  "alt": "นักกีฬารับลายเซ็นบนเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc287.webp",
+  "imgSmall": "/img/customer/lc287-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักกีฬารับลายเซ็นบนเสื้อ",
+  "q": 2,
+  "alt": "นักกีฬารับลายเซ็นบนเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc288.webp",
+  "imgSmall": "/img/customer/lc288-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักกีฬารับลายเซ็นบนเสื้อ",
+  "q": 2,
+  "alt": "นักกีฬารับลายเซ็นบนเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc292.webp",
+  "imgSmall": "/img/customer/lc292-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมข้างสระ",
+  "q": 2,
+  "alt": "นักเรียนถ่ายรวมข้างสระ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc293.webp",
+  "imgSmall": "/img/customer/lc293-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมในค่าย",
+  "q": 2,
+  "alt": "นักเรียนถ่ายรวมในค่าย · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc296.webp",
+  "imgSmall": "/img/customer/lc296-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ใส่เสื้อทีมร่วมกิจกรรมค่าย",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมร่วมกิจกรรมค่าย · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc297.webp",
+  "imgSmall": "/img/customer/lc297-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ใส่เสื้อทีมร่วมกิจกรรมค่าย",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมร่วมกิจกรรมค่าย · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc300.webp",
+  "imgSmall": "/img/customer/lc300-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ใส่เสื้อทีมทำกิจกรรมกลางแจ้ง",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมทำกิจกรรมกลางแจ้ง · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc303.webp",
+  "imgSmall": "/img/customer/lc303-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ใส่เสื้อทีมเล่นแบดมินตัน",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมเล่นแบดมินตัน · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc304.webp",
+  "imgSmall": "/img/customer/lc304-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ใส่เสื้อทีมเล่นแบดมินตัน",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมเล่นแบดมินตัน · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc305.webp",
+  "imgSmall": "/img/customer/lc305-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ใส่เสื้อทีมนั่งพักข้างสนาม",
+  "q": 3,
+  "alt": "ใส่เสื้อทีมนั่งพักข้างสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc306.webp",
+  "imgSmall": "/img/customer/lc306-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ใส่เสื้อทีมเล่นแบดมินตัน",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมเล่นแบดมินตัน · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc311.webp",
+  "imgSmall": "/img/customer/lc311-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "เด็กใส่เสื้อทีมข้างสนาม",
+  "q": 3,
+  "alt": "เด็กใส่เสื้อทีมข้างสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc312.webp",
+  "imgSmall": "/img/customer/lc312-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ใส่เสื้อทีมในสนามฟุตบอล",
+  "q": 1,
+  "alt": "ใส่เสื้อทีมในสนามฟุตบอล · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc313.webp",
+  "imgSmall": "/img/customer/lc313-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ใส่เสื้อทีมในสนามฟุตบอล",
+  "q": 1,
+  "alt": "ใส่เสื้อทีมในสนามฟุตบอล · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc318.webp",
+  "imgSmall": "/img/customer/lc318-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ใส่โปโลทีมถ่ายรวมในอาคาร",
+  "q": 3,
+  "alt": "ใส่โปโลทีมถ่ายรวมในอาคาร · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc320.webp",
+  "imgSmall": "/img/customer/lc320-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ใส่เสื้อคณะถ่ายภาพในสนาม",
+  "q": 2,
+  "alt": "ใส่เสื้อคณะถ่ายภาพในสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc321.webp",
+  "imgSmall": "/img/customer/lc321-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ใส่เสื้อคณะถ่ายภาพในสนาม",
+  "q": 2,
+  "alt": "ใส่เสื้อคณะถ่ายภาพในสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc324.webp",
+  "imgSmall": "/img/customer/lc324-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ใส่เสื้อทีมยืนข้างสนาม",
+  "q": 1,
+  "alt": "ใส่เสื้อทีมยืนข้างสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc325.webp",
+  "imgSmall": "/img/customer/lc325-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "เด็กโชว์เหรียญในงานกีฬา",
+  "q": 3,
+  "alt": "เด็กโชว์เหรียญในงานกีฬา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc326.webp",
+  "imgSmall": "/img/customer/lc326-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนโชว์เหรียญในงานกีฬา",
+  "q": 3,
+  "alt": "นักเรียนโชว์เหรียญในงานกีฬา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc328.webp",
+  "imgSmall": "/img/customer/lc328-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนถ่ายรวมในงานกีฬา",
+  "q": 3,
+  "alt": "นักเรียนถ่ายรวมในงานกีฬา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc329.webp",
+  "imgSmall": "/img/customer/lc329-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ใส่เสื้อสีถ่ายรวมข้างสนาม",
+  "q": 3,
+  "alt": "ใส่เสื้อสีถ่ายรวมข้างสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc330.webp",
+  "imgSmall": "/img/customer/lc330-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ใส่เสื้อสีถ่ายรวมข้างสนาม",
+  "q": 3,
+  "alt": "ใส่เสื้อสีถ่ายรวมข้างสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc331.webp",
+  "imgSmall": "/img/customer/lc331-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ใส่เสื้อสีถ่ายรวมในอาคาร",
+  "q": 3,
+  "alt": "ใส่เสื้อสีถ่ายรวมในอาคาร · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc332.webp",
+  "imgSmall": "/img/customer/lc332-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ใส่เสื้อสีถ่ายรวมในอาคาร",
+  "q": 3,
+  "alt": "ใส่เสื้อสีถ่ายรวมในอาคาร · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc333.webp",
+  "imgSmall": "/img/customer/lc333-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนโชว์เหรียญในงานกีฬา",
+  "q": 3,
+  "alt": "นักเรียนโชว์เหรียญในงานกีฬา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc334.webp",
+  "imgSmall": "/img/customer/lc334-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนโชว์เหรียญในงานกีฬา",
+  "q": 3,
+  "alt": "นักเรียนโชว์เหรียญในงานกีฬา · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc340.webp",
+  "imgSmall": "/img/customer/lc340-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ทีมเชียร์ถ่ายรวมในอาคาร",
+  "q": 3,
+  "alt": "ทีมเชียร์ถ่ายรวมในอาคาร · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc341.webp",
+  "imgSmall": "/img/customer/lc341-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ใส่โปโลทีมถ่ายรวมในอาคาร",
+  "q": 3,
+  "alt": "ใส่โปโลทีมถ่ายรวมในอาคาร · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc344.webp",
+  "imgSmall": "/img/customer/lc344-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ใส่เสื้อทีมถ่ายรวมหน้าร้าน",
+  "q": 2,
+  "alt": "ใส่เสื้อทีมถ่ายรวมหน้าร้าน · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc347.webp",
+  "imgSmall": "/img/customer/lc347-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานถ่ายรวมหน้าร้าน",
+  "q": 2,
+  "alt": "ทีมงานถ่ายรวมหน้าร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc348.webp",
+  "imgSmall": "/img/customer/lc348-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานถ่ายรวมหน้าร้าน",
+  "q": 2,
+  "alt": "ทีมงานถ่ายรวมหน้าร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc351.webp",
+  "imgSmall": "/img/customer/lc351-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานใส่โปโลร่วมงานร้าน",
+  "q": 2,
+  "alt": "ทีมงานใส่โปโลร่วมงานร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc352.webp",
+  "imgSmall": "/img/customer/lc352-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานใส่โปโลร่วมงานร้าน",
+  "q": 2,
+  "alt": "ทีมงานใส่โปโลร่วมงานร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc353.webp",
+  "imgSmall": "/img/customer/lc353-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "โชว์ลายพิมพ์ด้านหลังโปโล",
+  "q": 3,
+  "alt": "โชว์ลายพิมพ์ด้านหลังโปโล · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc356.webp",
+  "imgSmall": "/img/customer/lc356-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานใส่โปโลร่วมงานร้าน",
+  "q": 2,
+  "alt": "ทีมงานใส่โปโลร่วมงานร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc358.webp",
+  "imgSmall": "/img/customer/lc358-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานใส่โปโลร่วมงานร้าน",
+  "q": 2,
+  "alt": "ทีมงานใส่โปโลร่วมงานร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc360.webp",
+  "imgSmall": "/img/customer/lc360-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานใส่โปโลร่วมงานร้าน",
+  "q": 2,
+  "alt": "ทีมงานใส่โปโลร่วมงานร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc361.webp",
+  "imgSmall": "/img/customer/lc361-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานใส่โปโลร่วมงานร้าน",
+  "q": 2,
+  "alt": "ทีมงานใส่โปโลร่วมงานร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc362.webp",
+  "imgSmall": "/img/customer/lc362-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานใส่โปโลร่วมงานร้าน",
+  "q": 2,
+  "alt": "ทีมงานใส่โปโลร่วมงานร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc363.webp",
+  "imgSmall": "/img/customer/lc363-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "ทีมงานใส่โปโลร่วมงานร้าน",
+  "q": 2,
+  "alt": "ทีมงานใส่โปโลร่วมงานร้าน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc365.webp",
+  "imgSmall": "/img/customer/lc365-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "ใส่โปโลทีมเดินเที่ยว",
+  "q": 2,
+  "alt": "ใส่โปโลทีมเดินเที่ยว · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc366.webp",
+  "imgSmall": "/img/customer/lc366-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนเดินเที่ยวสวนสนุก",
+  "q": 3,
+  "alt": "นักเรียนเดินเที่ยวสวนสนุก · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc367.webp",
+  "imgSmall": "/img/customer/lc367-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนนั่งพักในสวนสนุก",
+  "q": 2,
+  "alt": "นักเรียนนั่งพักในสวนสนุก · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc369.webp",
+  "imgSmall": "/img/customer/lc369-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนหญิงถ่ายรวมสวนสนุก",
+  "q": 3,
+  "alt": "นักเรียนหญิงถ่ายรวมสวนสนุก · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc370.webp",
+  "imgSmall": "/img/customer/lc370-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนโพสท่าในสวนสนุก",
+  "q": 3,
+  "alt": "นักเรียนโพสท่าในสวนสนุก · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc371.webp",
+  "imgSmall": "/img/customer/lc371-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนต่อคิวซื้อไอศกรีม",
+  "q": 3,
+  "alt": "นักเรียนต่อคิวซื้อไอศกรีม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc372.webp",
+  "imgSmall": "/img/customer/lc372-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนยืนรอหน้าร้านไอศกรีม",
+  "q": 3,
+  "alt": "นักเรียนยืนรอหน้าร้านไอศกรีม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc373.webp",
+  "imgSmall": "/img/customer/lc373-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนเดินคุยกันในสวนสนุก",
+  "q": 3,
+  "alt": "นักเรียนเดินคุยกันในสวนสนุก · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc374.webp",
+  "imgSmall": "/img/customer/lc374-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนเดินเที่ยวในสวนสนุก",
+  "q": 2,
+  "alt": "นักเรียนเดินเที่ยวในสวนสนุก · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc376.webp",
+  "imgSmall": "/img/customer/lc376-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนชายหญิงเดินถ่ายรูป",
+  "q": 3,
+  "alt": "นักเรียนชายหญิงเดินถ่ายรูป · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc377.webp",
+  "imgSmall": "/img/customer/lc377-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนหญิงชูสองนิ้วถ่ายรูป",
+  "q": 2,
+  "alt": "นักเรียนหญิงชูสองนิ้วถ่ายรูป · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc378.webp",
+  "imgSmall": "/img/customer/lc378-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนหญิงเดินเล่นสวนสนุก",
+  "q": 2,
+  "alt": "นักเรียนหญิงเดินเล่นสวนสนุก · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc380.webp",
+  "imgSmall": "/img/customer/lc380-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ครูหันหลังโชว์ลายหลังเสื้อ",
+  "q": 3,
+  "alt": "ครูหันหลังโชว์ลายหลังเสื้อ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc384.webp",
+  "imgSmall": "/img/customer/lc384-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานร้านริมน้ำถ่ายรวม",
+  "q": 3,
+  "alt": "พนักงานร้านริมน้ำถ่ายรวม · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc385.webp",
+  "imgSmall": "/img/customer/lc385-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานหันหลังมองแม่น้ำ",
+  "q": 2,
+  "alt": "พนักงานหันหลังมองแม่น้ำ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc386.webp",
+  "imgSmall": "/img/customer/lc386-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานหันหลังโชว์ลายเสื้อ",
+  "q": 3,
+  "alt": "พนักงานหันหลังโชว์ลายเสื้อ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc389.webp",
+  "imgSmall": "/img/customer/lc389-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนหญิงยิ้มข้างหุ่นยนต์",
+  "q": 3,
+  "alt": "นักเรียนหญิงยิ้มข้างหุ่นยนต์ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc390.webp",
+  "imgSmall": "/img/customer/lc390-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนบังคับหุ่นยนต์ในสนาม",
+  "q": 3,
+  "alt": "นักเรียนบังคับหุ่นยนต์ในสนาม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc392.webp",
+  "imgSmall": "/img/customer/lc392-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนยืนเรียงหน้าสนามแข่ง",
+  "q": 3,
+  "alt": "นักเรียนยืนเรียงหน้าสนามแข่ง · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc393.webp",
+  "imgSmall": "/img/customer/lc393-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนยืนดูสนามหุ่นยนต์",
+  "q": 2,
+  "alt": "นักเรียนยืนดูสนามหุ่นยนต์ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc395.webp",
+  "imgSmall": "/img/customer/lc395-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานเดินดูหน้างาน",
+  "q": 3,
+  "alt": "พนักงานเดินดูหน้างาน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc396.webp",
+  "imgSmall": "/img/customer/lc396-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานใส่หมวกนิรภัยหน้างาน",
+  "q": 3,
+  "alt": "พนักงานใส่หมวกนิรภัยหน้างาน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc397.webp",
+  "imgSmall": "/img/customer/lc397-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานลองเสื้อในออฟฟิศ",
+  "q": 2,
+  "alt": "พนักงานลองเสื้อในออฟฟิศ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc400.webp",
+  "imgSmall": "/img/customer/lc400-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "เจ้าหน้าที่หันหลังโชว์เสื้อ",
+  "q": 3,
+  "alt": "เจ้าหน้าที่หันหลังโชว์เสื้อ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc401.webp",
+  "imgSmall": "/img/customer/lc401-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "เจ้าหน้าที่ยืนหน้าประตูแผนก",
+  "q": 3,
+  "alt": "เจ้าหน้าที่ยืนหน้าประตูแผนก · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc402.webp",
+  "imgSmall": "/img/customer/lc402-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ศิษย์เก่าโชว์ลายแขนเสื้อ",
+  "q": 2,
+  "alt": "ศิษย์เก่าโชว์ลายแขนเสื้อ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc403.webp",
+  "imgSmall": "/img/customer/lc403-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ศิษย์เก่าหันหลังโชว์ชื่อรุ่น",
+  "q": 3,
+  "alt": "ศิษย์เก่าหันหลังโชว์ชื่อรุ่น · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc404.webp",
+  "imgSmall": "/img/customer/lc404-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "ศิษย์เก่ายืนถ่ายรูปริมทาง",
+  "q": 3,
+  "alt": "ศิษย์เก่ายืนถ่ายรูปริมทาง · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc408.webp",
+  "imgSmall": "/img/customer/lc408-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมเทควันโดถ่ายรวมบนเวที",
+  "q": 3,
+  "alt": "ทีมเทควันโดถ่ายรวมบนเวที · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc410.webp",
+  "imgSmall": "/img/customer/lc410-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักกีฬาเด็กชูบัตรนักกีฬา",
+  "q": 3,
+  "alt": "นักกีฬาเด็กชูบัตรนักกีฬา · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc412.webp",
+  "imgSmall": "/img/customer/lc412-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักกีฬาเด็กคล้องบัตรในสนาม",
+  "q": 3,
+  "alt": "นักกีฬาเด็กคล้องบัตรในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc413.webp",
+  "imgSmall": "/img/customer/lc413-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "เด็กเล็กโพสท่าในยิมเทควันโด",
+  "q": 3,
+  "alt": "เด็กเล็กโพสท่าในยิมเทควันโด · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc414.webp",
+  "imgSmall": "/img/customer/lc414-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "เด็กหญิงยิ้มในยิมเทควันโด",
+  "q": 3,
+  "alt": "เด็กหญิงยิ้มในยิมเทควันโด · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc415.webp",
+  "imgSmall": "/img/customer/lc415-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "เด็กหันหลังโชว์ลายเสื้อ",
+  "q": 2,
+  "alt": "เด็กหันหลังโชว์ลายเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc416.webp",
+  "imgSmall": "/img/customer/lc416-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักกีฬาถือเป้าซ้อมเตะ",
+  "q": 3,
+  "alt": "นักกีฬาถือเป้าซ้อมเตะ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc418.webp",
+  "imgSmall": "/img/customer/lc418-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "เจ้าหน้าที่หันหลังโชว์เสื้อ",
+  "q": 3,
+  "alt": "เจ้าหน้าที่หันหลังโชว์เสื้อ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc422.webp",
+  "imgSmall": "/img/customer/lc422-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักธนูง้างคันธนูในสนาม",
+  "q": 2,
+  "alt": "นักธนูง้างคันธนูในสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc424.webp",
+  "imgSmall": "/img/customer/lc424-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักธนูง้างสายยิงเป้า",
+  "q": 3,
+  "alt": "นักธนูง้างสายยิงเป้า · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc428.webp",
+  "imgSmall": "/img/customer/lc428-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "สมาชิกถ่ายรวมงานครบรอบ",
+  "q": 3,
+  "alt": "สมาชิกถ่ายรวมงานครบรอบ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc436.webp",
+  "imgSmall": "/img/customer/lc436-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "เด็กหันหลังชี้ชื่อบนเสื้อ",
+  "q": 3,
+  "alt": "เด็กหันหลังชี้ชื่อบนเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc437.webp",
+  "imgSmall": "/img/customer/lc437-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ภาพใกล้โลโก้หน้าอกเสื้อ",
+  "q": 3,
+  "alt": "ภาพใกล้โลโก้หน้าอกเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc438.webp",
+  "imgSmall": "/img/customer/lc438-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ภาพใกล้ลายหลังเสื้อ",
+  "q": 3,
+  "alt": "ภาพใกล้ลายหลังเสื้อ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc439.webp",
+  "imgSmall": "/img/customer/lc439-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "สมาชิกสหกรณ์ถ่ายรวมหน้าตึก",
+  "q": 3,
+  "alt": "สมาชิกสหกรณ์ถ่ายรวมหน้าตึก · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc440.webp",
+  "imgSmall": "/img/customer/lc440-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "สมาชิกสหกรณ์ถ่ายรวมหน้าตึก",
+  "q": 3,
+  "alt": "สมาชิกสหกรณ์ถ่ายรวมหน้าตึก · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc442.webp",
+  "imgSmall": "/img/customer/lc442-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนใส่เสื้อค่ายวิชาการ",
+  "q": 3,
+  "alt": "นักเรียนใส่เสื้อค่ายวิชาการ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc443.webp",
+  "imgSmall": "/img/customer/lc443-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ยิ้มโพสด้านข้างโชว์เสื้อ",
+  "q": 3,
+  "alt": "ยิ้มโพสด้านข้างโชว์เสื้อ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc444.webp",
+  "imgSmall": "/img/customer/lc444-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "หันหลังโชว์ลายหลังเสื้อ",
+  "q": 3,
+  "alt": "หันหลังโชว์ลายหลังเสื้อ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc447.webp",
+  "imgSmall": "/img/customer/lc447-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "ชายยืนโพสหน้ากำแพงโบราณ",
+  "q": 3,
+  "alt": "ชายยืนโพสหน้ากำแพงโบราณ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc448.webp",
+  "imgSmall": "/img/customer/lc448-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "ชายยืนยิ้มหน้ากำแพงโบราณ",
+  "q": 3,
+  "alt": "ชายยืนยิ้มหน้ากำแพงโบราณ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc161.webp",
+  "imgSmall": "/img/customer/lc161-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมเทควันโดเด็กถ่ายรวมบนเบาะซ้อม",
+  "q": 3,
+  "alt": "ทีมเทควันโดเด็กถ่ายรวมบนเบาะซ้อม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc174.webp",
+  "imgSmall": "/img/customer/lc174-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ทีมเสื้อแดงลายเดียวกันในงานกลางคืน",
+  "q": 3,
+  "alt": "ทีมเสื้อแดงลายเดียวกันในงานกลางคืน · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc211.webp",
+  "imgSmall": "/img/customer/lc211-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมหน้าฉากงานแข่งโบว์ลิ่ง",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมหน้าฉากงานแข่งโบว์ลิ่ง · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc222.webp",
+  "imgSmall": "/img/customer/lc222-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทีมสี่คนใส่เสื้อลายเดียวกันในลานโบว์ลิ่ง",
+  "q": 3,
+  "alt": "ทีมสี่คนใส่เสื้อลายเดียวกันในลานโบว์ลิ่ง · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/lc246.webp",
+  "imgSmall": "/img/customer/lc246-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "นักแบดสองคนถ่ายคู่ในคอร์ต",
+  "q": 3,
+  "alt": "นักแบดสองคนถ่ายคู่ในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc262.webp",
+  "imgSmall": "/img/customer/lc262-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ทีมผู้จัดใส่เสื้อโปโลม่วงหน้าฉากงานแข่งแบด",
+  "q": 3,
+  "alt": "ทีมผู้จัดใส่เสื้อโปโลม่วงหน้าฉากงานแข่งแบด · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/lc289.webp",
+  "imgSmall": "/img/customer/lc289-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "กลุ่มใหญ่ใส่เสื้อแดงถ่ายรวมข้างอัฒจันทร์",
+  "q": 3,
+  "alt": "กลุ่มใหญ่ใส่เสื้อแดงถ่ายรวมข้างอัฒจันทร์ · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc298.webp",
+  "imgSmall": "/img/customer/lc298-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนสี่คนใส่เสื้อกิจกรรมคู่กับกลอง",
+  "q": 3,
+  "alt": "นักเรียนสี่คนใส่เสื้อกิจกรรมคู่กับกลอง · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc307.webp",
+  "imgSmall": "/img/customer/lc307-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดเสื้อน้ำเงินถ่ายรวมในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดเสื้อน้ำเงินถ่ายรวมในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/lc323.webp",
+  "imgSmall": "/img/customer/lc323-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาใส่เสื้อทีมถ่ายรวมหน้าอาคาร",
+  "q": 3,
+  "alt": "นักศึกษาใส่เสื้อทีมถ่ายรวมหน้าอาคาร · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc346.webp",
+  "imgSmall": "/img/customer/lc346-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "class"
+  ],
+  "photoGroup": "class",
+  "occ": "เพื่อนร่วมรุ่นใส่เสื้อมีเบอร์ถ่ายรวมในงานเลี้ยง",
+  "q": 3,
+  "alt": "เพื่อนร่วมรุ่นใส่เสื้อมีเบอร์ถ่ายรวมในงานเลี้ยง · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc379.webp",
+  "imgSmall": "/img/customer/lc379-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "ครูถ่ายรวมหน้าป้ายต้อนรับ",
+  "q": 3,
+  "alt": "ครูถ่ายรวมหน้าป้ายต้อนรับ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/lc391.webp",
+  "imgSmall": "/img/customer/lc391-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนใส่เสื้อโปโลบังคับโดรนในงานแข่ง",
+  "q": 3,
+  "alt": "นักเรียนใส่เสื้อโปโลบังคับโดรนในงานแข่ง · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/cr00.webp",
+  "imgSmall": "/img/customer/cr00-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาเสื้อขาวฟ้านั่งถ่ายรวมหน้าตึก",
+  "q": 3,
+  "alt": "นักศึกษาเสื้อขาวฟ้านั่งถ่ายรวมหน้าตึก · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/cr01.webp",
+  "imgSmall": "/img/customer/cr01-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "กลุ่มใหญ่ถ่ายรวมหน้าภูเขาหินในงานกิจกรรม",
+  "q": 2,
+  "alt": "กลุ่มใหญ่ถ่ายรวมหน้าภูเขาหินในงานกิจกรรม · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/cr02.webp",
+  "imgSmall": "/img/customer/cr02-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "เจ้าหน้าที่หญิงเสื้อโปโลเขียวถ่ายรวมในสำนักงาน",
+  "q": 3,
+  "alt": "เจ้าหน้าที่หญิงเสื้อโปโลเขียวถ่ายรวมในสำนักงาน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr03.webp",
+  "imgSmall": "/img/customer/cr03-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานถ่ายรวมบนเวทีงานสัมมนา",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมบนเวทีงานสัมมนา · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr04.webp",
+  "imgSmall": "/img/customer/cr04-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "พนักงานเสื้อชมพูดำถ่ายรวมในงานเลี้ยงกลางคืน",
+  "q": 3,
+  "alt": "พนักงานเสื้อชมพูดำถ่ายรวมในงานเลี้ยงกลางคืน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr05.webp",
+  "imgSmall": "/img/customer/cr05-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "กลุ่มเสื้อเขียวถ่ายรวมหน้าซุ้มลูกโป่ง",
+  "q": 3,
+  "alt": "กลุ่มเสื้อเขียวถ่ายรวมหน้าซุ้มลูกโป่ง · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/cr06.webp",
+  "imgSmall": "/img/customer/cr06-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "corp"
+  ],
+  "photoGroup": "corp",
+  "occ": "ทีมงานสี่คนใส่เสื้อโปโลในงานประชุม",
+  "q": 3,
+  "alt": "ทีมงานสี่คนใส่เสื้อโปโลในงานประชุม · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr07.webp",
+  "imgSmall": "/img/customer/cr07-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "บุคลากรโรงพยาบาลเสื้อส้มถ่ายรวม",
+  "q": 3,
+  "alt": "บุคลากรโรงพยาบาลเสื้อส้มถ่ายรวม · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr08.webp",
+  "imgSmall": "/img/customer/cr08-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานถ่ายรวมหน้าร้านรถยนต์",
+  "q": 3,
+  "alt": "พนักงานถ่ายรวมหน้าร้านรถยนต์ · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr09.webp",
+  "imgSmall": "/img/customer/cr09-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานเสื้อโปโลยืนเรียงแถวหน้าอาคาร",
+  "q": 3,
+  "alt": "พนักงานเสื้อโปโลยืนเรียงแถวหน้าอาคาร · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr10.webp",
+  "imgSmall": "/img/customer/cr10-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "กลุ่มนักเรียนถ่ายรวมในห้องประชุม",
+  "q": 3,
+  "alt": "กลุ่มนักเรียนถ่ายรวมในห้องประชุม · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/cr11.webp",
+  "imgSmall": "/img/customer/cr11-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "ผู้เข้าร่วมสัมมนาถ่ายรวมหน้าป้ายงาน",
+  "q": 3,
+  "alt": "ผู้เข้าร่วมสัมมนาถ่ายรวมหน้าป้ายงาน · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr12.webp",
+  "imgSmall": "/img/customer/cr12-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "เจ้าหน้าที่ถือเสื้อทีมถ่ายรวมในห้องรับรอง",
+  "q": 3,
+  "alt": "เจ้าหน้าที่ถือเสื้อทีมถ่ายรวมในห้องรับรอง · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr13.webp",
+  "imgSmall": "/img/customer/cr13-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "shop"
+  ],
+  "photoGroup": "shop",
+  "occ": "พนักงานชุดหมีและเสื้อทีมถ่ายรวมกับหมวกนิรภัย",
+  "q": 3,
+  "alt": "พนักงานชุดหมีและเสื้อทีมถ่ายรวมกับหมวกนิรภัย · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr14.webp",
+  "imgSmall": "/img/customer/cr14-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "กลุ่มใหญ่ถ่ายรวมบนลานกีฬาในร่ม",
+  "q": 2,
+  "alt": "กลุ่มใหญ่ถ่ายรวมบนลานกีฬาในร่ม · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/cr15.webp",
+  "imgSmall": "/img/customer/cr15-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมเสื้อเขียวเหลืองถ่ายรวมในยิมกีฬา",
+  "q": 3,
+  "alt": "ทีมเสื้อเขียวเหลืองถ่ายรวมในยิมกีฬา · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr16.webp",
+  "imgSmall": "/img/customer/cr16-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดถ่ายรวมในคอร์ตพื้นเขียว",
+  "q": 3,
+  "alt": "ทีมแบดถ่ายรวมในคอร์ตพื้นเขียว · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr17.webp",
+  "imgSmall": "/img/customer/cr17-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดเสื้อดำถ่ายรวมในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดเสื้อดำถ่ายรวมในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr18.webp",
+  "imgSmall": "/img/customer/cr18-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมเสื้อเหลืองถ่ายรวมบนสนามพื้นส้ม",
+  "q": 3,
+  "alt": "ทีมเสื้อเหลืองถ่ายรวมบนสนามพื้นส้ม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr19.webp",
+  "imgSmall": "/img/customer/cr19-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ชมรมว่ายน้ำถ่ายรวมกับป้ายชมรมบนสนามหญ้า",
+  "q": 3,
+  "alt": "ชมรมว่ายน้ำถ่ายรวมกับป้ายชมรมบนสนามหญ้า · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr20.webp",
+  "imgSmall": "/img/customer/cr20-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดเสื้อลายพิมพ์ยืนเรียงในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดเสื้อลายพิมพ์ยืนเรียงในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr21.webp",
+  "imgSmall": "/img/customer/cr21-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "นักแบดสามคนถือไม้แบดในคอร์ต",
+  "q": 3,
+  "alt": "นักแบดสามคนถือไม้แบดในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr22.webp",
+  "imgSmall": "/img/customer/cr22-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดเสื้อขาวถ่ายรวมในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดเสื้อขาวถ่ายรวมในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr23.webp",
+  "imgSmall": "/img/customer/cr23-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ทีมเสื้อดำแดงถ่ายรวมในยิม",
+  "q": 3,
+  "alt": "ทีมเสื้อดำแดงถ่ายรวมในยิม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr24.webp",
+  "imgSmall": "/img/customer/cr24-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดเสื้อส้มดำชูไม้แบดในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดเสื้อส้มดำชูไม้แบดในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr25.webp",
+  "imgSmall": "/img/customer/cr25-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "ทีมแบดเสื้อฟ้าถ่ายรวมในคอร์ต",
+  "q": 3,
+  "alt": "ทีมแบดเสื้อฟ้าถ่ายรวมในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr26.webp",
+  "imgSmall": "/img/customer/cr26-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "badminton"
+  ],
+  "photoGroup": "badminton",
+  "occ": "นักแบดชายสี่คนเสื้อเทาในคอร์ต",
+  "q": 3,
+  "alt": "นักแบดชายสี่คนเสื้อเทาในคอร์ต · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr27.webp",
+  "imgSmall": "/img/customer/cr27-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "ครอบครัวนักกีฬาเสื้อชมพูถือเกียรติบัตร",
+  "q": 3,
+  "alt": "ครอบครัวนักกีฬาเสื้อชมพูถือเกียรติบัตร · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr28.webp",
+  "imgSmall": "/img/customer/cr28-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "กลุ่มใหญ่เสื้อขาวถ่ายรวมในสนามกีฬาในร่ม",
+  "q": 2,
+  "alt": "กลุ่มใหญ่เสื้อขาวถ่ายรวมในสนามกีฬาในร่ม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr29.webp",
+  "imgSmall": "/img/customer/cr29-480.webp",
+  "cat": "sports",
+  "catName": "เสื้อกีฬา",
+  "uses": [
+   "sport"
+  ],
+  "photoGroup": "sport",
+  "occ": "นักกีฬาชายสี่คนนั่งพักข้างสนาม",
+  "q": 3,
+  "alt": "นักกีฬาชายสี่คนนั่งพักข้างสนาม · เสื้อกีฬา"
+ },
+ {
+  "img": "/img/customer/cr30.webp",
+  "imgSmall": "/img/customer/cr30-480.webp",
+  "cat": "corporate",
+  "catName": "เสื้อองค์กร",
+  "uses": [
+   "gov"
+  ],
+  "photoGroup": "gov",
+  "occ": "เจ้าหน้าที่หน่วยงานถ่ายรวมในงานกีฬา",
+  "q": 3,
+  "alt": "เจ้าหน้าที่หน่วยงานถ่ายรวมในงานกีฬา · เสื้อองค์กร"
+ },
+ {
+  "img": "/img/customer/cr31.webp",
+  "imgSmall": "/img/customer/cr31-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "ทีมเชียร์เสื้อแดงถ่ายรวมในห้องโถง",
+  "q": 3,
+  "alt": "ทีมเชียร์เสื้อแดงถ่ายรวมในห้องโถง · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/cr32.webp",
+  "imgSmall": "/img/customer/cr32-480.webp",
+  "cat": "event",
+  "catName": "เสื้ออีเวนต์",
+  "uses": [
+   "event"
+  ],
+  "photoGroup": "event",
+  "occ": "กลุ่มใหญ่เสื้อม่วงถ่ายรวมในงานแข่ง",
+  "q": 3,
+  "alt": "กลุ่มใหญ่เสื้อม่วงถ่ายรวมในงานแข่ง · เสื้ออีเวนต์"
+ },
+ {
+  "img": "/img/customer/cr33.webp",
+  "imgSmall": "/img/customer/cr33-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "faculty"
+  ],
+  "photoGroup": "faculty",
+  "occ": "นักศึกษาสองคนใส่เสื้อคณะถ่ายในสตูดิโอ",
+  "q": 3,
+  "alt": "นักศึกษาสองคนใส่เสื้อคณะถ่ายในสตูดิโอ · เสื้อมหาลัย โรงเรียน"
+ },
+ {
+  "img": "/img/customer/cr34.webp",
+  "imgSmall": "/img/customer/cr34-480.webp",
+  "cat": "school",
+  "catName": "เสื้อมหาลัย โรงเรียน",
+  "uses": [
+   "edu"
+  ],
+  "photoGroup": "edu",
+  "occ": "นักเรียนเสื้อกรมถ่ายรวมกลางแจ้งหน้าภูเขา",
+  "q": 3,
+  "alt": "นักเรียนเสื้อกรมถ่ายรวมกลางแจ้งหน้าภูเขา · เสื้อมหาลัย โรงเรียน"
  }
 ]

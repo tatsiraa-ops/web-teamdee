@@ -1,0 +1,24 @@
+{{!-- ส่วน Faq ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 12 · คำถามก่อนสั่ง -->
+{{#if pp.faq.show}}
+<section id="faq"><div class="wrap section">
+  <div class="max-w-[68ch] mb-8">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามที่พบบ่อย</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.faq.h}}}</h2>
+  </div>
+  {{!-- การ์ดกางได้ชุดเดียวกับหน้าคำถาม /faq/ (.fq-q · 26 ต.ค.) --}}
+  <div class="fq-list max-w-[820px]">
+    {{#each pp.faq.items}}
+    <details class="fq-q" id="pfaq-{{@index}}">
+      <summary><span class="fq-q__t">{{this.[0]}}</span><span class="fq-q__pm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path class="fq-q__v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+      <div class="fq-q__a"><p>{{this.[1]}}</p></div>
+    </details>
+    {{/each}}
+  </div>
+  <div class="flex flex-wrap gap-x-6 gap-y-2 mt-6">
+    <a class="pp-more" href="{{ppNextLine.queue}}" data-track="line" data-where="pp-faq-queue">เช็กคิวตามวันใช้เสื้อ<span class="arw" aria-hidden="true">&rarr;</span></a>
+    <a class="pp-more" href="{{url 'faq'}}">คำถามที่พบบ่อยฉบับเต็ม<span class="arw" aria-hidden="true">&rarr;</span></a>
+    {{#each pp.faq.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+  </div>
+</div></section>
+{{/if}}

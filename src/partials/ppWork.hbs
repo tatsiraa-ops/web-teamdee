@@ -1,0 +1,54 @@
+{{!-- ส่วน Work ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 08 · ผลงานจริง -->
+{{#if pp.work.show}}
+<section id="work">
+  <div class="wrap section">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <div class="max-w-[62ch]">
+        <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>เสื้อจริง</span>
+        <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.work.h}}}</h2>
+      </div>
+      <a class="pp-more" href="{{url 'projects'}}">ดูผลงานและรีวิวทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a>
+    </div>
+    {{#if pp.work.real.length}}
+    <div class="pp-work-grid grid md:grid-cols-3 gap-5">
+      {{!-- 24 ต.ค.: ชื่องาน โจทย์ และ "ทีมดีช่วย" ใน works.json แต่งขึ้น → ลบ · เหลือรูปจริงที่เห็นว่าเป็นงานแบบนี้ + คำบรรยายตามที่เห็น (figcaption แทน alt ไม่ให้อ่านซ้ำ)
+           ไม่มีงานจริงของสินค้านี้ → ส่วนนี้ซ่อนบนเว็บจริงเอง (product-view.js) · โปโลปักใช้รูปลูกค้าจริงด้านล่างแทน --}}
+      {{#each pp.work.real}}
+      <figure class="bg-paper border border-line rounded-plate overflow-hidden flex flex-col">
+        <div class="relative aspect-[4/3] bg-shell">
+          {{!-- fit: รูปเสื้อบนหุ่นแนวตั้ง ตัดเป็น 4:3 แล้วคอ/ชายเสื้อหาย → แสดงทั้งตัว (2 พ.ย.) --}}
+          <img src="{{this.img}}" alt="" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full {{#if this.fit}}object-contain{{else}}object-cover{{/if}}">
+          <span class="tag tag-ink absolute left-3 bottom-3">งานผลิตจริง</span>
+        </div>
+        <figcaption class="px-6 pt-4 on-paper t-sm">{{{ph this.alt}}}</figcaption>
+        <a class="pp-more px-6 pb-3" href="{{this.line}}" data-track="line" data-where="pp-work">สนใจงานแนวนี้<span class="arw" aria-hidden="true">&rarr;</span></a>
+      </figure>
+      {{/each}}
+    </div>
+    {{else if pp.work.photos.length}}
+    {{#if pp.work.photoH}}<h3 class="text-[22px] mt-10 mb-5">{{pp.work.photoH}}</h3>{{/if}}
+    {{!-- รูปลูกค้าจริงที่ใส่เสื้อของทีมดี (โปโลปัก · POLO_CORP_PHOTOS) · ยังไม่มีรูปที่ยืนยันว่าเป็นงานปัก → หัวข้อ photoH แทนหัวข้อ v22 · คำบรรยายบอกแค่สิ่งที่เห็น ห้ามเคลมว่าปัก
+         รูป 640px · data-sizes → srcset -320/-400/640 (ความเร็วมือถือ 30 ต.ค.: ช่องมือถือ ~164px เดิมโหลดไฟล์ 640 ทุกรูป) --}}
+    <ul class="pp-real">{{#each pp.work.photos}}
+      <li><figure><img src="{{this.img}}" data-sizes="(min-width:1240px) 379px, (min-width:768px) calc((100vw - 104px) / 3), calc(50vw - 24px)" alt="{{this.d}} · เสื้อโปโลที่ทีมดีผลิต" width="900" height="900" loading="lazy" decoding="async"><figcaption><span>{{this.d}}</span><a class="pp-real__ask" href="{{this.line}}" data-track="line" data-where="pp-work-photo"><span aria-hidden="true">{{> icoLine}}</span>สนใจงานแนวนี้</a></figcaption></figure></li>
+    {{/each}}</ul>
+    {{#if pp.work.jobs.length}}
+    <h3 class="text-[22px] mt-12 mb-5">แบบจากงานลูกค้า</h3>
+    {{!-- งานปักจริงของลูกค้า เป็นภาพ 3D ไม่ใช่รูปถ่าย (อาร์ตอนุญาต 2 พ.ย.) ป้ายบอกตรงๆ --}}
+    <ul class="pp-work-grid grid md:grid-cols-3 gap-5">{{#each pp.work.jobs}}
+      <li><figure class="bg-paper border border-line rounded-plate overflow-hidden flex flex-col h-full">
+        <div class="relative aspect-[3/2] bg-paper"><img src="{{this.img}}" alt="ภาพ 3D เสื้อโปโลงานปัก แบบ {{this.code}}" width="1080" height="720" data-sizes="(min-width:1240px) 379px, (min-width:768px) calc((100vw - 104px) / 3), 84vw" loading="lazy" decoding="async" class="w-full h-full object-contain"></div>
+        <figcaption class="px-6 py-4 on-paper t-sm"><b class="tabular-nums">{{this.code}}</b> · ภาพ 3D</figcaption>
+      </figure></li>{{/each}}
+    </ul>
+    {{/if}}
+    {{else}}
+    {{#unless wp}}<p class="pending-ribbon">ยังไม่มีงาน{{item.name}}ที่ได้รับอนุญาตให้เผยแพร่ · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
+    <div class="pp-work-grid grid md:grid-cols-3 gap-5 mt-4">
+      {{#each pp.work.cards}}<article class="pp-card"><span class="img-pending">{{this.img}}</span><h3 class="text-[19px] mt-4">{{this.h}}</h3>{{#each this.facts}}<p class="t-sm mt-1">{{this}}</p>{{/each}}</article>{{/each}}
+    </div>
+    {{/if}}
+  </div>
+</section>
+{{/if}}

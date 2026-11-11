@@ -1,0 +1,10 @@
+{{!-- คลิปทีมดีของหน้านี้ (vids จาก vite.config.js · แนวทาง ข 26 ต.ค.) · ไม่มีคลิป = ไม่มีส่วนนี้ · ใช้: {{> clipsBlock h="…" p="…" cls="…" auto=true}} · auto = ตัวเล่นขึ้นเองไม่ต้องกด (video-slot.js autoStart) · center=true หัวข้อกลาง · tail="…" ท้ายหัวข้อสีส้ม (hl · หน้า project 9 พ.ย.) --}}
+{{#if vids.length}}
+<section class="{{cls}}" id="clips" aria-labelledby="clips-h">
+  <div class="wrap section">
+    <h2 id="clips-h" class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch]{{#if center}} mx-auto text-center{{/if}}">{{#if tail}}{{{hl h tail}}}{{else}}{{h}}{{/if}}</h2>
+    {{#if p}}<p class="t-lead mt-3 max-w-[60ch]{{#if center}} mx-auto text-center{{/if}}">{{p}}</p>{{/if}}
+    <ul class="vgrid mt-8"{{#if auto}} data-embed-auto{{/if}}>{{#each vids}}<li>{{> videoSlot v=this wp=@root.wp}}{{#if this.caseHref}}<a class="pp-more" href="{{this.caseHref}}">อ่านเรื่องของ{{this.customer}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}</li>{{/each}}</ul>
+  </div>
+</section>
+{{/if}}

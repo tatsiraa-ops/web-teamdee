@@ -1,0 +1,39 @@
+{{!-- แบนเนอร์ "แชทผ่าน LINE" (รอบ 151–155 · อาร์ต "ต่อลงมาขอ cta แบบนี้" → "หนาไป ครีเอทๆหน่อย" → "cta ทำดีๆหน่อย ไปเจนอะไรมาได้เต็มที่")
+     ซ้าย: โลโก้ LINE แบบเรียบ (icoLine · ไม่ใช้ 3D) + หัว + ตอบภายใน 5 นาที + ประโยคเดียว + ปุ่ม
+     ขวา: มือถือ 3D ที่เจน (Magnific GPT 2.5 high · ตัวขาวขอบส้ม จอว่าง ไม่มีตัวอักษรในภาพ · public/img/line-cta) ตั้งล้นขอบบน เอียงนิด
+           จอ = แชท HTML (aria-hidden): ข้อความที่ปุ่มพิมพ์รอไว้จริง + ภาพแบบพร้อมรหัสจริง + ทีมดีกำลังพิมพ์ · ตำแหน่งจอวัดจากภาพ (ซ้ายขวา 6.2% บน 9.5% ล่าง 3%)
+     รอบ 156 "ยังไม่โดนอะ": เสื้อลายจริง 5 ตัว (ภาพตัวหน้า + รหัส TD จริง) ลอยตามเส้นประเข้าหามือถือ = เลือกแบบไหนก็ส่งรหัสเข้าแชท (แทนนาฬิกา)
+     ไม่ลอกชื่อ/รูปพนักงานจากบอร์ดอ้างอิง · CSS page-designs.css "lc" --}}
+<section class="lc" aria-labelledby="lc-h">
+  <h2 class="sr-only" id="lc-h">{{c.h2}}</h2>{{!-- H2 ตามผัง v22 · ตัวใหญ่บนจอคือ "แชทผ่าน LINE" --}}
+  <div class="wrap">
+    <div class="lc__card">
+      <span class="lc__bg" aria-hidden="true"></span>
+      <div class="lc__copy">
+        <div class="lc__head">
+          <span class="lc__logo" aria-hidden="true">{{> icoLine}}</span>
+          <div><p class="lc__title">{{c.h}}</p><p class="lc__live"><i aria-hidden="true"></i>{{c.live}}</p></div>
+        </div>
+        <p class="lc__sub">{{{ph c.sub}}}</p>
+        <div class="lc__btns">
+          <a class="lc__go" href="{{{href}}}" data-track="line" data-where="{{where}}">{{c.cta}} <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="lc__alt" href="{{{href2}}}{{{q2}}}">{{c.alt}}</a>
+        </div>
+      </div>
+      <div class="lc__vis">
+        <div class="lc__chat" aria-hidden="true">
+          <img class="lc__phimg" src="/img/line-cta/phone-3d-560.webp" srcset="/img/line-cta/phone-3d-560.webp 284w, /img/line-cta/phone-3d-900.webp 457w" sizes="(min-width: 768px) 228px, 170px" width="457" height="900" alt="" loading="lazy" decoding="async">
+          <div class="lc__scr">
+            <p class="lc__bar"><span class="lc__av">T</span><span><b>TEAMDEE</b><small>@teamdee</small></span></p>
+            <p class="lc__me">{{#each c.msg}}<span class="lc__ln">{{{ph this.t}}}{{#if this.q}}: <i></i>{{#if this.unit}} {{this.unit}}{{/if}}{{/if}}</span>{{/each}}</p>
+            <figure class="lc__att"><img src="{{c.design.img}}" width="540" height="360" alt="" loading="lazy" decoding="async"><figcaption>{{c.design.code}}</figcaption></figure>
+            <p class="lc__typing"><span class="lc__av">T</span><span class="lc__dots"><i></i><i></i><i></i></span></p>
+            <p class="lc__input"><span class="lc__plus">+</span><span class="lc__field">Aa</span><span class="lc__send"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M3 20.5 21 12 3 3.5v6.6l12 1.9-12 1.9z"/></svg></span></p>
+          </div>
+        </div><!-- /chat -->
+        <svg class="lc__trail" viewBox="0 0 520 260" preserveAspectRatio="none" aria-hidden="true"><path d="M10 210 C 120 250, 200 60, 330 120 S 440 120, 470 70"/></svg>
+        <ul class="lc__flies" aria-hidden="true">{{#each c.fly}}<li class="lc__fly lc__fly--{{inc @index}}"><img src="{{this.img}}" width="720" height="720" alt="" loading="lazy" decoding="async"><b>{{this.code}}</b></li>{{/each}}</ul>
+      </div>
+    </div>
+  </div>
+</section>

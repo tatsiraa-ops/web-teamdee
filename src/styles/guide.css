@@ -1,0 +1,110 @@
+/* Visual guide family: demonstrations first, chapters second; existing brand tokens. */
+.td-guide { color:var(--color-ink); background:var(--color-paper); }
+.td-guide [hidden] { display:none!important; }
+.td-guide ::selection { background:var(--color-orange); color:var(--color-ink); }
+.td-guide :is(a,button,summary,select,[tabindex]):focus-visible { outline:3px solid var(--color-ink); outline-offset:4px; }
+.td-guide__header { padding:24px 0 26px; }
+.td-guide__header>.wrap { position:relative; }
+.td-guide__crumb { display:flex; flex-wrap:wrap; gap:8px; color:var(--color-ink-3); font-size:14px; line-height:1.7; padding-right:260px; }
+.td-guide__crumb a { text-decoration:underline; text-underline-offset:4px; }
+.td-guide__switch { position:absolute; top:0; right:0; z-index:8; width:230px; }
+.td-guide__switch summary { min-height:44px; cursor:pointer; font-size:15px; font-weight:650; padding:8px 16px; border:1px solid var(--color-line-2); border-radius:24px; background:var(--color-paper); }
+.td-guide__switch summary span { display:none; }
+.td-guide__switch nav { margin-top:8px; background:var(--color-paper); border:1px solid var(--color-line); border-radius:16px; padding:8px; box-shadow:0 12px 28px -16px rgb(0 0 0 / .35); }
+.td-guide__switch a { display:block; padding:12px; font-size:15px; border-radius:8px; }
+.td-guide__switch a:hover { background:var(--color-shell); }
+.td-guide__switch a[aria-current] { background:var(--color-ink); color:var(--color-paper); }
+.td-guide__opening { padding-top:30px; }
+.td-guide__opening>div { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(240px,1fr); gap:12px 64px; align-items:end; }
+.td-guide__opening h1 { grid-row:1/3; font-size:42px; font-weight:800; line-height:1.35; text-wrap:balance; }
+.td-guide__lead { font-size:17px; color:var(--color-ink-2); line-height:1.8; max-width:50ch; }
+.td-guide__date { font-size:13px; color:var(--color-ink-3); align-self:start; }
+.td-guide__notice { font-size:15px; padding:12px; border:1px solid var(--color-line-2); grid-column:1/-1; }
+.td-guide__experience { margin-bottom:54px; }
+.td-guide__layout { padding-bottom:64px; }
+.td-guide__toc { position:sticky; top:76px; z-index:6; background:var(--color-paper); border-top:1px solid var(--color-line-2); border-bottom:1px solid var(--color-line-2); }
+.td-guide__toc details { display:flex; }
+.td-guide__toc summary { cursor:pointer; font-size:14px; font-weight:700; min-height:44px; padding:12px 4px; }
+.td-guide__toc summary span { margin-left:8px; font-size:12px; font-weight:400; color:var(--color-ink-3); }
+.td-guide__toc ol { display:flex; overflow-x:auto; gap:6px; padding:4px 3px 12px; scrollbar-width:thin; scrollbar-color:var(--color-line-2) var(--color-paper); }
+.td-guide__toc li { flex-shrink:0; }
+.td-guide__toc a { display:block; min-height:44px; padding:11px 15px; border-radius:24px; font-size:14px; line-height:1.6; color:var(--color-ink-2); }
+.td-guide__toc a:hover { background:var(--color-shell); }
+.td-guide__toc a[aria-current] { background:var(--color-ink); color:var(--color-paper); }
+.td-guide__body { min-width:0; font-size:18px; line-height:1.85; overflow-wrap:break-word; }
+.td-guide__context { padding:42px 0; max-width:72ch; margin-left:auto; color:var(--color-ink-2); width:calc(100% - 340px); }
+.td-guide__who { margin-top:12px; font-size:14px; color:var(--color-ink-3); }
+.td-guide__section { display:grid; grid-template-columns:280px minmax(0,1fr); gap:60px; padding:40px 0 50px; border-top:1px solid var(--color-line-2); scroll-margin-top:220px; }
+.td-guide__section-side { min-width:0; }
+.td-guide__section-content { min-width:0; }
+.td-guide__section-content>:first-child { margin-top:0; }
+.td-guide__section h2 { font-size:30px; line-height:1.45; font-weight:750; text-wrap:pretty; }
+.td-guide__section-head>.gtag { margin-top:14px; }
+.td-guide__share { margin-top:10px; font-size:13px; color:var(--color-ink-3); }
+.td-guide__share button { min-height:44px; text-decoration:underline; text-underline-offset:4px; cursor:pointer; text-align:left; }
+.td-guide__share button:disabled { opacity:.6; cursor:wait; }
+.td-guide [data-guide-copy-status] { display:block; overflow-wrap:anywhere; }.td-guide [data-guide-copy-status]:empty { display:none; }
+.td-guide__part { margin-top:36px; scroll-margin-top:220px; }
+.td-guide__part-head { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+.td-guide__part-head h3 { font-size:23px; line-height:1.5; font-weight:700; }
+.td-guide__library { display:grid; grid-template-columns:1fr 1.5fr; gap:56px; border-top:1px solid var(--color-line); padding-top:40px; padding-bottom:24px; scroll-margin-top:110px; }
+.td-guide__library h2 { font-size:30px; font-weight:750; line-height:1.5; }
+.td-guide__library p { color:var(--color-ink-2); margin-top:12px; font-size:17px; line-height:1.8; }
+.td-guide__library ul { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 26px; }
+.td-guide__library a { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:56px; padding:14px 0; border-bottom:1px solid var(--color-line); font-size:16px; font-weight:600; }
+.td-guide__library a:hover span { text-decoration:underline; text-underline-offset:5px; }
+.td-guide__library svg { flex-shrink:0; }.td-guide__library small { color:var(--color-ink-3); font-size:12px; font-weight:400; white-space:nowrap; }
+@media(max-width:1100px) {
+  .td-guide__opening>div { gap:12px 32px; }.td-guide__opening h1 { font-size:36px; }
+  .td-guide__section { grid-template-columns:220px minmax(0,1fr); gap:32px; }.td-guide__context { width:calc(100% - 252px); }
+}
+@media(max-width:767px) {
+  .td-guide__header { padding:20px 0 24px; }.td-guide__crumb { padding-right:0; font-size:13px; }
+  .td-guide__switch { position:relative; width:100%; margin-top:16px; }.td-guide__switch nav { position:absolute; width:100%; }
+  .td-guide__opening { padding-top:24px; }.td-guide__opening>div { display:block; }.td-guide__opening h1 { font-size:30px; line-height:1.4; }
+  .td-guide__lead { margin-top:14px; font-size:16px; }.td-guide__date { margin-top:10px; }
+  .td-guide__experience { margin-bottom:32px; }.td-guide__layout { padding-bottom:32px; }
+  .td-guide__toc { top:76px; }.td-guide__toc details { display:block; }.td-guide__toc ol { display:block; max-height:45svh; overflow-y:auto; }
+  .td-guide__toc a { border-radius:8px; }.td-guide__context { width:auto; padding:28px 0; }
+  .td-guide__section { display:block; padding:28px 0 36px; scroll-margin-top:150px; }.td-guide__section-content { margin-top:22px; }
+  .td-guide__section h2 { font-size:26px; }.td-guide__part-head h3 { font-size:22px; }
+  .td-guide__library { display:block; padding-top:30px; }.td-guide__library h2 { font-size:26px; }.td-guide__library ul { grid-template-columns:1fr; margin-top:20px; }
+}
+@media print { .td-guide__switch,.td-guide__toc,.td-guide__share,.td-guide__library,.td-guide .hm-sec { display:none; }.td-guide__section { display:block; }.td-guide__context { width:100%; } }
+
+/* ---------- ตรวจหน้าคู่มือ 27 ต.ค. (Claude · ต่อจากงาน Codex) ----------
+   ให้หน้าคู่มือใช้ชุดเดียวกับทั้งเว็บ: hero พื้น shell (แบบหน้าแบบเสื้อ/รีวิว/FAQ) · สารบัญ ab-toc · ตารางเส้นบาง · FAQ .fq-q · ปุ่ม cb · แชทตามบริบท */
+.td-guide__header { padding: 22px 0 30px; background: var(--color-shell); border-bottom: 1px solid var(--color-line); }
+.td-guide__h1 { margin-top: 10px; max-width: 22ch; font-size: clamp(30px, 3.8vw, 50px); line-height: 1.25; color: var(--color-ink); text-wrap: balance; }
+.td-guide__header .td-guide__lead { max-width: 60ch; margin-top: 12px; font-size: 17px; line-height: 1.75; }
+.td-guide__meta { display: flex; flex-wrap: wrap; gap: 4px 8px; margin-top: 10px; font-size: 14px; color: var(--color-ink-3); }
+.td-guide__quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.td-guide__quick li { animation: pj-rise .6s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(.15s + var(--i, 0) * .07s); }
+.td-guide__quick a { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 12px 0 18px; border: 1px solid var(--color-line-2); border-radius: 999px; background: var(--color-paper); font-size: 15px; font-weight: 700; transition: border-color .2s, background-color .2s, color .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.td-guide__quick svg { width: 18px; height: 18px; flex: none; color: var(--color-orange); transition: translate .25s cubic-bezier(.2, .7, .2, 1); }
+@media (hover: hover) { .td-guide__quick a:hover { border-color: var(--color-ink); background: var(--color-ink); color: var(--color-paper); transform: translateY(-2px); } .td-guide__quick a:hover svg { translate: 0 2px; } }
+.td-guide__quick a:active { transform: scale(.97); }
+.td-guide__experience { margin-top: 48px; }
+/* หัวข้อส่วนสาธิต (studio / lab) เป็นหัวข้อส่วน ไม่แข่งกับ H1 */
+.td-guide .g-studio__heading h2, .td-guide .g-lab h2 { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.3; letter-spacing: -.01em; }
+.td-guide__abtoc { margin-top: 0; }
+.td-guide__section, .td-guide__part { scroll-margin-top: calc(var(--hdr-b, 78px) + 70px); }
+/* คัดลอกลิงก์: ไอคอนเล็ก + คำสั้น */
+.td-guide__share { margin-top: 8px; }
+.td-guide__copy { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 10px 0 6px; border-radius: 999px; font-size: 13px; color: var(--color-ink-3); text-decoration: none !important; transition: background-color .2s, color .2s; }
+.td-guide__copy svg { width: 16px; height: 16px; }
+.td-guide__copy:hover { background: var(--color-shell); color: var(--color-ink); }
+/* ภาพรวมขั้นตอน (การ์ดไม่มีรูป ใต้หัวข้อ overview) = แถบขั้นตอนเลขส้ม แบบส่วนขั้นตอนของหน้าสินค้า */
+.td-guide #overview .gblock-cards { counter-reset: gstep; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.td-guide #overview .gblock-card { counter-increment: gstep; padding: 18px 20px 20px; border: 1px solid var(--color-line); border-radius: 18px; background: var(--color-paper); }
+.td-guide #overview .gblock-card::before { content: counter(gstep, decimal-leading-zero); display: block; margin-bottom: 10px; font-size: 28px; font-weight: 800; line-height: 1; color: var(--color-orange); font-variant-numeric: tabular-nums; }
+.td-guide #overview .gblock-card .gblock-description { margin-top: 4px; font-size: 15px; line-height: 1.6; }
+@media (max-width: 767px) {
+  .td-guide__header { padding: 16px 0 24px; }
+  .td-guide__quick a { min-height: 44px; font-size: 14px; }
+  .td-guide #overview .gblock-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .td-guide #overview .gblock-card { padding: 14px; border-radius: 14px; }
+  .td-guide #overview .gblock-card::before { font-size: 22px; margin-bottom: 6px; }
+  .td-guide #overview .gblock-title { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .td-guide__quick li { animation: none; } .td-guide__quick a, .td-guide__quick svg { transition: none; } }

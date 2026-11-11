@@ -1,0 +1,52 @@
+{{!-- ป้ายยินยอมคุกกี้ PDPA (อาร์ตเลือกแบบ ก แถบล่างจอ · 26 ต.ค. 2026) · ตรรกะ src/js/consent.js · หน้าตา src/js/consent-ui.js
+     อาร์ต 26 ต.ค. รอบ 2: เน้นให้กด "ยอมรับทั้งหมด" (ปุ่มหลัก) · "เฉพาะที่จำเป็น" ยังอยู่บนแถบแรก · ไม่บังเนื้อหา ไม่ล็อกหน้า --}}
+<section class="ck" id="ckBar" hidden aria-labelledby="ckTitle">
+  <div class="ck__in">
+    <span class="ck__ico" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M27.5 17.2A11.5 11.5 0 1 1 14.8 4.5a4 4 0 0 0 4.6 4.6 4 4 0 0 0 4.6 4.6 4 4 0 0 0 3.5 3.5Z"/><circle cx="11" cy="14" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="11.5" cy="21.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="21.5" cy="23" r="1" fill="currentColor" stroke="none"/></svg></span>
+    <div class="ck__txt">
+      {{!-- 30 ต.ค. อาร์ต: บอกตรงว่ามีคุกกี้โฆษณา · ตัด "ใช้เว็บได้ครบ" (สื่อว่าไม่ยอมแล้วใช้ไม่ได้ ซึ่งไม่จริง) · ปุ่มคงเดิม --}}
+      <h2 id="ckTitle" class="ck__h">ทีมดีใช้คุกกี้วัดผล โฆษณา และตัวเล่นคลิป</h2>
+      <p class="ck__p">วัดผลการใช้งาน · โฆษณาจาก Meta / Google · ตัวเล่นคลิป Facebook เลือกเฉพาะที่จำเป็นก็ใช้เว็บได้ตามปกติ <span class="ck__pol"><a href="{{url 'privacy'}}">นโยบายความเป็นส่วนตัว</a></span></p>
+    </div>
+    <div class="ck__act">
+      {{!-- อาร์ตเคาะ 30 ต.ค. "ให้เท่ากัน": ปฏิเสธกับยอมรับเป็นปุ่มหน้าตาเดียวกัน วางคู่กัน (PDPA ไม่ชี้นำ) · ตั้งค่ารายหมวดเป็นลิงก์ด้านล่าง --}}
+      <div class="ck__btns">
+        <button type="button" class="btn btn-orange ck__b" data-ck="none">เฉพาะที่จำเป็น</button>
+        <button type="button" class="btn btn-orange ck__b" data-ck="all">ยอมรับทั้งหมด</button>
+      </div>
+      <p class="ck__more"><button type="button" data-ck="open">ตั้งค่าคุกกี้รายหมวด</button></p>
+    </div>
+  </div>
+</section>
+<dialog class="ckd" id="ckDialog" aria-labelledby="ckdTitle">
+  <form method="dialog" class="ckd__in">
+    <div class="ckd__head">
+      <h2 id="ckdTitle" class="ckd__h">ตั้งค่าคุกกี้</h2>
+      <button type="button" class="ckd__x" data-ck="close" aria-label="ปิดหน้าตั้งค่าคุกกี้"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <ul class="ckd__list">
+      <li class="ckd__row">
+        <div><p class="ckd__k" id="ck-need-k">จำเป็นต่อการใช้เว็บ</p><p class="ckd__d" id="ck-need-d">เก็บในเครื่องนี้เท่านั้น: การเลือกคุกกี้นี้ · แบบเสื้อที่กดเลือกไว้ · การปิดการ์ดแนะนำ · ป๊อปอัปที่กด "ไม่ต้องแสดงอีก" · เบอร์ที่เพิ่งส่งฟอร์ม (ลบเมื่อปิดแท็บ) · ปิดไม่ได้</p></div>
+        <input type="checkbox" class="ckd__sw" checked disabled aria-labelledby="ck-need-k" aria-describedby="ck-need-d">
+      </li>
+      <li class="ckd__row">
+        <div><label class="ckd__k" for="ckAnalytics">วัดผลการใช้งาน</label><p class="ckd__d" id="ck-an-d">นับจำนวนคนเข้าเว็บและหน้าที่ดู (Google Analytics) ช่วยให้ทีมดีปรับเว็บให้ใช้ง่ายขึ้น</p></div>
+        <input type="checkbox" class="ckd__sw" id="ckAnalytics" aria-describedby="ck-an-d">
+      </li>
+      <li class="ckd__row">
+        <div><label class="ckd__k" for="ckMarketing">โฆษณาจาก Meta / Google</label><p class="ckd__d" id="ck-mk-d">วัดผลโฆษณาของทีมดี (Meta Pixel, Google Ads)</p></div>
+        <input type="checkbox" class="ckd__sw" id="ckMarketing" aria-describedby="ck-mk-d">
+      </li>
+      {{!-- 30 ต.ค.: แยกตัวเล่น Facebook ออกจากหมวดโฆษณา (เดิมกดเล่นคลิป = เปิดคุกกี้โฆษณาทั้งเว็บ) · consent.js หมวด media --}}
+      <li class="ckd__row">
+        <div><label class="ckd__k" for="ckMedia">สื่อจากภายนอก (ตัวเล่น Facebook)</label><p class="ckd__d" id="ck-md-d">เปิดตัวเล่นคลิปลูกค้าจาก Facebook ในหน้าเว็บ · Facebook (Meta) ได้รับข้อมูลการเข้าชมเมื่อตัวเล่นโหลด ไม่เปิดคุกกี้โฆษณาของทีมดี</p></div>
+        <input type="checkbox" class="ckd__sw" id="ckMedia" aria-describedby="ck-md-d">
+      </li>
+    </ul>
+    {{!-- ปุ่มเท่ากันแบบเดียวกับป้าย (อาร์ตเคาะ 30 ต.ค.) --}}
+    <div class="ckd__act ck__btns">
+      <button type="button" class="btn btn-orange ck__b" data-ck="save">บันทึกเฉพาะที่เลือก</button>
+      <button type="button" class="btn btn-orange ck__b" data-ck="all">ยอมรับทั้งหมด</button>
+    </div>
+  </form>
+</dialog>

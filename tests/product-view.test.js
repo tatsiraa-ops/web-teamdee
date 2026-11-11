@@ -116,3 +116,30 @@ test('ตัวเลขทีมดีใต้ hero: ตัดตัวที�
   assert.equal(productView(one, real, { forWp: true, has }).trust.show, false)
   assert.equal(productView(pp, real, { forWp: false, has }).trust.show, false) // ไม่มีข้อมูลตัวเลข
 })
+
+/* อาร์ตเคาะ 2 พ.ย.: หน้าสินค้าตามลำดับ v22 · ส่วนที่มีข้อมูลจริงต้องขึ้นเว็บจริง */
+test('รายละเอียด: การ์ดรูปโชว์เมื่อมีไฟล์จริง · การ์ดข้อความจริง (text) โชว์ได้โดยไม่มีรูป · การ์ดบรรยายรูปที่ไม่มีไฟล์ซ่อน', () => {
+  const page = { ...pp, detail: { h: 'd', cards: [{ h: 'มีรูป', p: ['x'], img: '/img/a.webp' }, { h: 'ข้อความ', p: ['จริง'], img: 'ภาพแนวทาง', text: true }, { h: 'บรรยายรูป', p: ['ภาพ…'], img: 'ภาพแนวทาง' }], links: [] } }
+  const wp = productView(page, real, { forWp: true, has })
+  assert.deepEqual(wp.detail.cards.map((c) => c.h), ['มีรูป', 'ข้อความ'])
+  assert.deepEqual(wp.detail.cards.map((c) => c.hasImg), [true, false])
+  assert.equal(wp.detail.show, true)
+})
+
+test('ผ้ายังไม่ยืนยัน (fabricsPending): เว็บจริงซ่อนรายการแต่ส่วนยังอยู่ · ต้นแบบเห็นรายการพร้อมป้าย', () => {
+  const wp = productView(pp, { ...real, fabricsPending: true }, { forWp: true, has })
+  assert.deepEqual(wp.fabric.fabrics, [])
+  assert.equal(wp.fabric.show, true)
+  const proto = productView(pp, { ...real, fabricsPending: true }, { forWp: false, has })
+  assert.equal(proto.fabric.fabrics.length, 1)
+  assert.equal(proto.fabric.fabricsPending, true)
+})
+
+test('รูปลูกค้าจริงในส่วนงานจริง (photos): เว็บจริงโชว์ส่วน · หัวข้อใช้ photoH ไม่ใช้หัวข้อ v22 ที่เคลมเทคนิค', () => {
+  const page = { ...pp, work: { ...pp.work, photoH: 'เสื้อที่ลูกค้าใส่จริง' } }
+  const wp = productView(page, { ...real, photos: [{ img: '/a.webp', d: 'ทีม' }] }, { forWp: true, has })
+  assert.equal(wp.work.show, true)
+  assert.equal(wp.work.h, 'เสื้อที่ลูกค้าใส่จริง')
+  assert.equal(wp.work.photos.length, 1)
+  assert.equal(productView(page, real, { forWp: false, has }).work.h, 'ผลงาน')
+})

@@ -2,8 +2,14 @@
 <html lang="th">
 <head>
   {{> head}}
+  {{!-- CSS เฉพาะหน้าโหลดใน head (27 ต.ค.) · เดิม import ผ่าน JS → ตอนเปิดหน้ารูป/ไอคอนกางใหญ่แวบก่อน CSS มา --}}
+  <link rel="stylesheet" href="/src/styles/article-reader.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-blocks.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-material-lab.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-process-studio.css" data-page-css>
   <title>วิธีเลือกผ้าสำหรับเสื้อทีมและยูนิฟอร์ม | TEAMDEE</title>
-  <meta name="description" content="วิธีเลือกผ้าเสื้อทีม · เริ่มจากงานที่ใส่ แล้วค่อยเทียบผ้าและคุณสมบัติที่เกี่ยวข้อง">
+  <meta name="description" content="ผ้าเสื้อทีมมีหลายแบบ วิธีเลือกผ้าให้เริ่มจากงานที่ใส่ แล้วเทียบผ้าเรียบไมโคร ผ้ารังผึ้ง ผ้าดรายเทค และผ้าอื่น ขอชิ้นผ้าตัวอย่างฟรีมาจับก่อนสั่งได้">
 </head>
 <body>
 {{> siteHeader active="learn"}}

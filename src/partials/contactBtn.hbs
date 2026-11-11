@@ -1,0 +1,10 @@
+{{!-- ปุ่ม "ติดต่อทีมดี" บนหัวเว็บ + ท้ายเว็บ (อาร์ต 26 ต.ค. "แก้ปุ่มตรงนี้ทำดีๆ")
+     เม็ดดำ (ท้ายเว็บพื้นดำ = เม็ดส้ม) · จุดสถานะซ้าย: เขียวกะพริบเบาๆ เมื่ออยู่ในเวลาทำการจริง (nudge.js openNow) เทาเมื่อปิด
+     ลูกศรในวงกลมส้มขวา · ชี้: วงกลมขยายเต็มปุ่มเป็นพื้นส้ม ลูกศรหมุนชี้ไปข้างหน้า
+     อยู่หน้าติดต่อแล้ว = หน้าตาเดียวกัน ลูกศรชี้ลง กดแล้วเลื่อนไปฟอร์ม (#form · อาร์ต 26 ต.ค. "ทำปุ่มมาดีๆ" เดิมเป็นขอบดำเปล่าๆ)
+     size=lg ใช้ในเมนูมือถือ · tone=orange ใช้บนพื้นดำ --}}
+<a class="hcta{{#if tone}} hcta--{{tone}}{{/if}}{{#if size}} hcta--{{size}}{{/if}}{{#if (eq active 'contact')}} is-here{{/if}}{{#if cls}} {{cls}}{{else}} inline-flex{{/if}}" href="{{#if (eq active 'contact')}}#form{{else}}{{url 'contact'}}{{/if}}"{{#if (eq active 'contact')}} aria-current="page"{{/if}}>
+  <span class="hcta__dot" data-float-status aria-hidden="true"><span data-float-status-t hidden></span></span>
+  <span class="hcta__t">ติดต่อทีมดี</span>
+  <span class="hcta__go" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</a>

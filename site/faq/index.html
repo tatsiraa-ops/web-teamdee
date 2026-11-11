@@ -3,95 +3,104 @@
 <head>
   {{> head}}
   <title>คำถามก่อนสั่งทำเสื้อทีม | TEAMDEE</title>
+  {{#if faqLd}}<script type="application/ld+json">{{{faqLd}}}</script>{{/if}}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"คู่มือและบทความ","item":"{{site.baseUrl}}{{url 'blog'}}"},{"@type":"ListItem","position":3,"name":"คำถามที่พบบ่อย"}]}</script>
   <meta name="description" content="รวมคำถามเรื่องแบบเสื้อ โลโก้ ผ้า ไซซ์ การขอราคา ขั้นต่ำ ระยะเวลาผลิต การจัดส่ง และบริการหลังรับเสื้อจากทีมดี">
 </head>
 <body>
 {{> siteHeader active="learn"}}
 
 <main id="main">
-  <section class="band-hero relative overflow-hidden">
-    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-    <div class="wrap relative py-12 md:py-16">
-      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>คู่มือและบทความ</span><span aria-hidden="true">/</span><span aria-current="page">คำถามที่พบบ่อย</span></nav>
-      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">คำถามก่อนสั่งทำเสื้อทีม</h1>
-      <p class="text-[18px] leading-[1.8] text-ink-2 max-w-[58ch] mt-5">คำตอบชุดเดียวกับที่ทีมขายใช้ตอบ ทุกข้อมีลิงก์ของตัวเอง กดที่คำถามแล้วคัดลอกลิงก์ส่งต่อได้เลย</p>
+  {{!-- รื้อ 26 ต.ค. (อาร์ต "รื้อหน้านี้ต่อ"): หัวเรื่อง + ช่องค้นหาคำถามสด (faq-search.js มีเทส) + คำถามยอดฮิต
+       ตัวหน้า: เมนูหมวดติดจอซ้าย (มือถือ = แถบเลื่อนใต้หัวเว็บ) ไฮไลต์หมวดที่อ่านอยู่ · คำถามเป็นการ์ดกางได้ (details)
+       ทุกข้อ: ถามต่อใน LINE (แนบคำถามข้อนั้น) + คัดลอกลิงก์ · ค้นไม่เจอ = ส่งคำที่พิมพ์ไปถามใน LINE · ปิดด้วยกล่องแชท
+       CSS main.css "หน้าคำถาม" · ลิงก์ตรงรายข้อเดิม #หมวด-ลำดับ ใช้ได้เหมือนเดิม --}}
+  <section class="fq-hero">
+    <div class="wrap fq-hero__in">
+      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'blog'}}">คู่มือและบทความ</a><span aria-hidden="true">/</span><span aria-current="page">คำถามที่พบบ่อย</span></nav>
+      <h1 class="t-display fq-hero__h">{{{ph "คำถามก่อนสั่งทำเสื้อทีม"}}}</h1>
+      <p class="fq-hero__p">{{{ph "คำตอบชุดเดียวกับที่ทีมขายใช้ตอบลูกค้า"}}} {{{ph "พิมพ์สิ่งที่อยากรู้ หรือเลือกหมวดด้านล่าง"}}}</p>
+      <form class="fq-search" role="search" onsubmit="return false" data-fq-form>
+        <label class="sr-only" for="fqq">ค้นหาคำถาม</label>
+        <span class="fq-search__ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+        <input class="fq-search__in" id="fqq" name="q" type="search" placeholder="เช่น ขั้นต่ำ ใบกำกับภาษี งานด่วน ไซซ์ใหญ่" autocomplete="off" enterkeyhint="search" spellcheck="false" aria-describedby="fqStatus" data-fq-q>
+        <kbd class="fq-search__kbd" aria-hidden="true">/</kbd>
+        <button class="fq-search__x" type="button" aria-label="ล้างคำค้น" hidden data-fq-clear><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </form>
+      {{#if fq.popular.length}}
+      <div class="fq-pop">
+        <p class="fq-pop__h">คนถามบ่อย</p>
+        <ul class="fq-pop__list">{{#each fq.popular}}<li style="--i:{{@index}}"><a href="#{{this.id}}" data-fq-jump>{{this.q}}</a></li>{{/each}}</ul>
+      </div>
+      {{/if}}
     </div>
   </section>
 
-  <!-- 1 · คำถามสำคัญ · ชุดเดียวกับหน้าแรก (ไม่เขียนจำนวนข้อในหัวข้อ เพราะเว็บจริงตัดข้อที่ยังรอยืนยัน) -->
-  <section class="wrap section" aria-labelledby="top-h">
-    <div class="max-w-[68ch] mb-7">
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามสำคัญ</span>
-      <h2 id="top-h" class="t-display text-[clamp(26px,3.4vw,42px)]">คำถามที่คนถามบ่อยก่อนตัดสินใจ</h2>
-    </div>
-    <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
-      {{#each faq.home}}
-      <div class="hs-accordion border-b border-line" id="top-{{@index}}">
-        <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-5 min-h-tap font-bold text-[18px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-expanded="false" aria-controls="topp-{{@index}}">
-          <span>{{this.[0]}}</span>
-          <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-        </button>
-        <div id="topp-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
-          <p class="t-body pb-6">{{this.[1]}}</p>
+  <div class="wrap fq-body">
+    <aside class="fq-side" data-fq-side>
+      <nav class="fq-nav" aria-label="หมวดคำถาม">
+        <p class="fq-nav__h">หมวดคำถาม</p>
+        <ul>{{#each fq.cats}}<li><a href="#{{this.id}}" data-fq-cat="{{this.id}}"><span class="fq-nav__ico" aria-hidden="true">{{> (lookup . 'ico')}}</span><span class="fq-nav__t">{{this.name}}</span><span class="fq-nav__n tabular-nums" data-fq-n>{{this.n}}</span></a></li>{{/each}}</ul>
+      </nav>
+      <div class="fq-help">
+        <p class="fq-help__h">ถามทีมดีโดยตรง</p>
+        <p class="fq-help__p">{{{ph site.hours}}}</p>
+        <a class="cb cb--p" href="{{faqCtaLine}}" data-track="line" data-where="faq-side"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ทัก LINE ถาม</span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="fq-help__tel tabular-nums" href="tel:{{site.phonePrimaryTel}}"><span aria-hidden="true">{{> icoPhone}}</span>โทร {{site.phonePrimary}}</a>
+      </div>
+    </aside>
+
+    <div class="fq-main">
+      {{!-- ประกาศผลคัดลอกลิงก์ (30 ต.ค. · เดิมเปลี่ยนแค่ข้อความในปุ่ม โปรแกรมอ่านจอไม่รู้) --}}
+      <p class="sr-only" role="status" id="fqCopyStatus"></p>
+      <p class="fq-status" id="fqStatus" aria-live="polite" data-fq-status>ทั้งหมด <b class="tabular-nums">{{fq.total}}</b> คำถาม ใน {{fq.cats.length}} หมวด</p>
+
+      {{!-- ค้นไม่เจอ: ส่งคำที่พิมพ์ไปถามใน LINE ได้เลย (ข้อความพิมพ์รอไว้) --}}
+      <div class="fq-empty" hidden data-fq-empty>
+        <p class="fq-empty__h">ยังไม่มีคำถามนี้ในหน้า</p>
+        <p class="fq-empty__p">ส่งคำถามให้ทีมดีตอบทาง LINE ได้เลย ข้อความพิมพ์รอไว้ให้แล้ว</p>
+        <p class="fq-empty__bub" aria-hidden="true" data-fq-bub></p>
+        <div class="fq-empty__btns">
+          <a class="cb cb--p" href="{{faqCtaLine}}" data-track="line" data-where="faq-empty" data-fq-ask><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ส่งคำถามนี้ทาง LINE</span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <button class="cb cb--s" type="button" data-fq-reset>ดูคำถามทั้งหมด</button>
         </div>
       </div>
-      {{/each}}
-    </div>
-  </section>
 
-  <!-- 2 · ทางลัดหมวด -->
-  <section class="bg-shell border-y border-line" aria-labelledby="cat-h">
-    <div class="wrap py-10">
-      <h2 id="cat-h" class="text-[15px] font-bold text-ink-3 mb-4">ทางลัดหมวด</h2>
-      <nav class="chiprail" aria-label="ทางลัดหมวดคำถาม">
-        {{#each faq.full}}<a class="chip" href="#{{this.id}}">{{this.name}}</a>{{/each}}
-      </nav>
-    </div>
-  </section>
-
-  <!-- 3 · คำตอบรายหมวด · ทุกข้อมีลิงก์ตรง -->
-  <section class="wrap section">
-    <div class="max-w-[820px]">
-      {{#each faq.full}}
-      <section class="guide-sec scroll-mt-28 {{#unless @first}}mt-12 pt-12 border-t border-line{{/unless}}" id="{{this.id}}" aria-labelledby="h-{{this.id}}">
-        <h2 id="h-{{this.id}}" class="t-display text-[clamp(23px,2.8vw,32px)]">{{this.name}}</h2>
-        <div class="hs-accordion-group border-t-2 border-ink mt-5">
-          {{#each this.items}}
-          <div class="hs-accordion border-b border-line scroll-mt-28" id="{{../id}}-{{@index}}">
-            <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-5 min-h-tap font-bold text-[18px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-expanded="false" aria-controls="{{../id}}-{{@index}}-a">
-              <span>{{this.[0]}}</span>
-              <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-            </button>
-            <div id="{{../id}}-{{@index}}-a" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
-              <p class="t-body pb-4">{{this.[1]}}</p>
-              <p class="pb-6"><a class="text-[15px] font-semibold text-ink-3 underline decoration-line-2 underline-offset-4 hover:text-ink inline-flex items-center min-h-[44px]" href="#{{../id}}-{{@index}}" data-copy-link>คัดลอกลิงก์คำถามนี้</a></p>
+      {{#each fq.cats}}
+      <section class="fq-cat" id="{{this.id}}" aria-labelledby="h-{{this.id}}" data-fq-sec>
+        <header class="fq-cat__hd">
+          <span class="fq-cat__ico" aria-hidden="true">{{> (lookup . 'ico')}}</span>
+          <h2 id="h-{{this.id}}">{{this.name}}</h2>
+          <span class="fq-cat__n tabular-nums">{{this.n}} ข้อ</span>
+        </header>
+        <div class="fq-list">
+          {{#each this.qs}}
+          <details class="fq-q" id="{{this.id}}" data-fq-item data-cat="{{../name}}">
+            <summary><span class="fq-q__t" data-fq-t>{{this.q}}</span><span class="fq-q__pm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path class="fq-q__v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+            <div class="fq-q__a">
+              <p>{{this.a}}</p>
+              <div class="fq-q__acts">
+                <a class="fq-act fq-act--line" href="{{this.line}}" data-track="line" data-where="faq-item" aria-label="ถามต่อใน LINE: {{this.q}}"><span aria-hidden="true">{{> icoLine}}</span>ถามต่อข้อนี้ใน LINE</a>
+                <button type="button" class="fq-act" data-href="#{{this.id}}" data-copy-link><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span data-copy-t>คัดลอกลิงก์</span><span class="sr-only"> ข้อ {{this.q}}</span></button>
+              </div>
             </div>
-          </div>
+          </details>
           {{/each}}
         </div>
       </section>
       {{/each}}
 
-      <div class="mt-12 pt-10 border-t-2 border-ink">
-        <h2 class="t-display text-[clamp(22px,2.6vw,30px)]">อยากอ่านละเอียดกว่านี้</h2>
-        <div class="chiprail mt-5">
-          {{#each guides}}<a class="chip" href="{{url 'guides' this.id}}">{{this.name}}</a>{{/each}}
-        </div>
-      </div>
+      {{#if guides.length}}
+      <nav class="fq-guides" aria-labelledby="fq-g-h">
+        <h2 id="fq-g-h">อยากอ่านละเอียดกว่านี้</h2>
+        <ul>{{#each guides}}<li><a href="{{url 'guides' this.id}}"><span>{{this.name}}</span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>{{/each}}</ul>
+      </nav>
+      {{/if}}
     </div>
-  </section>
+  </div>
 
-  {{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end · 24 ต.ค.) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
-  <section class="hm-end" aria-labelledby="end-h">
-    <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
-    <div class="wrap relative hm-end__in">
-      <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
-      <h2 id="end-h">{{{ph "ยังมีเรื่องที่อยากถาม? คุยกับทีมดีได้เลย"}}}</h2>
-      <p class="hm-end__lead">{{{ph "บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้"}}}</p>
-      <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a></div>
-      <p class="hm-end__alt"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>
-    </div>
-  </section>
+  {{!-- ปิดแบบแชท (ctaBox ชุดเดียวกับหน้าแรก) --}}
+  {{> ctaBox id="fqEnd" tone="no" c=faqCta href=faqCtaLine where="cta-faq" cta=faqCta.cta href2=(url 'contact') q2="?from=%2Ffaq%2F" cta2="ฝากข้อมูลให้ติดต่อกลับ"}}
 </main>
 {{> footer}}
 <script type="module" src="/src/js/faq-page.js"></script>

@@ -1,0 +1,202 @@
+{
+  "_note": "คลิปจาก IG @teamdee_ และเพจ Facebook teamdee (FB ไม่ล็อกอินเห็นแค่ 9 คลิปแรก) · อาร์ตเลือกทำ ก หน้าเคส ข ช่องคลิปในหน้าที่มี ค บทความ (26 ต.ค. 2026) · title/summary เรียบเรียงจากแคปชันของทีมดีเอง ไม่แต่งคำพูดลูกค้า · ขึ้นเว็บจริงเมื่อครบ: file (mp4 ต้นฉบับ ไม่มีหน้าจอ IG) poster duration(วินาที) consent=true music=ok (เพลงใช้นอก IG ได้ หรือไม่มีเพลง) · places = จุดที่วางคลิป (key ของ routes) · quotes = คำพูดลูกค้าในคลิปที่ทีมพิมพ์ให้ · captions = ไฟล์ซับ .vtt · links = ที่โพสต์ไว้ (ig/fb) · date = วันโพสต์จริง (FB บอกแค่ \"x สัปดาห์ที่แล้ว\" → null จนกว่าจะรู้วัน) · durationPosted = ความยาวที่เห็นบนเพจ (duration จริงใส่เมื่อได้ไฟล์)",
+  "items": [
+    {
+      "id": "assumption",
+      "kind": "case",
+      "date": "2026-10-25",
+      "title": "เบื้องหลังเสื้อทีมโรงเรียนอัสสัมชัญคอนแวนต์ ตั้งแต่ออกแบบถึงส่งมอบ",
+      "summary": "ทีมดีพาชมการทำเสื้อทีมให้โรงเรียนอัสสัมชัญคอนแวนต์ ตั้งแต่ออกแบบไปจนถึงวันส่งมอบ พร้อมความรู้สึกของผู้สั่งหลังได้เห็นเสื้อจริง",
+      "customer": "โรงเรียนอัสสัมชัญคอนแวนต์",
+      "use": "edu",
+      "product": "print",
+      "qty": "[1,551 หรือ 1,500 ตัว · แคปชัน 2 คลิปไม่ตรงกัน รอยืนยัน]",
+      "places": [
+        "cases.assumption",
+        "projects",
+        "articles.school-bulk",
+        "about"
+      ],
+      "file": null,
+      "poster": null,
+      "duration": null,
+      "captions": null,
+      "quotes": [],
+      "consent": false,
+      "music": null,
+      "links": {
+        "ig": "https://www.instagram.com/teamdee_/reel/De8be7XlaV1/",
+        "fb": "https://www.facebook.com/teamdee/videos/1590107625649413/",
+        "igOld": "https://www.instagram.com/teamdee_/reel/DdqdYpSlMDs/",
+        "fbOld": "https://www.facebook.com/teamdee/videos/1405385921807532/"
+      },
+      "durationPosted": 85
+    },
+    {
+      "id": "gsb",
+      "kind": "case",
+      "date": "2026-09-21",
+      "title": "เบื้องหลังเสื้อทีมแบดมินตันธนาคารออมสิน",
+      "summary": "เสื้อทีมแบดมินตันชุดใหม่ของธนาคารออมสิน ทีมดีดูแลตั้งแต่ออกแบบจนส่งมอบถึงสำนักงานใหญ่",
+      "customer": "ธนาคารออมสิน",
+      "use": "badminton",
+      "product": "print",
+      "qty": "กว่า 200 ตัว",
+      "places": [
+        "cases.gsb",
+        "projects",
+        "articles.badminton-org"
+      ],
+      "file": null,
+      "poster": null,
+      "duration": null,
+      "captions": null,
+      "quotes": [],
+      "consent": false,
+      "music": null,
+      "links": {
+        "ig": "https://www.instagram.com/teamdee_/reel/DdkvzB0T9XR/",
+        "fb": "https://www.facebook.com/teamdee/videos/1418697490227931/"
+      },
+      "durationPosted": 85
+    },
+    {
+      "id": "junbi",
+      "kind": "case",
+      "date": "2026-09-28",
+      "title": "เมื่อภาพวาดของเด็กๆ กลายเป็นเสื้อทีม Junbi Taekwondo",
+      "summary": "Junbi Taekwondo เล่าเองว่าภาพวาดของเด็กๆ ในยิมกลายมาเป็นเสื้อทีมพิมพ์ลายได้อย่างไร",
+      "customer": "Junbi Taekwondo",
+      "use": "sport",
+      "product": "print",
+      "qty": null,
+      "places": [
+        "cases.junbi",
+        "projects"
+      ],
+      "file": null,
+      "poster": null,
+      "duration": null,
+      "captions": null,
+      "quotes": [],
+      "consent": false,
+      "music": null,
+      "links": {
+        "ig": "https://www.instagram.com/teamdee_/reel/Dd28KLcvsuy/",
+        "fb": "https://www.facebook.com/teamdee/videos/1397876905844445/"
+      },
+      "durationPosted": 50
+    },
+    {
+      "file": null,
+      "poster": null,
+      "duration": null,
+      "captions": null,
+      "quotes": [],
+      "consent": false,
+      "music": null,
+      "id": "police",
+      "kind": "case",
+      "links": {
+        "fb": "https://www.facebook.com/teamdee/videos/3039692749557757/"
+      },
+      "date": null,
+      "durationPosted": 52,
+      "title": "เสียงจากลูกค้าจริง สภ.ปลายบาง และ สภ.บางกรวย สั่งเสื้อทีมกับทีมดี",
+      "summary": "สภ.ปลายบาง และ สภ.บางกรวย เล่าประสบการณ์สั่งเสื้อทีมกับทีมดี ทั้งเนื้อผ้า น้ำหนัก และความคล่องตัวตอนใส่",
+      "customer": "สภ.ปลายบาง และ สภ.บางกรวย",
+      "use": "gov",
+      "product": "print",
+      "qty": null,
+      "places": [
+        "cases.police",
+        "projects"
+      ]
+    },
+    {
+      "id": "embroidery-asmr",
+      "kind": "process",
+      "date": "2026-08-28",
+      "title": "งานปักโลโก้บนเสื้อโปโล ภาพจริงจากงานของทีมดี",
+      "summary": "ดูจักรปักทำงานทีละฝีเข็มบนเสื้อโปโล ก่อนออกมาเป็นโลโก้บนเสื้อทีม",
+      "places": [
+        "products.polo",
+        "about"
+      ],
+      "file": null,
+      "poster": null,
+      "duration": null,
+      "captions": null,
+      "quotes": [],
+      "consent": null,
+      "music": null,
+      "links": {
+        "ig": "https://www.instagram.com/teamdee_/reel/Dcm7BFqHWK5/",
+        "fb": "https://www.facebook.com/teamdee/videos/1443921554460679/"
+      },
+      "durationPosted": 40
+    },
+    {
+      "id": "why-teamdee",
+      "kind": "brand",
+      "date": "2026-06-24",
+      "title": "ทำไมทีมต่างๆ เลือกสั่งเสื้อทีมกับทีมดี",
+      "summary": "คลิปสั้นเล่าว่าทีมดีดูแลงานเสื้อทีมอย่างไร ตั้งแต่ออกแบบจนผลิตเสร็จ",
+      "places": ["unlisted"],
+      "file": null,
+      "poster": null,
+      "duration": null,
+      "captions": null,
+      "quotes": [],
+      "consent": null,
+      "music": null,
+      "links": {
+        "ig": "https://www.instagram.com/teamdee_/reel/DZ_ln0kPXjv/"
+      }
+    },
+    {
+      "file": null,
+      "poster": null,
+      "duration": null,
+      "captions": null,
+      "quotes": [],
+      "consent": null,
+      "music": null,
+      "id": "backstage",
+      "kind": "process",
+      "links": {
+        "fb": "https://www.facebook.com/teamdee/videos/1071563669119050/"
+      },
+      "date": null,
+      "durationPosted": 46,
+      "title": "หลังบ้านทีมดี หลังส่งแบบแล้วงานเสื้อทีมไปถึงไหน",
+      "summary": "พาดูหลังบ้านทีมดี ว่างานเสื้อทีมเดินไปถึงขั้นไหนหลังลูกค้ายืนยันแบบ",
+      "places": [
+        "about",
+        "articles.school-bulk"
+      ]
+    },
+    {
+      "file": null,
+      "poster": null,
+      "duration": null,
+      "captions": null,
+      "quotes": [],
+      "consent": null,
+      "music": null,
+      "id": "one-stop",
+      "kind": "brand",
+      "links": {
+        "fb": "https://www.facebook.com/teamdee/videos/28084125771288948/"
+      },
+      "date": null,
+      "durationPosted": 30,
+      "title": "ทำเสื้อทีมที่เดียวจบ ครบที่ทีมดี",
+      "summary": "คลิปสั้นแนะนำงานเสื้อทีมของทีมดี ตั้งแต่ออกแบบจนผลิตเสร็จในที่เดียว",
+      "places": [
+        "about"
+      ]
+    }
+  ],
+  "_noteAbout": "9 พ.ย. /about-us/ อาร์ต \"เอาแค่ fb ไปเอาคลิปมาได้เต็มที่\": คลิป Facebook 4 ตัว (assumption · embroidery-asmr · backstage · one-stop) · why-teamdee (IG) ไม่ขึ้นหน้านี้แล้ว → places \"unlisted\" = เก็บข้อมูลไว้ ยังไม่วางหน้าไหน"
+}

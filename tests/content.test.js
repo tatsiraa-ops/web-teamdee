@@ -38,7 +38,8 @@ test('หน้ากลุ่มลูกค้า: เอกสารและ
   for (const [id, v] of Object.entries(read('../src/data/use-pages.json'))) {
     if (id[0] === '_' || !v.plan.payment) continue
     assert.ok(v.plan.payment.p.includes('ออกใบเสร็จ / ใบกำกับภาษีได้'), id)
-    assert.ok(v.plan.payment.p.some((x) => x.startsWith('ขอเอกสารจัดซื้อได้')), id)
+    /* เอกสารจัดซื้อเฉพาะกลุ่มที่ต้องใช้ (2 พ.ย.) */
+    assert.equal(v.plan.payment.p.some((x) => x.startsWith('ขอเอกสารจัดซื้อได้')), ['corp', 'shop', 'gov', 'edu', 'faculty'].includes(id), id)
   }
 })
 

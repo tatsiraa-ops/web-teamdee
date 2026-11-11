@@ -1,0 +1,9 @@
+{{!-- ส่วนชวนขอราคาตาม v22: หัวข้อ ประโยคเดียว ปุ่ม · แชทตัวอย่างเหลือส่วนปิดหน้าท้ายสุด (2 พ.ย.: เดิมซ้ำ 2 กล่อง สูงกล่องละ 547px) --}}
+<section class="bg-shell" aria-labelledby="quote-h">
+  <div class="wrap pp-band">
+    <h2 id="quote-h" class="t-display">{{{ph ppQuoteCta.title}}}</h2>
+    <p class="t-lead mt-3">{{{ph ppQuoteCta.lead}}}</p>
+    {{#if ppQuoteCta.send.items.length}}<ul class="pp-band__send">{{#each ppQuoteCta.send.items}}<li>{{this}}</li>{{/each}}</ul>{{/if}}
+    <div class="pp-row" data-where="pp-quote"><a class="cb cb--p" href="{{quoteLine}}" data-track="line"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ทัก LINE ส่งข้อมูล</span></a><a class="cb cb--s" href="{{url 'contact'}}?p={{item.id}}">{{pp.quote.cta}}</a></div>
+  </div>
+</section>

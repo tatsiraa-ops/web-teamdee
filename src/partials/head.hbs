@@ -1,8 +1,17 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+{{!-- viewport-fit=cover: ให้ env(safe-area-inset-*) มีผลบน iPhone (แถบล่างไม่ชิดขีด home · ตรวจมือถือ 30 ต.ค.) · color-scheme: เว็บโหมดสว่าง ไม่ให้เบราว์เซอร์บังคับมืดเอง --}}
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <meta name="theme-color" content="#FF6C00">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&display=swap">
+{{!-- เว็บจริง: functions.php พิมพ์ชุดเดียวกันใน wp_head ลำดับ 0 ก่อน GTM --}}
+{{#unless wp}}{{> consentHead}}{{/unless}}
+{{!-- ระบบคุกกี้ปิดชั่วคราว (site.json cookieConsent · อาร์ต 3 พ.ย.) → consent.js ถือว่าอนุญาตตัวเล่นคลิป GA/โฆษณาคง denied --}}
+{{#unless site.cookieConsent}}<meta name="td-consent" content="off">{{/unless}}
+{{!-- คลิปทีมดีที่พร้อมขึ้นเว็บในหน้านี้ (VideoObject · video-view.js) --}}
+{{#each videoLd}}<script type="application/ld+json">{{{this}}}</script>{{/each}}
+{{!-- ฟอนต์อยู่ในเว็บเอง (src/styles/fonts.css ใน main.css · 30 ต.ค. รอบ 48) · preload ฟอนต์ไทยใส่ตอน build (vite.config.js teamdee-font-preload) ด้วยชื่อไฟล์ที่ hash แล้ว
+     ห้ามเขียน <link rel="preload"> ชี้ /src/... ตรงนี้: Vite ไม่แปลง href ของ preload (ได้ 404) --}}
 <link rel="stylesheet" href="/src/styles/main.css">
+{{!-- home.css = ชิ้นส่วนที่ใช้ทุกหน้า (กล่องแชท CTA การ์ด หัวข้อ) · โหลดใน head ไม่ใช่ผ่าน JS · เดิม import ใน page.js → ตอน dev ไอคอนกางเต็มจอแวบก่อน CSS มา (27 ต.ค.) --}}
+<link rel="stylesheet" href="/src/styles/home.css">

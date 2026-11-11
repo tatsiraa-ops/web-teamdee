@@ -1,0 +1,31 @@
+{{!-- ส่วน Hero ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 01 · hero · จอแรกมือถือเป็นใบเสนอราคาย่อ (audit P2 · 2.3): H1 → รูป → ราคา → ขั้นต่ำ/เวลาผลิต → ปุ่ม LINE → เวลาตอบ แล้วค่อยย่อหน้าคำค้น
+     คอม: ข้อความซ้าย รูปขวา (grid 2 แถว รูปกินทั้งสองแถว) · มือถือ: เรียงตามลำดับใน HTML -->
+<section class="band-hero relative overflow-hidden">
+  <div class="wrap relative pt-3 pb-8 md:pt-8 lg:py-10">
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>สินค้าและบริการ</span><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
+    <div class="grid gap-3 mt-1 lg:mt-6 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-0">
+      <h1 class="t-display text-[clamp(28px,4.6vw,56px)] text-ink lg:col-start-1 lg:row-start-1 lg:self-end">{{{ph pp.hero.h1}}}</h1>
+      <figure class="relative lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center"{{#unless item.img}}{{#unless item.panel}} hidden{{/unless}}{{/unless}}>
+        <div class="overflow-hidden rounded-plate bg-paper aspect-[16/10] lg:aspect-[3/2]">
+          {{!-- heroPhoto = รูปลูกค้าจริงแทนภาพจำลองของสินค้า (โปโลปัก · 2 พ.ย.) · บรรยายสิ่งที่เห็น ไม่เคลมว่าปัก · รูปหลักของหน้า data-sizes → srcset -320/-480/640 คง fetchpriority (ความเร็วมือถือ 30 ต.ค.) --}}
+          {{#if heroPhoto}}<img src="{{heroPhoto.img}}" data-sizes="(min-width:1024px) 46vw, calc(100vw - 40px)" alt="{{heroPhoto.alt}}" width="640" height="640" fetchpriority="high" decoding="async" class="w-full h-full {{#if heroPhoto.fit}}object-contain{{else}}object-cover{{/if}}">
+          {{else if item.img}}<img src="{{item.img}}"{{#if heroSrcset}} srcset="{{heroSrcset}}" sizes="(min-width:1024px) 46vw, 100vw"{{/if}} alt="{{#if item.imgAlt}}{{item.imgAlt}}{{else}}{{#if (eq item.imgKind 'shape')}}{{item.imgNote}}{{else}}{{item.name}} ด้านหน้าและด้านหลัง {{#if (eq item.imgKind 'real')}}งานที่ทีมดีผลิต{{else}}ภาพจำลอง{{/if}}{{/if}}{{/if}}" width="1080" height="720" fetchpriority="high" decoding="async" class="w-full h-full object-contain">
+          {{else if item.panel}}{{!-- เสื้อสกรีน: แผงตัวหนังสือแทนรูปเครื่อง DFT ที่พิสูจน์ที่มาไม่ได้ (24 ต.ค.) จนกว่าจะมีรูปงานสกรีนจริง --}}<span class="tech-panel" role="img" aria-label="{{item.name}} {{item.panel}}"><b lang="en" aria-hidden="true">{{item.panel}}</b></span>
+          {{else}}<span class="prod-noimg" role="img" aria-label="ยังไม่มีภาพ{{item.name}}"><span class="block size-14">{{> icoShirt}}</span><span>{{item.name}}</span></span>{{/if}}
+        </div>
+        {{#if heroPhoto}}<figcaption class="tag absolute left-3 top-3 max-w-[calc(100%-1.5rem)]">{{heroPhoto.tag}}</figcaption>
+        {{else if item.img}}<figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-3 top-3 max-w-[calc(100%-1.5rem)]">{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else if (eq item.imgKind 'shape')}}ภาพประกอบทรง · ยังไม่ใช่งานพิมพ์สำเร็จ{{else}}ภาพจำลอง{{/if}}</figcaption>{{/if}}
+      </figure>
+      <div class="lg:col-start-1 lg:row-start-2 lg:pt-6">
+        <p class="text-[17px] leading-[1.75] text-ink-2 max-w-[56ch] mt-3">{{pp.hero.lead}}</p>
+        {{!-- ปุ่ม 2 ปุ่มตาม v22 · ราคา ขั้นต่ำ อยู่แถบสรุปถัดไป · วันใช้เสื้อและวิธีชำระอยู่ส่วนขั้นตอน (2 พ.ย.: hero เดิมซ้อน 7 ก้อน) --}}
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mt-5" data-where="pp-hero">
+          <a class="cb cb--p pp-hero__cb" href="{{priceAsk}}" data-track="line"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ทัก LINE ขอราคา</span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cb cb--s pp-hero__cb" href="#options">ดูแบบและตัวเลือก</a>
+        </div>
+        <p class="hp-reply">{{{ph 'ตอบใน 5 นาที (8:30–21:00) · แบบ 3D ใน 24 ชม.'}}}</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,118 @@
+/* ตัวดูรูปแบบแอป (audit มือถือ 30 ต.ค. ข้อ 17) · ใช้กับ swipe-pager.js ใน lightbox.js (.lb) และ review-dialog.js (.rvd)
+   โหลดจาก lightbox.js / review-dialog.js · selector ขึ้นต้นด้วย dialog. ให้ชนะ main.css โดยไม่พึ่งลำดับไฟล์
+   - พื้นที่รูปรับนิ้วเอง (touch-action: none) เพราะต้องได้ทั้งลากซ้ายขวา ปัดลงปิด และบีบซูมของเราเอง
+   - --vw-fade (1 → 0) ตั้งจาก JS ตอนปัดลง: ฉากหลังและแผงข้อมูลจางตามระยะนิ้ว
+   - มือถือ: รูปเต็มกว้างจอ สูงได้ถึงจอ − 200px · ปุ่ม ก่อนหน้า / ปิด / ถัดไป อยู่แถบล่างที่นิ้วโป้งถึง (ขนาด 52px) */
+
+.vw-track { position: relative; display: grid; place-items: center; width: 100%; }
+.vw-track.is-moving, .vw-track > img { will-change: transform; }
+.vw-track > img { transform-origin: center; }
+/* ภาพข้างเคียง: ซ่อนตอนนิ่ง โผล่เฉพาะตอนลาก · คลาสเดียวกับภาพหลักจึงขนาดเท่ากัน */
+.vw-peek { position: absolute; inset: 0; display: grid; place-items: center; visibility: hidden; pointer-events: none; }
+.vw-peek[data-side="-1"] { translate: calc(-100% - 24px) 0; }
+.vw-peek[data-side="1"] { translate: calc(100% + 24px) 0; }
+.vw-track.is-moving .vw-peek { visibility: visible; }
+.vw-peek img:not([src]) { visibility: hidden; }
+
+dialog.lb .lb__stage, dialog.rvd .rvd__stage { overflow: hidden; touch-action: none; -webkit-user-select: none; user-select: none; }
+dialog :is(.lb__stage, .rvd__stage).is-zoomed { cursor: grab; }
+
+/* จางตามนิ้วตอนปัดลง */
+dialog.lb { background: rgb(14 14 14 / var(--vw-fade, 1)); }
+dialog.lb::backdrop { background: rgb(12 12 12 / calc(.95 * var(--vw-fade, 1))); }
+dialog.lb :is(.lb__cap, .lb__btn) { opacity: var(--vw-fade, 1); }
+dialog.rvd { background: color-mix(in srgb, var(--color-paper) calc(var(--vw-fade, 1) * 100%), transparent); }
+dialog.rvd::backdrop { background: rgb(0 0 0 / calc(.72 * var(--vw-fade, 1))); }
+dialog.rvd .rvd__stage { background: rgb(14 14 14 / var(--vw-fade, 1)); }
+dialog.rvd :is(.rvd__side, .rvd__nav, .rvd__x, .rvd__count) { opacity: var(--vw-fade, 1); }
+dialog.rvd .vw-track { height: 100%; }
+
+@media (max-width: 767px) {
+  /* ---- รูปใหญ่ (.lb) ---- */
+  dialog.lb .lb__stage { padding: env(safe-area-inset-top) 0 0; }
+  dialog.lb .lb__img { max-height: calc(100dvh - 200px - env(safe-area-inset-bottom)); border-radius: 0; box-shadow: none; }
+  dialog.lb .lb__cap { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
+  dialog.lb::after { content: ""; position: fixed; inset: auto 0 0; z-index: 2; height: calc(84px + env(safe-area-inset-bottom)); background: linear-gradient(to top, rgb(14 14 14 / .94) 55%, rgb(14 14 14 / 0)); opacity: var(--vw-fade, 1); pointer-events: none; }
+  dialog.lb .lb__btn { position: fixed; top: auto; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 3; width: 52px; height: 52px; translate: none; background: rgb(38 38 38 / .82); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+  dialog.lb .lb__prev { left: 16px; right: auto; }
+  dialog.lb .lb__next { right: 16px; left: auto; }
+  /* ปุ่มปิดย้ายจากมุมขวาบน (นิ้วโป้งเอื้อมไม่ถึง) มากลางแถบล่าง */
+  dialog.lb .lb__close { top: auto; right: auto; bottom: calc(14px + env(safe-area-inset-bottom)); left: 50%; translate: -50% 0; }
+
+  /* ---- รีวิว (.rvd) ทั้งกล่องเลื่อนได้ ลากรูปขึ้น = อ่านรีวิว ---- */
+  dialog.rvd .rvd__in { display: block; height: 100dvh; overflow-y: auto; overscroll-behavior: contain; }
+  dialog.rvd .rvd__stage { min-height: 0; padding-top: env(safe-area-inset-top); }
+  dialog.rvd .vw-track { height: auto; }
+  dialog.rvd .rvd__img { height: auto; max-height: calc(100dvh - 200px - env(safe-area-inset-bottom)); }
+  dialog.rvd .rvd__side { overflow: visible; padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
+  dialog.rvd::after { content: ""; position: fixed; inset: auto 0 0; z-index: 2; height: calc(84px + env(safe-area-inset-bottom)); background: linear-gradient(to top, rgb(255 255 255 / .94) 55%, rgb(255 255 255 / 0)); opacity: var(--vw-fade, 1); pointer-events: none; }
+  dialog.rvd :is(.rvd__nav, .rvd__x) { position: fixed; top: auto; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 3; width: 52px; height: 52px; translate: none; background: rgb(20 20 20 / .84); color: var(--color-paper); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+  dialog.rvd .rvd__prev { left: 16px; right: auto; }
+  dialog.rvd .rvd__next { right: 16px; left: auto; }
+  dialog.rvd .rvd__x { top: auto; right: auto; bottom: calc(14px + env(safe-area-inset-bottom)); left: 50%; translate: -50% 0; }
+}
+
+
+/* ---------- กล่องแบบเสื้อโหมดสว่าง (.lb--design · 9 พ.ย. 2026) ----------
+   อาร์ต "เอาแบบกดขึ้นมาแล้ว popup … ไม่ได้ตัดออกจากเว็บขนาดนั้น ตอนนี้มันดูตัดขาดออกจากเว็บ"
+   แบบเสื้อที่มีรหัส: การ์ดขาวขอบมนลอยกลางจอ · หน้าเว็บด้านหลังจาง+เบลอ (ยังเห็นว่าอยู่ในเว็บ) · ชื่อทรงตัวใหญ่ รหัสบรรทัดรองสีส้มเข้ม
+   ปุ่มชุดเดียวกับเว็บ (เขียว LINE · ปุ่มรองขอบดำ) · รูปลูกค้าจริงยังเป็นกล่องมืดเดิม */
+dialog.lb.lb--design { background: transparent; color: var(--color-ink); }
+dialog.lb.lb--design::backdrop { background: rgb(36 26 18 / calc(.5 * var(--vw-fade, 1))); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+dialog.lb.lb--design .lb__fig { width: min(1180px, calc(100% - 64px)); min-height: 0; margin: max(32px, calc((100dvh - 700px) / 2)) auto 32px; border-radius: 28px; background: #fff; overflow: hidden; box-shadow: 0 40px 90px -30px rgb(40 18 4 / .55); opacity: var(--vw-fade, 1); }
+dialog.lb.lb--design .lb__stage { min-height: 0; height: min(700px, calc(100dvh - 64px)); padding: 28px 84px; background: #F6F3EF; }
+dialog.lb.lb--design .lb__img { max-height: 100%; border-radius: 18px; background: #fff; box-shadow: 0 20px 44px -28px rgb(40 18 4 / .45); }
+dialog.lb.lb--design .lb__cap { min-height: 0; gap: 12px; padding: 40px 32px 32px; border-left: 1px solid rgb(23 19 15 / .07); background: #fff; color: var(--color-ink); }
+dialog.lb.lb--design .lb__count { color: var(--color-ink-3); }
+dialog.lb.lb--design .lb__title { font-size: clamp(26px, 2.2vw, 32px); font-weight: 800; line-height: 1.3; }
+dialog.lb.lb--design .lb__title:empty { display: none; }
+dialog.lb.lb--design .lb__code { font-size: 15px; font-weight: 750; letter-spacing: 0; color: #C24A00; }
+dialog.lb.lb--design .lb__code::before { content: "รหัสแบบ "; font-weight: 600; color: var(--color-ink-3); }
+dialog.lb.lb--design .lb__chip { border-color: rgb(23 19 15 / .1); background: #F6F1EC; color: var(--color-ink); }
+dialog.lb.lb--design .lb__note { color: var(--color-ink-3); }
+dialog.lb.lb--design :is(.lb__line, .lb__quote, .lb__pick, .lb__save, .lb__btn):focus-visible { outline-color: var(--color-ink); }
+dialog.lb.lb--design .lb__btn { border-color: rgb(23 19 15 / .12); background: #fff; color: var(--color-ink); box-shadow: 0 8px 20px -12px rgb(40 18 4 / .4); }
+dialog.lb.lb--design .lb__btn:hover { border-color: var(--color-orange); background: var(--color-orange); color: var(--color-ink); }
+dialog.lb.lb--design .lb__close { position: absolute; top: calc(max(32px, calc((100dvh - 700px) / 2)) + 16px); right: calc(max(32px, calc((100% - 1180px) / 2)) + 16px); width: 44px; height: 44px; }
+dialog.lb.lb--design .lb__close svg { width: 20px; height: 20px; }
+/* ปุ่ม (10 พ.ย. อาร์ต "sloppy มาก" → "เน้นๆ ไอคอน · คนแลบไม่ต้องอ่านตัวหนังสือก็กดได้")
+   หลัก: LINE เต็มกว้าง (โลโก้ LINE) · รอง: แถวไทล์ ไอคอนใหญ่ในวงกลมส้มอ่อน + คำเดียว เก็บไว้ / ขอราคา / เซฟรูป
+   ไทล์ที่ซ่อน (หน้าแรกไม่มีเก็บ · รูปลูกค้าไม่มีขอราคา) ไม่กินช่อง · เก็บแล้ว = วงกลมส้มเต็ม บุ๊กมาร์กทึบ */
+dialog.lb.lb--design .lb__bar { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+dialog.lb.lb--design .lb__line { min-height: 60px; }
+dialog.lb.lb--design .lb__tiles { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 10px; }
+dialog.lb.lb--design .lb__tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 84px; padding: 10px 6px; border: 1.5px solid rgb(23 19 15 / .1); border-radius: 18px; background: #fff; font-size: 14.5px; font-weight: 750; line-height: 1.2; color: var(--color-ink); text-align: center; text-decoration: none; cursor: pointer; transition: border-color .2s, background-color .2s, transform .15s cubic-bezier(.2, .7, .2, 1); }
+dialog.lb.lb--design .lb__tile[hidden] { display: none; }
+dialog.lb.lb--design .lb__tile:hover { border-color: rgb(23 19 15 / .35); background: #FFFAF6; }
+dialog.lb.lb--design .lb__tile:active { transform: scale(.96); }
+dialog.lb.lb--design .lb__tile:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+dialog.lb.lb--design .lb__ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #FFF0E4; color: #C24A00; transition: background-color .2s, color .2s; }
+dialog.lb.lb--design .lb__ico svg { width: 22px; height: 22px; }
+dialog.lb.lb--design .lb__pick[aria-pressed="true"] { border-color: #FF6C00; background: #FFF7F0; color: var(--color-ink); }
+dialog.lb.lb--design .lb__pick[aria-pressed="true"] .lb__ico { background: #FF6C00; color: #111; }
+dialog.lb.lb--design .lb__pick[aria-pressed="true"] .lb__ico path { fill: currentColor; }
+dialog.lb.lb--design .lb__save[aria-disabled="true"] { opacity: .55; cursor: progress; }
+dialog.lb.lb--design .lb__picked { font-size: 13.5px; text-align: center; color: #17733E; }
+@media (prefers-reduced-motion: reduce) { dialog.lb.lb--design :is(.lb__tile, .lb__ico) { transition: none; } }
+@media (max-width: 1023px) {
+  dialog.lb.lb--design .lb__fig { width: calc(100% - 40px); margin: 20px auto; }
+  dialog.lb.lb--design .lb__stage { height: auto; padding: 64px 16px 72px; }
+  dialog.lb.lb--design .lb__img { max-height: 56dvh; }
+  dialog.lb.lb--design .lb__cap { padding: 22px 22px 26px; border-left: 0; border-top: 1px solid rgb(23 19 15 / .07); }
+  dialog.lb.lb--design .lb__close { top: 32px; right: 32px; }
+}
+@media (max-width: 767px) {
+  dialog.lb.lb--design { background: #fff; }
+  dialog.lb.lb--design .lb__fig { width: 100%; margin: 0; border-radius: 0; box-shadow: none; }
+  dialog.lb.lb--design .lb__stage { padding: calc(16px + env(safe-area-inset-top)) 0 12px; }
+  dialog.lb.lb--design .lb__img { max-height: calc(100dvh - 260px - env(safe-area-inset-bottom)); border-radius: 0; box-shadow: none; }
+  dialog.lb.lb--design .lb__cap { padding: 18px 20px calc(100px + env(safe-area-inset-bottom)); }
+  dialog.lb.lb--design::after { background: linear-gradient(to top, rgb(255 255 255 / .96) 55%, rgb(255 255 255 / 0)); }
+  dialog.lb.lb--design .lb__btn { position: fixed; top: auto; bottom: calc(14px + env(safe-area-inset-bottom)); width: 52px; height: 52px; background: #fff; }
+  dialog.lb.lb--design .lb__close { right: auto; left: 50%; translate: -50% 0; background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+}
+
+/* ลดการเคลื่อนไหว: JS ข้ามสปริงอยู่แล้ว (กระโดดไปปลายทาง) · กันไว้ไม่ให้มี transition ใดๆ บนภาพ */
+@media (prefers-reduced-motion: reduce) {
+  .vw-track, .vw-track > img, .vw-peek { transition: none; }
+}

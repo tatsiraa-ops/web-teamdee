@@ -2,8 +2,14 @@
 <html lang="th">
 <head>
   {{> head}}
+  {{!-- CSS เฉพาะหน้าโหลดใน head (27 ต.ค.) · เดิม import ผ่าน JS → ตอนเปิดหน้ารูป/ไอคอนกางใหญ่แวบก่อน CSS มา --}}
+  <link rel="stylesheet" href="/src/styles/article-reader.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-blocks.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-material-lab.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-process-studio.css" data-page-css>
   <title>วิธีเตรียมไฟล์โลโก้และข้อมูลสั่งทำเสื้อ | TEAMDEE</title>
-  <meta name="description" content="เริ่มคุยด้วยข้อมูลเท่าที่มี แล้วค่อยรวบรวมรายการให้ครบก่อนผลิต">
+  <meta name="description" content="ไฟล์โลโก้แบบไหนใช้สั่งทำเสื้อได้ AI EPS PDF SVG ดีที่สุด ไม่มีไฟล์ต้นฉบับก็ส่งรูปที่มีให้ทีมดีดราฟต์ใหม่ได้ พร้อมวิธีรวบรวมชื่อ ไซซ์ และจำนวนก่อนผลิต">
 </head>
 <body>
 {{> siteHeader active="learn"}}

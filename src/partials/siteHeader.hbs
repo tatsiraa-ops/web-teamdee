@@ -1,5 +1,6 @@
 <a class="sr-only focus:not-sr-only focus:absolute focus:z-[200] focus:left-2 focus:top-2 focus:bg-orange focus:text-ink focus:px-5 focus:py-3 focus:font-bold" href="#main">ข้ามไปเนื้อหาหลัก</a>
 
+{{!-- ไม่มีเส้นส้มใต้หัวเว็บทุกหน้า (อาร์ต 26 ต.ค. "ลบเส้นส้มด้านล่างสุดออก" · ก่อนหน้านี้ให้มีทุกหน้าหรือไม่มีทุกหน้า) · เหลือเส้นเทาบางแบ่งหัวเว็บ --}}
 <header class="sticky top-0 z-50 bg-paper border-b border-line relative" data-header>
   {{!-- เมนูหลักอยู่กลางแถบ (อาร์ต 21 ต.ค. 2026) · จอ 1400+ กลางจอพอดีด้วย grid 3 ช่อง · 1280–1399 ที่ไม่พอ กลางช่องระหว่างโลโก้กับปุ่ม --}}
   <div class="wrap-full flex items-center gap-2 min-h-[76px] min-[1400px]:grid min-[1400px]:grid-cols-[1fr_auto_1fr]">
@@ -64,7 +65,7 @@
 
     <span class="flex-1 xl:hidden"></span>
 
-    <a class="hidden sm:inline-flex justify-self-end btn btn-orange btn-sm{{#if (eq active 'contact')}} !bg-ink !border-ink !text-paper{{/if}}" href="{{url 'contact'}}"{{#if (eq active 'contact')}} aria-current="page"{{/if}}>ติดต่อทีมดี</a>
+    {{> contactBtn active=active cls="hidden sm:inline-flex justify-self-end"}}
 
     <button class="xl:hidden btn btn-line btn-sm gap-2" type="button" data-menu-open aria-expanded="false" aria-controls="mobileMenu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -78,32 +79,57 @@
   <div class="wrap flex items-center gap-4 min-h-[80px] border-b border-line">
     <span class="font-display font-bold text-[25px]">เมนู</span>
     <span class="flex-1"></span>
+    {{!-- ค้นหาสินค้า แบบเสื้อ และคำถาม (ลองใช้จริง 30 ต.ค.: หน้าค้นหามีลิงก์แค่ในหน้า 404) · อยู่นอกรายการเมนู v22 --}}
+    <a class="btn btn-line btn-sm gap-2" href="{{url 'search'}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>ค้นหา</a>
     <button class="btn btn-line btn-sm gap-2" type="button" data-menu-close>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
       ปิด
     </button>
   </div>
+  {{!-- หมวดย่อยพับด้วย <details> ทุกหน้า (29 ต.ค. อาร์ต: หัวหมวดเดิมเป็นป้ายตัวเล็กสีเทา ดูไม่เหมือนเมนู · หน้าแรกพับด้วยสคริปต์ หน้าอื่นยาวเหยียด) · หมวดของหน้าปัจจุบันเปิดไว้ --}}
   <nav class="wrap pb-32" aria-label="เมนูมือถือ">
     <a class="mnav" href="{{url nav.home.to}}"{{#if (eq active nav.home.active)}} aria-current="page"{{/if}}>{{nav.home.label}}</a>
 
-    <p class="mnav__head">{{nav.products.label}}</p>
-    {{#each nav.products.groups}}{{#if this.h}}<p class="mnav__head mnav__head--sub">{{this.h}}</p>{{/if}}{{#each this.items}}<a class="mnav mnav--sub" href="{{url this.[1]}}">{{this.[0]}}</a>{{/each}}{{/each}}
+    <details class="mnav-fold"{{#if (eq active nav.products.active)}} open{{/if}}>
+      <summary class="mnav">{{nav.products.label}}</summary>
+      <div class="mnav-fold__body">
+      {{#each nav.products.groups}}{{#if this.h}}<p class="mnav__head mnav__head--sub">{{this.h}}</p>{{/if}}{{#each this.items}}<a class="mnav mnav--sub" href="{{url this.[1]}}"{{#if (eq (url this.[1]) @root.articleHref)}} aria-current="page"{{/if}}>{{this.[0]}}</a>{{/each}}{{/each}}
+      </div>
+    </details>
 
-    <p class="mnav__head">{{nav.uses.label}}</p>
-    {{#each nav.uses.groups}}{{#if this.h}}<p class="mnav__head mnav__head--sub">{{this.h}}</p>{{/if}}{{#each this.items}}<a class="mnav mnav--sub" href="{{url this.[1]}}">{{this.[0]}}</a>{{/each}}{{/each}}
+    <details class="mnav-fold"{{#if (eq active nav.uses.active)}} open{{/if}}>
+      <summary class="mnav">{{nav.uses.label}}</summary>
+      <div class="mnav-fold__body">
+      {{#each nav.uses.groups}}{{#if this.h}}<p class="mnav__head mnav__head--sub">{{this.h}}</p>{{/if}}{{#each this.items}}<a class="mnav mnav--sub" href="{{url this.[1]}}"{{#if (eq (url this.[1]) @root.articleHref)}} aria-current="page"{{/if}}>{{this.[0]}}</a>{{/each}}{{/each}}
+      </div>
+    </details>
 
-    <a class="mnav" href="{{url nav.designs.to}}">{{nav.designs.label}}</a>
-    <a class="mnav" href="{{url nav.works.to}}">{{nav.works.label}}</a>
+    <a class="mnav" href="{{url nav.designs.to}}"{{#if (eq (url nav.designs.to) @root.articleHref)}} aria-current="page"{{/if}}>{{nav.designs.label}}</a>
+    <a class="mnav" href="{{url nav.works.to}}"{{#if (eq (url nav.works.to) @root.articleHref)}} aria-current="page"{{/if}}>{{nav.works.label}}</a>
 
-    <p class="mnav__head">{{nav.learn.label}}</p>
-    {{#each nav.learn.groups}}{{#if this.h}}<p class="mnav__head mnav__head--sub">{{this.h}}</p>{{/if}}{{#each this.items}}<a class="mnav mnav--sub" href="{{url this.[1]}}">{{this.[0]}}</a>{{/each}}{{/each}}
+    <details class="mnav-fold"{{#if (eq active nav.learn.active)}} open{{/if}}>
+      <summary class="mnav">{{nav.learn.label}}</summary>
+      <div class="mnav-fold__body">
+      {{#each nav.learn.groups}}{{#if this.h}}<p class="mnav__head mnav__head--sub">{{this.h}}</p>{{/if}}{{#each this.items}}<a class="mnav mnav--sub" href="{{url this.[1]}}"{{#if (eq (url this.[1]) @root.articleHref)}} aria-current="page"{{/if}}>{{this.[0]}}</a>{{/each}}{{/each}}
+      </div>
+    </details>
 
-    <a class="mnav" href="{{url nav.about.to}}">{{nav.about.label}}</a>
+    <a class="mnav" href="{{url nav.about.to}}"{{#if (eq (url nav.about.to) @root.articleHref)}} aria-current="page"{{/if}}>{{nav.about.label}}</a>
 
-    <div class="grid gap-3 mt-7">
-      <a class="btn btn-orange btn-lg w-full" href="{{url 'contact'}}">ติดต่อทีมดี</a>
-      <a class="btn btn-line btn-lg w-full" href="{{site.lineUrl}}" data-track="line">ทัก LINE ขอราคา</a>
-      <a class="btn btn-line btn-lg w-full tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a>
+    {{!-- แผงติดต่อท้ายเมนู (11 พ.ย. 2026 อาร์ต "อันนี้ต่อ ทำมาดีๆหน่อย" · เดิมปุ่ม 3 ทรงไม่เข้าชุด + ลิงก์ลูกค้าเดิมตัวเล็ก)
+         LINE ปุ่มหลัก (อาร์ตเคาะ 30 ต.ค.) + บรรทัดสถานะเวลาทำการจริง (nudge.js data-float-status) → โทร | ติดต่อทีมดี การ์ดคู่ทรงเดียวกัน → ลูกค้าเดิม สั่งซ้ำ | ติดตามงาน
+         ทุกปุ่มชิดซ้าย ไอคอนเส้นชุดเดียว · หน้าติดต่อ = การ์ดติดต่อพาไปฟอร์ม --}}
+    <div class="mct">
+      <a class="mct__line" href="{{@root.pageLine}}" data-track="line" data-where="mobile-menu"><span class="mct__lico" aria-hidden="true">{{> icoLine}}</span><span class="mct__lt"><b>ทัก LINE ขอราคา</b><span class="mct__st" data-float-status><span data-float-status-t>ส่งรูปหรือแบบมาคุยได้เลย</span></span></span><svg class="mct__arw" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="mct__two">
+        <a class="mct__tile" href="tel:{{site.phonePrimaryTel}}"><svg class="mct__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span class="mct__tt"><b>โทร</b><span class="tabular-nums">{{site.phonePrimary}}</span></span></a>
+        <a class="mct__tile" href="{{#if (eq active 'contact')}}#form" aria-current="page{{else}}{{url 'contact'}}{{/if}}"><svg class="mct__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg><span class="mct__tt"><b>ติดต่อทีมดี</b><span>ฟอร์มและช่องทางอื่น</span></span></a>
+      </div>
+      <p class="mct__k">ลูกค้าเดิม</p>
+      <div class="mct__two">
+        <a class="mct__old" href="{{@root.reorderLine}}" data-track="line" data-where="menu-reorder"><svg class="mct__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5.3L4 15"/><path d="M4 20v-5h5"/></svg><span>สั่งซ้ำ / เพิ่มจำนวน</span></a>
+        <a class="mct__old" href="{{@root.trackLine}}" data-track="line" data-where="menu-track"><svg class="mct__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="m3 7.5 9 4.5 9-4.5M12 12v9"/></svg><span>ติดตามงาน</span></a>
+      </div>
     </div>
   </nav>
 </div>

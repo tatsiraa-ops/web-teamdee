@@ -1,0 +1,97 @@
+/* ถาดเลือกหลายแบบ + ปุ่มเลือกบนการ์ดแกลเลอรี · ชุดเดียวใช้ทั้ง /designs/ และแกลเลอรีรายกลุ่ม 10 หน้า
+   (audit มือถือ 30 ต.ค. ข้อ 11 · ถาดย้ายมาจาก page-designs.css) · โหลดจาก designs-page.js และ gallery-page.js
+   markup: src/partials/pickTray.hbs · JS: src/js/pick-tray.js */
+
+/* ---------- ถาด ---------- */
+.dg-tray { position: fixed; left: 50%; bottom: 18px; z-index: 55; width: min(760px, calc(100% - 32px)); translate: -50% 0; animation: dg-tray-in .35s cubic-bezier(.2, .7, .2, 1); }
+.dg-tray[hidden] { display: none; }
+.dg-tray__in { display: flex; align-items: center; gap: 14px; padding: 10px 10px 10px 12px; border-radius: 22px; background: var(--color-ink); color: var(--color-paper); box-shadow: 0 24px 50px -18px rgb(0 0 0 / .6); }
+.dg-tray__thumbs { flex: none; display: flex; }
+.dg-tray__thumbs img { width: 56px; height: 40px; object-fit: contain; border: 2px solid var(--color-ink); border-radius: 10px; background: #fff; }
+.dg-tray__thumbs img + img { margin-left: -18px; }
+.dg-tray__txt { flex: 1; min-width: 0; }
+.dg-tray__h { font-size: 16px; font-weight: 700; white-space: nowrap; }
+.dg-tray__codes { overflow: hidden; font-size: 13px; color: rgb(255 255 255 / .7); white-space: nowrap; text-overflow: ellipsis; }
+.dg-tray.is-undo .dg-tray__in { display: none; }
+.dg-tray__undo { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; padding: 8px 8px 8px 18px; border-radius: 18px; background: var(--color-ink); color: var(--color-paper); font-size: 15px; font-weight: 700; box-shadow: 0 24px 50px -18px rgb(0 0 0 / .6); }
+.dg-tray__undo[hidden] { display: none; }
+.dg-tray__full { padding: 10px 16px; margin-bottom: 8px; border-radius: 14px; background: var(--color-ink); color: var(--color-paper); font-size: 15px; font-weight: 600; line-height: 1.5; }
+.dg-tray__full[hidden] { display: none; }
+.dg-tray__undo button { min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--color-paper); color: var(--color-ink); font-size: 15px; font-weight: 700; }
+.dg-tray__undo button:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 2px; }
+.dg-tray__clear { flex: none; min-height: 44px; padding: 0 10px; font-size: 14px; font-weight: 700; color: rgb(255 255 255 / .75); text-decoration: underline; text-underline-offset: 4px; }
+.dg-tray__clear:hover { color: var(--color-paper); }
+.dg-tray__clear svg { display: none; width: 18px; height: 18px; }
+.dg-tray__txt { overflow: hidden; }
+.dg-tray__send { flex: none; min-height: 52px; }
+.dg-tray .cb:focus-visible, .dg-tray__clear:focus-visible { outline: 3px solid var(--color-paper); outline-offset: 2px; }
+html.dg-tray-on [data-floats] { opacity: 0; pointer-events: none; }
+@media (max-width: 1023px) {
+  .dg-tray { bottom: calc(var(--mb-h, 70px) + 12px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 639px) {
+  /* มือถือ: ถาดแถวเดียว ไม่บังจอ · ซ่อนรูปย่อและรายการรหัส (ข้อความในแชทมีครบ) */
+  .dg-tray { width: calc(100% - 20px); }
+  .dg-tray__in { gap: 8px; padding: 8px 8px 8px 14px; border-radius: 18px; }
+  .dg-tray__thumbs, .dg-tray__codes { display: none; }
+  .dg-tray__h { font-size: 15px; line-height: 1.3; }
+  .dg-tray__clear { padding: 0 4px; }
+  /* ขนาดตัวอักษรและขอบขวามาจาก .cb / .cb--p มือถือ (main.css · home.css) ตามเดิม · เดิมเขียน 15px / 14px ไว้ที่นี่แต่ถูกทับมาตลอด ตัดออกตอนแยกไฟล์ 30 ต.ค. */
+  .dg-tray__send { min-height: 46px; padding-inline-start: 8px; }
+  .dg-tray__send .cb__arw { display: none; }
+}
+@media (max-width: 399px) {
+  .dg-tray__long, .dg-tray__clear-t { display: none; }
+  .dg-tray__clear { display: grid; place-items: center; width: 44px; padding: 0; }
+  .dg-tray__clear svg { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dg-tray { animation: none; }
+}
+
+/* ---------- ถาดเปิดอยู่: ปุ่มส่งในถาดแทนปุ่ม LINE เขียวในแถบล่าง (ไม่ซ้อนสองปุ่มเขียว · audit ข้อ 11/14) ----------
+   แถบล่างเหลือ โทร | ช่อง 3 · ถาดยังลอยเหนือแถบเท่าเดิม (--mb-h) · html.has-tray สลับโดย pick-tray.js */
+@media (max-width: 1023px) {
+  html.has-tray .mobilebar { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  html.has-tray .mobilebar .mb__line { display: none; }
+}
+
+/* ---------- การ์ดแกลเลอรีรายกลุ่ม (galleryPage.hbs) ----------
+   รูป (figure · ตัวดูรูปใส่ปุ่มขยายทับทั้งรูป) แยกจากแถบล่างการ์ดที่มีป้าย + ปุ่มเลือก · ปุ่มไม่ทับรูป ไม่สับสนว่ากดอะไร */
+.gcard { position: relative; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--color-line); border-radius: var(--radius-card, 10px); background: var(--color-paper); transition: border-color .2s, box-shadow .25s; }
+.gcard__fig { margin: 0; aspect-ratio: 3 / 2; overflow: hidden; }
+.gcard__cap { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 8px 8px 12px; border-top: 1px solid var(--color-line); }
+.gcard__t { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+.gcard__t b { font-size: 15px; font-weight: 800; letter-spacing: .01em; }
+.gcard__t span { font-size: 13px; color: var(--color-ink-3); }
+.gcard__pick { display: inline-flex; flex: none; align-items: center; justify-content: center; gap: 6px; min-height: 44px; min-width: 44px; padding: 0 14px 0 12px; border: 1.5px solid var(--color-line-2); border-radius: 999px; background: var(--color-paper); color: var(--color-ink); font-size: 14px; font-weight: 700; line-height: 1; white-space: nowrap; cursor: pointer; transition: background-color .2s, border-color .2s, color .2s; }
+.gcard__pick svg { width: 16px; height: 16px; }
+.gcard__pick:hover { border-color: var(--color-ink); }
+.gcard__pick:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+.gcard__tick { display: none; }
+.gcard.is-picked { border-color: var(--color-ink); box-shadow: 0 0 0 2px var(--color-ink); }
+.gcard.is-picked .gcard__pick { border-color: var(--color-ink); background: var(--color-ink); color: var(--color-paper); }
+.gcard.is-picked .gcard__plus { display: none; }
+.gcard.is-picked .gcard__tick { display: inline; }
+/* เครื่องหมายถูกมุมรูป (ไม่รับการกด · ปุ่มขยายรูปข้างใต้ยังกดได้) */
+.gcard.is-picked::before { content: ""; position: absolute; top: 10px; left: 10px; z-index: 2; width: 26px; height: 26px; border-radius: 50%; background: var(--color-ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 14px no-repeat; pointer-events: none; }
+@media (hover: hover) {
+  .gcard:hover { border-color: var(--color-ink); }
+}
+@media (max-width: 639px) {
+  /* มือถือ 2 คอลัมน์ (~165px): ป้ายบน ปุ่มเต็มกว้างล่าง */
+  .gcard__cap { flex-direction: column; align-items: stretch; gap: 6px; padding: 8px; }
+  .gcard__t b { font-size: 14px; }
+  .gcard__pick { width: 100%; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gcard, .gcard__pick { transition: none; }
+}
+
+/* ---------- แกลเลอรีรายกลุ่ม: โชว์ทีละ 24 ภาพ (audit มือถือ 30 ต.ค. ข้อ 24 · gallery-page.js) ---------- */
+.gcard[hidden] { display: none; }
+.gal-count { margin-top: 24px; text-align: center; }
+.gal-count:empty { margin: 0; } /* หน้าที่ภาพไม่เกิน 24 ไม่มีข้อความ ไม่เว้นช่องว่าง (ยังอยู่ใน a11y tree) */
+.gal-more { display: flex; justify-content: center; margin-top: 12px; }
+.gal-more[hidden] { display: none; }
+.gal-more__btn { min-height: 60px; width: min(100%, 360px); }

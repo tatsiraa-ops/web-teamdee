@@ -1,0 +1,33 @@
+/* ช่อง "ต้องใช้เสื้อวันที่…" ใต้ปุ่ม hero หน้าสินค้า + ผลลัพธ์ในช่อง "มีวันใช้แล้ว?" หน้ากลุ่ม (ตรวจมือถือ 30 ต.ค. ข้อ 35)
+   โหลดจาก need-by-ui.js เท่านั้น · ไม่แตะ main.css */
+.nb { max-width: 460px; margin-top: 16px; padding: 12px 14px; border: 1px solid var(--color-line); border-radius: var(--radius-card); background: var(--color-paper); text-align: left; }
+html:not(.js) .nb { display: none; }
+.nb__row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.nb__lbl { flex: 0 0 auto; font-size: 15px; font-weight: 700; color: var(--color-ink); }
+.nb__in { flex: 1 1 160px; min-width: 0; min-height: 48px; padding: 6px 12px; border: 2px solid var(--color-field); border-radius: var(--radius-card); background: var(--color-paper); color: var(--color-ink); font: inherit; font-size: 17px; font-variant-numeric: tabular-nums; }
+.nb__in:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 2px; border-color: var(--color-ink); }
+
+.nb__out { margin-top: 10px; font-size: 15px; line-height: 1.55; color: var(--color-ink-2); overflow-wrap: anywhere; }
+.nb__out:empty { margin-top: 0; }
+.nb__out--use { text-align: left; }
+.nb__hint { font-size: 14px; }
+.nb__head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.nb__tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 13px; font-weight: 700; line-height: 1.5; }
+.nb__tag--ok { background: var(--color-ok-tint); color: var(--color-ok); }
+.nb__tag--tight, .nb__tag--rush { background: #FFE9D9; color: #A84300; } /* 5.2:1 */
+.nb__tag--late, .nb__tag--past { background: var(--color-alert-tint); color: var(--color-alert); }
+.nb__need { font-weight: 600; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.nb__main { margin-top: 6px; font-size: 18px; font-weight: 700; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.nb__basis { margin-top: 4px; font-size: 13.5px; line-height: 1.55; }
+.nb__cta { display: inline-flex; align-items: center; min-height: 44px; margin-top: 2px; font-weight: 700; color: var(--color-ink); text-decoration: underline; text-decoration-color: #06C755; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.nb__cta:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 2px; border-radius: 4px; }
+
+/* วิธีนับวันผลิต (2 พ.ย. รอบ 64) · กดเปิดอ่าน ไม่ให้กติกาเต็มจอตั้งแต่แรก */
+.nb-how { margin-top: 16px; font-size: 15px; line-height: 1.65; color: var(--color-ink-2); }
+.nb-how > summary { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; cursor: pointer; font-weight: 700; color: var(--color-ink); list-style: none; text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.nb-how > summary::-webkit-details-marker { display: none; }
+.nb-how > summary::after { content: ''; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: 45deg; translate: 0 -2px; transition: rotate .2s ease; }
+.nb-how[open] > summary::after { rotate: 225deg; translate: 0 2px; }
+.nb-how ul { display: grid; gap: 6px; margin-top: 4px; padding-left: 18px; list-style: disc; }
+.nb-how li::marker { color: var(--color-orange); }
+.nb-how--order { margin-top: 12px; }

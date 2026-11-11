@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { estimate, readCalcQuery, calcSearch, lineText, fromText, barText } from '../src/js/estimate.js'
+import { estimate, readCalcQuery, calcSearch, lineText, fromText, barText, tiers } from '../src/js/estimate.js'
 import { calcKinds } from '../src/js/prices.js'
 
 /* เครื่องคำนวณ /calculations/ (audit 3.4 calc-01 calc-02 calc-04) · ราคาจริงจาก prices.json ไฟล์เดียว */
@@ -9,13 +9,13 @@ const P = JSON.parse(readFileSync(new URL('../src/data/prices.json', import.meta
 const K = calcKinds(P)
 const at = (kind, qty, more = {}) => estimate(K, { kind, qty, ...more })
 
-test('ขั้น 1 มี 6 แบบเรียงตามนี้ · บรรทัดรองเป็นราคาที่ 10 ตัว · สกรีนประเมินตามแบบ', () => {
-  assert.deepEqual(K.kinds.map((k) => k.id), ['polo', 'round', 'collar', 'baseball', 'jersey', 'screen'])
-  assert.deepEqual(K.kinds.map((k) => k.name), ['โปโลปัก', 'พิมพ์ลายคอกลม/คอวี', 'พิมพ์ลายคอปก', 'เบสบอล', 'Jersey Oversize', 'สกรีน'])
-  assert.deepEqual(K.kinds.map((k) => k.from ?? null), [220, 279, 329, 359, 359, null])
+test('ขั้น 1 แยกสกรีน Premium/Oversize พร้อมราคาที่ขั้นต่ำของแต่ละสินค้า', () => {
+  assert.deepEqual(K.kinds.map((k) => k.id), ['polo', 'round', 'collar', 'baseball', 'jersey', 'screen', 'screen-oversize'])
+  assert.deepEqual(K.kinds.map((k) => k.name), ['โปโลปัก', 'พิมพ์ลายคอกลม/คอวี', 'พิมพ์ลายคอปก', 'เบสบอล', 'Jersey Oversize', 'สกรีน Premium', 'สกรีน Oversize'])
+  assert.deepEqual(K.kinds.map((k) => k.from ?? null), [220, 279, 329, 359, 359, 290, 320])
   const screen = K.kinds.at(-1)
-  assert.equal(screen.byDesign, true)
-  assert.equal(screen.sub, 'ประเมินตามแบบ')
+  assert.equal(screen.byDesign, undefined)
+  assert.equal(screen.minQty, 1)
   assert.equal(K.minQty, 10)
 })
 
@@ -33,7 +33,7 @@ test('โปโลมีแถวเลือกผ้า: จูติเป็
 })
 
 test('ออปชันใช้กับพิมพ์ลายและโปโล · เบสบอล/Jersey/สกรีนไม่มี (prices.json ไม่ได้ตั้ง options)', () => {
-  assert.deepEqual(K.kinds.map((k) => k.options), [true, true, true, false, false, false])
+  assert.deepEqual(K.kinds.map((k) => k.options), [true, true, true, false, false, false, false])
 })
 
 test('บรรทัดราคาหัวหน้าสร้างจากข้อมูล (calc-06)', () => {
@@ -82,11 +82,14 @@ test('ช่วงที่ยังไม่มีราคา (เบสบอ
   assert.equal(at('jersey', 999).unit, 230)
 })
 
-test('สกรีนประเมินตามแบบ ไม่มีตัวเลข', () => {
-  const r = at('screen', 30)
-  assert.equal(r.ok, false)
-  assert.equal(r.byDesign, true)
-  assert.equal(r.total, null)
+test('สกรีนใช้ราคาปกติ รวมจุดแรก เริ่ม 1 ตัว และเกินตารางต้องขอราคา', () => {
+  assert.equal(at('screen', 1).total, 290)
+  assert.equal(at('screen', 30).total, 8400)
+  assert.equal(at('screen-oversize', 30).total, 9300)
+  assert.equal(at('screen', 500).unit, 220)
+  assert.equal(at('screen', 501).ok, false)
+  assert.equal(at('screen', 0).belowMin, true)
+  assert.equal(readCalcQuery(K, '?kind=screen&qty=1').qty, 1)
 })
 
 test('ต่ำกว่าขั้นต่ำหรือไม่ใช่จำนวนเต็ม ไม่คิดราคา', () => {
@@ -159,16 +162,43 @@ test('ข้อความ LINE: สินค้า ผ้า จำนวน �
   const sc = lineText(at('screen', 40))
   assert.match(sc, /สินค้า: สกรีน/)
   assert.match(sc, /จำนวน: 40 ตัว/)
-  assert.match(sc, /ส่งโลโก้ \+ จำนวนสี/)
-  assert.doesNotMatch(sc, /ยอดรวม/)
+  assert.match(sc, /รวมสกรีน 1 จุด/)
+  assert.match(sc, /ยอดรวม: 11,200 บาท/)
   assert.match(lineText(at('baseball', 1200)), /ราคาต่อตัว: ขอให้ทีมดีประเมิน/)
 })
 
 test('สรุปที่ส่งไปฟอร์ม (?from=) และแถบล่างมือถือ', () => {
   assert.equal(fromText(at('round', 30)), '/calculations/ · พิมพ์ลายคอกลม/คอวี · 30 ตัว · 230 บาท/ตัว · รวม 6,900 บาท')
   assert.equal(fromText(at('polo', 30, { fabric: 'drytech', options: ['pocket'] })), '/calculations/ · โปโลปัก · ผ้าดรายเทค · 30 ตัว · กระเป๋าอก · 410 บาท/ตัว · รวม 12,300 บาท')
-  assert.equal(fromText(at('screen', 30)), '/calculations/ · สกรีน · 30 ตัว · ประเมินตามแบบ')
+  assert.equal(fromText(at('screen', 30)), '/calculations/ · สกรีน Premium · 30 ตัว · 280 บาท/ตัว · รวม 8,400 บาท')
   assert.deepEqual(barText(at('round', 30)), { main: '6,900 บาท', sub: '230/ตัว · 30 ตัว' })
-  assert.deepEqual(barText(at('screen', 30)), { main: 'ทีมดีประเมินให้', sub: '30 ตัว' })
+  assert.deepEqual(barText(at('screen', 30)), { main: '8,400 บาท', sub: '280/ตัว · 30 ตัว' })
   assert.deepEqual(barText(at('round', 5)), { main: 'ขั้นต่ำ 10 ตัว', sub: '' })
+})
+
+test('แถบช่วงราคา (รื้อหน้า 26 ต.ค.): ทุกช่วงของแบบ+ผ้าที่เลือก · ราคารวมออปชันแล้ว · ช่วงปัจจุบัน on · ไม่มีราคา = null · สกรีนไม่มีแถบ', () => {
+  const t = tiers(at('round', 30))
+  assert.deepEqual(t.map((x) => x.qty), ['10–20 ตัว', '21–50 ตัว', '51–100 ตัว', '101–199 ตัว', '200 ตัวขึ้นไป'])
+  assert.deepEqual(t.map((x) => x.unit), [279, 230, 210, 180, 160])
+  assert.deepEqual(t.map((x) => x.on), [false, true, false, false, false])
+  assert.deepEqual(t.map((x) => x.min), [10, 21, 51, 101, 200])
+  const polo = tiers(at('polo', 60, { fabric: 'drytech', options: ['pocket'] }))
+  assert.equal(polo[0].unit, 390 + 20)
+  assert.equal(polo[1].on, true)
+  assert.equal(tiers(at('baseball', 30)).at(-1).unit, null)
+  assert.deepEqual(tiers(at('screen', 30)).map(x => x.unit), [290, 280, 260, 240, 220, null])
+  assert.ok(tiers(at('round', 5)).every((x) => !x.on))
+})
+
+/* ตรวจมือถือ 30 ต.ค. ข้อ 5: คนจัดซื้อส่งใบประเมินให้หัวหน้าดูได้ (แชร์ LINE / Web Share) · ลิงก์เปิดแล้วเห็นตัวเลขชุดเดียวกัน */
+import { shareText, lineShareUrl } from '../src/js/estimate.js'
+test('ข้อความส่งให้หัวหน้า: หัวเรื่อง · ตัวเลขเดียวกับใบประเมิน · ลิงก์ใบประเมิน · ไม่ใช่ข้อความขอราคาถึงทีมดี', () => {
+  const r = { kind: { name: 'เสื้อพิมพ์ลาย' }, fabric: null, qty: 80, opts: [], ok: true, unit: 210, total: 16800, vatIncluded: true }
+  const t = shareText(r, 'https://team-dee.com/calculations/?kind=print&qty=80')
+  assert.match(t, /^ใบประเมินราคาเบื้องต้น จาก TEAMDEE\n/)
+  assert.match(t, /จำนวน: 80 ตัว/)
+  assert.match(t, /ยอดรวม: 16,800 บาท \(รวม VAT 7%\)/)
+  assert.match(t, /\nดูใบประเมิน: https:\/\/team-dee\.com\/calculations\/\?kind=print&qty=80$/)
+  assert.doesNotMatch(t, /ขอราคาเสื้อจากเครื่องคำนวณ/)
+  assert.equal(lineShareUrl('ก ข'), `https://line.me/R/share?text=${encodeURIComponent('ก ข')}`)
 })

@@ -1,0 +1,24 @@
+{{!-- ตัวเลข + โลโก้ลูกค้า โฉมใหม่ (อาร์ต 3 พ.ย. "แยกตามหน้าแรก ดึง uiux มาใช้") · ชิ้นเดียวกับหน้าแรก:
+     ส่วนโลโก้ (hm-logowrap · หัวข้อ v22 + โลโก้วิ่ง 2 แถวสวนกัน · ไม่มีปุ่มหยุด หยุดตอนโฟกัสคีย์บอร์ด) → แถบตัวเลข (hm-stats-band · count-up.js)
+     ตัวเลขยืนยันแล้ว (claims.mjs STATS) · โลโก้อาร์ตยืนยันเผยแพร่ได้ 22 ต.ค. --}}
+<section class="hm-sec hm-sec--tight hm-logowrap up2-logos" aria-labelledby="up2-trust-h">
+  <header class="wrap hm-head hm-head--left">
+    <h2 id="up2-trust-h" class="hm-h3">{{{hl up.trust.h "ไว้วางใจทีมดี"}}}</h2>
+    {{#if item.seoLine}}<p class="up2-logos__sub">{{{ph item.seoLine}}}</p>{{/if}}
+  </header>
+  {{#if homeV4.logoRows.length}}
+  <div class="hm-marquee" data-marquee data-marquee-nobtn>
+    {{#each homeV4.logoRows}}
+    <div class="hm-marquee__row{{#if @index}} is-reverse{{/if}}">
+      <ul class="hm-marquee__track" aria-label="โลโก้ลูกค้า แถว {{inc @index}}">{{#each this}}{{#if this.img}}<li><img src="{{this.img}}" alt="{{this.alt}}" width="336" height="144" loading="lazy" decoding="async"></li>{{/if}}{{/each}}</ul>
+      <ul class="hm-marquee__track" aria-hidden="true">{{#each this}}{{#if this.img}}<li><img src="{{this.img}}" alt="" width="336" height="144" loading="lazy" decoding="async"></li>{{/if}}{{/each}}</ul>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</section>
+<section class="wrap hm-stats-band up2-stats" aria-label="ตัวเลขทีมดี">
+  <dl class="hm-stats hm-stats--fit" data-countup>
+    {{#each up.trust.stats}}<div class="hm-stat" data-stat="{{this.n}}" style="--i:{{@index}}"><dt class="t-sm">{{this.t}}</dt><dd>{{#with (stat this.n)}}<span class="sr-only">{{../n}}</span><span class="hm-stat__v" aria-hidden="true"><span class="hm-stat__figure"><span class="hm-stat__n" data-stat-n>{{baht this.n}}</span>{{this.plus}}</span><span class="hm-stat__u">{{this.unit}}</span></span><span class="hm-stat__bar" aria-hidden="true"></span>{{else}}{{this.n}}{{/with}}</dd></div>{{/each}}
+  </dl>
+</section>

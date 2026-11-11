@@ -1,0 +1,18 @@
+{{!-- ส่วน Production ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 07 · เบื้องหลังการผลิต -->
+{{#if pp.production.show}}
+<section class="bg-shell border-y border-line" id="production"><div class="wrap section">
+  <div class="max-w-[62ch] mb-8">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoPrinter}}</span>การผลิต</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.production.h}}}</h2>
+  </div>
+  <div class="grid {{#if productionPhoto}}lg:grid-cols-[1.2fr_0.8fr]{{/if}} gap-10 items-start">
+  <ol class="pp-steps grid md:grid-cols-3 gap-5">
+    {{#each pp.production.cards}}<li class="pp-card"><span class="pp-card__no">0{{inc @index}}</span><h3 class="text-[20px] mt-3">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</li>{{/each}}
+  </ol>
+  {{#if productionPhoto}}<figure><div class="overflow-hidden rounded-plate bg-shell aspect-[3/4] max-w-[420px]"><img src="{{productionPhoto.img}}" alt="{{productionPhoto.alt}}" width="900" height="1200" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><figcaption class="t-sm mt-3">{{productionPhoto.cap}}</figcaption></figure>{{/if}}
+  </div>
+  {{#unless productionPhoto}}{{#unless wp}}<p class="pending-ribbon mt-6">รอภาพขั้นตอนผลิตจริงของสินค้านี้ · ข้อความด้านบนขึ้นเว็บจริงได้ ภาพยังไม่มี</p>{{/unless}}{{/unless}}
+  {{#each pp.production.notes}}<p class="t-sm mt-3">{{this}}</p>{{/each}}
+</div></section>
+{{/if}}

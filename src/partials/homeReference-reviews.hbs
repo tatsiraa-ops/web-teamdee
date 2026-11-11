@@ -1,0 +1,39 @@
+<section class="hm-sec hm-customer-proof" id="reviews" aria-labelledby="home-reviews-h">
+  {{!-- กระดานรีวิว · 3 พ.ย. 2026 อาร์ต "แบบ Delicake ทำให้ดีกว่า · พื้นที่ไม่เอาโล่ง" แทนแถวรีวิวเลื่อน
+       ซ้าย: หัวข้อ + ชิปกลุ่มงาน + โมเสกรูปงานจริงของกลุ่ม (homeCustomerProof.boardGroups) · ขวา: รีวิวจริงทีละราย รูปใหญ่ + การ์ดคำรีวิวเต็ม
+       ใช้ซ้ำทั้งชุดที่หน้ากลุ่มโฉมใหม่ (up2Reviews.hbs): rvH/rvTail = หัวข้อ v22 ของหน้า · rvWhere = ป้ายติดตาม LINE · rvNoClips = ไม่แสดงคลิป (/corporate/ อาร์ต 3 พ.ย. "ลบวีดีโอ") · ไม่ส่ง = หน้าแรกเหมือนเดิม
+       review-board.js: ชิป/ลูกศร · กดรูปใหญ่ = กล่องดูรูปทั้งชุด (review-dialog.js) · ไม่มี JS = รีวิวเรียงครบ · ไอคอน 3D review-quote.webp
+       4 พ.ย. (ตรวจหน้าแรก P2): data-sizes → build ใส่ srcset ไฟล์เล็ก · โปรไฟล์ -480-160 · โมเสกช่องเล็ก (ที่ 1 2 4) -800-400 · ช่องใหญ่คง 800 --}}
+  <div class="wrap hm-rvb" data-rvb>
+    <div class="hm-rvb__left">
+      <h2 id="home-reviews-h">{{#if rvH}}{{{hl rvH rvTail}}}{{else}}{{{hl "รีวิวจากลูกค้าที่สั่งทำเสื้อกับทีมดี" "ที่สั่งทำเสื้อกับทีมดี"}}}{{/if}}</h2>
+      <p class="hm-rvb__lead">คำพูดจริงจากแชทลูกค้าหลังได้รับเสื้อ เลือกกลุ่มงานเพื่อดูรูปงานจริง</p>
+      <div class="hm-rvb__chips" role="group" aria-label="เลือกรีวิวตามกลุ่มงาน">{{#each homeCustomerProof.boardChips}}<button type="button" data-rvb-use="{{this.use}}" aria-pressed="{{#if @first}}true{{else}}false{{/if}}">{{this.name}}</button>{{/each}}</div>
+      {{#each homeCustomerProof.boardGroups}}
+      <figure class="hm-rvb__mosaic" data-rvb-group="{{this.use}}"{{#unless @first}} hidden{{/unless}}>{{#each this.photos}}<img src="{{this}}"{{#unless (eq @index 2)}}{{#unless (eq @index 4)}} data-sizes="(min-width:1024px) 200px, 33vw"{{/unless}}{{/unless}} alt="ภาพงานจริงของลูกค้ากลุ่ม{{../name}}" width="800" height="600" loading="lazy" decoding="async">{{/each}}</figure>
+      {{/each}}
+    </div>
+    <div class="hm-rvb__right">
+      <div class="hm-rvb__top"><p class="hm-rvb__label">ภาพงานจริงจากรีวิว</p><div class="hm-rvb__nav"><span class="hm-rvb__count tabular-nums" data-rvb-count aria-live="polite">1 / {{homeCustomerProof.board.length}}</span><button type="button" class="hm-rvb__arw" data-rvb-step="-1" aria-label="รีวิวก่อนหน้า"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hm-rvb__arw" data-rvb-step="1" aria-label="รีวิวถัดไป"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
+      {{#each homeCustomerProof.board}}
+      <article class="hm-rvb__item{{#if @first}} is-on{{/if}}" data-rvb-item data-use="{{this.use}}" aria-label="รีวิวจาก {{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}">
+        <button type="button" class="hm-rvb__photo" data-rv-open="{{this.id}}"><span class="sr-only">ดูรูปทั้ง {{this.total}} รูปของ {{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}</span><img src="{{this.img}}" srcset="{{this.imgSmall}} 480w, {{this.img}} 1200w" sizes="(min-width:1024px) 560px, 90vw" alt="" width="1200" height="800" loading="lazy" decoding="async"><span class="hm-rvb__zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>ดูรูปทั้งชุด {{this.total}} รูป</span></button>
+        <div class="hm-rvb__card">
+          <img class="hm-rvb__pop" src="/img/icons/review-quote.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
+          <div class="hm-rvb__head"><img class="hm-rvb__avatar" src="{{this.imgSmall}}" data-sizes="52px" alt="" width="480" height="320" loading="lazy" decoding="async"><p class="hm-rvb__who"><b>{{#if this.who}}{{{ph this.who}}}{{else}}{{{ph this.kind}}}{{/if}}</b><small>{{#if this.who}}{{this.kind}} · {{/if}}รีวิวจากแชทจริง</small></p></div>
+          <blockquote class="hm-rvb__q"><p>{{{ph this.quote}}}</p></blockquote>
+          <div class="hm-rvb__acts"><a class="cb cb--p hm-rvb__cta" href="{{this.line}}" data-track="line" data-where="{{#if ../rvWhere}}{{../rvWhere}}{{else}}home-review{{/if}}"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">อยากได้เสื้อแบบนี้</span></a><a class="hm-rvb__all" href="/project/#reviews">ดูรีวิวทั้งหมด <span aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+      {{/each}}
+    </div>
+    <script type="application/json" data-rv-json>{{{json homeCustomerProof.allReviews}}}</script>
+  </div>
+  {{#unless rvNoClips}}
+  <div class="wrap hm-customer-proof__clips" id="home-clips">
+    <header class="rvc-head"><h3>ฟังจากลูกค้าจริง</h3><a class="hm-more" href="/project/#clips">ดูคลิปลูกค้าทั้งหมด <span aria-hidden="true">→</span></a></header>
+    {{!-- 3 พ.ย. อาร์ต "ให้คลิปแสดงมาเลย เอาแค่สามคลิป" · data-embed-auto = ยินยอมสื่อแล้วตัวเล่นขึ้นเอง (video-slot.js) · ตัดกล่องคลิปเพิ่มเติม --}}
+    <ul class="vgrid mt-8" data-embed-auto>{{#each homeCustomerProof.clips}}<li>{{> videoSlot v=this wp=@root.wp}}</li>{{/each}}</ul>
+  </div>
+  {{/unless}}
+</section>

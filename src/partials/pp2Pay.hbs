@@ -1,0 +1,22 @@
+{{!-- /sublimation/ วิธีชำระเงิน · รอบ 139 (บอร์ด "วิธีชำระเงิน") · ชิ้นเดียวกับ /corporate/ (up2Pay.hbs) ทั้งชิ้น · ข้อมูล pp-v2.json print.payment
+     CSS ร่วม src/styles/pay-block.css · รูปหลังเจนจากแบบจริง BALAC CHULA สีกรม · โลโก้บัตร SVG วาดเอง (ก่อนขึ้นจริงควรใช้ไฟล์ทางการ Visa / Mastercard) --}}
+{{#with pp2.payment}}
+<section class="up2-pay" id="payment" aria-label="{{h}}">
+  <div class="wrap up2-pay__in">
+    <div class="up2-pay__art">
+      <img class="up2-pay__ph up2-pay__ph--back" src="{{back.img}}-960.webp" srcset="{{back.img}}-560.webp 560w, {{back.img}}-960.webp 960w" sizes="(min-width:1024px) 440px, 74vw" alt="{{back.alt}}" width="{{back.w}}" height="{{back.h}}" loading="lazy" decoding="async">
+      <img class="up2-pay__ph up2-pay__ph--front" src="{{front.img}}-640.webp" srcset="{{front.img}}-400.webp 400w, {{front.img}}-640.webp 640w" sizes="(min-width:1024px) 310px, 52vw" alt="{{front.alt}}" width="{{front.w}}" height="{{front.h}}" loading="lazy" decoding="async">
+    </div>
+    <div class="up2-pay__copy">
+      <p class="up2-pay__line">{{{ph doc}}}</p>
+      <p class="up2-pay__line">{{{ph card}}}</p>
+      <ul class="up2-pay__cards" aria-label="บัตรที่รับ">
+        <li class="up2-pay__brand"><span class="sr-only">Visa</span><svg viewBox="0 0 72 30" width="72" height="30" aria-hidden="true" focusable="false"><text x="36" y="24" text-anchor="middle" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="25" font-weight="900" font-style="italic" letter-spacing="-.6" fill="#1A1F71">VISA</text></svg></li>
+        <li class="up2-pay__brand"><span class="sr-only">Mastercard</span><svg viewBox="0 0 48 30" width="48" height="30" aria-hidden="true" focusable="false"><circle cx="18" cy="15" r="12" fill="#EB001B"/><circle cx="30" cy="15" r="12" fill="#F79E1B"/><path d="M24 4.61A12 12 0 0 1 24 25.39 12 12 0 0 1 24 4.61Z" fill="#FF5F00"/></svg></li>
+      </ul>
+      <p class="up2-pay__line"><span class="up2-pay__nw">{{bill.[0]}} <u class="up2-pay__u">{{bill.[1]}}</u>ได้</span><wbr><span class="up2-pay__nw">{{bill.[2]}}</span></p>
+      <ul class="up2-pay__terms" aria-label="เงื่อนไขชำระเงิน">{{#each fine}}<li>{{this}}</li>{{/each}}</ul>
+    </div>
+  </div>
+</section>
+{{/with}}

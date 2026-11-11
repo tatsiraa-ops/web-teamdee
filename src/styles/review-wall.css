@@ -1,0 +1,29 @@
+/* รีวิวโฉมใหม่ (กำแพงรูป + การ์ดกระดานหน้าแรก) · ใช้ร่วม /corporate/ (up2Reviews) และ /sublimation/ (pp2Reviews) · ย้ายจาก use-page.css 5 พ.ย. */
+/* 7 · รีวิว แบบ Delicake ที่ดีกว่า (อาร์ต 3 พ.ย.) · หัวข้อกลาง · กำแพงรูป 2 แถวยืดเต็มตามสัดส่วนรูปจริง (flex-grow = กว้าง/สูง · 10 รูปแถวละ 5 ที่ 1280–1440)
+   แฮชแท็กตัวเข้ม # ส้ม */
+.up2-rv { padding: 56px 0 72px; }
+.up2-rv__head { text-align: center; }
+.up2-rv__head h2 { margin: 0; font-size: clamp(28px, 3.1vw, 44px); font-weight: 800; line-height: 1.3; color: var(--color-ink); text-wrap: balance; }
+.up2-rv__head p { margin: 12px 0 0; font-size: 17px; color: var(--color-ink-3); }
+.up2-rv__wall { display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 0; padding: 0; list-style: none; }
+.up2-rv__wall > li { flex: calc(var(--r) * 100) 1 calc(var(--r) * 150px); height: 200px; }
+.up2-rv__wall > li > button { display: block; width: 100%; height: 100%; padding: 0; overflow: hidden; border: 0; border-radius: 16px; background: #E6E1DC; cursor: zoom-in; }
+/* ช่องรูปลูกค้า (figure + ปุ่มใส .lb-open ของกล่องดูรูป) · 4 พ.ย.: เดิมกฎปุ่มด้านบนจับ .lb-open เป็นแผ่นเทาทึบบังรูป */
+.up2-rv__wall > li > figure { position: relative; height: 100%; margin: 0; overflow: hidden; border-radius: 16px; background: #E6E1DC; }
+.up2-rv__wall .lb-open { cursor: zoom-in; }
+.up2-rv__wall .lb-open:focus-visible { outline: 3px solid var(--color-ink); outline-offset: -4px; }
+.up2-rv__wall img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+@media (hover: hover) { .up2-rv__wall li:hover img { transform: scale(1.04); } }
+.up2-rv__wall button:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .up2-rv__wall img { transition: none; } }
+.up2-rv__tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin: 20px 0 0; font-size: 16px; font-weight: 800; color: var(--color-ink); }
+.up2-rv__tags span::first-letter { color: #C24B00; }
+/* การ์ดคำรีวิว (ไม่มีรูป · อาร์ต "ไม่เอารูปซ้ำ"): การ์ดหน้าแรกกว้างกลางหน้า 880 · ตัวย่อชื่อในวงกลมส้มแทนรูปโปรไฟล์ */
+.up2-rv__board { display: block; max-width: 880px; margin: 48px auto 0; }
+.up2-rv .hm-rvb__top { margin-bottom: 40px; }
+.up2-rv .hm-rvb__card { margin-top: 0; padding: 30px 34px 30px; }
+.up2-rv .hm-rvb__pop { top: -50px; right: 26px; width: 112px; height: 112px; }
+.up2-rv__mono { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border: 2px solid #fff; border-radius: 50%; background: #FF6C00; font-size: 22px; font-weight: 800; line-height: 1; color: #111; box-shadow: 0 4px 12px -6px rgba(17, 17, 17, .35); }
+.up2-rv .hm-rvb__q p { font-size: 19px; }
+.up2-rv__wall figure { width: 100%; height: 100%; margin: 0; overflow: hidden; border-radius: 16px; background: #E6E1DC; cursor: zoom-in; }
+

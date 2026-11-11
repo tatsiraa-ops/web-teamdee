@@ -1,0 +1,160 @@
+/* เครื่องคำนวณ /calculations/ (calc-page.js) · ย้ายออกจาก main.css (30 ต.ค. รอบ 48 · อาร์ตอนุญาตแยก CSS) = หน้าอื่นไม่ต้องโหลด
+   ลำดับเดิมคงไว้ · @media เดิมคงไว้ · ตรวจด้วย computed style ทุกหน้าก่อน/หลังแยก */
+/* ---------- หน้าคำนวณราคา (รื้อทั้งหน้า 26 ต.ค. · อาร์ตเลือกแบบใบประเมิน "ทำให้ใช้งานง่าย ไม่ต้องเลื่อนเยอะ") ----------
+   หัวเรื่องเตี้ย · การ์ดเสื้อแนวนอน (รูปเล็กซ้าย ชื่อ+ราคาขวา) 3×2 · จำนวน + ชิปลัดแถวเดียว · แถบช่วงราคาสดแตะได้
+   ใบประเมินติดขวา (กระดาษ หัวใบ วันที่ ตรายาง เส้นประ ยอดรวมเส้นคู่ ขอบฟันปลา) · ตารางเต็มพับไว้ · FAQ + ลิงก์ + LINE แถวเดียว */
+.calc-hero { padding-block: 26px 28px; }
+.calc-hero__h { margin-top: 12px; font-size: clamp(28px, 3.4vw, 44px); color: var(--color-ink); }
+.calc-hero__p { max-width: 70ch; margin-top: 8px; font-size: 16px; line-height: 1.7; color: var(--color-ink-2); }
+@media (min-width: 768px) {
+  .calc-hero { padding-block: 32px 34px; }
+}
+.calc { padding-block: 32px 48px; }
+.calc__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); align-items: start; gap: 48px; }
+.calc__form { display: grid; gap: 30px; min-width: 0; }
+.calc__step { min-width: 0; }
+.calc__lg { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 20px; font-weight: 700; }
+.calc__no { display: grid; place-items: center; flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--color-ink); color: var(--color-paper); font-size: 14px; font-weight: 700; }
+.calc__lg-sub { font-size: 14px; font-weight: 400; color: var(--color-ink-3); }
+.calc__sub { margin-top: 16px; }
+.calc__sl { font-size: 15px; font-weight: 700; }
+.calc__sl span { font-weight: 400; color: var(--color-ink-3); }
+.calc__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.calc .choice { min-height: 44px; padding-inline: 16px; font-size: 15px; }
+.calc__qrow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 12px; }
+.calc__qty { display: flex; align-items: center; gap: 8px; }
+.calc__unit { margin-left: 2px; font-size: 16px; font-weight: 600; color: var(--color-ink-2); }
+.calc__err { margin-top: 8px; font-size: 15px; font-weight: 700; }
+.kcard { position: relative; display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: center; gap: 12px; min-height: 76px; padding: 8px 30px 8px 8px; border: 2px solid var(--color-line-2); border-radius: 14px; background: var(--color-paper); cursor: pointer; transition: border-color .2s, box-shadow .25s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.kcard__img { display: block; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 8px; background: #fff; }
+.kcard__img img { width: 100%; height: 100%; object-fit: contain; transition: scale .45s cubic-bezier(.2, .7, .2, 1); }
+.kcard__ico { display: grid; place-items: center; height: 100%; background: var(--color-shell); color: var(--color-ink-3); }
+.kcard__ico svg { width: 26px; height: 26px; }
+.kcard__txt { display: flex; flex-direction: column; min-width: 0; }
+.kcard__t { font-size: 15px; font-weight: 700; line-height: 1.3; }
+.kcard__t > span { display: inline-block; }
+.kcard__p { font-size: 13px; color: var(--color-ink-3); }
+.kcard__p b { font-size: 15px; color: var(--color-ink); }
+.kcard:has(input:checked) { border-color: var(--color-ink); box-shadow: 0 10px 22px -16px rgb(0 0 0 / .5); }
+.kcard:has(input:checked)::after { content: ""; position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat; }
+.kcard:has(input:focus-visible) { outline: 3px solid var(--color-ink); outline-offset: 3px; }
+@media (hover: hover) {
+  .kcard:hover { border-color: var(--color-ink); transform: translateY(-1px); }
+  .kcard:hover .kcard__img img { scale: 1.06; }
+}
+.kcard:active { transform: scale(.98); }
+/* ใบประเมิน */
+.slip { position: sticky; top: 104px; padding: 26px 26px 42px; border-radius: 6px 6px 0 0; background: #FFFDF8; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 26px 50px -24px rgb(60 30 0 / .4); -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 12px) no-repeat, conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 20px 12px repeat-x; mask: linear-gradient(#000 0 0) top / 100% calc(100% - 12px) no-repeat, conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 20px 12px repeat-x; }
+.slip::before { content: "ราคาเบื้องต้น"; position: absolute; top: 88px; right: 22px; padding: 3px 10px; border: 2px solid #C24E00; border-radius: 8px; color: #C24E00; font-size: 13px; font-weight: 800; rotate: -7deg; pointer-events: none; }
+.slip__brand { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px dashed var(--color-line-2); font-size: 13px; line-height: 1.5; color: var(--color-ink-3); text-align: right; }
+.slip__logo { font-size: 20px; font-weight: 800; letter-spacing: .04em; color: #C24E00; }
+.slip__h { font-size: 18px; font-weight: 700; }
+.slip__prod { margin-top: 10px; padding-right: 96px; font-size: 16px; font-weight: 700; }
+.slip__inc { font-size: 13px; color: var(--color-ink-3); }
+.slip__rows { display: grid; gap: 10px; margin-top: 14px; font-size: 15px; }
+.slip__rows > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 10px; border-bottom: 1px dashed var(--color-line-2); }
+.slip__rows > div[hidden] { display: none; }
+.slip__rows dt { color: var(--color-ink-2); }
+.slip__rows dt span { display: block; font-size: 12px; color: var(--color-ink-3); }
+.slip__rows dd { font-weight: 700; text-align: right; }
+.slip__rows > .slip__total { align-items: flex-end; padding: 12px 0 0; border-top: 4px double var(--color-ink); border-bottom: 0; }
+.slip__total dt { font-weight: 700; color: var(--color-ink); }
+.slip__total dd { font-size: clamp(30px, 2.8vw, 38px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+.slip__next { margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: #F6EFE4; font-size: 14px; line-height: 1.6; }
+.slip__pending { margin-top: 14px; font-size: 15px; line-height: 1.7; }
+/* ต้นขั้วฉีก (อาร์ต 26 ต.ค. "แก้ตรงนี้ เอาดีๆ เท่ๆ"): เส้นประ + รอยเว้าครึ่งวงกลมสองข้างแบบตั๋ว · ปุ่ม LINE 2 บรรทัด + สถานะจริง · ทางรองเป็นแถบ 2 ช่องมีไอคอน */
+.slip__btns { position: relative; display: grid; gap: 10px; margin: 20px -26px 0; padding: 22px 26px 0; border-top: 2px dashed #CBBFAE; }
+.slip__btns::before, .slip__btns::after { content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--color-paper); box-shadow: inset 0 0 0 1px rgb(60 30 0 / .06); }
+.slip__btns::before { left: -11px; }
+.slip__btns::after { right: -11px; }
+.slip__btns .cb--p { width: 100%; min-height: 66px; justify-content: flex-start; padding: 8px 20px 8px 10px; border-radius: 18px; }
+.slip__btns .cb--p .cb__ico { width: 44px; height: 44px; padding: 6px; border-radius: 12px; background: rgb(255 255 255 / .22); }
+.slip__btns .cb--p .cb__lbl { flex: 1; min-width: 0; }
+.slip__btns .cb--p .cb__t { font-size: 17px; }
+.slip__btns .cb--p .cb__arw { width: 22px; height: 22px; }
+.slip__alt { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); overflow: hidden; border: 1.5px solid var(--color-ink); border-radius: 14px; background: var(--color-paper); }
+.slip__alt a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 6px 12px; font-size: 15px; font-weight: 700; line-height: 1.25; text-align: center; transition: background-color .2s, color .2s; }
+.slip__alt a + a { border-left: 1.5px solid var(--color-ink); }
+/* ส่งให้หัวหน้าดู (ตรวจมือถือ 30 ต.ค.) · ลิงก์รองเต็มแถว จุดกด 48px */
+.slip__share { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; margin-top: 8px; font-size: 15px; font-weight: 700; color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.slip__alt a:hover { background: var(--color-ink); color: var(--color-paper); }
+.slip__alt a:hover .slip__ico { color: #FF8A33; }
+.slip__alt a:focus-visible { outline: 3px solid var(--color-ink); outline-offset: -5px; }
+.slip__ico { flex: none; display: block; width: 18px; height: 18px; color: var(--color-orange); transition: color .2s; }
+.slip__ico svg { width: 100%; height: 100%; }
+.slip__note { margin-top: 12px; font-size: 12px; color: var(--color-ink-3); text-align: center; }
+/* ตารางเต็ม (พับ) */
+.calc-more { padding-bottom: 8px; }
+.calc-table { border: 1px solid var(--color-line); border-radius: 18px; background: var(--color-shell); }
+.calc-table summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 22px; cursor: pointer; list-style: none; }
+.calc-table summary::-webkit-details-marker { display: none; }
+.calc-table summary:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; border-radius: 18px; }
+.calc-table__h { font-size: 20px; font-weight: 700; }
+.calc-table__s { display: block; font-size: 14px; color: var(--color-ink-3); }
+.calc-table__btn { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border: 2px solid var(--color-line-2); border-radius: 999px; background: var(--color-paper); font-size: 15px; font-weight: 700; }
+.calc-table__btn svg { width: 18px; height: 18px; transition: rotate .25s; }
+.calc-table__close, .calc-table[open] .calc-table__open { display: none; }
+.calc-table[open] .calc-table__close { display: inline; }
+.calc-table[open] .calc-table__btn svg { rotate: 180deg; }
+.calc-table summary:hover .calc-table__btn { border-color: var(--color-ink); }
+.calc-table__body { padding: 0 14px 14px; }
+.calc-help { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; gap: 40px; padding-block: 48px 72px; }
+.calc-help__h { font-size: clamp(24px, 2.6vw, 32px); font-weight: 700; line-height: 1.3; }
+.calc-faq { margin-top: 16px; border-top: 2px solid var(--color-ink); }
+.calc-faq > div { border-bottom: 1px solid var(--color-line); }
+.calc-faq__q { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; width: 100%; min-height: 44px; padding: 16px 0; font-size: 17px; font-weight: 700; text-align: left; }
+.calc-faq__q:hover span { text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.calc-faq__ico { flex: none; margin-top: 3px; color: var(--color-orange); transition: rotate .25s; }
+.calc-faq__a { max-width: 62ch; padding-bottom: 18px; font-size: 16px; line-height: 1.75; color: var(--color-ink-2); }
+.calc-help__side { padding: 22px; border-radius: 20px; background: var(--color-shell); }
+.calc-help__h2 { font-size: 18px; font-weight: 700; }
+.calc-links { margin-top: 6px; }
+.calc-links a { display: flex; align-items: center; gap: 12px; min-height: 52px; border-bottom: 1px solid var(--color-line); font-size: 16px; font-weight: 700; }
+.calc-links a:hover { text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.calc-links__ico { display: block; width: 22px; height: 22px; color: var(--color-orange); }
+.calc-links .arw { margin-left: auto; }
+.calc-help__ask { margin-top: 16px; font-size: 15px; line-height: 1.6; color: var(--color-ink-2); }
+.calc-help__side .cb--p { width: 100%; margin-top: 10px; }
+@media (max-width: 1023px) {
+  .calc__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .slip { position: relative; top: auto; max-width: 560px; }
+  .calc-help { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 36px 56px; }
+}
+@media (max-width: 639px) {
+  .calc { padding-block: 22px 36px; }
+  /* มือถือ: คำอธิบายข้างหัวข้อขั้นลงบรรทัดใหม่เต็มกว้าง ไม่บีบข้างหัวข้อจนหักกลางวลี */
+  .calc__lg-sub { flex-basis: 100%; padding-left: 40px; }
+  /* ตรายางเล็กลง · หัวข้อเว้นที่ให้ตรายาง ไม่ทับกัน */
+  .slip__h { padding-right: 92px; font-size: 17px; }
+  .slip::before { padding: 2px 8px; font-size: 12px; }
+  .slip__btns .cb--p .cb__t { font-size: 15px; }
+  .slip__btns .cb--p .cb__ico { width: 38px; height: 38px; padding: 5px; }
+  .slip__btns .cb--p { gap: 10px; padding-right: 14px; }
+  .calc-table summary { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .calc-table__btn { min-height: 40px; }
+  .kcard { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; align-items: start; gap: 6px; min-height: 0; padding: 5px 5px 9px; border-radius: 12px; }
+  .kcard__img { border-radius: 8px; }
+  .kcard__txt { padding-inline: 3px; }
+  .kcard__t { font-size: 13px; line-height: 1.3; }
+  .kcard__p { font-size: 12px; }
+  .kcard__p b { font-size: 14px; }
+  .kcard__t { font-size: 14px; }
+  .kcard__p { font-size: 12px; }
+  .kcard__p b { font-size: 14px; }
+  .kcard:has(input:checked)::after { top: 4px; right: 4px; width: 18px; height: 18px; background-size: 11px; }
+  .slip { padding: 22px 18px 40px; }
+  .slip__btns { margin-inline: -18px; padding-inline: 18px; }
+  .slip__alt a { font-size: 14px; padding-inline: 8px; }
+  .slip::before { top: 80px; right: 16px; }
+  .calc-table summary { padding: 14px 16px; }
+  .calc-table__h { font-size: 18px; }
+  .calc-table__body { padding: 0 8px 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kcard:hover, .kcard:active { transform: none; }
+}
+/* เครื่องคำนวณ: พิมพ์จำนวนต่ำกว่าขั้นต่ำอยู่ ยอดรวมจางลงจนกว่าจะออกจากช่อง (รอบ 46) */
+.calc-stale :is(#sTotal, #sQty, [data-bar-live]) { opacity: .4; transition: opacity .15s; }
+@media (prefers-reduced-motion: reduce) {
+  .calc-stale :is(#sTotal, #sQty, [data-bar-live]) { transition: none; }
+}

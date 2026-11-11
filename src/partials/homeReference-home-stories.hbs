@@ -1,0 +1,15 @@
+{{!-- บทความหน้าแรก · 3 พ.ย. 2026 (อาร์ต "เอาเป็นบทความแทน วางแบบให้ชิดกว่าหน้า blog") · เดิมเป็นการ์ดคู่มือผ้า + Facebook + คลิปลูกค้า
+     บทความล่าสุด 4 เรื่องจาก legacy-posts.json (homePosts ใน vite.config) · ปกเป็นภาพปกบทความจริงบน team-dee.com เหมือนหน้า /blog/ --}}
+<section class="hm-sec hm-reference hm-journal" id="home-stories" aria-labelledby="journal-h">
+  <div class="wrap">
+  <header><h2 id="journal-h">{{{hl "คู่มือเลือกเสื้อและข่าวสารจากทีมดี" "และข่าวสารจากทีมดี"}}}</h2><a class="hm-more" href="/blog/">ดูบทความทั้งหมด <span aria-hidden="true">→</span></a></header>
+  <ul class="hm-posts">
+    {{#each homePosts}}
+    <li><a class="hm-post" href="{{this.url}}" data-legacy>
+      <span class="hm-post__img"><img src="{{this.img}}" srcset="{{this.srcset}}" sizes="(min-width: 1280px) 300px, (min-width: 768px) 24vw, 80vw" alt="" width="1024" height="512" loading="lazy" decoding="async"></span>
+      <span class="hm-post__body"><span class="hm-post__cat">{{this.catName}}</span><span class="hm-post__t">{{this.title}}</span><time datetime="{{this.date}}">{{this.dateTh}}</time></span>
+    </a></li>
+    {{/each}}
+  </ul>
+  </div>
+</section>

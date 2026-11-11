@@ -1,3 +1,5 @@
+import { backClose } from './back-close.js'
+
 /* dropdown เมนูหลัก เปิดได้ทั้งคลิกและ hover
    คลิกคือทางหลัก เพราะ hover อย่างเดียวจะปิดเองเวลาเมาส์เลื่อนออกนิดเดียว
    และบนจอสัมผัสไม่มี hover ให้ใช้
@@ -86,19 +88,27 @@ export function initNav() {
   /* เมนูมือถือเต็มจอ */
   const menu = document.getElementById('mobileMenu')
   const openBtn = document.querySelector('[data-menu-open]')
+  /* เปิดเมนู: ส่วนอื่นของหน้า inert โปรแกรมอ่านจอปัดหลุดไปข้างหลังไม่ได้ (ตรวจละเอียด 30 ต.ค.) */
+  const behind = (on) => { for (const el of document.body.children) if (el !== menu && el.tagName !== 'SCRIPT') el.inert = on }
   function closeMobile() {
     if (!menu || menu.hidden) return
     menu.hidden = true
+    behind(false)
     document.body.style.overflow = ''
     openBtn?.setAttribute('aria-expanded', 'false')
     openBtn?.focus()
+    back?.closed()
   }
+  /* ปุ่มย้อนกลับมือถือปิดเมนู ไม่ออกจากหน้า (back-close.js) */
+  const back = menu ? backClose(() => !menu.hidden, closeMobile, menu) : null
   if (menu && openBtn) {
     openBtn.addEventListener('click', () => {
       menu.hidden = false
+      behind(true)
       document.body.style.overflow = 'hidden'
       openBtn.setAttribute('aria-expanded', 'true')
       menu.querySelector('[data-menu-close]')?.focus()
+      back.opened()
     })
     menu.querySelector('[data-menu-close]')?.addEventListener('click', closeMobile)
     /* เป็น dialog: กด Tab วนอยู่ในเมนู ไม่หลุดไปหน้าข้างหลังที่มองไม่เห็น */

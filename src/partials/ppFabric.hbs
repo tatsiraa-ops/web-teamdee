@@ -1,0 +1,26 @@
+{{!-- ส่วน Fabric ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 03 · ผ้า -->
+{{#if pp.fabric.show}}
+<section class="bg-shell border-y border-line" id="fabric">
+  <div class="wrap section">
+    <div class="max-w-[62ch] mb-8">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoCube}}</span>ผ้า</span>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.fabric.h}}}</h2>
+      {{#each pp.fabric.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
+    </div>
+    {{#if pp.fabric.fabrics.length}}
+    <ul class="pp-fabrics">
+      {{!-- รูปผ้าแสดงแค่ 64px (main.css .pp-fabrics img) · มีไฟล์ -160/-320.webp แล้ว · data-sizes ให้ตัวเติม srcset ตอน build เลือกไฟล์เล็ก (30 ต.ค. H21) --}}
+      {{#each pp.fabric.fabrics}}
+      <li>{{#if this.img}}<img src="{{this.img}}" alt="ผิว{{this.name}}ระยะใกล้" width="120" height="120" data-sizes="64px" loading="lazy" decoding="async">{{/if}}<div><h3 class="text-[18px]">{{this.name}}</h3><p class="t-sm mt-1">{{this.use}}</p></div></li>
+      {{/each}}
+    </ul>
+    {{/if}}
+    {{#unless wp}}{{#if pp.fabric.fabricsPending}}<p class="pending-ribbon mt-6">รายการผ้านี้ยังไม่ยืนยันว่าใช้กับ{{item.name}} (products.json spec.fabricNote) · บนเว็บจริงซ่อนรายการ เหลือหัวข้อ คำนำ และทางขอตัวอย่างผ้า</p>{{/if}}{{/unless}}
+    {{#unless wp}}{{#if pp.fabric.table}}<p class="pending-ribbon mt-6">ตารางสเปกผ้าของ v22 รอข้อมูลจริง (ส่วนผสม / น้ำหนัก) · บนเว็บจริงซ่อนไว้</p>{{/if}}{{/unless}}
+    {{#each pp.fabric.notes}}<p class="t-sm mt-5">{{this}}</p>{{/each}}
+    {{#if pp.fabric.links.length}}<div class="flex flex-wrap gap-x-6 gap-y-2 mt-5">{{#each pp.fabric.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}</div>{{/if}}
+    <div class="pp-row"><a class="cb cb--s" href="{{ppNextLine.fabric}}" data-track="line" data-where="pp-next-fabric">ขอดูตัวอย่างผ้า</a></div>
+  </div>
+</section>
+{{/if}}

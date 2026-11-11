@@ -1,121 +1,78 @@
-<!doctype html>
-<html lang="th">
-<head>
-  {{> head}}
-  <title>บทความและไอเดียสั่งทำเสื้อทีม | TEAMDEE</title>
-  <meta name="description" content="ข้อมูลเลือกเสื้อทีม ผ้า ทรง และแนวกราฟิก พร้อมคำแนะนำเตรียมโลโก้ ไซซ์ จำนวน และกำหนดใช้งานก่อนสั่งผลิต">
-</head>
-<body>
+<!doctype html><html lang="th"><head>
+{{> head}}
+  {{!-- CSS เฉพาะหน้าโหลดใน head (27 ต.ค.) · เดิม import ผ่าน JS → ตอนเปิดหน้ารูป/ไอคอนกางใหญ่แวบก่อน CSS มา --}}
+  <link rel="stylesheet" href="/src/styles/blog.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/article-reader.css" data-page-css>
+<title>บทความและไอเดียสั่งทำเสื้อทีม | TEAMDEE</title>
+<meta name="description" content="อ่านเรื่องผ้า เทคนิคพิมพ์ลาย สกรีนและงานปัก พร้อมไอเดียเสื้อทีมและคำแนะนำเรื่องไซซ์ งบประมาณ และการเตรียมสั่งผลิตจาก TEAMDEE">
+</head><body>
 {{> siteHeader active="learn"}}
-
-<main id="main">
-  <section class="band-hero relative overflow-hidden">
-    <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-    <div class="wrap relative py-12 md:py-16">
+{{!-- รื้อแนวนิตยสาร (27 ต.ค. อาร์ตเลือก "ข นิตยสาร") · src/js/blog-model.js magazine (มีเทส) · CSS src/styles/blog.css "นิตยสาร"
+     หัวหน้า: ชื่อหน้า + ค้นหา + ชิปพาไปหัวข้อ · เรื่องปก 1 + เรื่องข้าง 2 · หัวข้อ: ตัวที่มีเรื่องมากสุดเป็นคอลัมน์กว้าง อีก 3 หัวข้อคอลัมน์ข้าง
+     ค้นหา = ซ่อนนิตยสาร โชว์กริดผลลัพธ์ (#artGrid · articles-page.js) · ลิงก์บทความเดิมครบทุกเรื่อง (URL เว็บจริง) --}}
+<main id="main" class="td-blog mz">
+  <header class="mz-head">
+    <div class="wrap mz-head__in">
       <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>คู่มือและบทความ</span><span aria-hidden="true">/</span><span aria-current="page">บทความและไอเดีย</span></nav>
-      <h1 class="t-display text-[clamp(30px,4.6vw,56px)] text-ink mt-7">บทความสั่งทำเสื้อทีม: เลือกแบบ ผ้า และวางแผนผลิต</h1>
-      <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[56ch] mt-5">อ่านเพื่อช่วยเลือก วางแผน และเตรียมข้อมูลให้คุยต่อได้ง่าย</p>
-    </div>
-  </section>
-
-  <!-- 1 · เรื่องแนะนำ (v22) · บทความเดิมล่าสุดบนเว็บจริง 1 + การ์ดข้าง 2 · ข้อมูล src/data/legacy-posts.json -->
-  <section class="wrap section" aria-labelledby="feat-h">
-    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>เรื่องแนะนำ</span>
-    <h2 id="feat-h" class="sr-only">เรื่องแนะนำ</h2>
-    <div class="grid lg:grid-cols-[1.35fr_1fr] gap-8 lg:gap-10 mt-4 items-start">
-      {{#with legacyPosts.featured}}
-      <a href="{{this.url}}" class="group flex flex-col" data-legacy>
-        <div class="overflow-hidden rounded-plate bg-shell aspect-[2/1]">
-          <img src="{{this.img}}" alt="{{this.title}}" width="1024" height="512" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
+      <div class="mz-head__row">
+        <div>
+          <h1 class="t-display mz-head__h">{{{ph "บทความและไอเดียสั่งทำเสื้อทีม"}}}</h1>
+          <p class="mz-head__p">{{{ph "เรื่องผ้า เทคนิคผลิต งบ และไอเดียออกแบบ"}}} {{{ph "อ่านก่อนเริ่มคุยกับทีมดี"}}}</p>
+          <p class="mz-head__meta">{{legacyPosts.items.length}} เรื่อง · อัปเดตล่าสุด {{legacyPosts.magazine.latest}}</p>
         </div>
-        <p class="t-xs mt-5">{{this.catName}} · {{this.dateTh}}</p>
-        <h3 class="t-display text-[clamp(24px,3vw,34px)] mt-2 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
-        <p class="t-lead mt-3">{{this.excerpt}}</p>
-      </a>
-      {{/with}}
-      <div class="space-y-7">
-        {{#each legacyPosts.side}}
-        <a href="{{this.url}}" class="group grid grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-4 items-start" data-legacy>
-          <div class="overflow-hidden rounded-card bg-shell aspect-[2/1]">
-            <img src="{{this.img}}" alt="{{this.title}}" width="1024" height="512" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
-          </div>
-          <div>
-            <h3 class="text-[19px] leading-snug transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
-            <p class="t-xs mt-2">{{this.catName}} · {{this.dateTh}}</p>
-          </div>
-        </a>
-        {{/each}}
+        <form class="mz-search" id="artSearch" role="search" action="{{url 'blog'}}" method="get">
+          <label class="sr-only" for="artQuery">ค้นหาบทความ</label>
+          <span class="mz-search__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <input class="mz-search__in" type="search" id="artQuery" name="q" placeholder="ค้นหา เช่น ผ้า ไซซ์ DFT ราคา" autocomplete="off" enterkeyhint="search">
+          <button class="mz-search__x" type="button" id="artReset" aria-label="ล้างคำค้น" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+        </form>
       </div>
+      <ul class="mz-topics" aria-label="ไปที่หัวข้อ">{{#each legacyPosts.magazine.blocks}}<li style="--i:{{@index}}"><a href="#t-{{this.id}}">{{this.name}}<b class="tabular-nums">{{this.items.length}}</b></a></li>{{/each}}</ul>
     </div>
+  </header>
+
+  <div class="wrap mz-body" id="artMag">
+    {{!-- เรื่องปก (v22 "เรื่องแนะนำ") --}}
+    <section class="mz-cover" aria-labelledby="cover-h">
+      <h2 id="cover-h" class="sr-only">เรื่องแนะนำ</h2>
+      {{#with legacyPosts.magazine.main}}<a class="mz-story mz-story--main" href="{{this.url}}" data-legacy>
+        <span class="mz-story__img"><img src="{{img}}" srcset="{{srcset}}" sizes="(min-width: 1024px) 690px, calc(100vw - 40px)" alt="" width="1024" height="513" fetchpriority="high" decoding="async"></span>
+        <span class="mz-story__body"><span class="mz-kicker">{{catName}}</span><span class="mz-story__t">{{title}}</span><span class="mz-story__x">{{excerpt}}</span><span class="mz-story__meta"><time datetime="{{date}}">{{dateTh}}</time><span class="mz-read">อ่านเรื่องนี้<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span>
+      </a>{{/with}}
+      {{!-- เรื่องรองโหลดทีหลัง (30 ต.ค.) ให้รูปปกใหญ่ (LCP) ได้แบนด์วิดท์ก่อน --}}
+      <div class="mz-cover__side">{{#each legacyPosts.magazine.side}}<a class="mz-story mz-story--side" href="{{this.url}}" data-legacy>
+        <span class="mz-story__img"><img src="{{img}}" srcset="{{srcset}}" sizes="(max-width: 639px) 120px, (min-width: 1024px) 430px, 45vw" alt="" width="1024" height="512" loading="lazy" decoding="async"></span>
+        <span class="mz-story__body"><span class="mz-kicker">{{catName}}</span><span class="mz-story__t">{{title}}</span><span class="mz-story__meta"><time datetime="{{date}}">{{dateTh}}</time></span></span>
+      </a>{{/each}}</div>
+    </section>
+
+    {{!-- ตามหัวข้อ (v22 "เลือกเรื่องที่สนใจ") · หัวข้อแรก = คอลัมน์กว้าง (เรื่องแรกเป็นการ์ดใหญ่ ที่เหลือเป็นแถว) · ที่เหลือคอลัมน์ข้าง --}}
+    <div class="mz-sections">
+      <h2 class="sr-only">เลือกเรื่องที่สนใจ</h2>
+      {{#each legacyPosts.magazine.blocks}}
+      <section class="mz-sec{{#if @first}} mz-sec--wide{{/if}}" id="t-{{this.id}}" aria-labelledby="t-{{this.id}}-h">
+        <header class="mz-sec__hd"><h2 id="t-{{this.id}}-h">{{this.name}}</h2><span class="tabular-nums">{{this.items.length}} เรื่อง</span></header>
+        <ol class="mz-list">{{#each this.items}}<li><a class="mz-row{{#if @first}}{{#if @../first}} mz-row--lead{{/if}}{{/if}}" href="{{this.url}}" data-legacy>
+          <span class="mz-row__img"><img src="{{img}}" srcset="{{srcset}}" sizes="{{#if @first}}{{#if @../first}}(min-width: 1024px) 640px, calc(100vw - 40px){{else}}136px{{/if}}{{else}}136px{{/if}}" alt="" width="1024" height="512" loading="lazy" decoding="async"></span>
+          <span class="mz-row__body"><span class="mz-kicker">{{catName}}</span><span class="mz-row__t">{{title}}</span>{{#if @first}}{{#if @../first}}<span class="mz-story__x">{{excerpt}}</span>{{/if}}{{/if}}<time datetime="{{date}}">{{dateTh}}</time></span>
+        </a></li>{{/each}}</ol>
+      </section>
+      {{/each}}
+    </div>
+    <nav class="mz-archives" aria-label="หน้าหมวดบทความ"><span>อ่านตามหมวดเดิม</span>{{#each legacyPosts.cats}}<a href="{{this.url}}">{{name}} <b class="tabular-nums">{{n}}</b></a>{{/each}}</nav>
+  </div>
+
+  {{!-- ผลค้นหา: ซ่อนจนกว่าจะพิมพ์ (articles-page.js) · บทความครบ 12 เรื่อง --}}
+  <section class="wrap mz-results" id="article-library" aria-labelledby="all-h" hidden>
+    <div class="mz-results__hd"><h2 id="all-h">ผลการค้นหา</h2><p id="artCount" role="status" aria-live="polite"></p></div>
+    <div class="mz-grid" id="artGrid">{{#each legacyPosts.library}}<a class="mz-card" href="{{this.url}}" data-legacy data-cat="{{cat}}" data-topics="{{topicKeys}}" data-title="{{title}}" data-excerpt="{{excerpt}}" data-cat-name="{{catName}}"><span class="mz-row__img"><img src="{{img}}" srcset="{{srcset}}" sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, calc(100vw - 40px)" alt="" width="1024" height="512" loading="lazy" decoding="async"></span><span class="mz-kicker">{{catName}}</span><span class="mz-row__t">{{title}}</span><time datetime="{{date}}">{{dateTh}}</time></a>{{/each}}</div>
+    <div class="mz-empty" id="artEmpty" hidden><p class="mz-empty__h">ยังไม่พบบทความที่ตรงกับคำค้น</p><p>ลองคำสั้นลง เช่น “ผ้า” หรือ “สกรีน” หรือถามทีมดีตรงๆ ทาง LINE</p><div class="mz-empty__btns"><a class="cb cb--p" href="{{blogCtaLine}}" data-track="line" data-where="blog-empty"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ถามทีมดีทาง LINE</span></a><button type="button" class="cb cb--s" data-art-clear>ดูบทความทั้งหมด</button></div></div>
   </section>
 
-  <!-- 2 · เลือกเรื่องที่สนใจ (v22) · กรองตามหมวดเดิม 3 หมวด + ลิงก์หน้าหมวดเดิม (URL เดิมทุกชั้น) -->
-  <section class="bg-shell border-y border-line" aria-labelledby="all-h">
-    <div class="wrap section">
-      <h2 id="all-h" class="t-display text-[clamp(26px,3.4vw,40px)] mb-6">เลือกเรื่องที่สนใจ</h2>
-      <div class="chiprail" id="artFilter" role="group" aria-label="เลือกหมวดบทความ">
-        <button class="chip" type="button" data-cat="all" aria-pressed="true">ทั้งหมด <span class="tabular-nums opacity-60">{{legacyPosts.items.length}}</span></button>
-        {{#each legacyPosts.cats}}<button class="chip" type="button" data-cat="{{this.id}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
-        <p class="t-sm sm:ml-auto tabular-nums" id="artCount" role="status" aria-live="polite">แสดง {{legacyPosts.items.length}} เรื่อง</p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-9 mt-8" id="artGrid">
-        {{#each legacyPosts.items}}
-        <a href="{{this.url}}" data-cat="{{this.cat}}" class="group flex flex-col" data-legacy>
-          <div class="overflow-hidden rounded-plate bg-paper aspect-[2/1]">
-            <img src="{{this.img}}" alt="{{this.title}}" width="1024" height="512" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
-          </div>
-          <h3 class="text-[20px] leading-snug mt-4 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
-          <p class="t-sm mt-2 grow line-clamp-3">{{this.excerpt}}</p>
-          <p class="t-xs mt-4 pt-3 border-t border-line">{{this.catName}} · {{this.dateTh}}</p>
-        </a>
-        {{/each}}
-      </div>
-      <p class="t-sm mt-8 hidden" id="artEmpty">ยังไม่มีบทความในหมวดนี้ ลองเลือกหมวดอื่นดู</p>
-
-      <nav class="mt-10 pt-6 border-t border-line" aria-label="หมวดบทความ">
-        <p class="t-sm font-semibold">เปิดหน้าหมวดบทความ</p>
-        <ul class="flex flex-wrap gap-x-6 gap-y-1 mt-2">
-          {{#each legacyPosts.cats}}<li><a class="inline-flex items-center min-h-[44px] font-semibold underline decoration-orange decoration-2 underline-offset-4" href="{{this.url}}">{{this.name}}</a></li>{{/each}}
-        </ul>
-      </nav>
-
-      {{#unless wp}}
-      <div class="mt-10 pt-6 border-t border-line">
-        {{#unless wp}}<p class="pending-ribbon">หัวข้อบทความใหม่ตาม v22 · ร่าง noindex ยังไม่ลิงก์บนเว็บจริงจนกว่าทีมตรวจเนื้อหา</p>{{/unless}}
-        <ul class="mt-4 space-y-1">{{#each v22Posts}}<li><a class="inline-flex items-center min-h-[44px] underline decoration-orange decoration-2 underline-offset-4" href="{{url 'posts' this.id}}">{{this.title}}</a></li>{{/each}}</ul>
-        {{#unless wp}}<p class="pending-ribbon mt-6">ร่างบทความของเราเดิม (ต้นแบบเท่านั้น ไม่ export)</p>{{/unless}}
-        <ul class="mt-4 space-y-1">{{#each articles.items}}<li><a class="inline-flex items-center min-h-[44px] underline decoration-line-2 underline-offset-4" href="{{url 'articles' this.id}}">{{this.title}}</a></li>{{/each}}</ul>
-      </div>
-      {{/unless}}
-    </div>
-  </section>
-
-  <!-- 3 · ทางไปคู่มือ -->
-  <section class="wrap section">
-    <div class="max-w-[68ch] mb-7">
-      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoDoc}}</span>อยากอ่านละเอียดกว่านี้</span>
-      <h2 class="t-display text-[clamp(26px,3.4vw,42px)]">ต้องการขั้นตอนสั่งทำ?</h2>
-      <p class="t-lead mt-4">บทความช่วยตัดสินใจ ส่วนคู่มือบอกว่าต้องทำอะไรบ้างตามลำดับ</p>
-    </div>
-    <div class="chiprail">
-      {{#each guides}}<a class="chip" href="{{url 'guides' this.id}}">{{this.name}}</a>{{/each}}
-    </div>
-  </section>
-
-  {{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end · 24 ต.ค.) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
-  <section class="hm-end" aria-labelledby="end-h">
-    <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
-    <div class="wrap relative hm-end__in">
-      <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
-      <h2 id="end-h">{{{ph "มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย"}}}</h2>
-      <p class="hm-end__lead">{{{ph "บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้"}}}</p>
-      <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}?from=blog">ฝากข้อมูลให้ติดต่อกลับ</a></div>
-      <p class="hm-end__alt"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>
-    </div>
-  </section>
+  <section class="wrap mz-guides" aria-labelledby="guides-h"><div><h2 id="guides-h">ต้องการขั้นตอนสั่งทำ?</h2><p>{{{ph "จากไอเดียถึงวันรับเสื้อ"}}} {{{ph "เลือกคู่มือที่ตรงกับสิ่งที่กำลังทำ"}}}</p></div><ul>{{#each guides}}<li><a href="{{url 'guides' id}}"><span>{{name}}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>{{/each}}</ul></section>
+  {{#unless wp}}<details class="wrap td-blog__drafts"><summary>บทความร่างสำหรับตรวจเนื้อหา (ไม่ใช่รายการบทความที่เผยแพร่)</summary><ul>{{#each v22Posts}}<li><a href="{{url 'posts' id}}">{{title}}</a></li>{{/each}}{{#each articles.items}}<li><a href="{{url 'articles' id}}">{{title}}</a></li>{{/each}}</ul></details>{{/unless}}
+  {{> ctaBox id="blog-cta" tone="no" c=blogCta href=blogCtaLine where="cta-blog" cta=blogCta.cta href2=(url 'contact') q2="?from=blog" cta2="ฝากข้อมูลให้ติดต่อกลับ"}}
 </main>
 {{> footer}}
 <script type="module" src="/src/js/articles-page.js"></script>
-</body>
-</html>
+</body></html>

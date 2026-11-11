@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
-import { bandLabel, bandId, qtyText, bandFor, calcPricing, productPrice, priceFact, heroPrice, priceLine, useQuote, calcHref } from '../src/js/prices.js'
+import { bandLabel, bandId, qtyText, bandFor, calcPricing, productPrice, priceFact, heroPrice, priceLine, useQuote, calcHref, fabricRanges } from '../src/js/prices.js'
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
 const P = JSON.parse(read('src/data/prices.json'))
@@ -20,7 +20,7 @@ test('ป้ายช่วงจำนวนสร้างจากตัว�
 
 test('ทุกสินค้า: ช่วงจำนวนเรียงต่อกัน ไม่ชนกัน ไม่เว้นช่อง เริ่มที่ขั้นต่ำ และช่วงสุดท้ายเท่านั้นที่ปลายเปิด', () => {
   for (const [id, p] of priced) {
-    assert.equal(p.bands[0].min, P.minQty, `${id} เริ่มที่ขั้นต่ำ`)
+    assert.equal(p.bands[0].min, p.minQty || P.minQty, `${id} เริ่มที่ขั้นต่ำ`)
     p.bands.forEach((b, i) => {
       assert.ok(Number.isInteger(b.min), `${id} ${i} min เป็นตัวเลข`)
       if (i < p.bands.length - 1) {
@@ -54,6 +54,8 @@ test('ตารางราคาหน้าเครื่องคำนว�
   assert.deepEqual(C.bands.map((b) => b.qty), ['10–20 ตัว', '21–50 ตัว', '51–100 ตัว', '101–199 ตัว', '200 ตัวขึ้นไป'])
   assert.deepEqual(C.kinds.map((k) => k.id), ['round', 'collar', 'screen'])
   assert.equal(C.kinds.find((k) => k.id === 'screen').byDesign, true)
+  /* 30 ต.ค. แถวสกรีนบอกราคาเริ่มจริง ไม่ใช่ "ประเมินราคาตามแบบ" */
+  assert.match(C.kinds.find((k) => k.id === 'screen').note, /เริ่ม 290 บาท\/ตัว/)
   assert.equal(C.prices.round['10-20'], 279)
   assert.equal(C.prices.round['200+'], 160)
   assert.equal(C.prices.collar['101-199'], 230)
@@ -80,7 +82,7 @@ test('กล่องราคาหน้าสินค้าเป็นข�
   assert.equal(bb.box.amount, '359 → 230')
   assert.match(bb.box.p, /^10–20 ตัว → 501–999 ตัว/)
   assert.match(bb.box.p, /1,000 ตัวขึ้นไป ทักถามราคาได้เลย/)
-  assert.equal(productPrice(P, 'screen'), null)
+  assert.equal(productPrice(P, 'screen').box.amount, '290 → 220')
   assert.equal(productPrice(P, 'warmup'), null)
 })
 
@@ -108,13 +110,14 @@ test('ลิงก์ไปเครื่องคำนวณมี ?kind= ต
   assert.equal(calcHref(P, 'polo', '/calculations/'), '/calculations/?kind=polo')
   assert.equal(calcHref(P, 'baseball', '/calculations/'), '/calculations/?kind=baseball')
   assert.equal(calcHref(P, 'jersey', '/calculations/'), '/calculations/?kind=jersey')
-  for (const id of ['screen', 'warmup']) assert.equal(calcHref(P, id, '/calculations/'), null, id)
+  assert.equal(calcHref(P, 'screen', '/calculations/'), '/calculations/?kind=screen')
+  for (const id of ['warmup']) assert.equal(calcHref(P, id, '/calculations/'), null, id)
 })
 
 test('การ์ดบริการหน้าแรกบอกจำนวนที่ราคาใช้ได้ (home-02)', () => {
   assert.deepEqual(priceFact(P, 'print'), { v: '279 บาท/ตัว (10–20 ตัว)', sub: 'ลดถึง 160 เมื่อสั่ง 200 ตัวขึ้นไป' })
   assert.deepEqual(priceFact(P, 'polo'), { v: '220 บาท/ตัว', sub: 'ผ้าจูติ 10–50 ตัว รวมปัก 1 จุด' })
-  assert.deepEqual(priceFact(P, 'screen'), { v: 'ประเมินตามแบบ' })
+  assert.deepEqual(priceFact(P, 'screen'), { v: '290 บาท/ตัว (1–20 ตัว)', sub: 'ลดถึง 220 เมื่อสั่ง 301–500 ตัว' })
   assert.deepEqual(priceFact(P, 'warmup'), { v: 'ทัก LINE ขอราคา' })
 })
 
@@ -124,7 +127,7 @@ test('แถวราคาใน hero หน้าสินค้า บอก�
   assert.deepEqual(heroPrice(P, 'print'), { v: '279 บาท/ตัว (10–20 ตัว)', sub: 'คอกลม / คอวี · ลดถึง 160 เมื่อสั่ง 200 ตัวขึ้นไป · คอปก +50' })
   assert.deepEqual(heroPrice(P, 'polo'), priceFact(P, 'polo'))
   assert.deepEqual(heroPrice(P, 'baseball'), { v: '359 บาท/ตัว (10–20 ตัว)', sub: 'ลดถึง 230 เมื่อสั่ง 501–999 ตัว' })
-  assert.deepEqual(heroPrice(P, 'screen'), { v: 'ประเมินตามแบบ' })
+  assert.deepEqual(heroPrice(P, 'screen'), { v: '290 บาท/ตัว (1–20 ตัว)', sub: 'Premium C32 · ลดถึง 220 เมื่อสั่ง 301–500 ตัว' })
   assert.equal(heroPrice(P, 'nope'), null)
   for (const [id] of priced) { const f = heroPrice(P, id); assert.match(`${f.v} ${f.sub}`, QTY, id) }
 })
@@ -134,7 +137,7 @@ test('ราคาบรรทัดเดียวของ hero หน้า�
   assert.equal(priceLine(P, 'polo'), '220 บาท/ตัว (ผ้าจูติ 10–50 ตัว)')
   assert.equal(priceLine(P, 'print'), '279 บาท/ตัว (คอกลม / คอวี 10–20 ตัว)')
   assert.equal(priceLine(P, 'baseball'), '359 บาท/ตัว (10–20 ตัว)')
-  assert.equal(priceLine(P, 'screen'), null)
+  assert.equal(priceLine(P, 'screen'), '290 บาท/ตัว (Premium C32 1–20 ตัว)')
   assert.equal(priceLine(P, 'warmup'), null)
   for (const [id] of priced) assert.match(priceLine(P, id), QTY, id)
 })
@@ -145,18 +148,18 @@ test('ใบราคาย่อหน้ากลุ่มลูกค้า (
   const row = (id) => q.rows.find((r) => r.id === id)
   assert.equal(row('polo').amount, '220 → 170')
   assert.equal(row('polo').qty, '10–50 ตัว → 2,001 ตัวขึ้นไป · ผ้าจูติ รวมปัก 1 จุด')
-  assert.equal(row('polo').lead, '10–15 วันทำการ')
+  assert.equal(row('polo').lead, '10–15 วัน')
   assert.equal(row('print').amount, '279 → 160')
   assert.equal(row('print').qty, '10–20 ตัว → 200 ตัวขึ้นไป · คอปก 329 → 210')
-  assert.equal(row('print').lead, '15–20 วันทำการ')
+  assert.equal(row('print').lead, '15–20 วัน')
   assert.equal(q.leadNote, lead.note)
   assert.equal(row('baseball').amount, '359 → 230')
   assert.equal(row('baseball').qty, '10–20 ตัว → 501–999 ตัว')
-  assert.equal(row('screen').text, 'ประเมินตามแบบ')
-  assert.equal(row('screen').amount, undefined)
+  assert.equal(row('screen').text, undefined)
+  assert.equal(row('screen').amount, '290 → 220')
   assert.equal(row('warmup').text, 'ทัก LINE ขอราคา')
   assert.equal(row('warmup').askHref, 'line:warmup')
-  assert.equal(q.foot, 'ขั้นต่ำ 10 ตัวทุกสินค้า · ราคานี้รวม VAT 7% + ใบกำกับเต็มรูป · ส่งฟรีตั้งแต่ 10 ตัว · ทุกไซซ์ราคาเดียว')
+  assert.equal(q.foot, 'ขั้นต่ำ 10 ตัว · เสื้อสกรีนเริ่ม 1 ตัว · ราคานี้รวม VAT 7% + ใบกำกับเต็มรูป · ส่งฟรีทั่วไทย · ทุกไซซ์ราคาเดียว')
 })
 
 /* ทุกตัวเลขราคาที่ขึ้นหน้าเว็บต้องบอกจำนวนกำกับ · ห้าม "เริ่มต้น 160" ลอย ๆ (audit 2.2) */
@@ -183,4 +186,27 @@ test('ไม่มีคำว่า "เริ่มต้น" ตามด้�
     for (const m of read(f).matchAll(/เริ่ม(?:ต้น)?\s*(?:ที่\s*)?[\d,]{3,}[^"<\n]{0,60}/g)) if (!QTY.test(m[0])) bad.push(`${f}: ${m[0]}`)
   }
   assert.deepEqual(bad, [])
+})
+
+test('fabricRanges: ผ้าทุกชนิดในตารางราคา พร้อมช่วงราคาจริง (ไม่ยุบผ้าราคาเท่ากัน)', () => {
+  const list = fabricRanges(P, 'polo')
+  assert.deepEqual(list.map((f) => f.id), ['juti', 'tc', 'tricot', 'pique', 'endurance', 'drytech'])
+  assert.deepEqual(list[0], { id: 'juti', name: 'จูติ (JUTI)', min: 170, max: 220 })
+  assert.deepEqual(list[5], { id: 'drytech', name: 'ดรายเทค (Dry Tech)', min: 300, max: 390 })
+})
+
+test('ใบราคาย่อหน้ากลุ่ม (รอบ 64): ราคาเป็น 2 ขั้นตามจำนวน ไม่ใช่ลูกศรที่อ่านเหมือนลดราคา · เงื่อนไขท้ายเป็นรายการ', () => {
+  const cards = [{ h: 'โปโล', p: [], to: 'products.polo' }, { h: 'พิมพ์', p: [], to: 'products.print' }]
+  const q = useQuote(P, cards, lead, {})
+  const polo = q.rows.find((r) => r.id === 'polo')
+  assert.deepEqual(polo.tiers.map((t) => t.prices[0]), ['220', '170'])
+  assert.equal(polo.tiers[0].q, '10–50 ตัว')
+  assert.match(polo.tiers[1].q, /ขึ้นไป/)
+  assert.match(polo.basis, /ผ้าจูติ/)
+  assert.equal(polo.colNames.length, 1)
+  const print = q.rows.find((r) => r.id === 'print')
+  assert.equal(print.colNames.length, 2)
+  assert.deepEqual(print.tiers.map((t) => t.prices), [['279', '329'], ['160', '210']])
+  assert.ok(q.notes.includes(`ขั้นต่ำ ${P.minQty} ตัว`))
+  for (const x of P.included) assert.ok(q.notes.includes(x), x)
 })

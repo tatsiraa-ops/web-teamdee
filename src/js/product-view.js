@@ -31,15 +31,24 @@ export function productView(pp, real, { forWp, has }) {
   const rows = (r) => (r || []).filter((x) => !forWp || !x.some(pending))
   const spec = { shape: rows(real.spec?.shape), collar: rows(real.spec?.collar), option: rows(real.spec?.option) }
   const specTabs = [['shape', 'ทรง'], ['collar', 'คอ'], ['option', 'ออปชั่น']].filter(([k]) => spec[k].length).map(([id, t]) => ({ id, t }))
-  v.options = sec({ ...opt, intro: strs(opt.intro), cards: opt.cards.filter((c) => ok(c.h)).map(card), links: links(opt.links), designs: real.designs || [], tags: real.tags || [], spec, specTabs }, true)
+  const optV = { ...opt, intro: strs(opt.intro), cards: opt.cards.filter((c) => ok(c.h)).map(card), links: links(opt.links), designs: real.designs || [], tags: real.tags || [], spec, specTabs }
+  /* ส่วนที่ไม่เหลือเนื้อหาซ่อน พร้อมชิปนำทาง (หน้าสกรีนเหลือแต่หัวข้อ · audit 26 ต.ค.) */
+  v.options = sec(optV, !forWp || !!(optV.intro.length || optV.cards.length || optV.links.length || optV.designs.length || specTabs.length))
 
   const fab = pp.fabric
-  const fabrics = (real.fabrics || []).filter((f) => ok(f.name) && ok(f.use))
-  v.fabric = sec({ ...fab, intro: strs(fab.intro), notes: strs(fab.notes), table: forWp ? null : fab.table, links: links(fab.links), fabrics }, fabrics.length > 0 || !forWp)
+  /* fabricsPending: ข้อมูลของสินค้านี้เองบอกว่าผ้ายังไม่ยืนยัน (วอร์ม · เบสบอล) → เว็บจริงซ่อนรายการ แต่ส่วนยังอยู่ตามลำดับ v22 พร้อมข้อความจริงที่มี · ต้นแบบเห็นรายการพร้อมป้าย */
+  const fabricsPending = !!real.fabricsPending
+  const fabrics = forWp && fabricsPending ? [] : (real.fabrics || []).filter((f) => ok(f.name) && ok(f.use))
+  v.fabric = sec({ ...fab, intro: strs(fab.intro), notes: strs(fab.notes), table: forWp ? null : fab.table, links: links(fab.links), fabrics, fabricsPending }, fabrics.length > 0 || fabricsPending || !forWp)
 
   const det = pp.detail
-  const detCards = det.cards.filter((c) => ok(c.h)).map(card)
-  v.detail = sec({ ...det, intro: strs(det.intro), cards: detCards, table: table(det.table), links: links(det.links) }, detCards.length > 0)
+  /* การ์ดรายละเอียดเป็นการ์ดภาพตาม v22 · ข้อความในการ์ดเป็นคำบรรยายภาพ ("ภาพโครงสร้างคอ…")
+     เว็บจริงโชว์เฉพาะการ์ดที่มีไฟล์ภาพจริงแล้ว ไม่งั้นเหลือแต่หัวข้อหรือบรรยายภาพที่ไม่มี (audit 26 ต.ค.)
+     ยกเว้น c.text = ข้อความในการ์ดเป็นเนื้อหาจริงอ่านได้โดยไม่มีรูป (โปโลปัก · scripts/v22/product-pages.mjs) */
+  const realImg = (c) => /\.(webp|jpe?g|png|avif)$/i.test(c.img || '')
+  const detCards = det.cards.filter((c) => ok(c.h) && (!forWp || realImg(c) || c.text)).map((c) => ({ ...card(c), hasImg: realImg(c) }))
+  const detTable = table(det.table)
+  v.detail = sec({ ...det, intro: strs(det.intro), cards: detCards, table: detTable, links: links(det.links) }, detCards.length > 0 || (forWp && !!detTable?.rows?.length))
 
   /* ราคาจริงจาก src/data/prices.json (ตารางราคาที่ทีมดีอนุมัติ) มาแทนกล่อง/ตาราง/หมายเหตุที่ยังรอราคา */
   const pri = real.price ? { ...pp.price, ...real.price } : pp.price
@@ -56,8 +65,12 @@ export function productView(pp, real, { forWp, has }) {
   v.production = sec({ ...pro, cards: proCards, notes: strs(pro.notes) }, proCards.length > 0)
 
   const works = real.works || []
-  const workCards = forWp ? [] : (works.length ? [] : pp.work.cards)
-  v.work = sec({ ...pp.work, real: works, cards: workCards, links: links(pp.work.links) }, works.length > 0 || !forWp)
+  /* photos = รูปลูกค้าจริงที่ใส่เสื้อแบบนี้ แต่ยืนยันเทคนิคไม่ได้ (โปโลปัก) · หัวข้อ photoH แทนหัวข้อ v22 ที่เคลมเทคนิค */
+  const photos = works.length ? [] : real.photos || []
+  const workCards = forWp || works.length || photos.length ? [] : pp.work.cards
+  const jobs = real.jobs || []
+  /* มีภาพงานจริง (3D) = H2 ตาม v22 + รูปลูกค้าเป็นหัวข้อย่อย photoH · มีแต่รูปลูกค้า = ใช้ photoH แทนหัวข้อ */
+  v.work = sec({ ...pp.work, h: !jobs.length && photos.length && pp.work.photoH ? pp.work.photoH : pp.work.h, real: works, photos, jobs, photoH: jobs.length ? pp.work.photoH : null, cards: workCards, links: links(pp.work.links) }, works.length > 0 || photos.length > 0 || !forWp)
 
   v.reviews = sec({ ...pp.reviews }, !forWp)
   v.reviews.pending = true

@@ -17,8 +17,8 @@ test('เว็บจริง (หลังยืนยัน 22 ต.ค.): จ
   assert.equal(v.benefits.items.length, 8)
   assert.deepEqual(v.stats.items.map((x) => x.n), ['8 ปี', '2,800+ องค์กร', '10,000+ งาน'])
   assert.equal(v.show.stats, true)
-  /* 23 ต.ค. พี่ทัชตอบ: วางบิลได้ · ไม่รับบัตรเครดิต (การ์ดบัตรเครดิตถูกลบ) */
-  assert.deepEqual(v.payment.items.map((x) => x.h), ['รองรับการวางบิล', 'ออกใบเสร็จ / ใบกำกับภาษีได้'])
+  /* 29 ต.ค. เจ้าของยืนยันรับบัตรเครดิตและวางบิลตามหน้าอ้างอิง */
+  assert.deepEqual(v.payment.items.map((x) => x.h), ['รับบัตรเครดิต', 'รองรับการวางบิล', 'ออกใบเสร็จ / ใบกำกับภาษีได้'])
   assert.equal(v.show.care, true)
   assert.equal(v.show.benefits, true)
 })

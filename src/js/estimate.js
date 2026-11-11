@@ -31,8 +31,8 @@ export const estimate = (K, { kind, fabric, qty, options = [] }) => {
   const opts = k.options ? all : []
   const add = opts.reduce((s, o) => s + o.add, 0)
   const q = Number(qty)
-  const belowMin = !Number.isInteger(q) || q < K.minQty
-  const base = { kind: k, fabric: fab, qty: belowMin ? null : q, opts, add, vatIncluded: !!K.vatIncluded, minQty: K.minQty }
+  const belowMin = !Number.isInteger(q) || q < (k.minQty || K.minQty)
+  const base = { kind: k, fabric: fab, qty: belowMin ? null : q, opts, add, vatIncluded: !!K.vatIncluded, minQty: k.minQty || K.minQty }
   const none = { ok: false, band: null, base: null, unit: null, total: null, next: null }
   if (belowMin) return { ...base, ...none, belowMin: true }
   if (k.byDesign) return { ...base, ...none, byDesign: true }
@@ -52,6 +52,17 @@ export const estimate = (K, { kind, fabric, qty, options = [] }) => {
   return { ...base, ok: true, band, base: price, unit, total, next }
 }
 
+/** แถบช่วงราคาใต้ช่องจำนวน (รื้อหน้า 26 ต.ค.) · ทุกช่วงของแบบ+ผ้าที่เลือก ราคารวมออปชันแล้ว · on = ช่วงที่จำนวนตอนนี้อยู่ · แตะแล้วเปลี่ยนจำนวนเป็นต้นช่วง (calc-page.js) */
+export const tiers = (r) => {
+  const k = r.kind
+  if (!k.bands) return []
+  const col = r.fabric ? r.fabric.id : k.col
+  return k.bands.map((b) => {
+    const p = priceOf(b, col)
+    return { qty: b.qty, min: b.min, unit: p === null ? null : p + r.add, on: r.band === b }
+  })
+}
+
 const MAX_QTY = 99999
 
 /** ค่าจาก URL (?kind=&qty=&fabric=&opt=a,b) · ค่าไหนไม่มีจริงเป็น null/[] · ?band=21-50 (ลิงก์เดิม) ใช้ต้นช่วง */
@@ -61,7 +72,7 @@ export const readCalcQuery = (K, search) => {
   const num = (v) => (/^\d{1,5}$/.test(v || '') ? Number(v) : null)
   let qty = num(s.get('qty'))
   if (qty === null) qty = num((/^(\d+)(?:-\d+|\+)$/.exec(s.get('band') || '') || [])[1])
-  if (qty !== null && (qty < K.minQty || qty > MAX_QTY)) qty = null
+  if (qty !== null && (qty < (k?.minQty || K.minQty) || qty > MAX_QTY)) qty = null
   /* ผ้าที่รวมชิปกัน รับรหัสผ้าตัวไหนในกลุ่มก็ได้ */
   const f = s.get('fabric')
   const fabric = (f && k?.fabrics?.find((x) => x.cols.includes(f))?.id) || null
@@ -89,11 +100,18 @@ export const lineText = (r) => {
     r.qty && `จำนวน: ${fmt(r.qty)} ตัว`,
     r.opts.length && `ออปชัน: ${r.opts.map((o) => `${o.name} +${fmt(o.add)}`).join(' · ')}`,
   ]
-  if (r.byDesign) rows.push('จะส่งโลโก้ + จำนวนสี ในแชทนี้ ให้ทีมดีประเมินราคา')
+  /* 30 ต.ค. สกรีนเป็น DFT ไม่คิดตามจำนวนสี · ขอแค่โลโก้กับขนาดลาย */
+  if (r.byDesign) rows.push('จะส่งโลโก้และขนาดลายในแชทนี้ ให้ทีมดีประเมินราคา')
   else if (r.ok) rows.push(`ราคาต่อตัว: ${fmt(r.unit)} บาท`, `ยอดรวม: ${fmt(r.total)} บาท${r.vatIncluded ? ' (รวม VAT 7%)' : ''}`)
   else if (r.band) rows.push('ราคาต่อตัว: ขอให้ทีมดีประเมิน')
   return rows.filter(Boolean).join('\n')
 }
+
+/** ส่งให้หัวหน้าดู (ตรวจมือถือ 30 ต.ค.) · ตัวเลขชุดเดียวกับข้อความ LINE แต่ขึ้นหัวเป็นใบประเมิน + ลิงก์ที่เปิดแล้วเห็นค่าเดิม */
+export const shareText = (r, url) => ['ใบประเมินราคาเบื้องต้น จาก TEAMDEE', ...lineText(r).split('\n').slice(1), `ดูใบประเมิน: ${url}`].join('\n')
+
+/** หน้าเลือกเพื่อน/กลุ่มใน LINE (ใช้ได้บน LINE มือถือ) */
+export const lineShareUrl = (text) => `https://line.me/R/share?text=${encodeURIComponent(text)}`
 
 /** สรุปสั้นที่ส่งไปฟอร์มขอใบเสนอราคา (?from=) · ทีมขายเห็นว่าลูกค้าคิดราคาอะไรมา */
 export const fromText = (r) => [

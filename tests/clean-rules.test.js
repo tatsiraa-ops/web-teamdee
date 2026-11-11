@@ -38,7 +38,8 @@ test('works.json: ไม่มีเรื่องเล่าที่แต�
     for (const k of NARRATIVE_KEYS) if (k in w) bad.push(`${w.id}: มีฟิลด์ ${k}`)
     if (!w.img || !existsSync(join(root, 'public', w.img))) bad.push(`${w.id}: ไม่มีไฟล์รูป ${w.img}`)
     if (!cats.has(w.cat)) bad.push(`${w.id}: หมวด ${w.cat} ไม่อยู่ในชิปหน้าแรก`)
-    if (!/ใส่เสื้อ.*ที่ทีมดีผลิต$/.test(w.alt || '')) bad.push(`${w.id}: คำบรรยายต้องบอกแค่สิ่งที่เห็น`)
+    /* รูปคนใส่เสื้อ: "…ใส่เสื้อ…ที่ทีมดีผลิต" · รูปเสื้อเปล่าบนหุ่น/วางราบ (2 พ.ย.): "เสื้อ…ที่ทีมดีผลิต" */
+    if (!/(ใส่เสื้อ.*|^เสื้อ.*|^ด้านหลังเสื้อ.*)ที่ทีมดีผลิต$/.test(w.alt || '')) bad.push(`${w.id}: คำบรรยายต้องบอกแค่สิ่งที่เห็น`)
     if (/\d/.test(w.alt || '')) bad.push(`${w.id}: คำบรรยายมีตัวเลข ${w.alt}`)
     if (w.product != null && !products.has(w.product)) bad.push(`${w.id}: สินค้า ${w.product} ไม่มี`)
     if (w.use != null && !uses.has(w.use)) bad.push(`${w.id}: กลุ่ม ${w.use} ไม่มี`)

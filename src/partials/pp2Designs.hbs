@@ -1,0 +1,22 @@
+{{!-- แบบเสื้อ 3D พิมพ์ลาย (อาร์ต 5 พ.ย. บอร์ด "แบบเสื้อ3d พิมพ์ลาย" · การ์ดภาพแบบ ref: ภาพเต็ม + ชื่อ + ป้ายส้ม + ปุ่มลูกศร · แถวตามหมวด)
+     แบบจริงจาก designs.json (vite.config pp2.designs.rows) · ทุกแถวอยู่ใน #pp2Designs ชุดเดียว → lightbox เดิม (ดูใหญ่ + ส่งรหัสทาง LINE) เลื่อนข้ามแถวได้
+     6 พ.ย. อาร์ต "ไม่เอารหัส ขยายให้รูปใหญ่อีก": การ์ดไม่โชว์รหัส (รหัสอยู่ที่ data-code ให้ lightbox) · ตัดขอบล่างของภาพที่มีป้ายรหัสฝังในรูป · การ์ดใหญ่ขึ้น 2.5 ใบต่อจอ · รางเลื่อนแนวนอน + ปุ่มลูกศร/ตัวนับ (addRailControls) · ปุ่มลูกศรบนการ์ดเป็นภาพ (ปุ่มจริงคือ .lb-open ที่ lightbox ใส่ทับทั้งการ์ด)
+     6 พ.ย. "เอาแค่ด้านหน้าเสื้อ ไม่เอาคำ": การ์ดจัตุรัส ภาพตัวหน้า (/img/design-front/ จาก scripts/design-fronts.py) ไม่มีชื่อ · ลูกศรลอยมุมขวาล่าง · data-full = ภาพเต็มหน้า+หลังให้ lightbox · ภาพเดี่ยว loose-* ใช้ไฟล์เดิม --}}
+<section class="pp2-dz" aria-labelledby="pp2-dz-h">
+  <div class="wrap">
+    <header class="pp2-dz__head">
+      <h2 id="pp2-dz-h">{{{hl pp2.designs.h pp2.designs.accent}}}</h2>
+      <p>{{{ph pp2.designs.sub}}}</p>
+    </header>
+    <div id="pp2Designs" data-line-url="{{site.lineUrl}}">
+      {{#each pp2.designs.rows}}
+      <div class="pp2-dz__row">
+        <div class="pp2-dz__rhead"><h3 class="pp2-dz__rh">{{this.t}}</h3><a class="pp2-dz__all" href="{{{this.all}}}" aria-label="ดู{{this.t}}ทั้งหมด {{this.total}} แบบ">ดูทั้งหมด {{this.total}} แบบ <span aria-hidden="true">→</span></a></div>
+        <div class="pp2-dz__rail">
+          {{#each this.items}}<figure class="pp2-dz__card" data-code="{{this.code}}" data-meta="{{this.meta}}" data-full="{{this.img}}"><div class="pp2-dz__ph{{#unless this.front}} pp2-dz__ph--one{{/unless}}">{{#if this.front}}<img src="{{this.front}}" width="720" height="720" sizes="(min-width:1024px) 330px, 72vw"{{else}}<img src="{{this.imgSmall}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 470px, 86vw" width="1080" height="720"{{/if}} loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} {{this.techName}} ด้านหน้า รหัส {{this.code}}"></div><span class="pp2-dz__go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></figure>{{/each}}
+        </div>
+      </div><!-- /row -->
+      {{/each}}
+    </div>
+  </div>
+</section>

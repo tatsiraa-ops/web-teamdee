@@ -1,0 +1,10 @@
+{{!-- ส่วน Reviews ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 09 · รีวิว · ยังไม่มีรีวิวที่ได้รับอนุญาต ต้นแบบเท่านั้น -->
+{{!-- รีวิวจริงจากแชทลูกค้า (27 ต.ค.) · แชทไม่ได้บอกว่าลูกค้าสั่งสินค้าอะไร → หัวข้อ "รีวิวจากลูกค้าทีมดี" ไม่ใช่ "รีวิวจากลูกค้าเสื้อ…" ของ v22 (ไม่จริง)
+     ได้รีวิวที่ยืนยันสินค้าแล้วค่อยกลับไปใช้หัวข้อ v22 (tests/v22-structure.test.js EXCEPT) --}}
+{{#if pageReviews.length}}
+<section class="bg-shell border-y border-line" id="reviews" aria-labelledby="reviews-h"><div class="wrap section">
+  <div class="rvc-head"><div><h2 id="reviews-h" class="t-display text-[clamp(26px,3.4vw,40px)]">รีวิวจากลูกค้าทีมดี</h2><p class="t-sm mt-2">{{{ph "คำพูดจริงจากแชทลูกค้าทีมดี"}}}</p></div><a class="pp-more" href="{{url 'projects'}}#reviews">ดูรีวิวเพิ่มเติม<span class="arw" aria-hidden="true">&rarr;</span></a></div>
+  {{> reviewCards list=pageReviews}}
+</div></section>
+{{/if}}

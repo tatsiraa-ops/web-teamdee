@@ -1,0 +1,21 @@
+{{!-- กล่อง CTA แบบแชท LINE (อาร์ตเลือกแบบแชท 26 ต.ค. "ชอบแบบแชท ทำดี สวยอะ") · CSS home.css "CTA แบบแชท"
+     ซ้าย: หัวข้อ + ปุ่ม · ขวา: หน้าแชทตัวอย่าง = ข้อความที่ปุ่ม LINE พิมพ์รอไว้ (vite ctaLine จาก c.msg) + สิ่งที่แนบตามบริบท (c.attach: รูปที่ชอบ / รูปแบบเสื้อ / ไฟล์โลโก้)
+     แชทตัวอย่างซ่อนจากโปรแกรมอ่านจอ · รายการ "ต้องบอก" 3 ข้ออ่านได้แทน (ซ่อนด้วยตา) --}}
+<section class="wrap hm-sec hm-sec--tight" aria-labelledby="{{id}}-h">
+  <div class="cx cx--{{tone}}" data-rv>
+    <div class="cx__main"><h2 id="{{id}}-h">{{{ph c.title}}}</h2><p>{{{ph c.lead}}}</p></div>
+    <div class="cx__send"><p>{{c.send.label}}</p><ol>{{#each c.send.items}}<li>{{this}}</li>{{/each}}</ol></div>
+    <div class="cx__chat" aria-hidden="true">
+      <p class="cx__chat-h"><span class="cx__chat-ico">{{> icoLine}}</span><b>TEAMDEE</b><span>@teamdee</span></p>
+      <div class="cx__thread">
+        <p class="cx__bub">{{#each c.msg}}<span class="cx__ln">{{{ph this.t}}}{{#if this.q}}: <i class="cx__q"></i>{{#if this.unit}} {{this.unit}}{{/if}}{{/if}}</span>{{/each}}</p>
+        {{#if c.attach}}<div class="cx__att">{{#each c.attach}}{{#if this.file}}<span class="cx__file"><span class="cx__file-ico">{{> icoDoc}}</span><span><b>{{this.file}}</b><small>{{this.kind}}</small></span></span>{{else}}<img src="{{this.img}}" alt="" width="320" height="320" loading="lazy" decoding="async">{{/if}}{{/each}}</div>{{/if}}
+      </div>
+      <p class="cx__chat-n">{{{ph c.note}}}</p>
+    </div>
+    <div class="cx__btns">
+      <a class="cb cb--p" href="{{href}}" data-track="line" data-where="{{where}}"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{cta}}</span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="cb cb--s" href="{{href2}}{{q2}}">{{cta2}}</a>
+    </div>
+  </div>
+</section>

@@ -45,7 +45,7 @@ test('เซิร์ฟเวอร์ตอบผิดพลาดหรื�
 import { b2bPrefill } from '../src/js/contact-send.js'
 
 test('มาจากหน้าบริษัท/หน่วยงาน/ร้านค้า/โรงเรียน/คณะ: ติ๊กใบเสนอราคาให้ และชวนใส่อีเมล · กลุ่มอื่นไม่แตะ', () => {
-  for (const u of ['corp', 'gov', 'shop', 'edu', 'faculty']) {
+  for (const u of ['corp', 'gov', 'shop', 'edu', 'faculty', 'class']) {
     const b = b2bPrefill(u)
     assert.deepEqual(b.docs, ['ใบเสนอราคา'], u)
     assert.match(b.emailHelp, /อีเมล/)
@@ -106,4 +106,93 @@ test('ธงหน้าขอบคุณ: เก็บเบอร์ที่
   assert.equal(readThanksFlag(JSON.stringify({ tel: 1, t: now }), now), null)
   const again = readThanksFlag(JSON.stringify({ ...d, counted: true }), now)
   assert.equal(again.counted, true)
+})
+
+/* ---------- audit 26 ต.ค. M1/M2: ฟอร์มรู้ว่ามาจากปุ่มไหน · ไม่ทิ้งข้อมูลจัดซื้อ ---------- */
+import { prefillFor, emailLooksOk, qtyFromQuery } from '../src/js/contact-send.js'
+
+test('เบอร์องค์กรที่มีเบอร์ต่อ วงเล็บ หรือ # ยังผ่าน', () => {
+  for (const v of ['02-123-4567 ต่อ 12', '02-123-4567 #12', '(02) 123-4567', '02 123 4567 ext 5', '02-123-4567 ext.5', '021234567 x12']) assert.equal(telOk(v), true, v)
+  for (const v of ['ต่อ 12', '12 ต่อ 3', '(02)']) assert.equal(telOk(v), false, v)
+})
+
+test('ปุ่มที่ส่งมาบอกบริบท: ขอเอกสารบริษัท · ขอใบเสนอราคา · หน้าคำนวณ · โปโลปัก · สั่งซ้ำ · กลุ่มองค์กร', () => {
+  assert.deepEqual(prefillFor({ from: 'company-docs' }).docs, ['ใบเสนอราคา', 'หนังสือรับรองบริษัท', 'ภ.พ.20'])
+  assert.equal(prefillFor({ from: 'company-docs' }).openOrg, true)
+  assert.deepEqual(prefillFor({ from: 'quote' }).docs, ['ใบเสนอราคา'])
+  assert.deepEqual(prefillFor({ from: '/calculations/ · โปโล 30 ตัว' }).docs, ['ใบเสนอราคา'])
+  assert.equal(prefillFor({ product: 'polo' }).openOrg, true)
+  assert.equal(prefillFor({ use: 'class' }).openOrg, true)
+  assert.equal(prefillFor({ from: 'reorder' }).reorder, true)
+  assert.equal(prefillFor({ from: 'reorder' }).openOrg, false)
+  assert.equal(prefillFor({ use: 'sport' }), null)
+  assert.equal(prefillFor({}), null)
+})
+
+test('อีเมลผิดรูปแบบเตือนได้ (ไม่บล็อก) · ว่างไม่เตือน', () => {
+  for (const v of ['hr@company.co.th', 'a.b@x.com', '']) assert.equal(emailLooksOk(v), true, v)
+  for (const v of ['hr@company', 'hr@company,co.th', 'hr company.com', 'hr@@x.com']) assert.equal(emailLooksOk(v), false, v)
+})
+
+test('จำนวนจากหน้าคำนวณ (?qty=) รับแค่จำนวนเต็มบวก', () => {
+  assert.equal(qtyFromQuery('?qty=150'), '150')
+  for (const s of ['?qty=0', '?qty=-3', '?qty=abc', '?qty=1.5', '', '?qty=999999']) assert.equal(qtyFromQuery(s), '', s)
+})
+
+test('telOk: เลขไทย (๐๘๑…) ก็รับ (ลองใช้จริง 30 ต.ค. · คีย์บอร์ดไทยบางแบบพิมพ์เลขไทย)', () => {
+  for (const v of ['๐๘๑๒๓๔๕๖๗๘', '๐๘๑-๒๓๔-๕๖๗๘', '๐๒ ๑๒๓ ๔๕๖๗']) assert.equal(telOk(v), true, v)
+  assert.equal(telOk('๑๒๓๔๕'), false)
+})
+
+test('toAsciiDigits: แปลงเลขไทยก่อนส่ง (ตรวจละเอียด 30 ต.ค.: เว็บรับเลขไทยแต่ server ตัดทิ้ง → ลูกค้าเจอ "เบอร์ไม่ครบ")', async () => {
+  const { toAsciiDigits } = await import('../src/js/contact-send.js')
+  assert.equal(toAsciiDigits('๐๘๑-๒๓๔-๕๖๗๘'), '081-234-5678')
+  assert.equal(toAsciiDigits('สั่ง ๕๐ ตัว'), 'สั่ง 50 ตัว')
+  assert.equal(toAsciiDigits(''), '')
+  assert.equal(thanksFlag({ tel: '๐๘๑๒๓๔๕๖๗๘' }, 1).includes('0812345678'), true)
+})
+
+test('telOk: รูปแบบที่คนพิมพ์จริงและ server รับได้ (+66 (0) · จุด · สองเบอร์คั่น / หรือ ,)', () => {
+  for (const v of ['+66 (0) 81 234 5678', '081.234.5678', '081 234 5678 / 089 123 4567', '0812345678, 0891234567']) assert.equal(telOk(v), true, v)
+})
+
+test('sendContact: เน็ตค้างเกินเวลา = network (เดิมปุ่มค้าง "กำลังส่ง" ตลอด · 30 ต.ค.)', async () => {
+  const { sendContact } = await import('../src/js/contact-send.js')
+  const hang = (url, opt) => new Promise((_, reject) => opt.signal.addEventListener('abort', () => reject(new Error('abort'))))
+  const r = await sendContact({ name: 'a', tel: '0812345678' }, { enabled: true, endpoint: '/x' }, hang, 30)
+  assert.deepEqual(r, { ok: false, reason: 'network' })
+})
+
+test('cleanFrom: ?from= รับเฉพาะ path ของเว็บหรือคำที่ใช้จริง ยาวไม่เกิน 100 (ไม่ให้ข้อความแปลกเข้าอีเมลทีม · 30 ต.ค.)', async () => {
+  const { cleanFrom } = await import('../src/js/contact-send.js')
+  assert.equal(cleanFrom('/designs/'), '/designs/')
+  assert.equal(cleanFrom('quote'), 'quote')
+  assert.equal(cleanFrom('collar-options'), 'collar-options')
+  assert.equal(cleanFrom('โปรด่วน! โทรหาฉัน'), '')
+  assert.equal(cleanFrom('//evil.example'), '')
+  assert.equal(cleanFrom('/' + 'a'.repeat(200)), '')
+})
+
+test('todayLocal: วันนี้ตามเวลาเครื่อง ไม่ใช่ UTC (ตี 0–7 เวลาไทยเคยเลือกเมื่อวานได้ · 30 ต.ค.)', async () => {
+  const { todayLocal } = await import('../src/js/lib.js')
+  assert.equal(todayLocal(new Date(2026, 9, 30, 2, 0)), '2026-10-30')
+  assert.equal(todayLocal(new Date(2026, 0, 5, 23, 59)), '2026-01-05')
+})
+
+test('failText: ส่งข้ามเว็บ (origin) บอกให้รีเฟรชหน้าแล้วลองใหม่ ไม่ใช่ "ระบบขัดข้อง" ลอยๆ (30 ต.ค.)', () => {
+  assert.match(failText({ ok: false, reason: 'error', code: 'origin' }), /รีเฟรช/)
+})
+
+/* ตรวจมือถือ 30 ต.ค. ข้อ 12: มาจากหน้าแบบ/แกลเลอรี (?from=/sports-shirt/) รหัสไปอยู่ในรายละเอียด แต่ช่องสินค้า/งานไม่ถูกเลือก */
+import { contextFromPath } from '../src/js/contact-send.js'
+test('เดาสินค้าและงานจากหน้าที่มา · หน้าที่ไม่รู้จัก = ว่าง', async () => {
+  const routes = JSON.parse((await import('node:fs')).readFileSync(new URL('../src/data/routes.json', import.meta.url), 'utf8'))
+  assert.deepEqual(contextFromPath('/sports-shirt/', routes), { product: 'print', use: 'sport' })
+  assert.deepEqual(contextFromPath('/corporate-shirts/', routes), { product: 'print', use: 'corp' })
+  assert.deepEqual(contextFromPath('/embroidery/', routes), { product: 'polo', use: '' })
+  assert.deepEqual(contextFromPath('/education/', routes), { product: '', use: 'edu' })
+  assert.deepEqual(contextFromPath('/designs/', routes), { product: 'print', use: '' })
+  assert.deepEqual(contextFromPath('/design-preview/td-0012/', routes), { product: 'print', use: '' })
+  assert.deepEqual(contextFromPath('/size-chart/', routes), { product: '', use: '' })
+  assert.deepEqual(contextFromPath('', routes), { product: '', use: '' })
 })

@@ -2,15 +2,23 @@
 <html lang="th">
 <head>
   {{> head}}
+  {{!-- CSS เฉพาะหน้าโหลดใน head (27 ต.ค.) · เดิม import ผ่าน JS → ตอนเปิดหน้ารูป/ไอคอนกางใหญ่แวบก่อน CSS มา --}}
+  <link rel="stylesheet" href="/src/styles/article-reader.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-blocks.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-material-lab.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-process-studio.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/roster.css" data-page-css>
   <title>ตารางไซซ์และวิธีวัดเสื้อก่อนสั่งทำ | TEAMDEE</title>
   <meta name="description" content="ตารางไซซ์ (ตารางไซส์) และวิธีวัดเสื้อ · เลือกสินค้าและทรงก่อนดูตาราง แล้วเทียบกับเสื้อที่ใส่สบาย">
 </head>
 <body>
 {{> siteHeader active="learn"}}
 <main id="main">
-{{> guidePage}}
+{{> guidePage roster=true}}
 </main>
 {{> footer}}
 <script type="module" src="/src/js/guide-page.js"></script>
+<script type="module" src="/src/js/roster-ui.js"></script>
 </body>
 </html>

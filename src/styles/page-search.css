@@ -1,0 +1,32 @@
+/* หน้าค้นหา /search/ (ตรวจมือถือ 30 ต.ค. ข้อ 6–7) · โหลดจาก search-page.js เท่านั้น
+   กล่องหน้าไม่พบใช้ .fq-empty ชุดเดียวกับ /faq/ (main.css) · ปุ่มใช้ .cb */
+
+/* ลูกค้าเดิม: สั่งซ้ำ / ติดตามงาน */
+.sr-acts { margin-top: 28px; padding: 24px; border: 1px solid var(--color-line); border-radius: 20px; background: var(--color-cream); }
+.sr-acts[hidden] { display: none; }
+.sr-acts__h { font-size: 20px; font-weight: 800; line-height: 1.4; }
+.sr-acts__p { margin-top: 4px; font-size: 15px; line-height: 1.7; color: var(--color-ink-2); }
+.sr-acts__btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+/* ปุ่มรอง (เส้นขอบ) ไม่ใส่ไอคอน LINE สีขาว (มองไม่เห็นบนพื้นอ่อน) */
+.sr-acts .cb--s .cb__ico { display: none; }
+
+/* คำตอบ FAQ: คำถาม + คำตอบย่อ 2 บรรทัด */
+.sr-faq { display: block; padding-block: 16px; min-height: 44px; color: inherit; text-decoration: none; }
+.sr-faq__q { display: block; font-size: 19px; font-weight: 700; line-height: 1.45; }
+.sr-faq:hover .sr-faq__q { text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.sr-faq__a { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin-top: 4px; font-size: 15px; line-height: 1.7; color: var(--color-ink-2); }
+.sr-faq__go { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 700; }
+.sr-faq:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 3px; }
+
+/* หน้าไม่พบ */
+.sr-empty[hidden] { display: none; }
+.sr-empty .fq-empty__bub { white-space: pre-line; }
+.sr-empty__ico { flex: none; display: grid; place-items: center; width: 22px; height: 22px; }
+.sr-more { display: flex; flex-wrap: wrap; align-items: center; gap: 0 18px; margin-top: 14px; font-size: 15px; color: var(--color-ink-2); }
+.sr-more a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.sr-more a:hover { text-decoration-color: var(--color-ink); }
+
+@media (max-width: 639px) {
+  .sr-acts { padding: 20px; }
+  .sr-acts__btns .cb, .sr-empty .fq-empty__btns .cb { width: 100%; }
+}

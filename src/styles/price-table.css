@@ -1,0 +1,43 @@
+/* ตารางราคาหลายผ้าบนมือถือ (mobile UX audit 30 ต.ค. ข้อ 10) · โหลดจาก src/js/price-compare.js · เทส tests/price-compare.test.js
+   .pcmp = ตัวเลือกช่วงจำนวน + ตาราง ผ้า | บาท/ตัว ที่ JS สร้าง · .is-pcmp = JS ทำงานแล้ว
+   จอ <768: โชว์ .pcmp ซ่อนตารางเต็ม · จอ ≥768 หรือไม่มี JS: ตารางเต็มเหมือนเดิม (.ptable ใน main.css ไม่แก้) */
+
+.pcmp { display: none; }
+
+@media (max-width: 767.98px) {
+  .is-pcmp > .pcmp { display: block; }
+  .is-pcmp > .ptable, .is-pcmp > .pcmp-hint { display: none; }
+}
+
+.pcmp__pick { margin: 0; padding: 0; border: 0; min-width: 0; }
+.pcmp__legend { padding: 0; margin-bottom: 10px; font-size: 16px; font-weight: 700; color: var(--color-ink); }
+/* 2 ปุ่มต่อแถวที่ 320–479 (วัดจริง: "1,001–2,000" กว้าง 90px · 3 ปุ่มในกล่อง 299px ล้น) · จอกว้างขึ้นได้ 3–4 ปุ่ม */
+.pcmp__opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; }
+/* ปุ่มสูง 48px (เป้าแตะ ≥44px) · เลือกแล้วพื้นดำ ตัวขาว เหมือน .choice ของทั้งเว็บ (ส้มกับขาวคอนทราสต์ไม่ถึง) */
+.pcmp__opt { position: relative; display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 6px;
+  border: 2px solid var(--color-line-2); border-radius: var(--radius-card); background: var(--color-paper);
+  font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--color-ink); cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease; }
+/* radio จริงคลุมทั้งปุ่ม (โปร่งใส) · แตะตรงไหนก็เลือก · ลูกศรเลื่อนในกลุ่มได้ตามปกติของ radio */
+.pcmp__opt input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.pcmp__opt:has(input:checked) { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-paper); }
+.pcmp__opt:has(input:focus-visible) { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+@media (hover: hover) { .pcmp__opt:hover { border-color: var(--color-ink); } }
+@media (prefers-reduced-motion: reduce) { .pcmp__opt { transition: none; } }
+
+.pcmp__box { margin-top: 14px; }
+/* caption บอกช่วงที่ราคาใช้ได้ + VAT (audit 2.2) · เข้มกว่าเทาเดิมเพราะเป็นตัวบอกว่ากำลังดูช่วงไหน */
+.pcmp__box caption { color: var(--color-ink-2); font-weight: 600; }
+.pcmp__box tbody th { white-space: normal; }
+.pcmp__nb { display: inline-block; }
+/* ตาราง 2 คอลัมน์ไม่ต้องปัดข้าง → เลิกตรึงคอลัมน์แรกของ .ptable (sticky ทำเส้นใต้หัว "ผ้า" หาย) */
+.ptable.pcmp__box :is(thead th:first-child, tbody th) { position: static; }
+
+/* ประกาศช่วงที่เลือกให้โปรแกรมอ่านจอ (ซ่อนจากตา) */
+.pcmp__live { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* 768–1199: ตารางเต็ม 7 คอลัมน์กว้าง 681px ในกล่อง 628px (768) / 585px (1024 มีรูปข้าง) → ลด padding ข้างเหลือ 12px (~570px) พอดี ไม่ต้องปัด
+   ≥1200 กล่อง 737px พอดีอยู่แล้ว (วัดจริง 30 ต.ค.) */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  [data-price-compare] > .ptable :is(thead th, tbody th, td) { padding-inline: 12px; }
+}

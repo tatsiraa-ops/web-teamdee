@@ -1,27 +1,41 @@
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"{{item.title}}","description":"{{item.excerpt}}","image":"{{site.baseUrl}}{{item.img}}","dateModified":"2026-10-01","publisher":{"@type":"Organization","name":"TEAMDEE","legalName":"บริษัท ดีดี ฟินิกซ์ จำกัด"},"mainEntityOfPage":"{{site.baseUrl}}{{url 'articles' item.id}}"}</script>
+{{#unless articleDraft}}<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"{{item.title}}","description":"{{item.excerpt}}","image":"{{site.baseUrl}}{{item.img}}","publisher":{"@type":"Organization","name":"TEAMDEE","legalName":"บริษัท ดีดี ฟินิกซ์ จำกัด"},"mainEntityOfPage":"{{site.baseUrl}}{{articleHref}}"}</script>{{/unless}}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"บทความและไอเดีย","item":"{{site.baseUrl}}{{url 'blog'}}"},{"@type":"ListItem","position":3,"name":"{{item.title}}"}]}</script>
 
-<!-- 1 · หัวเรื่อง + ผู้เขียน + วันที่อัปเดต -->
-<section class="wrap pt-10 md:pt-14">
-  <div class="max-w-[68ch]">
-    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'blog'}}">บทความและไอเดีย</a><span aria-hidden="true">/</span><span aria-current="page">{{item.title}}</span></nav>
-    <h1 class="t-display text-[clamp(30px,4.4vw,52px)] mt-6">{{item.title}}</h1>
-    {{#unless wp}}<p class="t-xs mt-5">{{item.catName}} · โดย [รอชื่อผู้เขียน] · ตรวจข้อมูลโดย [รอชื่อผู้ตรวจ] · อัปเดต {{item.updated}}</p>{{/unless}}
+<div class="td-reader">
+<header class="wrap td-reader__header">
+  <div>
+    <nav class="td-reader__crumb" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'blog'}}">บทความและไอเดีย</a><span aria-hidden="true">/</span><span aria-current="page">{{item.title}}</span></nav>
+    {{#unless wp}}{{#if articleDraft}}<p class="pending-ribbon">ร่างบทความสำหรับตรวจเนื้อหา · ยังไม่เปิดให้เครื่องมือค้นหาเก็บข้อมูล</p>{{/if}}{{/unless}}
+    <h1 class="td-reader__title">{{item.title}}</h1>
+    <p class="td-reader__meta"><span>{{item.catName}}</span>{{#unless articleDraft}}{{#if item.updated}}<span>อัปเดต {{item.updated}}</span>{{/if}}{{/unless}}</p>
   </div>
-</section>
+</header>
 
-<section class="wrap section pt-8">
-  <div class="grid lg:grid-cols-[minmax(0,1fr)_260px] gap-10 lg:gap-16 items-start">
+<section class="wrap td-reader__reading">
+  <div class="td-reader__layout">
+    <aside class="td-reader__toc">
+      <details open>
+        <summary>ในบทความนี้</summary>
+        <nav aria-label="สารบัญบทความ" data-reader-toc>
+          <ol>{{#each item.sections}}<li><a href="#{{this.id}}">{{this.t}}</a></li>{{/each}}</ol>
+        </nav>
+      </details>
+      <a class="td-reader__back" href="{{url 'blog'}}">กลับไปเลือกบทความ</a>
+    </aside>
 
     <!-- 2 · เนื้อหา · คำตอบหลักอยู่ตั้งแต่ต้น -->
-    <article class="max-w-[68ch]">
-      <p class="text-[20px] leading-[1.8] font-semibold">{{item.lead}}</p>
+    <article class="td-reader__body" data-reader-content>
+      <p class="td-reader__lead">{{item.lead}}</p>
 
-      <figure class="mt-9">
-        <div class="overflow-hidden rounded-plate bg-shell aspect-[16/9]">
-          <img src="{{item.img}}" alt="{{item.title}}" width="1200" height="675" fetchpriority="high" decoding="async" class="w-full h-full object-cover">
+      <figure class="td-reader__cover">
+        <div>
+          {{!-- กรอบ 16:9 ล็อกใน article-reader.css (30 ต.ค. H20 CLS) · data-sizes = ขนาดจริงให้ตัวเติม srcset ตอน build (ถ้ามีไฟล์ย่อ) --}}
+          <img src="{{item.img}}" alt="{{item.title}}" width="1200" height="675" data-sizes="(min-width:820px) 760px, calc(100vw - 40px)" fetchpriority="high" decoding="async" class="w-full h-full object-cover">
         </div>
       </figure>
+
+      {{!-- คลิปประกอบบทความ (videos.json places articles.<id> · แนวทาง ค 26 ต.ค.) --}}
+      {{#if vids.length}}<ul class="vgrid mt-9" aria-label="คลิปประกอบ">{{#each vids}}<li>{{> videoSlot v=this wp=@root.wp}}{{#if this.caseHref}}<a class="pp-more" href="{{this.caseHref}}">อ่านเรื่องของ{{this.customer}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}</li>{{/each}}</ul>{{/if}}
 
       {{#each item.sections}}
       <section class="art-sec scroll-mt-28 mt-11" id="{{this.id}}">
@@ -36,9 +50,10 @@
         {{/if}}
         {{#if this.table}}
         <div class="overflow-x-auto border-2 border-ink rounded-card mt-6" tabindex="0" role="region" aria-label="ตารางเปรียบเทียบ เลื่อนซ้ายขวาได้">
-          <table class="w-full min-w-[520px] text-[17px]">
+          {{!-- มือถือเรียงเป็นการ์ดทีละแถว · ตารางเทียบ 2 อย่างต้องเห็นทั้งสองฝั่ง (audit 26 ต.ค.) --}}
+          <table class="rtable w-full sm:min-w-[520px] text-[17px]">
             <thead class="bg-ink text-paper"><tr>{{#each this.table.head}}<th scope="col" class="text-left font-bold px-5 py-4">{{this}}</th>{{/each}}</tr></thead>
-            <tbody>{{#each this.table.rows}}<tr class="border-t border-line">{{#each this}}{{#if @first}}<th scope="row" class="text-left font-bold px-5 py-4">{{this}}</th>{{else}}<td class="px-5 py-4 text-ink-2">{{this}}</td>{{/if}}{{/each}}</tr>{{/each}}</tbody>
+            <tbody>{{#each this.table.rows}}<tr class="border-t border-line">{{#each this}}{{#if @first}}<th scope="row" class="text-left font-bold px-5 py-4">{{this}}</th>{{else}}<td class="px-5 py-4 text-ink-2" data-label="{{lookup ../../table.head @index}}">{{this}}</td>{{/if}}{{/each}}</tr>{{/each}}</tbody>
           </table>
         </div>
         {{/if}}
@@ -47,57 +62,40 @@
       {{/each}}
 
       {{#if more}}
-      <section class="mt-11" aria-labelledby="more-h">
+      <section class="mt-11" aria-labelledby="more-h" data-reader-exclude>
         <h2 id="more-h" class="t-display text-[clamp(22px,2.6vw,30px)]">{{more.h}}</h2>
         <p class="mt-4 flex flex-wrap gap-x-6">{{#each more.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}</p>
       </section>
       {{/if}}
 
-      <div class="mt-12 pt-8 border-t-2 border-ink">
+      <section class="td-reader__context" aria-label="อ่านต่อและปรึกษา" data-reader-exclude>
+        <h2>อ่านต่อตามบริบท</h2>
+        <ul>{{#each item.links}}<li><a href="{{url this.[1]}}">{{this.[0]}}</a></li>{{/each}}</ul>
+        <a class="btn btn-orange btn-sm" href="{{url 'contact'}}?from=blog">ปรึกษาทีมดี</a>
+      </section>
+      <div class="td-reader__note">
         <p class="t-sm">บทความนี้เป็นข้อมูลประกอบการตัดสินใจ เงื่อนไขที่ผูกพันจริงอยู่ในใบเสนอราคาของแต่ละงาน</p>
       </div>
     </article>
 
-    <!-- สารบัญ + ลิงก์ตามบริบท -->
-    {{!-- div ไม่ใช่ aside · aside ซ้อนใน main ผิดกฎ landmark (axe) · สารบัญข้างในเป็น nav อยู่แล้ว --}}
-    <div class="lg:sticky lg:top-28 space-y-7" id="guideToc">
-      <nav aria-labelledby="atoc-h">
-        <h2 id="atoc-h" class="text-[15px] font-bold text-ink-3 mb-3">สารบัญ</h2>
-        <ol class="toc">
-          {{#each item.sections}}<li><a href="#{{this.id}}">{{this.t}}</a></li>{{/each}}
-        </ol>
-      </nav>
-
-      <div class="bg-shell border border-line rounded-plate p-6">
-        <h2 class="text-[17px] font-bold">อ่านต่อตามบริบท</h2>
-        <ul class="mt-3 space-y-1">
-          {{#each item.links}}
-          <li><a class="inline-flex items-center min-h-[44px] text-[16px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url this.[1]}}">{{this.[0]}}<span class="arw" aria-hidden="true">&rarr;</span></a></li>
-          {{/each}}
-        </ul>
-        <a class="btn btn-orange btn-sm w-full mt-5" href="{{url 'contact'}}">ปรึกษาทีมดี</a>
-      </div>
-    </div>
   </div>
 </section>
 
 <!-- 3 · บทความเกี่ยวข้อง -->
 {{#if related.length}}
-<section class="bg-shell border-y border-line">
+<section class="td-reader__related">
   <div class="wrap section">
     <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
       <h2 class="t-display text-[clamp(24px,3vw,36px)]">{{#if relatedH}}{{relatedH}}{{else}}บทความเกี่ยวข้อง{{/if}}</h2>
       <a class="inline-flex items-center min-h-[44px] font-bold text-ink underline decoration-orange decoration-2 underline-offset-4 hover:decoration-ink" href="{{url 'blog'}}">ดูบทความทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a>
     </div>
-    <div class="grid sm:grid-cols-3 gap-x-5 gap-y-8">
+    <div class="td-reader__related-grid">
       {{#each related}}
-      <a href="{{#if this.to}}{{url this.to}}{{else}}{{url 'articles' this.id}}{{/if}}" class="group flex flex-col">
-        <div class="overflow-hidden rounded-plate bg-paper aspect-[4/3]">
-          <img src="{{this.img}}" alt="{{this.title}}" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]">
-        </div>
-        <h3 class="text-[19px] mt-3.5 transition-[text-decoration-color] decoration-2 underline-offset-4 decoration-transparent group-hover:underline group-hover:decoration-orange">{{this.title}}</h3>
-        <p class="t-sm mt-1.5 grow">{{this.excerpt}}</p>
-        <p class="t-xs mt-3 pt-3 border-t border-line">{{this.catName}}</p>
+      <a href="{{#if this.to}}{{url this.to}}{{else}}{{url 'articles' this.id}}{{/if}}" class="td-reader__card">
+        <img src="{{this.img}}" alt="{{this.title}}" width="600" height="300" loading="lazy" decoding="async" class="td-reader__card-image">
+        <h3 class="td-reader__card-title">{{this.title}}</h3>
+        <p class="td-reader__card-excerpt">{{this.excerpt}}</p>
+        <p class="td-reader__card-meta">{{this.catName}}</p>
       </a>
       {{/each}}
     </div>
@@ -105,14 +103,12 @@
 </section>
 {{/if}}
 
-{{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end · 24 ต.ค.) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
-<section class="hm-end" aria-labelledby="end-h">
-  <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
-  <div class="wrap relative hm-end__in">
-    <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
+<section class="td-reader__end" aria-labelledby="end-h">
+  <div class="wrap">
     <h2 id="end-h">{{#if cta}}{{cta.h}}{{else}}มีคำถามที่บทความยังไม่ได้ตอบ{{/if}}</h2>
-    <p class="hm-end__lead">{{#if cta}}{{cta.p}}{{else}}ถามทีมดีได้โดยตรง ไม่ต้องมีแบบ ไม่ต้องรู้ชื่อเสื้อ{{/if}}</p>
-    <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}">{{#if cta}}ฝากข้อมูลให้ติดต่อกลับ{{else}}กรอกฟอร์ม{{/if}}</a></div>
-    <p class="hm-end__alt"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>
+    <p>{{#if cta}}{{cta.p}}{{else}}ถามทีมดีได้โดยตรง ไม่ต้องมีแบบ ไม่ต้องรู้ชื่อเสื้อ{{/if}}</p>
+    <div class="td-reader__actions"><a class="btn btn-orange gap-2" href="{{@root.pageLine}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line" href="{{url 'contact'}}?from=blog">ฝากข้อมูลให้ติดต่อกลับ</a></div>
+    <p class="td-reader__meta"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span>{{{ph site.hours}}}</span></p>
   </div>
 </section>
+</div>

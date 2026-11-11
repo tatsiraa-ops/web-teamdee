@@ -143,14 +143,29 @@ export function initGalleryFilter() {
   if (!bar) return
   const items = [...document.querySelectorAll('#pickGrid [data-uses]')]
   const count = document.querySelector('[data-gallery-count]')
+  const more = document.querySelector('[data-dz-more]')
+  const moreT = more?.querySelector('[data-dz-more-t]')
+  const fan = more ? [...more.querySelectorAll('.hm-dz__fan img')] : []
   /* หน้าแรกโชว์ไม่เกิน 10 แบบ (มือถือ 6 แบบ ให้หน้าสั้นลง · อาร์ตเคาะ 23 ต.ค. ข้อ B) ที่เหลือดูต่อในหน้าแบบเสื้อ */
   const small = window.matchMedia('(max-width: 767px)')
   const apply = (b) => {
     const id = b.dataset.use
-    const limit = small.matches ? 6 : 10
+    const limit = small.matches ? 10 : Number(document.querySelector('#pickGrid')?.dataset.previewLimit) || 20 /* ไม่เกิน 5 แถว (จอใหญ่ 4 คอลัมน์ · มือถือ 2) */
     const match = items.filter((it) => !id || it.dataset.uses.split(' ').includes(id))
-    for (const it of items) it.hidden = !match.slice(0, limit).includes(it)
-    if (count) count.textContent = `${id ? b.textContent.trim() : 'ทุกกลุ่มลูกค้า'} · ${Math.min(limit, match.length)} จาก ${match.length} แบบ`
+    /* เต็มแถวเสมอ (4 คอลัมน์ · มือถือ 2) ไม่ให้เหลือใบเดี่ยว · กลุ่มที่มีแบบน้อยกว่าแถวโชว์ทั้งหมด · ที่เหลือไปดูต่อจากแถบดูทั้งหมด */
+    const cols = small.matches ? 2 : 4
+    const n = Math.min(limit, match.length)
+    const show = n >= cols ? n - (n % cols) : n
+    for (const it of items) it.hidden = !match.slice(0, show).includes(it)
+    /* 9 พ.ย. การ์ดเท่ากันทุกใบ (เลิกการ์ดใหญ่) · แถบดูทั้งหมดตามกลุ่ม: ข้อความ ลิงก์ ?use= และพัดรูป 4 ใบแรกของกลุ่ม */
+    if (more) {
+      const name = id ? (b.querySelector('span')?.textContent || b.textContent).trim() : ''
+      if (moreT) moreT.textContent = id ? more.dataset.group.replace('{name}', name) : more.dataset.title
+      const u = new URL(more.href, location.href); if (id) u.searchParams.set('use', id); else u.searchParams.delete('use'); more.href = u.pathname + u.search
+      const pics = match.slice(0, 4).map((it) => it.querySelector('img'))
+      fan.forEach((im, i) => { const p = pics[i] || pics[0]; if (p) im.src = p.getAttribute('srcset')?.split(' ')[0] || p.getAttribute('src') })
+    }
+    if (count) count.textContent = `${id ? (b.querySelector('span')?.textContent || b.textContent).trim() : 'ทุกกลุ่มลูกค้า'} · ${Math.min(limit, match.length)} จาก ${match.length} แบบ`
   }
   const current = () => bar.querySelector('[aria-pressed="true"]') || bar.querySelector('[data-use]')
   bar.addEventListener('click', (e) => {

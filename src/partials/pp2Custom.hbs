@@ -1,0 +1,41 @@
+{{!-- เสื้อพิมพ์ลาย "ออกแบบให้เป็นทีมคุณ" · รอบ 177 (10 พ.ย. 2026 อาร์ต "เอาไปรวมกับอันบน และทำทั้งหมดมาดีๆ · เสื้อ teamdee เอาไปถ่ายในสตูดิโอดีๆ สมจริงๆ")
+     การ์ดเดียว: ภาพสตูดิโอคนใส่เสื้อทีมดีหน้า+หลัง + ป้ายชี้ 6 จุด (HTML คำเดียว + บรรทัดรองสั้น เส้นส้มบาง SVG ไม่ใช้ JS)
+     ใต้ภาพในการ์ดเดียวกัน: 3 ทางเริ่มออกแบบ + ขั้นตอนสั้น + ปุ่ม LINE ปุ่มเดียว · มือถือ เลขบนภาพ + รายการใต้ภาพ
+     ไม่มีตาราง/ราคา · CSS product-page.css "การ์ดเดียว ภาพสตูดิโอ" --}}
+{{#with pp2.custom}}
+<section class="pp2-cz" id="customize" aria-labelledby="pp2-cz-h">
+  <div class="wrap">
+    <header class="dz__head">
+      <h2 id="pp2-cz-h">{{{hl h accent}}}</h2>
+      <p class="fl__lead">{{{ph lead}}}</p>
+    </header>
+    <div class="czp">
+    {{#with flat}}
+    <figure class="fl">
+      <div class="fl__pic">
+      <img src="/img/pp-cz/{{img}}-1600.webp" srcset="/img/pp-cz/{{img}}-640.webp 640w, /img/pp-cz/{{img}}-960.webp 960w, /img/pp-cz/{{img}}-1600.webp 1600w" sizes="(min-width: 1280px) 1240px, calc(100vw - 40px)" width="1600" height="893" alt="{{alt}}" loading="lazy" decoding="async">
+      <svg class="fl__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{{#each pins}}<line x1="{{this.x}}" y1="{{this.y}}" x2="{{this.lx}}" y2="{{this.ly}}" vector-effect="non-scaling-stroke"/>{{/each}}</svg>
+      {{#each pins}}<i class="fl__dot" style="--x:{{this.x}}%;--y:{{this.y}}%" aria-hidden="true">{{inc @index}}</i>{{/each}}
+      </div>
+      <ol class="fl__ps" aria-label="ส่วนที่ปรับได้">{{#each pins}}<li class="fl__p" style="--x:{{this.x}}%;--y:{{this.y}}%;--lx:{{this.lx}}%;--ly:{{this.ly}}%"><span class="fl__n" aria-hidden="true">{{inc @index}}</span><b>{{this.t}}</b><span>{{this.sub}}</span></li>{{/each}}</ol>
+    </figure>
+    {{/with}}
+    <div class="czp__foot">
+      <h3 class="czp__h">{{waysH}}</h3>
+      <ul class="czp__ways">{{#each ways}}<li class="czp__w">
+        <span class="czp__wi" aria-hidden="true"><img src="{{this.icon}}" width="240" height="240" alt="" loading="lazy" decoding="async"></span>
+        <span class="czp__wt"><b>{{this.t}}</b><span>{{{ph this.p}}}</span>{{#if this.href}}<a href="{{this.href}}" class="czp__wl">ดูแบบเสื้อ <span aria-hidden="true">→</span></a>{{/if}}</span>
+      </li>{{/each}}</ul>
+      <div class="czp__go">
+        <div class="czp__flow">
+          <ol class="czp__ss" aria-label="ขั้นตอน">{{#each flow}}<li class="czp__s">{{this}}</li>{{/each}}</ol>
+          <p class="czp__fh">{{flowH}}</p>
+        </div>
+        <a class="cb cb--p czp__cta" href="{{@root.priceAsk}}" data-track="line" data-where="pp-custom"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{flatCta}}</span></a>
+      </div>
+    </div>
+    </div><!-- /czp -->
+    <p class="cz-note">{{note}}</p>
+  </div>
+</section>
+{{/with}}

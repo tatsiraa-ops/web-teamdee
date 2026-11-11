@@ -66,7 +66,8 @@ test('ทุกหน้าใน PAGE-MAP v22 มีใน routes.json ที�
 
 test('ไม่มีหน้าที่ v22 ตัดออกแล้ว', () => {
   const allowed = new Set([...v22Pages.map((p) => p.proposed_url), ...map.live_url_rows.map((r) => new URL(r.old_url).pathname), ...EXTRA_OK])
-  const extra = Object.keys(ours).filter((u) => !allowed.has(u) && !u.startsWith('/blog/'))
+  /* หน้าเคสลูกค้าจากคลิปใต้ /project/…/ ไม่อยู่ใน v22 · อาร์ตเลือกทำ (แนวทาง ก · 26 ต.ค.) · อยู่แค่ต้นแบบจนคลิปพร้อม (seo-check isExported) */
+  const extra = Object.keys(ours).filter((u) => !allowed.has(u) && !u.startsWith('/blog/') && !/^\/project\/.+\//.test(u))
   assert.deepEqual(extra, [])
 })
 

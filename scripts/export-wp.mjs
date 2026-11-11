@@ -77,8 +77,8 @@ for (const file of walk(dist)) {
     title: decode(pick(/<title>([\s\S]*?)<\/title>/, head)),
     description: decode(pick(/<meta name="description" content="([^"]*)"/, head)),
     robots: pick(/<meta name="robots" content="([^"]*)"/, head),
-    /* ชื่อสั้นสำหรับสร้างหน้า WordPress · เอาจาก h1 ตัวแรก (ตัดแท็กออก) */
-    h1: decode((pick(/<h1[^>]*>([\s\S]*?)<\/h1>/, body) || pick(/role="heading" aria-level="1"[^>]*>([\s\S]*?)<\/p>/, body) || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()) || null,
+    /* ชื่อสั้นสำหรับสร้างหน้า WordPress · เอาจาก h1 ตัวแรก (ตัดแท็กออก · แท็กตัดบรรทัดไทย t-* ตัดแบบไม่เว้นวรรค 30 ต.ค.) */
+    h1: decode((pick(/<h1[^>]*>([\s\S]*?)<\/h1>/, body) || pick(/role="heading" aria-level="1"[^>]*>([\s\S]*?)<\/p>/, body) || '').replace(/<\/?t-[a-z]+>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()) || null,
   }
 }
 writeFileSync(join(out, 'pages.json'), JSON.stringify({ generated: new Date().toISOString(), themeUrl: THEME_URL, pages }, null, 1))

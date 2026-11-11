@@ -1,0 +1,29 @@
+{{!-- ส่วน Order ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 11 · ขั้นตอนสั่งทำ -->
+<section class="bg-shell border-y border-line" id="order">
+  <div class="wrap section">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{{ph pp.order.h}}}</h2>
+      {{#each pp.order.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+    </div>
+    {{!-- ขั้นตอน 3 ช่องตาม v22 · การชำระเงินคู่กับช่องวางแผนวันใช้เสื้อ (ย้ายจาก hero 2 พ.ย.) --}}
+    <ol class="pp-steps grid md:grid-cols-3 gap-5">
+      {{#each pp.order.steps}}<li class="pp-card"><span class="pp-card__no">0{{inc @index}}</span><h3 class="text-[20px] mt-3">{{this.h}}</h3>{{#if this.p}}<p class="t-body mt-2">{{this.p}}</p>{{/if}}</li>{{/each}}
+    </ol>
+    <div class="grid lg:grid-cols-2 gap-5 mt-8 items-start">
+      {{#if pp.order.payment.p.length}}
+      <div class="bg-paper border border-line rounded-plate p-6">
+        <h3 class="text-[19px]">{{pp.order.payment.h}}</h3>
+        <p class="hp-reply hp-pay">{{site.payLine}}</p>
+        <ul class="mt-3 space-y-2.5">{{#each pp.order.payment.p}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
+      </div>
+      {{/if}}
+      {{!-- ต้องใช้เสื้อวันที่… (ตรวจมือถือ 30 ต.ค. ข้อ 35) · need-by-ui.js คำนวณวันยืนยันแบบจาก lead-times.json แล้วต่อท้ายข้อความ LINE ปุ่ม hero + แถบล่าง --}}
+      <div class="nb nb--order" data-need-by="{{item.id}}">
+        <div class="nb__row"><label class="nb__lbl" for="nbDate">ต้องใช้เสื้อวันที่</label><input class="nb__in" id="nbDate" type="date"></div>
+        <div class="nb__out" id="nbOut" role="status" aria-live="polite"><p class="nb__hint">เลือกวัน แล้วดูว่าต้องยืนยันแบบภายในวันไหน</p></div>
+      </div>
+      {{> nbHow cls="nb-how--order"}}
+    </div>
+  </div>
+</section>

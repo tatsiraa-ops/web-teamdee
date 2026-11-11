@@ -1,49 +1,113 @@
-{{!-- หน้ากลุ่มลูกค้า 10 หน้า ตาม Wireframe v22 (22 ต.ค. 2026) · หัวข้อ H2 ของ v22 อยู่ครบ (tests/v22-structure.test.js)
-     ลำดับส่วน: หลักฐานขึ้นครึ่งบน (audit use-04 · อาร์ตเคาะ 24 ต.ค. ข้อ 5) hero → แบบเสื้อ → ใบราคาย่อ → ตัวเลข → ผลงาน + ภาพลูกค้า → ยังไม่แน่ใจ
-     → โจทย์ → บริบท → ทำไมทีมดี → วางงบ → วันที่ใช้ → FAQ → ทีม · เลขในคอมเมนต์แต่ละส่วนคือลำดับเดิมของ v22 · สารบัญเรียงตาม scripts/v22/use-pages.mjs ORDER
+{{!-- หน้ากลุ่มลูกค้า 10 หน้า ตาม Wireframe v22 (22 ต.ค. 2026) · หัวข้อ H2 และลำดับส่วนตรง v22 ทุกส่วน (tests/v22-structure.test.js)
+     ลำดับส่วน (อาร์ตเคาะ 2 พ.ย. 2026 ตาม v22 · ยกเลิก "หลักฐานขึ้นครึ่งบน" ของ audit use-04 / 24 ต.ค. ข้อ 5):
+     01 hero → 02 ตัวเลข → 03 โจทย์ → 04 บริบท (บริษัท หน่วยงาน) → 05 แบบเสื้อ → 06 ใบราคาย่อ → 07 ยังไม่แน่ใจ → 08 ผลงาน → 09 รีวิว
+     → 10 ทำไมทีมดี → 11 วางงบ → 12 ภาพลูกค้า → 13 วันที่ใช้ → 14 FAQ → 15 ทีม + กลุ่มใกล้เคียง · เลขในคอมเมนต์แต่ละส่วนคือลำดับ v22
+     เพิ่มจาก v22 สองที่: กล่อง "จากภาพแบบ สู่เสื้อที่ใส่จริง" (downloadAssets ต่อจาก 05) · ส่วนปิด "เล่าโจทย์ของทีมคุณมา" (ท้ายสุด)
+     สารบัญเรียงตามลำดับส่วนนี้ (ORDER ใน scripts/v22/use-pages.mjs)
      ข้อความ: src/data/use-pages.json (scripts/v22/use-pages.mjs) · ของจริง: แบบเสื้อรหัส TD · ผลงาน · ภาพลูกค้า
      src/js/use-view.js ตัดข้อความที่รอยืนยันออกบนเว็บจริง · ส่วนที่ยังไม่มีของจริงซ่อน · ต้นแบบโชว์พร้อมป้าย --}}
 {{#if useLd}}<script type="application/ld+json">{{{useLd}}}</script>
 {{/if}}<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"{{item.name}}"}]}</script>
 
+{{!-- โฉมใหม่ (use-v2.json · อาร์ต 3 พ.ย.) ใช้ส่วนใหม่ทีละส่วน กลุ่มอื่นใช้แบบเดิม --}}
+{{#if up.v2.hero}}{{> up2Hero}}{{else}}
 <!-- 01 · hero · จอแรกมือถือ (audit use-03 · 2.3): รูปลูกค้าจริงขึ้นก่อน H1 (จอเล็กกว่า lg) → H1 → ราคาบรรทัดเดียว → ปุ่มหลักปุ่มเดียว → เวลาตอบ → ย่อหน้าคำค้น
-     ปุ่มหลักตามกลุ่ม (src/js/use-cta.js): บริษัท หน่วยงาน ร้านค้า โรงเรียน คณะ = ขอใบเสนอราคา · กลุ่มอื่น = LINE · "ดูแบบเสื้อ" เป็นลิงก์ตัวหนังสือ -->
-<section class="band-hero relative overflow-hidden">
-  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-  <div class="wrap relative pt-3 pb-10 md:pt-8 lg:py-16">
-    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>เลือกตามการใช้งาน</span><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
-    <div class="grid gap-5 mt-1 lg:mt-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-x-16 lg:items-center">
-      <figure class="relative lg:col-start-2 lg:row-start-1">
-        <div class="overflow-hidden rounded-plate bg-shell aspect-[16/10] lg:aspect-[4/3]">
-          {{#if item.img}}<img src="{{item.img}}"{{#if up.hero.srcset}} srcset="{{up.hero.srcset}}" sizes="(min-width:1024px) 46vw, 100vw"{{/if}} alt="{{item.name}} · ทีมลูกค้าใส่เสื้อที่ทีมดีผลิต" width="760" height="760" fetchpriority="high" decoding="async" class="w-full h-full object-cover {{item.imgPos}}">
+     ปุ่มหลัก = LINE ทุกกลุ่ม (src/js/use-cta.js · อาร์ตเคาะ 30 ต.ค.) · ใบเสนอราคาเป็นทางรองของกลุ่มที่ต้องมีเอกสารจัดซื้อ · "ดูแบบเสื้อ" เป็นลิงก์ตัวหนังสือ -->
+{{!-- 2 พ.ย. รอบ 64 (อาร์ต: ยังดูโหล): รูปลูกค้าล้นขอบขวา · การ์ดแบบ 3D จริงของกลุ่มลอยทับมุมรูป (เล่าเรื่องแบบ → เสื้อจริง)
+     · ลายเส้นโค้งจากโลโก้ทีมดีหลังรูป · ขีดเน้นคำหลัก --}}
+<section class="band-hero up-hero relative overflow-hidden">
+  <span class="up-hero__mark" aria-hidden="true">{{> brandMark}}</span>
+  <div class="wrap relative pt-3 pb-8 md:pt-8 lg:pt-8 lg:pb-14">
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">{{firstName item.name}}</span></nav>
+    <div class="up-hero__grid">
+      <figure class="up-hero__fig">
+        <div class="up-hero__photo">
+          {{#if item.img}}<img src="{{item.img}}"{{#if up.hero.srcset}} srcset="{{up.hero.srcset}}" sizes="(min-width:1024px) 58vw, 100vw"{{/if}} alt="{{item.name}} · ทีมลูกค้าใส่เสื้อที่ทีมดีผลิต" width="760" height="760" fetchpriority="high" decoding="async" class="w-full h-full object-cover {{item.imgPos}}">
           {{else}}<span class="prod-noimg" role="img" aria-label="ยังไม่มีภาพ{{item.name}}"><span class="block size-14">{{> icoUsers}}</span><span>{{item.name}}</span></span>{{/if}}
         </div>
-        {{#if item.img}}<figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-3 bottom-3">{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else}}ภาพจำลอง{{/if}}</figcaption>{{/if}}
+        {{#if item.img}}<figcaption class="up-hero__proof">{{#if (eq item.imgKind 'real')}}<span class="up-checks__i">{{> icoCheck}}</span>งานผลิตจริงของลูกค้าทีมดี{{else}}ภาพจำลอง{{/if}}</figcaption>{{/if}}
+        {{#with up.designs.items.[0]}}<div class="up-hero__design"><img src="{{this.img}}" alt="" width="1080" height="720" loading="lazy" decoding="async"><span><b>ตัวอย่างแบบ 3D</b>ทีมดีออกแบบให้ฟรี</span></div>{{/with}}
       </figure>
-      <div class="lg:col-start-1 lg:row-start-1">
-        <h1 class="t-display text-[clamp(28px,4.4vw,54px)] text-ink">{{{ph up.hero.h1}}}</h1>
-        {{!-- ราคาบรรทัดเดียว: สินค้าตัวแรกในใบราคาย่อที่มีตารางราคา (src/js/prices.js priceLine) + ขั้นต่ำ --}}
-        {{#if up.hero.price}}<p class="hp hp--line mt-4"><span>{{up.hero.price.name}}</span> <b>{{{ph up.hero.price.line}}}</b> <span>{{up.hero.price.moq}}</span></p>{{/if}}
-        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4" data-where="use-hero">
-          <a class="btn btn-orange btn-lg gap-2 max-sm:flex-1 max-sm:px-5 max-sm:min-h-[52px] max-sm:text-[18px]" href="{{cta.primary.href}}">{{#if (eq cta.mode 'line')}}<span class="block size-5" aria-hidden="true">{{> icoChat}}</span>{{/if}}{{cta.primary.label}}</a>
-          {{#if up.designs.show}}<a class="pp-more" href="#designs">{{up.hero.cta2}}<span class="ml-1" aria-hidden="true">&darr;</span></a>{{/if}}
+      <div class="up-hero__copy">
+        {{!-- 2 พ.ย. รอบ 64: คำหลักตัวใหญ่ · คำค้นต่อท้ายบรรทัดรอง (เดิม H1 ยาว 2 บรรทัดหนักเท่ากัน) · ข้อความ H1 ครบเหมือนเดิม --}}
+        <h1 class="up-h1 text-ink"><span class="up-h1__main"><span class="up-h1__hl">{{{ph up.hero.h1p.main}}}</span></span>{{#if up.hero.h1p.rest}}<span class="up-h1__rest"><span class="sr-only"> / </span>{{{ph up.hero.h1p.rest}}}</span>{{/if}}</h1>
+        {{!-- lead + seoLine ย่อหน้าเดียว (อาร์ตเคาะ 22 ต.ค. ให้อยู่ใต้ hero) · ราคาและข้อเท็จจริงย้ายไปแถบสรุปถัดไปตาม v22 (2 พ.ย.) --}}
+        <p class="text-[17px] leading-[1.75] text-ink-2 max-w-[56ch] mt-3">{{up.hero.lead}}{{#if item.seoLine}} {{item.seoLine}}{{/if}}</p>
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mt-5" data-where="use-hero">
+          <a class="cb cb--p max-sm:w-full" href="{{cta.primary.href}}" data-track="line"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{cta.primary.label}}</span></a>
+          {{#if up.designs.show}}<a class="cb cb--s" href="#designs">{{up.hero.cta2}}</a>{{/if}}
         </div>
-        {{!-- "5 นาที" ผูกกับ LINE/โทรเท่านั้น ห้ามใช้กับฟอร์ม (audit 2.4) · หน้าที่ปุ่มหลักเป็นฟอร์ม บอกช่องทางกำกับ --}}
-        <p class="hp-reply">{{#if (eq cta.mode 'line')}}{{{ph 'ตอบใน 5 นาที (8:30–21:00) · แบบ 3D ใน 24 ชม.'}}}{{else}}{{{ph 'ทัก LINE หรือโทร ตอบใน 5 นาที (8:30–21:00) · แบบ 3D ใน 24 ชม.'}}}{{/if}}</p>
-        {{!-- lead + seoLine เป็นย่อหน้าเดียว (use-03 · คำค้น "ยูนิฟอร์มพนักงาน" อยู่ที่ seoLine ของหน้าบริษัท · อาร์ตเคาะ 22 ต.ค. ให้อยู่ใต้ hero) --}}
-        <p class="text-[17px] leading-[1.75] text-ink-2 max-w-[56ch] mt-6 pt-5 border-t border-line">{{up.hero.lead}}{{#if item.seoLine}} {{item.seoLine}}{{/if}}</p>
+        {{!-- คำสัญญา 2 ข้อเป็นจุดมีไอคอน (เดิมบรรทัดเทาตัวเล็ก) · ข้อความเดิม --}}
+        <ul class="up-promise"><li><span class="up-promise__i">{{> icoClock}}</span><span><b>ตอบใน 5 นาที</b> {{#unless (eq cta.mode 'line')}}ทัก LINE หรือโทร {{/unless}}8:30–21:00</span></li><li><span class="up-promise__i">{{> icoPen}}</span><span><b>แบบ 3D ใน 24 ชม.</b></span></li></ul>
       </div>
     </div>
   </div>
 </section>
-
-{{#if up.toc.length}}
-<nav class="border-b border-line bg-paper" aria-label="ข้ามไปยังหัวข้อในหน้านี้">
-  <div class="wrap chiprail py-3">{{#each up.toc}}<a class="chip" href="#{{this.key}}">{{this.t}}</a>{{/each}}</div>
-</nav>
 {{/if}}
 
-<!-- 05 · แบบเสื้อของกลุ่มนี้ · ย้ายขึ้นมาต่อจาก hero (agent ลูกค้า 22 ต.ค.: บนมือถือต้องเลื่อนผ่าน 4 ส่วนกว่าจะเจอแบบ) · v22 เดิมอยู่ลำดับ 05 (รหัส TD จริง) -->
+{{!-- โฉมใหม่ไม่มีแถบสิทธิพิเศษและสารบัญ (อาร์ต 3 พ.ย. "ลบ") --}}
+{{#unless up.v2}}
+{{!-- แถบสรุปใต้ hero ตาม v22 (strip) · ข้อเท็จจริง 3 ข้อ + ราคาเริ่มต้นของสินค้าตัวแรกในใบราคาย่อ (src/js/prices.js priceLine) --}}
+{{!-- 2 พ.ย. รอบ 64 · อาร์ต: "ลบราคาออก เอาให้เหลือที่สิทธิพิเศษ" → แถบมีแค่สิทธิพิเศษ 3 ข้อ (ราคาอยู่ที่การ์ดราคา #products) --}}
+<section class="pp-strip up-strip" aria-label="สิทธิพิเศษเมื่อสั่งกับทีมดี">
+  <div class="wrap up-strip__in">
+    {{#if up.hero.factLine.length}}<ul class="pp-strip__make up-strip__facts">{{#each up.hero.factLine}}<li><span class="up-checks__i">{{> icoCheck}}</span>{{{ph this}}}</li>{{/each}}</ul>{{/if}}
+  </div>
+</section>
+{{> ppToc items=up.toc}}
+{{/unless}}
+
+<!-- 02 · ตัวเลขทีมดี (ยืนยันแล้ว scripts/v22/claims.mjs STATS) · โลโก้ตามกลุ่มยังรอตรวจรายการจับคู่ (audit use-04) จึงยังไม่ใส่ -->
+{{#if up.trust.show}}
+{{#if up.v2}}{{> up2Trust}}{{else}}
+<section class="wrap pt-10 md:pt-14 pb-2">
+  <h2 class="t-display text-[clamp(22px,2.6vw,30px)] text-center">{{{ph up.trust.h}}}</h2>
+  {{!-- ตัวเลขวิ่งนับขึ้นแบบหน้าแรก (count-up.js) · ค่าจริงอยู่ใน sr-only และตัวเลขที่เห็น ไม่มี JS ก็เห็นค่าจริง --}}
+  <dl class="hm-stats hm-stats--fit" data-countup>{{#each up.trust.stats}}<div class="hm-stat" data-stat="{{this.n}}" style="--i:{{@index}}"><dt class="t-sm">{{this.t}}</dt><dd>{{#with (stat this.n)}}<span class="sr-only">{{../n}}</span><span class="hm-stat__v" aria-hidden="true"><span class="hm-stat__n" data-stat-n>{{baht this.n}}</span>{{this.plus}}<span class="hm-stat__u">{{this.unit}}</span></span><span class="hm-stat__bar" aria-hidden="true"></span>{{else}}{{this.n}}{{/with}}</dd></div>{{/each}}</dl>
+  {{#if up.trust.note}}<p class="up-stats-note">{{{ph up.trust.note}}}</p>{{/if}}
+</section>
+{{!-- อาร์ต 2 พ.ย.: แทรกโลโก้ลูกค้าวิ่ง · ชุดเดียวกับหน้าแรก (home.json logos · อาร์ตยืนยันเผยแพร่ได้ 22 ต.ค.) · แถวเดียว มีปุ่มหยุด (marquee-pause.js) --}}
+{{#if homeV4.logoRows.length}}
+<div class="hm-marquee up-logos" data-marquee>
+  <div class="hm-marquee__row">
+    <ul class="hm-marquee__track" aria-label="โลโก้ลูกค้าทีมดี">{{#each homeV4.logoRows.[0]}}{{#if this.img}}<li><img src="{{this.img}}" alt="{{this.alt}}" width="336" height="144" loading="lazy" decoding="async"></li>{{/if}}{{/each}}</ul>
+    <ul class="hm-marquee__track" aria-hidden="true">{{#each homeV4.logoRows.[0]}}{{#if this.img}}<li><img src="{{this.img}}" alt="" width="336" height="144" loading="lazy" decoding="async"></li>{{/if}}{{/each}}</ul>
+  </div>
+</div>
+{{/if}}
+{{/if}}
+{{/if}}
+
+<!-- 03 · โจทย์ของคนสั่ง -->
+{{#if up.pain.show}}{{#if up.v2}}{{> up2Pain}}{{else}}
+<section class="bg-shell border-y border-line"><div class="wrap section">
+  {{!-- 2 พ.ย. รอบ 64 (อาร์ต: ไม่น่าอ่าน): การ์ดสองชั้น ปัญหาของคนสั่ง → ทีมดีช่วย · ตัดเลขลำดับที่ไม่มีความหมาย และป้ายเหนือหัวข้อ --}}
+  <div class="max-w-[62ch] mb-8">
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph up.pain.h}}}</h2>
+    {{#each up.pain.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
+  </div>
+  <ul class="up-pain">
+    {{#each up.pain.cards}}<li><div class="up-pain__q"><span class="up-pain__i">{{> (concat 'ico' this.ico)}}</span><h3>{{this.h}}</h3></div><div class="up-pain__a"><span class="up-checks__i">{{> icoCheck}}</span><p><b>ทีมดีช่วย</b> {{#each this.p}}{{this}}{{#unless @last}} {{/unless}}{{/each}}</p></div></li>{{/each}}
+  </ul>
+</div></section>{{/if}}
+{{/if}}
+
+<!-- 04 · บริบทงาน (บริษัท / หน่วยงาน) -->
+{{#if up.contexts.show}}{{#if up.v2}}{{> up2Contexts}}{{else}}
+<section class="bg-shell border-y border-line">
+  <div class="wrap section">
+    <h2 class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch]">{{{ph up.contexts.h}}}</h2>
+    <div class="up-contexts grid {{#if (eq up.contexts.cards.length 2)}}md:grid-cols-2{{else}}md:grid-cols-3{{/if}} gap-4 mt-8">
+      {{#each up.contexts.cards}}<article class="pp-card">{{#if this.photo}}<img src="{{this.photo.img}}" alt="{{this.photo.alt}}" width="1080" height="1080" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover rounded-card">{{/if}}{{#if this.img}}<span class="img-pending">{{this.img}}</span>{{/if}}<h3 class="text-[19px] {{#if this.img}}mt-4{{/if}}{{#if this.photo}}mt-4{{/if}}">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</article>{{/each}}
+    </div>
+    <div class="flex flex-wrap gap-x-6 mt-6">{{#each up.contexts.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}<a class="pp-more" href="{{#if up.contexts.ask}}{{up.contexts.ask.line}}{{else}}{{cta.primary.href}}{{/if}}" data-track="line">{{#if up.contexts.ask}}{{up.contexts.ask.t}}{{else}}{{cta.primary.label}}{{/if}}<span class="arw" aria-hidden="true">&rarr;</span></a></div>
+  </div>
+</section>{{/if}}
+{{/if}}
+
+{{!-- โฉมใหม่: อาร์ต 3 พ.ย. "ลบ" แบบเสื้อ + จากภาพแบบสู่เสื้อจริง ตรงนี้ (โครงอาร์ตมีส่วนแบบ 3D ทีหลัง) --}}
+{{#unless up.v2}}
+<!-- 05 · แบบเสื้อของกลุ่มนี้ (รหัส TD จริง) · ตามด้วยกล่องหลักฐาน downloadAssets ซึ่งเพิ่มจาก v22 -->
 {{#if up.designs.show}}
 <section class="wrap section" id="designs">
   <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
@@ -52,57 +116,71 @@
       <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph up.designs.h}}}</h2>
       {{#each up.designs.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
     </div>
-    {{#if up.designs.items.length}}<a class="pp-more" href="{{url 'galleries' item.id}}">ดูแบบทั้งหมด {{useDesignsAll}} แบบ<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}
+    {{#if up.designs.items.length}}<a class="pp-more" href="{{url 'galleries' item.id}}">ดูแบบ{{item.name}}ทั้งหมด {{useDesignsAll}} ภาพ<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}
   </div>
   {{#unless up.designs.items.length}}{{#unless wp}}<p class="pending-ribbon">ยังไม่มีแบบ{{item.name}}ในคลัง (ทีมดีไซน์ยืนยันรหัสแบบและกลุ่มลูกค้าก่อน) · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}{{/unless}}
   <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" id="useGrid" data-line-url="{{site.lineUrl}}">
     {{#each up.designs.items}}
     {{#if this.square}}
     <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="" data-meta="แบบจากคลังผลงานทีมดี">
-      <img src="{{this.img}}" width="1080" height="1080" loading="lazy" decoding="async" alt="{{this.alt}}" class="w-full h-full object-contain">
+      <img src="{{this.img}}"{{#if this.imgSmall}} srcset="{{this.imgSmall}}" sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"{{/if}} width="1080" height="1080" loading="lazy" decoding="async" alt="{{this.alt}}" class="w-full h-full object-contain">
     </figure>
     {{else}}
-    <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="{{this.code}}" data-meta="{{this.meta}}">
-      <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 33vw, 50vw" width="1080" height="720" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง" class="w-full h-full object-contain">
+    <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2] {{#if this.thumbBoard}}board-thumb{{/if}}" data-code="{{this.code}}" data-meta="{{this.meta}}">
+      <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} {{#if this.width}}{{this.width}}{{else}}1080{{/if}}w" sizes="(min-width:1024px) 33vw, 50vw" width="1080" height="720" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} {{this.techName}} รหัส {{this.code}}" class="w-full h-full object-contain">
     </figure>
     {{/if}}
     {{/each}}
   </div>
 </section>
 {{/if}}
+{{> downloadAssets}}
+{{/unless}}
 
-<!-- 06 · ประเภทเสื้อที่เหมาะ -->
-{{#if up.products.show}}
+<!-- 06 · ประเภทเสื้อที่เหมาะ · การ์ด 3 ช่องตาม v22 พร้อมราคาจริง (src/data/prices.json · src/js/prices.js useQuote) -->
+{{#if up.products.show}}{{#if up.v2.products}}{{> up2Products}}{{else}}
 <section class="bg-shell border-y border-line" id="products">
   <div class="wrap section">
-    <h2 class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch]">{{{ph up.products.h}}}</h2>
-    {{!-- ใบราคาย่อ (audit use-02): แถวละสินค้า · ราคา 2 ปลายพร้อมจำนวน · เวลาผลิต · ตัวเลขทั้งหมดจาก src/data/prices.json (src/js/prices.js) --}}
-    <div class="uq mt-8">
-      <ul>
-        {{#each up.products.quote.rows}}
-        <li class="uq__row">
-          <div class="uq__name"><h3><a href="{{url this.to}}">{{this.h}}<span class="arw" aria-hidden="true">&rarr;</span></a></h3>{{#each this.p}}<p>{{{ph this}}}</p>{{/each}}</div>
-          <div class="uq__price">{{#if this.amount}}<p><b>{{this.amount}}</b> <span>{{this.unit}}</span></p><p class="uq__qty">{{{ph this.qty}}}</p>{{else if this.askHref}}<a class="pp-more" href="{{this.askHref}}">{{this.text}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{else}}<p class="uq__text">{{this.text}}</p>{{/if}}</div>
-          <div class="uq__lead">{{#if this.lead}}<small>ผลิต</small>{{this.lead}}{{/if}}</div>
-        </li>
-        {{/each}}
-      </ul>
-      <p class="uq__foot">{{{ph up.products.quote.foot}}}{{#if up.products.quote.leadNote}}<span class="block mt-1 font-normal">{{{ph leadTimes.open}}} · {{{ph leadTimes.start}}}</span>{{/if}}</p>
-    </div>
+    <h2 class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch] mb-8">{{{ph up.products.h}}}</h2>
+    <ul class="uq-grid">
+      {{!-- 2 พ.ย. รอบ 64 (อาร์ต: อ่านยาก · "220 → 170" อ่านเหมือนลดราคา): ราคาเป็นตารางเล็กตามจำนวน · พิมพ์ลายมี 2 คอลัมน์ (คอกลม/คอวี · คอปก) --}}
+      {{#each up.products.quote.rows}}
+      <li class="uq-card">
+        <h3><a href="{{url this.to}}">{{this.h}}</a></h3>
+        {{#each this.p}}<p class="uq-card__use">{{{ph this}}}</p>{{/each}}
+        {{#if this.tiers}}
+        <table class="uq-tiers">
+          <caption>ราคาต่อตัว (บาท){{#if this.basis}} · {{this.basis}}{{/if}}</caption>
+          {{#if this.colNames.[1]}}<thead><tr><th scope="col"><span class="sr-only">จำนวน</span></th>{{#each this.colNames}}<th scope="col">{{this}}</th>{{/each}}</tr></thead>{{/if}}
+          <tbody>{{#each this.tiers}}<tr><th scope="row">{{this.q}}</th>{{#each this.prices}}<td>{{this}}</td>{{/each}}</tr>{{/each}}</tbody>
+        </table>
+        {{else if this.askHref}}<a class="uq-card__ask pp-more" href="{{this.askHref}}">{{this.text}}<span class="arw" aria-hidden="true">&rarr;</span></a>
+        {{else}}<p class="uq-card__ask">{{this.text}}</p>{{/if}}
+        {{#if this.lead}}<p class="uq-card__lead"><span class="uq-card__i">{{> icoClock}}</span>ผลิต {{this.lead}}</p>{{/if}}
+        <a class="pp-more uq-card__more" href="{{url this.to}}">ดูผ้า ทรง และรายละเอียด<span class="arw" aria-hidden="true">&rarr;</span></a>
+      </li>
+      {{/each}}
+    </ul>
+    {{!-- เงื่อนไขทุกการ์ด เป็นรายการเช็ก (เดิมประโยคยาวบรรทัดเดียว) · วิธีนับวันผลิตอยู่ในส่วนวันที่ (nbHow) --}}
+    <ul class="uq-notes" aria-label="เงื่อนไขราคา">{{#each up.products.quote.notes}}<li><span class="up-checks__i">{{> icoCheck}}</span>{{this}}</li>{{/each}}</ul>
+    {{#each up.products.links}}<a class="pp-more mt-2" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+  </div>
+</section>{{/if}}
+{{/if}}
+
+{{#if up.v2.help}}{{> up2Help}}{{#if up.v2.reviews}}{{> up2Reviews}}{{/if}}{{#if up.v2.reviewWall}}{{> reviewWall items=up.v2.reviewWall.items id="corp-review-wall" title=up.v2.reviewWall.title tail=up.v2.reviewWall.tail}}{{/if}}{{else}}
+<!-- 07 · ยังไม่แน่ใจ · แถบเรียบตาม v22 -->
+<section class="bg-shell border-b border-line" aria-labelledby="help-h">
+  <div class="wrap pp-band">
+    <h2 id="help-h" class="t-display">{{{ph up.help.h}}}</h2>
+    <p class="t-lead mt-3">{{{ph up.help.p}}}</p>
+    <div class="pp-row"><a class="cb cb--p" href="{{cta.primary.href}}" data-track="line"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{up.help.cta}}</span></a></div>
   </div>
 </section>
 {{/if}}
 
-<!-- 02 · ตัวเลขทีมดี (ยืนยันแล้ว scripts/v22/claims.mjs STATS) · โลโก้ตามกลุ่มยังรอตรวจรายการจับคู่ (audit use-04) จึงยังไม่ใส่ -->
-{{#if up.trust.show}}
-<section class="wrap pt-4 pb-4">
-  {{#unless wp}}<p class="pending-ribbon">โลโก้ลูกค้ารายกลุ่มรอตรวจรายการจับคู่ (audit use-04) · ตอนนี้โชว์เฉพาะตัวเลข</p>{{/unless}}
-  <h2 class="t-display text-[clamp(22px,2.6vw,30px)] text-center">{{{ph up.trust.h}}}</h2>
-  {{!-- ตัวเลขวิ่งนับขึ้นแบบหน้าแรก (count-up.js) · ค่าจริงอยู่ใน sr-only และตัวเลขที่เห็น ไม่มี JS ก็เห็นค่าจริง --}}
-  <dl class="hm-stats hm-stats--fit" data-countup>{{#each up.trust.stats}}<div class="hm-stat" data-stat="{{this.n}}" style="--i:{{@index}}"><dt class="t-sm">{{this.t}}</dt><dd>{{#with (stat this.n)}}<span class="sr-only">{{../n}}</span><span class="hm-stat__v" aria-hidden="true"><span class="hm-stat__n" data-stat-n>{{baht this.n}}</span>{{this.plus}}<span class="hm-stat__u">{{this.unit}}</span></span><span class="hm-stat__bar" aria-hidden="true"></span>{{else}}{{this.n}}{{/with}}</dd></div>{{/each}}</dl>
-</section>
-{{/if}}
-
+{{!-- โฉมใหม่: โชว์รูมหน้าแรก (up2Showroom) แทนส่วนผลงานเดิม --}}
+{{#if up.v2.showroom}}{{> up2Showroom}}{{else}}
 <!-- 08 · ผลงานจริง -->
 {{#if up.work.show}}
 <section class="wrap section" id="work">
@@ -111,12 +189,14 @@
     <a class="pp-more" href="{{url 'projects'}}">ดูผลงานและรีวิวทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a>
   </div>
   {{#if up.work.real.length}}
-  <div class="grid md:grid-cols-3 gap-5">
-    {{!-- 24 ต.ค.: ชื่องาน โจทย์ และ "ทีมดีช่วย" ใน works.json แต่งขึ้น (ไม่ตรงกับรูป) → ลบ · เหลือรูปจริง + คำบรรยายตามที่เห็นในรูป (figcaption แทน alt ไม่ให้โปรแกรมอ่านจออ่านซ้ำ) --}}
+  <div class="pp-work-grid grid md:grid-cols-3 gap-5">
+    {{!-- 24 ต.ค.: ชื่องาน โจทย์ และ "ทีมดีช่วย" ใน works.json แต่งขึ้น (ไม่ตรงกับรูป) → ลบ · เหลือรูปจริง + คำบรรยายตามที่เห็นในรูป (figcaption แทน alt ไม่ให้โปรแกรมอ่านจออ่านซ้ำ)
+         2 พ.ย.: หน้าที่ไม่มีงานใน works.json ใช้ภาพลูกค้ากลุ่มนี้แทน (คำบรรยาย = occ) · ปุ่ม LINE ข้อความเดียวกับปุ่มหลักของกลุ่ม · ลิงก์สินค้าจาก vite · pp-work-grid = รางบนมือถือ (mobile-ui.js) --}}
     {{#each up.work.real}}
     <figure class="bg-paper border border-line rounded-plate overflow-hidden flex flex-col">
       <div class="relative aspect-[4/3] bg-shell"><img src="{{this.img}}" alt="" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover"><span class="tag tag-ink absolute left-3 bottom-3">งานผลิตจริง</span></div>
-      <figcaption class="px-6 py-4 on-paper t-sm">{{{ph this.alt}}}</figcaption>
+      <figcaption class="px-6 pt-4 on-paper t-sm">{{{ph this.alt}}}</figcaption>
+      <div class="up-work__foot"><a class="up-work__line" href="{{#if this.line}}{{this.line}}{{else}}{{../cta.primary.href}}{{/if}}" data-track="line"><span class="up-work__ico" aria-hidden="true">{{> icoLine}}</span><span>สนใจงานแนวนี้</span></a>{{#if this.productHref}}<a class="up-work__product" href="{{this.productHref}}">{{this.productName}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}</div>
     </figure>
     {{/each}}
   </div>
@@ -125,17 +205,69 @@
   {{/if}}
 </section>
 {{/if}}
+{{/if}}
+
+<!-- 09 · รีวิว -->
+{{!-- รีวิวจริงจากแชทลูกค้า (27 ต.ค.) ตรงกลุ่มเท่านั้น · ไม่มีรีวิวตรงกลุ่ม (เสื้อรุ่น เสื้อคณะ) ซ่อนทั้งส่วน · สารบัญใช้ up.reviews.show ตัวเดียวกัน --}}
+{{#if up.reviews.show}}
+{{#unless up.v2.reviews}}<section class="bg-shell border-y border-line" id="reviews" aria-labelledby="reviews-h"><div class="wrap section">
+  <div class="rvc-head"><h2 id="reviews-h" class="t-display text-[clamp(24px,3vw,36px)]">{{#if up.reviews.h}}{{{ph up.reviews.h}}}{{else}}รีวิวจากลูกค้า{{/if}}</h2><a class="pp-more" href="{{url 'projects'}}#reviews">ดูรีวิวเพิ่มเติม<span class="arw" aria-hidden="true">&rarr;</span></a></div>
+  {{> reviewCards list=up.reviews.items}}
+</div></section>{{/unless}}
+{{/if}}
+
+<!-- 10 · ทำไมทีมดี · 2 คอลัมน์ตาม v22 -->
+{{#if up.benefits.show}}{{#if up.v2.benefits}}{{> up2Why}}{{else}}
+{{!-- 2 พ.ย. รอบ 64 (อาร์ต: ไม่น่าอ่าน): หัวข้อ + ภาพลูกค้าจริงของกลุ่มทางซ้าย · ข้อดีเป็นแถวมีไอคอนตามความหมาย คั่นเส้นบาง ไม่ทำการ์ดซ้ำแบบ --}}
+<section>
+  <div class="wrap section up-why">
+    <div class="up-why__head">
+      <h2 class="t-display">{{{ph up.benefits.h}}}</h2>
+      {{#if up.benefits.photo}}<figure class="up-why__fig"><img src="{{up.benefits.photo.img}}" alt="{{up.benefits.photo.occ}}" width="640" height="480" loading="lazy" decoding="async"><figcaption><span class="tag tag-ink">ภาพจริง</span>{{up.benefits.photo.occ}}</figcaption></figure>{{/if}}
+    </div>
+    <ul class="up-why__list">
+      {{#each up.benefits.cards}}<li><span class="up-why__i">{{> (concat 'ico' this.ico)}}</span><div><h3>{{this.h}}</h3>{{#each this.p}}<p>{{this}}</p>{{/each}}</div></li>{{/each}}
+    </ul>
+  </div>
+</section>{{/if}}
+{{/if}}
+{{!-- วิธีชำระเงิน ต่อจากการ์ดภาพ 4 ใบ (อาร์ต 4 พ.ย.) · มีเฉพาะหน้าที่มี use-v2.json payment --}}
+{{#if up.v2.payment}}{{> up2Pay}}{{/if}}
+
+<!-- 11 · วางงบและขั้นตอน · ตาม v22: ข้อมูล 2 คอลัมน์ → ขั้นตอน 3 ช่อง → การชำระเงิน -->
+{{#if up.plan.show}}
+<section class="bg-shell border-y border-line" id="plan">
+  <div class="wrap section">
+    <h2 class="t-display text-[clamp(28px,3.6vw,44px)] max-w-[30ch]">{{{ph up.plan.h}}}</h2>
+    {{!-- 2 พ.ย. รอบ 64 (อาร์ต: ยังอ่านยาก): แผ่นเดียวสองฝั่ง แทนการ์ดเล็กหลายใบ · เช็กลิสต์ไอคอนเดียวกันทั้งส่วน · ตัวอักษร 17px สีดำ
+         ขั้นตอนเป็นเส้นเวลา (ลำดับมีความหมาย) แทนการ์ดเส้นดำ · เอกสารไหลแบบคอลัมน์ ไม่มีช่องโหว่ใต้ข้อสั้น --}}
+    <div class="up-brief">
+      {{#if up.plan.need}}<div class="up-brief__col"><h3>{{up.plan.need.h}}</h3><ul class="up-checks">{{#each up.plan.need.items}}<li><span class="up-checks__i">{{> icoCheck}}</span>{{this}}</li>{{/each}}</ul></div>{{/if}}
+      {{#if up.plan.price}}<div class="up-brief__col"><h3>{{up.plan.price.h}}</h3>{{#each up.plan.price.p}}<p>{{this}}</p>{{/each}}</div>{{/if}}
+    </div>
+    <ol class="up-flow">{{#each up.plan.steps}}<li><span class="up-flow__no" aria-hidden="true">{{inc @index}}</span><div><h3>{{this.h}}</h3>{{#if this.p}}<p>{{this.p}}</p>{{/if}}</div></li>{{/each}}</ol>
+    {{#if up.plan.payment}}<div class="up-pay"><h3>{{up.plan.payment.h}}</h3><ul class="up-checks">{{#each up.plan.payment.p}}<li><span class="up-checks__i">{{> icoCheck}}</span>{{this}}</li>{{/each}}</ul></div>{{/if}}
+    <div class="pp-row">{{#each up.plan.asks}}{{#if @first}}<a class="cb cb--s" href="{{this.line}}" data-track="line"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{this.t}}</span></a>{{else}}<a class="pp-more" href="{{this.line}}" data-track="line">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}{{/each}}{{#each up.plan.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}</div>
+  </div>
+</section>
+{{/if}}
 
 <!-- 12 · ภาพลูกค้าจริง -->
 {{#if up.photos.show}}
-<section class="bg-shell border-y border-line" id="photos">
+<section id="photos">
   <div class="wrap section">
     <h2 class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch]">{{{ph up.photos.h}}}</h2>
     <p class="t-lead mt-3">{{up.photos.intro}}</p>
     {{#if up.photos.items.length}}
-    <ul class="pp-photos mt-8" aria-label="ภาพลูกค้าสวมเสื้อ">
-      {{#each up.photos.items}}<li><img src="{{this.imgSmall}}" alt="ทีมลูกค้า{{this.catName}}ใส่เสื้อที่ทีมดีผลิต" width="320" height="320" loading="lazy" decoding="async"></li>{{/each}}
+    {{!-- ภาพกลุ่มนี้เท่านั้น เรียง q (vite) · alt และคำบรรยาย = occ · คำบรรยายซ่อนจากโปรแกรมอ่านจอ ไม่ให้อ่านซ้ำกับ alt --}}
+    <ul class="pp-photos up-photos mt-8" id="usePhotos" aria-label="ภาพลูกค้าสวมเสื้อ">
+      {{#each up.photos.items}}<li{{#unless (lt @index ../up.photos.shown)}} data-extra hidden{{/unless}}><figure data-full="{{this.img}}"><img src="{{this.imgSmall}}" alt="{{this.occ}}" width="320" height="320" loading="lazy" decoding="async"><figcaption aria-hidden="true">{{this.occ}}</figcaption></figure></li>{{/each}}
     </ul>
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-6">
+      {{#if (lt up.photos.shown up.photos.items.length)}}<button type="button" class="pp-more" data-more-photos aria-expanded="false" aria-controls="usePhotos">ดูภาพลูกค้าเพิ่มเติม</button>{{/if}}
+      {{#if up.photos.ask}}<a class="pp-more" href="{{up.photos.ask.line}}" data-track="line">{{up.photos.ask.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}
+      {{#each up.photos.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+    </div>
     {{else}}
     {{#unless wp}}<p class="pending-ribbon mt-6">รอภาพลูกค้ากลุ่มนี้พร้อมสิทธิ์เผยแพร่ · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
     {{/if}}
@@ -143,98 +275,32 @@
 </section>
 {{/if}}
 
-<!-- 09 · รีวิว · ต้นแบบเท่านั้น -->
-{{#if up.reviews.show}}
-<section class="wrap pb-12" id="reviews">
-  <h2 class="t-display text-[clamp(24px,3vw,36px)]">{{{ph up.reviews.h}}}</h2>
-  {{#unless wp}}<p class="pending-ribbon mt-4">รอคำรีวิว ภาพ คลิป และแหล่งที่มาจริงที่ได้รับอนุญาต · ไม่แสดงดาวหรือคำชมสมมติ · บนเว็บจริงซ่อนส่วนนี้</p>{{/unless}}
-</section>
-{{/if}}
-
-<!-- 07 · ยังไม่แน่ใจ -->
-<section class="wrap pg-cta">
-  <div class="hm-cta hm-cta--2">
-    <div class="hm-cta__main"><h2>{{{ph up.help.h}}}</h2><p>{{{ph up.help.p}}}</p></div>
-    <div class="hm-cta__btns"><a class="btn btn-orange btn-lg" href="{{cta.primary.href}}">{{cta.primary.label}}</a></div>
-  </div>
-</section>
-
-<!-- 03 · โจทย์ของคนสั่ง -->
-{{#if up.pain.show}}
-<section class="wrap section">
-  <div class="max-w-[62ch] mb-8">
-    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoUsers}}</span>โจทย์ของคนสั่ง</span>
-    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph up.pain.h}}}</h2>
-    {{#each up.pain.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
-  </div>
-  <ol class="grid md:grid-cols-3 gap-4">
-    {{#each up.pain.cards}}<li class="pp-card"><span class="pp-card__no">{{inc @index}}</span><h3 class="text-[20px] mt-3">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</li>{{/each}}
-  </ol>
-</section>
-{{/if}}
-
-<!-- 04 · บริบทงาน (บริษัท / หน่วยงาน) -->
-{{#if up.contexts.show}}
-<section class="bg-shell border-y border-line">
-  <div class="wrap section">
-    <h2 class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch]">{{{ph up.contexts.h}}}</h2>
-    <div class="grid md:grid-cols-3 gap-4 mt-8">
-      {{#each up.contexts.cards}}<article class="pp-card">{{#if this.photo}}<img src="{{this.photo.img}}" alt="{{this.photo.alt}}" width="1080" height="1080" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover rounded-card">{{/if}}{{#if this.img}}<span class="img-pending">{{this.img}}</span>{{/if}}<h3 class="text-[19px] {{#if this.img}}mt-4{{/if}}{{#if this.photo}}mt-4{{/if}}">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</article>{{/each}}
+<!-- 13 · มีวันใช้แล้ว · แถบตาม v22 · ช่องวันที่อยู่ขวา -->
+{{#if up.schedule.show}}
+<section class="bg-shell border-y border-line" aria-labelledby="schedule-h">
+  <div class="wrap pp-band pp-band--split">
+    <div><h2 id="schedule-h" class="t-display">{{{ph up.schedule.h}}}</h2><p class="t-lead mt-3">{{{ph up.schedule.p}}}</p>
+      {{!-- เวลาผลิตแยกงาน (lead-times.json) · 2 พ.ย. รอบ 64: ตัวเลขเด่น 3 ช่อง · กติกาการนับวันพับไว้ใน nbHow --}}
+      <dl class="up-lead">
+        <div><dt>งานปัก</dt><dd>{{leadTimes.polo.days}}</dd></div>
+        <div><dt>พิมพ์ลายเต็มตัว</dt><dd>{{leadTimes.print.days}}</dd></div>
+        <div><dt>สกรีน DFT</dt><dd>{{leadTimes.screen.days}}</dd></div>
+      </dl>
+      {{> nbHow}}
     </div>
-    <div class="flex flex-wrap gap-x-6 mt-6">{{#each up.contexts.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}<a class="pp-more" href="{{cta.primary.href}}">{{cta.primary.label}}<span class="arw" aria-hidden="true">&rarr;</span></a></div>
-  </div>
-</section>
-{{/if}}
-
-<!-- 10 · ทำไมทีมดี -->
-{{#if up.benefits.show}}
-<section class="bg-shell border-y border-line">
-  <div class="wrap section">
-    <h2 class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch]">{{{ph up.benefits.h}}}</h2>
-    <div class="pp-auto mt-8">
-      {{#each up.benefits.cards}}<article class="pp-card"><h3 class="text-[19px]">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</article>{{/each}}
+    <div class="grid gap-3">
+      {{!-- เลือกวันแล้วบอกวันยืนยันแบบ ของสินค้าตัวแรกที่มีราคาในหน้า (need-by-ui.js · ตรวจมือถือ 30 ต.ค. ข้อ 35) --}}
+      <div><label class="label" for="useDate">วันที่ต้องใช้เสื้อ</label><input class="input w-full" id="useDate" type="date"{{#if up.hero.price.pid}} data-need-by="{{up.hero.price.pid}}"{{/if}}></div>
+      <div class="nb__out nb__out--use" id="useDateOut" role="status" aria-live="polite"></div>
+      <a class="cb cb--p js-date-cta" href="{{cta.primary.href}}" data-track="line"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{up.schedule.cta}}</span></a>
     </div>
   </div>
 </section>
 {{/if}}
-
-<!-- 11 · วางงบและขั้นตอน -->
-{{#if up.plan.show}}
-<section class="wrap section" id="plan">
-  <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoClock}}</span>ข้อมูลก่อนสั่ง</span>
-  <h2 class="t-display text-[clamp(28px,3.6vw,44px)] max-w-[30ch]">{{{ph up.plan.h}}}</h2>
-  <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start mt-8">
-    <div>
-      {{#if up.plan.need}}<h3 class="text-[19px]">{{up.plan.need.h}}</h3><ul class="mt-3 space-y-2.5">{{#each up.plan.need.items}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>{{/if}}
-      {{#if up.plan.price}}<h3 class="text-[19px] mt-8">{{up.plan.price.h}}</h3><ul class="mt-3 space-y-2.5">{{#each up.plan.price.p}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>{{/if}}
-      <div class="flex flex-wrap gap-x-6 mt-5">{{#each up.plan.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}</div>
-    </div>
-    <div>
-      <ol class="border-t-2 border-ink">{{#each up.plan.steps}}<li class="why-row"><span class="why-row__no">0{{inc @index}}</span><div class="why-row__body"><h3 class="why-row__t">{{this.h}}</h3>{{#if this.p}}<p class="why-row__d">{{this.p}}</p>{{/if}}</div></li>{{/each}}</ol>
-      {{#if up.plan.payment}}<div class="bg-shell border border-line rounded-plate p-6 mt-6"><h3 class="text-[18px]">{{up.plan.payment.h}}</h3><ul class="mt-3 space-y-2">{{#each up.plan.payment.p}}<li class="pp-dot">{{this}}</li>{{/each}}</ul></div>{{/if}}
-      <a class="btn btn-line mt-6" href="{{cta.primary.href}}">{{cta.primary.label}}</a>
-    </div>
-  </div>
-</section>
-{{/if}}
-
-<!-- 13 · มีวันใช้แล้ว -->
-<section class="wrap pg-cta">
-  <div class="hm-cta hm-cta--2">
-    <div class="hm-cta__main"><h2>{{{ph up.schedule.h}}}</h2><p>{{{ph up.schedule.p}}}</p>
-      {{!-- เวลาผลิตจริงแยกงาน + วิธีนับวัน (src/data/lead-times.json · 26 ต.ค.) --}}<p class="text-[16px] leading-[1.7] text-ink mt-2 font-semibold"><span class="inline-block">งานปัก {{leadTimes.polo.days}}</span> · <span class="inline-block">พิมพ์ลายเต็มตัว {{leadTimes.print.days}}</span> · <span class="inline-block">สกรีน {{leadTimes.screen.days}}</span></p><p class="text-[15px] leading-[1.7] text-ink-2 mt-1">{{{ph leadTimes.note}}}</p>
-      
-    </div>
-    <div class="hm-cta__btns">
-      <div><label class="label" for="useDate">วันที่ต้องใช้เสื้อ</label><input class="input w-full" id="useDate" type="date"></div>
-      <a class="btn btn-orange btn-lg js-date-cta" href="{{cta.primary.href}}">{{cta.primary.label}}</a>
-    </div>
-  </div>
-</section>
 
 <!-- 14 · คำถามก่อนสั่ง -->
 {{#if up.faq.show}}
-<section class="wrap section" id="faq">
+{{#if up.v2.faq}}{{> up2Faq}}{{else}}<section class="wrap section" id="faq">
   <div class="max-w-[68ch] mb-8"><span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoChat}}</span>คำถามที่พบบ่อย</span><h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph up.faq.h}}}</h2></div>
   <div class="hs-accordion-group border-t-2 border-ink max-w-[820px]">
     {{#each up.faq.items}}
@@ -248,36 +314,43 @@
     {{/each}}
   </div>
   <a class="pp-more mt-6" href="{{url 'faq'}}">คำถามที่พบบ่อยฉบับเต็ม<span class="arw" aria-hidden="true">&rarr;</span></a>
-</section>
+</section>{{/if}}
 {{/if}}
 
 <!-- 15 · ทีมดีและกลุ่มใกล้เคียง -->
+{{!-- โฉมใหม่: ชิ้น #story หน้าแรกทั้งชุด (up2Team) --}}
+{{#if up.v2.team}}{{> up2Team}}{{else}}
 <section class="bg-shell border-y border-line">
-  <div class="wrap section grid lg:grid-cols-2 gap-10 lg:gap-16">
+  {{!-- 2 พ.ย.: v22 วางภาพทีม/ออฟฟิศคู่ข้อมูลบริษัท · ภาพคนจริงยังไม่ได้อนุญาต → ฝั่งขวาเป็นการ์ดติดต่อจาก site.json
+       (เดิมย่อหน้าเรียงยาวครึ่งจอ เวลาทำการขึ้น 2 ครั้งคนละรูปแบบ ครึ่งขวาว่างเมื่อไม่มีกลุ่มใกล้เคียง) --}}
+  <div class="wrap section up-team">
     <div>
       <h2 class="t-display text-[clamp(24px,3vw,36px)]">{{{ph up.team.h}}}</h2>
-      <h3 class="text-[18px] mt-5">{{up.team.title}}</h3>
-      {{#each up.team.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}
-      <p class="t-body mt-2">{{site.address}} · {{site.hours}}</p>
-      <div class="flex flex-wrap gap-x-6 mt-4">{{#each up.team.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}</div>
+      <p class="up-team__co">{{up.team.title}}</p>
+      <p class="t-lead mt-3">{{up.team.p.[0]}}</p>
+      <div class="pp-row">{{#each up.team.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}<a class="pp-more" href="{{url up.team.place.to}}">{{up.team.place.t}}<span class="arw" aria-hidden="true">&rarr;</span></a></div>
+      {{#if up.related.show}}
+      <h2 class="up-team__rel">{{{ph up.related.h}}}</h2>
+      <div class="chiprail mt-4">{{#each up.related.links}}<a class="chip" href="{{url this.to}}">{{this.t}}</a>{{/each}}</div>
+      {{/if}}
     </div>
-    {{#if up.related.show}}
-    <div>
-      <h2 class="t-display text-[clamp(22px,2.6vw,30px)]">{{{ph up.related.h}}}</h2>
-      <div class="chiprail mt-5">{{#each up.related.links}}<a class="chip" href="{{url this.to}}">{{this.t}}</a>{{/each}}</div>
-    </div>
-    {{/if}}
+    <dl class="up-care">
+      {{!-- รอบ 64: LINE เบอร์โทร และเวลาทำการ อยู่ในส่วนปิดที่ติดกันด้านล่างแล้ว ไม่แสดงซ้ำ --}}
+      <div class="up-care__row"><span class="up-care__i">{{> icoPin}}</span><dt>ออฟฟิศ นนทบุรี</dt><dd>{{site.address}}<small>นัดเวลาก่อนเข้าดูตัวอย่างผ้าและเสื้อ · <a href="{{site.mapUrl}}" target="_blank" rel="noopener">เปิดแผนที่</a></small></dd></div>
+      <div class="up-care__row"><span class="up-care__i">{{> icoShield}}</span><dt>หลังรับเสื้อ</dt><dd>พบปัญหาจากการผลิต แจ้งภายใน {{site.claimDays}} วันหลังรับสินค้า<small>ส่งเลขออเดอร์และภาพปัญหาทาง LINE</small></dd></div>
+    </dl>
   </div>
 </section>
+{{/if}}
 
 {{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
-<section class="hm-end" aria-labelledby="end-h">
+{{#if up.end.show}}{{#if up.v2.end}}{{> up2End}}{{else}}<section class="hm-end" aria-labelledby="end-h">
   <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
   <div class="wrap relative hm-end__in">
     <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
     <h2 id="end-h">เล่าโจทย์ของทีมคุณมา</h2>
     <p class="hm-end__lead">บอกว่าใครใส่ จำนวนประมาณ และใช้วันไหน ยังไม่มีแบบก็เริ่มได้</p>
-    <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{cta.primary.href}}">{{#if (eq cta.mode 'line')}}<span class="block size-5" aria-hidden="true">{{> icoChat}}</span>{{/if}}{{cta.primary.label}}</a><a class="btn btn-line btn-lg tabular-nums" href="{{cta.secondary.href}}">{{cta.secondary.label}}</a></div>
-    {{#if (eq cta.mode 'line')}}<p class="hm-end__alt"><a class="tabular-nums" href="{{cta.tel.href}}">โทร {{cta.tel.label}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>{{else}}<p class="hm-end__alt">ขอเอกสารจัดซื้อได้ ใบเสนอราคา ใบกำกับภาษี<span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>{{/if}}
+    <div class="hm-cta__btns hm-end__btns"><a class="cb cb--p" href="{{up.team.ask.line}}" data-track="line"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{up.team.ask.t}}</span></a><a class="btn btn-line btn-lg tabular-nums" href="{{cta.secondary.href}}">{{cta.secondary.label}}</a></div>
+    {{#if (eq cta.mode 'line')}}<p class="hm-end__alt"><a class="tabular-nums" href="{{cta.tel.href}}">โทร {{cta.tel.label}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span>{{#if cta.docs}}<span class="hm-end__sep" aria-hidden="true">·</span><span>ขอเอกสารจัดซื้อได้ ใบเสนอราคา ใบกำกับภาษี</span>{{/if}}</p>{{else}}<p class="hm-end__alt">ขอเอกสารจัดซื้อได้ ใบเสนอราคา ใบกำกับภาษี<span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>{{/if}}
   </div>
-</section>
+</section>{{/if}}{{/if}}

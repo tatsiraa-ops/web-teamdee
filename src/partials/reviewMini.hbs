@@ -1,0 +1,10 @@
+{{!-- การ์ดรีวิวย่อในแถวเลื่อน · ปุ่มทั้งใบ เปิดกล่องดูรูป · ใช้ประโยคสั้น (short = ท่อนหนึ่งของคำพูดจริง ตัดด้วย …) อ่านเต็มในกล่อง 
+     sizes (ส่งมาจาก reviewMarquee thumbSizes) = srcset จากไฟล์ย่อของไฟล์ -480 (rvNN-480-320 / -480-400 · addSrcset ใน vite.config.js · ความเร็วมือถือ 30 ต.ค.)
+     ใช้ไฟล์ -480 เป็นตัวตั้ง ไม่ใช่ไฟล์ 1200: srcset จะไม่มีไฟล์ใหญ่ให้จอ DPR3 กระโดดไปโหลด · ไม่ส่ง (หน้าแรก) = ไฟล์ -480 เดิม --}}
+<button type="button" class="rvm__c{{#unless this.img}} rvm__c--text{{/unless}}" data-rv-open="{{this.id}}"{{#if dup}} tabindex="-1"{{/if}}>
+  {{!-- ชื่อปุ่ม = "ดูรีวิวและรูปของ…" + คำรีวิวที่เห็น (30 ต.ค. · เดิม aria-label ทับ โปรแกรมอ่านจอไม่ได้ยินคำรีวิว) --}}
+  <span class="sr-only">ดูรีวิวและรูปของ {{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}: </span>
+  {{#if this.img}}<span class="rvm__img"><img src="{{this.imgSmall}}"{{#if sizes}} data-sizes="{{sizes}}"{{/if}} alt="" width="480" height="320" loading="lazy" decoding="async">{{#if this.gallery.length}}<span class="rvm__n"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 8"/></svg>{{this.gallery.length}} รูป</span>{{/if}}</span>{{/if}}
+  <span class="rvm__q">{{#if this.short}}{{{ph this.short}}}{{else}}{{{ph this.quote}}}{{/if}}</span>
+  <span class="rvm__who"><b>{{#if this.who}}{{{ph this.who}}}{{else}}{{{ph this.kind}}}{{/if}}</b><small>{{#if this.who}}{{this.kind}} · {{/if}}รีวิวจากแชทจริง</small></span>
+</button>

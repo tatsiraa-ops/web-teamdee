@@ -1,0 +1,15 @@
+{{!-- ส่วน Uses ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 13 · เลือกตามงานที่ใช้ -->
+<section id="uses">
+  <div class="wrap section">
+    <h2 class="t-display text-[clamp(24px,3vw,36px)]">{{{ph pp.uses.h}}}</h2>
+    {{!-- ย่อหน้าคำค้น (seo-keywords.json) ย้ายจาก hero มาไว้ตรงนี้ ให้ hero สั้นตาม v22 (2 พ.ย.) --}}
+    {{#if item.seoLine}}<p class="t-body mt-3 max-w-[70ch]">{{item.seoLine}}</p>{{/if}}
+    {{#if pp.uses.links.length}}<div class="chiprail mt-6">{{#each pp.uses.links}}<a class="chip" href="{{url this.to}}">{{this.t}}</a>{{/each}}</div>{{/if}}
+    {{#if pp.uses.compare.length}}
+    <p class="t-body mt-6">อยากเปรียบเทียบกับงานแบบอื่น?
+      {{#each pp.uses.compare}}<a class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4" href="{{url this.to}}">{{this.t}}</a>{{#unless @last}} · {{/unless}}{{/each}}
+    </p>
+    {{/if}}
+  </div>
+</section>

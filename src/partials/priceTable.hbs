@@ -12,11 +12,11 @@
       {{#each @root.pricing.kinds as |k|}}
       <tr>
         <th scope="row"><b class="block text-ink font-bold">{{k.name}}</b><span class="block text-[14px] text-ink-3">{{k.sub}}</span></th>
-        {{#if k.byDesign}}<td class="ptable__note" colspan="{{@root.pricing.bands.length}}">ประเมินราคาตามแบบ · ขึ้นกับขนาดลายและจำนวนตำแหน่ง</td>{{else}}{{#each @root.pricing.bands as |b|}}<td>{{#with (lookup (lookup @root.pricing.prices k.id) b.id) as |p|}}{{baht p}}{{else}}<span class="text-ink-3 font-semibold">สอบถาม</span>{{/with}}</td>{{/each}}{{/if}}
+        {{#if k.byDesign}}<td class="ptable__note" colspan="{{@root.pricing.bands.length}}">{{#if k.note}}{{k.note}}{{else}}ประเมินราคาตามแบบ · ขึ้นกับขนาดลายและจำนวนตำแหน่ง{{/if}}</td>{{else}}{{#each @root.pricing.bands as |b|}}<td>{{#with (lookup (lookup @root.pricing.prices k.id) b.id) as |p|}}{{baht p}}{{else}}<span class="text-ink-3 font-semibold">สอบถาม</span>{{/with}}</td>{{/each}}{{/if}}
       </tr>
       {{/each}}
     </tbody>
   </table>
-  <p class="ptable__foot">หน่วยเป็นบาทต่อตัว · ออปชันเสริมต่อตัว {{#each @root.pricing.options as |o|}}<span class="inline-block">{{o.name}} +{{#if o.add}}{{baht o.add}} บาท{{else}}สอบถาม{{/if}}{{#unless @last}}&nbsp;·{{/unless}}</span> {{/each}}</p>
+  <p class="ptable__foot"><span class="inline-block">หน่วยเป็นบาทต่อตัว ·</span> <span class="inline-block">ออปชันเสริมต่อตัว</span> {{#each @root.pricing.options as |o|}}<span class="inline-block">{{o.name}} +{{#if o.add}}{{baht o.add}} บาท{{else}}สอบถาม{{/if}}{{#unless @last}}&nbsp;·{{/unless}}</span> {{/each}}</p>
 </div>
 <p class="scroll-hint">ปัดตารางไปทางขวาเพื่อดูคอลัมน์ที่เหลือ</p>

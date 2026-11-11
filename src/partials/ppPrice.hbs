@@ -1,0 +1,58 @@
+{{!-- ส่วน Price ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) · 2 พ.ย.: เอาแถบขั้นต่อไปท้ายส่วนออก กล่อง quote ต่อท้ายทันที CTA ซ้อนกัน 2 ชั้น --}}
+<!-- 05 · ราคา -->
+{{#if pp.price.show}}
+<section class="bg-shell border-y border-line" id="price">
+  {{!-- คอม: ข้อความซ้าย กล่องราคาขวา แล้วตารางกว้างเต็มแถวข้างล่าง ไม่ให้คอลัมน์ผ้าโดนบีบ (audit P3: ตาราง 664px ถูกบีบในช่อง 546px) --}}
+  <div class="wrap section grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-x-16 lg:gap-y-10 items-start">
+    <div>
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoTag}}</span>ราคา</span>
+      <h2 class="t-display text-[clamp(28px,3.6vw,44px)]">{{{ph pp.price.h}}}</h2>
+      {{#if pp.price.factors.length}}
+      <h3 class="text-[19px] mt-7">{{pp.price.factorsTitle}}</h3>
+      <ul class="mt-3 space-y-2.5">{{#each pp.price.factors}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
+      {{/if}}
+      {{#if pp.price.need}}
+      <h3 class="text-[19px] mt-7">{{pp.price.need.h}}</h3>
+      <ul class="mt-3 space-y-2.5">{{#each pp.price.need.items}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
+      {{/if}}
+      <p class="t-xs mt-6 max-w-[44ch]">ราคายืนยันอยู่ในใบเสนอราคา</p>
+    </div>
+    <div>
+      {{#if pp.price.box}}
+      {{!-- กล่องราคาขั้นบันได (audit P3): ตัวเลขใหญ่ = ราคาที่จำนวนน้อยสุด → ราคาที่จำนวนมาก · บรรทัดรองบอกจำนวนของแต่ละปลาย (src/js/prices.js) --}}
+      <div class="pbox">{{#if pp.price.box.amount}}<p class="pbox__k">ราคาต่อตัว ตามจำนวนที่สั่ง</p><p class="pbox__v"><span class="pbox__n">{{pp.price.box.amount}}</span> <span class="pbox__u">{{pp.price.box.unit}}</span></p>{{else}}<p class="text-[22px] font-bold">{{pp.price.box.strong}}</p>{{/if}}<p class="pbox__p">{{{ph pp.price.box.p}}}</p><p class="pbox__s">{{{ph pp.price.box.small}}}</p></div>
+      {{/if}}
+      {{#if pp.price.calcHref}}<a class="pp-more mt-5" href="{{pp.price.calcHref}}">คำนวณราคาตามจำนวน<span class="arw" aria-hidden="true">&rarr;</span></a>{{/if}}
+      {{#unless pp.price.confirmed}}
+      <div class="bg-paper border-2 border-ink rounded-plate p-7 {{#if pp.price.box}}mt-5{{/if}}">
+        <p class="text-[22px] font-bold">ขอราคาตามแบบและจำนวนของทีมคุณ</p>
+        <p class="t-body mt-2">ส่งรหัสแบบหรือภาพอ้างอิง จำนวนคร่าว ๆ และวันที่ต้องใช้ ทีมดีแจ้งราคาต่อตัวให้ ออกแบบฟรี ขั้นต่ำ 10 ตัว</p>
+        <a class="cb cb--p mt-5" href="{{priceAsk}}" data-track="line" data-where="pp-price-box"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ขอราคาทาง LINE</span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        {{#unless wp}}<p class="pending-ribbon mt-4">รอตารางราคาจากทีม (ใส่ใน src/data/prices.json) · ได้แล้วกล่องนี้หายเอง ตารางราคาขึ้นแทน</p>{{/unless}}
+      </div>
+      {{/unless}}
+    </div>
+    {{#if pp.price.table}}
+    <div class="lg:col-span-2 min-w-0">
+      {{!-- ตารางราคาแบบใบเสนอราคา: เส้นบาง หัวเทาตัวเล็ก ตัวเลขชิดขวาหนา (อาร์ต 23 ต.ค.: แบบกรอบดำหนา "ดูเด็กเล่น") --}}
+      {{!-- data-price-compare: ตาราง ≥3 คอลัมน์ราคา บนมือถือ (<768) เลือกช่วงจำนวนแล้วเห็นราคาทุกคอลัมน์ (src/js/price-compare.js · audit มือถือ 30 ต.ค. ข้อ 10)
+            ตาราง ≤2 คอลัมน์ราคา (พิมพ์ลาย · สกรีน · เบสบอล · Jersey) พอดีจอ ไม่เปลี่ยน · ไม่มี JS = ตารางเต็มนี้ --}}
+      <div data-price-compare="{{item.id}}">
+      <div class="ptable" tabindex="0" role="region" aria-label="ตารางราคาต่อตัว">
+        <table>
+          <caption>ราคาต่อตัว (บาท) · รวม VAT 7%</caption>
+          <thead><tr>{{#each pp.price.table.head}}<th scope="col">{{{ph this}}}</th>{{/each}}</tr></thead>
+          <tbody>{{#each pp.price.table.rows}}<tr>{{#each this}}{{#if @first}}<th scope="row">{{this}}</th>{{else}}<td>{{this}}</td>{{/if}}{{/each}}</tr>{{/each}}</tbody>
+        </table>
+      </div>
+      {{#if (lt 3 pp.price.table.head.length)}}<p class="pcmp-hint t-xs mt-2 md:hidden">ปัดตารางไปทางซ้ายเพื่อดูผ้าอื่น</p>{{/if}}
+      </div>
+      {{#if pp.price.included}}<p class="t-sm font-semibold text-ink mt-4">{{{ph pp.price.included}}}</p>{{/if}}
+      {{#each pp.price.notes}}<p class="t-sm mt-2">{{{ph this}}}</p>{{/each}}
+    </div>
+    {{else}}
+    {{#if pp.price.notes.length}}<div class="lg:col-span-2">{{#each pp.price.notes}}<p class="t-sm mt-2">{{{ph this}}}</p>{{/each}}</div>{{/if}}
+    {{/if}}
+  </div>
+</section>
+{{/if}}

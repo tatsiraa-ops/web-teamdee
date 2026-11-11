@@ -1,44 +1,84 @@
 {{!-- แกลเลอรีแบบเสื้อพิมพ์ลายรายกลุ่ม 10 หน้า ตาม Wireframe v22 (22 ต.ค. 2026)
      ข้อความ: src/data/design-pages.json · แบบ: designs.json ที่ติดแท็กกลุ่มนี้ (vite designsFor)
-     กลุ่มที่ยังไม่มีแบบ: หน้าแจ้งตรงๆ + noindex (ตั้งใน index.html ของหน้า) จนกว่าจะมีแบบจริง --}}
+     ภาพแบบอ้างอิง + งานจริงของลูกค้า: คลังรูปกลาง media-library.json (vite galleryFor · 30 ต.ค.)
+     กลุ่มที่ยังไม่มีแบบ: หน้าแจ้งตรงๆ + noindex (ตั้งใน index.html ของหน้า) จนกว่าจะมีแบบจริง
+     30 ต.ค. (audit มือถือ ข้อ 11): ทุกภาพมีปุ่ม "เลือก" ใต้รูป + ถาดส่ง LINE ครั้งเดียว (pickTray.hbs · gallery-page.js)
+     ภาพไม่มีรหัสใช้ป้าย "รูปที่ N" · JS เติม data-pick เป็น "รูปที่ N จาก /หน้า/ (ไฟล์)" ให้ฝ่ายขายหาเจอ --}}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"แบบเสื้อ","item":"{{site.baseUrl}}{{url 'designs'}}"},{"@type":"ListItem","position":3,"name":"{{dp.h1}}"}]}</script>
 
-<section class="band-hero relative overflow-hidden">
-  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
+<section class="band-hero gallery-hero relative overflow-hidden">
   <div class="wrap relative py-12 md:py-16">
-    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'designs'}}">แบบเสื้อ</a><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'designs'}}">แบบเสื้อ</a><span aria-hidden="true">/</span><span aria-current="page">{{firstName item.name}}</span></nav>
     <h1 class="t-display text-[clamp(30px,4.4vw,52px)] text-ink mt-7 max-w-[24ch]">{{dp.h1}}</h1>
     <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[60ch] mt-5">{{dp.lead}}</p>
     <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink mt-8 max-sm:whitespace-normal max-sm:text-center" href="{{url 'uses' item.id}}">{{dp.back}}</a>
   </div>
 </section>
 
-<section class="wrap section">
+<section class="wrap section gallery-results">
   <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
     <h2 class="t-display text-[clamp(24px,3vw,34px)]">{{dp.gridH}}</h2>
-    <a class="pp-more" href="{{url 'designs'}}">ดูแบบเสื้อพิมพ์ลายทุกกลุ่ม<span class="arw" aria-hidden="true">&rarr;</span></a>
+    <a class="pp-more" href="{{url 'designs'}}">ดูแบบเสื้อทุกกลุ่ม<span class="arw" aria-hidden="true">&rarr;</span></a>
   </div>
+  {{#if gallery.inspiration}}<p class="bg-shell border border-line rounded-card p-5 mb-5">แนวทางปรับแบบสำหรับ{{item.name}} · คัดจากแบบในคลังทีมดีเพื่อคุยเรื่องสี โลโก้ และข้อความ ภาพเหล่านี้ไม่ได้แสดงผลงานลูกค้าในกลุ่มนี้โดยเฉพาะ</p>{{/if}}
   {{#if gallery.items.length}}
-  <p class="t-sm tabular-nums mb-5" role="status">{{gallery.items.length}} แบบ · กดขยาย เซฟรูป (มีรหัสอยู่ในภาพ) แล้วส่งคุยใน LINE</p>
+  <p class="t-sm tabular-nums mb-5">{{!-- ลองใช้จริง 30 ต.ค.: คำเดิมใช้ศัพท์ภายใน ลูกค้าใหม่ไม่รู้ว่าคืออะไร --}}{{gallery.codedN}} แบบมีรหัส (เช่น TD-0001) ส่งรหัสให้ทีมดีได้เลย{{#if gallery.referenceN}} · อีก {{gallery.referenceN}} ภาพเป็นงานที่เคยทำ{{/if}} · กด "เลือก" ได้หลายภาพ แล้วส่งทาง LINE ครั้งเดียว</p>
   <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" id="galGrid" data-line-url="{{site.lineUrl}}">
     {{#each gallery.items}}
-    {{#if this.square}}
-    <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="" data-meta="แบบจากคลังผลงานทีมดี">
-      <img src="{{this.img}}" width="1080" height="1080" loading="lazy" decoding="async" alt="{{this.alt}}" class="w-full h-full object-contain">
+    {{!-- คลังรูปกลาง 30 ต.ค.: หัวข้องานจริงคั่นในกริดเดียวกัน กล่องดูรูปใหญ่เลื่อนต่อกันได้ทั้งชุด · srcset จากไฟล์ย่อที่มีจริง (data-sizes) --}}
+    {{#if this.realFirst}}
+    <div class="col-span-full mt-6 md:mt-8">
+      <h3 class="t-display text-[clamp(20px,2.4vw,26px)]">{{@root.dp.realH}}</h3>
+      <p class="t-sm mt-2 max-w-[60ch]">{{@root.dp.realP}}</p>
+    </div>
+    {{/if}}
+    {{#if this.real}}
+    <div class="gcard" data-thumb="{{this.img}}">
+    <figure class="gcard__fig bg-shell" data-code="" data-meta="งานจริงของลูกค้า">
+      <img src="{{this.img}}" data-sizes="(min-width:1024px) 33vw, 50vw" width="{{this.w}}" height="{{this.h}}" loading="lazy" decoding="async" alt="{{this.alt}}" class="w-full h-full object-cover">
     </figure>
+      <div class="gcard__cap">
+        <p class="gcard__t"><b class="tabular-nums">รูปที่ {{inc @index}}</b><span>งานจริงของลูกค้า</span></p>
+        <button class="gcard__pick" type="button" aria-pressed="false" data-pick="" data-pick-n="{{inc @index}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="gcard__plus" d="M12 5v14M5 12h14"/><path class="gcard__tick" d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-pick-t>เลือก</span><span class="sr-only"> รูปที่ {{inc @index}}</span></button>
+      </div>
+    </div>
+    {{else if this.square}}
+    <div class="gcard" data-thumb="{{this.img}}">
+    <figure class="gcard__fig bg-paper" data-code="" data-meta="แบบจากคลังผลงานทีมดี">
+      {{!-- ไฟล์ 540 สำหรับช่องเล็ก (มือถือเคยโหลดไฟล์ 1080 ทุกช่อง ~4MB/หน้า · audit 26 ต.ค.) --}}<img src="{{this.img}}" data-sizes="(min-width:1024px) 33vw, 50vw" width="{{#if this.w}}{{this.w}}{{else}}1080{{/if}}" height="{{#if this.h}}{{this.h}}{{else}}1080{{/if}}" loading="lazy" decoding="async" alt="{{this.alt}}" class="w-full h-full object-contain">
+    </figure>
+      <div class="gcard__cap">
+        <p class="gcard__t"><b class="tabular-nums">รูปที่ {{inc @index}}</b><span>แบบอ้างอิง ไม่มีรหัส</span></p>
+        <button class="gcard__pick" type="button" aria-pressed="false" data-pick="" data-pick-n="{{inc @index}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="gcard__plus" d="M12 5v14M5 12h14"/><path class="gcard__tick" d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-pick-t>เลือก</span><span class="sr-only"> รูปที่ {{inc @index}}</span></button>
+      </div>
+    </div>
     {{else}}
-    <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2]" data-code="{{this.code}}" data-meta="{{this.meta}}">
-      <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1080w" sizes="(min-width:1024px) 33vw, 50vw" width="1080" height="720" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} รหัส {{this.code}} ด้านหน้าและด้านหลัง" class="w-full h-full object-contain">
+    <div class="gcard" data-thumb="{{this.imgSmall}}">
+    <figure class="gcard__fig bg-paper {{#if this.thumbBoard}}board-thumb{{/if}}" data-code="{{this.code}}" data-meta="{{this.meta}}">
+      <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} {{#if this.width}}{{this.width}}{{else}}1080{{/if}}w" sizes="(min-width:1024px) 33vw, 50vw" width="1080" height="720" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} {{this.techName}} รหัส {{this.code}}" class="w-full h-full object-contain">
     </figure>
+      <div class="gcard__cap">
+        <p class="gcard__t"><b class="tabular-nums">{{this.code}}</b><span>{{this.garmentName}}</span></p>
+        <button class="gcard__pick" type="button" aria-pressed="false" data-pick="{{this.code}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="gcard__plus" d="M12 5v14M5 12h14"/><path class="gcard__tick" d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-pick-t>เลือก</span><span class="sr-only"> แบบ {{this.code}}</span></button>
+      </div>
+    </div>
     {{/if}}
     {{/each}}
   </div>
+  {{!-- audit มือถือ 30 ต.ค. ข้อ 24: เลื่อนถึงท้ายแล้วโหลดครบทุกภาพ (/sports-shirt/ 113 ภาพ ~2.2MB) → JS โชว์ 24 ภาพแรก ปุ่มนี้เพิ่มทีละ 24 (gallery-page.js)
+       ทุกภาพยังอยู่ใน HTML ให้ Google เห็น · ไม่มี JS = เห็นครบ ไม่มีปุ่ม · ช่องประกาศอยู่นอกกล่องปุ่ม (ปุ่มหายตอนครบแล้วยังประกาศได้) --}}
+  <p class="gal-count t-sm tabular-nums" id="galCount" role="status" aria-live="polite"></p>
+  <div class="gal-more" hidden>
+    <button class="cb cb--s gal-more__btn" type="button" id="galMore" aria-controls="galGrid">ดูเพิ่ม</button>
+  </div>
+  {{!-- ถาดเลือกหลายแบบ ชุดเดียวกับ /designs/ (audit มือถือ 30 ต.ค. ข้อ 11) · ที่เลือกจำข้ามหน้า --}}
+  {{> pickTray where="gallery-tray" send="ทั้งหมด"}}
   {{else}}
   <div class="bg-shell border border-line rounded-plate p-7 md:p-9">
     <p class="t-lead max-w-[56ch]">ยังไม่มีแบบ{{item.name}}ขึ้นในคลังบนเว็บ ส่งภาพอ้างอิงหรือเล่าโจทย์มาให้ทีมออกแบบช่วยคิดได้ หรือดูแบบกลุ่มอื่นเป็นแนวทางก่อน</p>
     {{#unless wp}}<p class="pending-ribbon mt-5">รอแบบจริงของกลุ่มนี้จากทีมดีไซน์ · หน้านี้ตั้ง noindex ไว้จนกว่าจะมีแบบ</p>{{/unless}}
     <div class="flex flex-wrap gap-3 mt-6">
-      <a class="btn btn-orange" href="{{site.lineUrl}}" data-track="line">ส่งภาพอ้างอิงทาง LINE</a>
+      <a class="btn btn-orange" href="{{@root.pageLine}}" data-track="line">ส่งภาพอ้างอิงทาง LINE</a>
       <a class="btn btn-line" href="{{url 'designs'}}">ดูแบบเสื้อทุกกลุ่ม</a>
     </div>
   </div>
@@ -55,7 +95,7 @@
       <h2 class="t-display text-[clamp(22px,2.6vw,30px)]">{{dp.cta.h}}</h2>
       <p class="t-body mt-3">{{dp.cta.p}}</p>
       <div class="flex flex-wrap gap-3 mt-6">
-        <a class="btn btn-orange gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
+        <a class="btn btn-orange gap-2" href="{{@root.pageLine}}" data-track="line"><span class="block size-5">{{> icoChat}}</span>ทัก LINE ขอราคา</a>
         <a class="btn btn-line" href="{{url 'contact'}}?u={{item.id}}&amp;from=designs">ฝากข้อมูลให้ติดต่อกลับ</a>
       </div>
     </div>

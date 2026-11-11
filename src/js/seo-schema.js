@@ -47,5 +47,19 @@ export function businessSchema(site) {
   }
 }
 
+/** ชื่อแบบเสื้อแบบเดียวกับ alt รูป: "แบบ<ทรง> งาน<เทคนิค> รหัส TD-xxxx" */
+export const designName = (d) => `แบบ${d.garmentName} งาน${d.techName} รหัส ${d.code}`
+
+/** ItemList แบบเสื้อที่มีรหัส (หน้า /designs/ · ตรวจคำ SEO 26 ต.ค.) · ไม่มีแบบ = null */
+export function designListSchema(designs = [], baseUrl = '') {
+  if (!designs.length) return null
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    numberOfItems: designs.length,
+    itemListElement: designs.map((d, i) => ({ '@type': 'ListItem', position: i + 1, name: designName(d), image: baseUrl + d.img })),
+  }
+}
+
 /** JSON สำหรับใส่ใน <script type="application/ld+json"> · กัน </script> ในข้อความปิดแท็กก่อนเวลา */
 export const ldJson = (obj) => JSON.stringify(obj).replace(/</g, '\\u003c')

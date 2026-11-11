@@ -1,0 +1,27 @@
+{{!-- บริการของเรา โฉมใหม่ (อาร์ต 3 พ.ย. "ต้องเอาอันนี้มาใช้เลย") · ส่วน "เลือกบริการทำเสื้อ" ของหน้าแรกทั้งชุด (#services · hm-cats--hero-cards · ข้อมูล homeV4.cats ชุดเดียวกัน)
+     ต่างจากหน้าแรกแค่หัวข้อ: ใช้ H2 v22 ของหน้านี้ (ล็อกใน tests/v22-structure)
+     div.td-page-home = ขอบเขตให้ CSS หน้าแรก (:is(.page-home,.td-page-home) #services …) ทำงานกับชิ้นนี้ทั้งชุด ไม่ต้องคัด CSS ซ้ำ (ไม่มี JS อ่านคลาสนี้) --}}
+<div class="td-page-home up2-home">
+  <section class="wrap hm-sec" id="services" aria-labelledby="up2-svc-h">
+    <header class="hm-head hm-head--left">
+      <h2 id="up2-svc-h">{{{hl up.products.h "งานของบริษัทคุณ?"}}}</h2>
+    </header>
+    <ul class="hm-cats hm-cats--3 hm-cats--poster hm-cats--hero-cards">
+      {{#each homeV4.cats.items}}
+      <li>
+        <div class="hm-cat">
+          <span class="hm-cat__img is-service-{{this.id}}">
+            <img src="{{this.img}}"{{#if this.imgSmall}} srcset="{{this.imgSmall}} 640w, {{this.img}} 960w" sizes="(min-width:1280px) 430px, (min-width:768px) 33vw, 82vw"{{/if}} alt="" width="960" height="640" loading="lazy" decoding="async">
+            {{#if this.imageLabel}}<span class="hm-cat__image-label">{{this.imageLabel}}</span>{{/if}}
+          </span>
+          <span class="hm-cat__body">
+            <a class="hm-cat__name hm-cat__link" href="{{url 'products' this.id}}">{{#if this.kind}}<span class="hm-cat__kind">{{this.kind}}</span><span class="sr-only"> · {{this.title}}</span>{{else}}{{this.title}}{{/if}}</a>
+            <span class="hm-cat__tag">{{{dots this.tag}}}</span>
+            <span class="hm-cat__more is-link" aria-hidden="true"><span>{{{ph this.more}}}</span><span class="arw"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+          </span>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </section>
+</div>

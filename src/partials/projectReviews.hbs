@@ -1,0 +1,41 @@
+{{!-- กระดานรีวิว /project/ (รอบ 169c · 9 พ.ย. อาร์ตแคปกระดานหน้าแรก "ชอบแบบนี้อะ ทำให้มันดีกว่าอันนี้")
+     คัดลอกโครง homeReference-reviews.hbs (hm-rvb · review-board.js · review-dialog.js) ทั้งชุด แล้วต่อยอด:
+     · กว้างพิเศษ (pj-rvb · page-project.css) · รีวิวครบทุกราย (pjBoard ใน vite.config.js · หน้าแรกเฉพาะที่มีรูป)
+     · 4 เรื่องเด่นอยู่ในกระดาน: ป้าย "เรื่องเด่น" + หัวเรื่อง + ข้อเท็จจริงจากแชท (reviews.json stories · ไม่แต่งเพิ่ม) + ไอคอน 3D ของเรื่องแทนไอคอนคำพูด
+     · ไม่มีอะไรเลื่อนเอง (แถวรายชื่อรีวิวใต้กระดาน ลองแล้วอาร์ต "ไม่เอา" 9 พ.ย.)
+     · ไอคอนลอย + รูปวงกลมในการ์ด = พื้นหลัง CSS (ตกแต่ง ไม่นับงบรูปมือถือ ≤ 200 · ไฟล์ -480-160)
+     · ปุ่มรองในการ์ด = ดูรูปทั้งชุด (หน้าแรกเป็นลิงก์มาหน้านี้) · รีวิวไม่มีรูป = การ์ดคำรีวิวอย่างเดียว --}}
+<section class="hm-sec hm-customer-proof pj-rvb-sec" id="reviews" aria-labelledby="reviews-h">
+  <div class="wrap hm-rvb pj-rvb" data-rvb>
+    <div class="hm-rvb__left">
+      <h2 id="reviews-h">{{{hl h tail}}}</h2>
+      <p class="hm-rvb__lead">คำพูดจริงจากแชทลูกค้าหลังได้รับเสื้อ {{stories.length}} เรื่องเด่น และรีวิวทั้งหมด {{items.length}} ราย เลือกกลุ่มงานเพื่อดูรูปงานจริง</p>
+      <div class="hm-rvb__chips" role="group" aria-label="เลือกรีวิวตามกลุ่มงาน">{{#each chips}}<button type="button" data-rvb-use="{{this.use}}" aria-pressed="{{#if @first}}true{{else}}false{{/if}}">{{this.name}}</button>{{/each}}</div>
+      {{#each groups}}
+      <figure class="hm-rvb__mosaic" data-rvb-group="{{this.use}}"{{#unless @first}} hidden{{/unless}}>{{#each this.photos}}<img src="{{this}}"{{#unless (eq @index 2)}}{{#unless (eq @index 4)}} data-sizes="(min-width:1024px) 240px, 33vw"{{/unless}}{{/unless}} alt="ภาพงานจริงของลูกค้ากลุ่ม{{../name}}" width="800" height="600" loading="lazy" decoding="async">{{/each}}</figure>
+      {{/each}}
+    </div>
+    <div class="hm-rvb__right">
+      <div class="hm-rvb__top"><p class="hm-rvb__label">ภาพงานจริงจากรีวิว</p><div class="hm-rvb__nav"><span class="hm-rvb__count tabular-nums" data-rvb-count aria-live="polite">1 / {{items.length}}</span><button type="button" class="hm-rvb__arw" data-rvb-step="-1" aria-label="รีวิวก่อนหน้า"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hm-rvb__arw" data-rvb-step="1" aria-label="รีวิวถัดไป"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
+      {{#each items}}
+      <article class="hm-rvb__item{{#if @first}} is-on{{/if}}"{{#if @first}} id="stories"{{/if}} data-rvb-item data-use="{{this.use}}" data-id="{{this.id}}" aria-label="รีวิวจาก {{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}">
+        {{#if this.img}}<button type="button" class="hm-rvb__photo" data-rv-open="{{this.id}}"><span class="sr-only">ดูรูปทั้ง {{this.total}} รูปของ {{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}</span><img src="{{this.img}}" srcset="{{this.imgSmall}} 480w, {{this.img}} 1200w" sizes="(min-width:1024px) 680px, 90vw" alt="" width="1200" height="800" loading="lazy" decoding="async"><span class="hm-rvb__zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>ดูรูปทั้งชุด {{this.total}} รูป</span></button>{{/if}}
+        <div class="hm-rvb__card{{#unless this.img}} pj-rvb__card--text{{/unless}}">
+          <span class="hm-rvb__pop pj-rvb__pop" style="background-image:url({{#if this.story}}{{this.story.icon}}{{else}}/img/icons/review-quote.webp{{/if}})" aria-hidden="true"></span>
+          <div class="hm-rvb__head">{{#if this.thumb}}<span class="hm-rvb__avatar pj-rvb__av" style="background-image:url({{this.thumb}})" aria-hidden="true"></span>{{else}}<span class="hm-rvb__avatar pj-rvb__mono" aria-hidden="true">{{this.mono}}</span>{{/if}}<p class="hm-rvb__who"><b>{{#if this.who}}{{{ph this.who}}}{{else}}{{{ph this.kind}}}{{/if}}</b><small>{{#if this.who}}{{this.kind}} · {{/if}}รีวิวจากแชทจริง</small></p></div>
+          {{#if this.story}}
+          <div class="pj-rvb__story">
+            <p class="pj-rvb__tag">เรื่องเด่นจากทีมลูกค้า</p>
+            <h3 class="pj-rvb__t">{{{ph this.story.title}}}</h3>
+            <ul class="pj-rvb__f">{{#each this.story.facts}}<li>{{this}}</li>{{/each}}</ul>
+          </div>
+          {{/if}}
+          <blockquote class="hm-rvb__q"><p>{{{ph this.quote}}}</p></blockquote>
+          <div class="hm-rvb__acts"><a class="cb cb--p hm-rvb__cta" href="{{this.line}}" data-track="line" data-where="project-review"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">อยากได้เสื้อแบบนี้</span></a>{{#if this.img}}<button type="button" class="hm-rvb__all" data-rv-open="{{this.id}}">ดูรูปทั้งชุด {{this.total}} รูป</button>{{/if}}</div>
+        </div>
+      </article>
+      {{/each}}
+    </div>
+    <script type="application/json" data-rv-json>{{{json all}}}</script>
+  </div>
+</section>

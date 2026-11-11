@@ -1,5 +1,5 @@
 {
-  "_note": "บทความเดิม 12 เรื่องบน team-dee.com (URL-MIGRATION-MAP v22: KEEP ทุก URL) · ดึงจากหน้าสาธารณะ 22 ต.ค. 2026 · ตัวบทความยังอยู่ใน CMS เดิม หน้านี้ใช้แค่ลิงก์ ชื่อ คำโปรย รูปปก · บทความใหม่ใน CMS ต้องเพิ่มที่นี่จนกว่าจะดึงจาก WordPress อัตโนมัติ",
+  "_note": "บทความเดิม 12 เรื่องบน team-dee.com (URL-MIGRATION-MAP v22: KEEP ทุก URL) · ดึงจากหน้าสาธารณะ 22 ต.ค. 2026 · ตัวบทความยังอยู่ใน CMS เดิม หน้านี้ใช้แค่ลิงก์ ชื่อ คำโปรย รูปปก · บทความใหม่ใน CMS ต้องเพิ่มที่นี่จนกว่าจะดึงจาก WordPress อัตโนมัติ · img/srcset = ขนาดย่อยที่ WordPress ทำไว้ (ดึงจากหน้าบทความ ตรวจ 200 ทุกไฟล์ 30 ต.ค. 2026 · ไฟล์ต้นฉบับเต็ม 0.5–0.7MB ไม่ใช้)",
   "cats": [
     {
       "id": "purchasing-guide",
@@ -29,7 +29,8 @@
       "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-4@2x-1024x513.png",
       "date": "2026-10-05",
       "dateTh": "5 ต.ค. 2026",
-      "cat": "fabric-technique"
+      "cat": "fabric-technique",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-4@2x-300x150.png 300w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-4@2x-768x384.png 768w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-4@2x-1024x513.png 1024w"
     },
     {
       "slug": "sports-running-shirt-fabric-guide",
@@ -39,7 +40,8 @@
       "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-2@2x-1024x513.jpg",
       "date": "2026-10-05",
       "dateTh": "5 ต.ค. 2026",
-      "cat": "fabric-technique"
+      "cat": "fabric-technique",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-2@2x-300x150.jpg 300w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-2@2x-768x384.jpg 768w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-2@2x-1024x513.jpg 1024w"
     },
     {
       "slug": "polo-shirt-size-chart-uniform-guide",
@@ -49,7 +51,8 @@
       "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-3@2x-1024x513.png",
       "date": "2026-10-05",
       "dateTh": "5 ต.ค. 2026",
-      "cat": "purchasing-guide"
+      "cat": "purchasing-guide",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-3@2x-300x150.png 300w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-3@2x-768x384.png 768w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-3@2x-1024x513.png 1024w"
     },
     {
       "slug": "how-to-start-clothing-brand-production-guide",
@@ -59,7 +62,8 @@
       "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-6@2x-1024x513.png",
       "date": "2026-10-05",
       "dateTh": "5 ต.ค. 2026",
-      "cat": "purchasing-guide"
+      "cat": "purchasing-guide",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-6@2x-300x150.png 300w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-6@2x-768x384.png 768w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-6@2x-1024x513.png 1024w"
     },
     {
       "slug": "garment-production-cost-structure-bulk-order",
@@ -69,7 +73,8 @@
       "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-5@2x-1024x513.png",
       "date": "2026-10-05",
       "dateTh": "5 ต.ค. 2026",
-      "cat": "purchasing-guide"
+      "cat": "purchasing-guide",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-5@2x-300x150.png 300w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-5@2x-768x384.png 768w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-5@2x-1024x513.png 1024w"
     },
     {
       "slug": "event-sports-day-t-shirt-timeline-management",
@@ -79,67 +84,74 @@
       "img": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-7@2x-1024x513.png",
       "date": "2026-10-05",
       "dateTh": "5 ต.ค. 2026",
-      "cat": "purchasing-guide"
+      "cat": "purchasing-guide",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/10/Artboard-7@2x-300x150.png 300w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-7@2x-768x384.png 768w, https://team-dee.com/wp-content/uploads/2026/10/Artboard-7@2x-1024x513.png 1024w"
     },
     {
       "slug": "sublimation-sportswear-designs",
       "url": "/sublimation-sportswear-designs/",
       "title": "50+ แบบเสื้อกีฬาพิมพ์ลาย สุดเท่ปี 2026 เซฟเรฟไปสั่งทำได้เลย",
       "excerpt": "ส่อง 50+ ไอเดียแบบเสื้อกีฬาพิมพ์ลายสุดเท่ อัปเดตปี 2026 ครบทั้งลายเสื้อฟุตบอลสวยๆ เสื้อวิ่งพิมพ์ลาย เสื้อกีฬาสี และอีสปอร์ต เซฟเรฟไปสั่งทำเสื้อกีฬาพิมพ์ลายกับ TEAMDEE ขึ้นม็อกอัป 3D ฟรี สั่งผลิตเริ่มต้น 10 ตัว",
-      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-5.webp",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-5-1024x512.webp",
       "date": "2026-09-08",
       "dateTh": "8 ก.ย. 2026",
-      "cat": "sportswear-sublimation"
+      "cat": "sportswear-sublimation",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-5-300x150.webp 300w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-5-768x384.webp 768w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-5-1024x512.webp 1024w"
     },
     {
       "slug": "shirt-production-techniques-guide",
       "url": "/shirt-production-techniques-guide/",
       "title": "สกรีน DFT งานปัก หรือพิมพ์ลาย? เลือก เทคนิคการผลิตเสื้อ แบบไหนให้เหมาะกับทีม",
       "excerpt": "เทียบชัด 3 เทคนิคการผลิตเสื้อยอดนิยม งานปักคอมพิวเตอร์ สกรีนเสื้อ DFT และพิมพ์ลายซับลิเมชัน ทำเสื้อบริษัทหรือเสื้อทีมควรเลือกแบบไหนให้ตอบโจทย์ภาพลักษณ์ คุ้มค่างบประมาณ และตรงตามสเปกการใช้งาน",
-      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-6.webp",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-6-1024x513.webp",
       "date": "2026-09-08",
       "dateTh": "8 ก.ย. 2026",
-      "cat": "fabric-technique"
+      "cat": "fabric-technique",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-6-300x150.webp 300w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-6-768x385.webp 768w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-6-1024x513.webp 1024w"
     },
     {
       "slug": "polo-shirt-fabric-guide",
       "url": "/polo-shirt-fabric-guide/",
       "title": "ทริคเลือกเนื้อผ้า สั่งผลิตเสื้อโปโล พนักงาน ใส่สบาย ไม่ยับ ไม่ต้องรีด",
       "excerpt": "เจาะลึก 3 เนื้อผ้าเสื้อโปโลยอดฮิตสำหรับพนักงานออฟฟิศ ทั้งผ้าไมโคร จูติไมโคร และดรายเทค สั่งผลิตเสื้อโปโลแบบไหนใส่สบาย ระบายอากาศดี ไม่ต้องรีด เช็กก่อนสั่งได้ที่นี่",
-      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-4.webp",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-4-1024x512.webp",
       "date": "2026-09-08",
       "dateTh": "8 ก.ย. 2026",
-      "cat": "purchasing-guide"
+      "cat": "purchasing-guide",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-4-300x150.webp 300w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-4-768x384.webp 768w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-4-1024x512.webp 1024w"
     },
     {
       "slug": "how-to-design-sportswear-color-guide",
       "url": "/how-to-design-sportswear-color-guide/",
       "title": "4 เคล็ดลับ ออกแบบเสื้อกีฬา ให้สีสดตรงปก ภาพไม่แตกเมื่อผลิตจริง",
       "excerpt": "เจาะลึก 4 ทริคเตรียมไฟล์ ออกแบบเสื้อกีฬา ให้สีสดตรงปก งานพิมพ์ไม่แตก ไม่เบลอ เทียบชัดเจนระหว่าง RGB กับ CMYK พร้อมเทคนิคส่ง ผลิตเสื้อพิมพ์ลาย ให้ได้งานตรงตามสเปกและ CI แบรนด์",
-      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-7.webp",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-7-1024x512.webp",
       "date": "2026-09-08",
       "dateTh": "8 ก.ย. 2026",
-      "cat": "purchasing-guide"
+      "cat": "purchasing-guide",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-7-300x150.webp 300w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-7-768x384.webp 768w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-7-1024x512.webp 1024w"
     },
     {
       "slug": "how-to-choose-garment-factory-checklist",
       "url": "/how-to-choose-garment-factory-checklist/",
-      "title": "5 เช็กลิสต์เลือกโรงงานรับผลิตเสื้อ ไม่ให้โดนเท งานตรงสเปก ส่งตรงเวลา",
-      "excerpt": "วิธีคัดกรองโรงงานรับผลิตเสื้อไม่ให้โดนเทงาน ส่อง 5 มาตรฐานโรงงานผลิตเสื้อครบวงจร งานตัดเย็บประณีต มีแบบ 3D ตรวจก่อนตัดเย็บจริง ส่งตรงเวลา ไม่มีบวกเพิ่ม",
-      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-3.webp",
+      "title": "5 เช็กลิสต์เลือกผู้รับผลิตเสื้อ ไม่ให้โดนเท งานตรงสเปก ส่งตรงเวลา",
+      "excerpt": "วิธีคัดกรองผู้รับผลิตเสื้อไม่ให้โดนเทงาน ส่อง 5 มาตรฐานผู้ผลิตผลิตเสื้อครบวงจร งานตัดเย็บประณีต มีแบบ 3D ตรวจก่อนตัดเย็บจริง ส่งตรงเวลา ไม่มีบวกเพิ่ม",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-3-1024x513.webp",
       "date": "2026-09-08",
       "dateTh": "8 ก.ย. 2026",
-      "cat": "purchasing-guide"
+      "cat": "purchasing-guide",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-3-300x150.webp 300w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-3-768x385.webp 768w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-3-1024x513.webp 1024w"
     },
     {
       "slug": "choose-uniform-manufacturer-checklist",
       "url": "/choose-uniform-manufacturer-checklist/",
       "title": "5 เช็กลิสต์เลือกบริษัทรับผลิตเสื้อยูนิฟอร์ม สวยตรงปก ไม่โดนเท",
       "excerpt": "หมดปัญหาเสื้อไม่ตรงปก รวม 5 เช็กลิสต์เลือกบริษัทรับผลิตเสื้อยูนิฟอร์มและสั่งผลิตเสื้อโปโลองค์กรระดับมืออาชีพ เนื้อผ้าพรีเมียม ขึ้นแบบ 3D ฟรี พร้อมใบกำกับภาษีเต็มรูปแบบ",
-      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-2.webp",
+      "img": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-2-1024x512.webp",
       "date": "2026-09-08",
       "dateTh": "8 ก.ย. 2026",
-      "cat": "purchasing-guide"
+      "cat": "purchasing-guide",
+      "srcset": "https://team-dee.com/wp-content/uploads/2026/09/Artboard-2-300x150.webp 300w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-2-768x384.webp 768w, https://team-dee.com/wp-content/uploads/2026/09/Artboard-2-1024x512.webp 1024w"
     }
   ]
 }

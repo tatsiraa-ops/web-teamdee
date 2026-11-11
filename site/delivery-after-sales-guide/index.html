@@ -2,8 +2,14 @@
 <html lang="th">
 <head>
   {{> head}}
+  {{!-- CSS เฉพาะหน้าโหลดใน head (27 ต.ค.) · เดิม import ผ่าน JS → ตอนเปิดหน้ารูป/ไอคอนกางใหญ่แวบก่อน CSS มา --}}
+  <link rel="stylesheet" href="/src/styles/article-reader.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-blocks.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-material-lab.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-process-studio.css" data-page-css>
   <title>การจัดส่งเสื้อ การตรวจรับ และบริการหลังการขาย | TEAMDEE</title>
-  <meta name="description" content="รู้ขั้นตอนรับเสื้อ ตรวจงาน แจ้งปัญหา และสั่งซ้ำ">
+  <meta name="description" content="จัดส่งและตรวจรับเสื้อทีมกับทีมดี เช็กจำนวน ไซซ์ และชื่อทันทีที่ได้รับ พบปัญหาจากการผลิตแจ้งภายใน 7 วันหลังรับสินค้า สั่งเพิ่มแบบเดิม 30 วันได้ราคาเดิม">
 </head>
 <body>
 {{> siteHeader active="learn"}}

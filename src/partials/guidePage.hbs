@@ -1,89 +1,43 @@
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"คู่มือและบทความ"},{"@type":"ListItem","position":3,"name":"{{item.name}}"}]}</script>
-
-<!-- หัวคู่มือ -->
-<section class="band-hero relative overflow-hidden">
-  <span class="absolute inset-x-0 top-0 h-1 bg-orange z-10" aria-hidden="true"></span>
-  <div class="wrap relative py-12 md:py-16">
-    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>คู่มือและบทความ</span><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
-    <h1 class="t-display text-[clamp(30px,4.4vw,54px)] text-ink mt-7 max-w-[24ch]">{{#if item.h1}}{{item.h1}}{{else}}{{item.name}}{{/if}}</h1>
-    {{#if item.lead}}<p class="text-[19px] leading-[1.75] text-ink-2 max-w-[56ch] mt-4">{{item.lead}}</p>{{/if}}
-    <p class="text-[17px] leading-[1.75] text-ink-2 max-w-[56ch] mt-3">สำหรับ {{item.who}}</p>
-    <p class="text-[15px] text-ink-3 mt-3">อัปเดต {{item.updated}}</p>
-    {{#if item.hidden}}
-    <p class="mt-6 inline-block border-2 border-orange rounded-card px-4 py-3 text-[16px] font-semibold text-ink">หน้านี้รองรับไว้ ยังไม่เปิดในเมนูและยังไม่ให้ Google เก็บ · เปิดเมื่อบริการพร้อม [รอยืนยัน]</p>
-    {{/if}}
-    <p class="text-[18px] leading-[1.8] text-ink-2 max-w-[60ch] mt-5">{{item.intro}}</p>
-
-    <div class="flex flex-wrap items-center gap-2.5 mt-8 pt-6 border-t border-line">
-      <span class="text-[15px] font-semibold text-ink-3 mr-1">ในคู่มือนี้แยกไว้ว่าใครทำอะไร</span>
-      <span class="gtag gtag--customer">ลูกค้าส่ง</span>
-      <span class="gtag gtag--teamdee">ทีมดีทำ</span>
-      <span class="gtag gtag--approve">ต้องอนุมัติ</span>
-    </div>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"คู่มือและบทความ","item":"{{site.baseUrl}}{{url 'blog'}}"},{"@type":"ListItem","position":3,"name":"{{item.name}}"}]}</script>
+<div class="td-guide td-guide--{{item.id}}">
+  {{!-- hero เดียว (ตรวจหน้าคู่มือ 27 ต.ค.): พื้น shell แบบหน้าแบบเสื้อ/รีวิว/FAQ · คำถามลัด 3 ข้อพาไปหัวข้อ (guide-presentation.js quickLinks)
+       ปุ่ม "เลือกคู่มือเรื่องอื่น" ด้านบนเอาออก ซ้ำกับรายการคู่มือท้ายหน้าและเมนู --}}
+  <header class="td-guide__header"><div class="wrap">
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'blog'}}">คู่มือและบทความ</a><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
+    <h1 class="t-display td-guide__h1">{{#if item.h1}}{{{ph item.h1}}}{{else}}{{{ph item.name}}}{{/if}}</h1>
+    {{#if item.lead}}<p class="td-guide__lead">{{item.lead}}</p>{{/if}}
+    <p class="td-guide__meta"><span>{{item.sections.length}} หัวข้อ</span><span aria-hidden="true">·</span><span>อัปเดต {{item.updated}}</span></p>
+    {{#if item.hidden}}<p class="td-guide__notice">หน้านี้เป็นต้นแบบที่ยังไม่เปิดเผยแพร่ ข้อมูลบางส่วนรอยืนยัน</p>{{/if}}
+    {{#if item.quickLinks.length}}<ul class="td-guide__quick" aria-label="คำถามที่คู่มือนี้ตอบ">{{#each item.quickLinks}}<li style="--i:{{@index}}"><a href="#{{this.id}}"><span>{{this.label}}</span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a></li>{{/each}}</ul>{{/if}}
+  </div></header>
+  <div class="wrap td-guide__experience">
+    {{> guideMaterialLab}}
+    {{> guideProcessStudio}}
   </div>
-</section>
-
-<section class="wrap section">
-  <div class="grid lg:grid-cols-[250px_minmax(0,1fr)] gap-10 lg:gap-16 items-start">
-
-    <!-- สารบัญ ติดซ้าย -->
-    <nav class="lg:sticky lg:top-28" aria-labelledby="toc-h" id="guideToc">
-      <h2 id="toc-h" class="text-[15px] font-bold text-ink-3 mb-3">สารบัญ</h2>
-      <ol class="toc">
-        {{#each item.sections}}
-        <li><a href="#{{this.id}}"><span class="tabular-nums text-ink-3 mr-2">{{this.no}}</span>{{this.title}}</a></li>
-        {{/each}}
-      </ol>
-      <p class="t-xs mt-5 max-w-[30ch]">ทุกหัวข้อมีลิงก์ของตัวเอง กดที่หัวข้อแล้วคัดลอกลิงก์ส่งต่อเฉพาะส่วนได้</p>
-    </nav>
-
-    <!-- เนื้อหา -->
-    <div class="max-w-[68ch]">
+  {{!-- สารบัญติดใต้หัวเว็บชุดเดียวกับหน้ารู้จักทีมดี/หน้าสินค้า (ไฮไลต์หัวข้อที่อ่าน + แถบอ่านถึงไหน · เดิมเม็ดยาดำ top 76px ตายตัว) --}}
+  <nav class="ab-toc td-guide__abtoc" aria-label="สารบัญคู่มือ" id="guideToc" data-toc>
+    <div class="wrap ab-toc__in">{{#each item.sections}}<a href="#{{this.id}}">{{this.title}}</a>{{/each}}</div>
+    <span class="ab-toc__bar" aria-hidden="true"></span>
+  </nav>
+  <div class="wrap td-guide__layout">
+    <div class="td-guide__body">
+      <div class="td-guide__context"><p>{{item.intro}}</p><p class="td-guide__who">สำหรับ {{item.who}}</p></div>
       {{#each item.sections}}
-      <article class="guide-sec scroll-mt-28 {{#unless @first}}mt-14 pt-14 border-t border-line{{/unless}}" id="{{this.id}}">
-        <div class="flex flex-wrap items-center gap-3">
-          <h2 class="t-display text-[clamp(24px,3vw,34px)]"><span class="text-ink-3 tabular-nums mr-2">{{this.no}}</span>{{this.title}}</h2>
-          {{#if this.tag}}
-          <span class="gtag gtag--{{this.tag}}">{{#if (eq this.tag 'customer')}}ลูกค้าส่ง{{/if}}{{#if (eq this.tag 'teamdee')}}ทีมดีทำ{{/if}}{{#if (eq this.tag 'approve')}}ต้องอนุมัติ{{/if}}</span>
-          {{/if}}
+      <section class="guide-sec td-guide__section" id="{{this.id}}" aria-labelledby="guide-heading-{{this.id}}">
+        <div class="td-guide__section-side"><div class="td-guide__section-head"><h2 id="guide-heading-{{this.id}}" tabindex="-1">{{this.title}}</h2>{{#if this.tag}}<span class="gtag gtag--{{this.tag}}">{{#if (eq this.tag 'customer')}}ลูกค้าส่ง{{/if}}{{#if (eq this.tag 'teamdee')}}ทีมดีทำ{{/if}}{{#if (eq this.tag 'approve')}}ต้องอนุมัติ{{/if}}</span>{{/if}}</div>
+        <div class="td-guide__share"><button type="button" class="td-guide__copy" data-guide-copy="{{this.id}}" hidden aria-label="คัดลอกลิงก์หัวข้อ {{this.title}}" title="คัดลอกลิงก์หัวข้อนี้"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>คัดลอกลิงก์</span></button><span data-guide-copy-status role="status" aria-live="polite"></span></div>
+        </div><div class="td-guide__section-content">
+        {{> guideBlock this blockHeading="h3"}}
+        {{#each this.parts}}<section class="td-guide__part" aria-labelledby="{{../id}}-p{{@index}}" id="{{../id}}-{{this.id}}"><div class="td-guide__part-head"><h3 id="{{../id}}-p{{@index}}">{{this.title}}</h3>{{#if this.tag}}<span class="gtag gtag--{{this.tag}}">{{#if (eq this.tag 'customer')}}ลูกค้าส่ง{{/if}}{{#if (eq this.tag 'teamdee')}}ทีมดีทำ{{/if}}{{#if (eq this.tag 'approve')}}ต้องอนุมัติ{{/if}}</span>{{/if}}</div>{{> guideBlock this blockHeading="h4"}}</section>{{/each}}
+        {{!-- เก็บไซซ์ทั้งทีม: เฉพาะหน้าที่ส่ง roster=true (/size-chart/) ในหัวข้อ collect · audit มือถือ 30 ต.ค. ข้อ 36 --}}
+        {{#if ../roster}}{{#if (eq this.id 'collect')}}{{> rosterTool}}{{/if}}{{/if}}
+        {{#if (eq this.id @root.guideCta.next.section)}}{{> ppNext ico=@root.guideCta.next.ico t=@root.guideCta.next.t p=@root.guideCta.next.p href=@root.guideCta.next.line label=@root.guideCta.next.label where="guide-next"}}{{/if}}
         </div>
-
-        {{> guideBlock this}}
-
-        {{#each this.parts}}
-        <section class="mt-10" aria-labelledby="{{../id}}-p{{@index}}" id="{{../id}}-{{this.id}}">
-          <div class="flex flex-wrap items-center gap-3">
-            <h3 id="{{../id}}-p{{@index}}" class="text-[clamp(20px,2.2vw,24px)] font-bold">{{this.title}}</h3>
-            {{#if this.tag}}<span class="gtag gtag--{{this.tag}}">{{#if (eq this.tag 'customer')}}ลูกค้าส่ง{{/if}}{{#if (eq this.tag 'teamdee')}}ทีมดีทำ{{/if}}{{#if (eq this.tag 'approve')}}ต้องอนุมัติ{{/if}}</span>{{/if}}
-          </div>
-          {{> guideBlock this}}
-        </section>
-        {{/each}}
-      </article>
+      </section>
       {{/each}}
-
-      {{#unless item.hasLinks}}
-      <!-- คู่มือเล่มอื่น -->
-      <div class="mt-14 pt-10 border-t-2 border-ink">
-        <h2 class="t-display text-[clamp(22px,2.6vw,30px)]">คู่มือเล่มอื่น</h2>
-        <div class="chiprail mt-5">
-          {{#each otherGuides}}<a class="chip" href="{{url 'guides' this.id}}">{{this.name}}</a>{{/each}}
-        </div>
-      </div>
-      {{/unless}}
     </div>
   </div>
-</section>
-
-<!-- CONVERT -->
-{{!-- ส่วนปิดแบบเดียวกับหน้าแรก (.hm-end · 24 ต.ค.) · เดิมแถบส้มตัวขาวจาง 2.5:1 ไม่ผ่าน AA --}}
-<section class="hm-end" aria-labelledby="end-h">
-  <svg class="hm-end__arc" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 300C300 90 620 20 760 20c240 0 480 70 680 200v80z"/></svg>
-  <div class="wrap relative hm-end__in">
-    <p class="hm-eyebrow is-en"><span lang="en">WE BUILD TEAM IDENTITY</span></p>
-    <h2 id="end-h">{{{ph "มีโจทย์เสื้อทีม เล่าให้ทีมดีฟังได้เลย"}}}</h2>
-    <p class="hm-end__lead">{{{ph "บอกว่าใครใส่ จำนวนประมาณเท่าไร และใช้วันไหน ยังไม่มีแบบก็เริ่มคุยได้"}}}</p>
-    <div class="hm-cta__btns hm-end__btns"><a class="btn btn-orange btn-lg gap-2" href="{{site.lineUrl}}" data-track="line"><span class="block size-5" aria-hidden="true">{{> icoChat}}</span>ทัก LINE ขอราคา</a><a class="btn btn-line btn-lg" href="{{url 'contact'}}">ฝากข้อมูลให้ติดต่อกลับ</a></div>
-    <p class="hm-end__alt"><a class="tabular-nums" href="tel:{{site.phonePrimaryTel}}">โทร {{site.phonePrimary}}</a><span class="hm-end__sep" aria-hidden="true">·</span><span>{{{ph site.hours}}}</span></p>
-  </div>
-</section>
+  <section class="td-guide__library wrap" aria-labelledby="guide-library-h" id="guide-library"><div><h2 id="guide-library-h">คู่มือที่ใช้ต่อได้</h2><p>เลือกอ่านเฉพาะเรื่องที่ทีมคุณกำลังเตรียม</p></div><nav aria-label="เลือกอ่านคู่มือ"><ul>{{#each item.guideNav}}<li><a href="{{url 'guides' this.id}}"{{#if this.current}} aria-current="page"{{/if}}><span>{{this.label}}</span>{{#if this.current}}<small>กำลังอ่าน</small>{{else}}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>{{/if}}</a></li>{{/each}}</ul></nav></section>
+  {{!-- แชทตามเรื่องของคู่มือ (vite guideCta · ไฟล์/รูปแนบตามบริบท) --}}
+  {{> ctaBox id="guide-cta" tone="no" c=guideCta.c href=guideCta.line where="cta-guide" cta=guideCta.cta href2=(url 'contact') q2="?from=guide" cta2="ฝากข้อมูลให้ติดต่อกลับ"}}
+</div>

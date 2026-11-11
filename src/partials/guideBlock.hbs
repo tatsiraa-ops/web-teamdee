@@ -1,135 +1,57 @@
-{{!-- เนื้อหาหนึ่งบล็อกของคู่มือ (หัวข้อหลักหรือหัวข้อย่อย) · ใช้ใน guidePage.hbs --}}
-{{#if this.body}}<p class="t-body mt-4">{{this.body}}</p>{{/if}}
-
+{{!-- Shared guide blocks. Parent passes blockHeading="h4" beneath H3 subsections. --}}
+{{#if this.body}}<p class="gblock-body">{{this.body}}</p>{{/if}}
 {{#if (eq this.kind 'steps')}}
-<ol class="mt-6 border-t-2 border-ink">
-  {{#each this.items}}
-  <li class="why-row">
-    <span class="why-row__no">0{{inc @index}}</span>
-    <div class="why-row__body col-span-2">
-      <span class="gtag gtag--{{this.tag}} mb-2">{{#if (eq this.tag 'customer')}}ลูกค้าส่ง{{/if}}{{#if (eq this.tag 'teamdee')}}ทีมดีทำ{{/if}}{{#if (eq this.tag 'approve')}}ต้องอนุมัติ{{/if}}</span>
-      <h3 class="why-row__t">{{this.t}}</h3>
-      <p class="why-row__d">{{this.d}}</p>
-    </div>
-  </li>
-  {{/each}}
-</ol>
-{{/if}}
-
-{{#if this.list}}
-<ul class="mt-5 space-y-3">
-  {{#each this.list}}
-  <li class="flex gap-3 text-[17px] leading-[1.75] text-ink-2"><svg class="shrink-0 mt-2 text-orange" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{this}}</li>
-  {{/each}}
-</ul>
-{{/if}}
-
+<ol class="gblock-steps">{{#each this.items}}
+  <li class="gblock-step"><span class="gblock-step__number" aria-hidden="true">{{inc @index}}</span><div>
+    <div class="gblock-step__heading">{{#if (eq ../blockHeading 'h4')}}<h4 class="gblock-title">{{this.t}}</h4>{{else}}<h3 class="gblock-title">{{this.t}}</h3>{{/if}}
+    {{#if this.tag}}<span class="gblock-role">{{#if (eq this.tag 'customer')}}ลูกค้าส่ง{{/if}}{{#if (eq this.tag 'teamdee')}}ทีมดีทำ{{/if}}{{#if (eq this.tag 'approve')}}ต้องอนุมัติ{{/if}}</span>{{/if}}</div>
+    <p class="gblock-description">{{this.d}}</p>
+  </div></li>{{/each}}
+</ol>{{/if}}
+{{#if this.list}}<ul class="gblock-list">{{#each this.list}}<li>{{this}}</li>{{/each}}</ul>{{/if}}
 {{#if (eq this.kind 'collars')}}
-<ul class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
-  {{#each this.items}}
-  <li class="border border-line rounded-card p-4 text-center">
-    <span class="block text-ink mx-auto w-full max-w-[120px]">{{> (lookup this 'icon')}}</span>
-    <span class="block font-bold text-[17px] mt-2">{{this.t}}</span>
-    {{#if this.d}}<span class="block t-xs mt-1">{{this.d}}</span>{{/if}}
-  </li>
-  {{/each}}
-</ul>
+<ul class="gblock-collars">{{#each this.items}}<li><span class="gblock-collars__drawing" aria-hidden="true">{{> (lookup this 'icon')}}</span><strong>{{this.t}}</strong>{{#if this.d}}<p class="gblock-description">{{this.d}}</p>{{/if}}</li>{{/each}}</ul>
 {{/if}}
-
 {{#if (eq this.kind 'table')}}
-<div class="overflow-x-auto border-2 border-ink rounded-card mt-6" tabindex="0" role="region" aria-label="ตาราง เลื่อนซ้ายขวาได้">
-  <table class="w-full min-w-[560px] text-[17px]">
-    <thead class="bg-ink text-paper"><tr>{{#each this.head}}<th scope="col" class="text-left font-bold px-5 py-4">{{this}}</th>{{/each}}</tr></thead>
-    <tbody>
-      {{#each this.rows}}
-      <tr class="border-t border-line">{{#each this}}{{#if @first}}<th scope="row" class="text-left font-bold px-5 py-4">{{this}}</th>{{else}}<td class="px-5 py-4 text-ink-2">{{this}}</td>{{/if}}{{/each}}</tr>
-      {{/each}}
-    </tbody>
+<p class="gblock-table-hint">เปรียบเทียบรายละเอียดในตาราง · เลื่อนซ้าย–ขวาเพื่อดูครบทุกคอลัมน์</p>
+<div class="gblock-table-scroll" tabindex="0" role="region" aria-label="ตาราง {{this.title}} เลื่อนซ้ายขวาได้">
+  <table class="gblock-table"><caption class="sr-only">{{this.title}}</caption><thead><tr>{{#each this.head}}<th scope="col">{{this}}</th>{{/each}}</tr></thead>
+    <tbody>{{#each this.rows}}<tr>{{#each this}}{{#if @first}}<th scope="row">{{this}}</th>{{else}}<td>{{this}}</td>{{/if}}{{/each}}</tr>{{/each}}</tbody>
   </table>
-</div>
-<p class="scroll-hint">ปัดตารางไปทางขวาเพื่อดูคอลัมน์ที่เหลือ</p>
-{{/if}}
-
+</div>{{/if}}
 {{#if (eq this.kind 'sizes')}}
-<div class="overflow-x-auto border-2 border-ink rounded-card mt-6" tabindex="0" role="region" aria-label="ตาราง เลื่อนซ้ายขวาได้">
-  <table class="w-full min-w-[460px] text-[17px]">
-    <caption class="text-left font-bold text-[18px] px-5 py-4 border-b-2 border-ink">หน่วยเป็น{{@root.sizing.unit}} วัดจากตัวเสื้อวางราบ</caption>
-    <thead class="bg-ink text-paper"><tr>
-      <th scope="col" class="text-left font-bold px-5 py-4">ไซซ์</th>
-      <th scope="col" class="text-right font-bold px-5 py-4">รอบอก</th>
-      <th scope="col" class="text-right font-bold px-5 py-4">ความยาว</th>
-      <th scope="col" class="text-right font-bold px-5 py-4">ไหล่</th>
-    </tr></thead>
-    <tbody>
-      {{#each @root.sizing.sizes}}
-      <tr class="border-t border-line"><th scope="row" class="text-left font-bold px-5 py-3.5">{{this.size}}</th><td class="px-5 py-3.5 text-right tabular-nums">{{this.chest}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.length}}</td><td class="px-5 py-3.5 text-right tabular-nums">{{this.shoulder}}</td></tr>
-      {{/each}}
-    </tbody>
+{{#if @root.sizeDraftHidden}}<p class="gblock-caution">ทักแอดมินเพื่อขอตารางไซซ์ล่าสุดของสินค้าและทรงที่เลือกก่อนสรุปจำนวน</p><a class="btn btn--ghost mt-4" href="/contact-us/?from=size-chart">ขอตารางไซซ์จากทีมดี →</a>{{else}}
+<p class="gblock-caution">ตารางนี้เป็นขนาดอ้างอิงเบื้องต้น กรุณายืนยันตารางไซซ์ของสินค้าและทรงที่เลือกกับทีมดีก่อนสรุปจำนวน</p>
+<div class="gblock-table-scroll" tabindex="0" role="region" aria-label="ตารางไซซ์เสื้อ">
+  <table class="gblock-table gblock-table--sizes"><caption>หน่วยเป็น{{@root.sizing.unit}} วัดจากตัวเสื้อวางราบ</caption>
+    <thead><tr><th scope="col">ไซซ์</th><th scope="col">รอบอก</th><th scope="col">ความยาว</th><th scope="col">ไหล่</th></tr></thead>
+    <tbody>{{#each @root.sizing.sizes}}<tr><th scope="row">{{this.size}}</th><td>{{this.chest}}</td><td>{{this.length}}</td><td>{{this.shoulder}}</td></tr>{{/each}}</tbody>
   </table>
-</div>
-<p class="scroll-hint">ปัดตารางไปทางขวาเพื่อดูคอลัมน์ที่เหลือ</p>
-<p class="t-xs mt-3">{{@root.sizing.tolerance}}</p>
-{{/if}}
-
+</div><p class="gblock-note">{{@root.sizing.tolerance}} · เป็นข้อมูลอ้างอิง กรุณายืนยันค่าคลาดเคลื่อนของงานที่สั่งกับทีมดีอีกครั้ง</p>{{/if}}{{/if}}
 {{#if (eq this.kind 'fabrics')}}
-<ul class="divide-y divide-line border-t-2 border-ink mt-6">
-  {{#each @root.sizing.fabrics}}
-  <li class="flex items-baseline justify-between gap-6 py-4">
-    <span class="text-[18px] font-bold">{{this.name}}</span>
-    <span class="t-sm text-right max-w-[30ch]">{{this.use}}</span>
-  </li>
-  {{/each}}
-</ul>
-{{/if}}
-
+<ul class="gblock-cards">{{#each @root.sizing.fabrics}}<li class="gblock-card">
+  <img class="gblock-card__image" src="{{this.img}}" alt="ผิว{{this.name}}ระยะใกล้" width="1200" height="558" loading="lazy" decoding="async">
+  {{#if (eq ../blockHeading 'h4')}}<h4 class="gblock-title">{{this.name}}</h4>{{else}}<h3 class="gblock-title">{{this.name}}</h3>{{/if}}<p class="gblock-description">{{this.use}}</p>
+</li>{{/each}}</ul>{{/if}}
 {{#if (eq this.kind 'props')}}
-<div class="grid sm:grid-cols-2 gap-5 mt-6">
-  {{#each @root.sizing.fabricProps}}
-  <div class="bg-shell border border-line rounded-plate p-6">
-    <p class="text-[15px] font-bold tracking-[0.12em] text-ink-3">{{this.en}}</p>
-    <h3 class="text-[19px] font-bold mt-1.5">{{this.th}}</h3>
-    <p class="t-sm mt-2">{{this.d}}</p>
-  </div>
-  {{/each}}
-</div>
+<dl class="gblock-properties">{{#each @root.sizing.fabricProps}}<div><dt>{{this.th}} <span lang="en">{{this.en}}</span></dt><dd>{{this.d}}</dd></div>{{/each}}</dl>
 {{/if}}
-
 {{#if (eq this.kind 'download')}}
-<a class="btn btn-orange btn-lg mt-6 gap-2 whitespace-normal text-center max-w-full" href="{{this.file}}" download>
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>
-  {{this.label}}
-</a>
-<p class="t-xs mt-3">เปิดด้วย Excel หรือ Google Sheets ได้ กรอกแล้วส่งกลับมาไฟล์เดียว</p>
-{{/if}}
-
+<div class="gblock-download"><a class="cb cb--s gblock-download__button" href="{{this.file}}" download><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>{{this.label}}</a>
+  <p class="gblock-note">เปิดด้วย Excel หรือ Google Sheets ได้ กรอกแล้วส่งกลับมาไฟล์เดียว</p>
+  <p class="gblock-note">ก่อนกรอกจำนวน กรุณายืนยันตารางไซซ์ของสินค้าและทรงที่เลือกกับทีมดี ไม่ใช้ขนาดอ้างอิงแทนสเปกงานจริง</p>
+</div>{{/if}}
 {{#if (eq this.kind 'faq')}}
-<div class="hs-accordion-group border-t-2 border-ink mt-6">
-  {{#each this.items}}
-  <div class="hs-accordion border-b border-line" id="gfaq-{{../id}}-{{@index}}">
-    <button type="button" class="hs-accordion-toggle w-full flex items-start justify-between gap-5 text-left py-5 min-h-tap font-bold text-[18px] hover:underline decoration-orange decoration-2 underline-offset-4" aria-expanded="false" aria-controls="gfaq-panel-{{../id}}-{{@index}}">
-      <span>{{this.[0]}}</span>
-      <svg class="shrink-0 mt-1.5 transition-transform hs-accordion-active:rotate-45 text-orange" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-    </button>
-    <div id="gfaq-panel-{{../id}}-{{@index}}" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
-      <p class="t-body pb-6">{{this.[1]}}</p>
-    </div>
-  </div>
-  {{/each}}
-</div>
-{{/if}}
-
+{{!-- การ์ดกางได้ชุดเดียวกับหน้า /faq/ และหน้าสินค้า (.fq-q · main.css) --}}<div class="gblock-faq fq-list">{{#each this.items}}<details class="fq-q" id="gfaq-{{../id}}-{{@index}}">
+  <summary><span class="fq-q__t">{{this.[0]}}</span><span class="fq-q__pm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path class="fq-q__v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+  <div class="fq-q__a" id="gfaq-panel-{{../id}}-{{@index}}"><p>{{this.[1]}}</p></div>
+</details>{{/each}}</div>{{/if}}
 {{#if (eq this.kind 'cards')}}
-<ul class="grid sm:grid-cols-2 {{#unless this.cards.[3]}}lg:grid-cols-3{{/unless}} gap-4 mt-6">
-  {{#each this.cards}}
-  <li class="pp-card">{{#if this.img}}<img src="{{this.img}}" alt="ผิว{{this.t}}ระยะใกล้" width="1200" height="558" loading="lazy" decoding="async" class="w-full aspect-[2/1] object-cover rounded-card mb-4">{{/if}}{{#if this.ph}}{{#unless @root.wp}}<span class="img-pending mb-4">{{this.ph}}</span>{{/unless}}{{/if}}<h3 class="text-[18px] font-bold">{{this.t}}</h3>{{#if this.d}}<p class="t-sm mt-1.5">{{this.d}}</p>{{/if}}</li>
-  {{/each}}
-</ul>
-{{/if}}
-
+<ul class="gblock-cards">{{#each this.cards}}<li class="gblock-card">
+  {{#if this.img}}<img src="{{this.img}}" alt="ผิว{{this.t}}ระยะใกล้" width="1200" height="558" loading="lazy" decoding="async" class="gblock-card__image">{{/if}}
+  {{#if this.ph}}{{#unless @root.wp}}<span class="img-pending gblock-card__placeholder">{{this.ph}}</span>{{/unless}}{{/if}}
+  {{#if (eq ../blockHeading 'h4')}}<h4 class="gblock-title">{{this.t}}</h4>{{else}}<h3 class="gblock-title">{{this.t}}</h3>{{/if}}{{#if this.d}}<p class="gblock-description">{{this.d}}</p>{{/if}}
+</li>{{/each}}</ul>{{/if}}
 {{#if (eq this.kind 'links')}}
-<ul class="flex flex-wrap gap-x-6 gap-y-2 mt-5">{{#each this.links}}<li><a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a></li>{{/each}}</ul>
-{{#if @root.otherGuides.length}}
-<h3 class="text-[18px] font-bold mt-8">คู่มือเล่มอื่น</h3>
-<div class="chiprail mt-3">{{#each @root.otherGuides}}<a class="chip" href="{{url 'guides' this.id}}">{{this.name}}</a>{{/each}}</div>
-{{/if}}
+<ul class="gblock-links">{{#each this.links}}<li><a href="{{url this.to}}">{{this.t}}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></a></li>{{/each}}</ul>
 {{/if}}

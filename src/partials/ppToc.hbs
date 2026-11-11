@@ -1,0 +1,12 @@
+{{!-- ส่วน Toc ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+{{#if items.length}}
+{{!-- สารบัญติดใต้หัวเว็บชุดเดียวกับหน้ารู้จักทีมดี (about-toc.js · CSS .ab-toc ใน main.css) · ไฮไลต์ส่วนที่อ่าน · แถบส้มบอกอ่านถึงไหน
+     คอม: ปุ่ม LINE ขวาสุด โผล่ตอนแถบติดจอ (เลื่อนผ่านปุ่มใน hero แล้ว) · มือถือมีแถบล่างแล้ว ไม่โชว์ปุ่มนี้ --}}
+<nav class="ab-toc ab-toc--cta" aria-label="ข้ามไปยังหัวข้อในหน้านี้" data-toc>
+  <div class="wrap ab-toc__wrap">
+    <div class="ab-toc__in">{{#each items}}<a href="#{{this.key}}">{{this.t}}</a>{{/each}}</div>
+    <a class="cb cb--p ab-toc__cta" href="{{priceAsk}}" data-track="line" data-where="pp-toc" tabindex="-1"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ทัก LINE ขอราคา</span></a>
+  </div>
+  <span class="ab-toc__bar" aria-hidden="true"></span>
+</nav>
+{{/if}}

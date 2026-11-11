@@ -35,13 +35,12 @@ test('เว็บจริง: ตัดข้อความรอยืนย
   assert.deepEqual(v.plan.payment, null)
   assert.deepEqual(v.faq.items.map(([q]) => q), ['เริ่มได้ไหม?'])
   assert.deepEqual(v.team.p, ['ทุกวัน 08:30–21:00'])
-  assert.equal(v.contexts.cards[0].img, null)
+  assert.equal(v.contexts.show, false, 'ไม่มีภาพลูกค้าเลย = ซ่อนทั้งส่วน (2 พ.ย.)')
 })
 
 test('ต้นแบบ: เก็บทุกส่วนไว้พร้อมป้ายรอข้อมูล', () => {
   const v = useView(up, none, { forWp: false, has })
   assert.equal(v.trust.show, true)
-  assert.equal(v.reviews.show, true)
   assert.equal(v.benefits.cards.length, 2)
   assert.equal(v.faq.items.length, 2)
 })
@@ -59,6 +58,19 @@ test('ลิงก์และการ์ดสินค้าที่ชี�
   assert.deepEqual(v.products.cards.map((c) => c.h), ['โปโลปัก'])
   assert.deepEqual(v.related.links.map((l) => l.to), ['uses.sport'])
   assert.deepEqual(v.toc.map((t) => t.key), ['faq'])
+})
+
+test('รีวิว: ส่วนขึ้นเมื่อมีรีวิวจริงเท่านั้น ทั้งเว็บจริงและต้นแบบ · สารบัญมีรีวิวตามนั้น (เดิมเว็บจริงขาด "รีวิว" ทุกหน้า)', () => {
+  const reviews = [{ id: 'r1' }]
+  for (const forWp of [true, false]) {
+    const on = useView(up, { ...none, reviews }, { forWp, has })
+    assert.equal(on.reviews.show, true)
+    assert.deepEqual(on.reviews.items, reviews)
+    assert.ok(on.toc.some((t) => t.key === 'reviews'))
+    const off = useView(up, none, { forWp, has })
+    assert.equal(off.reviews.show, false)
+    assert.ok(!off.toc.some((t) => t.key === 'reviews'))
+  }
 })
 
 test('สถิติที่ยืนยันแล้วอย่างน้อย 2 ตัว → เว็บจริงโชว์ · ตัวที่ยังรอยืนยันถูกตัด', () => {
@@ -86,4 +98,15 @@ test('การ์ดบริบทงาน: มีภาพลูกค้า
     assert.deepEqual(v.contexts.cards[0].photo, photo)
     assert.equal(v.contexts.cards[0].img, null)
   }
+})
+
+/* อาร์ต 4 พ.ย. "ลบตามภาพ" (/corporate/): use-v2.json drop ปิดส่วนเดิมทั้งส่วน · สารบัญตัดลิงก์ไปส่วนที่ปิด · ไม่มี drop = ส่วนปิดหน้ายังขึ้น */
+test('drop: ปิดส่วนวางงบ ภาพลูกค้า มีวันใช้ และส่วนปิดหน้า · สารบัญไม่มีลิงก์ไปส่วนที่ปิด', () => {
+  const real = { designs: [{}], works: [{}], photos: [{}], reviews: [{}] }
+  const v = useView(up, real, { forWp: true, has, drop: ['plan', 'photos', 'schedule', 'end'] })
+  for (const k of ['plan', 'photos', 'schedule', 'end']) assert.equal(v[k].show, false, k)
+  assert.equal(v.faq.show, true)
+  assert.deepEqual(v.toc.map((t) => t.key), ['designs', 'reviews', 'faq'])
+  const keep = useView(up, real, { forWp: true, has })
+  for (const k of ['plan', 'photos', 'schedule', 'end']) assert.equal(keep[k].show, true, k)
 })

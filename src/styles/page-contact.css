@@ -1,0 +1,210 @@
+/* ---------- หน้าติดต่อ รอบ 170c · เทียบบอร์ดอาร์ตทีละชิ้น (9 พ.ย. "เอาครีเอทมากกว่านี้") · site/contact-us/index.html ----------
+   hero ตัวละคร 3D พนักงาน + หัวข้อ 2 บรรทัด (บรรทัดสองส้ม) · การ์ด LINE เขียวสด ตัวใหญ่ มือถือแชทในกรอบ สติกเกอร์นาฬิกา "ตอบไว 5 นาที"
+   การ์ดโทรแบบตัวหนังสือ · แถบติดตามพื้นเทา · การ์ดออฟฟิศคู่ฟอร์มพื้นครีม (บอร์ด: สาขาซ้าย ฟอร์มขวา)
+   การ์ดเบา: มุม 16–24 เส้นบาง เงาบางมาก (ไม่ใช่ชุดการ์ดเงาหนาเหมือนกันทุกใบ) · โหลดจาก contact-page.js เท่านั้น */
+
+/* ---------- hero ---------- */
+.cx-hero { overflow: hidden; background: var(--color-shell); border-bottom: 1px solid var(--color-line); }
+.cx-hero .crumb2 { padding-top: 8px; }
+.cx-hero__in { display: grid; grid-template-columns: 520px minmax(0, 1fr); align-items: center; gap: 8px 48px; padding-block: 0 36px; }
+.cx-hero__art { position: relative; }
+/* วงส้มอ่อนหลังตัวละคร ให้ภาพมีพื้นของตัวเอง */
+.cx-hero__art::before { content: ""; position: absolute; inset: 8% 6% 4% 6%; border-radius: 50%; background: radial-gradient(closest-side, #FFE2C9 0%, #FFEFE1 62%, transparent 100%); }
+.cx-hero__art img { position: relative; display: block; width: 100%; height: auto; }
+.cx-h1 { display: block; color: var(--color-ink); }
+.cx-h1__big { display: block; font-family: var(--font-display); font-weight: 800; font-size: clamp(42px, 5.4vw, 72px); line-height: 1.12; letter-spacing: -0.015em; }
+.cx-h1__l1, .cx-h1__l2 { display: block; }
+.cx-h1 .hm-hl { color: #F05A00; }
+.cx-h1__sub { display: block; margin-top: 18px; font-size: clamp(18px, 1.6vw, 21px); font-weight: 700; line-height: 1.45; }
+.cx-h1__en { color: var(--color-ink-3); font-weight: 600; }
+.cx-hero__p { max-width: 44ch; margin-top: 8px; font-size: 17px; line-height: 1.75; color: var(--color-ink-2); text-wrap: pretty; }
+.cx-hero__tag { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 18px; padding: 8px 16px; border: 1px solid var(--color-line); border-radius: 999px; background: var(--color-paper); font-size: 15px; font-weight: 600; color: var(--color-ink-2); }
+.cx-hero__dot { width: 8px; height: 8px; border-radius: 50%; background: #06C755; box-shadow: 0 0 0 4px rgb(6 199 85 / .18); }
+.cx-hero__sep { width: 1px; height: 14px; background: var(--color-line-2); }
+
+/* ---------- แถวช่องทาง: LINE + โทร ---------- */
+.cx-ch { padding-top: 56px; }
+.cx-ch__grid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); align-items: stretch; gap: 20px; }
+
+/* การ์ด LINE: เขียวสดฝั่งมือถือ · ฝั่งตัวหนังสือเข้มขึ้นพอให้ขาวอ่านผ่าน (≥4.5:1 ที่ตัวเล็ก ≥3:1 ที่หัวข้อ) */
+/* การ์ด LINE รอบ 170e (อาร์ตเลือกแบบ ก.): เขียว LINE เรียบ #06C755 ตัวขาวแบบบอร์ด · ไม่มีไล่สีนีออน · ป้ายบริการขาวทึบ · สติกเกอร์นาฬิกาไม่ทับแชท
+   โลโก้ LINE ทางการแบบขาวล้วน (icoLine.hbs) วางบนพื้นเขียวตรงๆ */
+.cx-lc { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) 300px; grid-template-areas: "copy vis" "go go"; column-gap: 8px; padding: 34px 34px 28px; border-radius: 24px; color: #fff; background: linear-gradient(180deg, #06C755 0%, #05B94F 100%); }
+.cx-lc__copy { grid-area: copy; position: relative; z-index: 2; }
+.cx-lc__head { display: flex; align-items: center; gap: 20px; }
+.cx-lc__logo { display: block; flex: none; width: 88px; height: 88px; filter: drop-shadow(0 8px 12px rgb(0 60 20 / .3)); }
+.cx-lc__logo svg { display: block; width: 100%; height: 100%; }
+.cx-lc__t { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 3.8vw, 54px); line-height: 1.05; letter-spacing: -0.01em; white-space: nowrap; }
+.cx-lc__sub { margin-top: 6px; font-size: clamp(20px, 2vw, 26px); font-weight: 700; line-height: 1.3; }
+.cx-lc__subs { display: block; margin-top: 2px; font-size: 16px; font-weight: 600; opacity: .92; }
+.cx-lc__svc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .35); }
+.cx-lc__svc li { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 4px 16px 4px 6px; border-radius: 999px; background: #fff; font-size: 16px; font-weight: 700; color: #04341a; box-shadow: 0 6px 14px -10px rgb(0 60 20 / .6); }
+.cx-lc__si { display: block; flex: none; width: 36px; height: 36px; }
+/* มือถือในกรอบ ก้นหายใต้ปุ่มขาว */
+.cx-lc__vis { grid-area: vis; position: relative; min-height: 250px; margin-bottom: -20px; clip-path: inset(-60px -60px 0 -240px); }
+.cx-lc .lc__chat { position: absolute; left: auto; right: 22px; top: 4px; bottom: auto; width: 196px; transform: rotate(4deg); filter: drop-shadow(0 22px 26px rgb(0 60 20 / .4)); }
+/* สติกเกอร์นาฬิกาอยู่ซ้ายล่างของมือถือ ไม่ทับบับเบิลแชท */
+.cx-lc__sticker { position: absolute; left: -62px; bottom: 26px; z-index: 2; display: flex; align-items: center; transform: rotate(-6deg); }
+.cx-lc__sticker img { width: 92px; height: 92px; filter: drop-shadow(0 10px 12px rgb(0 60 20 / .4)); }
+.cx-lc__sticker p { display: grid; grid-template-columns: auto auto; align-items: end; column-gap: 4px; margin-left: -16px; padding: 6px 12px 6px 14px; border-radius: 14px; background: #fff; color: #04341a; box-shadow: 0 10px 18px -10px rgb(0 0 0 / .5); line-height: 1; }
+.cx-lc__sticker small { grid-column: 1 / -1; font-size: 13px; font-weight: 800; }
+.cx-lc__sticker b { font-family: var(--font-display); font-size: 34px; font-weight: 900; color: #F05A00; }
+.cx-lc__sticker span { padding-bottom: 4px; font-size: 15px; font-weight: 800; }
+.cx-lc__go { grid-area: go; position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 64px; margin-top: 22px; border-radius: 16px; background: #fff; font-size: 21px; font-weight: 800; color: #037A35; text-decoration: none; box-shadow: 0 -10px 24px -14px rgb(0 60 20 / .45); transition: transform .2s cubic-bezier(.2, .7, .2, 1), box-shadow .25s; }
+.cx-lc__go svg { transition: transform .2s cubic-bezier(.2, .7, .2, 1); }
+.cx-lc__go:focus-visible { outline: 3px solid #04341a; outline-offset: 3px; }
+@media (hover: hover) {
+  .cx-lc__go:hover { transform: translateY(-2px); }
+  .cx-lc__go:hover svg { transform: translateX(4px); }
+}
+/* การ์ดโทร: ตัวหนังสือเป็นหลัก (บอร์ด "โทรหาทีมดี") */
+.cx-call { display: flex; flex-direction: column; padding: 26px 28px 22px; border: 1px solid var(--color-line); border-radius: 24px; background: var(--color-paper); }
+.cx-call__k { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--color-orange-text); }
+.cx-call__ki { display: block; width: 36px; height: 36px; }
+.cx-call__t { margin-top: 10px; font-family: var(--font-display); font-size: 30px; font-weight: 800; line-height: 1.2; }
+.cx-call__p { margin-top: 2px; font-size: 15px; line-height: 1.5; color: var(--color-ink-3); }
+.cx-call__list { margin-top: 14px; border-top: 1px solid var(--color-line); }
+.cx-call__list li { border-bottom: 1px solid var(--color-line); }
+.cx-call__n { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 68px; font-size: clamp(26px, 2.3vw, 30px); font-weight: 600; letter-spacing: .01em; color: var(--color-ink); text-decoration: none; }
+.cx-call__go { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 700; letter-spacing: 0; color: var(--color-ink-3); transition: color .2s; }
+.cx-call__n:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; border-radius: 8px; }
+@media (hover: hover) { .cx-call__n:hover { color: var(--color-orange-text); } .cx-call__n:hover .cx-call__go { color: var(--color-orange-text); } }
+.cx-call__foot { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 16px; font-size: 15px; font-weight: 600; color: var(--color-ink-2); }
+.cx-call__fi { display: block; width: 28px; height: 28px; }
+
+/* ---------- แถบติดตาม พื้นเทา (บอร์ด "ติดตามเราได้ที่ :") ---------- */
+.cx-followsec { margin-top: 20px; }
+.cx-follow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 32px; padding: 14px 24px; border-radius: 18px; background: #F2F0EC; }
+/* main.css มือถือตั้ง main h2 24px → ใช้ id ให้แรงกว่า */
+#follow .cx-follow__h { margin: 0; font-size: 17px; font-weight: 800; line-height: 1.4; text-align: start; }
+.cx-follow__list { display: flex; flex-wrap: wrap; gap: 6px 28px; }
+.cx-follow__a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 600; color: var(--color-ink); text-decoration: none; }
+.cx-follow__ico { display: grid; place-items: center; flex: none; width: 30px; height: 30px; padding: 6px; border-radius: 8px; color: #fff; }
+.cx-follow__ico--fb { background: #1877F2; padding: 5px; }
+.cx-follow__ico--ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.cx-follow__a:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; border-radius: 6px; }
+@media (hover: hover) { .cx-follow__a:hover span:not(.cx-follow__ico) { text-decoration: underline; text-underline-offset: 3px; } }
+.cx-follow__pend { margin: 0 0 0 auto; }
+
+/* ---------- ออฟฟิศ (ซ้าย) คู่ฟอร์ม (ขวา) ---------- */
+.cx-pair { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; gap: 24px; padding-block: 48px 88px; }
+
+/* การ์ดออฟฟิศ (รอบ 170d): หัวเป็นรูปหน้าออฟฟิศ + แถบไล่ส้มตัวขาว (สูตร pp2-pf__band) · ฟอร์มยาวกว่า → การ์ดเลื่อนตามจอข้างฟอร์ม */
+.cx-office { position: sticky; top: 96px; overflow: hidden; border: 1px solid var(--color-line); border-radius: 24px; background: var(--color-paper); }
+.cx-office__hero { position: relative; margin: 0; }
+.cx-office__hero img { display: block; width: 100%; aspect-ratio: 16 / 11; object-fit: cover; object-position: 50% 34%; }
+.cx-office__band { position: absolute; left: 0; right: 0; bottom: 0; padding: 64px 24px 18px; background: linear-gradient(180deg, rgb(240 90 0 / 0) 0%, rgb(240 90 0 / .88) 46%, #A33A00 100%); color: #fff; }
+.cx-office__h { font-family: var(--font-display); font-size: clamp(22px, 2vw, 27px); font-weight: 800; line-height: 1.25; text-shadow: 0 1px 2px rgb(0 0 0 / .18); }
+.cx-office__sub { display: block; margin-top: 2px; font-size: 15px; font-weight: 600; opacity: .95; }
+.cx-open { position: absolute; left: 16px; top: 16px; display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 14px 4px 12px; border-radius: 999px; background: rgb(255 255 255 / .94); font-size: 14px; font-weight: 700; color: var(--color-ink-2); box-shadow: 0 6px 16px -10px rgb(0 0 0 / .5); }
+.cx-open i { width: 9px; height: 9px; border-radius: 50%; background: var(--color-line-2); }
+.cx-open.is-open { color: var(--color-ok); }
+.cx-open.is-open i { background: #06C755; box-shadow: 0 0 0 4px rgb(6 199 85 / .18); }
+.cx-office__body { padding: 22px 24px 24px; }
+.cx-rows { display: grid; gap: 14px; }
+.cx-rows li { display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: start; gap: 12px; }
+.cx-rows__ico { display: block; width: 48px; height: 48px; margin-top: -4px; }
+.cx-rows b { display: block; font-size: 16px; font-weight: 700; line-height: 1.5; color: var(--color-ink); }
+.cx-rows div > span { display: block; margin-top: 1px; font-size: 14px; line-height: 1.55; color: var(--color-ink-3); }
+.cx-office__acts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-line); }
+/* ป้าย LINE แบบบอร์ด "สอบถาม คลิก! @…" · เขียวเข้มพอให้ขาวอ่านผ่าน */
+.cx-linebadge { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 14px 6px 10px; border-radius: 14px; background: linear-gradient(180deg, #06C755 0%, #05B94F 100%); color: #fff; text-decoration: none; transition: filter .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.cx-linebadge__ico { display: block; flex: none; width: 40px; height: 40px; }
+.cx-linebadge__ico svg { display: block; width: 100%; height: 100%; }
+.cx-linebadge small, .cx-office__tel small { display: block; font-size: 13px; font-weight: 600; line-height: 1.25; }
+.cx-linebadge b, .cx-office__tel b { display: block; font-size: 17px; font-weight: 800; line-height: 1.25; }
+.cx-linebadge:focus-visible, .cx-office__tel:focus-visible, .cx-nav:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+.cx-office__tel { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 14px 6px 8px; border: 1px solid var(--color-line-2); border-radius: 14px; color: var(--color-ink); text-decoration: none; transition: border-color .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.cx-office__tel small { color: var(--color-ink-3); }
+.cx-office__ti { display: block; flex: none; width: 44px; height: 44px; }
+@media (hover: hover) {
+  .cx-linebadge:hover { filter: brightness(1.04); transform: translateY(-1px); }
+  .cx-office__tel:hover { border-color: var(--color-ink); transform: translateY(-1px); }
+}
+.cx-map { overflow: hidden; margin-top: 18px; border: 1px solid var(--color-line); border-radius: 16px; aspect-ratio: 16 / 10; background: var(--color-shell); }
+.cx-map iframe { display: block; width: 100%; height: 100%; border: 0; }
+.cx-nav { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; margin-top: 10px; border-radius: 12px; background: var(--color-shell); font-size: 15px; font-weight: 700; color: var(--color-ink); text-decoration: none; transition: background-color .2s; }
+.cx-nav__ico { display: block; width: 30px; height: 30px; }
+@media (hover: hover) { .cx-nav:hover { background: var(--color-line); } }
+
+/* ฟอร์มพื้นครีม (บอร์ด "เล่าเรื่องเสื้อทีมของคุณ") · รอบ 170d: ช่องเบาลง (สูง 48 เส้น 1.5px) ป้าย 14px คำอธิบายสั้น ไอคอน 3D หัวฟอร์ม */
+.cx-formsec { min-width: 0; }
+.cx-form { padding: 30px 32px 28px; border: 1px solid #F0E2D2; border-radius: 24px; background: #FFF8F1; }
+.cx-form__head { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; column-gap: 14px; }
+.cx-form__ico { width: 56px; height: 56px; }
+.cx-form__h { font-family: var(--font-display); font-size: clamp(24px, 2.3vw, 30px); font-weight: 800; line-height: 1.25; }
+.cx-form__req { align-self: start; padding-top: 6px; font-size: 13px; color: var(--color-ink-3); }
+.cx-form__p { margin-top: 8px; font-size: 15px; line-height: 1.65; color: var(--color-ink-2); }
+.cx-form__grid { margin-top: 22px; gap: 16px 16px; }
+.cx-form__full { grid-column: 1 / -1; }
+.cx-form .label { margin-bottom: 6px; font-size: 14px; font-weight: 700; }
+.cx-opt { font-weight: 400; color: var(--color-ink-3); }
+.cx-form .input { min-height: 48px; padding: 10px 14px; border-width: 1.5px; border-color: #D8CCBE; border-radius: 12px; background: var(--color-paper); font-size: 16px; transition: border-color .15s, box-shadow .15s; }
+.cx-form textarea.input { min-height: 104px; }
+.cx-form .input::placeholder { color: #8C877C; }
+@media (hover: hover) { .cx-form .input:hover { border-color: #B9AC9C; } }
+.cx-form .input:focus { outline: none; border-color: var(--color-ink); box-shadow: 0 0 0 3px rgb(255 108 0 / .28); }
+.cx-form .help { margin-top: 6px; font-size: 13px; line-height: 1.5; }
+.cx-docs { min-width: 0; margin: 22px 0 0; padding: 18px 0 0; border: 0; border-top: 1px solid #EEDFCD; }
+/* legend ลอยออกจากขอบ fieldset (ไม่ให้เส้นขอบลากผ่านข้างหัวข้อ) */
+.cx-docs__h { float: left; display: flex; align-items: center; gap: 8px; width: 100%; padding: 0; font-size: 14px; font-weight: 700; }
+.cx-docs__ico { width: 32px; height: 32px; }
+.cx-docs__h + * { clear: both; }
+.cx-docs__list { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 10px; }
+.cx-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px 6px 12px; border: 1px solid #D8CCBE; border-radius: 999px; background: var(--color-paper); font-size: 14px; cursor: pointer; transition: border-color .2s, background-color .2s; }
+.cx-chip input { flex: none; width: 18px; height: 18px; accent-color: var(--color-ink); }
+.cx-chip:has(input:checked) { border-color: var(--color-ink); background: #FFE9D6; font-weight: 700; }
+.cx-chip:has(input:focus-visible) { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+@media (hover: hover) { .cx-chip:hover { border-color: var(--color-ink); } }
+.cx-order { max-width: calc(50% - 8px); margin-top: 16px; }
+.cx-send { margin-top: 24px; }
+/* ปุ่มส่งส้ม ข้อความชิดซ้าย ลูกศรขวา (บอร์ด) · พื้นส้มตัวดำ */
+.cx-send .cf-submit { justify-content: space-between; min-height: 56px; padding-inline: 24px; background: var(--color-orange); color: var(--color-ink); border-radius: 14px; }
+.cx-send .cf-submit .cb__arw { color: var(--color-ink); }
+@media (hover: hover) { .cx-send .cf-submit:hover { background: #FF7F1F; box-shadow: 0 14px 28px -16px rgb(255 108 0 / .65); } }
+
+/* ---------- จอเล็ก ---------- */
+@media (max-width: 1199px) {
+  .cx-hero__in { grid-template-columns: 420px minmax(0, 1fr); }
+  .cx-lc { grid-template-columns: minmax(0, 1fr) 260px; }
+}
+@media (max-width: 1023px) {
+  .cx-hero__in { grid-template-columns: 340px minmax(0, 1fr); gap: 8px 28px; }
+  .cx-ch__grid { grid-template-columns: minmax(0, 1fr); }
+  .cx-pair { grid-template-columns: minmax(0, 1fr); }
+  .cx-office { position: static; }
+  .cx-office__hero img { max-height: 360px; }
+}
+@media (max-width: 767px) {
+  .cx-hero__in { grid-template-columns: minmax(0, 1fr); justify-items: center; padding-bottom: 28px; text-align: center; }
+  .cx-hero__art { width: 300px; }
+  .cx-hero__p { margin-inline: auto; }
+  .cx-hero__tag { justify-content: center; }
+  .cx-ch { padding-top: 36px; }
+  .cx-lc { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "vis" "go"; padding: 24px 20px 20px; border-radius: 22px; }
+  .cx-lc__logo { width: 64px; height: 64px; }
+  .cx-lc__head { gap: 14px; }
+  .cx-lc__vis { min-height: 220px; margin: 14px 0 -20px; }
+  .cx-lc .lc__chat { right: 50%; width: 176px; transform: translateX(62%) rotate(5deg); }
+  .cx-lc__sticker { left: 0; bottom: 40px; }
+  .cx-lc__sticker img { width: 80px; height: 80px; }
+  .cx-lc__go { margin-top: 16px; }
+  .cx-call { padding: 22px 20px 18px; border-radius: 22px; }
+  .cx-follow { flex-direction: column; align-items: flex-start; padding: 14px 16px; }
+  .cx-follow__pend { margin: 0; }
+  .cx-pair { padding-block: 32px 56px; gap: 16px; }
+  .cx-office { border-radius: 22px; }
+  .cx-office__body { padding: 18px 16px 20px; }
+  .cx-office__acts { grid-template-columns: minmax(0, 1fr); }
+  /* main.css มือถือตั้ง main h2 24px กลาง · ในแถบรูปให้ชิดซ้าย */
+  #location .cx-office__h { font-size: 22px; text-align: start; }
+  .cx-form__head { grid-template-columns: 44px minmax(0, 1fr); }
+  .cx-form__ico { width: 44px; height: 44px; }
+  .cx-form__req { grid-column: 2; padding-top: 0; }
+  .cx-form { padding: 22px 18px; border-radius: 22px; }
+  .cx-form__grid { grid-template-columns: minmax(0, 1fr); }
+  .cx-order { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cx-lc__go, .cx-lc__go svg, .cx-call__go, .cx-chip, .cx-linebadge, .cx-office__tel, .cx-nav, .cx-form .input { transition: none; }
+}

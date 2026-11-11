@@ -48,12 +48,17 @@ const MAP = {
 const sizing = JSON.parse(readFileSync(join(root, 'src/data/sizing.json'), 'utf8'))
 const fabricCards = sizing.fabrics.filter((f) => f.img).map((f) => ({ t: f.name, d: `เหมาะกับ${f.use}`, img: f.img.replace(/\.jpg$/, '-wide.webp') }))
 
+/* ย่อหน้าแรกที่แก้แทน v22 (เดิมแก้ใน guide-pages.json ตรงๆ · ย้ายมาไว้ที่นี่ 30 ต.ค.) · ตารางไซซ์ยังต้องขอฉบับยืนยันจากทีมดี */
+const LEAD_FIX = { size: 'เลือกสินค้าและทรง แล้วขอตารางไซซ์ที่ยืนยันจากทีมดีมาเทียบกับเสื้อที่ใส่สบาย' }
+
 const out = { _note: 'สร้างจาก Wireframe v22 + guides.json ด้วย scripts/v22/guide-pages.mjs · รันใหม่จะทับ · แก้เนื้อหาที่ guides.json แล้วรันใหม่' }
 for (const [gid, [vid, rows]] of Object.entries(MAP)) {
   const v = info[vid]
   const sec = Object.fromEntries(v.sections.map((s) => [s.key, s]))
   const sections = rows.map(([key, id, main, parts = []], i) => {
-    const base = main ? part(gid, main) : gid === 'fabric' && id === 'texture' ? { kind: 'cards', cards: fabricCards } : fromV22(sec[key])
+    /* เปรียบเทียบผ้า: รายชื่อผ้าซ้ำกับการ์ด "ดูผิวผ้า" ด้านบนคำต่อคำ (audit 26 ต.ค.) → เหลือคำแนะนำ + คุณสมบัติที่ควรถาม */
+    const base = gid === 'fabric' && id === 'compare' ? { kind: 'text', body: 'ชื่อผ้าและงานที่เหมาะดูได้ในหัวข้อก่อนหน้า ใช้คุณสมบัติด้านล่างถามทีมดีว่าผ้าตัวไหนตรงกับงานของคุณ' }
+      : main ? part(gid, main) : gid === 'fabric' && id === 'texture' ? { kind: 'cards', cards: fabricCards } : fromV22(sec[key])
     return { ...base, id, no: String(i + 1), title: clean(sec[key].h), parts: parts.map((r) => part(gid, r)) }
   })
   /* FAQ: ของเดิม + ข้อของ v22 ที่ยังไม่มี */
@@ -65,7 +70,7 @@ for (const [gid, [vid, rows]] of Object.entries(MAP)) {
   const more = v.sections.find((s) => s.h === 'ข้อมูลที่ใช้ต่อได้')
   const links = more.links.map((l) => ({ t: clean(l.t), to: LINK[l.href.replace(/^#/, '')] })).filter((l) => l.to && l.to !== `guides.${gid}`)
   sections.push({ id: 'more', no: String(sections.length + 1), title: clean(more.h), kind: 'links', links, parts: [] })
-  out[gid] = { h1: clean(v.hero.h1), lead: clean(v.hero.lead), sections }
+  out[gid] = { h1: clean(v.hero.h1), lead: LEAD_FIX[gid] || clean(v.hero.lead), sections }
 }
 writeFileSync(join(root, 'src/data/guide-pages.json'), JSON.stringify(out, null, 2) + '\n')
 console.log('guide-pages.json:', Object.keys(out).filter((k) => k[0] !== '_').join(', '))

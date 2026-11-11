@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="th">
+<head>
+  {{> head}}
+  <title>คลังรูปกลาง | TEAMDEE</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="คลังรูปกลางสำหรับทีม รวมรูปทุกไฟล์ใน public/img พร้อมขนาด ไฟล์ย่อ รูปซ้ำ กลุ่มลูกค้า สินค้า และหน้าที่ใช้อยู่ ใช้เลือกรูปไปวางหน้าเว็บ">
+  {{!-- คลังรูปกลาง 30 ต.ค. · หน้าภายใน /ui/ ไม่ export ขึ้น WordPress (vite input ตัด ui/ · seo-check isExported) และ noindex --}}
+  <style>
+    /* มือถือ: แถบตัวกรองสูงเกินครึ่งจอ ไม่ตรึง · จอใหญ่ตรึงไว้บนสุด */
+    .md-tools { background: var(--color-paper); border-bottom: 1px solid var(--color-line); }
+    @media (min-width: 1024px) { .md-tools { position: sticky; top: 0; z-index: 20; } }
+    .md-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 14px; }
+    .md-card { display: flex; flex-direction: column; min-width: 0; background: var(--color-paper); border: 1px solid var(--color-line); border-radius: var(--radius-card); overflow: hidden; }
+    .md-thumb { display: grid; place-items: center; aspect-ratio: 4 / 3; background: var(--color-shell); border-bottom: 1px solid var(--color-line); }
+    .md-thumb img { width: 100%; height: 100%; object-fit: contain; }
+    .md-body { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px 14px; font-size: 15px; line-height: 1.5; color: var(--color-ink-2); }
+    .md-path { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; color: var(--color-ink); overflow-wrap: anywhere; }
+    .md-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .md-tag { display: inline-flex; align-items: center; min-height: 28px; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--color-line-2); font-size: 14px; color: var(--color-ink); background: var(--color-paper); }
+    .md-tag--kind { background: var(--color-ink); color: var(--color-paper); border-color: var(--color-ink); }
+    .md-tag--dup { background: var(--color-alert-tint); color: var(--color-alert); border-color: var(--color-alert); }
+    .md-tag--code { background: var(--color-cream); border-color: var(--color-orange); }
+    .md-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .md-copy { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 2px solid var(--color-line-2); background: var(--color-paper); color: var(--color-ink); font-size: 15px; font-weight: 600; cursor: pointer; }
+    .md-copy:hover { border-color: var(--color-ink); }
+    .md-copy[data-done] { background: var(--color-ok-tint); border-color: var(--color-ok); color: var(--color-ok); }
+    .md-copy svg { width: 18px; height: 18px; flex: none; }
+    .md-used summary { display: flex; align-items: center; min-height: 44px; cursor: pointer; font-weight: 600; color: var(--color-ink); }
+    .md-used ul { margin-top: 4px; display: grid; gap: 2px; }
+    .md-used a { display: inline-flex; min-height: 32px; align-items: center; text-decoration: underline; overflow-wrap: anywhere; }
+    .md-select { appearance: auto; }
+  </style>
+</head>
+<body>
+{{> siteHeader}}
+<main id="main">
+  <header class="wrap section border-b border-line">
+    <p class="eyebrow">สำหรับทีมในเครื่อง · ไม่ขึ้นเว็บจริง</p>
+    <h1 class="t-display text-[clamp(32px,4.4vw,52px)] mt-3">คลังรูปกลาง</h1>
+    <p class="t-body mt-5 max-w-[68ch]">รูปทุกไฟล์ใน <code>public/img</code> รวมไฟล์ย่อเป็นรูปเดียว บอกขนาด ไฟล์ย่อที่มี รูปที่ซ้ำกัน กลุ่มลูกค้าและสินค้าตามข้อมูลที่มีอยู่ และหน้าที่ใช้รูปนั้นอยู่ เลือกรูปแล้วกดคัดลอก path ไปใช้ได้เลย</p>
+    <dl class="flex flex-wrap gap-x-8 gap-y-3 mt-6 t-sm tabular-nums" id="mdStats" aria-label="สรุปคลัง"></dl>
+    <p class="t-xs mt-5 max-w-[68ch]">อัปเดตคลัง: <code>npx vite build --logLevel error</code> แล้ว <code>node scripts/media-library.mjs</code> · หน้าเว็บดึงรูปผ่าน <code>mediaFor()</code> ใน vite.config.js หรือ <code>\{{#each (media group="running" kind="customer")}}</code> ในแม่แบบ · รูปที่ไม่มีแท็กกลุ่ม = ข้อมูลยังไม่บอก ไม่ได้เดาให้</p>
+  </header>
+
+  <div class="md-tools">
+    <form class="wrap py-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_auto] items-end" id="mdForm" role="search" onsubmit="return false">
+      <label class="block"><span class="label">ค้นหา</span><input class="input" type="search" name="q" placeholder="path, คำบรรยาย หรือรหัส TD" autocomplete="off" spellcheck="false"></label>
+      <label class="block"><span class="label">ชนิดรูป</span><select class="input md-select" name="kind"><option value="">ทุกชนิด</option></select></label>
+      <label class="block"><span class="label">กลุ่มลูกค้า</span><select class="input md-select" name="group"><option value="">ทุกกลุ่ม</option></select></label>
+      <label class="block"><span class="label">สินค้า</span><select class="input md-select" name="product"><option value="">ทุกสินค้า</option></select></label>
+      <label class="choice"><input class="sr-only" type="checkbox" name="dup">เฉพาะรูปซ้ำ</label>
+    </form>
+  </div>
+
+  <section class="wrap section" aria-labelledby="mdCount">
+    <h2 class="t-display text-[clamp(22px,2.6vw,30px)] tabular-nums" id="mdCount" aria-live="polite">กำลังโหลดคลังรูป…</h2>
+    <ul class="md-grid mt-6" id="mdGrid"></ul>
+    <div class="mt-8 flex justify-center"><button class="btn btn-line" type="button" id="mdMore" hidden>แสดงเพิ่ม</button></div>
+    <noscript><p class="t-body">หน้านี้ต้องเปิด JavaScript</p></noscript>
+  </section>
+</main>
+{{> footer}}
+<script type="module" src="/src/js/media-library-page.js"></script>
+</body>
+</html>

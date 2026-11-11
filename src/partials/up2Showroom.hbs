@@ -1,0 +1,18 @@
+{{!-- ผลงาน โฉมใหม่ (อาร์ต 3 พ.ย. "ดึงอันนี้มาใช้ · แถวแรกเสื้อที่เราออกแบบบริษัท ต่อมาเสื้อใส่หุ่น · แบบไม่ซ้ำกัน") · โชว์รูม #real-work ของหน้าแรกทั้งชุด (คัดจาก site/index.html)
+     ต่างจากหน้าแรก: หัวข้อ H2 v22 ของหน้านี้ · ข้อมูล up.v2.showroom (vite.config.js) · LINE ปุ่มหลักของหน้า · แถว 1 ไฟล์ออกแบบงานปักจริง แถว 2 เสื้อโปโลบนหุ่นชุดหน้าแรก
+     4 พ.ย. อาร์ต "แยกให้ชัดๆระหว่างแบบเสื้อ 3D กับ เสื้อจริงใส่หุ่น": ป้ายประเภทหน้าหัวข้อแถว (kindLabel) · 5 พ.ย. อาร์ต "เอาป้ายบนภาพออก" ตัดป้ายมุมการ์ด · แถว 2 = ภาพถ่ายเสื้อตัวจริง (ไม่ใช่ภาพเจน)
+     แบบในแถว 1 ไม่ใช่แบบที่เอาไปเจนหุ่นแถว 2 (หุ่น = embroider-004/012/017/029 · ตัด 3NINE 005/022/024 และ Mega Amp 033 ที่ซ้ำแบบ) · div.td-page-home = ขอบเขต CSS หน้าแรก --}}
+<div class="td-page-home up2-home">
+<section class="wrap hm-sec hm-reference hm-show" id="real-work" aria-labelledby="works-h">
+  <header class="hm-show__head"><div><h2 id="works-h">{{{hl up.work.h "เสื้อบริษัทที่ผลิตจริง"}}}</h2><p>แบบที่ทีมดีออกแบบให้บริษัทลูกค้า และเสื้อที่ผลิตส่งจริง</p></div><a class="hm-more" href="/project/#reviews">ดูรีวิวลูกค้าทั้งหมด <span aria-hidden="true">→</span></a></header>
+  {{#each up.v2.showroom}}
+  <div class="hm-show__row{{#if this.kind}} up2-show--{{this.kind}}{{/if}}" id="show-{{this.id}}">
+    <div class="hm-show__rhead">{{#if this.kindLabel}}<span class="up2-show__kind up2-show__kind--{{this.kind}}">{{this.kindLabel}}</span>{{/if}}<h3>{{this.title}}</h3><p>{{this.sub}}</p><nav class="hm-show__links" aria-label="ดูรายละเอียด{{this.title}}">{{#each this.links}}<a href="{{this.href}}">{{#if @first}}ดูรายละเอียด{{/if}}{{this.title}}{{#if @last}} <span aria-hidden="true">→</span>{{/if}}</a>{{/each}}</nav></div>
+    <div class="hm-show__line5" id="homeWorks-{{this.id}}">
+      {{#each this.items}}<figure class="hm-show__item"><img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} 1024w" sizes="(min-width:1280px) 280px, 45vw" alt="{{this.alt}}" width="1024" height="1024" loading="lazy" decoding="async"><figcaption>{{this.caption}}</figcaption></figure>{{/each}}
+      <div class="hm-show__cta"><div class="hm-show__chead"><img class="hm-show__ico" src="{{this.icon}}" alt="" width="400" height="400" loading="lazy" decoding="async"><p class="hm-show__ct">อยากได้งานแนวนี้?</p></div><p class="hm-show__cl">ส่งรูปที่ชอบมาทาง LINE ได้เลย</p><a class="cb cb--p hm-line-cta hm-show__line" href="{{@root.cta.primary.href}}" data-track="line" data-where="use-work-{{this.id}}"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">สนใจงานแนวนี้</span></a></div>
+    </div>
+  </div><!-- /row -->
+  {{/each}}
+</section>
+</div>

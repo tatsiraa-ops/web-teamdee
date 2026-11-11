@@ -1,0 +1,10 @@
+{{!-- ขั้นต่อไปท้ายส่วน หน้าสินค้า (รื้อ /embroidery/ 26 ต.ค. "เน้น cta ให้ลูกค้าคุยต่อ") · แถบบางเรื่องเดียวกับส่วนนั้น + ปุ่ม LINE ที่พิมพ์ข้อความรอไว้
+     ico = ชื่อ partial ไอคอน · t = หัว · p = บรรทัดรอง · href/label/where = ปุ่ม · href2/label2 = ลิงก์รอง (ไม่บังคับ) · CSS main.css "ขั้นต่อไปท้ายส่วน" --}}
+<div class="pp-next" data-where="{{where}}">
+  <span class="pp-next__ico" aria-hidden="true">{{> (lookup . 'ico')}}</span>
+  <p class="pp-next__t"><b>{{{ph t}}}</b>{{#if p}}<span>{{{ph p}}}</span>{{/if}}</p>
+  <div class="pp-next__btns">
+    <a class="cb cb--p pp-next__cb" href="{{href}}" data-track="line" data-where="{{where}}"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{label}}</span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    {{#if href2}}<a class="pp-more" href="{{href2}}">{{label2}}</a>{{/if}}
+  </div>
+</div>

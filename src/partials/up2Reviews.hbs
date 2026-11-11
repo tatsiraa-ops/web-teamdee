@@ -1,0 +1,28 @@
+{{!-- รีวิว โฉมใหม่ (อาร์ต 3 พ.ย. "ชอบแบบ Delicake เอามาปรับกับกระดานรีวิว") · หัวข้อ H2 v22 กลาง → กำแพงรูปลูกค้าจริง 10 รูป
+     (รูปหลักรีวิวองค์กร กด = กล่องดูรูปรีวิวนั้น review-dialog.js · รูปลูกค้าองค์กรงานอื่น กด = รูปใหญ่) → แฮชแท็ก → การ์ดคำรีวิวของหน้าแรก เฉพาะองค์กร ลูกศรทีละราย
+     อาร์ต "ทั้งหมดต้องเป็นรูปรีวิวลูกค้า ไม่เอาเสื้อใส่หุ่น ไม่เอารูปซ้ำ": ไม่มีรูปหุ่น · กลุ่มละรูป · การ์ดไม่มีรูป (ตัวย่อชื่อแทนรูปโปรไฟล์) · ไม่มีคลิป --}}
+<section class="hm-customer-proof up2-rv" id="reviews" aria-labelledby="up2-rv-h">
+  <div class="wrap">
+    <header class="up2-rv__head"><h2 id="up2-rv-h">{{{hl up.reviews.h "คนใส่เสื้อบริษัท"}}}</h2><p>รูปงานจริงและคำพูดจริงจากแชทลูกค้าองค์กร กดรูปเพื่อดูงานทั้งชุด</p></header>
+    <ul class="up2-rv__wall" id="up2RvWall">
+      {{#each up.v2.reviews.wall}}<li style="--r:{{this.r}}">{{#if this.review}}<button type="button" data-rv-open="{{this.review}}"><img src="{{this.small}}" srcset="{{this.small}} {{this.sw}}w, {{this.img}} 1200w" sizes="(min-width:1024px) 360px, 50vw" alt="{{this.alt}}" width="{{this.w}}" height="{{this.h}}" loading="lazy" decoding="async"></button>{{else}}<figure data-full="{{this.img}}"><img src="{{this.small}}" srcset="{{this.small}} {{this.sw}}w, {{this.img}} 1200w" sizes="(min-width:1024px) 360px, 50vw" alt="{{this.alt}}" width="{{this.w}}" height="{{this.h}}" loading="lazy" decoding="async"></figure>{{/if}}</li>{{/each}}
+    </ul>
+    <p class="up2-rv__tags">{{#each up.v2.reviews.tags}}<span>#{{this}}</span>{{/each}}</p>
+    <div class="hm-rvb up2-rv__board" data-rvb>
+      <div class="hm-rvb__right">
+        <div class="hm-rvb__top"><p class="hm-rvb__label">รีวิวจากลูกค้าองค์กร</p><div class="hm-rvb__nav"><span class="hm-rvb__count tabular-nums" data-rvb-count aria-live="polite">1 / {{up.v2.reviews.items.length}}</span><button type="button" class="hm-rvb__arw" data-rvb-step="-1" aria-label="รีวิวก่อนหน้า"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hm-rvb__arw" data-rvb-step="1" aria-label="รีวิวถัดไป"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
+        {{#each up.v2.reviews.items}}
+        <article class="hm-rvb__item{{#if @first}} is-on{{/if}}" data-rvb-item data-use="{{this.use}}" aria-label="รีวิวจาก {{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}">
+          <div class="hm-rvb__card">
+            <img class="hm-rvb__pop" src="/img/icons/review-quote.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
+            <div class="hm-rvb__head"><span class="up2-rv__mono" aria-hidden="true">{{this.mono}}</span><p class="hm-rvb__who"><b>{{#if this.who}}{{{ph this.who}}}{{else}}{{{ph this.kind}}}{{/if}}</b><small>{{#if this.who}}{{this.kind}} · {{/if}}รีวิวจากแชทจริง</small></p></div>
+            <blockquote class="hm-rvb__q"><p>{{{ph this.quote}}}</p></blockquote>
+            <div class="hm-rvb__acts"><a class="cb cb--p hm-rvb__cta" href="{{this.line}}" data-track="line" data-where="use-review"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">อยากได้เสื้อแบบนี้</span></a><a class="hm-rvb__all" href="/project/#reviews">ดูรีวิวทั้งหมด <span aria-hidden="true">→</span></a></div>
+          </div>
+        </article>
+        {{/each}}
+      </div>
+      <script type="application/json" data-rv-json>{{{json homeCustomerProof.allReviews}}}</script>
+    </div>
+  </div>
+</section>

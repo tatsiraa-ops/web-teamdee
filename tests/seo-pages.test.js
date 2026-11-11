@@ -23,7 +23,8 @@ before(() => {
   execSync('npx vite build --logLevel error', { cwd: root, stdio: 'pipe', env: { ...process.env, TD_TARGET: 'wp' } })
   pages = walk(dist).filter((f) => !INTERNAL_PAGES.has(f.slice(dist.length).replace(/index\.html$/, ''))).map((f) => {
     const rel = f.slice(dist.length).replace(/index\.html$/, '')
-    const html = readFileSync(f, 'utf8')
+    /* ถอดแท็กตัดบรรทัดไทย (thai-break.js) ก่อนตรวจข้อความ · แท็กอยู่กลางคำ */
+    const html = readFileSync(f, 'utf8').replace(/<\/?t-(?:nw|p|g)>/g, '')
     return { route: rel === '/404.html' ? '404' : rel, html, ...inspectPage(html) }
   })
 })
@@ -119,18 +120,20 @@ test('ลิงก์ภายในบนหน้าที่ export ไม่
 
 /* หน้าแรกเรียงตาม Wireframe v22 · หัวข้อ H2 ของ v22 (ตัดเลขนำหน้า "02 /") ต้องอยู่ครบและเรียงตามลำดับเดียวกัน
    ส่วนที่ซ่อนบนเว็บจริงเพราะรอข้อมูลไม่นับ */
-test('หน้าแรกบนเว็บจริงเรียงหัวข้อตาม v22', () => {
+test('หน้าแรกบนเว็บจริงมีหัวข้อ v22 ครบ (ลำดับตามบอร์ด 3 พ.ย. ตรวจที่ home-board.test.js)', () => {
   const v22 = JSON.parse(readFileSync(join(root, 'docs/spec/teamdee-v22/PAGE-CONTENT.json'), 'utf8')).pages.find((p) => p.id === 'home')
   const norm = (t) => t.replace(/^\d+\s*\/\s*/, '').replace(/\s+/g, '')
   /* อาร์ตเคาะ 23 ต.ค. (ตรวจหน้าแรกกลุ่ม 2 ข้อ A): ส่วนชำระเงินกับส่วน 11 รับประกัน รวมเข้า "ทุกออเดอร์ได้ครบ" แล้ว ไม่มีหัวข้อแยก
      รีวิว (04) ขึ้นแล้วด้วยเคสจริงจากอัลบั้มรีวิว LINE → ต้องอยู่ในลำดับ */
-  const HIDDEN = ['ชำระค่าเสื้อและเตรียมเอกสารสำหรับองค์กร', '11 / การรับประกันเสื้อและบริการหลังการขาย'].map(norm)
+  /* 3 พ.ย. อาร์ตกากบาทส่วนชำระเงินออกจากหน้าแรก (ข้อมูลอยู่ใน FAQ) */
+  /* 10 พ.ย. อาร์ตแทนส่วน 07 ผลงานด้วยคลังรีวิว (รูปลูกค้าจริง) */
+  const HIDDEN = [norm('ชำระค่าเสื้อและเตรียมเอกสารสำหรับองค์กร'), norm('ผลงานเสื้อโปโลปัก / เสื้อพิมพ์ลาย / เสื้อสกรีน')]
   const want = v22.headings.filter((x) => x.level === 'H2').map((x) => norm(x.text)).filter((t) => !HIDDEN.includes(t))
   const home = pages.find((p) => p.route === '/')
   const got = [...home.html.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => norm(m[1].replace(/<[^>]+>/g, '')))
   const at = want.map((t) => got.indexOf(t))
   assert.deepEqual(want.filter((t, i) => at[i] < 0), [], 'หัวข้อ v22 ที่หายไป')
-  assert.deepEqual(at, [...at].sort((a, b) => a - b), 'ลำดับหัวข้อไม่ตรง v22')
+  /* 3 พ.ย. 2026 อาร์ตสั่งจัดลำดับหน้าแรกใหม่ตามบอร์ด Miro ("ลุยเลย") · ลำดับตรวจที่ tests/home-board.test.js · ที่นี่ตรวจแค่ว่าหัวข้อ v22 อยู่ครบ */
 })
 
 /* ทั้งหน้า (ไม่ใช่แค่ <main>) ต้องไม่มีป้ายต้นแบบและ [วงเล็บรอข้อมูล] · เจอ 22 ต.ค. จาก agent ลูกค้า:
@@ -147,7 +150,8 @@ test('หน้าที่ export ไม่มีป้ายต้นแบบ
 test('หน้ากลุ่มลูกค้า: ปุ่มติดต่อเหลือ 2 ชื่อ · กลุ่มกีฬา/ก๊วนปุ่มแรกเป็น LINE · มีเบอร์โทรท้ายเนื้อหา', () => {
   const uses = JSON.parse(readFileSync(join(root, 'src/data/uses.json'), 'utf8'))
   const routes = JSON.parse(readFileSync(join(root, 'src/data/routes.json'), 'utf8'))
-  const LINE_FIRST = ['sport', 'badminton', 'running', 'event', 'class']
+  /* อาร์ตเคาะ 30 ต.ค. (ตรวจมือถือ): LINE เป็นปุ่มแรกทุกกลุ่ม (เดิมบริษัท/หน่วยงาน/ร้าน/โรงเรียน/คณะ ใช้ฟอร์มก่อน) */
+  const LINE_FIRST = uses.map((u) => u.id)
   const bad = []
   for (const u of uses) {
     const path = routes.uses[u.id]
@@ -155,11 +159,10 @@ test('หน้ากลุ่มลูกค้า: ปุ่มติดต่
     if (!pg) continue
     const main = pg.html.slice(pg.html.indexOf('<main'), pg.html.indexOf('</main>'))
     /* ปุ่ม (.btn) ที่พาไปติดต่อ: ฟอร์ม LINE โทร */
-    const btns = [...main.matchAll(/<a class="btn[^"]*"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)]
+    const btns = [...main.matchAll(/<a class="(?:btn|cb)[^"]*"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)]
       .filter(([, h]) => /contact-us|line\.me|^tel:/.test(h))
       .map(([, h, t]) => ({ h, t: t.replace(/<[^>]+>/g, '').trim() }))
-    const labels = new Set(btns.map((b) => b.t))
-    if (labels.size > 2) bad.push(`${path}: ${[...labels].join(' / ')}`)
+    /* ชื่อปุ่มตาม v22 รายส่วน (อาร์ตเคาะ 2 พ.ย. รอบ 54) จึงไม่จำกัด 2 ชื่อแล้ว · ปุ่มแรกยังต้องเป็น LINE */
     if (LINE_FIRST.includes(u.id) !== /line\.me/.test(btns[0]?.h || '')) bad.push(`${path}: ปุ่มแรก ${btns[0]?.h}`)
     if (!/href="tel:/.test(main)) bad.push(`${path}: ไม่มีเบอร์โทรในเนื้อหา`)
   }
@@ -170,19 +173,23 @@ test('กล่องที่เลื่อนซ้ายขวาได้ (
   assert.deepEqual(fails((p) => [...p.html.matchAll(/<div class="[^"]*overflow-x-auto[^"]*"[^>]*>/g)].map((m) => m[0]).filter((t) => !/tabindex="0"/.test(t) || !/aria-label="/.test(t))), [])
 })
 
-/* ตรวจซ้ำ 23 ต.ค.: ส่วนชำระเงิน/รับประกันรวมเข้า "ทุกออเดอร์ได้ครบ" แล้ว → HTML จริงต้องมีครบ ไม่ใช่แค่ข้อมูล */
-test('หน้าแรก: ทุกออเดอร์ได้ครบ 8 ข้อ มีใบกำกับภาษี เคลม 7 วัน สั่งเพิ่ม 30 วัน · ไม่มีส่วนชำระเงิน/รับประกันแยก', () => {
+/* โครง v22 ที่อนุมัติ 29 ต.ค. เก็บสิทธิประโยชน์และส่วนชำระเงิน/หลังการขายแยกไว้ครบ */
+test('หน้าแรก: ทุกออเดอร์ได้ครบ 8 ข้อ มีใบกำกับภาษี เคลม 7 วัน สั่งเพิ่ม 30 วัน · มีส่วนชำระเงิน/รับประกันตาม v22', () => {
   const home = pages.find((p) => p.route === '/')
   /* อาร์ตลบหัวข้อส่วนนี้ (23 ต.ค.) · เริ่มนับจากรายการการ์ด */
-  const get = home.html.slice(home.html.indexOf('hm-benefits--get'), home.html.indexOf('aria-label="ตัวเลขทีมดี"'))
+  /* 3 พ.ย.: ส่วนตัวเลขย้ายไปหลังบริการตามบอร์ด → ตัดถึงท้ายแถบสิทธิประโยชน์แทน */
+  const from = home.html.indexOf('hm-benefits--get')
+  const get = home.html.slice(from, home.html.indexOf('</section>', from))
   assert.equal((get.match(/<li\b/g) || []).length, 8)
   for (const t of ['ใบกำกับภาษี', '7 วันหลังรับสินค้า', 'ภายใน 30 วัน']) assert.ok(get.replace(/<[^>]+>/g, '').includes(t), t)
-  assert.ok(!home.html.includes('id="pay-h"') && !home.html.includes('id="care-h"'))
+  /* 3 พ.ย. อาร์ตลบส่วนชำระเงินบนหน้าแรก · ข้อมูลบัตร/วางบิลยังอยู่ใน FAQ */
+  assert.ok(home.html.includes('id="aftercare"'), 'aftercare')
+  for (const text of ['Visa / Mastercard', 'วางบิล']) assert.ok(home.html.includes(text), text)
 })
 
 test('หน้าแรก: ปุ่ม LINE/โทรทุกจุดบอกตำแหน่ง (data-where) ให้ GTM แยกได้ว่าปุ่มไหนทำยอด', () => {
   const home = pages.find((p) => p.route === '/').html
-  const missing = ['hero', 'hero-have', 'cta-design', 'cta-have', 'cta-end', 'mobile-menu', 'mobile-bar', 'float'].filter((w) => !home.includes(`data-where="${w}"`))
+  const missing = ['hero', 'cta-design', 'cta-have', 'home-process', 'home-aftercare-reorder', 'mobile-menu', 'mobile-bar', 'float'].filter((w) => !home.includes(`data-where="${w}"`))
   assert.deepEqual(missing, [])
 })
 
@@ -215,7 +222,94 @@ test('หน้าติดต่อ: ไม่มีช่องแนบไฟ
   assert.equal(ty.noindex, true)
   assert.equal(ty.h1.length, 1)
   assert.ok(ty.html.includes('id="tyTel"') && ty.html.includes('ส่งโลโก้ / ไฟล์แบบทาง LINE'))
-  assert.ok(ty.html.includes('ทีมติดต่อกลับในเวลาทำการ') && !/หน้าทดสอบ/.test(ty.html))
+  assert.ok(ty.html.includes('ยังไม่มีข้อมูลยืนยันการส่งฟอร์ม') && !/หน้าทดสอบ/.test(ty.html))
+  assert.ok(!ty.html.includes('ได้รับข้อมูลแล้ว'), 'HTML must not claim receipt before a successful submission')
   /* "5 นาที" บนหน้าขอบคุณผูกกับ LINE เท่านั้น */
   assert.deepEqual((ty.html.replace(/<[^>]+>/g, ' ').match(/.{0,20}5 นาที.{0,5}/g) || []).filter((m) => !/LINE/.test(m)), [])
+})
+
+/* หน้าสินค้า 6 หน้าบนเว็บจริง · ตามลำดับ v22 (อาร์ตเคาะ 2 พ.ย. 2026) · ส่วน work ซ่อนได้เฉพาะสินค้าที่ยังไม่มีงานจริงที่ยืนยันเทคนิค */
+const PP_ROUTES = ['/embroidery/', '/sublimation/', '/screen-printing/', '/custom-printed-warmup-shirts/', '/custom-oversize-jerseys/', '/custom-baseball-shirts/']
+const PP_ORDER = ['options', 'fabric', 'detail', 'price', 'quote-h', 'production', 'work', 'reviews', 'size', 'order', 'faq', 'uses', 'end-h']
+/* works.json ยังไม่มีงานของ 3 สินค้านี้ · เว็บจริงซ่อนส่วนผลงาน ไม่แต่งรูป · ได้งานจริงแล้วเอาออกจากรายการ */
+const NO_WORK_YET = new Set(['/custom-printed-warmup-shirts/', '/custom-oversize-jerseys/', '/custom-baseball-shirts/'])
+const PP2_REVIEWS = new Set(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/' })[id]).filter(Boolean))
+/* หน้าโฉมใหม่ที่จบที่ FAQ (pp-v2.json lean · อาร์ต 6 พ.ย. "ที่เหลือต่อจากอันนี้ลบทิ้งได้หมดยกเว้น footer") ไม่มีส่วนเดิมของ v22 · ตรวจที่ tests/pp-v2.test.js */
+const PP2_LEAN = new Set(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).filter(([, v]) => v && v.lean).map(([id]) => ({ print: '/sublimation/' })[id]).filter(Boolean))
+/* หน้าโฉมใหม่ย้ายส่วนขึ้นตามบอร์ดอาร์ต: รีวิว (5 พ.ย.) · เนื้อผ้า (6 พ.ย.) → ส่วนที่ย้ายไม่นับลำดับ v22 */
+const PP2_MOVED = Object.fromEntries(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).map(([id, v]) => [({ print: '/sublimation/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
+const ppMain = (route) => { const h = pages.find((p) => p.route === route).html; return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
+
+test('เว็บจริง: ส่วนหน้าสินค้าครบและเรียงตาม v22', () => {
+  for (const route of PP_ROUTES) {
+    if (PP2_LEAN.has(route)) continue
+    const main = ppMain(route)
+    const want = PP_ORDER.filter((k) => !(k === 'work' && NO_WORK_YET.has(route)))
+    const at = want.map((k) => main.indexOf(` id="${k}"`))
+    assert.deepEqual(want.filter((_, i) => at[i] < 0), [], route)
+    /* หน้าโฉมใหม่ (pp-v2.json มี reviews · บอร์ดอาร์ต 5 พ.ย.) รีวิวย้ายขึ้นต่อจาก "ทำไมต้องสั่งกับทีมดี" · ส่วนอื่นยังเรียงตาม v22 */
+    const ord = at.filter((_, i) => !(PP2_MOVED[route] || []).includes(want[i]))
+    assert.deepEqual(ord, ord.slice().sort((a, b) => a - b), route)
+  }
+})
+
+test('เว็บจริง /embroidery/: แม่แบบ v22 · หัวข้องานปัก · ผ้า 6 ชนิดตามตารางราคา · hero รูปจริงไม่เคลมว่าปัก · แถบล่างไป #price', () => {
+  const main = ppMain('/embroidery/')
+  const page = pages.find((p) => p.route === '/embroidery/').html
+  assert.ok(!/v3h|v3-dark|id="spec"|class="lab-/.test(page), 'เศษ poloV3')
+  assert.match(main, /<h2[^>]*>[^]*?วางโลโก้และรายละเอียดงานปัก/)
+  const prices = JSON.parse(readFileSync(join(root, 'src/data/prices.json'), 'utf8'))
+  const fabric = main.slice(main.indexOf(' id="fabric"'), main.indexOf(' id="detail"'))
+  for (const c of prices.products.polo.cols) assert.ok(fabric.includes(c.name), c.name)
+  const hero = main.slice(main.indexOf('band-hero'), main.indexOf('pp-trust'))
+  assert.match(hero, /<img[^>]+src="[^"]*\/img\/customer\/[^"]+"[^>]+fetchpriority="high"/)
+  assert.match(hero, /<img[^>]+srcset="/)
+  assert.ok(!/ปัก[^"<]*<\/figcaption>/.test(hero), 'คำบรรยายรูปห้ามเคลมว่าปัก')
+  assert.match(page, /class="[^"]*mb__[^"]*"[^>]*href="#price"|href="#price"[^>]*class="[^"]*mb__/)
+  for (const m of main.matchAll(/<img[^>]+src="[^"]*\/img\/customer\/[^"]+"[^>]*alt="([^"]*)"/g)) assert.ok(!/ปัก/.test(m[1]), m[1])
+  assert.match(main.slice(main.indexOf(' id="work"')), /เสื้อโปโลที่ลูกค้าองค์กรใส่จริง/)
+})
+
+test('เว็บจริง: รายละเอียดพิมพ์ลายมีตารางจริง · เบสบอลมีรูปจริง 2 ใบในการ์ด · ผ้าเจอร์ซีย์ยืนยันแล้ว · วอร์ม/เบสบอลไม่โชว์รายการผ้าที่ยังไม่ยืนยัน', () => {
+  if (!PP2_LEAN.has('/sublimation/')) {
+    const print = ppMain('/sublimation/')
+    const printDetail = print.slice(print.indexOf(' id="detail"'), print.indexOf(' id="price"'))
+    assert.match(printDetail, /จัดวางลาย โลโก้ ชื่อ และเบอร์|จัดวางลาย/)
+    assert.match(printDetail, /<table>/)
+    assert.ok(!printDetail.replace(/<[^>]+>/g, '').includes('['), 'มีข้อความรอยืนยัน')
+  }
+  const ball = ppMain('/custom-baseball-shirts/')
+  const ballDetail = ball.slice(ball.indexOf(' id="detail"'), ball.indexOf(' id="price"'))
+  for (const f of ['loose-119', 'loose-120']) assert.ok(ballDetail.includes(f), f)
+  assert.ok(!ball.slice(0, ball.indexOf(' id="detail"')).includes('loose-119'), 'รูปซ้ำในหลักฐานแบบ')
+  const fab = (m) => m.slice(m.indexOf(' id="fabric"'), m.indexOf(' id="detail"'))
+  const techniques = JSON.parse(readFileSync(join(root, 'src/data/techniques.json'), 'utf8'))
+  for (const n of techniques.sublimation.fabricNames) assert.ok(fab(ppMain('/custom-oversize-jerseys/')).includes(n), n)
+  const jersey = ppMain('/custom-oversize-jerseys/')
+  assert.ok(!/รอยืนยัน/.test(jersey.slice(jersey.indexOf(' id="fabric"'), jersey.indexOf(' id="price"'))), 'ผ้าเจอร์ซีย์ยังมีรอยืนยัน')
+  for (const r of ['/custom-printed-warmup-shirts/', '/custom-baseball-shirts/']) {
+    assert.ok(!fab(ppMain(r)).includes('pp-fabrics'), `${r}: รายการผ้า`)
+    /* หัวข้อคงไว้ให้ตรงสารบัญ · เนื้อหาคือการขอตัวอย่างผ้า (2 พ.ย.) */
+    assert.match(fab(ppMain(r)), /<h2/, r)
+    assert.match(fab(ppMain(r)), /ขอดูตัวอย่างผ้า/, r)
+  }
+})
+
+test('เว็บจริง /screen-printing/: H1 เดิม · มีรีวิว · งานจริงอยู่หลังการผลิต', () => {
+  const page = pages.find((p) => p.route === '/screen-printing/')
+  assert.match(page.h1[0].replace(/\s+/g, ''), /รับทำเสื้อสกรีน/)
+  const main = ppMain('/screen-printing/')
+  assert.ok(main.indexOf(' id="production"') < main.indexOf(' id="work"'))
+  assert.ok(main.includes(' id="reviews"') && main.includes('id="screenGallery"'))
+})
+
+/* All product variants must share the production approval gate, including polo tabs. */
+test('unapproved size chart values never ship in product pages', () => {
+  const sizing = JSON.parse(readFileSync(join(root, 'src/data/sizing.json'), 'utf8'))
+  if (sizing.status === 'approved') return
+  for (const route of ['/embroidery/', '/sublimation/', '/screen-printing/', '/custom-printed-warmup-shirts/', '/custom-oversize-jerseys/', '/custom-baseball-shirts/', '/size-chart/']) {
+    const page = pages.find(p => p.route === route)
+    assert.ok(page, route)
+    assert.ok(!/<th scope="row">XS<\/th><td>34<\/td>/.test(page.html), route + ': unapproved sizes leaked')
+  }
 })

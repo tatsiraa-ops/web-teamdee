@@ -1,0 +1,13 @@
+{{!-- รีวิวจริงจากแชทลูกค้า (src/data/reviews.json · 27 ต.ค. อาร์ตให้คัดจากอัลบั้มรีวิว) · คำพูดถอดตรงตัว + รูปทีมเดียวกับในแชท
+     ชื่อใต้คำพูด = ชื่อทีม/องค์กรที่ลูกค้าบอกเองตอนอนุญาตให้ลงรีวิว ไม่มีก็ใช้ประเภทลูกค้า · ไม่ใส่ชื่อคน ไม่แสดงดาวหรือคะแนน
+     ใช้: {{> reviewCards list=pageReviews}} · CSS main.css "รีวิวจริง" --}}
+<ul class="rvc{{#if cls}} {{cls}}{{/if}}">{{#each list}}
+  <li class="rvc__i{{#unless this.img}} rvc__i--text{{/unless}}">
+    <figure>
+      {{#if this.img}}<button type="button" class="rvc__img" data-rv-open="{{this.id}}" aria-label="ดูรูปทั้งหมดของ {{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}"><img src="{{this.imgSmall}}" srcset="{{this.imgSmall}} 480w, {{this.img}} 1200w" sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw" alt="{{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}} ใส่เสื้อที่ทีมดีผลิต" width="480" height="320" loading="lazy" decoding="async">{{#if this.gallery.length}}<span class="rvm__n"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 8"/></svg>{{this.gallery.length}} รูป</span>{{/if}}</button>{{/if}}
+      <blockquote class="rvc__q"><p>{{this.quote}}</p></blockquote>
+      <figcaption class="rvc__who"><span class="rvc__ico" aria-hidden="true">{{> icoChat}}</span><span>{{#if this.who}}<b>{{this.who}}</b><small>{{this.kind}} · รีวิวจากแชทจริง</small>{{else}}<b>{{this.kind}}</b><small>รีวิวจากแชทจริง</small>{{/if}}</span></figcaption>
+    </figure>
+  </li>
+{{/each}}</ul>
+<script type="application/json" data-rv-json>{{{json list}}}</script>

@@ -1,0 +1,64 @@
+{{!-- ส่วน Options ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 02 · แบบและตัวเลือก -->
+{{#if pp.options.show}}
+<section class="wrap section" id="options">
+  <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+    <div class="max-w-[62ch]">
+      <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoShirt}}</span>แบบและตัวเลือก</span>
+      <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.options.h}}}</h2>
+      {{#each pp.options.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
+    </div>
+    {{#each pp.options.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+  </div>
+
+  {{> ppOptCards}}
+
+  {{#if pp.options.specTabs.length}}
+  {{!-- ตารางสเปกไม่อยู่ใน v22 · พับไว้ ไม่ให้แย่งการ์ด 3 ใบ (2 พ.ย.) --}}
+  <details class="pp-specs"><summary>ดูตัวเลือกทรง คอ และออปชั่นที่ผลิตได้</summary>
+  <div class="spec-tabs mt-4" data-tabs>
+    <div class="chiprail" role="tablist" aria-label="ตัวเลือกที่ผลิตได้">
+      {{#each pp.options.specTabs}}<button class="spec-tab" role="tab" type="button" id="t-{{this.id}}" aria-controls="p-{{this.id}}" aria-selected="{{#if @first}}true{{else}}false{{/if}}"{{#unless @first}} tabindex="-1"{{/unless}}>{{this.t}}</button>{{/each}}
+    </div>
+    {{#each pp.options.specTabs}}
+    <div role="tabpanel" id="p-{{this.id}}" aria-labelledby="t-{{this.id}}" tabindex="0" class="ptable ptable--text mt-5 max-w-[860px]"{{#unless @first}} hidden{{/unless}}>
+      <table>
+        <caption class="sr-only">ตัวเลือก{{this.t}}</caption>
+        <thead><tr><th scope="col">ตัวเลือก</th><th scope="col">หมายเหตุ</th></tr></thead>
+        <tbody>{{#each (lookup ../pp.options.spec this.id)}}<tr><th scope="row">{{this.[0]}}</th><td>{{this.[1]}}</td></tr>{{/each}}</tbody>
+      </table>
+    </div>
+    {{/each}}
+    <p class="t-xs mt-3"><a class="pp-more" href="{{url 'contact'}}?from=collar-options">ขอตัวเลือกทรงคอที่เหมาะกับงาน<span class="arw" aria-hidden="true">&rarr;</span></a> <a class="pp-more" href="{{url 'guides' 'collar'}}">ดูทรงคอเสื้อทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a></p>
+  </div>
+  </details>
+  {{/if}}
+
+  {{!-- โปโลปัก: แบบตัวอย่างอยู่ใน downloadAssets ถัดไปแล้ว ไม่ขึ้นกริดซ้ำ --}}
+  {{!-- โปโล: การ์ด 3 ใบกับแบบจากงานลูกค้าพอแล้ว ไม่ขึ้นกริดแบบทั้งหมด (2 พ.ย.) --}}
+  {{!-- หน้าโฉมใหม่มีส่วนแบบเสื้อ 3D แยก (pp2Designs.hbs) ไม่ขึ้นกริดซ้ำ --}}
+  {{#if productDesigns.length}}{{#unless (eq item.id 'polo')}}{{#unless pp2.designs}}
+  <div class="mt-14" id="ex">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+      <h3 class="t-display text-[clamp(22px,2.6vw,30px)]">เลือกกราฟิกพร้อมรหัสแบบ กดขยายแล้วเซฟไปคุยต่อ</h3>
+      <a class="pp-more" href="{{url 'designs'}}?product={{item.id}}" id="prodAll">ดูแบบ{{item.name}}ทั้งหมด<span class="arw" aria-hidden="true">&rarr;</span></a>
+    </div>
+    {{#if productTags.length}}
+    <div class="chiprail mb-6" id="prodTags" data-show="6">
+      <span class="text-[15px] font-bold mr-1">ทรงเสื้อ</span>
+      <button class="chip" type="button" data-tag="all" aria-pressed="true">ทั้งหมด <span class="tabular-nums opacity-60">{{productDesigns.length}}</span></button>
+      {{#each productTags}}<button class="chip" type="button" data-tag="{{this.garment}}" data-q="{{this.name}}" aria-pressed="false">{{this.name}} <span class="tabular-nums opacity-60">{{this.n}}</span></button>{{/each}}
+    </div>
+    <p class="t-sm tabular-nums -mt-2 mb-6" id="prodCount" role="status">แสดง 6 จาก {{productDesigns.length}} แบบ · ดูครบในแกลเลอรี</p>
+    {{/if}}
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" id="prodGrid" data-line-url="{{site.lineUrl}}">
+      {{#each productDesigns}}
+      <figure class="overflow-hidden rounded-card bg-paper border border-line aspect-[3/2] {{#if this.thumbBoard}}board-thumb{{/if}}" data-code="{{this.code}}" data-meta="{{this.meta}}" data-garment="{{this.garment}}"{{#unless (lt @index 6)}} hidden{{/unless}}>
+        <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} {{#if this.width}}{{this.width}}{{else}}1080{{/if}}w" sizes="(min-width:1024px) 33vw, 50vw" width="1080" height="720" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} {{this.techName}} รหัส {{this.code}}" class="w-full h-full object-contain">
+      </figure>
+      {{/each}}
+    </div>
+  </div>
+  {{/unless}}{{/unless}}{{/if}}
+</section>
+{{/if}}

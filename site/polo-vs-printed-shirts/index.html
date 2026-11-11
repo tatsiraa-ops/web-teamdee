@@ -2,6 +2,12 @@
 <html lang="th">
 <head>
   {{> head}}
+  {{!-- CSS เฉพาะหน้าโหลดใน head (27 ต.ค.) · เดิม import ผ่าน JS → ตอนเปิดหน้ารูป/ไอคอนกางใหญ่แวบก่อน CSS มา --}}
+  <link rel="stylesheet" href="/src/styles/article-reader.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-blocks.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-material-lab.css" data-page-css>
+  <link rel="stylesheet" href="/src/styles/guide-process-studio.css" data-page-css>
   <title>เสื้อโปโลปักกับเสื้อพิมพ์ลาย เลือกแบบไหนสำหรับพนักงาน? | TEAMDEE</title>
   <meta name="description" content="เปรียบเทียบเสื้อโปโลปักกับเสื้อพิมพ์ลายสำหรับพนักงาน พร้อมปัจจัยเลือกผ้า รูปแบบ และข้อมูลขอราคาก่อนสั่งทำ">
   {{!-- บทความร่างตาม v22 · noindex จนกว่ามีผู้ตรวจและชื่อผู้เขียนจริง --}}

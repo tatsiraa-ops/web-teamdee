@@ -1,0 +1,26 @@
+{{!-- ส่วน Detail ของหน้าสินค้า (แยกจาก productPage.hbs 27 ต.ค.) --}}
+<!-- 04 · รายละเอียดงาน (ปัก / ลาย / สกรีน / ซิป ฯลฯ) -->
+{{#if pp.detail.show}}
+<section class="wrap section" id="detail">
+  <div class="max-w-[62ch] mb-8">
+    <span class="eyebrow"><span class="block size-[18px] shrink-0">{{> icoSpark}}</span>รายละเอียดงาน</span>
+    <h2 class="t-display text-[clamp(28px,3.8vw,46px)]">{{{ph pp.detail.h}}}</h2>
+    {{#each pp.detail.intro}}<p class="t-lead mt-4">{{this}}</p>{{/each}}
+  </div>
+  {{!-- การ์ดมีรูปจริง (download-designs.json ผ่าน scripts/v22/product-pages.mjs) · ไม่มีรูป = เว็บจริงซ่อน ยกเว้นการ์ดข้อความจริง (text) · ไม่เหลือการ์ด = เหลือตาราง --}}
+  {{#if pp.detail.cards.length}}<ol class="pp-cards grid gap-4 {{#if (eq pp.detail.cards.length 2)}}md:grid-cols-2 max-w-[860px]{{else}}md:grid-cols-3{{/if}}">
+    {{#each pp.detail.cards}}<li class="pp-card">{{#if this.hasImg}}<div class="pp-card__img relative{{#if this.fit}} pp-card__img--fit{{/if}}"><img src="{{this.img}}" {{#if this.imgSmall}}srcset="{{this.imgSmall}} 540w, {{this.img}} {{this.width}}w" sizes="(min-width:768px) 420px, calc(100vw - 40px)"{{else}}data-sizes="(min-width:768px) 420px, calc(100vw - 40px)"{{/if}} width="{{this.width}}" height="{{this.height}}" alt="{{this.alt}}" loading="lazy" decoding="async">{{#if this.tag}}<span class="tag tag-ink absolute left-3 bottom-3">{{this.tag}}</span>{{/if}}</div>{{/if}}<span class="pp-card__no">{{inc @index}}</span><h3 class="text-[20px] mt-3">{{this.h}}</h3>{{#each this.p}}<p class="t-body mt-2">{{this}}</p>{{/each}}</li>{{/each}}
+  </ol>{{/if}}
+  {{#if pp.detail.table}}
+  <div class="ptable ptable--text mt-8 max-w-[860px]" tabindex="0" role="region" aria-label="ตารางรายละเอียด">
+    <table>
+      <caption class="sr-only">ตารางรายละเอียด {{item.name}}</caption>
+      <thead><tr>{{#each pp.detail.table.head}}<th scope="col">{{this}}</th>{{/each}}</tr></thead>
+      <tbody>{{#each pp.detail.table.rows}}<tr><th scope="row">{{this.[0]}}</th><td>{{this.[1]}}</td></tr>{{/each}}</tbody>
+    </table>
+  </div>
+  {{/if}}
+  {{#each pp.detail.links}}<a class="pp-more mt-6" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}
+  <div class="pp-row"><a class="cb cb--s" href="{{ppNextLine.logo}}" data-track="line" data-where="pp-next-logo">ส่งโลโก้ให้ทีมดีช่วยดู</a></div>
+</section>
+{{/if}}

@@ -1,0 +1,20 @@
+{{!-- ถาดแบบที่เลือกไว้ ติดล่างจอ · ส่งทุกแบบในแชท LINE ครั้งเดียว (ข้อความพิมพ์รอไว้) · เลือกไว้จำในเครื่องนี้ ข้ามหน้า
+     ชุดเดียวใช้ทั้ง /designs/ และแกลเลอรีรายกลุ่ม 10 หน้า (audit มือถือ 30 ต.ค. ข้อ 11) · JS: src/js/pick-tray.js · CSS: src/styles/picks.css
+     พารามิเตอร์: where = data-where ของปุ่มส่ง · send = คำกลางปุ่มส่งบนจอกว้าง ("ส่ง___ทาง LINE") --}}
+{{!-- ประกาศจำนวนแบบที่เลือกให้โปรแกรมอ่านจอ (อยู่นอกถาด เพราะถาดซ่อนตอนยังไม่เลือก · รอบ 46) --}}
+<p class="sr-only" id="dgTrayLive" aria-live="polite"></p>
+<section class="dg-tray" id="dgTray" aria-labelledby="dgTray-h" hidden>
+  {{!-- ล้างแล้วเลิกทำได้ (ลองใช้จริง 30 ต.ค.: ปุ่มล้างติดปุ่มส่ง แตะพลาดแล้วหายหมด) --}}
+  <div class="dg-tray__undo" id="dgTrayUndo" hidden><span id="dgTrayUndoT"></span><button type="button" id="dgTrayUndoBtn">เลิกทำ</button></div>
+  {{!-- เลือกครบแล้วกดเพิ่ม ต้องเห็นบนจอ ไม่ใช่แค่โปรแกรมอ่านจอ (2 พ.ย.) --}}
+  <p class="dg-tray__full" id="dgTrayFull" hidden></p>
+  <div class="dg-tray__in">
+    <div class="dg-tray__thumbs" id="dgTrayThumbs" aria-hidden="true"></div>
+    <div class="dg-tray__txt">
+      <h2 class="dg-tray__h" id="dgTray-h"><span class="dg-tray__long">เลือกไว้ </span><span id="dgTrayN">0</span> แบบ</h2>
+      <p class="dg-tray__codes tabular-nums" id="dgTrayCodes"></p>
+    </div>
+    <button class="dg-tray__clear" type="button" id="dgTrayClear" aria-label="ล้างแบบที่เลือกไว้"><span class="dg-tray__clear-t">ล้าง</span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <a class="cb cb--p dg-tray__send" id="dgTraySend" href="{{@root.site.lineUrl}}" data-track="line" data-where="{{where}}"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ส่ง<span class="dg-tray__long">{{send}}</span>ทาง LINE</span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="cb__arw" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>

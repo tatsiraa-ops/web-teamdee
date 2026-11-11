@@ -1,0 +1,328 @@
+/* หน้ารีวิว /project/ (works-page.js) · ย้ายออกจาก main.css (30 ต.ค. รอบ 48 · อาร์ตอนุญาตแยก CSS) = หน้าอื่นไม่ต้องโหลด
+   ลำดับเดิมคงไว้ · @media เดิมคงไว้ · ตรวจด้วย computed style ทุกหน้าก่อน/หลังแยก */
+/* ---------- หน้ารีวิวลูกค้า /project/ (รื้อ 26 ต.ค. · อาร์ต "หน้านี้ต่อ") ----------
+   หัวเรื่อง: ข้อความ + ตัวเลขจริง 3 ช่อง + ทางลัดมีจำนวน | โมเสกภาพจริง 6 ใบ ใบแรกใหญ่ · เมนูกลุ่มลูกค้าก่อนภาพ · ส่วนปิดแบบแชท */
+/* เมนูกลุ่มลูกค้า */
+.pj-ph__head { text-align: center; }
+.pj-ph__head .hm-hl, #clips-h .hm-hl { color: #F05A00; }
+/* 10 กลุ่มตาม v22 (28 ต.ค.): คอม 5×2 · การ์ดที่เลือก = กรอบดำ พื้นครีม (aria-current จาก works-page.js) */
+.pj-groups { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 22px; }
+.pj-groups a[aria-current="true"] { border-color: var(--color-ink); background: var(--color-cream); box-shadow: inset 0 0 0 1px var(--color-ink); }
+.pj-groups a { display: grid; grid-template-columns: 56px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 12px; align-items: center; padding: 8px 12px 8px 8px; border: 1px solid var(--color-line); border-radius: 14px; background: var(--color-paper); transition: border-color .2s, box-shadow .25s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.pj-groups__img { grid-row: span 2; display: block; width: 56px; height: 56px; overflow: hidden; border-radius: 10px; background: var(--color-shell); }
+.pj-groups__img img { width: 100%; height: 100%; object-fit: cover; }
+.pj-groups__t { align-self: end; font-size: 15px; font-weight: 700; line-height: 1.3; }
+.pj-groups__n { align-self: start; font-size: 13px; color: var(--color-ink-3); }
+.pj-groups a:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+@media (hover: hover) {
+  .pj-groups a:hover { border-color: var(--color-ink); transform: translateY(-2px); box-shadow: 0 14px 26px -20px rgb(0 0 0 / .5); }
+}
+.pj-grp { scroll-margin-top: calc(var(--hdr-b, 78px) + 8px); }
+/* ลิงก์ข้อมูลสินค้าใต้กล่องปิด */
+.pj-links { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; padding-bottom: 64px; font-size: 15px; }
+.pj-links span { font-weight: 700; color: var(--color-ink-3); }
+.pj-links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; text-decoration: underline; text-decoration-color: var(--color-line-2); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.pj-links a:hover { text-decoration-color: var(--color-orange); }
+@media (max-width: 1023px) {
+  .pj-groups { display: flex; gap: 10px; margin-inline: -20px; padding: 2px 20px 8px; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-inline: 20px; scrollbar-width: none; -webkit-mask: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+  .pj-groups::-webkit-scrollbar { display: none; }
+  .pj-groups li { flex: 0 0 196px; scroll-snap-align: start; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .pj-groups { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .pj-groups a { grid-template-columns: 44px minmax(0, 1fr); }
+  .pj-groups__img { width: 44px; height: 44px; }
+  .pj-groups__t { font-size: 14px; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .pj-groups { margin-inline: -40px; padding-inline: 40px; scroll-padding-inline: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pj-groups a, .pj-jump a { transition: none; }
+  .pj-groups a:hover { transform: none; }
+}
+.pj-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; max-width: 580px; margin-top: 22px; }
+.pj-stats > div { position: relative; display: flex; flex-direction: column-reverse; justify-content: flex-end; overflow: hidden; padding: 14px 16px 18px; border: 1px solid var(--color-line); border-radius: 16px; background: var(--color-paper); box-shadow: 0 1px 2px rgb(0 0 0 / .04); }
+.pj-stats dd { font-size: clamp(22px, 2.1vw, 30px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; white-space: nowrap; }
+.pj-stats dt { margin-top: 4px; font-size: 13px; color: var(--color-ink-3); }
+.pj-stat__v { display: inline-flex; align-items: baseline; }
+.pj-stat__plus { color: var(--color-orange); }
+.pj-stat__u { margin-left: .22em; font-size: .62em; font-weight: 700; color: var(--color-ink-2); }
+.pj-stat__bar { position: absolute; left: 16px; right: 16px; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--color-orange); transform-origin: left center; }
+.pj-stats.is-armed > div { opacity: 0; transform: translateY(18px); }
+.pj-stats.is-armed .pj-stat__n { display: inline-block; color: var(--color-orange-text); }
+.pj-stats.is-armed .pj-stat__u { display: inline-block; opacity: 0; transform: translateY(.35em); }
+.pj-stats.is-armed .pj-stat__bar { transform: scaleX(0); }
+.pj-stats.is-run > div { opacity: 1; transform: none; transition: opacity .6s ease-out, transform .8s cubic-bezier(.16, 1, .3, 1); transition-delay: calc(var(--i) * .18s); }
+.pj-stats.is-run .pj-stat__bar { transform: scaleX(1); transition: transform 2.2s cubic-bezier(.16, 1, .3, 1) calc(var(--i) * .22s); }
+.pj-stats > div.is-hit .pj-stat__n { color: var(--color-ink); transition: color .5s ease; animation: pj-stat-pop .55s cubic-bezier(.16, 1, .3, 1); }
+.pj-stats > div.is-hit .pj-stat__u { opacity: 1; transform: none; transition: opacity .4s ease-out, transform .55s cubic-bezier(.16, 1, .3, 1); }
+.pj-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.pj-jump li { animation: pj-rise .6s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(.35s + var(--i, 0) * .08s); }
+.pj-jump a { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px 0 6px; border: 1.5px solid var(--color-line-2); border-radius: 999px; background: var(--color-paper); font-size: 15px; font-weight: 700; transition: border-color .2s, background-color .25s, color .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.pj-jump__ico { display: grid; place-items: center; width: 36px; height: 36px; padding: 9px; border-radius: 50%; background: var(--color-shell); color: var(--color-ink); transition: background-color .25s, color .25s; }
+.pj-jump__ico svg { width: 100%; height: 100%; }
+.pj-jump a b { display: grid; place-items: center; min-width: 26px; height: 24px; padding: 0 7px; border-radius: 999px; background: var(--color-orange); color: var(--color-ink); font-size: 13px; }
+.pj-jump__go { width: 16px; height: 16px; color: var(--color-ink-3); transition: translate .25s cubic-bezier(.2, .7, .2, 1), color .2s; }
+.pj-jump a:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+@media (hover: hover) {
+  .pj-jump a:hover { border-color: var(--color-ink); background: var(--color-ink); color: var(--color-paper); transform: translateY(-2px); }
+  .pj-jump a:hover .pj-jump__ico { background: var(--color-orange); color: var(--color-ink); }
+  .pj-jump a:hover .pj-jump__go { color: var(--color-paper); translate: 0 3px; }
+}
+.pj-jump a:active { transform: scale(.97); }
+@media (max-width: 639px) {
+  .pj-stats { gap: 8px; }
+  .pj-stats > div { padding: 10px 10px 14px; border-radius: 12px; }
+  .pj-stats dd { font-size: 19px; }
+  .pj-stats dt { font-size: 13px; line-height: 1.35; }
+  .pj-stat__bar { left: 10px; right: 10px; }
+  /* มือถือ: ทางลัด 3 ช่องแถวเดียว (ไอคอนบน ชื่อ + จำนวน) ไม่กินความสูง 3 แถว */
+  .pj-jump { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; }
+  .pj-jump a { flex-direction: column; justify-content: center; gap: 4px; min-height: 0; height: 100%; padding: 10px 6px; border-radius: 16px; font-size: 13px; line-height: 1.25; text-align: center; }
+  .pj-jump__ico { width: 32px; height: 32px; padding: 8px; }
+  .pj-jump__go { display: none; }
+}
+@media (max-width: 399px) {
+  /* จอ 320: หน่วยลงบรรทัดใหม่ ไม่ล้นการ์ด */
+  .pj-stats dd { white-space: normal; font-size: 17px; }
+  .pj-stat__v { flex-wrap: wrap; }
+  .pj-stats .pj-stat__u, .pj-stats.is-armed .pj-stat__u { display: block; flex-basis: 100%; margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pj-jump li { animation: none; }
+  .pj-jump a, .pj-jump__go, .pj-jump__ico { transition: none; }
+  .pj-jump a:hover { transform: none; }
+}
+
+/* ---------- หัวกลาง (รอบ 161b · อาร์ต "เอาภาพแรกทำมาใหม่ดีๆ เอาไว้กลางก่อน" → แบนเนอร์เดิม จัดกลาง) ----------
+   เนื้อหาเดิมครบ · หัว/ข้อความ/ตัวเลข/ทางลัดอยู่กลางแบบหน้าแบบเสื้อ /designs/ · ภาพลูกค้า 6 ใบแถวเดียว กว้างพิเศษ (site-widths) · ภาพนิ่ง */
+.pj-hero { overflow: hidden; background: var(--color-shell); border-bottom: 1px solid var(--color-line); }
+.pj-hero__in { display: flex; flex-direction: column; align-items: center; padding-block: 36px 44px; text-align: center; }
+.pj-hero .crumb2 { justify-content: center; }
+.pj-hero__h { margin-top: 14px; font-size: clamp(34px, 4.4vw, 60px); color: var(--color-ink); }
+.pj-hero__h .hm-hl { color: #F05A00; }
+.pj-hero__p { max-width: 60ch; margin: 10px auto 0; font-size: 16.5px; line-height: 1.7; color: var(--color-ink-2); }
+/* ตัวเลข (รอบ 163b · อาร์ต "แปลกๆ"): กลับเป็นตัวหนังสือเรียบ ไม่มีกล่อง ไม่มีไอคอน (ไอคอนมีที่การ์ดทางลัดชุดเดียว) · คั่นเส้นบาง */
+.pj-hero .pj-stats { display: flex; justify-content: center; gap: 0; width: auto; max-width: none; margin: 22px auto 0; }
+.pj-hero .pj-stats > div { display: flex; flex-direction: column-reverse; align-items: center; padding: 0 30px; border: 0; border-radius: 0; background: none; box-shadow: none; text-align: center; }
+.pj-hero .pj-stats > div + div { border-left: 1px solid var(--color-line-2); }
+.pj-hero .pj-stats dd { font-size: clamp(26px, 2.4vw, 34px); }
+.pj-hero .pj-stats dt { margin-top: 2px; font-size: 14px; }
+.pj-hero .pj-stat__bar { display: none; }
+@media (max-width: 639px) {
+  .pj-hero .pj-stats { width: 100%; }
+  .pj-hero .pj-stats > div { flex: 1; padding: 0 6px; }
+  .pj-hero .pj-stats dd { font-size: 21px; }
+  .pj-hero .pj-stats dt { font-size: 12.5px; line-height: 1.35; }
+}
+.pj-mosaic { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; width: 100%; margin: 14px 0 0; } /* รอบ 163b: อยู่ใน .wrap เดียวกับการ์ดทางลัด ขอบซ้ายขวาตรงกัน */
+.pj-mosaic li { overflow: hidden; aspect-ratio: 1; border-radius: 18px; background: var(--color-line); }
+.pj-mosaic img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 1023px) {
+  .pj-hero__in { padding-block: 20px 22px; }
+  .pj-mosaic { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .pj-mosaic li { border-radius: 14px; }
+}
+@media (max-width: 639px) {
+  .pj-hero__p { font-size: 15.5px; }
+}
+/* ---------- ทางลัดการ์ดไอคอน (รอบ 162b · อาร์ต "เอาไอคอนแบบที่ผมชอบ" = ไอคอน 3D ส้ม-ขาวชุดเว็บ) ----------
+   การ์ดขาว ไอคอนใหญ่ ชื่อ + จำนวน · ลูกศรวงกลมมุมขวาล่าง · คอม 5 ใบแถวเดียว · มือถือรางเลื่อนข้าง */
+.pj-jt-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; width: 100%; margin: 28px 0 0; }
+.pj-jt { position: relative; display: flex; flex-direction: column; align-items: center; height: 100%; padding: 16px 12px 18px; border: 1px solid var(--color-line); border-radius: 20px; background: #fff; color: var(--color-ink); text-align: center; box-shadow: 0 1px 2px rgb(0 0 0 / .04), 0 14px 28px -24px rgb(60 30 5 / .45); transition: border-color .2s ease; }
+.pj-jt__ico { width: 88px; height: 88px; object-fit: contain; transition: translate .3s cubic-bezier(.2, .7, .2, 1); }
+.pj-jt__t { margin-top: 8px; font-size: 16.5px; font-weight: 800; line-height: 1.3; }
+.pj-jt__go { position: absolute; right: 10px; top: 10px; width: 26px; height: 26px; padding: 5px; border-radius: 50%; background: var(--color-shell); color: var(--color-ink-2); transition: background-color .2s ease, color .2s ease; }
+.pj-jt:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 3px; }
+@media (hover: hover) {
+  .pj-jt:hover { border-color: #FF6C00; }
+  .pj-jt:hover .pj-jt__ico { translate: 0 -3px; }
+  .pj-jt:hover .pj-jt__go { background: #FF6C00; color: #17130f; }
+}
+@media (max-width: 767px) {
+  .pj-jt-row { display: flex; align-self: stretch; gap: 10px; width: auto; margin: 22px -20px 0; padding: 0 20px 6px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; scrollbar-width: none; }
+  .pj-jt-row::-webkit-scrollbar { display: none; }
+  .pj-jt-row > li { flex: 0 0 38%; scroll-snap-align: start; }
+  .pj-jt__ico { width: 72px; height: 72px; }
+  .pj-jt__t { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) { .pj-jt, .pj-jt__ico, .pj-jt__go { transition: none; } }
+/* ---------- หัวกลาง ภาพล้อมสองข้าง (รอบ 163c · อาร์ต "เอารูปแรก ไปรวมกับภาพที่สอง" → "หัวข้อกลาง ภาพล้อมสองข้าง") ----------
+   คอม ≥1024: ภาพลูกค้า 6 ใบ ซ้าย 3 ขวา 3 เอียงนิดๆ ขอบขาว เงานุ่ม · ไม่ทับข้อความ (กล่องข้อความกว้างสุด 600) · 1024–1279 เหลือ 4 ใบมุม
+   จอเล็ก: ตาราง 3×2 ใต้ตัวเลข (กฎ .pj-mosaic เดิม) */
+.pj-stage { position: relative; width: 100%; }
+.pj-stage__txt { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+/* รอบ 168 (9 พ.ย. อาร์ต "เอารูปรีวิวเต็มๆไปเลย ไม่ต้องมีที่โล่ง ซ้ายขวา" → "เอาข้อความไว้ซ้าย" → แบบ ค "กองภาพบนโต๊ะ แบบภาพส่งงาน")
+   ข้อความชิดซ้ายตามแนวเว็บ · ฝั่งขวา = ภาพลูกค้าจริงอัดขอบขาว 5 ใบวางซ้อนเอียงคนละนิด ไหลไปชนขอบจอขวา ป้ายกลุ่มลูกค้าที่ขอบล่าง
+   (ลองแล้วไม่ผ่าน: กำแพงรูปเล็กเอียงสองข้าง · ภาพ 2×2 สองข้างข้อความกลาง · ตาราง 2 แถวฝั่งขวา "ไม่สวยไม่ครีเอท") */
+.pj-stage__txt { align-items: flex-start; text-align: left; }
+.pj-hero .pj-stage .crumb2 { justify-content: flex-start; }
+.pj-hero .pj-stage__txt .pj-hero__p { margin-inline: 0; }
+.pj-hero .pj-stage__txt .pj-stats { margin-inline: 0; justify-content: flex-start; }
+.pj-hero .pj-stage__txt .pj-stats > div:first-child { padding-left: 0; }
+.pj-hero .pj-stage__txt .pj-stats > div { align-items: flex-start; text-align: left; }
+.pj-pile { position: relative; }
+.pj-pile__list { position: absolute; inset: 0; margin: 0; }
+.pj-print { --r: 0deg; position: absolute; display: flex; flex-direction: column; aspect-ratio: 1.22; padding: 10px 10px 0; border-radius: 4px; background: #fff; rotate: var(--r); box-shadow: 0 1px 2px rgb(60 30 5 / .1), 0 24px 44px -20px rgb(60 30 5 / .45); transition: translate .25s cubic-bezier(.16,1,.3,1), box-shadow .25s; }
+.pj-print img { flex: 1; min-height: 0; width: 100%; object-fit: cover; border-radius: 2px; }
+.pj-print__tag { display: flex; align-items: center; gap: 8px; height: 38px; padding-inline: 2px; font-size: 14px; font-weight: 700; color: var(--color-ink); }
+.pj-print__tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #FF6C00; }
+.pj-print:hover { translate: 0 -6px; box-shadow: 0 1px 2px rgb(60 30 5 / .1), 0 32px 52px -20px rgb(60 30 5 / .5); }
+/* ใบแรก = บนสุด · ใบอื่นซ้อนอยู่ข้างหลัง กระจายจนชนขอบขวา */
+.pj-print:nth-child(1) { z-index: 5; --r: -2deg; }
+.pj-print:nth-child(2) { z-index: 4; --r: 6deg; }
+.pj-print:nth-child(3) { z-index: 3; --r: -7deg; }
+.pj-print:nth-child(4) { z-index: 2; --r: 4deg; }
+.pj-print:nth-child(5) { z-index: 1; --r: -9deg; }
+@media (prefers-reduced-motion: reduce) { .pj-print { transition: none; } .pj-print:hover { translate: none; } }
+@media (min-width: 1024px) {
+  .pj-hero__in { padding-top: 0; }
+  /* ซ้ายเริ่มที่ขอบ .wrap (1240 กลางจอ) · ขวาชนขอบจอ ภาพที่เลยขอบถูกตัด */
+  .pj-stage { --edge: max(32px, calc((100vw - 1240px) / 2)); display: grid; grid-template-columns: minmax(0, 540px) minmax(0, 1fr); gap: 40px; align-items: stretch; width: 100vw; min-height: 580px; margin-inline: calc(50% - 50vw); padding-left: var(--edge); overflow: hidden; }
+  .pj-stage__txt { justify-content: center; padding-block: 40px; }
+  .pj-hero .pj-stats dt { white-space: nowrap; }
+  /* รอบ 168b (อาร์ต "ในคอมทำขนาดภาพให้โอเคๆหน่อย"): ภาพเล็กลงให้ทั้งกองอยู่ในกรอบ เห็นครบเกือบทุกใบ เลยขอบขวาได้นิดเดียว */
+  .pj-print { width: clamp(280px, 24vw, 420px); }
+  .pj-print:nth-child(1) { left: 20%; top: 22%; }
+  .pj-print:nth-child(2) { left: 52%; top: 6%; }
+  .pj-print:nth-child(3) { left: 0; top: 46%; }
+  .pj-print:nth-child(4) { left: 56%; top: 47%; }
+  .pj-print:nth-child(5) { left: 28%; top: 2%; }
+}
+@media (min-width: 1600px) {
+  .pj-stage { min-height: 640px; }
+}
+@media (max-width: 1023px) {
+  .pj-pile { width: 100%; aspect-ratio: 1.15; margin-top: 18px; }
+  .pj-print { width: 66%; padding: 7px 7px 0; }
+  .pj-print__tag { height: 30px; font-size: 12.5px; }
+  .pj-print:nth-child(1) { left: 16%; top: 20%; }
+  .pj-print:nth-child(2) { left: 36%; top: 2%; }
+  .pj-print:nth-child(3) { left: 0; top: 42%; }
+  .pj-print:nth-child(4), .pj-print:nth-child(5) { display: none; }
+}
+/* โลโก้ลูกค้า (รอบ 165): ชิ้นเดียวกับหน้ากลุ่มลูกค้า (up2Trust) · ค่าจาก use-page.css "2 · โลโก้ + ตัวเลข" คัดมาตรงตามต้นฉบับ (หน้านี้ไม่ได้โหลด use-page.css) */
+.up2-logos .hm-marquee__track { gap: 8px; padding-right: 8px; }
+.up2-logos .hm-marquee__row + .hm-marquee__row { margin-top: 12px; }
+.up2-logos.hm-sec--tight { padding-block: 56px 8px; }
+.up2-logos .hm-head { margin-bottom: 28px; }
+.up2-logos__sub { margin: 10px auto 0; font-size: 16px; line-height: 1.7; color: var(--color-ink-3); text-wrap: balance; }
+/* 11 พ.ย. โลโก้ย้ายไปอยู่ระหว่างรีวิวกับคลิป · ไม่ติดแบนเนอร์ LINE แล้ว เลิกเผื่อระยะล่าง */
+/* ---------- ภาพลูกค้าทุกกลุ่ม (รอบ 166 แถวละกลุ่ม · 166b การ์ดป้ายกลุ่ม · 167 "เอารูปมาให้เต็มๆ อย่างละ 30-40 รูป … เลื่อนซ้ายขวา") ----------
+   กว้างพิเศษ (site-widths) · แต่ละกลุ่ม = การ์ดป้ายซ้าย (ไอคอน 3D · ชื่อ · จำนวน · ลิงก์ดูเสื้อ) + รางเลื่อนข้าง 2 แถว รูปแรกใหญ่ 2×2
+   ปุ่มซ้ายขวาบนราง (เฉพาะจอที่ชี้ได้) · ขอบขวาจาง = ยังมีต่อ · ช่องท้าย "ดูอีก N ภาพ" สูงเต็มราง · มือถือ = ป้ายบน รางล่าง ปัดเอง */
+@media (min-width: 768px) { .pj-ph > .wrap, .pj-ph .pj-grp > .wrap { width: calc(100% - 64px); max-width: 1400px; padding-inline: 0; } }
+.pj-ph { --tile: 176px; --gap: 10px; }
+.pj-ph .pj-grp { scroll-margin-top: calc(var(--hdr-b, 78px) + 8px); }
+.pj-ph > .wrap { padding-bottom: 14px; }
+.pj-ph .pj-grp__in { display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 14px; padding-top: 16px; }
+.pj-ph .pj-grp:last-of-type .pj-grp__in { padding-bottom: 64px; }
+.pj-grp__side { display: flex; flex-direction: column; align-items: flex-start; padding: 18px 18px 16px; border: 1px solid var(--color-line); border-radius: 22px; background: var(--color-shell); }
+.pj-grp__ico { display: block; width: 64px; height: 64px; margin: -4px 0 6px -4px; background: center / contain no-repeat; }
+.pj-grp__h { display: flex; flex-direction: column; font-size: clamp(22px, 1.9vw, 27px); font-weight: 800; line-height: 1.2; }
+.pj-grp__k { font-size: 13px; font-weight: 600; color: var(--color-ink-3); }
+/* 11 พ.ย. การ์ดกลุ่ม (อาร์ต "เอาตัวเลขออก · cta เพื่อกดไปดูหน้าของกลุ่มนั้นๆต่อ" → "พื้นที่ว่างเหลือเยอะ ไปคิดมา")
+   ≥1024: โปสเตอร์รูปลูกค้าจริงของกลุ่ม (--poster · รูปที่ยังไม่โชว์ในราง) · ไอคอนในวงขาวมุมบน · แถบไล่ส้มล่าง ตัวหนังสือขาว (แบบการ์ดรูปที่อาร์ตชอบ)
+   ปุ่ม: แคปซูลขาว "ไปหน้าเสื้อ<กลุ่ม>" + วงลูกศรส้ม (ลูกศรดำบนส้ม) · จอเล็ก แถวกะทัดรัด */
+.pj-grp__sub { margin: 2px 0 0; font-size: 14px; font-weight: 600; line-height: 1.45; color: var(--color-ink-2); }
+.pj-grp__go { display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 44px; margin-top: auto; padding: 5px 5px 5px 16px; border-radius: 999px; background: #fff; color: var(--color-ink); font-size: 15px; font-weight: 800; line-height: 1.3; text-decoration: none; box-shadow: 0 10px 22px -14px rgb(60 20 0 / .6); transition: background-color .2s ease-out; }
+.pj-grp__arw { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #FF6C00; color: #111; transition: translate .2s ease-out; }
+.pj-grp__arw svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+@media (hover: hover) { .pj-grp__go:hover { background: #FFF1E6; } .pj-grp__go:hover .pj-grp__arw { translate: 3px 0; } }
+.pj-grp__go:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 3px; }
+/* รอบ 3: พื้นโปสเตอร์ = ภาพบรรยากาศกลุ่มที่เคยเจน (AI) → ป้าย "ภาพจำลอง" มุมขวาบน · จอเล็กไม่มีโปสเตอร์ ป้ายซ่อน */
+.pj-grp__sim { position: absolute; top: 14px; right: 14px; display: none; padding: 3px 9px; border-radius: 999px; background: rgb(0 0 0 / .55); color: #fff; font-size: 12px; font-weight: 600; line-height: 1.4; backdrop-filter: blur(4px); }
+@media (min-width: 1024px) {
+  .pj-grp__side { position: relative; isolation: isolate; overflow: hidden; justify-content: flex-end; padding: 18px; border: 0; background: #3a2a1e var(--poster) var(--poster-at, 50%) center / cover no-repeat; color: #fff; }
+  .pj-grp__side::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(0 0 0 / 0) 28%, rgb(240 90 0 / .5) 52%, rgb(214 78 0 / .9) 72%, #B04000 100%); }
+  .pj-grp__ico { position: absolute; top: 14px; left: 14px; width: 54px; height: 54px; margin: 0; border-radius: 50%; background-color: rgb(255 255 255 / .94); background-size: 74%; box-shadow: 0 8px 18px -10px rgb(0 0 0 / .5); }
+  .pj-grp__h { font-size: clamp(24px, 2vw, 29px); color: #fff; text-shadow: 0 1px 2px rgb(0 0 0 / .25); }
+  .pj-grp__k { color: rgb(255 255 255 / .92); }
+  .pj-grp__sub { color: #fff; }
+  .pj-grp__go { margin-top: 14px; }
+  .pj-grp__sim { display: block; }
+}
+/* ราง */
+.pj-rail { position: relative; min-width: 0; }
+.pj-rail::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 56px; background: linear-gradient(90deg, rgb(255 255 255 / 0), #fff); pointer-events: none; transition: opacity .2s ease; }
+.pj-rail.is-end::after { opacity: 0; }
+.pj-ph .rv-grp.mt-5 { margin-top: 0; }
+.pj-ph .rv-grp { display: grid; grid-auto-flow: column dense; grid-template-columns: none; grid-template-rows: repeat(2, var(--tile)); grid-auto-columns: var(--tile); gap: var(--gap); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; }
+.pj-ph .rv-grp::-webkit-scrollbar { display: none; }
+.pj-ph .rv-grp > li { min-width: 0; scroll-snap-align: start; }
+.pj-ph .rv-grp > li:first-child { grid-row: span 2; grid-column: span 2; }
+.pj-ph .rv-grp__lead { grid-column: span 2; grid-row: span 2; }
+.pj-ph .rv-grp img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+.pj-ph .rv-grp__cap { font-size: 12px; }
+.pj-ph .rv-grp__lead .rv-grp__cap { padding: 30px 14px 12px; font-size: 14px; }
+/* ช่อง "ดูอีก N ภาพ" สูงเต็มราง */
+.pj-ph .pj-more { display: flex; grid-row: span 2; }
+.pj-ph .pj-more[hidden] { display: none; }
+.pj-more__btn { display: block; width: 100%; height: 100%; padding: 12px; border: 1px solid #FFD3B0; border-radius: var(--radius-card); background: #FFF1E6; color: #17130f; font-size: 15.5px; font-weight: 800; line-height: 1.45; text-align: center; transition: background-color .2s ease, border-color .2s ease; }
+.pj-more__btn svg { display: block; width: 44px; height: 44px; margin: 12px auto 0; padding: 10px; border-radius: 50%; background: #FF6C00; color: #17130f; }
+@media (hover: hover) { .pj-more__btn:hover { background: #FFE2C9; border-color: #FF6C00; } }
+.pj-more__btn:focus-visible { outline: 3px solid var(--color-ink); outline-offset: -3px; }
+/* ปุ่มซ้ายขวา */
+.pj-rail__btn { position: absolute; z-index: 2; top: 50%; display: grid; place-items: center; width: 46px; height: 46px; margin-top: -23px; border: 1px solid var(--color-line); border-radius: 50%; background: #fff; color: var(--color-ink); box-shadow: 0 10px 22px -12px rgb(0 0 0 / .45); transition: opacity .2s ease, background-color .2s ease; }
+.pj-rail__btn svg { width: 20px; height: 20px; }
+.pj-rail__btn--prev { left: 10px; }
+.pj-rail__btn--next { right: 10px; }
+.pj-rail__btn:disabled { opacity: 0; pointer-events: none; }
+@media (hover: hover) { .pj-rail__btn:hover { background: #FF6C00; border-color: #FF6C00; color: #17130f; } }
+.pj-rail__btn:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+@media (hover: none) { .pj-rail__btn { display: none; } }
+@media (max-width: 1023px) {
+  .pj-ph { --tile: 150px; }
+  .pj-ph .pj-grp__in { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .pj-grp__side { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "ico h go" "ico sub go"; align-items: center; column-gap: 12px; padding: 10px 14px; border-radius: 18px; }
+  .pj-grp__ico { grid-area: ico; width: 48px; height: 48px; margin: 0; }
+  .pj-grp__h { grid-area: h; flex-direction: row; gap: 4px; align-items: baseline; font-size: 19px; }
+  .pj-grp__k { font-size: 19px; font-weight: 800; color: var(--color-ink); }
+  .pj-grp__sub { grid-area: sub; margin: 0; font-size: 13px; }
+  .pj-grp__go { grid-area: go; width: auto; margin: 0; background: #17130F; color: #fff; font-size: 14px; } /* จอเล็ก: แคปซูลเข้ม (พื้นการ์ดอ่อน) */
+  @media (hover: hover) { .pj-grp__go:hover { background: #2B231B; } }
+}
+@media (max-width: 767px) {
+  .pj-ph { --tile: 118px; --gap: 6px; }
+  .pj-rail { margin-inline: -20px; }
+  .pj-ph .rv-grp { padding-inline: 20px; scroll-padding-inline: 20px; }
+  .pj-rail::after { width: 36px; }
+  .pj-grp__side { grid-template-areas: "ico h" "ico sub" "go go"; grid-template-columns: auto minmax(0, 1fr); row-gap: 2px; }
+  .pj-grp__go { width: 100%; margin-top: 10px; } /* มือถือ: ปุ่มเต็มแถวใต้ชื่อกลุ่ม */
+  .pj-more__btn { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .pj-more__btn, .pj-rail__btn, .pj-rail::after, .pj-grp__go, .pj-grp__arw { transition: none; } }
+/* ---------- กระดานรีวิว /project/ (รอบ 169c · ชิ้นเดียวกับหน้าแรก hm-rvb ใน home.css แล้วต่อยอด) ----------
+   กว้างพิเศษ (site-widths) · ภาพใหญ่ขึ้นตามความกว้าง · เรื่องเด่นในการ์ด */
+@media (min-width: 768px) { .pj-rvb.wrap { width: calc(100% - 64px); max-width: 1400px; padding-inline: 0; } }
+/* 169d (อาร์ต "ทำขนาดความสูงซ้ายขวามาดีๆหน่อย ทำให้มันเท่าๆกัน"): คอม ≥1024 ซ้ายขวาสูงเท่ากันทุกรีวิว
+   · ขวา: ทุกการ์ดสูง = การ์ดที่สูงสุด (--rvb-item-h วัดใน board-fit.js) → กดเลื่อนแล้วกระดานไม่กระโดด
+   · รูปบนการ์ดยืดเติมที่ว่าง (การ์ดสั้น = รูปใหญ่ขึ้น · รูปลอยเต็มกล่อง ไม่ดันความสูง) · รีวิวไม่มีรูป = การ์ดคำพูดเต็มช่อง
+   · ซ้าย: ยืดเท่าขวา โมเสกยืดเติมจนขอบล่างตรงกัน (แถวโมเสก minmax(0, …) ภาพไม่ดันแถว) */
+@media (min-width: 1024px) {
+  .pj-rvb { gap: 40px; align-items: stretch; }
+  .pj-rvb .hm-rvb__left { display: flex; flex-direction: column; }
+  .pj-rvb .hm-rvb__mosaic { flex: 1 1 0; min-height: 480px; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, .8fr); }
+  .pj-rvb .hm-rvb__mosaic img { min-height: 0; }
+  .pj-rvb .hm-rvb__item { display: flex; flex-direction: column; min-height: var(--rvb-item-h, auto); }
+  .pj-rvb .hm-rvb__photo { flex: 1 1 auto; height: auto; min-height: 340px; }
+  .pj-rvb .hm-rvb__photo img { position: absolute; inset: 0; }
+  .pj-rvb .hm-rvb__card { flex: none; }
+  .pj-rvb .pj-rvb__card--text { flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 70px; }
+  .pj-rvb .pj-rvb__card--text .hm-rvb__q p { font-size: clamp(22px, 2vw, 28px); line-height: 1.6; }
+}
+/* เรื่องเด่น: ป้ายส้มตัวดำ · หัวเรื่องใหญ่ · ข้อเท็จจริงเป็นรายการติ๊ก */
+.pj-rvb__story { margin-top: 16px; padding-top: 16px; border-top: 1px dashed rgba(255, 108, 0, .35); }
+.pj-rvb__tag { display: inline-flex; margin: 0; padding: 4px 10px; border-radius: 999px; background: #FF6C00; color: #17130f; font-size: 12.5px; font-weight: 800; }
+.pj-rvb__t { margin: 10px 0 0; font-size: clamp(20px, 1.8vw, 24px); font-weight: 800; line-height: 1.35; color: var(--color-ink); text-wrap: balance; }
+.pj-rvb__f { display: grid; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+.pj-rvb__f li { position: relative; padding-left: 26px; font-size: 15px; line-height: 1.6; color: var(--color-ink-2); }
+.pj-rvb__f li::before { content: ""; position: absolute; left: 0; top: 4px; width: 17px; height: 17px; border-radius: 50%; background: #FF6C00 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317130f' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 11px no-repeat; }
+.pj-rvb .hm-rvb__item .pj-rvb__story + .hm-rvb__q p { font-size: 16.5px; }
+/* รีวิวไม่มีรูป: การ์ดอย่างเดียว ตัวคำพูดใหญ่ขึ้น */
+.pj-rvb__card--text { margin-top: 70px; }
+.pj-rvb__card--text .hm-rvb__q p { font-size: 22px; }
+.pj-rvb__pop { background: center / contain no-repeat; }
+.pj-rvb__av { display: block; background: #eee center / cover no-repeat; }
+.pj-rvb__mono { display: grid; place-items: center; background: #FF6C00; color: #17130f; font-size: 20px; font-weight: 800; }

@@ -1,0 +1,10 @@
+{{!-- 30 ต.ค. ปุ่ม LINE ใช้ข้อความตั้งต้นจาก home.json cta2.msg (vite.config.js ctaLine)
+     3 พ.ย. 2026 การ์ดทาง 2 "มีแบบแล้ว" · ไอคอน 3D talk-quote.webp · ส่งมาแค่นี้ 3 ข้อจากข้อความเดิม · ไม่ใช้พื้นดำแล้ว (โทนขาวส้ม) --}}
+<section class="hm-talk__card is-ready" id="cta-quote" aria-labelledby="cta-quote-h">
+  <img class="hm-talk__pop" src="/img/icons/talk-quote.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
+  <p class="hm-talk__kick">มีแบบแล้ว</p>
+  <h2 id="cta-quote-h">{{{hl "มีแบบเสื้อแล้ว ขอประเมินราคาได้เลย" "ขอประเมินราคาได้เลย"}}}</h2>
+  <p class="hm-talk__lead">{{{ph "ส่งแบบ จำนวน และวันที่ต้องการรับเสื้อ ให้ทีมดีประเมินราคา และตรวจแผนผลิต"}}}</p>
+  <div class="hm-talk__send"><p>ส่งมาแค่นี้</p><ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>แบบเสื้อหรือโลโก้</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>จำนวน</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>วันที่ต้องการรับเสื้อ</li></ul></div>
+  <div class="hm-talk__acts"><a class="cb cb--p hm-line-cta" href="{{@root.ctaLine.have}}" data-track="line" data-where="cta-have"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ขอประเมินราคา</span></a></div>
+</section>

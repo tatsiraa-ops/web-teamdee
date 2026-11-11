@@ -1,0 +1,28 @@
+{{#if downloadAssets}}
+<section class="wrap section download-assets" id="design-evidence" aria-labelledby="design-evidence-h">
+  <div class="download-assets__head">
+    <div><span class="eyebrow">ดูแบบให้เห็นภาพ</span><h2 id="design-evidence-h" class="t-display text-[clamp(28px,3.6vw,44px)]">{{downloadAssets.heading}}</h2><p class="t-lead mt-3">{{downloadAssets.intro}}</p></div>
+    {{#if downloadAssets.catalogHref}}<a class="pp-more" href="{{downloadAssets.catalogHref}}">{{downloadAssets.catalogLabel}} <span aria-hidden="true">&rarr;</span></a>{{/if}}
+  </div>
+  {{#if downloadAssets.designs.length}}
+  <div class="sample-choices" role="group" aria-label="เลือกสีตัวอย่างโปโล" hidden>{{#each downloadAssets.designs}}<button type="button" data-sample="{{@index}}" aria-pressed="{{#if @first}}true{{else}}false{{/if}}">{{this.color}}<small>{{this.code}}</small></button>{{/each}}</div>
+  <div class="download-assets__catalog" id="downloadDesignGrid" data-line-url="{{site.lineUrl}}">
+    {{#each downloadAssets.designs}}<figure class="board-card" data-code="{{this.code}}" data-meta="{{this.meta}}"><span class="board-thumb"><img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} {{this.width}}w" sizes="(min-width:900px) 30vw, 100vw" width="{{this.width}}" height="{{this.height}}" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} {{this.code}}"></span><figcaption>{{this.code}} · {{this.color}}</figcaption></figure>{{/each}}
+  </div>
+  {{/if}}
+  {{#if downloadAssets.proofs.length}}
+  <div class="download-assets__proofs" data-proof-tabs>
+    {{#if downloadAssets.multipleProofs}}<div class="chiprail proof-tabs" role="tablist" aria-label="เลือกงานที่อยากดู">{{#each downloadAssets.proofs}}<button type="button" role="tab" class="proof-tab" id="proof-tab-{{this.id}}" aria-controls="proof-panel-{{this.id}}" aria-selected="{{#if @first}}true{{else}}false{{/if}}"><img src="{{this.real.imgSmall}}" alt="" width="44" height="56" loading="lazy" decoding="async"><span>{{this.title}}</span></button>{{/each}}</div>{{/if}}
+    {{#each downloadAssets.proofs}}<article class="design-proof" id="proof-panel-{{this.id}}" {{#if ../downloadAssets.multipleProofs}}role="tabpanel" aria-labelledby="proof-tab-{{this.id}}"{{/if}}><div class="design-proof__text"><h3>{{this.title}}</h3><p class="proof-note">{{this.note}}</p><div class="proof-view" role="group" aria-label="วิธีดู {{this.title}}" hidden><button type="button" data-proof-view="design" aria-pressed="true">ภาพแบบ</button><button type="button" data-proof-view="real" aria-pressed="false">เสื้อจริง</button><button type="button" data-proof-view="both" aria-pressed="false">ดูคู่กัน</button></div><a class="pp-more" href="{{this.line}}" data-track="line" data-where="design-evidence">คุยเรื่องเสื้อแนวนี้<span class="arw" aria-hidden="true">&rarr;</span></a></div><div class="design-proof__pair" id="proof-{{this.id}}" data-proof-grid data-line-url="{{this.line}}">
+      <figure><img src="{{this.design.img}}" width="{{this.design.width}}" height="{{this.design.height}}" loading="lazy" decoding="async" alt="ภาพแบบ · {{this.title}}"><figcaption class="proof-tag proof-tag--design">ภาพแบบ</figcaption></figure>
+      <span class="proof-arrow" aria-hidden="true">{{> icoArrow}}</span>
+      <figure><img src="{{this.real.img}}" width="{{this.real.width}}" height="{{this.real.height}}" loading="lazy" decoding="async" alt="เสื้อจริง · {{this.title}}"><figcaption class="proof-tag proof-tag--real"><span class="up-checks__i">{{> icoCheck}}</span>เสื้อจริง</figcaption></figure>
+    </div></article>{{/each}}
+  </div>
+  {{/if}}
+  {{#if downloadAssets.shapes.length}}<div class="download-assets__catalog" id="warmupShapeGrid" data-line-url="{{site.lineUrl}}">{{#each downloadAssets.shapes}}<figure><img src="{{this.img}}" width="{{this.width}}" height="{{this.height}}" loading="lazy" decoding="async" alt="ภาพแบบทรงเสื้อวอร์ม {{this.title}}"><figcaption>{{this.title}}<small>{{this.note}}</small></figcaption></figure>{{/each}}</div>{{/if}}
+  {{#if downloadAssets.details.length}}<div class="download-assets__details">{{#each downloadAssets.details}}<figure><a href="{{this.img}}" target="_blank" rel="noopener" aria-label="ดูรูปใหญ่ {{this.title}}"><img src="{{this.img}}" width="{{this.width}}" height="{{this.height}}" loading="lazy" decoding="async" alt="{{this.title}}"></a><figcaption>{{this.title}}</figcaption></figure>{{/each}}</div>{{/if}}
+  {{#if downloadAssets.references.length}}<div class="download-assets__details">{{#each downloadAssets.references}}<figure><a href="{{this.img}}" target="_blank" rel="noopener"><img src="{{this.img}}" width="{{this.width}}" height="{{this.height}}" loading="lazy" decoding="async" alt="{{this.title}}"></a><figcaption>{{this.title}} · ใช้ดูตำแหน่งและขนาดลาย เทคนิคผลิตต้องคุยตามผ้าและไฟล์จริง</figcaption></figure>{{/each}}</div>{{/if}}
+  <p class="t-sm mt-5">{{downloadAssets.note}}</p>
+</section>
+{{/if}}
