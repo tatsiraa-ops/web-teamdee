@@ -1,0 +1,89 @@
+[
+  {
+    "active": "th-tab-team",
+    "brokenImages": [],
+    "copyBottom": 49.078125,
+    "ctaTop": 529.078125,
+    "h1": 1,
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "active": "th-tab-sport",
+    "brokenImages": [],
+    "copyBottom": 23.8828125,
+    "ctaTop": 529.078125,
+    "h1": 1,
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "active": "th-tab-team",
+    "brokenImages": [],
+    "copyBottom": 48.8828125,
+    "ctaTop": 528.8828125,
+    "h1": 1,
+    "scroll": 375,
+    "width": 375
+  },
+  {
+    "active": "th-tab-sport",
+    "brokenImages": [],
+    "copyBottom": 48.8828125,
+    "ctaTop": 528.8828125,
+    "h1": 1,
+    "scroll": 375,
+    "width": 375
+  },
+  {
+    "active": "th-tab-team",
+    "brokenImages": [],
+    "copyBottom": -151.1171875,
+    "ctaTop": 528.8828125,
+    "h1": 1,
+    "scroll": 768,
+    "width": 768
+  },
+  {
+    "active": "th-tab-sport",
+    "brokenImages": [],
+    "copyBottom": -151.1171875,
+    "ctaTop": 528.8828125,
+    "h1": 1,
+    "scroll": 768,
+    "width": 768
+  },
+  {
+    "active": "th-tab-team",
+    "brokenImages": [],
+    "copyBottom": 167.8828125,
+    "ctaTop": 204,
+    "h1": 1,
+    "scroll": 1024,
+    "width": 1024
+  },
+  {
+    "active": "th-tab-sport",
+    "brokenImages": [],
+    "copyBottom": 139.0859375,
+    "ctaTop": 204,
+    "h1": 1,
+    "scroll": 1024,
+    "width": 1024
+  },
+  {
+    "active": "th-tab-team",
+    "brokenImages": [],
+    "copyBottom": 135.3828125,
+    "ctaTop": 172,
+    "h1": 1,
+    "scroll": 1440,
+    "width": 1440
+  },
+  {
+    "width": 1440,
+    "scroll": 1440,
+    "active": "th-tab-sport",
+    "verifiedAfterSelectedWait": true
+  }
+]

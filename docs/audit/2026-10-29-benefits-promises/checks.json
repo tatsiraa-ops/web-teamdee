@@ -1,0 +1,122 @@
+[
+  {
+    "count": 8,
+    "height": 751,
+    "links": [
+      {
+        "height": 44,
+        "href": "/contact-us/?from=company-docs",
+        "text": "ขอเอกสารจัดซื้อ\n→"
+      },
+      {
+        "height": 44,
+        "href": "/delivery-after-sales-guide/",
+        "text": "วิธีแจ้งปัญหา\n→"
+      },
+      {
+        "height": 44,
+        "href": "/contact-us/?from=reorder",
+        "text": "แจ้งสั่งเพิ่ม\n→"
+      }
+    ],
+    "overflow": 0,
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "count": 8,
+    "height": 772,
+    "links": [
+      {
+        "height": 44,
+        "href": "/contact-us/?from=company-docs",
+        "text": "ขอเอกสารจัดซื้อ\n→"
+      },
+      {
+        "height": 44,
+        "href": "/delivery-after-sales-guide/",
+        "text": "วิธีแจ้งปัญหา\n→"
+      },
+      {
+        "height": 44,
+        "href": "/contact-us/?from=reorder",
+        "text": "แจ้งสั่งเพิ่ม\n→"
+      }
+    ],
+    "overflow": 0,
+    "scroll": 375,
+    "width": 375
+  },
+  {
+    "count": 8,
+    "height": 678,
+    "links": [
+      {
+        "height": 44,
+        "href": "/contact-us/?from=company-docs",
+        "text": "ขอเอกสารจัดซื้อ\n→"
+      },
+      {
+        "height": 44,
+        "href": "/delivery-after-sales-guide/",
+        "text": "วิธีแจ้งปัญหา\n→"
+      },
+      {
+        "height": 44,
+        "href": "/contact-us/?from=reorder",
+        "text": "แจ้งสั่งเพิ่ม\n→"
+      }
+    ],
+    "overflow": 0,
+    "scroll": 768,
+    "width": 768
+  },
+  {
+    "count": 8,
+    "height": 395,
+    "links": [
+      {
+        "height": 44,
+        "href": "/contact-us/?from=company-docs",
+        "text": "ขอเอกสารจัดซื้อ\n→"
+      },
+      {
+        "height": 44,
+        "href": "/delivery-after-sales-guide/",
+        "text": "วิธีแจ้งปัญหา\n→"
+      },
+      {
+        "height": 44,
+        "href": "/contact-us/?from=reorder",
+        "text": "แจ้งสั่งเพิ่ม\n→"
+      }
+    ],
+    "overflow": 0,
+    "scroll": 1024,
+    "width": 1024
+  },
+  {
+    "count": 8,
+    "height": 436,
+    "links": [
+      {
+        "height": 44,
+        "href": "/contact-us/?from=company-docs",
+        "text": "ขอเอกสารจัดซื้อ\n→"
+      },
+      {
+        "height": 44,
+        "href": "/delivery-after-sales-guide/",
+        "text": "วิธีแจ้งปัญหา\n→"
+      },
+      {
+        "height": 44,
+        "href": "/contact-us/?from=reorder",
+        "text": "แจ้งสั่งเพิ่ม\n→"
+      }
+    ],
+    "overflow": 0,
+    "scroll": 1440,
+    "width": 1440
+  }
+]

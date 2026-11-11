@@ -1,0 +1,110 @@
+[
+  {
+    "cards": [
+      {
+        "height": 399,
+        "href": "/embroidery/",
+        "overflow": false,
+        "width": 278
+      },
+      {
+        "height": 399,
+        "href": "/sublimation/",
+        "overflow": false,
+        "width": 278
+      },
+      {
+        "height": 399,
+        "href": "/screen-printing/",
+        "overflow": false,
+        "width": 278
+      }
+    ],
+    "count": 3,
+    "extraCalculator": 0,
+    "facts": 0,
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "cards": [
+      {
+        "height": 414,
+        "href": "/embroidery/",
+        "overflow": false,
+        "width": 219
+      },
+      {
+        "height": 414,
+        "href": "/sublimation/",
+        "overflow": false,
+        "width": 219
+      },
+      {
+        "height": 414,
+        "href": "/screen-printing/",
+        "overflow": false,
+        "width": 219
+      }
+    ],
+    "count": 3,
+    "extraCalculator": 0,
+    "facts": 0,
+    "scroll": 768,
+    "width": 768
+  },
+  {
+    "cards": [
+      {
+        "height": 453,
+        "href": "/embroidery/",
+        "overflow": false,
+        "width": 299
+      },
+      {
+        "height": 453,
+        "href": "/sublimation/",
+        "overflow": false,
+        "width": 299
+      },
+      {
+        "height": 453,
+        "href": "/screen-printing/",
+        "overflow": false,
+        "width": 299
+      }
+    ],
+    "count": 3,
+    "extraCalculator": 0,
+    "facts": 0,
+    "scroll": 1024,
+    "width": 1024
+  },
+  {
+    "cards": [
+      {
+        "height": 501,
+        "href": "/embroidery/",
+        "overflow": false,
+        "width": 371
+      },
+      {
+        "height": 501,
+        "href": "/sublimation/",
+        "overflow": false,
+        "width": 371
+      },
+      {
+        "height": 501,
+        "href": "/screen-printing/",
+        "overflow": false,
+        "width": 371
+      }
+    ],
+    "count": 3,
+    "extraCalculator": 0,
+    "facts": 0,
+    "scroll": 1440,
+    "width": 1440
+  }
+]

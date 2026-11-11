@@ -1,0 +1,677 @@
+{
+  "checkedAt": "2026-10-28T08:30:26.793Z",
+  "scope": "Local source readiness only. Staging, delivery and analytics remain unverified.",
+  "galleries": [
+    {
+      "id": "shop",
+      "url": "/staff-shirt-designs/",
+      "inspiration": true,
+      "status": "inspiration-only",
+      "codes": [
+        "TD-0008",
+        "TD-0026",
+        "TD-0027",
+        "TD-0029"
+      ]
+    },
+    {
+      "id": "class",
+      "url": "/class-shirt-designs/",
+      "inspiration": true,
+      "status": "inspiration-only",
+      "codes": [
+        "TD-0011",
+        "TD-0024",
+        "TD-0028",
+        "TD-0031"
+      ]
+    },
+    {
+      "id": "faculty",
+      "url": "/university-shirt-designs/",
+      "inspiration": true,
+      "status": "inspiration-only",
+      "codes": [
+        "TD-0015",
+        "TD-0024",
+        "TD-0030",
+        "TD-0033"
+      ]
+    }
+  ],
+  "designDrafts": [
+    {
+      "code": "TD-0001",
+      "url": "/design-preview/td-0001/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0004",
+      "url": "/design-preview/td-0004/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0005",
+      "url": "/design-preview/td-0005/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0006",
+      "url": "/design-preview/td-0006/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0007",
+      "url": "/design-preview/td-0007/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0008",
+      "url": "/design-preview/td-0008/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0009",
+      "url": "/design-preview/td-0009/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0010",
+      "url": "/design-preview/td-0010/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0011",
+      "url": "/design-preview/td-0011/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0012",
+      "url": "/design-preview/td-0012/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0013",
+      "url": "/design-preview/td-0013/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0014",
+      "url": "/design-preview/td-0014/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0015",
+      "url": "/design-preview/td-0015/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0016",
+      "url": "/design-preview/td-0016/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0017",
+      "url": "/design-preview/td-0017/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0018",
+      "url": "/design-preview/td-0018/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0019",
+      "url": "/design-preview/td-0019/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0020",
+      "url": "/design-preview/td-0020/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0021",
+      "url": "/design-preview/td-0021/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0022",
+      "url": "/design-preview/td-0022/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0023",
+      "url": "/design-preview/td-0023/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0024",
+      "url": "/design-preview/td-0024/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0025",
+      "url": "/design-preview/td-0025/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0026",
+      "url": "/design-preview/td-0026/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0027",
+      "url": "/design-preview/td-0027/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0028",
+      "url": "/design-preview/td-0028/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0029",
+      "url": "/design-preview/td-0029/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0030",
+      "url": "/design-preview/td-0030/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0031",
+      "url": "/design-preview/td-0031/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0032",
+      "url": "/design-preview/td-0032/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    },
+    {
+      "code": "TD-0033",
+      "url": "/design-preview/td-0033/",
+      "imageExists": true,
+      "status": "awaiting-real-code-and-publication-approval"
+    }
+  ],
+  "articles": [
+    {
+      "id": "polo",
+      "url": "/polo-vs-printed-shirts/",
+      "status": "draft-needs-editorial-review"
+    },
+    {
+      "id": "fabric",
+      "url": "/team-shirt-fabric-guide/",
+      "status": "draft-needs-editorial-review"
+    },
+    {
+      "id": "design",
+      "url": "/team-shirt-design-ideas/",
+      "status": "draft-needs-editorial-review"
+    },
+    {
+      "id": "checklist",
+      "url": "/team-shirt-order-checklist/",
+      "status": "draft-needs-editorial-review"
+    }
+  ],
+  "sizing": {
+    "status": "draft",
+    "required": [
+      "ตารางแยกตามสินค้า/ทรง",
+      "หน่วยและวิธีวัด",
+      "ค่าคลาดเคลื่อนที่ยืนยัน",
+      "ผู้ตรวจและวันที่"
+    ]
+  },
+  "videos": [
+    {
+      "id": "assumption",
+      "ready": false,
+      "missing": [
+        "file",
+        "poster",
+        "duration",
+        "consent",
+        "music"
+      ],
+      "source": "https://www.facebook.com/teamdee/videos/1590107625649413/"
+    },
+    {
+      "id": "gsb",
+      "ready": false,
+      "missing": [
+        "file",
+        "poster",
+        "duration",
+        "consent",
+        "music"
+      ],
+      "source": "https://www.facebook.com/teamdee/videos/1418697490227931/"
+    },
+    {
+      "id": "junbi",
+      "ready": false,
+      "missing": [
+        "file",
+        "poster",
+        "duration",
+        "consent",
+        "music"
+      ],
+      "source": "https://www.facebook.com/teamdee/videos/1397876905844445/"
+    },
+    {
+      "id": "police",
+      "ready": false,
+      "missing": [
+        "file",
+        "poster",
+        "duration",
+        "date",
+        "consent",
+        "music"
+      ],
+      "source": "https://www.facebook.com/teamdee/videos/3039692749557757/"
+    },
+    {
+      "id": "embroidery-asmr",
+      "ready": false,
+      "missing": [
+        "file",
+        "poster",
+        "duration",
+        "consent",
+        "music"
+      ],
+      "source": "https://www.facebook.com/teamdee/videos/1443921554460679/"
+    },
+    {
+      "id": "why-teamdee",
+      "ready": false,
+      "missing": [
+        "file",
+        "poster",
+        "duration",
+        "consent",
+        "music"
+      ],
+      "source": "https://www.instagram.com/teamdee_/reel/DZ_ln0kPXjv/"
+    },
+    {
+      "id": "backstage",
+      "ready": false,
+      "missing": [
+        "file",
+        "poster",
+        "duration",
+        "date",
+        "consent",
+        "music"
+      ],
+      "source": "https://www.facebook.com/teamdee/videos/1071563669119050/"
+    },
+    {
+      "id": "one-stop",
+      "ready": false,
+      "missing": [
+        "file",
+        "poster",
+        "duration",
+        "date",
+        "consent",
+        "music"
+      ],
+      "source": "https://www.facebook.com/teamdee/videos/28084125771288948/"
+    }
+  ],
+  "cmsPreservation": [
+    {
+      "url": "/choose-uniform-manufacturer-checklist/",
+      "target": "/choose-uniform-manufacturer-checklist/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/garment-production-cost-structure-bulk-order/",
+      "target": "/garment-production-cost-structure-bulk-order/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/event-sports-day-t-shirt-timeline-management/",
+      "target": "/event-sports-day-t-shirt-timeline-management/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/how-to-start-clothing-brand-production-guide/",
+      "target": "/how-to-start-clothing-brand-production-guide/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/sports-running-shirt-fabric-guide/",
+      "target": "/sports-running-shirt-fabric-guide/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/what-is-dft-shirt-printing-durability-guide/",
+      "target": "/what-is-dft-shirt-printing-durability-guide/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/polo-shirt-size-chart-uniform-guide/",
+      "target": "/polo-shirt-size-chart-uniform-guide/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/sublimation-sportswear-designs/",
+      "target": "/sublimation-sportswear-designs/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/how-to-choose-garment-factory-checklist/",
+      "target": "/how-to-choose-garment-factory-checklist/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/polo-shirt-fabric-guide/",
+      "target": "/polo-shirt-fabric-guide/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/how-to-design-sportswear-color-guide/",
+      "target": "/how-to-design-sportswear-color-guide/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/shirt-production-techniques-guide/",
+      "target": "/shirt-production-techniques-guide/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/",
+      "target": "/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/corporate/",
+      "target": "/corporate/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/sport/",
+      "target": "/sport/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/education/",
+      "target": "/education/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/size-chart/",
+      "target": "/size-chart/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/sublimation/",
+      "target": "/sublimation/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/blog/",
+      "target": "/blog/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/sports-shirt/",
+      "target": "/sports-shirt/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/calculations/",
+      "target": "/calculations/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/contact-us/",
+      "target": "/contact-us/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/fabric-technology/",
+      "target": "/fabric-technology/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/project/",
+      "target": "/project/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/screen-printing/",
+      "target": "/screen-printing/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/embroidery/",
+      "target": "/embroidery/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/production-techniques/",
+      "target": "/production-techniques/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/collar-styles/",
+      "target": "/collar-styles/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/event/",
+      "target": "/event/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/services/",
+      "target": "/services/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/about-us/",
+      "target": "/about-us/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/educations-shirt/",
+      "target": "/educations-shirt/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/event-shirts/",
+      "target": "/event-shirts/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/corporate-shirts/",
+      "target": "/corporate-shirts/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/thank-you/",
+      "target": "/thank-you/",
+      "action": "KEEP_NOINDEX",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/terms-conditions/",
+      "target": "/terms-conditions/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/privacy-policy/",
+      "target": "/privacy-policy/",
+      "action": "KEEP",
+      "localTemplate": true,
+      "stagingVerified": false
+    },
+    {
+      "url": "/pdpa/",
+      "target": "/pdpa/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/test-page/",
+      "target": "/test-page/",
+      "action": "KEEP_NOINDEX",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/category/sportswear-sublimation/",
+      "target": "/category/sportswear-sublimation/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/category/fabric-technique/",
+      "target": "/category/fabric-technique/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/category/purchasing-guide/",
+      "target": "/category/purchasing-guide/",
+      "action": "KEEP",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/serviecs/",
+      "target": "/services/",
+      "action": "PRESERVE_REDIRECT",
+      "localTemplate": false,
+      "stagingVerified": false
+    },
+    {
+      "url": "/terms/",
+      "target": "/terms-conditions/",
+      "action": "PRESERVE_REDIRECT",
+      "localTemplate": false,
+      "stagingVerified": false
+    }
+  ],
+  "externalChecks": [
+    "WordPress staging: all preserved URLs and legacy CMS content",
+    "Actual form email delivery and success/failure path",
+    "GTM consent and conversion events without duplicate events"
+  ]
+}

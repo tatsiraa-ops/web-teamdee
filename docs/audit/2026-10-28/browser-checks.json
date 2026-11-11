@@ -1,0 +1,176 @@
+{
+  "desktop": [
+    {
+      "broken": [],
+      "h1": "รับทำเสื้อโปโลปัก เลือกผ้า สี และทรงให้เหมาะกับทีม",
+      "overflow": false,
+      "path": "/embroidery/"
+    },
+    {
+      "broken": [],
+      "h1": "รับทำเสื้อพิมพ์ลาย ออกแบบสีและลายสำหรับทีมคุณ",
+      "overflow": false,
+      "path": "/sublimation/"
+    },
+    {
+      "broken": [],
+      "h1": "รับทำเสื้อสกรีน สำหรับบริษัท ทีมงาน และกิจกรรม",
+      "overflow": false,
+      "path": "/screen-printing/"
+    },
+    {
+      "broken": [],
+      "h1": "รับทำเสื้อบริษัท / เสื้อพนักงาน พร้อมโลโก้",
+      "overflow": false,
+      "path": "/corporate/"
+    },
+    {
+      "broken": [],
+      "h1": "แบบเสื้อ",
+      "overflow": false,
+      "path": "/designs/"
+    },
+    {
+      "broken": [],
+      "h1": "รีวิวทำเสื้อทีมจากลูกค้าทีมดี",
+      "overflow": false,
+      "path": "/project/"
+    },
+    {
+      "broken": [],
+      "h1": "บทความและไอเดียสั่งทำเสื้อทีม",
+      "overflow": false,
+      "path": "/blog/"
+    },
+    {
+      "broken": [],
+      "h1": "วิธีสั่งทำเสื้อพิมพ์ลาย ตั้งแต่เลือกแบบถึงรับเสื้อ",
+      "overflow": false,
+      "path": "/printed-shirt-order-guide/"
+    },
+    {
+      "broken": [],
+      "h1": "วิธีเลือกผ้าสำหรับเสื้อทีมและยูนิฟอร์ม",
+      "overflow": false,
+      "path": "/fabric-technology/"
+    },
+    {
+      "broken": [],
+      "h1": "ตารางไซซ์และวิธีวัดเสื้อก่อนสั่งทำ",
+      "overflow": false,
+      "path": "/size-chart/"
+    },
+    {
+      "broken": [],
+      "h1": "คำนวณราคาเสื้อทีมเบื้องต้น",
+      "overflow": false,
+      "path": "/calculations/"
+    },
+    {
+      "broken": [],
+      "h1": "ติดต่อ TEAMDEE ปรึกษาและขอราคา สั่งทำเสื้อทีม",
+      "overflow": false,
+      "path": "/contact-us/"
+    },
+    {
+      "broken": [],
+      "h1": "คำถามก่อนสั่งทำเสื้อทีม",
+      "overflow": false,
+      "path": "/faq/"
+    },
+    {
+      "broken": [],
+      "h1": "รู้จัก TEAMDEE บริการรับทำเสื้อทีม ในนนทบุรี",
+      "overflow": false,
+      "path": "/about-us/"
+    },
+    {
+      "broken": [],
+      "h1": "ทีมดีได้รับข้อมูลของคุณแล้ว",
+      "overflow": false,
+      "path": "/thank-you/"
+    }
+  ],
+  "mobile": [
+    {
+      "overflow": false,
+      "path": "/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/embroidery/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/sublimation/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/screen-printing/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/corporate/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/designs/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/project/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/blog/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/printed-shirt-order-guide/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/fabric-technology/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/size-chart/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/calculations/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/contact-us/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/faq/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/about-us/",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "path": "/thank-you/",
+      "width": 390
+    }
+  ]
+}

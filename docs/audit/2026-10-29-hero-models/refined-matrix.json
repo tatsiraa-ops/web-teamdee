@@ -1,0 +1,234 @@
+[
+  {
+    "viewport": 320,
+    "type": "team",
+    "h1": 1,
+    "images": [
+      {
+        "left": 9,
+        "right": 80,
+        "width": 71
+      },
+      {
+        "left": 83,
+        "right": 237,
+        "width": 154
+      },
+      {
+        "left": 240,
+        "right": 311,
+        "width": 71
+      }
+    ],
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "viewport": 320,
+    "type": "sport",
+    "h1": 1,
+    "images": [
+      {
+        "left": 9,
+        "right": 80,
+        "width": 71
+      },
+      {
+        "left": 83,
+        "right": 237,
+        "width": 154
+      },
+      {
+        "left": 240,
+        "right": 311,
+        "width": 71
+      }
+    ],
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "viewport": 375,
+    "type": "team",
+    "h1": 1,
+    "images": [
+      {
+        "left": 9,
+        "right": 93,
+        "width": 84
+      },
+      {
+        "left": 96,
+        "right": 279,
+        "width": 183
+      },
+      {
+        "left": 282,
+        "right": 366,
+        "width": 84
+      }
+    ],
+    "scroll": 375,
+    "width": 375
+  },
+  {
+    "viewport": 375,
+    "type": "sport",
+    "h1": 1,
+    "images": [
+      {
+        "left": 9,
+        "right": 93,
+        "width": 84
+      },
+      {
+        "left": 96,
+        "right": 279,
+        "width": 183
+      },
+      {
+        "left": 282,
+        "right": 366,
+        "width": 84
+      }
+    ],
+    "scroll": 375,
+    "width": 375
+  },
+  {
+    "viewport": 768,
+    "type": "team",
+    "h1": 1,
+    "images": [
+      {
+        "left": 23,
+        "right": 151,
+        "width": 128
+      },
+      {
+        "left": 151,
+        "right": 276,
+        "width": 125
+      },
+      {
+        "left": 285,
+        "right": 483,
+        "width": 198
+      },
+      {
+        "left": 492,
+        "right": 617,
+        "width": 125
+      },
+      {
+        "left": 617,
+        "right": 745,
+        "width": 128
+      }
+    ],
+    "scroll": 768,
+    "width": 768
+  },
+  {
+    "viewport": 768,
+    "type": "sport",
+    "h1": 1,
+    "images": [
+      {
+        "left": 23,
+        "right": 151,
+        "width": 128
+      },
+      {
+        "left": 151,
+        "right": 276,
+        "width": 125
+      },
+      {
+        "left": 285,
+        "right": 483,
+        "width": 198
+      },
+      {
+        "left": 492,
+        "right": 617,
+        "width": 125
+      },
+      {
+        "left": 617,
+        "right": 745,
+        "width": 128
+      }
+    ],
+    "scroll": 768,
+    "width": 768
+  },
+  {
+    "viewport": 1440,
+    "type": "team",
+    "h1": 1,
+    "images": [
+      {
+        "left": 66,
+        "right": 302,
+        "width": 236
+      },
+      {
+        "left": 294,
+        "right": 527,
+        "width": 233
+      },
+      {
+        "left": 533,
+        "right": 907,
+        "width": 373
+      },
+      {
+        "left": 913,
+        "right": 1146,
+        "width": 233
+      },
+      {
+        "left": 1138,
+        "right": 1374,
+        "width": 236
+      }
+    ],
+    "scroll": 1440,
+    "width": 1440
+  },
+  {
+    "viewport": 1440,
+    "type": "sport",
+    "h1": 1,
+    "images": [
+      {
+        "left": 66,
+        "right": 302,
+        "width": 236
+      },
+      {
+        "left": 294,
+        "right": 527,
+        "width": 233
+      },
+      {
+        "left": 533,
+        "right": 907,
+        "width": 373
+      },
+      {
+        "left": 913,
+        "right": 1146,
+        "width": 233
+      },
+      {
+        "left": 1138,
+        "right": 1374,
+        "width": 236
+      }
+    ],
+    "scroll": 1440,
+    "width": 1440
+  }
+]

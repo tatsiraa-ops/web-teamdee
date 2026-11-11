@@ -1,0 +1,83 @@
+[
+  {
+    "benefits": 288,
+    "columns": [
+      {
+        "overflow": false,
+        "width": 96,
+        "x": 16,
+        "y": 886.267822265625
+      },
+      {
+        "overflow": false,
+        "width": 96,
+        "x": 112,
+        "y": 897.15625
+      },
+      {
+        "overflow": false,
+        "width": 96,
+        "x": 208,
+        "y": 897.15625
+      }
+    ],
+    "notePresent": false,
+    "scroll": 320,
+    "section": 288,
+    "width": 320
+  },
+  {
+    "benefits": 736,
+    "columns": [
+      {
+        "overflow": false,
+        "width": 245.328125,
+        "x": 16,
+        "y": 865.4720458984375
+      },
+      {
+        "overflow": false,
+        "width": 245.3359375,
+        "x": 261.328125,
+        "y": 871.4765625
+      },
+      {
+        "overflow": false,
+        "width": 245.328125,
+        "x": 506.6640625,
+        "y": 871.4765625
+      }
+    ],
+    "notePresent": false,
+    "scroll": 768,
+    "section": 736,
+    "width": 768
+  },
+  {
+    "benefits": 1344,
+    "columns": [
+      {
+        "overflow": false,
+        "width": 448,
+        "x": 48,
+        "y": 632.1484375
+      },
+      {
+        "overflow": false,
+        "width": 448,
+        "x": 496,
+        "y": 632.1484375
+      },
+      {
+        "overflow": false,
+        "width": 448,
+        "x": 944,
+        "y": 632.1484375
+      }
+    ],
+    "notePresent": false,
+    "scroll": 1440,
+    "section": 1344,
+    "width": 1440
+  }
+]

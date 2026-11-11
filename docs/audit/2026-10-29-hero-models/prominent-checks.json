@@ -1,0 +1,56 @@
+[
+  {
+    "w": 375,
+    "group": "team",
+    "documentWidth": 375,
+    "h1": 1,
+    "modelHeight": 285,
+    "modelWidth": 229,
+    "viewport": 375
+  },
+  {
+    "w": 375,
+    "group": "sport",
+    "documentWidth": 375,
+    "h1": 1,
+    "modelHeight": 285,
+    "modelWidth": 229,
+    "viewport": 375
+  },
+  {
+    "w": 768,
+    "group": "team",
+    "documentWidth": 768,
+    "h1": 1,
+    "modelHeight": 400,
+    "modelWidth": 269,
+    "viewport": 768
+  },
+  {
+    "w": 768,
+    "group": "sport",
+    "documentWidth": 768,
+    "h1": 1,
+    "modelHeight": 400,
+    "modelWidth": 269,
+    "viewport": 768
+  },
+  {
+    "w": 1440,
+    "group": "team",
+    "documentWidth": 1440,
+    "h1": 1,
+    "modelHeight": 560,
+    "modelWidth": 499,
+    "viewport": 1440
+  },
+  {
+    "w": 1440,
+    "group": "sport",
+    "documentWidth": 1440,
+    "h1": 1,
+    "modelHeight": 560,
+    "modelWidth": 499,
+    "viewport": 1440
+  }
+]

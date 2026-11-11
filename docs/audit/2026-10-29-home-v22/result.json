@@ -1,0 +1,25 @@
+{
+  "scope": "Homepage reference alignment; desktop first; mobile refinement deferred per owner",
+  "protected": [
+    "hero",
+    "8 benefits",
+    "scrolling logos",
+    "approved 3D service mockups"
+  ],
+  "reference": "https://teamdee-home-journeys.tatsira.chatgpt.site/wireframe#home",
+  "verification": {
+    "tests": 316,
+    "pass": 315,
+    "skip": 1,
+    "fail": 0,
+    "exported_pages": 48
+  },
+  "pending_assets": [
+    "customer quotes and matching portrait/review links",
+    "review videos",
+    "polo and special-work evidence images",
+    "founder, office and production-location photographs",
+    "news and behind-the-scenes media"
+  ],
+  "source_placeholder_handling": "Retained explicitly descriptive source slots, with no invented customer names, dates, ratings or testimonial claims. Factory-location draft remains excluded from WordPress."
+}

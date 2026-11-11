@@ -1,0 +1,111 @@
+
+> web-teamdee@0.1.0 export:wp
+> node scripts/export-wp.mjs
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 145 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist-wp/hero-storyboard/index.html                                 31.63 kB │ gzip:  8.67 kB
+../dist-wp/thank-you/index.html                                       44.96 kB │ gzip:  8.79 kB
+../dist-wp/404.html                                                   51.26 kB │ gzip: 10.22 kB
+../dist-wp/design-sample/index.html                                   53.36 kB │ gzip: 10.62 kB
+../dist-wp/project/junbi-taekwondo-team-shirts/index.html             54.03 kB │ gzip: 10.79 kB
+../dist-wp/class-shirt-designs/index.html                             54.44 kB │ gzip: 10.92 kB
+../dist-wp/project/gsb-badminton-team-shirts/index.html               54.49 kB │ gzip: 10.81 kB
+../dist-wp/project/plaibang-bangkruai-police-team-shirts/index.html   54.82 kB │ gzip: 10.77 kB
+../dist-wp/staff-shirt-designs/index.html                             55.21 kB │ gzip: 10.98 kB
+../dist-wp/project/assumption-convent-school-shirts/index.html        55.49 kB │ gzip: 10.87 kB
+../dist-wp/privacy-policy/index.html                                  55.68 kB │ gzip: 11.10 kB
+../dist-wp/running-shirt-designs/index.html                           55.77 kB │ gzip: 11.00 kB
+../dist-wp/terms-conditions/index.html                                56.15 kB │ gzip: 11.20 kB
+../dist-wp/organization-shirt-designs/index.html                      56.30 kB │ gzip: 11.08 kB
+../dist-wp/badminton-shirt-designs/index.html                         57.09 kB │ gzip: 11.06 kB
+../dist-wp/university-shirt-designs/index.html                        57.35 kB │ gzip: 11.05 kB
+../dist-wp/blog/print-vs-embroidery/index.html                        61.55 kB │ gzip: 12.21 kB
+../dist-wp/blog/gov-docs/index.html                                   61.82 kB │ gzip: 12.14 kB
+../dist-wp/blog/design-ideas/index.html                               62.50 kB │ gzip: 12.26 kB
+../dist-wp/blog/which-product/index.html                              62.58 kB │ gzip: 12.17 kB
+../dist-wp/blog/pick-fabric/index.html                                62.84 kB │ gzip: 12.39 kB
+../dist-wp/blog/collect-sizes/index.html                              63.33 kB │ gzip: 12.44 kB
+../dist-wp/blog/when-to-start/index.html                              63.66 kB │ gzip: 12.43 kB
+../dist-wp/blog/badminton-org/index.html                              64.38 kB │ gzip: 12.52 kB
+../dist-wp/team-shirt-order-checklist/index.html                      65.21 kB │ gzip: 12.69 kB
+../dist-wp/team-shirt-design-ideas/index.html                         65.24 kB │ gzip: 12.55 kB
+../dist-wp/team-shirt-fabric-guide/index.html                         65.70 kB │ gzip: 12.68 kB
+../dist-wp/contact-us/index.html                                      67.78 kB │ gzip: 13.30 kB
+../dist-wp/polo-vs-printed-shirts/index.html                          68.41 kB │ gzip: 13.24 kB
+../dist-wp/blog/school-bulk/index.html                                68.92 kB │ gzip: 12.96 kB
+../dist-wp/calculations/index.html                                    73.75 kB │ gzip: 13.83 kB
+../dist-wp/collar-styles/index.html                                   74.74 kB │ gzip: 13.50 kB
+../dist-wp/screen-printing-order-guide/index.html                     79.69 kB │ gzip: 14.18 kB
+../dist-wp/size-chart/index.html                                      80.98 kB │ gzip: 14.60 kB
+../dist-wp/delivery-after-sales-guide/index.html                      84.00 kB │ gzip: 14.53 kB
+../dist-wp/artwork-preparation-guide/index.html                       85.45 kB │ gzip: 15.44 kB
+../dist-wp/educations-shirt/index.html                                87.12 kB │ gzip: 12.69 kB
+../dist-wp/fabric-technology/index.html                               89.30 kB │ gzip: 15.36 kB
+../dist-wp/blog/index.html                                            90.40 kB │ gzip: 15.08 kB
+../dist-wp/printed-shirt-order-guide/index.html                       94.96 kB │ gzip: 16.91 kB
+../dist-wp/embroidered-polo-order-guide/index.html                    95.96 kB │ gzip: 16.97 kB
+../dist-wp/search/index.html                                          98.07 kB │ gzip: 16.21 kB
+../dist-wp/custom-staff-shirts/index.html                            103.70 kB │ gzip: 18.82 kB
+../dist-wp/about-us/index.html                                       105.44 kB │ gzip: 18.28 kB
+../dist-wp/custom-running-shirts/index.html                          105.89 kB │ gzip: 19.00 kB
+../dist-wp/custom-badminton-shirts/index.html                        105.89 kB │ gzip: 18.74 kB
+../dist-wp/custom-class-shirts/index.html                            106.50 kB │ gzip: 19.33 kB
+../dist-wp/education/index.html                                      106.51 kB │ gzip: 19.28 kB
+../dist-wp/custom-university-shirts/index.html                       107.37 kB │ gzip: 19.34 kB
+../dist-wp/event-shirts/index.html                                   107.95 kB │ gzip: 13.44 kB
+../dist-wp/custom-organization-shirts/index.html                     109.84 kB │ gzip: 19.68 kB
+../dist-wp/screen-printing/index.html                                111.48 kB │ gzip: 18.94 kB
+../dist-wp/sport/index.html                                          114.09 kB │ gzip: 19.91 kB
+../dist-wp/sports-shirt/index.html                                   116.06 kB │ gzip: 13.85 kB
+../dist-wp/corporate/index.html                                      117.60 kB │ gzip: 20.52 kB
+../dist-wp/corporate-shirts/index.html                               120.50 kB │ gzip: 13.95 kB
+../dist-wp/custom-printed-warmup-shirts/index.html                   123.49 kB │ gzip: 20.78 kB
+../dist-wp/event/index.html                                          124.47 kB │ gzip: 21.02 kB
+../dist-wp/custom-oversize-jerseys/index.html                        125.22 kB │ gzip: 21.54 kB
+../dist-wp/embroidery/index.html                                     130.28 kB │ gzip: 21.43 kB
+../dist-wp/custom-baseball-shirts/index.html                         130.61 kB │ gzip: 22.13 kB
+../dist-wp/faq/index.html                                            172.39 kB │ gzip: 22.66 kB
+../dist-wp/sublimation/index.html                                    175.72 kB │ gzip: 25.63 kB
+../dist-wp/index.html                                                237.61 kB │ gzip: 32.03 kB
+../dist-wp/designs/index.html                                        244.87 kB │ gzip: 21.26 kB
+../dist-wp/project/index.html                                        338.30 kB │ gzip: 31.38 kB
+../dist-wp/assets/article-reader-An3H1hAu.css                          8.08 kB │ gzip:  2.13 kB
+../dist-wp/assets/about-us-BYioqCEi.css                                8.73 kB │ gzip:  2.22 kB
+../dist-wp/assets/blog-DePVrxkW.css                                   18.15 kB │ gzip:  3.80 kB
+../dist-wp/assets/product-page-1Y9pnPiz.css                           24.53 kB │ gzip:  5.22 kB
+../dist-wp/assets/guide-page-CARaQvKC.css                             28.40 kB │ gzip:  5.91 kB
+../dist-wp/assets/site-extras-CzB7MoqB.css                           285.23 kB │ gzip: 51.41 kB
+../dist-wp/assets/lib-_fxNo3bj.js                                      0.12 kB │ gzip:  0.13 kB
+../dist-wp/assets/gallery-page-D7c_bEOV.js                             0.15 kB │ gzip:  0.16 kB
+../dist-wp/assets/about-us-q5X9qp7j.js                                 0.32 kB │ gzip:  0.24 kB
+../dist-wp/assets/icoLine-CazAM8al.js                                  0.69 kB │ gzip:  0.51 kB
+../dist-wp/assets/use-page-ASVgzwQP.js                                 1.01 kB │ gzip:  0.68 kB
+../dist-wp/assets/count-up-Cmw6DeM0.js                                 1.12 kB │ gzip:  0.65 kB
+../dist-wp/assets/thank-you-DIqZnJuh.js                                1.15 kB │ gzip:  0.59 kB
+../dist-wp/assets/about-toc-D5sIizj6.js                                1.28 kB │ gzip:  0.74 kB
+../dist-wp/assets/project-CcOyujj-.js                                  1.51 kB │ gzip:  0.87 kB
+../dist-wp/assets/article-reader-bDpRgzeE.js                           1.65 kB │ gzip:  0.84 kB
+../dist-wp/assets/download-assets-CeG4Bc-U.js                          1.81 kB │ gzip:  0.87 kB
+../dist-wp/assets/blog-B7-ObfdL.js                                     1.91 kB │ gzip:  1.01 kB
+../dist-wp/assets/routes-7bUteH09.js                                   2.60 kB │ gzip:  1.12 kB
+../dist-wp/assets/estimate-W9T_8CWP.js                                 3.70 kB │ gzip:  1.71 kB
+../dist-wp/assets/search-D7IA8kJv.js                                   3.86 kB │ gzip:  1.90 kB
+../dist-wp/assets/home-picker-BGPWBj7D.js                              3.91 kB │ gzip:  1.57 kB
+../dist-wp/assets/main-DyXWh19b.js                                     4.26 kB │ gzip:  1.90 kB
+../dist-wp/assets/contact-send-CgDF7MfO.js                             4.56 kB │ gzip:  2.05 kB
+../dist-wp/assets/guide-page-Cp-YbR32.js                               5.04 kB │ gzip:  2.07 kB
+../dist-wp/assets/faq-D32Hd_K4.js                                      6.01 kB │ gzip:  2.64 kB
+../dist-wp/assets/calculations-SOWWLXzh.js                             6.11 kB │ gzip:  2.71 kB
+../dist-wp/assets/prices-DnmgQhNM.js                                   6.54 kB │ gzip:  2.20 kB
+../dist-wp/assets/contact-us-CbD-9mV1.js                               6.77 kB │ gzip:  3.08 kB
+../dist-wp/assets/page-DDowXxUU.js                                     7.72 kB │ gzip:  3.23 kB
+../dist-wp/assets/lightbox-Bxign-E6.js                                 7.74 kB │ gzip:  3.12 kB
+../dist-wp/assets/product-page-DP1L9flQ.js                             8.10 kB │ gzip:  3.15 kB
+../dist-wp/assets/designs-kGWzTAAG.js                                  9.10 kB │ gzip:  3.78 kB
+../dist-wp/assets/site-extras-DDUWwlEZ.js                             24.03 kB │ gzip:  8.19 kB
+✓ built in 2.24s
+export-wp: 48 หน้า → wp-theme/teamdee/build

@@ -1,0 +1,58 @@
+[
+  {
+    "hero": {
+      "left": 20,
+      "right": 355,
+      "width": 335
+    },
+    "scroll": 375,
+    "services": {
+      "left": 20,
+      "right": 355,
+      "width": 335
+    },
+    "viewport": 375
+  },
+  {
+    "hero": {
+      "left": 40,
+      "right": 728,
+      "width": 688
+    },
+    "scroll": 768,
+    "services": {
+      "left": 40,
+      "right": 728,
+      "width": 688
+    },
+    "viewport": 768
+  },
+  {
+    "hero": {
+      "left": 40,
+      "right": 984,
+      "width": 944
+    },
+    "scroll": 1024,
+    "services": {
+      "left": 40,
+      "right": 984,
+      "width": 944
+    },
+    "viewport": 1024
+  },
+  {
+    "hero": {
+      "left": 140,
+      "right": 1300,
+      "width": 1160
+    },
+    "scroll": 1440,
+    "services": {
+      "left": 140,
+      "right": 1300,
+      "width": 1160
+    },
+    "viewport": 1440
+  }
+]
