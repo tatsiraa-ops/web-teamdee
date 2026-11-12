@@ -4,6 +4,7 @@ import { initGuideProcessStudio } from './guide-process-studio.js'
 import { initArticleReader } from './article-reader.js'
 import { initGuideNavigation } from './guide-navigation.js'
 import { initToc } from './about-toc.js'
+import { initSizeFinder } from './size-finder.js'
 
 initArticleReader()
 initGuideNavigation()
@@ -11,3 +12,5 @@ initGuideNavigation()
 initToc()
 initGuideMaterialLab()
 initGuideProcessStudio()
+/* 12 พ.ย. หน้า /size-chart/: ตัวช่วยหาไซส์จากรอบอก (ไม่มี [data-size-finder] = ไม่ทำอะไร) */
+initSizeFinder()

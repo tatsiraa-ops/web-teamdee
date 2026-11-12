@@ -5,7 +5,7 @@
 import { prunePending } from './prune.js'
 
 /* ส่วนที่ดึงข้อมูลกลางมาแสดง (ตารางไซซ์ รายชื่อผ้า ฯลฯ) ถือว่ามีเนื้อหาเสมอ */
-const SHARED = new Set(['sizes', 'fabrics', 'props', 'download', 'collars'])
+const SHARED = new Set(['sizes', 'sizeCharts', 'fabrics', 'props', 'download', 'collars'])
 const filled = (s) => SHARED.has(s.kind) || !!(s.body || s.list?.length || s.items?.length || s.rows?.length || s.cards?.length || s.links?.length || s.parts?.some(filled))
 
 export function guideView(item, page, { forWp }) {

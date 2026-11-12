@@ -23,6 +23,8 @@ const h2Of = (id, re) => content[id].headings.filter((x) => x.level === 'H2' && 
 const EXCEPT = {
   /* หน้าเนื้อหาเดิมบน CMS เว็บจริง ไม่ export (seo-check.mjs CMS_PAGES) */
   privacy: 'all',
+  /* /size-chart/ 12 พ.ย. 2026 (Search Console: คนค้น "ไซส์" ส-ส · หน้าเคยไม่มีตาราง): หัวข้อ v22 "เลือกประเภทเสื้อ" → "ตารางไซส์เสื้อ" (มีตารางจริงแล้ว) · "ไซซ์" → "ไซส์" ทั้งหน้า · ตรวจที่ size-chart-page.test.js */
+  'guide-size': ['เลือกประเภทเสื้อ', 'รวบรวมไซซ์ของทีม'],
   /* /project/ รอบ 169 (อาร์ต 9 พ.ย. "เสียงจากผู้สั่งฯ + เรื่องราวจากทีมลูกค้า เอามารวมกัน"): เรื่องเด่น 4 เรื่องอยู่ในกระดานรีวิว (H3 + ป้าย "เรื่องเด่นจากทีมลูกค้า") ไม่มี H2 แยก · ตรวจที่ review-book.test.js */
   works: ['เรื่องราวจากทีมลูกค้า'],
   /* /about-us/ รอบ 170v (อาร์ต 9 พ.ย. "ต่อ" แคปข้อมูลบริษัท): ส่วนนัดหมายรวมเข้าส่วนข้อมูลบริษัท (ที่อยู่ แผนที่ ปุ่มนัดเข้าพบ) ไม่มี H2 แยก · ตรวจที่ about-v2.test.js */
@@ -50,6 +52,16 @@ const EXCEPT = {
     'ทีมดี คนที่ช่วยดูแลงานเสื้อของคุณ',
     /* อาร์ต 4 พ.ย. "ลบตามภาพ 1 2 3 4" (use-v2.json corp.drop) · ส่วนปิดหน้าไม่ใช่ H2 ของ v22 จึงไม่อยู่ในรายการนี้ */
     'วางงบและขั้นตอนสั่งเสื้อบริษัท', 'ภาพลูกค้าบริษัทสวมเสื้อในวันใช้งานจริง', 'มีวันที่ต้องใช้เสื้อแล้ว?'],
+  /* /custom-staff-shirts/ โฉมใหม่ (use-v2.json shop · 11 พ.ย. 2026 อาร์ต "เอาหน้าบริษัทคือต้นแบบของหน้าประเภทลูกค้า"): ตัดส่วนเดียวกับ business
+     หัวโลโก้ = "แบรนด์และทีมที่ไว้วางใจทีมดี" (ชิ้นโลโก้หน้าบริษัท) · การ์ดชวนคุย = หัวข้อเดียวกับหน้าบริษัท · ส่วนโจทย์ใกล้เคียงไม่มีในโครงหน้าบริษัท */
+  shop: ['ประสบการณ์ดูแลงานเสื้อทีมของทีมดี', 'แนวแบบเสื้อพนักงานร้านค้า สำหรับเริ่มคุย', 'มีโจทย์แล้ว แต่ยังเลือกเสื้อไม่ลงตัว?', 'วางรายละเอียดก่อนสั่งเสื้อพนักงานร้านค้า',
+    'ภาพลูกค้าเสื้อพนักงานร้านค้าในวันใช้งานจริง', 'มีวันใช้งานแล้ว วางแผนรับเสื้อกันก่อน', 'รู้จักทีมที่ช่วยดูแลงานของคุณ', 'ข้อมูลสำหรับโจทย์ที่ใกล้เคียง'],
+  /* /custom-organization-shirts/ โฉมใหม่ (use-v2.json gov · 11 พ.ย. 2026 อาร์ต "ต่อเลย"): ตัดส่วนเดียวกับ business/shop ตามโครงหน้าบริษัท */
+  organization: ['ประสบการณ์ดูแลงานเสื้อทีมของทีมดี', 'แนวแบบเสื้อหน่วยงาน สำหรับเริ่มคุย', 'มีโจทย์แล้ว แต่ยังเลือกเสื้อไม่ลงตัว?', 'วางรายละเอียดก่อนสั่งเสื้อหน่วยงาน',
+    'ภาพลูกค้าเสื้อหน่วยงานในวันใช้งานจริง', 'มีวันใช้งานแล้ว วางแผนรับเสื้อกันก่อน', 'รู้จักทีมที่ช่วยดูแลงานของคุณ', 'ข้อมูลสำหรับโจทย์ที่ใกล้เคียง'],
+  /* /education/ โฉมใหม่ (use-v2.json edu · 11 พ.ย. 2026 อาร์ต "ต่อ"): ตัดส่วนเดียวกับ business/shop/organization ตามโครงหน้าบริษัท */
+  education: ['ประสบการณ์ดูแลงานเสื้อทีมของทีมดี', 'แนวแบบเสื้อโรงเรียน / เสื้อกีฬาสี สำหรับเริ่มคุย', 'มีโจทย์แล้ว แต่ยังเลือกเสื้อไม่ลงตัว?', 'วางรายละเอียดก่อนสั่งเสื้อโรงเรียน / เสื้อกีฬาสี',
+    'ภาพลูกค้าเสื้อโรงเรียน / เสื้อกีฬาสีในวันใช้งานจริง', 'มีวันใช้งานแล้ว วางแผนรับเสื้อกันก่อน', 'รู้จักทีมที่ช่วยดูแลงานของคุณ', 'ข้อมูลสำหรับโจทย์ที่ใกล้เคียง'],
 }
 
 before(() => execSync('npx vite build --logLevel error', { cwd: root, stdio: 'pipe' }))
@@ -156,7 +168,8 @@ test('หน้ากลุ่มลูกค้า: ส่วนเสื้อ
 })
 
 test('หน้ากลุ่มลูกค้า: รีวิวตรงกลุ่ม · ร้านค้า รีสอร์ท · หน่วยงาน โรงพยาบาลกับ NT · วิ่ง นักวิ่งก่อน · รุ่นกับคณะซ่อน', () => {
-  const rv = (url) => imgs(sectionOf(useMain(url), 'reviews')).map((s) => s.match(/rv\d+/)?.[0])
+  /* 11 พ.ย. หน้าโฉมใหม่ (ร้านค้า) มีกำแพงรูปลูกค้าในส่วนรีวิว → นับเฉพาะรูปรีวิว rv ไม่ซ้ำ */
+  const rv = (url) => [...new Set(imgs(sectionOf(useMain(url), 'reviews')).map((s) => s.match(/rv\d+/)?.[0]).filter(Boolean))]
   assert.deepEqual(rv('/custom-staff-shirts/'), ['rv384'])
   assert.deepEqual(rv('/custom-organization-shirts/'), ['rv417', 'rv235'])
   assert.equal(rv('/custom-running-shirts/')[0], 'rv271')
@@ -197,13 +210,13 @@ test('คำค้นทุกคำบนการ์ดผังเว็บ v
 /* ลำดับส่วนหน้าสินค้า 6 หน้าตาม v22 (อาร์ตเคาะ 2 พ.ย. 2026 · แทนลำดับ 24 ต.ค. ข้อ 5 และ 26 ต.ค.)
    ที่มา: sections ใน extracted/products.json + H2 ใน PAGE-CONTENT.json */
 /* หน้าโฉมใหม่ที่จบที่ FAQ (pp-v2.json lean · อาร์ต 6 พ.ย. "ลบทิ้งได้หมดยกเว้น footer") · ตรวจที่ tests/pp-v2.test.js */
-const LEAN = new Set(Object.entries(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).filter(([, v]) => v && v.lean).map(([id]) => ({ print: 'printed' })[id]).filter(Boolean))
+const LEAN = new Set(Object.entries(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).filter(([, v]) => v && v.lean).map(([id]) => ({ print: 'printed', polo: 'polo' })[id]).filter(Boolean))
 const PRODUCTS = { polo: '/embroidery/', printed: '/sublimation/', screen: '/screen-printing/', warmup: '/custom-printed-warmup-shirts/', oversize: '/custom-oversize-jerseys/', baseball: '/custom-baseball-shirts/' }
 const raw = JSON.parse(readFileSync(join(root, 'docs/spec/teamdee-v22/extracted/products.json'), 'utf8'))
 /* key ของ wireframe → id ใน HTML · n11 = ส่วน "ตามงานที่ใช้" · quote / contact = ctaBox (id อยู่ที่หัวข้อ) */
-const v2Reviews = new Set(Object.entries(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/' })[id]))
+const v2Reviews = new Set(Object.entries(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]))
 /* ส่วนที่หน้าโฉมใหม่ย้ายขึ้นตามบอร์ด (รีวิว 5 พ.ย. · เนื้อผ้า 6 พ.ย.) */
-const v2Moved = Object.fromEntries(Object.entries(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).map(([id, v]) => [({ print: '/sublimation/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
+const v2Moved = Object.fromEntries(Object.entries(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
 const SECTION_ID = { embroidery: 'detail', n11: 'uses', quote: 'quote-h', contact: 'end-h' }
 
 test('หน้าสินค้า 6 หน้า: id ส่วนเรียงตาม v22 ทุกส่วน', () => {
@@ -288,17 +301,7 @@ test('เมนูหลัก (เดสก์ท็อปและมือถ
 })
 
 /* อาร์ตเคาะ 2 พ.ย.: ใช้ไฟล์งานปักจริงได้ · ไฟล์เป็นภาพ 3D ไม่ใช่รูปถ่าย → ติดป้ายตรงๆ · /corporate/ ใช้รูปบริษัทจริงตามกลุ่ม */
-test('หน้าโปโล: H2 ผลงานตาม v22 · ภาพ 3D ของงานปักจริง 3 แบบ ติดป้ายทุกใบ ไม่ซ้ำแบบในหน้า · รูปลูกค้าแยกหัวข้อย่อย', () => {
-  const html = readFileSync(join(root, 'dist/embroidery/index.html'), 'utf8')
-  const work = html.slice(html.indexOf(' id="work"'), html.indexOf(' id="clips"') > 0 ? html.indexOf(' id="clips"') : html.indexOf(' id="reviews"'))
-  assert.match(work.replace(/<[^>]+>/g, ''), /ผลงานเสื้อโปโลปักจริง/)
-  for (const c of ['TD-0133', 'TD-0132', 'TD-0127']) assert.match(work, new RegExp(c), c)
-  assert.equal((work.match(/· ภาพ 3D/g) || []).length, 3)
-  /* รูปลูกค้าจริงขึ้นก่อนภาพ 3D (2 พ.ย.) */
-  assert.ok(work.indexOf('pp-real') < work.indexOf('แบบจากงานลูกค้า'))
-  assert.doesNotMatch(work, /งานผลิตจริง/)
-  assert.match(work, /<h3[^>]*>[^<]*เสื้อโปโลที่ลูกค้าองค์กรใส่จริง/)
-})
+/* 11 พ.ย. 2026 หน้าปัก /embroidery/ โฉมใหม่ (pp-v2 polo · lean): ส่วนผลงานเดิม (#work ภาพ 3D 3 แบบ) ถูกแทนด้วยแถวงานปักลูกค้าจริงในแบบเสื้อ 3D · ตรวจที่ tests/embroidery-v2.test.js */
 
 test('/corporate/: ผลงานเป็นรูปบริษัทจริง (photoGroup corp) ไม่ใช่ รพ.สต. หรือทหาร', { skip: v2Ids.has('corp') && 'โฉมใหม่: ส่วนผลงานเป็นโชว์รูมหน้าแรก (แบบ + เสื้อบนหุ่น) ตรวจที่ use-v2.test.js' }, () => {
   const html = readFileSync(join(root, 'dist/corporate/index.html'), 'utf8')

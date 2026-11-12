@@ -19,6 +19,33 @@
     <tbody>{{#each this.rows}}<tr>{{#each this}}{{#if @first}}<th scope="row">{{this}}</th>{{else}}<td>{{this}}</td>{{/if}}{{/each}}</tr>{{/each}}</tbody>
   </table>
 </div>{{/if}}
+{{#if (eq this.kind 'sizeCharts')}}{{!-- 12 พ.ย. 2026 หน้า /size-chart/ (Search Console: หน้าที่พาคนเข้าเว็บมากที่สุด) · ตารางจากข้อมูลที่ยืนยันแล้ว (vite sizeCharts) · เห็นครบทุกตาราง ไม่ซ่อนหลังแท็บ
+     ตัวช่วยหาไซส์ (size-finder.js): กรอกรอบอกเสื้อตัวที่ใส่พอดี → ไฮไลต์แถวที่ตรงในทุกตาราง · ไม่มี JS = ตารางธรรมดา --}}
+<div class="szc">
+  <div class="szc-find" data-size-finder>
+    <label class="szc-find__l" for="sizeFinder">หาไซส์จากเสื้อตัวที่ใส่พอดี <small>วางเสื้อราบ วัดใต้รักแร้ซ้าย–ขวา แล้วคูณ 2</small></label>
+    <div class="szc-find__row">
+      <input id="sizeFinder" type="number" inputmode="decimal" min="10" max="200" step="0.5" placeholder="เช่น 40" aria-describedby="sizeFinderHint">
+      <div class="szc-find__u" role="group" aria-label="หน่วยที่กรอก"><button type="button" data-size-unit="in" aria-pressed="true">นิ้ว</button><button type="button" data-size-unit="cm" aria-pressed="false">ซม.</button></div>
+    </div>
+    <p class="szc-find__hint" id="sizeFinderHint">ถ้าวัดรอบอกจริงของคน ไม่ใช่วัดจากเสื้อ ให้บวกเพิ่ม 1–2 ไซส์</p>
+    <ul class="szc-find__out" data-size-out aria-live="polite"></ul>
+  </div>
+  {{#each @root.sizeCharts}}
+  <section class="szc-card" aria-labelledby="szc-{{this.id}}">
+    <header class="szc-card__h"><h3 id="szc-{{this.id}}">ตารางไซส์{{this.name}}</h3><p>{{this.fit}} · หน่วยนิ้ว วัดจากตัวเสื้อวางราบ</p></header>
+    <div class="szc-grid">{{#each this.groups}}
+      <div class="szc-t"><table data-size-chart="{{this.short}}" data-size-card="{{../id}}">
+        <caption>{{this.label}} <span>{{this.range}}</span></caption>
+        <thead><tr><th scope="col">ไซส์</th><th scope="col">รอบอก</th><th scope="col">ความยาว</th></tr></thead>
+        <tbody>{{#each this.rows}}<tr data-size="{{this.size}}" data-chest="{{this.chest}}"><th scope="row">{{this.size}}</th><td>{{this.chest}}"<small>{{this.chestCm}} ซม.</small></td><td>{{this.length}}"<small>{{this.lengthCm}} ซม.</small></td></tr>{{/each}}</tbody>
+      </table></div>{{/each}}
+    </div>
+    <p class="szc-card__f">{{this.tol}} · <a class="pp-more" href="{{this.to}}">{{this.toLabel}} <span aria-hidden="true">→</span></a></p>
+  </section>
+  {{/each}}
+  <p class="szc-other">เสื้อสกรีน เสื้อเบสบอล และเจอร์ซีย์ Oversize ใช้ตารางเฉพาะทรง ทักขอตารางล่าสุดทาง LINE ก่อนสรุปจำนวน</p>
+</div>{{/if}}
 {{#if (eq this.kind 'sizes')}}
 {{#if @root.sizeDraftHidden}}<p class="gblock-caution">ทักแอดมินเพื่อขอตารางไซซ์ล่าสุดของสินค้าและทรงที่เลือกก่อนสรุปจำนวน</p><a class="btn btn--ghost mt-4" href="/contact-us/?from=size-chart">ขอตารางไซซ์จากทีมดี →</a>{{else}}
 <p class="gblock-caution">ตารางนี้เป็นขนาดอ้างอิงเบื้องต้น กรุณายืนยันตารางไซซ์ของสินค้าและทรงที่เลือกกับทีมดีก่อนสรุปจำนวน</p>

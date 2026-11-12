@@ -37,8 +37,10 @@ test('ไม่มีหน้า v22 (เช่น คู่มือทรง�
 test('คู่มือ 7 เล่ม: H2 ตรงหัวข้อ v22 ทุกหัวข้อ เรียงตาม v22', () => {
   const V = { print: 'guide-print', screen: 'guide-screen', polo: 'guide-embroider', fabric: 'guide-fabric', size: 'guide-size', logo: 'guide-files', delivery: 'guide-delivery' }
   for (const [id, vid] of Object.entries(V)) {
-    const want = v22[vid].sections.map((s) => s.h).filter((h) => !h.startsWith('มีโจทย์เสื้อทีม'))
+    /* /size-chart/ 12 พ.ย. 2026 (Search Console: คนค้น "ไซส์" ส-ส): หัวข้อ "เลือกประเภทเสื้อ" → "ตารางไซส์เสื้อ" (มีตารางจริง) · ไซซ์ → ไซส์ · H1 ใช้คำค้น "ตารางไซส์เสื้อ" (size-chart-page.test.js) */
+    const fix = id === 'size' ? (h) => (h === 'เลือกประเภทเสื้อ' ? 'ตารางไซส์เสื้อ' : h.replace(/ไซซ์/g, 'ไซส์')) : (h) => h
+    const want = v22[vid].sections.map((s) => s.h).filter((h) => !h.startsWith('มีโจทย์เสื้อทีม')).map(fix)
     assert.deepEqual(pages[id].sections.map((s) => s.title), want, id)
-    assert.equal(pages[id].h1, v22[vid].hero.h1, id)
+    if (id !== 'size') assert.equal(pages[id].h1, v22[vid].hero.h1, id)
   }
 })
