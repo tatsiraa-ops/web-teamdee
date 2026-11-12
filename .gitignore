@@ -18,3 +18,5 @@ _drive/
 
 # งานส่งต่อระหว่าง agent (ข้อมูลทำงาน ไม่ขึ้นเว็บ)
 handoff/
+# สำเนาพรีวิวออนไลน์ (scripts/prepare-sites-preview.mjs · มี .git และ .openai ของตัวเอง ~400MB) ไม่เอาเข้า repo
+sites/

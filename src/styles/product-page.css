@@ -1073,6 +1073,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
 .pf4__base i { width: 14px; height: 2px; border-radius: 2px; background: #7A2E00; }
 .pf4__ask { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 12px; margin-top: auto; padding-top: 10px; }
 .pf4__ask small { font-size: 12.5px; color: var(--color-ink-3); }
+@media (min-width: 1280px) and (max-width: 1439px) { .pf4__c0 { width: 36%; } .pf4__f { gap: 10px; } .pf4__f b { font-size: 15px; } .pf4__t thead th { padding-inline: 2px; } .pf4__t thead th[data-b] { font-size: 12.5px; letter-spacing: -.01em; } .pf4__t td { font-size: 18px; } } /* จอ 1280–1439: ชื่อผ้ายาว (ผ้าแอ็นดูแรนซ์) และหัวคอลัมน์ 1,001–2,000 ไม่ล้น · วัดแล้ว การ์ดสูงเท่าเดิม */
 @media (max-width: 1279px) { .pf4__f { gap: 10px; } .pf4__f img { width: 80px; height: 54px; } .pf4__f b { font-size: 15px; } .pf4__t td { font-size: 18px; } } /* จอแคบกว่า 1280: ชื่อผ้ายาว (ผ้าแอ็นดูแรนซ์) ไม่ล้นคอลัมน์ */
 @media (prefers-reduced-motion: reduce) { .pf4__hero img { animation: none; } .pf4__t td, .pf4__f img { transition: none; } }
 @media (max-width: 1279px) {
