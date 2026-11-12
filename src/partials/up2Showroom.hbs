@@ -4,7 +4,7 @@
      แบบในแถว 1 ไม่ใช่แบบที่เอาไปเจนหุ่นแถว 2 (หุ่น = embroider-004/012/017/029 · ตัด 3NINE 005/022/024 และ Mega Amp 033 ที่ซ้ำแบบ) · div.td-page-home = ขอบเขต CSS หน้าแรก --}}
 <div class="td-page-home up2-home">
 <section class="wrap hm-sec hm-reference hm-show" id="real-work" aria-labelledby="works-h">
-  <header class="hm-show__head"><div><h2 id="works-h">{{{hl up.work.h "เสื้อบริษัทที่ผลิตจริง"}}}</h2><p>แบบที่ทีมดีออกแบบให้บริษัทลูกค้า และเสื้อที่ผลิตส่งจริง</p></div><a class="hm-more" href="/project/#reviews">ดูรีวิวลูกค้าทั้งหมด <span aria-hidden="true">→</span></a></header>
+  <header class="hm-show__head"><div><h2 id="works-h">{{{hl up.work.h up.v2.copy.work}}}</h2><p>{{up.v2.copy.workSub}}</p></div><a class="hm-more" href="/project/#reviews">ดูรีวิวลูกค้าทั้งหมด <span aria-hidden="true">→</span></a></header>
   {{#each up.v2.showroom}}
   <div class="hm-show__row{{#if this.kind}} up2-show--{{this.kind}}{{/if}}" id="show-{{this.id}}">
     <div class="hm-show__rhead">{{#if this.kindLabel}}<span class="up2-show__kind up2-show__kind--{{this.kind}}">{{this.kindLabel}}</span>{{/if}}<h3>{{this.title}}</h3><p>{{this.sub}}</p><nav class="hm-show__links" aria-label="ดูรายละเอียด{{this.title}}">{{#each this.links}}<a href="{{this.href}}">{{#if @first}}ดูรายละเอียด{{/if}}{{this.title}}{{#if @last}} <span aria-hidden="true">→</span>{{/if}}</a>{{/each}}</nav></div>

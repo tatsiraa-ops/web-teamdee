@@ -35,7 +35,7 @@
         <p class="text-[17px] leading-[1.75] text-ink-2 max-w-[56ch] mt-3">{{up.hero.lead}}{{#if item.seoLine}} {{item.seoLine}}{{/if}}</p>
         <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mt-5" data-where="use-hero">
           <a class="cb cb--p max-sm:w-full" href="{{cta.primary.href}}" data-track="line"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{cta.primary.label}}</span></a>
-          {{#if up.designs.show}}<a class="cb cb--s" href="#designs">{{up.hero.cta2}}</a>{{/if}}
+          {{#if up.designs.show}}<a class="cb cb--s" href="{{#if up.v2}}#real-work{{else}}#designs{{/if}}">{{up.hero.cta2}}</a>{{/if}}
         </div>
         {{!-- คำสัญญา 2 ข้อเป็นจุดมีไอคอน (เดิมบรรทัดเทาตัวเล็ก) · ข้อความเดิม --}}
         <ul class="up-promise"><li><span class="up-promise__i">{{> icoClock}}</span><span><b>ตอบใน 5 นาที</b> {{#unless (eq cta.mode 'line')}}ทัก LINE หรือโทร {{/unless}}8:30–21:00</span></li><li><span class="up-promise__i">{{> icoPen}}</span><span><b>แบบ 3D ใน 24 ชม.</b></span></li></ul>
@@ -93,7 +93,8 @@
 {{/if}}
 
 <!-- 04 · บริบทงาน (บริษัท / หน่วยงาน) -->
-{{#if up.contexts.show}}{{#if up.v2}}{{> up2Contexts}}{{else}}
+{{!-- 11 พ.ย. โฉมใหม่: แท็บมาจาก use-v2.json contexts.tabs (ไม่ขึ้นกับการ์ดรูปแบบเดิม CTX) · ร้านค้าไม่มีการ์ดเดิม --}}
+{{#if up.v2.contexts}}{{> up2Contexts}}{{else}}{{#if up.contexts.show}}{{#unless up.v2}}
 <section class="bg-shell border-y border-line">
   <div class="wrap section">
     <h2 class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch]">{{{ph up.contexts.h}}}</h2>
@@ -102,8 +103,8 @@
     </div>
     <div class="flex flex-wrap gap-x-6 mt-6">{{#each up.contexts.links}}<a class="pp-more" href="{{url this.to}}">{{this.t}}<span class="arw" aria-hidden="true">&rarr;</span></a>{{/each}}<a class="pp-more" href="{{#if up.contexts.ask}}{{up.contexts.ask.line}}{{else}}{{cta.primary.href}}{{/if}}" data-track="line">{{#if up.contexts.ask}}{{up.contexts.ask.t}}{{else}}{{cta.primary.label}}{{/if}}<span class="arw" aria-hidden="true">&rarr;</span></a></div>
   </div>
-</section>{{/if}}
-{{/if}}
+</section>{{/unless}}
+{{/if}}{{/if}}
 
 {{!-- โฉมใหม่: อาร์ต 3 พ.ย. "ลบ" แบบเสื้อ + จากภาพแบบสู่เสื้อจริง ตรงนี้ (โครงอาร์ตมีส่วนแบบ 3D ทีหลัง) --}}
 {{#unless up.v2}}
@@ -168,7 +169,7 @@
 </section>{{/if}}
 {{/if}}
 
-{{#if up.v2.help}}{{> up2Help}}{{#if up.v2.reviews}}{{> up2Reviews}}{{/if}}{{#if up.v2.reviewWall}}{{> reviewWall items=up.v2.reviewWall.items id="corp-review-wall" title=up.v2.reviewWall.title tail=up.v2.reviewWall.tail}}{{/if}}{{else}}
+{{#if up.v2.help}}{{> up2Help}}{{#if up.v2.reviews}}{{> up2Reviews}}{{/if}}{{#if up.v2.reviewWall}}{{> reviewWall items=up.v2.reviewWall.items id=(concat item.id "-review-wall") title=up.v2.reviewWall.title tail=up.v2.reviewWall.tail}}{{/if}}{{else}}
 <!-- 07 · ยังไม่แน่ใจ · แถบเรียบตาม v22 -->
 <section class="bg-shell border-b border-line" aria-labelledby="help-h">
   <div class="wrap pp-band">

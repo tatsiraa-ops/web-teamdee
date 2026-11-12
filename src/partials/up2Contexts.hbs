@@ -5,12 +5,12 @@
      ชั้นวางไดโอรามาจิ๋ว 6 ชิ้น = แท็บ WAI-ARIA (use-page.js · คลิก / ลูกศร / Home / End) · ไม่เปิดตอนชี้เมาส์ --}}
 <section class="up2-ctx" id="up2-ctx" aria-labelledby="up2-ctx-h">
   <div class="wrap">
-    <header class="up2-ctx__head"><h2 id="up2-ctx-h">{{{hl up.contexts.h "แต่ละลักษณะธุรกิจ"}}}</h2>{{#if up.v2.contexts.lead}}<p>{{up.v2.contexts.lead}}</p>{{/if}}</header>
+    <header class="up2-ctx__head"><h2 id="up2-ctx-h">{{{hl up.contexts.h up.v2.copy.contexts}}}</h2>{{#if up.v2.contexts.lead}}<p>{{up.v2.contexts.lead}}</p>{{/if}}</header>
     {{!-- 11 พ.ย. 2026 อาร์ต "ย้ายไว้ล่าง sub head ทำให้รู้ว่ากดเล่นได้ · ภาพสองเอารีวิวลูกค้าแต่ละอัน" (ทาง A)
          คำนำ → แถบแท็บ (การ์ดภาพจิ๋วเสื้อ กรอบส้มเมื่อเลือก) → แผง (198c กว้างพิเศษ): ซ้ายไดโอรามาเดิม · ขวาข้อความ + แถวรูปจริงจากลูกค้า 2 รูป + รีวิวที่ตรงงาน → ‹ ตัวนับ › --}}
     <div class="up2-ctx__room" data-ctx-gal>
       <p class="up2-ctx__hint" id="up2-ctx-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L4.3 15.6a1.6 1.6 0 0 1 2.4-2.1L9 15.5"/></svg>{{up.v2.contexts.hint}}</p>
-      <div class="up2-ctx__shelf" role="tablist" aria-label="เลือกลักษณะงาน" aria-describedby="up2-ctx-hint">
+      <div class="up2-ctx__shelf" style="--n:{{up.v2.contexts.tabs.length}}" role="tablist" aria-label="เลือกลักษณะงาน" aria-describedby="up2-ctx-hint">
         {{#each up.v2.contexts.tabs}}<button type="button" role="tab" class="up2-ctx__pick" id="up2-ctx-tab-{{this.id}}" aria-controls="up2-ctx-{{this.id}}" aria-selected="{{#if @first}}true{{else}}false{{/if}}" tabindex="{{#if @first}}0{{else}}-1{{/if}}"><img class="up2-ctx__thumb" src="{{this.scene}}-thumb.webp" alt="" width="320" height="240" loading="lazy" decoding="async"><span class="up2-ctx__pname">{{this.name}}</span></button>{{/each}}
       </div>
       <div class="up2-ctx__views"><div class="up2-ctx__nav"><button type="button" class="up2-ctx__step" data-ctx-step="-1" aria-label="ลักษณะงานก่อนหน้า"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><span class="up2-ctx__count" aria-live="polite">1 / {{up.v2.contexts.tabs.length}}</span><button type="button" class="up2-ctx__step" data-ctx-step="1" aria-label="ลักษณะงานถัดไป"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>

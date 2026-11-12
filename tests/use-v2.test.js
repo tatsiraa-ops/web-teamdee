@@ -73,7 +73,7 @@ test('รูปในแท็บไม่ซ้ำส่วนเสื้อ�
 })
 
 test('กลุ่มอื่นยังใช้หน้าเดิม (ไม่มีส่วน up2-)', () => {
-  for (const f of ['custom-staff-shirts', 'education', 'sport']) assert.doesNotMatch(main(f), /class="[^"]*up2-/, f)
+  for (const f of ['custom-class-shirts', 'sport']) assert.doesNotMatch(main(f), /class="[^"]*up2-/, f) /* ร้านค้าเปลี่ยนเป็นโฉมใหม่ 11 พ.ย. (use-v2-shop.test.js) */
 })
 
 /* อาร์ต 3 พ.ย. "ต่อที่เราทำในหน้าแรก ไปดึงมา" · "ไปดึง component มาใช้งาน" */
@@ -244,7 +244,7 @@ test('/corporate/ ไม่มี 4 ส่วนที่อาร์ตสั�
   assert.doesNotMatch(m, /id="photos"|id="usePhotos"|ภาพลูกค้าบริษัทสวมเสื้อในวันใช้งานจริง/, 'ภาพลูกค้าสวมเสื้อ')
   assert.doesNotMatch(m, /id="schedule-h"|id="useDate"|มีวันที่ต้องใช้เสื้อแล้ว/, 'มีวันใช้แล้ว')
   for (const [, id] of m.matchAll(/href="#([^"]+)"/g)) assert.ok(m.includes(`id="${id}"`), `ลิงก์ #${id} ไม่มีปลายทาง`)
-  for (const f of ['custom-staff-shirts', 'education', 'sport']) {
+  for (const f of ['custom-class-shirts', 'sport']) { /* ร้านค้าเป็นโฉมใหม่แล้ว (use-v2-shop.test.js) */
     const o = main(f)
     for (const id of ['id="plan"', 'id="schedule-h"', 'id="end-h"']) assert.ok(o.includes(id), `${f} ${id}`)
   }
@@ -349,7 +349,7 @@ test('/corporate/ บริบทงาน รอบ 198: แท็บใต้�
   /* 198c อาร์ต "ทำมาดีๆหน่อย เอากว้างพิเศษได้": ตัวนับ + ‹ › อยู่ในแผง (มุมขวาบน ติดหัวข้อ) ไม่ใช่แถวลอยใต้แผง */
   assert.match(c, /<div class="up2-ctx__views"><div class="up2-ctx__nav">/, 'ตัวนับ+ลูกศรอยู่ในแผง')
   assert.match(text(c.match(/<p class="up2-ctx__hint" id="up2-ctx-hint">([\s\S]*?)<\/p>/)[1]), /เลือกงานของคุณ/)
-  assert.match(c, /<div class="up2-ctx__shelf" role="tablist" aria-label="[^"]+" aria-describedby="up2-ctx-hint">/)
+  assert.match(c, /<div class="up2-ctx__shelf"(?: style="--n:\d+")? role="tablist" aria-label="[^"]+" aria-describedby="up2-ctx-hint">/)
   assert.match(c, /<button type="button" class="up2-ctx__step" data-ctx-step="-1" aria-label="ลักษณะงานก่อนหน้า">/)
   assert.match(c, /<button type="button" class="up2-ctx__step" data-ctx-step="1" aria-label="ลักษณะงานถัดไป">/)
   assert.match(c, /<span class="up2-ctx__count" aria-live="polite">1 \/ 6<\/span>/)

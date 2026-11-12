@@ -2,9 +2,9 @@
      ขนาดและการวางเท่าแบนเนอร์หน้าแรก: ภาพ 2304×800 (2.88:1) เต็มจอไม่ครอป · ข้อความเริ่ม 11.5% กว้าง 29% กลางแนวตั้ง · ตัวอักษรตาม vw ชุดเดียวกัน (th-o__*)
      ภาพไม่มีตัวหนังสือ (Magnific GPT 2.5 high · องค์ประกอบสไลด์แรกหน้าแรก นายแบบนางแบบทีมดี + เสื้อโปโลแบบจริงลอยข้างละ 2 ตัว · 4 พ.ย.) · มือถือภาพ 3:4 ใน <picture> แบบ heroTeam.hbs
      H1 ข้อความเดิมครบ: คำหลักดำ + คำค้นส้ม (แบบบรรทัดสองของหน้าแรก) · ปุ่ม LINE สองบรรทัดแบบหน้าแรก data-where="use-hero" --}}
-<section class="band-hero up2-hero" aria-labelledby="up2-h1">
+<section class="band-hero up2-hero{{#if up.v2.hero.compact}} up2-hero--compact{{/if}}" aria-labelledby="up2-h1">
   <div class="up2-hero__reel">
-    <picture class="up2-hero__pic"><source media="(max-width: 767px)" srcset="{{up.v2.hero.mobileSmall}} 480w, {{up.v2.hero.mobile}} 768w" sizes="100vw" width="768" height="1024"><img class="up2-hero__img" src="{{up.v2.hero.small}}" srcset="/img/use-hero/corp-800.webp 800w, {{up.v2.hero.small}} 1280w, {{up.v2.hero.img}} 2304w" sizes="100vw" width="2304" height="800" alt="{{up.v2.hero.alt}}" fetchpriority="high" decoding="async"></picture>
+    <picture class="up2-hero__pic"><source media="(max-width: 767px)" srcset="{{up.v2.hero.mobileSmall}} 480w, {{up.v2.hero.mobile}} 768w" sizes="100vw" width="768" height="1024"><img class="up2-hero__img" src="{{up.v2.hero.small}}" srcset="{{up.v2.hero.mid}} 800w, {{up.v2.hero.small}} 1280w, {{up.v2.hero.img}} 2304w" sizes="100vw" width="2304" height="800" alt="{{up.v2.hero.alt}}" fetchpriority="high" decoding="async"></picture>
     <nav class="crumb2 up2-hero__crumb" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">{{firstName item.name}}</span></nav>
     <div class="up2-hero__copy">
       <p class="th-o__kick">{{up.v2.hero.kicker}}</p>

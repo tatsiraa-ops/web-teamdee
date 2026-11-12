@@ -217,6 +217,31 @@ ul.pp-photos.m-rail.is-open + .m-rail-controls { display: none; }
   .up2-hero__crumb { margin-top: -24px; }
 }
 
+/* จอคอม (11 พ.ย. 2026 วัด 1024–1366): จัดกลางทั้งแบนเนอร์ทำให้หัวข้อยาวขึ้นไปทับเส้นทางหน้า → กล่องข้อความยืดเต็มความสูง
+   เว้นที่บนเท่าเส้นทางหน้า (ตำแหน่งบน + สูง 44 + ช่อง 4) แล้วจัดกลางในพื้นที่ที่เหลือ · ข้อความชิดซ้ายเหมือนเดิม ปุ่มไม่ยืด */
+@media (min-width: 1024px) {
+  .up2-hero__copy { top: 0; bottom: 0; translate: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding-top: calc(clamp(12px, 1.6vw, 28px) + 48px); padding-bottom: 12px; }
+  .up2-hero__copy > * { max-width: 100%; }
+}
+/* จอ 1024–1179: แบนเนอร์สูง 356–410px · หัวข้อยาว (ร้านค้า "รับทำเสื้อพนักงานร้านค้า" 3 บรรทัด) ล้นพื้นที่ใต้เส้นทางหน้า → ย่อเท่าหน้าสินค้า (pp2 2.85vw) */
+@media (min-width: 1024px) and (max-width: 1179px) {
+  .up2-hero .th-o__h { font-size: 2.85vw; }
+}
+/* 11 พ.ย. หัวข้อ hero ยาว (โรงเรียน 3 บรรทัด) ล้นแบนเนอร์ที่ 1280/1440 → use-v2.json hero.compact = หัวข้อเล็กลงเฉพาะหน้านั้น */
+@media (min-width: 1024px) {
+  .up2-hero--compact .th-o__h { font-size: clamp(26px, 2.55vw, 48px); }
+}
+/* hero จอแท็บเล็ต 768–1023 (11 พ.ย. 2026 ตรวจหน้าร้านค้า: แบนเนอร์ 2304:800 สูงแค่ ~280px ข้อความยาวกว่าภาพ หัวข้อทับเส้นทางหน้า คำโปรยทับเสื้อลอย · เป็นทั้ง /corporate/)
+   ภาพแบนเนอร์เดิมครอป 16:9 เข้าหาคนกับเสื้อ (ขวา) · ขอบล่างจางเข้าพื้น · เส้นทางหน้า + ข้อความอยู่ใต้ภาพ ชิดซ้ายตามจอคอม */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .up2-hero { background: #efece8; }
+  .up2-hero__reel { aspect-ratio: auto; }
+  .up2-hero__img { height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: 84% center; -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
+  .up2-hero__crumb { position: relative; top: auto; left: auto; margin-top: -40px; padding: 0 40px; }
+  .up2-hero__copy { position: relative; top: auto; left: auto; translate: none; width: auto; max-width: 720px; margin-top: 12px; padding: 0 40px 56px; }
+  .up2-hero__copy .th-o__sub { max-width: 60ch; }
+}
+
 /* 2 · โลโก้ + ตัวเลข: ชิ้นเดียวกับหน้าแรก (hm-logowrap + hm-stats-band) · ค่าที่หน้าแรกผูกกับ .page-home คัดมาให้ตรงกัน */
 .up2-logos .hm-marquee__track { gap: 8px; padding-right: 8px; }
 .up2-logos .hm-marquee__row + .hm-marquee__row { margin-top: 12px; }
@@ -361,7 +386,7 @@ body:has(.up2-hero) #main #up2-ctx { padding: 64px 0 56px; }
 .up2-ctx__room { margin-top: 26px; }
 .up2-ctx__hint { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 0 14px; font-size: 15px; font-weight: 700; line-height: 1.5; text-align: center; color: var(--ctx-ink-2); }
 .up2-ctx__hint svg { flex: none; width: 22px; height: 22px; fill: none; stroke: #C24B00; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.up2-ctx__shelf { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; margin: 0; }
+.up2-ctx__shelf { display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, calc((100% - 70px) / 6))); justify-content: center; gap: 14px; margin: 0; } /* 11 พ.ย. การ์ดกว้างเท่ากันทุกหน้า (1/6 แถว) · แท็บน้อยกว่า 6 จัดกลาง */
 .up2-ctx__pick { position: relative; display: grid; justify-items: center; gap: 4px; min-width: 0; padding: 8px 8px 12px; border: 2px solid rgb(40 30 20 / .1); border-radius: 18px; background: transparent; color: var(--ctx-ink-2); font: inherit; cursor: pointer; transition: translate .18s ease-out, box-shadow .18s ease-out, background-color .18s ease-out, border-color .18s ease-out; }
 .up2-ctx__thumb { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent); mask-composite: intersect; }
 .up2-ctx__pname { font-size: 14px; font-weight: 700; line-height: 1.35; text-align: center; }
