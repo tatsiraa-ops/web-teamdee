@@ -796,7 +796,19 @@ export default defineConfig({
         const rel = pagePath.replace(/\\/g, '/').replace(siteDir.replace(/\\/g, '/'), '')
         const at = ('/' + rel.replace(/^\//, '')).replace(/index\.html$/, '')
         const page = pageFor(routes, data.articles.items.map((a) => a.id))[at] || { kind: null, id: null }
-        const base = { ...data, page, wp: forWp, articleHref: at, articleDraft: true, sizeDraftHidden: forWp && data.sizing.status !== 'approved' }
+        /* 12 พ.ย. หน้า /size-chart/ (Search Console: คนค้น "ไซส์เสื้อ" มากที่สุด) · ตารางจากข้อมูลที่ยืนยันแล้วที่เดียว ไม่พิมพ์ตัวเลขซ้ำ
+           เสื้อพิมพ์ลาย = pp-v2.json print.sizes (กราฟิกทางการ LINE OA · ตรงกับเว็บจริง) · โปโลปัก = polo.json (คู่มือ 9 พ.ย.) · tests/size-chart-page.test.js */
+        const sizeCharts = at === '/size-chart/' ? (() => {
+          const pr = json('pp-v2.json').print.sizes, po = json('polo.json').sizes
+          const rows = (list) => list.map(([size, chest, length]) => ({ size, chest, length, chestCm: Math.round(chest * 2.54), lengthCm: Math.round(length * 2.54) }))
+          return [
+            { id: 'print', name: 'เสื้อพิมพ์ลาย · เสื้อกีฬา · เสื้อกิจกรรม', fit: 'ทรงเดียว ใส่ได้ทั้งชายและหญิง', to: url('products', 'print'), toLabel: 'ดูเสื้อพิมพ์ลาย', tol: pr.tol,
+              groups: [{ label: 'ผู้ใหญ่', short: 'พิมพ์ลาย ผู้ใหญ่', range: `${pr.adult[0][0]}–${pr.adult.at(-1)[0]}`, rows: rows(pr.adult) }, { label: 'เด็ก', short: 'พิมพ์ลาย เด็ก', range: `${pr.kids[0][0]}–${pr.kids.at(-1)[0]}`, rows: rows(pr.kids) }] },
+            { id: 'polo', name: 'เสื้อโปโลปัก', fit: 'ทรงชายตรง · ทรงหญิงเข้ารูป', to: url('products', 'polo'), toLabel: 'ดูเสื้อโปโลปัก', tol: po.tol,
+              groups: [{ label: 'ผู้ชาย', short: 'โปโล ชาย', range: `${po.men[0][0]}–${po.men.at(-1)[0]}`, rows: rows(po.men) }, { label: 'ผู้หญิง', short: 'โปโล หญิง', range: `${po.women[0][0]}–${po.women.at(-1)[0]}`, rows: rows(po.women) }] },
+          ]
+        })() : null
+        const base = { ...data, page, wp: forWp, articleHref: at, articleDraft: true, sizeCharts, sizeDraftHidden: forWp && data.sizing.status !== 'approved' }
         /* ปุ่ม LINE ส่วนกลาง (แถบล่าง · เมนู · hero · ปุ่มลอย · ท้ายเว็บ) ส่งข้อความตามหน้า + ทางเข้าลูกค้าเดิม (ตรวจมือถือ 30 ต.ค.) */
         {
           const named = (file) => { const j = json(file); return Object.fromEntries((Array.isArray(j) ? j : j.items || []).map((x) => [x.id, x.name])) }
@@ -834,6 +846,8 @@ export default defineConfig({
           const P = json('prices.json')
           base.dgFacts = { price: priceLine(P, 'print'), moq: `ขั้นต่ำ ${P.minQty} ตัว`, days: `ผลิต ${json('lead-times.json').print.days}` }
         }
+        /* 12 พ.ย. /size-chart/: FAQPage จากคำถามในหน้า (XL / 5XL อกเท่าไหร่ ฯลฯ · คำที่คนค้นจริงใน Search Console) */
+        if (at === '/size-chart/') base.sizeLd = (() => { const f = (json('guide-pages.json').size.sections || []).find((x) => x.kind === 'faq'); const s = f && faqSchema(f.items); return s && ldJson(s) })()
         if (at === '/calculations/') base.calcLd = (() => { const s = faqSchema(data.faq.calc); return s && ldJson(s) })()
         /* /faq/: FAQPage จากคำถามทุกหมวด (ตัดข้อที่ซ้ำกับ "คำถามสำคัญ" ให้เหลือข้อเดียว) · audit 26 ต.ค. */
         if (at === '/faq/') base.faqLd = (() => {
@@ -923,8 +937,31 @@ export default defineConfig({
                 const std = fabric.items.filter((f) => !f.new), fresh = fabric.items.filter((f) => f.new)
                 fabric.groups = [{ id: 'std', h: `ผ้ามาตรฐาน ${std.length} ชนิด`, meta: `${gsmT(std)} · มีเสื้อจริงจากงานลูกค้า`, items: std }, { id: 'new', h: `ผ้าใหม่ ${fresh.length} ชนิด`, meta: gsmT(fresh), items: fresh }].filter((g) => g.items.length)
               }
+              /* 11 พ.ย. หน้างานปัก: ข้อมูลโปโลจากไดรฟ์ "Info ปัก" ที่เดียว (src/data/polo.json · tests/polo-data.test.js) · ราคาจาก prices.json products.polo */
+              const P = json('polo.json')
+              const poloPr = json('prices.json').products.polo
+              const bandLabel = (b) => b.max ? `${b.min.toLocaleString('en-US')}–${b.max.toLocaleString('en-US')}` : `${b.min.toLocaleString('en-US')} ขึ้นไป`
+              /* 12 พ.ย. รอบ 213/216: บอร์ดราคาทุกผ้า × ทุกช่วงจำนวน (pp2PoloFabric.hbs) · ลำดับคอลัมน์ = prices.json cols = polo.json fabrics (เทส) */
+              const poloMatrix = v.poloFabric ? { rows: poloPr.bands.map((b) => ({ label: bandLabel(b), cells: poloPr.cols.map((c) => ({ id: c.id, price: b.price[c.id] })) })) } : null
+              const poloFabric = v.poloFabric ? { ...v.poloFabric, matrix: poloMatrix, minQty: P.minQty, fabrics: P.fabrics.map((f) => {
+                if (!poloPr.cols.some((c) => c.id === f.id)) throw new Error(`polo.json: ผ้า ${f.id} ไม่มีใน prices.json products.polo`)
+                const prices = poloPr.bands.map((b) => ({ label: bandLabel(b), price: b.price[f.id] }))
+                if (prices.some((x) => typeof x.price !== 'number')) throw new Error(`prices.json polo: ราคา ${f.id} ไม่ครบ`)
+                return { ...f, img: `/img/emb-fabric/${f.id}`, useTags: f.use.split(/\s+/).filter(Boolean), hero: existsSync(resolve(root, `public/img/emb-fabric/${f.id}-1120.webp`)) ? `/img/emb-fabric/${f.id}-1120.webp` : `/img/emb-fabric/${f.id}-560.webp`, prices, from: Math.min(...prices.map((x) => x.price)), main: f.colors.filter((c) => !c.base), base: f.colors.filter((c) => c.base),
+                  ask: lineMessageUrl(`ขอตัวอย่าง${f.name}\nสีที่สนใจ: \nจำนวนที่จะสั่งประมาณ:  ตัว`) }
+              }) } : null
+              const poloSpec = v.poloSpec ? { ...v.poloSpec, spec: P.spec, minQty: P.minQty,
+                /* 12 พ.ย. รอบ 213: ปุ่มเดียวท้ายส่วน · ข้อความตั้งต้นมีช่องให้กรอกแบบที่เลือกครบ 5 กลุ่ม */
+                ask: lineMessageUrl(`สนใจเสื้อโปโลปัก\nปก: \nสาบ: \nปลายแขน: \nกระเป๋า: \nตัดต่อ: \nจำนวนประมาณ:  ตัว`),
+                /* 12 พ.ย. คู่มือสั่งเสื้อโปโลปัก TEAMDEE (polo.json guide): ตำแหน่งปัก + รายละเอียดเสื้อ 5 กลุ่ม · ภาพครอปจากคู่มือ public/img/emb-guide */
+                guide: P.guide ? (() => {
+                  const g = P.guide, dim = (img) => img.startsWith('pkt-') ? [270, 235] : img.startsWith('pos-') ? [334, 207] : [335, 300]
+                  const pic = (x) => { const src = `/img/emb-guide/${x.img}.webp`; if (!existsSync(resolve(root, 'public' + src))) throw new Error(`polo.json guide: ไม่มีภาพ ${src}`); const [w, h] = dim(x.img); return { ...x, src, w, h } }
+                  return { ...g, positions: g.positions.map(pic), groups: g.groups.map((grp) => ({ ...grp, items: grp.items.map(pic) })) }
+                })() : null } : null
+              const vSizes = v.sizes && v.sizes.from === 'polo.json' ? { ...v.sizes, adult: P.sizes.men, kids: P.sizes.women, tol: P.sizes.tol, measure: P.sizes.measure, noteA: P.sizes.menNote, noteB: P.sizes.womenNote } : v.sizes
               /* ตารางไซซ์ (6 พ.ย.): ทรงที่ยังไม่มีตาราง → ปุ่ม LINE ขอตารางของทรงนั้น (ข้อความตั้งต้นมีแค่ชื่อทรง) */
-              const sizes = v.sizes ? { ...v.sizes, others: v.sizes.others.map((o) => ({ ...o, ask: lineMessageUrl(`ขอตารางไซซ์${o.name}\nจำนวนประมาณ:  ตัว`) })) } : null
+              const sizes = vSizes ? { labA: 'ผู้ใหญ่', labB: 'เด็ก', ...vSizes, def: vSizes.adult.find((r) => r[0] === 'M'), others: (vSizes.others || []).map((o) => ({ ...o, ask: lineMessageUrl(`ขอตารางไซซ์${o.name}\nจำนวนประมาณ:  ตัว`) })) } : null
               /* เสื้อจริงใส่หุ่น (6 พ.ย.): คำบรรยายจาก home-work-showcase · แบบ 3D ก่อนผลิตจาก download-designs proofs · รหัสจาก designs.json (ไม่มีในคลัง = ไม่ใส่รหัส) */
               const real = v.real ? (() => {
                 const man = json('home-work-showcase.json').mannequin, proofs = json('download-designs.json').proofs
@@ -965,11 +1002,13 @@ export default defineConfig({
                 if (items.length < 24) throw new Error(`pp-v2.json reviewWall: รูปไม่พอ (${items.length})`)
                 return { ...v.reviewWall, items }
               })() : null
-              if (!v.designs) return { ...v, proof, reviews, fabric, sizes, real, steps, collars, types, reviewWall }
+              if (!v.designs) return { ...v, proof, reviews, fabric, sizes, real, steps, collars, types, reviewWall, poloFabric, poloSpec }
               /* แบบเสื้อ 3D (5 พ.ย.): แถวตามทรงจาก productDesigns (มีรหัส + meta ให้ lightbox) · แถวละ ≤ 8 · ไม่ซ้ำ */
               const used = new Set()
-              const rows = v.designs.rows.map((r) => ({ ...r, total: data.designs.filter((d) => (d.product || []).includes(id) && r.garments.includes(d.garment)).length, /* นับจากคลังเต็มแบบเดียวกับหน้า /designs/ (ตัวเลขต้องตรงกับที่หน้าแบบเสื้อแสดง) */ all: `${url('designs')}?product=${id}${r.garments.length === 1 ? `&garment=${r.garments[0]}` : ''}`, items: productDesigns.filter((d) => r.garments.includes(d.garment) && !used.has(d.code) && !(v.designs.skip || []).includes(d.code)).slice(0, 8).map((d) => { used.add(d.code); const f = `/img/design-front/${d.img.split('/').pop().replace(/\.\w+$/, '')}-720.webp`; return { ...d, front: existsSync(resolve(root, 'public' + f)) ? f : null } }) })).filter((r) => r.items.length >= 3) /* 6 พ.ย. "เอาแค่ด้านหน้าเสื้อ": ภาพคู่ใช้ไฟล์ตัดตัวหน้า (scripts/design-fronts.py) */
-              return { ...v, proof, reviews, fabric, sizes, real, steps, collars, types, reviewWall, designs: { ...v.designs, rows } }
+              /* 11 พ.ย. หน้างานปัก: แถวภาพตรง (r.items · ภาพ 3D งานลูกค้าจริงจากไดรฟ์ "Info ปัก") · ไม่มีลิงก์ดูทั้งหมด · ภาพไม่มีไฟล์ = build พัง */
+              const direct = (r) => ({ ...r, total: r.items.length, all: null, items: r.items.map((x) => { for (const w of [480, 760, 1200]) if (!existsSync(resolve(root, `public${x.pic}-${w}.webp`))) throw new Error(`pp-v2.json designs: ไม่มีภาพ ${x.pic}-${w}.webp`); return { ...x, img: `${x.pic}-1200.webp`, code: '', meta: x.caption } }) })
+              const rows = v.designs.rows.map((r) => r.items ? direct(r) : ({ ...r, total: data.designs.filter((d) => (d.product || []).includes(id) && r.garments.includes(d.garment)).length, /* นับจากคลังเต็มแบบเดียวกับหน้า /designs/ (ตัวเลขต้องตรงกับที่หน้าแบบเสื้อแสดง) */ all: `${url('designs')}?product=${id}${r.garments.length === 1 ? `&garment=${r.garments[0]}` : ''}`, items: designsOf.filter( /* 12 พ.ย. ใช้คลังเต็มของสินค้า (productDesigns ตัดเหลือ 6 แบบแรกเมื่อสินค้าไม่มีแท็ก → หน้าปักได้แค่ 6 ใบ ปนใบแบบหน้า+หลัง) */(d) => r.garments.includes(d.garment) && !used.has(d.code) && !(v.designs.skip || []).includes(d.code)).map((d) => { const f = `/img/design-front/${d.img.split('/').pop().replace(/\.\w+$/, '')}-720.webp`; return { ...d, front: existsSync(resolve(root, 'public' + f)) ? f : null } }).sort((a, b) => (b.front ? 1 : 0) - (a.front ? 1 : 0)) /* 11 พ.ย. แบบที่มีภาพตัวหน้าขึ้นก่อน (หน้าปัก: ใบแบบเต็มหน้า+หลังไม่เข้าชุดการ์ดจัตุรัส) */.slice(0, 8).map((d) => { used.add(d.code); return d }) })).filter((r) => r.items.length >= 3) /* 6 พ.ย. "เอาแค่ด้านหน้าเสื้อ": ภาพคู่ใช้ไฟล์ตัดตัวหน้า (scripts/design-fronts.py) */
+              return { ...v, proof, reviews, fabric, sizes, real, steps, collars, types, reviewWall, poloFabric, poloSpec, designs: { ...v.designs, rows } }
             })(),
             downloadAssets: downloadAssetsFor('product', id, data.designs),
             priceStrip: priceSummary(json('prices.json'), id),
@@ -1073,7 +1112,7 @@ export default defineConfig({
           /* 11 พ.ย. แท็บบริบทงาน: รีวิวที่ตรงงาน (reviews.json · คำจริง ตัด "… " หน้าคำ) · รหัสผิด = build พัง */
           if (v2?.contexts) v2.contexts.tabs = v2.contexts.tabs.map((t) => { if (!t.review) return t; const r = reviewItems().find((x) => x.id === t.review); if (!r) throw new Error(`use-v2.json contexts ${t.id}: ไม่มีรีวิว ${t.review}`); return { ...t, review: { quote: r.quote.replace(/^…\s*/, ''), who: r.who || r.kind } } })
           /* 4 พ.ย. "ทำให้ดีกว่าเดิม uiux": ปุ่ม LINE ต่อสถานการณ์ (ข้อความบอกทีมขายว่าสนใจงานไหน) + ชื่อสถานการณ์ถัดไป */
-          if (v2?.contexts) v2.contexts.tabs = v2.contexts.tabs.map((t, i, all) => ({ ...t, line: lineMessageUrl(`สวัสดี ทีมดี เสื้อบริษัท — สนใจเสื้อสำหรับ${t.name}\nจำนวนประมาณ:  ตัว\nต้องใช้วันที่: \n(จากหน้า ${url('uses', id)})`), next: all[i + 1]?.name || '', nextScene: all[i + 1]?.scene || '' }))
+          if (v2?.contexts) v2.contexts.tabs = v2.contexts.tabs.map((t, i, all) => ({ ...t, line: lineMessageUrl(`สวัสดี ทีมดี ${item.name} — สนใจเสื้อสำหรับ${t.name}\nจำนวนประมาณ:  ตัว\nต้องใช้วันที่: \n(จากหน้า ${url('uses', id)})`), next: all[i + 1]?.name || '', nextScene: all[i + 1]?.scene || '' }))
           const onPage = new Set([item.img, ...contextPhotos.map((x) => x?.img), ...(v2?.contexts?.tabs || []).flatMap((t) => (t.photos || []).map((x) => x.img)), v2?.pain?.photo?.img, ...(v2?.reviews?.wall || []).map((w) => w.img)])
           const occSeen = new Set()
           const groupPhotos = cs.filter((c) => c.photoGroup === id && c.q >= 2 && c.occ && !onPage.has(c.img)).sort((a, b) => b.q - a.q).filter((c) => !occSeen.has(c.occ) && occSeen.add(c.occ))
@@ -1100,7 +1139,8 @@ export default defineConfig({
           up.v2 = v2
           /* รีวิวโฉมใหม่: การ์ดรีวิวเฉพาะกลุ่มองค์กร (แบบกระดานหน้าแรก) + กำแพงรูปจากแกลเลอรีรีวิว */
           if (v2?.reviews) {
-            const corpRv = reviewItems().filter((r) => r.use === REVIEW_USE[id] && r.img)
+            /* 11 พ.ย. กลุ่มที่อาร์ตเคาะรีวิวไว้ (REVIEW_PICK เช่น ร้านค้า = resort) ใช้เฉพาะรายการนั้น ไม่ยืมรีวิวองค์กร */
+            const corpRv = reviewItems().filter((r) => (REVIEW_PICK[id] ? REVIEW_PICK[id].includes(r.id) : r.use === REVIEW_USE[id]) && r.img)
             v2.reviews.items = corpRv.map((r) => { const g = r.gallery?.length ? r.gallery : [{ img: r.img, imgSmall: r.imgSmall }]; return { ...r, total: g.length, mono: [...(r.who || r.kind)].find((c) => !'เแโใไ'.includes(c)) } })
             for (const w of v2.reviews.wall) if (w.review) { const r = corpRv.find((x) => x.id === w.review); w.who = r.who || r.kind; w.alt = `งานจริงจากรีวิว ${w.who}` }
           }

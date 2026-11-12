@@ -233,11 +233,11 @@ const PP_ROUTES = ['/embroidery/', '/sublimation/', '/screen-printing/', '/custo
 const PP_ORDER = ['options', 'fabric', 'detail', 'price', 'quote-h', 'production', 'work', 'reviews', 'size', 'order', 'faq', 'uses', 'end-h']
 /* works.json ยังไม่มีงานของ 3 สินค้านี้ · เว็บจริงซ่อนส่วนผลงาน ไม่แต่งรูป · ได้งานจริงแล้วเอาออกจากรายการ */
 const NO_WORK_YET = new Set(['/custom-printed-warmup-shirts/', '/custom-oversize-jerseys/', '/custom-baseball-shirts/'])
-const PP2_REVIEWS = new Set(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/' })[id]).filter(Boolean))
+const PP2_REVIEWS = new Set(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]).filter(Boolean))
 /* หน้าโฉมใหม่ที่จบที่ FAQ (pp-v2.json lean · อาร์ต 6 พ.ย. "ที่เหลือต่อจากอันนี้ลบทิ้งได้หมดยกเว้น footer") ไม่มีส่วนเดิมของ v22 · ตรวจที่ tests/pp-v2.test.js */
-const PP2_LEAN = new Set(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).filter(([, v]) => v && v.lean).map(([id]) => ({ print: '/sublimation/' })[id]).filter(Boolean))
+const PP2_LEAN = new Set(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).filter(([, v]) => v && v.lean).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]).filter(Boolean))
 /* หน้าโฉมใหม่ย้ายส่วนขึ้นตามบอร์ดอาร์ต: รีวิว (5 พ.ย.) · เนื้อผ้า (6 พ.ย.) → ส่วนที่ย้ายไม่นับลำดับ v22 */
-const PP2_MOVED = Object.fromEntries(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).map(([id, v]) => [({ print: '/sublimation/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
+const PP2_MOVED = Object.fromEntries(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
 const ppMain = (route) => { const h = pages.find((p) => p.route === route).html; return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
 
 test('เว็บจริง: ส่วนหน้าสินค้าครบและเรียงตาม v22', () => {
@@ -253,21 +253,16 @@ test('เว็บจริง: ส่วนหน้าสินค้าคร
   }
 })
 
-test('เว็บจริง /embroidery/: แม่แบบ v22 · หัวข้องานปัก · ผ้า 6 ชนิดตามตารางราคา · hero รูปจริงไม่เคลมว่าปัก · แถบล่างไป #price', () => {
+test('เว็บจริง /embroidery/: โฉมใหม่ (pp-v2 polo) · หัวข้องานปัก · ผ้า 6 ชนิดตามตารางราคา · แถบล่างไปราคาในแผงผ้า', () => {
+  /* 11 พ.ย. 2026 หน้าปักเปลี่ยนจากแม่แบบ v22 เป็นโครงหน้าพิมพ์ลาย (อาร์ต "งานปักต่อเลย ต้นแบบคือหน้าเสื้อพิมพ์ลาย") · รายละเอียดที่ tests/embroidery-v2.test.js */
   const main = ppMain('/embroidery/')
   const page = pages.find((p) => p.route === '/embroidery/').html
   assert.ok(!/v3h|v3-dark|id="spec"|class="lab-/.test(page), 'เศษ poloV3')
-  assert.match(main, /<h2[^>]*>[^]*?วางโลโก้และรายละเอียดงานปัก/)
+  assert.match(main, /<h1[^>]*>[^]*?รับทำเสื้อโปโลปัก/)
   const prices = JSON.parse(readFileSync(join(root, 'src/data/prices.json'), 'utf8'))
-  const fabric = main.slice(main.indexOf(' id="fabric"'), main.indexOf(' id="detail"'))
-  for (const c of prices.products.polo.cols) assert.ok(fabric.includes(c.name), c.name)
-  const hero = main.slice(main.indexOf('band-hero'), main.indexOf('pp-trust'))
-  assert.match(hero, /<img[^>]+src="[^"]*\/img\/customer\/[^"]+"[^>]+fetchpriority="high"/)
-  assert.match(hero, /<img[^>]+srcset="/)
-  assert.ok(!/ปัก[^"<]*<\/figcaption>/.test(hero), 'คำบรรยายรูปห้ามเคลมว่าปัก')
-  assert.match(page, /class="[^"]*mb__[^"]*"[^>]*href="#price"|href="#price"[^>]*class="[^"]*mb__/)
-  for (const m of main.matchAll(/<img[^>]+src="[^"]*\/img\/customer\/[^"]+"[^>]*alt="([^"]*)"/g)) assert.ok(!/ปัก/.test(m[1]), m[1])
-  assert.match(main.slice(main.indexOf(' id="work"')), /เสื้อโปโลที่ลูกค้าองค์กรใส่จริง/)
+  const fabric = main.slice(main.indexOf(' id="fabric"'), main.indexOf('</section>', main.indexOf(' id="fabric"')))
+  for (const c of prices.products.polo.cols) assert.ok(fabric.includes(`data-fab="${c.id}"`), c.id)
+  assert.match(page, /class="[^"]*mb__[^"]*"[^>]*href="#fabric"|href="#fabric"[^>]*class="[^"]*mb__/)
 })
 
 test('เว็บจริง: รายละเอียดพิมพ์ลายมีตารางจริง · เบสบอลมีรูปจริง 2 ใบในการ์ด · ผ้าเจอร์ซีย์ยืนยันแล้ว · วอร์ม/เบสบอลไม่โชว์รายการผ้าที่ยังไม่ยืนยัน', () => {

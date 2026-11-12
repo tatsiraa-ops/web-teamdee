@@ -2293,6 +2293,7 @@ html.rv [data-rv].in { opacity: 1; translate: 0 0; }
 .hm-rvb__head { display: flex; align-items: center; gap: 14px; padding-right: 100px; }
 .hm-rvb__avatar { flex: none; width: 52px; height: 52px; border: 2px solid #fff; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px -6px rgba(17, 17, 17, .35); }
 .hm-rvb__who { display: grid; gap: 1px; margin: 0; }
+@media (max-width: 767px) { .hm-rvb__head { padding-right: 56px; } } /* 11 พ.ย. มือถือ: ไอคอนคำพูดลอยเหนือการ์ด กันที่ 100px ทำให้ชื่อตัดกลางคำ (หน่วยงานโรง/พยาบาล) */
 .hm-rvb__who b { font-size: 17px; font-weight: 800; line-height: 1.4; }
 .hm-rvb__who small { font-size: 13.5px; color: var(--color-ink-3); }
 .hm-rvb__q { margin: 16px 0 0; }

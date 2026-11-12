@@ -1,0 +1,47 @@
+{{!-- 11 พ.ย. 2026 หน้างานปัก: แบบเสื้อมาตรฐาน (spec ข้อ 8 · แทน pp2Types/pp2Collars ของพิมพ์ลาย · id="options" เดิม) · แบบมาตรฐาน 6 ข้อจากไดรฟ์ "Info ปัก" (polo.json spec)
+     12 พ.ย. รอบ 213 (อาร์ต "ใช้งานยาก คำเยอะเกินไป ให้กดเยอะเกิน ข้อมูลที่ควรให้ลูกค้าดูเลยไม่แสดง"):
+     - ตำแหน่งปัก = ผังเสื้อ + รายการสั้น ชื่อตำแหน่ง | ขนาด (เดิมการ์ดภาพ 6 ใบ · ภาพ pos-6 มีเบอร์โทรลูกค้า จึงไม่ใช้)
+     - รายละเอียดเสื้อ 28 แบบ เห็นครบไม่ต้องกด (เดิมแท็บ 5 กลุ่ม ซ่อน 22 แบบ) · ใต้ภาพเหลือชื่อแบบ คำบรรยายย้ายไปอยู่ใน alt
+     - ตัดการ์ด "ตัวอย่างจากงานลูกค้าจริง" 4 ใบ (คอซิป ปกขลิบ ต่อสี ซ้ำกับแบบด้านบน) → ปุ่ม LINE ปุ่มเดียวท้ายส่วน
+     ข้อมูลคู่มือสั่งเสื้อโปโลปัก TEAMDEE (polo.json guide) · ภาพครอปจากคู่มือ = ภาพจำลอง --}}
+{{#with pp2.poloSpec}}
+<section class="ps2" id="options" aria-labelledby="ps2-h">
+  <div class="wrap">
+    <header class="ps2__head">
+      <h2 id="ps2-h">{{{hl h accent}}}</h2>
+      <p>{{{ph p}}}</p>
+    </header>
+    <div class="ps2__std">
+      <figure class="ps2__img"><img src="{{img}}-760.webp" srcset="{{img}}-480.webp 480w, {{img}}-760.webp 760w, {{img}}-1200.webp 1200w" sizes="(min-width:1024px) 520px, 92vw" width="1200" height="1112" alt="{{alt}}" loading="lazy" decoding="async"></figure>
+      <div class="ps2__list">
+        <h3 class="ps2__lh">{{stdH}}</h3>
+        <ul class="ps2__spec">{{#each spec}}<li class="ps2__si ps2__si--{{this.k}}"><b>{{this.t}}</b><span>{{this.s}}</span></li>{{/each}}</ul>
+        <p class="ps2__min">เริ่มสั่ง {{minQty}} ตัว</p>
+      </div>
+    </div>
+    {{#if guide}}
+    {{!-- 12 พ.ย. รอบ 215 อาร์ต "ทำแบบเดิมมาได้": ตำแหน่งปักกลับเป็นผังเสื้อ + การ์ดภาพ 6 ใบ (แบบรอบ 212) --}}
+    <div class="ps2__pos" id="embroidery-spots">
+      <h3 class="ps2__oh">{{guideH}}</h3>
+      <p class="ps2__op">{{{ph guideP}}}</p>
+      <div class="ps2__pgrid">
+        <figure class="ps2__map"><img src="/img/emb-guide/{{guide.map}}.webp" width="315" height="705" alt="ภาพจำลอง: เสื้อโปโลด้านหน้าและด้านหลัง เลข 01–05 บอกตำแหน่งปัก อกซ้าย อกขวา แขน ด้านหลังใต้คอ และกลางหลัง" loading="lazy" decoding="async"></figure>
+        <ol class="ps2__spots">{{#each guide.positions}}<li><span class="ps2__spi"><img src="{{this.src}}" width="{{this.w}}" height="{{this.h}}" alt="ภาพจำลองงานปักตำแหน่ง{{this.t}}" loading="lazy" decoding="async"></span><span class="ps2__spn" aria-hidden="true">0{{inc @index}}</span><b>{{this.t}}</b><span class="ps2__sps">{{this.s}}</span></li>{{/each}}</ol>
+      </div>
+      <p class="ps2__gnote">{{guide.posNote}}</p>
+    </div>
+    <div class="ps2__parts">
+      <h3 class="ps2__oh">{{partsH}}</h3>
+      <p class="ps2__op">{{guide.imgNote}}</p>
+      <div class="ps2__groups">
+        {{#each guide.groups}}<section class="ps2__grp" aria-labelledby="grp-{{this.k}}">
+          <div class="ps2__gh"><h4 id="grp-{{this.k}}">{{this.t}} <span>{{this.items.length}} แบบ</span></h4>{{#if this.note}}<p>{{this.note}}</p>{{/if}}</div>
+          <ul class="ps2__pr">{{#each this.items}}<li class="ps2__pi"><span class="ps2__pim"><img src="{{this.src}}" width="{{this.w}}" height="{{this.h}}" alt="ภาพจำลอง: {{this.t}} {{this.s}}" loading="lazy" decoding="async"></span><b>{{this.t}}</b></li>{{/each}}</ul>
+        </section>{{/each}}
+      </div>
+      <a class="pp-more ps2__ask" href="{{ask}}" data-track="line" data-where="pp-options">บอกทีมดีว่าเลือกแบบไหน <span aria-hidden="true">→</span></a>
+    </div>
+    {{/if}}
+  </div>
+</section>
+{{/with}}

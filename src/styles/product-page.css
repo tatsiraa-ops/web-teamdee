@@ -62,6 +62,21 @@
   .pp2-hero__img { max-height: max(260px, calc(100svh - 380px)); -webkit-mask-image: linear-gradient(#000 62%, transparent); mask-image: linear-gradient(#000 62%, transparent); }
   .pp2-hero__crumb { margin-top: -24px; }
 }
+/* จอคอม (11 พ.ย. 2026 วัด 1024–1366): จัดกลางทั้งแบนเนอร์ทำให้หัวข้อยาวขึ้นไปทับเส้นทางหน้า → กล่องข้อความยืดเต็มความสูง
+   เว้นที่บนเท่าเส้นทางหน้า (ตำแหน่งบน + สูง 44 + ช่อง 4) แล้วจัดกลางในพื้นที่ที่เหลือ · ข้อความชิดซ้ายเหมือนเดิม ปุ่มไม่ยืด */
+@media (min-width: 1024px) {
+  .pp2-hero__copy { top: 0; bottom: 0; translate: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding-top: calc(clamp(12px, 1.6vw, 28px) + 48px); padding-bottom: 12px; }
+  .pp2-hero__copy > * { max-width: 100%; }
+}
+/* จอแท็บเล็ต 768–1023 (11 พ.ย. 2026): แบนเนอร์สูง ~280px ข้อความล้นทับเส้นทางหน้า/เสื้อลอย → ภาพ 16:9 ครอปเข้าหาคนกับเสื้อ · ข้อความใต้ภาพ (ชุดเดียวกับ up2-hero ใน use-page.css) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .pp2-hero { background: #f1f0ee; }
+  .pp2-hero__reel { aspect-ratio: auto; }
+  .pp2-hero__img { height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: var(--hero-tab-pos, 78% center); /* 11 พ.ย. ตั้งต่อหน้าได้ (pp-v2 hero.tabPos) · หน้าปักเสื้อชิดขวา */ -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
+  .pp2-hero__crumb { position: relative; top: auto; left: auto; margin-top: -40px; padding: 0 40px; }
+  .pp2-hero__copy { position: relative; top: auto; left: auto; translate: none; width: auto; max-width: 720px; margin-top: 12px; padding: 0 40px 56px; }
+  .pp2-hero__copy .th-o__sub { max-width: 60ch; }
+}
 /* จุดเด่นเสื้อพิมพ์ลาย: หัวข้อกลาง (คำเน้นส้ม) · บรรทัดรองหนา · ย่อหน้าสั้น · การ์ดขาว 4 ใบ ไอคอน 3D ซ้าย ข้อความขวา บนพื้นสตูดิโอ */
 .pp2-hl { padding: 64px 0 56px; background: var(--hm-studio, #f4f2ef); }
 .pp2-hl__head { max-width: 760px; margin: 0 auto; text-align: center; }
@@ -98,6 +113,8 @@
 .pp2-dz__card { position: relative; margin: 0; overflow: hidden; border: 1px solid #ece7e1; border-radius: 16px; background: #fff; scroll-snap-align: start; cursor: zoom-in; transition: box-shadow .25s ease, border-color .25s ease; }
 .pp2-dz__ph { aspect-ratio: 1; overflow: hidden; background: #fff; }
 .pp2-dz__ph img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.22, .7, .2, 1); }
+.pp2-dz__ph--r { aspect-ratio: 1200 / 1112; background: #fbf6f1; } /* 11 พ.ย. ภาพ 3D งานปักลูกค้าจริง (ไดรฟ์ Info ปัก) · เต็มภาพ ไม่ตัดแขนเสื้อ */
+.pp2-dz__rnote { margin: 0; font-size: 14px; color: #6b6257; }
 .pp2-dz__ph--one img { object-position: 50% 0; /* ภาพเดี่ยว: ตัดขอบล่าง = ป้ายรหัสที่ฝังในรูป */ }
 .pp2-dz__go { position: absolute; right: 12px; bottom: 12px; display: grid; background: rgb(255 255 255 / .92); place-items: center; width: 34px; height: 34px; border: 1px solid #e4ded8; border-radius: 10px; color: var(--color-ink); transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
 @media (hover: hover) {
@@ -217,6 +234,7 @@
   .up2-rv .up2-rv__wall { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 132px; gap: 8px; margin-top: 18px; }
   .up2-rv .up2-rv__wall > li { height: auto; }
   .up2-rv .up2-rv__wall > li:first-child, .up2-rv .up2-rv__wall > li:last-child { grid-column: 1 / -1; grid-row: span 2; }
+  .up2-rv .up2-rv__wall > li:nth-last-child(2):nth-child(even) { grid-column: 1 / -1; grid-row: span 2; } /* 11 พ.ย. รูปรวมเลขคี่ (เช่นหน้าปัก 3 ใบ): รูปกลางใบสุดท้ายไม่เหลือเดี่ยวครึ่งแถว */
   .up2-rv .up2-rv__wall > li > button, .up2-rv .up2-rv__wall > li > figure { border-radius: 12px; }
 }
 
@@ -253,7 +271,7 @@
 span.dz__ico { position: relative; flex: none; width: 56px; height: 56px; margin: -6px 0; }
 img.dz__ico { display: block; width: 56px; height: 56px; }
 .dz__n { position: absolute; right: -6px; bottom: -4px; display: grid; place-items: center; width: 24px; height: 24px; border: 2px solid #fff; border-radius: 50%; background: #FF6C00; font-size: 12px; font-weight: 900; color: #17130f; }
-.dz__c > p { margin: 4px 0 14px; font-size: 15px; line-height: 1.55; color: var(--color-ink-2, #3d3833); }
+.dz__c > p { margin: 4px 0 14px; font-size: 15px; line-height: 1.55; color: var(--color-ink-2); }
 .dz__tints { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; margin: 0; padding: 0; list-style: none; }
 .dz__tints li { display: grid; justify-items: center; gap: 2px; }
 .dz__tints img { display: block; width: 100%; height: auto; filter: drop-shadow(0 6px 6px rgb(40 25 10 / .16)); }
@@ -453,7 +471,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .is-off .ctz__no { position: absolute; top: 8px; left: 8px; z-index: 2; display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--color-ink); font-size: 12px; font-weight: 800; line-height: 1.4; color: #fff; }
 .cfx { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px 14px; }
 .cfm { grid-column: span var(--n); display: grid; grid-template-columns: subgrid; grid-template-rows: 18px 1fr; row-gap: 8px; }
-.cfm__h { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; margin: 0; font-size: 14px; font-weight: 800; line-height: 18px; color: var(--color-ink-2, #3d3833); }
+.cfm__h { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; margin: 0; font-size: 14px; font-weight: 800; line-height: 18px; color: var(--color-ink-2); }
 .cfm__h::after { content: ""; flex: 1; height: 1px; background: rgb(23 19 15 / .12); } /* เส้นบอกขอบเขตกลุ่ม */
 .cfm__cs { display: contents; }
 .ctz__c, .pp2-col__pk, .pp2-col__ask { position: relative; display: flex; flex-direction: column; min-width: 0; margin: 0; overflow: hidden; border-radius: 14px; background: #fff; box-shadow: 0 0 0 1px rgb(60 40 20 / .07), 0 10px 22px -20px rgb(60 30 5 / .5); }
@@ -461,7 +479,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .ctz__ph { display: block; width: 100%; height: 100%; object-fit: cover; }
 .ctz__b { display: flex; flex: 1; flex-direction: column; gap: 3px; padding: 10px 12px 12px; }
 .ctz__n { margin: 0; font-size: 15.5px; font-weight: 900; line-height: 1.3; color: var(--color-ink); }
-.ctz__d { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--color-ink-2, #3d3833); }
+.ctz__d { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--color-ink-2); }
 .ctz__x { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; margin-top: auto; padding-top: 8px; } /* ชิดล่างการ์ด ทุกใบแนวเดียวกัน */
 .ctz__x span { padding: 2px 9px; border-radius: 999px; background: #FFF1E6; font-size: 11.5px; font-weight: 800; line-height: 1.45; color: #9A3A00; }
 .pp2-col__pkp { display: grid; grid-template-columns: 1fr 1fr; aspect-ratio: 4 / 3; }
@@ -541,6 +559,11 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .pp2-sz__picks { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
 .pp2-sz__picks[data-g="kids"] { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .pp2-sz__picks[hidden] { display: none; }
+/* 11 พ.ย. หน้างานปัก: 2 กลุ่มเท่ากัน (ชาย/หญิง 11 ไซซ์) · ตารางเรียงลงทีละตาราง ปุ่มไซซ์ 6 คอลัมน์ทั้งสองกลุ่ม */
+.pp2-sz--even .pp2-sz__tables { grid-template-columns: minmax(0, 1fr); }
+.pp2-sz--even .pp2-sz__picks[data-g="kids"] { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.pp2-sz--even .pp2-sz__t--kids { min-width: 620px; }
+.pp2-sz__t caption small { font-weight: 500; color: var(--color-ink-3); }
 .pp2-sz__pick { min-height: 46px; border: 1.5px solid #E6DED6; border-radius: 14px; background: #fff; font: inherit; font-size: 15px; font-weight: 900; color: var(--color-ink); cursor: pointer; transition: border-color .15s ease, background-color .15s ease, color .15s ease, translate .15s ease; }
 .pp2-sz__pick:hover { border-color: #FF6C00; }
 .pp2-sz__pick[aria-pressed="true"] { border-color: #FF6C00; background: #FF6C00; color: #17130f; }
@@ -591,6 +614,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
   .pp2-sz__now b { font-size: 48px; }
   .pp2-sz__picks { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .pp2-sz__picks[data-g="kids"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pp2-sz--even .pp2-sz__picks[data-g="kids"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .pp2-sz__how { grid-template-columns: minmax(0, 1fr); }
   .pp2-sz__tables { overflow-x: auto; margin-inline: -20px; padding-inline: 20px; }
   .pp2-sz__t { min-width: 620px; } .pp2-sz__t--kids { min-width: 360px; }
@@ -688,7 +712,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .pp2-stb__fin img { display: block; width: 100%; height: auto; aspect-ratio: 2.36; object-fit: cover; }
 .pp2-stb__fin figcaption { position: absolute; inset: 0 auto 0 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; width: 46%; padding: 40px 48px; background: linear-gradient(90deg, rgb(255 246 236 / .92) 0%, rgb(255 246 236 / .75) 60%, rgb(255 246 236 / 0) 100%); }
 .pp2-stb__fin b { font-size: clamp(36px, 4.6vw, 64px); font-weight: 900; line-height: 1.02; letter-spacing: -.01em; color: #17130f; }
-.pp2-stb__fin figcaption > span { font-size: 18px; font-weight: 700; color: var(--color-ink-2, #3d3833); }
+.pp2-stb__fin figcaption > span { font-size: 18px; font-weight: 700; color: var(--color-ink-2); }
 .pp2-stb__fin .cb { margin-top: 6px; }
 .pp2-stb__note { margin: 12px 4px 0; font-size: 13px; color: #6f6862; }
 @media (max-width: 1099px) { .pp2-stb__s, .pp2-stb__s:nth-of-type(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; } }
@@ -798,7 +822,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
 .bld__c:target { box-shadow: 0 0 0 2px #FF6C00, 0 22px 40px -26px rgb(60 30 5 / .45); }
 .bld__c h3 { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 23px; font-weight: 900; line-height: 1.25; color: #C94F00; }
 .bld__c h3 .bld__n { width: 32px; height: 32px; font-size: 15px; }
-.bld__c > p { margin: 8px 0 14px; font-size: 15.5px; line-height: 1.65; color: var(--color-ink-2, #3d3833); }
+.bld__c > p { margin: 8px 0 14px; font-size: 15.5px; line-height: 1.65; color: var(--color-ink-2); }
 .bld__ims { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
 .bld__ims figure { margin: 0; }
 .bld__ims img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; background: #F3F1EE; }
@@ -952,3 +976,214 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
   .czp__cta { width: 100%; }
 }
 @media (max-width: 767px) { .fl__lead { font-size: 16px; } }
+
+/* ───── 11 พ.ย. 2026 หน้างานปัก: ผ้า + สี + ราคา แผงเดียว (pp2PoloFabric.hbs · polo-fabric.js) ───── */
+.pf2 { padding: 80px 0; background: #fff; }
+.pf2__head { max-width: 760px; }
+.pf2__head h2 { margin: 0; font-size: clamp(30px, 3.6vw, 48px); font-weight: 900; line-height: 1.2; color: var(--color-ink); text-wrap: balance; }
+.pf2__head h2 .hm-hl { color: #F05A00; }
+.pf2__head p { margin: 10px 0 0; font-size: 17px; line-height: 1.6; color: var(--color-ink-3); }
+.pf2__n { margin: 0; font-size: 28px; font-weight: 900; line-height: 1.2; color: var(--color-ink); }
+.pf2__n span { font-size: 18px; font-weight: 600; color: var(--color-ink-3); }
+.pf2__spec { display: grid; gap: 0; margin: 18px 0 0; }
+.pf2__spec > div { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-top: 1px solid #ece5dd; }
+.pf2__spec dt { font-size: 14px; font-weight: 700; color: var(--color-ink-3); }
+.pf2__spec dd { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--color-ink); }
+.pf2__ch { margin: 0; font-size: 18px; font-weight: 800; color: var(--color-ink); }
+.pf2__bh { margin: 16px 0 0; font-size: 14px; font-weight: 700; color: var(--color-ink-3); }
+.pf2__picked { min-height: 1.5em; margin: 4px 0 0; font-size: 14px; color: var(--color-ink-3); }
+.pf2__picked b { color: var(--color-ink); }
+.pf2__sw { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 10px 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+.pf2__c { display: grid; justify-items: center; gap: 5px; width: 100%; padding: 4px 0; border: 0; background: none; cursor: pointer; font: inherit; color: var(--color-ink); }
+.pf2__dot { width: 40px; height: 40px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgb(0 0 0 / .14), 0 0 0 0 transparent; transition: box-shadow .18s ease, transform .18s ease; }
+.pf2__code { max-width: 100%; font-size: 11.5px; font-weight: 600; line-height: 1.2; text-align: center; letter-spacing: .01em; color: var(--color-ink-3); overflow-wrap: anywhere; }
+.pf2__c[aria-pressed="true"] .pf2__dot { box-shadow: inset 0 0 0 1px rgb(0 0 0 / .14), 0 0 0 3px #fff, 0 0 0 5px #F05A00; }
+.pf2__c[aria-pressed="true"] .pf2__code { font-weight: 800; color: var(--color-ink); }
+@media (hover: hover) { .pf2__c:hover .pf2__dot { transform: scale(1.08); } }
+.pf2__c:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; border-radius: 10px; }
+.pf2__note { margin: 14px 0 0; font-size: 13.5px; line-height: 1.55; color: var(--color-ink-3); }
+.pf2__ask { margin-top: 6px; }
+/* 12 พ.ย. รอบ 217 ตัวเลือกผ้าและราคาในจอเดียว (pp2PoloFabric.hbs · อาร์ต "ไม่อยากให้เลื่อนเยอะ เอาให้ครบในที่เดียว")
+   ≥1280: สองฝั่ง ตาราง (แถว = ผ้า) 7 ส่วน · รายละเอียดผ้า 5 ส่วน สูงเท่ากัน · 768–1279: ซ้อนบนล่าง รายละเอียดแบ่ง 2 คอลัมน์ · <768: ชิปช่วงจำนวน + ราคาคอลัมน์เดียว */
+@media (min-width: 768px) { .pf2 > .wrap { width: calc(100% - 64px); max-width: 1400px; padding-inline: 0; } } /* กว้างพิเศษ ค่าเดียวกับส่วนกว้างอื่น (memory site-widths) */
+.pf4 { --sel: #FFF2E6; --rule: #f1e6da; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px; align-items: stretch; margin-top: 28px; }
+.pf4__board, .pf4__detail { overflow: hidden; border: 1px solid #eee3d7; border-radius: 26px; background: #fff; box-shadow: 0 1px 2px rgb(40 20 0 / .04), 0 26px 52px -40px rgb(60 30 5 / .55); }
+.pf4__board { display: flex; flex-direction: column; }
+.pf4__qty { display: none; }
+.pf4__tw { flex: 1; overflow-x: auto; }
+.pf4__tw:focus-visible { outline: 3px solid var(--color-ink); outline-offset: -3px; }
+.pf4__t { width: 100%; height: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; font-variant-numeric: tabular-nums; }
+.pf4__c0 { width: 33%; }
+.pf4__t thead th { padding: 16px 4px 13px; border-bottom: 1px solid #eadccd; background: #FBF7F2; text-align: center; font-size: 14.5px; font-weight: 800; line-height: 1.25; color: var(--color-ink); white-space: nowrap; }
+.pf4__t thead th span { display: block; margin-top: 1px; font-size: 12px; font-weight: 600; color: var(--color-ink-3); }
+.pf4__t thead th.pf4__corner { padding-left: 22px; text-align: left; }
+.pf4__corner span { display: inline !important; margin-left: 6px; }
+.pf4__t tbody th { padding: 7px 6px 7px 10px; border-top: 1px solid var(--rule); text-align: left; }
+.pf4__t td { padding: 7px 4px; border-top: 1px solid var(--rule); text-align: center; font-size: 20px; font-weight: 800; letter-spacing: -.01em; color: var(--color-ink); transition: background-color .2s ease; }
+.pf4__t tbody tr:first-child > * { border-top: 0; }
+.pf4__f { display: flex; align-items: center; gap: 14px; width: 100%; padding: 6px 8px 6px 6px; border: 0; border-radius: 14px; background: none; cursor: pointer; font: inherit; text-align: left; color: var(--color-ink); }
+.pf4__f img { flex: none; width: 106px; height: 70px; object-fit: cover; border-radius: 12px; box-shadow: 0 0 0 1px rgb(0 0 0 / .1); transition: box-shadow .2s ease; }
+.pf4__f b { font-size: 16.5px; font-weight: 800; line-height: 1.3; }
+.pf4__f b .inline-block { white-space: nowrap; } /* ชื่อผ้าไทยไม่ตัดกลางคำ */
+.pf4__f:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 1px; }
+.pf4__t tbody tr { cursor: pointer; }
+@media (hover: hover) { .pf4__t tbody tr:hover > * { background: #FFFAF5; } .pf4__t tbody tr:hover .pf4__f img { box-shadow: 0 0 0 2px #FFB27A; } }
+.pf4__t tbody tr.is-sel > *, .pf4__t tbody tr.is-sel:hover > * { background: var(--sel); }
+.pf4__t tbody tr.is-sel th { box-shadow: inset 4px 0 0 #FF6C00; }
+.pf4__t tbody tr.is-sel td { color: #7A2E00; font-weight: 900; }
+.pf4__t tbody tr.is-sel .pf4__f img { box-shadow: 0 0 0 2px #FF6C00; }
+.pf4__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; padding: 16px 22px; border-top: 1px solid #eadccd; background: #FBF7F2; }
+.pf4__foot { flex-wrap: nowrap; }
+.pf4__foot ul { display: grid; grid-template-columns: auto auto; gap: 6px 18px; margin: 0; padding: 0; list-style: none; }
+.pf4__foot .cb { flex: none; }
+.pf4__foot li { position: relative; padding-left: 24px; font-size: 14px; font-weight: 600; color: var(--color-ink-2); }
+.pf4__foot li::before { content: ""; position: absolute; left: 0; top: .2em; width: 17px; height: 17px; border-radius: 50%; background: #FF6C00 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center / 11px no-repeat; }
+.pf4__detail { background: var(--sel); border-color: #f2d9c2; }
+/* 12 พ.ย. รอบ 219 อาร์ต "ความสูงเพิ่มมาแปลกๆ": ตารางเป็นตัวกำหนดความสูงทั้งชิ้น · การ์ดขวาไม่ดันแถว (contain: size) ภาพผ้าหดรับส่วนต่าง → สูงเท่าเดิมทุกผ้า */
+@media (min-width: 1280px) { .pf4__detail { contain: size; } } /* สองฝั่งตั้งแต่ 1280 (1100–1279 การ์ดขวาแคบจนสีล้น) */
+.pf4__panel { display: flex; flex-direction: column; height: 100%; }
+.pf4__panel[hidden] { display: none; }
+.pf4__panel + .pf4__panel { border-top: 1px solid #f2d9c2; } /* ไม่มี JS: ทุกผ้าเรียงลงมา */
+.pf4__hero { position: relative; flex: 1 1 0; min-height: 130px; margin: 0; overflow: hidden; background: #3a2a1e; }
+.pf4__hero img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; animation: pf4-in .6s cubic-bezier(.22, .7, .2, 1); }
+.pf4__hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(40 18 4 / .82) 0%, rgb(40 18 4 / .35) 38%, rgb(40 18 4 / 0) 62%); }
+.pf4__hero figcaption { position: absolute; left: 24px; right: 24px; bottom: 20px; z-index: 1; color: #fff; }
+.pf4__hero h3 { margin: 0; font-size: 34px; font-weight: 900; line-height: 1.1; color: #fff; text-shadow: 0 1px 3px rgb(0 0 0 / .35); }
+.pf4__hero figcaption span { display: block; margin-top: 3px; font-size: 14px; font-weight: 600; color: rgb(255 255 255 / .82); }
+.pf4__hero p { display: inline-block; margin: 10px 0 0; padding: 4px 11px; border-radius: 8px; background: #FF6C00; font-size: 14px; font-weight: 800; color: #111; }
+@keyframes pf4-in { from { opacity: .35; transform: scale(1.06); } to { opacity: 1; transform: scale(1); } }
+.pf4__body { display: flex; flex: none; flex-direction: column; padding: 16px 22px 18px; }
+.pf4__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.pf4__chips li { padding: 5px 11px; border-radius: 999px; background: #fff; box-shadow: 0 0 0 1px rgb(120 60 10 / .14); font-size: 13.5px; font-weight: 800; line-height: 1.3; color: var(--color-ink); }
+.pf4__use { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 10px 0 0; }
+.pf4__use span { margin-right: 2px; font-size: 13px; font-weight: 800; color: var(--color-ink); }
+.pf4__use i { padding: 4px 10px; border-radius: 999px; background: rgb(255 108 0 / .12); font-size: 13px; font-style: normal; font-weight: 600; color: #6B2800; }
+.pf4__tip { position: relative; margin: 10px 0 0; padding-left: 22px; font-size: 13px; line-height: 1.5; color: var(--color-ink-2); }
+.pf4__tip::before { content: ""; position: absolute; left: 0; top: .2em; width: 15px; height: 15px; background: #B84300; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9.5'/%3E%3Cpath d='M12 11v6M12 7.5v.01'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9.5'/%3E%3Cpath d='M12 11v6M12 7.5v.01'/%3E%3C/svg%3E") center / contain no-repeat; }
+.pf4 .pf2__colors { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgb(120 60 10 / .14); }
+.pf4 .pf2__ch { font-size: 15.5px; }
+.pf4 .pf2__ch span { margin-left: 6px; font-size: 12.5px; font-weight: 600; color: var(--color-ink-3); }
+.pf4 .pf2__picked { min-height: 0; margin: 2px 0 0; font-size: 13px; }
+.pf4 .pf2__picked:empty { display: none; }
+.pf4 .pf2__sw { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 4px 2px; margin-top: 8px; }
+.pf4 .pf2__dot { width: 28px; height: 28px; }
+.pf4 .pf2__code { font-size: 10.5px; white-space: nowrap; letter-spacing: -.01em; } /* รหัสยาว (BLG335 D) อยู่บรรทัดเดียว ทุกผ้าสูงแถวเท่ากัน */
+.pf4 .pf2__c--base .pf2__dot { box-shadow: inset 0 0 0 1px rgb(0 0 0 / .14), 0 4px 0 -2px #fff, 0 5px 0 -2px #7A2E00; }
+.pf4__base { display: flex; align-items: center; gap: 6px; margin: 6px 0 0; font-size: 12px; color: var(--color-ink-3); }
+.pf4__base i { width: 14px; height: 2px; border-radius: 2px; background: #7A2E00; }
+.pf4__ask { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 12px; margin-top: auto; padding-top: 10px; }
+.pf4__ask small { font-size: 12.5px; color: var(--color-ink-3); }
+@media (max-width: 1279px) { .pf4__f { gap: 10px; } .pf4__f img { width: 80px; height: 54px; } .pf4__f b { font-size: 15px; } .pf4__t td { font-size: 18px; } } /* จอแคบกว่า 1280: ชื่อผ้ายาว (ผ้าแอ็นดูแรนซ์) ไม่ล้นคอลัมน์ */
+@media (prefers-reduced-motion: reduce) { .pf4__hero img { animation: none; } .pf4__t td, .pf4__f img { transition: none; } }
+@media (max-width: 1279px) {
+  .pf4 { grid-template-columns: minmax(0, 1fr); }
+  .pf4__panel { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .pf4__body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 24px; align-items: start; }
+  .pf4__hero { flex: none; height: 240px; min-height: 0; }
+  .pf4__body > :is(.pf4__chips, .pf4__use, .pf4__tip) { grid-column: 1; }
+  .pf4__body > .pf2__colors { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; padding-top: 0; border-top: 0; }
+}
+@media (max-width: 767px) {
+  .pf2 { padding: 56px 0; }
+  .pf4 { gap: 14px; margin-top: 22px; }
+  .pf4__board, .pf4__detail { border-radius: 20px; }
+  .pf4__qty { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 14px 14px 12px; border-bottom: 1px solid #eadccd; background: #FBF7F2; }
+  .pf4__qty span { width: 100%; margin-bottom: 2px; font-size: 14px; font-weight: 800; color: var(--color-ink); }
+  .pf4__q { flex: 1 1 28%; min-height: 40px; padding: 0 6px; border: 1.5px solid #e2d4c5; border-radius: 10px; background: #fff; cursor: pointer; font: inherit; font-size: 14px; font-weight: 700; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+  .pf4__q[aria-pressed="true"] { border-color: var(--color-ink); background: var(--color-ink); color: #fff; }
+  .pf4__q:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+  .pf2.is-js .pf4__t [data-b]:not(.is-band) { display: none; }
+  .pf4__t { table-layout: auto; } /* มือถือ: เหลือคอลัมน์ราคาเดียว ให้ตารางวัดความกว้างจากเซลล์ที่เห็นจริง */
+  .pf4__c0 { width: auto; }
+  .pf4__t td, .pf4__t thead th[data-b] { width: 92px; padding-right: 16px; text-align: right; }
+  .pf4 .pf4__t thead th { padding-block: 10px; }
+  .pf4__corner span { display: none !important; }
+  .pf4__t td { font-size: 20px; }
+  .pf4__foot { padding: 14px 14px 16px; }
+  .pf4__foot { flex-wrap: wrap; }
+  .pf4__foot ul { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+  .pf4__foot .cb { width: 100%; justify-content: center; }
+  .pf4__hero { height: 210px; }
+  .pf4__hero h3 { font-size: 28px; }
+  .pf4__f img { width: 76px; height: 50px; }
+  .pf4__f b { font-size: 15.5px; }
+  .pf4__body { display: flex; padding: 14px 14px 16px; }
+  .pf4__body > .pf2__colors { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgb(120 60 10 / .14); }
+}
+@media (max-width: 420px) {
+  .pf2__spec > div { grid-template-columns: minmax(0, 1fr); gap: 2px; padding: 9px 0; } /* 11 พ.ย. จอแคบ: หัวข้อบน ค่าล่าง (ช่องค่าเดิมแคบจนตัดหลายบรรทัด) */
+}
+
+/* ───── 11 พ.ย. 2026 หน้างานปัก: แบบมาตรฐาน + ตัวเลือกจากงานลูกค้าจริง (pp2PoloSpec.hbs) ───── */
+.ps2 { padding: 88px 0 72px; background: #F7F4F0; }
+.ps2__head { display: grid; gap: 10px; max-width: 820px; }
+.ps2__head h2 { margin: 0; font-size: clamp(30px, 3.8vw, 52px); font-weight: 900; line-height: 1.12; letter-spacing: -.01em; color: var(--color-ink); text-wrap: balance; }
+.ps2__head h2 .hm-hl { color: #F05A00; }
+.ps2__head p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--color-ink-3); }
+.ps2__std { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 40px; align-items: center; margin-top: 32px; padding: 28px; border-radius: 24px; background: #fff; }
+.ps2__img { margin: 0; overflow: hidden; border-radius: 16px; background: #fbf6f1; }
+.ps2__img img { display: block; width: 100%; height: auto; }
+.ps2__lh { margin: 0; font-size: 22px; font-weight: 900; color: var(--color-ink); }
+.ps2__spec { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; margin: 14px 0 0; padding: 0; list-style: none; counter-reset: none; }
+.ps2__si { display: grid; gap: 3px; padding: 14px 0 14px 30px; border-top: 1px solid #ece5dd; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F05A00' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") 0 16px / 20px no-repeat; }
+.ps2__si b { font-size: 16.5px; font-weight: 800; color: var(--color-ink); }
+.ps2__si span { font-size: 14.5px; line-height: 1.5; color: var(--color-ink-3); }
+.ps2__si--logo { grid-column: 1 / -1; } /* ปักโลโก้ฟรี = ข้อหลัก กว้างเต็มแถว */
+.ps2__si--logo b { font-size: 20px; }
+.ps2__min { margin: 16px 0 4px; font-size: 14.5px; color: var(--color-ink-3); }
+.ps2__oh { margin: 48px 0 0; font-size: 24px; font-weight: 900; color: var(--color-ink); }
+.ps2__op { margin: 6px 0 0; font-size: 16px; color: var(--color-ink-3); }
+@media (max-width: 1023px) { .ps2__std { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 18px; } }
+@media (max-width: 767px) { .ps2 { padding: 56px 0; } .ps2__spec { grid-template-columns: minmax(0, 1fr); } }
+/* 12 พ.ย. รอบ 213 หน้างานปัก (pp2PoloSpec.hbs): ตำแหน่งปัก = ผัง + รายการสั้น · รายละเอียดเสื้อ 28 แบบเห็นครบ ไม่มีแท็บ
+   จอใหญ่ แถวละกลุ่ม: หัวกลุ่มซ้าย ภาพ 6 ช่องขวา · มือถือ หัวกลุ่มบน ภาพเป็นรางปัดข้าง (เห็นใบถัดไปโผล่ = รู้ว่าปัดได้) */
+.ps2__pos { margin-top: 48px; }
+.ps2__pgrid { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 20px; padding: 24px; border-radius: 24px; background: #fff; }
+.ps2__map { margin: 0; overflow: hidden; border-radius: 16px; background: #f4f4f4; }
+.ps2__map img { display: block; width: 100%; height: auto; }
+.ps2__spots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 16px; margin: 0; padding: 0; list-style: none; }
+.ps2__spots li { position: relative; display: grid; align-content: start; gap: 2px; }
+.ps2__spi { display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 12px; background: #111; }
+.ps2__spi img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ps2__spn { position: absolute; top: 8px; left: 8px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #FF6C00; font-size: 13px; font-weight: 900; color: #000; }
+.ps2__spots b { margin-top: 8px; font-size: 16px; font-weight: 800; line-height: 1.35; color: var(--color-ink); }
+.ps2__sps { font-size: 14px; line-height: 1.5; color: var(--color-ink-3); }
+.ps2__gnote { margin: 14px 0 0; padding-left: 14px; border-left: 3px solid #FF6C00; font-size: 14.5px; line-height: 1.6; color: var(--color-ink-2); }
+.ps2__parts { margin-top: 48px; }
+.ps2__groups { margin-top: 18px; padding: 8px 28px; border-radius: 24px; background: #fff; }
+.ps2__grp { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 22px 0; }
+.ps2__grp + .ps2__grp { border-top: 1px solid #ece5dd; }
+.ps2__gh h4 { margin: 0; font-size: 20px; font-weight: 900; line-height: 1.25; color: var(--color-ink); }
+.ps2__gh h4 span { display: block; margin-top: 2px; font-size: 14px; font-weight: 700; color: var(--color-ink-3); }
+.ps2__gh p { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--color-ink-2); }
+.ps2__pr { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.ps2__pi { display: grid; align-content: start; gap: 8px; }
+.ps2__pim { display: block; aspect-ratio: 335 / 300; overflow: hidden; border-radius: 12px; background: #eef1f5; }
+.ps2__pim img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ps2__pi b { font-size: 14.5px; font-weight: 800; line-height: 1.35; color: var(--color-ink); text-wrap: balance; }
+.ps2__ask { margin-top: 14px; }
+@media (max-width: 1023px) {
+  .ps2__pgrid { grid-template-columns: 200px minmax(0, 1fr); gap: 20px; padding: 18px; } .ps2__spots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ps2__groups { padding: 4px 20px; }
+  .ps2__grp { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .ps2__gh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .ps2__gh h4 span { display: inline; margin: 0 0 0 6px; }
+  .ps2__gh p { margin: 0; }
+}
+@media (max-width: 767px) {
+  .ps2__pos { margin-top: 36px; }
+  .ps2__pgrid { grid-template-columns: minmax(0, 1fr); padding: 14px; }
+  .ps2__map { justify-self: center; width: min(170px, 50%); }
+  .ps2__spots { gap: 16px 10px; }
+  .ps2__spots b { font-size: 14.5px; }
+  .ps2__sps { font-size: 13px; }
+  .ps2__parts { margin-top: 36px; }
+  .ps2__groups { padding: 0 14px; }
+  .ps2__grp { padding: 16px 0; }
+  .ps2__gh h4 { font-size: 17px; }
+  .ps2__gh p { font-size: 13.5px; }
+  .ps2__pr { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 40%; gap: 10px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; margin-inline: -14px; padding-inline: 14px; scroll-padding-inline: 14px; scrollbar-width: none; }
+  .ps2__pr::-webkit-scrollbar { display: none; }
+  .ps2__pi { scroll-snap-align: start; }
+  .ps2__pi b { font-size: 13.5px; }
+}

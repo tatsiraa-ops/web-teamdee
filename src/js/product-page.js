@@ -1,5 +1,6 @@
 import { initFabricCards } from './fabric-cards.js'
 import { initTypeCollars } from './type-collars.js'
+import { initPoloFabric } from './polo-fabric.js'
 import './download-assets.js'
 import '../styles/v22-sections.css'
 /* หน้าสินค้า 6 หน้า · product-page.css (แกลเลอรีลูกค้า · รูปในการ์ด) โหลดใน head ของหน้า */
@@ -24,6 +25,7 @@ initNeedBy()
 initPriceCompare()
 /* การ์ดสะสมผ้า (รอบ 185): เอียง/ฟอยล์ · พลิก · แจกการ์ด · สำรับมือถือ */
 initFabricCards()
+initPoloFabric() /* 11 พ.ย. หน้างานปัก: ผ้า + สี + ราคา */
 /* แผงเลือกเสื้อ (196c): กดทรง → บอกคอที่ทำได้ + ราคาทรง */
 initTypeCollars()
 
