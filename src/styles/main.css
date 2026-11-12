@@ -2202,3 +2202,48 @@ t-nw { white-space: nowrap; }
 .nudge__x { width: 32px; height: 32px; border-radius: 8px; color: var(--color-ink-3); }
 .nudge__x svg { width: 16px; height: 16px; }
 .nudge__time { height: 2px; background: rgb(23 19 15 / .22); }
+
+/* ลิงก์ลูกศร แบบเดียวทั้งเว็บ
+   รอบ 206 (11 พ.ย. 2026 อาร์ต "แบบเดียวทั้งเว็บ"): เดิม 21 แบบ 14–18px เส้นใต้ส้มทึบ/จาง/เข้ม ลูกศรติดตัวหนังสือ (ช่องว่างท้ายข้อความใน inline-flex ถูกตัดทิ้ง)
+   รอบ 207 (อาร์ต "ไม่สวยเลยทำมาดีๆ" → เทียบ 3 แบบบนหน้าจริง → เลือก B): ตัวหนังสือดำหนาไม่มีเส้นใต้ + วงกลมส้มอ่อนลูกศรดำ
+   (วงแบบเดียวกับการ์ดบริการหน้าแรก #FFF1E4) · ลูกศรวาด SVG ด้วย mask แทนตัวอักษร → ↗ (ซ่อนตัวอักษรเดิมด้วย font-size 0 · ไม่ต้องแก้ template ทุกไฟล์)
+   ใส่ html body + #faq ใน :is ให้ชนะกฎเฉพาะส่วนทุกไฟล์ (ลำดับโหลด CSS แต่ละหน้าไม่เท่ากัน) · ปุ่มเม็ดยา #real-work บนมือถือ (id + 2 class) ยังชนะ
+   inline-block (ไม่ใช่ flex): ข้อความยาวตัดบรรทัดแล้ววงต่อท้ายคำสุดท้าย ไม่หลุดไปชิดขอบ
+   ไม่บังคับสีตัวอักษร: ลิงก์บนพื้นเข้มต้องเป็นขาว */
+html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more) {
+  display: inline-block; min-height: 44px; padding-block: 8px; line-height: 1.5;
+  font-size: 16px; font-weight: 700; column-gap: 0;
+  text-decoration-line: none;
+}
+html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more) > :is(.arw, span[aria-hidden="true"]:last-child) {
+  display: inline-grid; place-items: center; flex: none; width: 28px; height: 28px; margin-inline-start: 10px;
+  border-radius: 50%; background: #FFF1E4; color: #111; font-size: 0; line-height: 0; vertical-align: middle;
+  text-decoration: none; transition: background-color .2s ease;
+}
+html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more) > :is(.arw, span[aria-hidden="true"]:last-child)::before {
+  content: ""; width: 15px; height: 15px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12h15M13.5 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12h15M13.5 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: translate .25s cubic-bezier(.2, .8, .2, 1);
+}
+html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more)[target="_blank"] > :is(.arw, span[aria-hidden="true"]:last-child)::before { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8.5 7H17v8.5'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8.5 7H17v8.5'/%3E%3C/svg%3E"); }
+html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more):focus-visible { outline: 2px solid var(--color-ink); outline-offset: 4px; border-radius: 6px; }
+@media (hover: hover) {
+  html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more):hover > :is(.arw, span[aria-hidden="true"]:last-child) { background: #FF6C00; }
+  html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more):hover > :is(.arw, span[aria-hidden="true"]:last-child)::before { translate: 2px 0; }
+  html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more)[target="_blank"]:hover > :is(.arw, span[aria-hidden="true"]:last-child)::before { translate: 1.5px -1.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more) > :is(.arw, span[aria-hidden="true"]:last-child), html body :is(.pp-more, .hm-more, #faq .hm-faq__all, .hm-show__rhead .hm-show__links a, .pp2-dz__all, .pp2-faq__more a, .pp2-fab__guide, .spk__more) > :is(.arw, span[aria-hidden="true"]:last-child)::before { transition: none; }
+}
+/* ปุ่มเม็ดยาแถว showroom บนมือถือ (home.css · id ชนะกฎกลาง): ตัด gap ซ้อน · ขอบขวา 8px เท่าบนล่าง วงอยู่กลางเม็ดยา */
+@media (max-width: 767px) { html body #real-work .hm-show__rhead .hm-show__links a { column-gap: 0; padding-inline-end: 8px; } }
+/* ปุ่มกาง "ดูภาพลูกค้าเพิ่มเติม" (button ไม่มีลูกศรใน markup): วงเดียวกัน ลูกศรลง · กางแล้วกลับหัว */
+html body button.pp-more { border: 0; background: none; cursor: pointer; color: inherit; font-family: inherit; }
+html body button.pp-more::after {
+  content: ""; display: inline-block; width: 28px; height: 28px; margin-inline-start: 10px; vertical-align: middle; border-radius: 50%;
+  background: #FFF1E4 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6.5 9.5 5.5 5.5 5.5-5.5'/%3E%3C/svg%3E") center / 18px no-repeat; transition: background-color .2s ease, rotate .25s cubic-bezier(.2, .8, .2, 1);
+}
+html body button.pp-more[aria-expanded="true"]::after { rotate: 180deg; }
+@media (hover: hover) { html body button.pp-more:hover::after { background-color: #FF6C00; } }
+@media (prefers-reduced-motion: reduce) { html body button.pp-more::after { transition: none; } }
+/* /ลิงก์ลูกศร */
