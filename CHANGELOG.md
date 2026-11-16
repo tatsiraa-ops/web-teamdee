@@ -2,6 +2,15 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.3.1 — 2026-11-16
+
+หน้า /sublimation/ แสดงรีวิวครบทุกราย · รูปขั้นตรวจตัวอย่างไม่มีชื่อแบรนด์ · คำอธิบายหน้าร้านค้ามีร้านอาหารและคาเฟ่
+
+### Fixes
+
+- **sublimation:** show every review and drop brand text from the sample photo (534fdcb)
+- **seo:** mention restaurants and cafes in the staff-shirt page description (24920c7)
+
 ## v0.3.0 — 2026-11-16
 
 รีวิวคลังเดียวทุกหน้า · ผังเสื้อหน้า-หลังหน้า /embroidery/ · ขั้นตอนพิมพ์ลายมีตรวจตัวอย่าง · ธีมไฟล์แนบใน GitHub Release
