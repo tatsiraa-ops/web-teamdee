@@ -19,3 +19,13 @@ test('/corporate/: description ยังบอกบริการหลัก�
   const d = readFileSync(new URL('../site/corporate/index.html', import.meta.url), 'utf8').match(/<meta name="description" content="([^"]*)"/)[1]
   for (const w of ['เสื้อบริษัท', 'ยูนิฟอร์มพนักงาน', 'โลโก้', 'ไซซ์']) assert.ok(d.includes(w), w)
 })
+
+/* 16 พ.ย. 2026 อาร์ตเลือกคงคำ "ร้านอาหาร / คาเฟ่" ไว้ในหน้าร้านค้า (คำค้นจาก v22 · แม้ยังไม่มีแท็บร้านอาหารเพราะไม่มีแบบจริง)
+   → title · H1 · description พูดตรงกัน ไม่ใช่ title/H1 มีแต่ description ไม่มี */
+test('/custom-staff-shirts/: title · H1 · description มีทั้งร้านอาหารและคาเฟ่', () => {
+  const html = readFileSync(new URL('../site/custom-staff-shirts/index.html', import.meta.url), 'utf8')
+  const title = html.match(/<title>([^<]*)<\/title>/)[1]
+  const d = html.match(/<meta name="description" content="([^"]*)"/)[1]
+  const h1 = JSON.parse(readFileSync(new URL('../src/data/use-pages.json', import.meta.url), 'utf8')).shop.hero.h1
+  for (const [k, s] of [['title', title], ['h1', h1], ['description', d]]) for (const w of ['ร้านค้า', 'ร้านอาหาร', 'คาเฟ่']) assert.ok(s.includes(w), `${k}: ${w}`)
+})
