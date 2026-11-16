@@ -16,3 +16,9 @@ test('ลิงก์ขอตัวอย่างตั้งต้นใน�
   assert.equal(asks.length, 6)
   for (const a of asks) assert.doesNotMatch(a, /ผ้าผ้า/, a)
 })
+
+test('ข้อความขอราคา LINE ระบุผ้าและสี พร้อมช่องให้ลูกค้าแจ้งจำนวน', async () => {
+  const { quoteText } = await import('../src/js/polo-fabric.js')
+  assert.equal(quoteText('ผ้าจูติ', 'J-7937'), 'ขอใบเสนอราคาเสื้อโปโลปัก\nผ้าที่เลือก: ผ้าจูติ\nสีที่สนใจ: J-7937\nจำนวน:  ตัว\nปักโลโก้ 1 จุดที่อก')
+  assert.match(quoteText('ผ้าจูติ', ''), /ขอคำแนะนำเรื่องสี/)
+})

@@ -125,7 +125,7 @@
 .pp2-dz__card:focus-within { outline: 3px solid var(--color-ink); outline-offset: 2px; }
 .pp2-dz-ctl { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 10px; }
 .pp2-dz-ctl > span { margin-right: auto; font-size: 13px; font-variant-numeric: tabular-nums; color: #67635d; }
-.pp2-dz-ctl button { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #ded9d2; border-radius: 50%; background: #fff; color: var(--color-ink); font-size: 18px; cursor: pointer; }
+.pp2-dz-ctl button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ded9d2; border-radius: 50%; background: #fff; color: var(--color-ink); font-size: 18px; cursor: pointer; }
 .pp2-dz-ctl button[aria-disabled="true"] { opacity: .3; cursor: default; }
 @media (prefers-reduced-motion: reduce) { .pp2-dz__ph img, .pp2-dz__card, .pp2-dz__go { transition: none; } }
 @media (max-width: 1023px) { .pp2-dz__rail { grid-auto-columns: calc((100% - 2 * 16px) / 2.4); } }
@@ -146,7 +146,7 @@
 .pp2-pf__head p { margin: 12px auto 0; max-width: 60ch; font-size: 16px; line-height: 1.7; color: var(--color-ink-3); }
 /* แบนเนอร์โปสเตอร์ (รอบ 117 · อาร์ตเลือก B): ภาพเครื่องเต็มแบนเนอร์ · แถบไล่ส้มเตี้ยขอบล่าง (แบบเดียวกับการ์ด) · หัวข้อแถวเดียว */
 .pp2-pf__ban { position: relative; margin: 30px 0 0; overflow: hidden; border-radius: 24px; aspect-ratio: 16 / 8.4; background: #17130f; }
-.pp2-pf__ban > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 60% 32%; }
+.pp2-pf__ban > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--ban-pos, 60% 32%); }
 .pp2-pf__bt { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px 32px; padding: 96px 5% 30px; background: linear-gradient(180deg, rgb(240 90 0 / 0) 0%, rgb(240 90 0 / .82) 58%, #A33A00 100%); color: #fff; }
 .pp2-pf__bh { grid-column: 1 / -1; margin: 0; font-size: clamp(34px, 4.7vw, 70px); font-weight: 900; line-height: 1.1; letter-spacing: -.012em; white-space: nowrap; text-shadow: 0 4px 26px rgb(80 25 0 / .35); }
 .pp2-pf__bs { margin: 0; font-size: clamp(15px, 1.3vw, 19px); font-weight: 700; line-height: 1.5; color: #fff; text-shadow: 0 1px 10px rgb(80 25 0 / .3); }
@@ -160,6 +160,11 @@
 .pp2-pf__s { margin: 4px 0 0; font-size: clamp(14px, 1.1vw, 16px); font-weight: 700; line-height: 1.4; color: #fff; }
 @media (hover: hover) { .pp2-pf__step:hover img { transform: scale(1.04); } }
 @media (prefers-reduced-motion: reduce) { .pp2-pf__step img { transition: none; } }
+/* 13 พ.ย. หน้าปัก: แถบภาพเคลื่อนไหวจริงจากเครื่องปัก 4 ช่อง (pp2Proof loops) */
+.pp2-pf__lp { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.pp2-pf__lp li { position: relative; overflow: hidden; border-radius: 20px; background: #2a2622; aspect-ratio: 3 / 4; }
+.pp2-pf__lp video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pp2-pf__lpt { position: absolute; left: 12px; bottom: 12px; padding: 6px 12px; border-radius: 999px; background: rgb(23 19 15 / .78); font-size: 14px; font-weight: 700; color: #fff; pointer-events: none; }
 .pp2-pf__note { margin: 12px 0 0; font-size: 13px; color: #7a736c; text-align: right; }
 .pp2-pf__clips { margin-top: 36px; }
 .pp2-pf__ch { margin: 0 0 14px; font-size: 22px; font-weight: 800; color: var(--color-ink); }
@@ -196,7 +201,7 @@
   .pp2-pf__head h2 { font-size: 24px; line-height: 1.4; }
   .pp2-pf__head p { font-size: 15px; }
   .pp2-pf__ban { margin-top: 20px; border-radius: 20px; aspect-ratio: 4 / 5; }
-  .pp2-pf__ban > img { object-position: 38% 30%; }
+  .pp2-pf__ban > img { object-position: var(--ban-pos-m, 38% 30%); }
   .pp2-pf__bt { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 80px 20px 20px; }
   .pp2-pf__bh { font-size: 34px; white-space: normal; text-wrap: balance; }
   .pp2-pf__bs { font-size: 15px; }
@@ -215,6 +220,9 @@
   .pp2-pf__bc, .pp2-pf__bc--big, .pp2-pf__bc--wide { grid-column: auto; grid-row: auto; aspect-ratio: 4 / 3; scroll-snap-align: start; }
   .pp2-pf__bc .pp2-pf__t, .pp2-pf__bc--big .pp2-pf__t, .pp2-pf__bc--wide .pp2-pf__t { font-size: 22px; }
   .pp2-pf__bc--big .pp2-pf__band { padding: 40px 14px 13px; }
+  .pp2-pf__lp { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .pp2-pf__lp li { border-radius: 16px; }
+  .pp2-pf__lpt { left: 8px; bottom: 8px; font-size: 13px; }
   .pp2-pf__note { text-align: left; }
   .pp2-pf__clips { margin-top: 28px; }
   .pp2-pf__ch { font-size: 18px; }
@@ -235,6 +243,8 @@
   .up2-rv .up2-rv__wall > li { height: auto; }
   .up2-rv .up2-rv__wall > li:first-child, .up2-rv .up2-rv__wall > li:last-child { grid-column: 1 / -1; grid-row: span 2; }
   .up2-rv .up2-rv__wall > li:nth-last-child(2):nth-child(even) { grid-column: 1 / -1; grid-row: span 2; } /* 11 พ.ย. รูปรวมเลขคี่ (เช่นหน้าปัก 3 ใบ): รูปกลางใบสุดท้ายไม่เหลือเดี่ยวครึ่งแถว */
+  /* 13 พ.ย. ตรวจหน้าปัก: กำแพง 3 รูปเดิมเต็มแถวทุกรูป (สูง ~830px · สองรูปเป็นคนชุดเดียวกัน) → รูปแรกเต็มแถว อีกสองรูปคู่กัน */
+  .up2-rv .up2-rv__wall > li:first-child:nth-last-child(3) ~ li { grid-column: auto; grid-row: span 1; }
   .up2-rv .up2-rv__wall > li > button, .up2-rv .up2-rv__wall > li > figure { border-radius: 12px; }
 }
 
@@ -543,15 +553,15 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .pp2-sz__ln--h { top: 9%; bottom: 7%; right: 13%; width: 2px; }
 .pp2-sz__ln--h::before, .pp2-sz__ln--h::after { left: -6px; width: 14px; height: 2px; } .pp2-sz__ln--h::before { top: 0; } .pp2-sz__ln--h::after { bottom: 0; }
 .pp2-sz__bub { position: absolute; display: grid; justify-items: center; min-width: 78px; padding: 8px 12px 9px; border-radius: 18px; background: #17130f; color: #fff; box-shadow: 0 12px 24px -12px rgb(0 0 0 / .5); }
-.pp2-sz__bub small { font-size: 11.5px; font-weight: 700; opacity: .75; }
+.pp2-sz__bub small { font-size: 12px; font-weight: 700; opacity: .75; }
 .pp2-sz__bub b { font-size: 30px; font-weight: 900; line-height: 1.05; color: #FF8A33; font-variant-numeric: tabular-nums; }
-.pp2-sz__bub i { font-size: 11.5px; font-style: normal; font-weight: 700; }
+.pp2-sz__bub i { font-size: 12px; font-style: normal; font-weight: 700; }
 .pp2-sz__bub--w { left: 45.5%; top: 47%; translate: -50% -50%; }
 .pp2-sz__bub--h { right: 13%; top: 50%; translate: 50% -50%; }
 .pp2-sz__ctl { display: flex; flex-direction: column; gap: 18px; padding: 36px 40px; }
 .pp2-sz__segs { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
 .pp2-sz__seg { display: inline-flex; padding: 4px; border-radius: 999px; background: #F3EEE9; }
-.pp2-sz__seg button { min-height: 38px; padding: 0 18px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-size: 15px; font-weight: 800; color: var(--color-ink-3); cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+.pp2-sz__seg button { min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-size: 15px; font-weight: 800; color: var(--color-ink-3); cursor: pointer; transition: background-color .2s ease, color .2s ease; }
 .pp2-sz__seg button[aria-pressed="true"] { background: #17130f; color: #fff; }
 .pp2-sz__now { display: flex; align-items: baseline; gap: 12px; margin: 6px 0 0; }
 .pp2-sz__now span { font-size: 15px; font-weight: 700; color: var(--color-ink-3); }
@@ -563,7 +573,9 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .pp2-sz--even .pp2-sz__tables { grid-template-columns: minmax(0, 1fr); }
 .pp2-sz--even .pp2-sz__picks[data-g="kids"] { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 .pp2-sz--even .pp2-sz__t--kids { min-width: 620px; }
-.pp2-sz__t caption small { font-weight: 500; color: var(--color-ink-3); }
+.pp2-sz__t caption small { font-size: 12px; font-weight: 500; color: var(--color-ink-3); }
+/* 13 พ.ย. ป้ายบอกว่าตารางเลื่อนข้างได้ (เฉพาะมือถือ · ตารางกว้างกว่าจอ) */
+.pp2-sz__hint { display: none; margin: 14px 0 -10px; font-size: 13px; font-weight: 700; color: var(--color-ink-3); }
 .pp2-sz__pick { min-height: 46px; border: 1.5px solid #E6DED6; border-radius: 14px; background: #fff; font: inherit; font-size: 15px; font-weight: 900; color: var(--color-ink); cursor: pointer; transition: border-color .15s ease, background-color .15s ease, color .15s ease, translate .15s ease; }
 .pp2-sz__pick:hover { border-color: #FF6C00; }
 .pp2-sz__pick[aria-pressed="true"] { border-color: #FF6C00; background: #FF6C00; color: #17130f; }
@@ -617,11 +629,64 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
   .pp2-sz--even .pp2-sz__picks[data-g="kids"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .pp2-sz__how { grid-template-columns: minmax(0, 1fr); }
   .pp2-sz__tables { overflow-x: auto; margin-inline: -20px; padding-inline: 20px; }
+  .pp2-sz .pp2-sz__hint { display: flex; align-items: center; gap: 6px; }
   .pp2-sz__t { min-width: 620px; } .pp2-sz__t--kids { min-width: 360px; }
   .pp2-sz__os { grid-template-columns: minmax(0, 1fr); }
   .pp2-sz__o { height: 220px; }
 }
 @media (prefers-reduced-motion: reduce) { .pp2-sz__o img, .pp2-sz__pick, .pp2-sz__seg button { transition: none; } .pp2-sz__o:hover img { scale: none; } }
+/* ---------- ตารางไซซ์ v2 (หน้าปัก · 13 พ.ย. อาร์ต "ทำตรงนี้มาดีๆหน่อย") · pp2Sizes.hbs pp2.sizes.v2 ----------
+   ภาพเสื้อโปโลทีมดีแยกทรงชาย/หญิง · เส้นวัดวางตามขอบเสื้อจริง (พิกัด % ของภาพจาก pp-v2.json figs)
+   ป้ายวัดเป็นป้ายเล็กสีขาววางบนเส้น (แบบป้ายบอกขนาดในแบบตัดเย็บ) ไม่ใช่ก้อนดำทับเสื้อ · เลข 1/2 ตรงกับขั้นวิธีวัด */
+.pp2-sz--v2 .pp2-sz__stage { display: grid; place-items: center; padding: 44px 56px; }
+.pp2-sz__fig { width: 100%; max-width: 340px; }
+.pp2-sz__fig[hidden] { display: none; }
+.pp2-sz__box { position: relative; }
+.pp2-sz--v2 .pp2-sz__stage img { display: block; width: 100%; max-width: none; height: auto; margin: 0; filter: drop-shadow(0 22px 22px rgb(40 25 10 / .16)); }
+.pp2-sz--v2 .pp2-sz__ln--w { left: var(--cx1); right: calc(100% - var(--cx2)); top: var(--cy); bottom: auto; width: auto; height: 2px; }
+.pp2-sz--v2 .pp2-sz__ln--h { left: var(--hx); right: auto; top: var(--ly1); bottom: calc(100% - var(--ly2)); width: 2px; height: auto; }
+.pp2-sz__gd { position: absolute; left: var(--bx); width: calc(var(--hx) - var(--bx)); height: 0; border-top: 1.5px dashed rgb(255 108 0 / .7); }
+.pp2-sz__gd--t { top: var(--ly1); }
+.pp2-sz__gd--b { top: var(--ly2); }
+.pp2-sz__tag { position: absolute; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 5px; border: 1.5px solid #FF6C00; border-radius: 999px; background: #fff; white-space: nowrap; box-shadow: 0 8px 18px -12px rgb(60 30 5 / .55); translate: -50% -50%; }
+.pp2-sz__tag i { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #FF6C00; font-size: 13px; font-style: normal; font-weight: 900; color: #17130f; }
+.pp2-sz__tag small { font-size: 13px; font-weight: 700; color: var(--color-ink-3); }
+.pp2-sz__tag b { font-size: 20px; font-weight: 900; line-height: 1; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.pp2-sz__tag em { font-size: 13px; font-style: normal; font-weight: 700; color: var(--color-ink-3); }
+.pp2-sz__tag--w { left: calc((var(--cx1) + var(--cx2)) / 2); top: var(--cy); }
+.pp2-sz__tag--h { left: var(--hx); top: 74%; }
+/* ฝั่งควบคุม: ชื่อไซซ์ + ตัวเลขของไซซ์นั้น */
+.pp2-sz--v2 .pp2-sz__now { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin: 6px 0 0; }
+.pp2-sz__nm { display: flex; align-items: baseline; gap: 12px; margin: 0; }
+.pp2-sz__nm span { font-size: 15px; font-weight: 700; color: var(--color-ink-3); }
+.pp2-sz__nm b { font-size: 64px; font-weight: 900; line-height: 1; letter-spacing: -.02em; color: var(--color-ink); }
+.pp2-sz__rd { display: flex; gap: 10px; margin: 0; }
+.pp2-sz__rd > div { min-width: 112px; padding: 10px 14px 11px; border-radius: 16px; background: #FBF7F2; }
+.pp2-sz__rd dt { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; color: var(--color-ink-3); }
+.pp2-sz__rd dt i { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: #FF6C00; font-size: 12px; font-style: normal; font-weight: 900; color: #17130f; }
+.pp2-sz__rd dd { margin: 4px 0 0; font-size: 14px; font-weight: 700; color: var(--color-ink-3); }
+.pp2-sz__rd dd b { font-size: 26px; font-weight: 900; line-height: 1; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.pp2-sz--v2 .pp2-sz__how li::before { background: #FF6C00; color: #17130f; }
+/* ตาราง: สองตารางคอลัมน์ตรงกัน · ช่องไซซ์ที่ไม่มีทรงหญิง = พื้นจาง · กดช่องเลือกไซซ์ได้ */
+.pp2-sz--v2 .pp2-sz__t { table-layout: fixed; }
+.pp2-sz--v2 .pp2-sz__t thead td:first-child, .pp2-sz--v2 .pp2-sz__t tbody th { width: 96px; }
+.pp2-sz--v2 .pp2-sz__t [data-c] { cursor: pointer; }
+.pp2-sz__na { background: #FAF8F5; }
+@media (hover: hover) { .pp2-sz--v2 .pp2-sz__t td[data-c]:hover, .pp2-sz--v2 .pp2-sz__t th[data-c]:hover { background: #FFF6EE; } }
+@media (max-width: 1099px) { .pp2-sz__fig { max-width: 300px; } }
+@media (max-width: 767px) {
+  .pp2-sz--v2 .pp2-sz__stage { padding: 30px 28px 26px; }
+  .pp2-sz__fig { max-width: 250px; }
+  .pp2-sz__tag { gap: 4px; padding: 3px 9px 3px 3px; }
+  .pp2-sz__tag i { width: 20px; height: 20px; font-size: 12px; }
+  .pp2-sz__tag small, .pp2-sz__tag em { font-size: 12px; }
+  .pp2-sz__tag b { font-size: 17px; }
+  .pp2-sz__nm b { font-size: 48px; }
+  .pp2-sz__rd { width: 100%; }
+  .pp2-sz__rd > div { flex: 1; min-width: 0; }
+  .pp2-sz--v2 .pp2-sz__t { min-width: 760px; }
+  .pp2-sz--v2 .pp2-sz__t thead td:first-child, .pp2-sz--v2 .pp2-sz__t tbody th { width: 76px; }
+}
 
 /* ===== เสื้อจริงใส่หุ่น · รอบ 135 (pp2Real.hbs) =====
    กริด 4×2 รูปถ่ายตัวจริง 3:4 · ป้าย "เสื้อจริง" ดำ · แบบ 3D ก่อนผลิตเป็นภาพเล็กมุมขวาล่าง (ชี้ = ขยาย) · กด = ดูภาพใหญ่ */
@@ -705,7 +770,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .pp2-stb__tix::before { top: 12px; } .pp2-stb__tix::after { bottom: 12px; }
 .pp2-stb__tix > img { flex: none; width: 52px; height: 52px; }
 .pp2-stb__tt { display: grid; gap: 2px; }
-.pp2-stb__tix small { font-size: 11.5px; font-weight: 800; letter-spacing: .06em; color: rgb(255 255 255 / .65); }
+.pp2-stb__tix small { font-size: 12px; font-weight: 800; letter-spacing: .06em; color: rgb(255 255 255 / .65); }
 .pp2-stb__tix b { font-size: 19px; font-weight: 900; color: #FF8A33; }
 .pp2-stb__tix span { font-size: 13px; line-height: 1.45; color: rgb(255 255 255 / .85); }
 .pp2-stb__fin { position: relative; margin: 40px 0 0; overflow: hidden; border-radius: 30px; background: #E9E2DA; }
@@ -730,7 +795,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
   .pp2-stb__tix { position: relative; left: auto; top: auto; translate: none; min-width: 0; width: 90%; padding: 12px 18px 12px 26px; }
   .pp2-stb__tix > img { width: 42px; height: 42px; }
   .pp2-stb__map { gap: 10px; } .pp2-stb__map ol { gap: 6px; } .pp2-stb__map li + li::before { display: none; }
-  .pp2-stb__map a { padding: 4px 10px 4px 4px; font-size: 13px; } .pp2-stb__map a img { width: 28px; height: 28px; }
+  .pp2-stb__map a { min-height: 44px; padding: 4px 12px 4px 6px; font-size: 13px; } .pp2-stb__map a img { width: 28px; height: 28px; }
   .pp2-stb__ico { width: 64px; height: 64px; }
   .pp2-stb__time { right: 10px; bottom: 10px; font-size: 12.5px; } .pp2-stb__s:nth-of-type(even) .pp2-stb__time { left: auto; right: 10px; }
   .pp2-stb__fin { border-radius: 22px; }
@@ -979,7 +1044,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
 
 /* ───── 11 พ.ย. 2026 หน้างานปัก: ผ้า + สี + ราคา แผงเดียว (pp2PoloFabric.hbs · polo-fabric.js) ───── */
 .pf2 { padding: 80px 0; background: #fff; }
-.pf2__head { max-width: 760px; }
+.pf2__head { max-width: none; text-align: center; }
 .pf2__head h2 { margin: 0; font-size: clamp(30px, 3.6vw, 48px); font-weight: 900; line-height: 1.2; color: var(--color-ink); text-wrap: balance; }
 .pf2__head h2 .hm-hl { color: #F05A00; }
 .pf2__head p { margin: 10px 0 0; font-size: 17px; line-height: 1.6; color: var(--color-ink-3); }
@@ -996,7 +1061,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
 .pf2__sw { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 10px 6px; margin: 12px 0 0; padding: 0; list-style: none; }
 .pf2__c { display: grid; justify-items: center; gap: 5px; width: 100%; padding: 4px 0; border: 0; background: none; cursor: pointer; font: inherit; color: var(--color-ink); }
 .pf2__dot { width: 40px; height: 40px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgb(0 0 0 / .14), 0 0 0 0 transparent; transition: box-shadow .18s ease, transform .18s ease; }
-.pf2__code { max-width: 100%; font-size: 11.5px; font-weight: 600; line-height: 1.2; text-align: center; letter-spacing: .01em; color: var(--color-ink-3); overflow-wrap: anywhere; }
+.pf2__code { max-width: 100%; font-size: 12px; font-weight: 600; line-height: 1.2; text-align: center; letter-spacing: .01em; color: var(--color-ink-3); overflow-wrap: anywhere; }
 .pf2__c[aria-pressed="true"] .pf2__dot { box-shadow: inset 0 0 0 1px rgb(0 0 0 / .14), 0 0 0 3px #fff, 0 0 0 5px #F05A00; }
 .pf2__c[aria-pressed="true"] .pf2__code { font-weight: 800; color: var(--color-ink); }
 @media (hover: hover) { .pf2__c:hover .pf2__dot { transform: scale(1.08); } }
@@ -1009,7 +1074,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
 .pf4 { --sel: #FFF2E6; --rule: #f1e6da; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px; align-items: stretch; margin-top: 28px; }
 .pf4__board, .pf4__detail { overflow: hidden; border: 1px solid #eee3d7; border-radius: 26px; background: #fff; box-shadow: 0 1px 2px rgb(40 20 0 / .04), 0 26px 52px -40px rgb(60 30 5 / .55); }
 .pf4__board { display: flex; flex-direction: column; }
-.pf4__qty { display: none; }
+.pf4__t thead th .pf4__sh { display: none; }
 .pf4__tw { flex: 1; overflow-x: auto; }
 .pf4__tw:focus-visible { outline: 3px solid var(--color-ink); outline-offset: -3px; }
 .pf4__t { width: 100%; height: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; font-variant-numeric: tabular-nums; }
@@ -1067,7 +1132,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
 .pf4 .pf2__picked:empty { display: none; }
 .pf4 .pf2__sw { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 4px 2px; margin-top: 8px; }
 .pf4 .pf2__dot { width: 28px; height: 28px; }
-.pf4 .pf2__code { font-size: 10.5px; white-space: nowrap; letter-spacing: -.01em; } /* รหัสยาว (BLG335 D) อยู่บรรทัดเดียว ทุกผ้าสูงแถวเท่ากัน */
+.pf4 .pf2__code { font-size: 12px; white-space: nowrap; letter-spacing: -.02em; } /* รหัสยาว (BLG335 D) อยู่บรรทัดเดียว ทุกผ้าสูงแถวเท่ากัน */
 .pf4 .pf2__c--base .pf2__dot { box-shadow: inset 0 0 0 1px rgb(0 0 0 / .14), 0 4px 0 -2px #fff, 0 5px 0 -2px #7A2E00; }
 .pf4__base { display: flex; align-items: center; gap: 6px; margin: 6px 0 0; font-size: 12px; color: var(--color-ink-3); }
 .pf4__base i { width: 14px; height: 2px; border-radius: 2px; background: #7A2E00; }
@@ -1088,26 +1153,25 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
   .pf2 { padding: 56px 0; }
   .pf4 { gap: 14px; margin-top: 22px; }
   .pf4__board, .pf4__detail { border-radius: 20px; }
-  .pf4__qty { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 14px 14px 12px; border-bottom: 1px solid #eadccd; background: #FBF7F2; }
-  .pf4__qty span { width: 100%; margin-bottom: 2px; font-size: 14px; font-weight: 800; color: var(--color-ink); }
-  .pf4__q { flex: 1 1 28%; min-height: 40px; padding: 0 6px; border: 1.5px solid #e2d4c5; border-radius: 10px; background: #fff; cursor: pointer; font: inherit; font-size: 14px; font-weight: 700; color: var(--color-ink); font-variant-numeric: tabular-nums; }
-  .pf4__q[aria-pressed="true"] { border-color: var(--color-ink); background: var(--color-ink); color: #fff; }
-  .pf4__q:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
-  .pf2.is-js .pf4__t [data-b]:not(.is-band) { display: none; }
-  .pf4__t { table-layout: auto; } /* มือถือ: เหลือคอลัมน์ราคาเดียว ให้ตารางวัดความกว้างจากเซลล์ที่เห็นจริง */
-  .pf4__c0 { width: auto; }
-  .pf4__t td, .pf4__t thead th[data-b] { width: 92px; padding-right: 16px; text-align: right; }
-  .pf4 .pf4__t thead th { padding-block: 10px; }
+  /* 13 พ.ย. ตรวจทั้งหน้า (show, don't hide): มือถือเห็นครบ 6 ผ้า × 6 ช่วงจำนวน ไม่มีชิปเลือกช่วง · ชื่อผ้าอย่างเดียว (ซ่อนรูปผ้าเล็ก) · หัวคอลัมน์ใช้ป้ายย่อ */
+  .pf4__t { table-layout: fixed; }
+  .pf4__c0 { width: 27%; }
+  .pf4 .pf4__t thead th { padding: 10px 0; font-size: 12.5px; letter-spacing: -.01em; }
+  .pf4 .pf4__t thead th.pf4__corner { padding-left: 12px; }
   .pf4__corner span { display: none !important; }
-  .pf4__t td { font-size: 20px; }
+  .pf4__lg { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .pf4 .pf4__t thead th .pf4__sh { display: block; margin: 0; font-size: 12.5px; font-weight: 800; color: var(--color-ink); }
+  .pf4__t tbody th { padding: 4px 2px 4px 6px; }
+  .pf4__t td { padding: 4px 0; font-size: 15px; }
+  .pf4__f { min-height: 48px; padding: 4px 4px 4px 6px; }
+  .pf4__f img { display: none; }
+  .pf4__f b { font-size: 13.5px; line-height: 1.25; }
   .pf4__foot { padding: 14px 14px 16px; }
   .pf4__foot { flex-wrap: wrap; }
   .pf4__foot ul { grid-template-columns: minmax(0, 1fr); gap: 5px; }
   .pf4__foot .cb { width: 100%; justify-content: center; }
   .pf4__hero { height: 210px; }
   .pf4__hero h3 { font-size: 28px; }
-  .pf4__f img { width: 76px; height: 50px; }
-  .pf4__f b { font-size: 15.5px; }
   .pf4__body { display: flex; padding: 14px 14px 16px; }
   .pf4__body > .pf2__colors { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgb(120 60 10 / .14); }
 }
@@ -1115,76 +1179,295 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
   .pf2__spec > div { grid-template-columns: minmax(0, 1fr); gap: 2px; padding: 9px 0; } /* 11 พ.ย. จอแคบ: หัวข้อบน ค่าล่าง (ช่องค่าเดิมแคบจนตัดหลายบรรทัด) */
 }
 
+/* Fabric comparison: fabric → colour → quote. */
+.pf4 { margin-top: 18px; align-items: stretch; }
+.pf4__board, .pf4__detail { border-color: #e8e3dd; box-shadow: none; border-radius: 20px; }
+.pf4__detail { contain: none; background: #fff; }
+.pf4__t { height: 100%; }
+.pf4__t thead th { background: #faf9f7; }
+.pf4__t tbody th, .pf4__t td { padding-block: 10px; }
+.pf4__f img { width: 70px; height: 52px; }
+.pf4__f { gap: 10px; }
+.pf4__t tbody tr.is-sel > *, .pf4__t tbody tr.is-sel:hover > * { background: #fffaf5; }
+.pf4__foot { padding: 18px 22px; background: #faf9f7; }
+.pf4__foot ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pf4__hero { flex: none; height: 150px; min-height: 0; }
+.pf4__hero img { animation: none; }
+.pf4__hero h3 { font-size: 28px; }
+.pf4__hero p { padding: 0; background: none; color: #fff; font-weight: 500; margin-top: 6px; }
+.pf4__hero figcaption { bottom: 20px; }
+.pf4__body { display: flex; padding: 16px 22px; }
+.pf4__chips { gap: 4px 12px; }
+.pf4__chips li { padding: 0; box-shadow: none; border-radius: 0; font-weight: 600; font-size: 14px; }
+.pf4__chips li + li { border-left: 1px solid #d8d2cb; padding-left: 12px; }
+.pf4__use { gap: 2px 8px; margin-top: 8px; }
+.pf4__use i { padding: 0; background: none; color: #655f58; font-weight: 400; }
+.pf4__tip { margin-top: 8px; }
+.pf4 .pf2__colors { width: 100%; margin-top: 16px; padding-top: 14px; border-top: 1px solid #e8e3dd; }
+.pf4 .pf2__picked { min-height: 20px; margin-top: 5px; color: #655f58; }
+.pf4 .pf2__sw { grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 5px 3px; }
+.pf4 .pf2__c { min-height: 48px; grid-template-rows: 28px 15px; gap: 2px; padding: 2px 0; border-radius: 7px; }
+.pf4 .pf2__c[aria-pressed="true"] { background: #fff1e4; outline: 2px solid #d35400; outline-offset: -2px; }
+.pf4 .pf2__c[aria-pressed="true"] .pf2__dot::after { content: "✓"; position: absolute; right: -5px; top: -5px; display: grid; place-items: center; width: 16px; height: 16px; background: #171717; color: white; border-radius: 50%; font-size: 11px; box-shadow: 0 0 0 2px white; }
+.pf4 .pf2__dot { position: relative; }
+.pf4__quote { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding: 14px 18px; border-radius: 12px; background: #171717; color: #fff; text-decoration: none; font-size: 16px; font-weight: 800; }
+.pf4__quote:hover { background: #333; color: white; }
+.pf4__quote:focus-visible { outline: 3px solid #ed6500; outline-offset: 3px; }
+.pf4__quote[aria-disabled="true"] { opacity: .5; cursor: default; }
+.pf4__ask { gap: 5px; flex-direction: column; align-items: start; padding-top: 12px; }
+.pf4__ask .pp-more { font-size: 14px; margin-top: 0; }
+.pf4__ask small { line-height: 1.4; }
+@media (max-width: 767px) {
+  .pf4__t tbody th, .pf4__t td { padding-block: 5px; }
+  .pf4__foot { padding: 14px; }
+  .pf4__foot ul { gap: 8px 12px; }
+  .pf4__foot li { font-size: 12px; padding-left: 20px; }
+  .pf4__body { padding: 18px; }
+  .pf4__hero { height: 175px; }
+  .pf4__f b { font-size: 12px; min-width: 0; overflow-wrap: anywhere; }
+  .pf4__f b .inline-block { white-space: normal; }
+  .pf4 .pf4__t thead th .pf4__sh { font-size: 10.5px; }
+  .pf4__t td { font-size: 14px; }
+}
+
+/* Independent fabric cards: tactile image, legible prices, optional colour palette. */
+.pf5__terms { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 28px 0 32px; padding: 18px 8px; list-style: none; background: #faf8f4; border-radius: 18px; text-align: left; }
+.pf5__terms li { display: flex; align-items: center; justify-content: center; gap: 12px; min-width: 0; padding: 0 14px; }
+.pf5__terms li + li { border-left: 1px solid #e8e2d9; }
+.pf5__terms img { display: block; flex: none; width: 64px; height: 64px; object-fit: contain; }
+.pf5__terms strong { display: block; color: #252520; font-size: 16px; font-weight: 750; line-height: 1.45; text-wrap: balance; }
+.pf5__terms span { display: block; margin-top: 4px; color: #625c56; font-size: 12px; line-height: 1.5; text-wrap: balance; }
+.pf4.pf5 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+.pf5__card { display: flex; flex-direction: column; height: auto; min-width: 0; overflow: hidden; border: 1px solid #e5e1da; border-radius: 24px; background: #fff; scroll-margin-top: 100px; }
+.pf5__card + .pf5__card { border-top: 1px solid #e5e1da; }
+.pf5 .pf4__hero { display: grid; grid-template-columns: 46% minmax(0, 1fr); gap: 24px; align-items: center; height: auto; min-height: 0; margin: 22px 22px 0; overflow: visible; background: none; }
+.pf5 .pf4__hero::after { display: none; }
+.pf5 .pf4__hero img { position: static; width: 100%; height: 224px; object-fit: cover; border-radius: 16px; animation: none; }
+.pf5 .pf4__hero figcaption { position: static; color: #20211e; }
+.pf5 .pf4__hero figcaption > span { margin: 0 0 10px; color: #74716b; font-size: 11px; font-weight: 600; letter-spacing: .09em; }
+.pf5 .pf4__hero h3 { color: #20211e; font-size: clamp(24px, 2.2vw, 32px); font-weight: 800; line-height: 1.3; text-shadow: none; }
+.pf5 .pf4__hero p { display: block; margin: 8px 0 0; padding: 0; color: #a84608; font-size: 15px; font-weight: 600; background: none; }
+.pf5 .pf4__hero small { display: block; margin-top: 14px; color: #68635d; font-size: 13px; line-height: 1.6; }
+.pf5 .pf4__body { display: flex; padding: 22px; }
+.pf5__info { min-height: 0; }
+.pf5__composition { margin: 0; font-size: 14px; font-weight: 700; color: #33332e; }
+.pf5__uses { margin-top: 20px; }
+.pf5__uses > p { margin: 0 0 12px; color: #4f4b45; font-size: 13px; font-weight: 600; }
+.pf5__uses ul { display: grid; grid-template-columns: repeat(var(--use-count), minmax(0, 1fr)); gap: 12px; margin: 0; padding: 20px 12px 16px; list-style: none; background: #faf8f4; border-radius: 16px; }
+.pf5__uses li { display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 0; color: #37352f; font-size: 13px; font-weight: 600; line-height: 1.5; text-align: center; }
+.pf5__uses img { display: block; flex: none; width: 112px; max-width: 100%; height: 112px; object-fit: contain; }
+.pf5__uses li > span { display: block; min-height: 3em; text-wrap: balance; }
+.pf5 .pf4__tip { margin-top: 8px; padding-left: 0; font-size: 12px; line-height: 1.6; color: #77716b; }
+.pf5 .pf4__tip::before { display: none; }
+.pf5__prices { margin-top: 18px; border-top: 1px solid #e8e3dd; padding-top: 14px; }
+.pf5__prices table { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; font-variant-numeric: tabular-nums; }
+.pf5__prices caption { padding: 0 0 14px; text-align: left; font-size: 14px; font-weight: 700; color: #242420; }
+.pf5__prices caption span { float: right; color: #78726c; font-size: 12px; font-weight: 400; }
+.pf5__prices th { padding: 10px 2px 2px; font-size: 12px; font-weight: 500; color: #6c6760; text-align: center; background: #f8f6f2; line-height: 1.4; }
+.pf5__prices th span { display: block; font-size: 12px; font-weight: 400; }
+.pf5__prices td { padding: 4px 2px 12px; font-size: 25px; font-weight: 800; color: #23231f; text-align: center; background: #f8f6f2; line-height: 1.3; }
+.pf5__prices th:first-child { border-top-left-radius: 10px; }
+.pf5__prices th:last-child { border-top-right-radius: 10px; }
+.pf5__prices td:first-child { border-bottom-left-radius: 10px; }
+.pf5__prices td:last-child { border-bottom-right-radius: 10px; }
+.pf5__prices th + th, .pf5__prices td + td { border-left: 2px solid white; }
+.pf5 .pf2__colors { margin-top: 18px; padding-top: 0; border: 0; }
+.pf5__color-picker { border: 1px solid #e5e1da; border-radius: 12px; padding: 0 14px; }
+.pf5__color-picker summary { display: flex; align-items: center; gap: 14px; min-height: 64px; cursor: pointer; list-style: none; color: #272823; font-size: 14px; font-weight: 700; }
+.pf5__color-picker summary::-webkit-details-marker { display: none; }
+.pf5__color-label { display: flex; flex: 1; align-items: baseline; gap: 8px; }
+.pf5__color-picker summary small { color: #746e66; font-size: 12px; font-weight: 400; }
+.pf5__palette { display: flex; padding-left: 5px; }
+.pf5__palette i { display: block; width: 21px; height: 21px; flex: none; margin-left: -5px; background: var(--swatch); border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 1px rgb(0 0 0 / .06); }
+.pf5__palette i:nth-child(n+5) { display: none; }
+.pf5__color-picker summary:focus-visible { outline: 2px solid #ed6500; outline-offset: 3px; border-radius: 4px; }
+.pf5__color-chevron { position: relative; flex: none; width: 26px; height: 26px; border-radius: 50%; background: #f5f2ec; }
+.pf5__color-chevron::before, .pf5__color-chevron::after { content: ""; position: absolute; width: 10px; height: 1.5px; background: #252521; top: 12px; left: 8px; }
+.pf5__color-chevron::after { transform: rotate(90deg); transition: transform .18s; }
+.pf5__color-hide, .pf5__color-picker[open] .pf5__color-show { display: none; }
+.pf5__color-picker[open] .pf5__color-hide { display: inline; }
+.pf5__color-picker[open] .pf5__color-chevron::after { transform: rotate(0); }
+.pf5 .pf2__sw { grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 10px 4px; margin: 0; padding: 16px 0; border-top: 1px solid #eee9e1; }
+.pf5 .pf2__c { width: 100%; min-height: 58px; grid-template-rows: 30px 16px; gap: 6px; padding: 4px 0; }
+.pf5 .pf2__dot { width: 30px; height: 30px; }
+.pf5__color-note { margin: 0 0 14px; font-size: 12px; color: #77716b; }
+.pf5 .pf4__base { margin: 0 0 8px; }
+.pf5 .pf2__picked { margin: 10px 0 0; font-size: 12px; color: #a84608; }
+.pf5__actions { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 18px; margin-top: 20px; }
+.pf5 .pf4__quote { min-height: 52px; margin: 0; padding: 12px 16px; border-radius: 999px; font-size: 14px; font-weight: 700; background: #22231f; }
+.pf5 .pf4__quote:hover { background: #3d3f36; }
+.pf5 .pf4__ask { gap: 3px; margin: 0; padding: 0; align-items: center; }
+.pf5 .pf4__ask .pp-more { font-size: 14px; }
+.pf5 .pf4__ask small { font-size: 11px; }
+@media (max-width: 1100px) { .pf4.pf5 { grid-template-columns: minmax(0, 1fr); } .pf5__info { min-height: 0; } }
+@media (max-width: 767px) {
+ .pf4.pf5 { gap: 20px; }
+ .pf5__card { border-radius: 18px; }
+ .pf5 .pf4__hero { margin: 14px 14px 0; gap: 16px; grid-template-columns: 42% minmax(0, 1fr); }
+ .pf5 .pf4__hero img { height: 174px; border-radius: 12px; }
+ .pf5 .pf4__hero h3 { font-size: 23px; }
+ .pf5 .pf4__hero figcaption > span { font-size: 9px; margin-bottom: 6px; }
+ .pf5 .pf4__hero p { font-size: 13px; margin-top: 5px; }
+ .pf5 .pf4__hero small { font-size: 11px; margin-top: 8px; }
+ .pf5 .pf4__body { padding: 16px 14px; }
+ .pf5__uses ul { grid-template-columns: repeat(var(--use-count), minmax(0, 1fr)); gap: 12px; padding: 18px 10px 12px; }
+ .pf5__uses li { gap: 8px; font-size: 12px; }
+ .pf5__uses img { width: 84px; height: 84px; }
+ .pf5__uses li > span { min-height: 0; }
+ .pf5__prices th { font-size: 12px; letter-spacing: -.01em; overflow-wrap: anywhere; }
+ .pf5__prices td { font-size: 21px; }
+ .pf5__terms { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 0; margin: 24px 0 28px; padding: 18px 6px; border-radius: 16px; }
+ .pf5__terms li { justify-content: flex-start; gap: 8px; padding: 0 6px; }
+ .pf5__terms li:nth-child(odd) { border-left: 0; }
+ .pf5__terms img { width: 44px; height: 44px; }
+ .pf5__terms strong { font-size: 13px; }
+ .pf5__terms span { font-size: 11px; }
+ .pf5__color-label { gap: 5px; }
+ .pf5__color-picker summary { gap: 10px; }
+ .pf5__actions { gap: 12px; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+ .pf5 .pf4__quote { font-size: 13px; padding-inline: 12px; }
+ .pf5 .pf4__ask .pp-more { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { .pf5__color-chevron::after { transition: none; } }
+
 /* ───── 11 พ.ย. 2026 หน้างานปัก: แบบมาตรฐาน + ตัวเลือกจากงานลูกค้าจริง (pp2PoloSpec.hbs) ───── */
 .ps2 { padding: 88px 0 72px; background: #F7F4F0; }
-.ps2__head { display: grid; gap: 10px; max-width: 820px; }
-.ps2__head h2 { margin: 0; font-size: clamp(30px, 3.8vw, 52px); font-weight: 900; line-height: 1.12; letter-spacing: -.01em; color: var(--color-ink); text-wrap: balance; }
+.ps2__head { display: grid; gap: 14px; text-align: center; }
+.ps2__head h2 { margin: 0; font-size: clamp(30px, 3.8vw, 52px); font-weight: 900; line-height: 1.2; letter-spacing: -.01em; color: var(--color-ink); text-wrap: balance; }
 .ps2__head h2 .hm-hl { color: #F05A00; }
-.ps2__head p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--color-ink-3); }
-.ps2__std { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 40px; align-items: center; margin-top: 32px; padding: 28px; border-radius: 24px; background: #fff; }
-.ps2__img { margin: 0; overflow: hidden; border-radius: 16px; background: #fbf6f1; }
+.ps2__head p { max-width: 780px; margin: 0 auto; font-size: 16px; line-height: 1.7; color: var(--color-ink-3); text-wrap: pretty; }
+.ps2__std { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 32px; align-items: center; margin-top: 32px; padding: 24px; border: 1px solid #ebe5de; border-radius: 24px; background: #fff; }
+.ps2__img { margin: 0; overflow: hidden; border-radius: 16px; background: #fff; }
 .ps2__img img { display: block; width: 100%; height: auto; }
-.ps2__lh { margin: 0; font-size: 22px; font-weight: 900; color: var(--color-ink); }
-.ps2__spec { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; margin: 14px 0 0; padding: 0; list-style: none; counter-reset: none; }
-.ps2__si { display: grid; gap: 3px; padding: 14px 0 14px 30px; border-top: 1px solid #ece5dd; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F05A00' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") 0 16px / 20px no-repeat; }
-.ps2__si b { font-size: 16.5px; font-weight: 800; color: var(--color-ink); }
-.ps2__si span { font-size: 14.5px; line-height: 1.5; color: var(--color-ink-3); }
-.ps2__si--logo { grid-column: 1 / -1; } /* ปักโลโก้ฟรี = ข้อหลัก กว้างเต็มแถว */
-.ps2__si--logo b { font-size: 20px; }
-.ps2__min { margin: 16px 0 4px; font-size: 14.5px; color: var(--color-ink-3); }
+.ps2__list { min-width: 0; }
+.ps2__list-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding-bottom: 18px; border-bottom: 1px solid #e8e2da; }
+.ps2__lh { margin: 0; font-size: 20px; font-weight: 800; color: var(--color-ink); }
+.ps2__min { margin: 0; padding: 5px 10px; border-radius: 999px; background: #f7f4ef; font-size: 12px; font-weight: 600; color: #625c56; white-space: nowrap; }
+.ps2__spec { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; margin: 0; padding: 0; list-style: none; }
+.ps2__si { display: grid; grid-template-columns: 64px minmax(0, 1fr); align-items: center; gap: 12px; padding: 20px 0; border-bottom: 1px solid #eee9e3; }
+.ps2__visual { display: grid; place-items: center; width: 64px; height: 72px; }
+.ps2__visual img { display: block; width: 64px; height: 64px; object-fit: contain; }
+.ps2__visual--detail img { object-fit: cover; border-radius: 12px; }
+.ps2__measure { display: block; color: #b74a08; font-size: 34px; font-weight: 800; line-height: 1; text-align: center; }
+.ps2__measure small { display: block; margin-top: 5px; color: #766b60; font-size: 12px; font-weight: 500; }
+.ps2__copy b { display: block; font-size: 16px; font-weight: 750; line-height: 1.45; color: var(--color-ink); text-wrap: pretty; }
+.ps2__copy > span { display: block; margin-top: 5px; font-size: 13px; line-height: 1.6; color: var(--color-ink-3); text-wrap: pretty; }
+.ps2__next { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; color: #33332e; font-size: 14px; font-weight: 650; text-decoration: none; }
+.ps2__next > span { display: grid; place-items: center; width: 30px; height: 30px; flex: none; border-radius: 50%; background: #fff0e5; color: #a84400; font-size: 18px; }
+.ps2__next:hover { color: #a84400; }
+.ps2__next:focus-visible { outline: 2px solid #a84400; outline-offset: 5px; }
 .ps2__oh { margin: 48px 0 0; font-size: 24px; font-weight: 900; color: var(--color-ink); }
 .ps2__op { margin: 6px 0 0; font-size: 16px; color: var(--color-ink-3); }
-@media (max-width: 1023px) { .ps2__std { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 18px; } }
-@media (max-width: 767px) { .ps2 { padding: 56px 0; } .ps2__spec { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1023px) { .ps2__std { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 20px; } .ps2__img { width: min(100%, 520px); justify-self: center; } }
+@media (max-width: 767px) {
+ .ps2 { padding: 56px 0; }
+ .ps2__std { gap: 20px; padding: 16px; border-radius: 18px; }
+ .ps2__head p { font-size: 14px; }
+ .ps2__lh { font-size: 18px; }
+ .ps2__spec { grid-template-columns: minmax(0, 1fr); }
+ .ps2__si { grid-template-columns: 56px minmax(0, 1fr); gap: 14px; padding: 14px 0; }
+ .ps2__visual { width: 56px; height: 56px; }
+ .ps2__visual img { width: 56px; height: 56px; }
+ .ps2__copy b { font-size: 15px; }
+ .ps2__copy > span { font-size: 12px; }
+ .ps2__measure { font-size: 30px; }
+ .ps2__next { font-size: 13px; }
+}
 /* 12 พ.ย. รอบ 213 หน้างานปัก (pp2PoloSpec.hbs): ตำแหน่งปัก = ผัง + รายการสั้น · รายละเอียดเสื้อ 28 แบบเห็นครบ ไม่มีแท็บ
    จอใหญ่ แถวละกลุ่ม: หัวกลุ่มซ้าย ภาพ 6 ช่องขวา · มือถือ หัวกลุ่มบน ภาพเป็นรางปัดข้าง (เห็นใบถัดไปโผล่ = รู้ว่าปัดได้) */
-.ps2__pos { margin-top: 48px; }
-.ps2__pgrid { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 20px; padding: 24px; border-radius: 24px; background: #fff; }
-.ps2__map { margin: 0; overflow: hidden; border-radius: 16px; background: #f4f4f4; }
+.ps2__pos { margin-top: 64px; scroll-margin-top: 100px; }
+.ps2__pos > .ps2__oh { margin-top: 0; font-size: clamp(26px, 2.8vw, 36px); text-align: center; }
+.ps2__pos > .ps2__op { margin-top: 10px; text-align: center; }
+.ps2__pgrid { display: grid; grid-template-columns: 208px minmax(0, 1fr); gap: 32px; align-items: start; margin-top: 28px; padding: 28px; border: 1px solid #ebe5de; border-radius: 24px; background: #fff; }
+.ps2__map { margin: 0; overflow: hidden; border-radius: 16px; background: #f7f7f7; }
 .ps2__map img { display: block; width: 100%; height: auto; }
-.ps2__spots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 16px; margin: 0; padding: 0; list-style: none; }
-.ps2__spots li { position: relative; display: grid; align-content: start; gap: 2px; }
-.ps2__spi { display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 12px; background: #111; }
+.ps2__map figcaption { padding: 12px 8px 16px; font-size: 12px; line-height: 1.5; color: #6f6a62; text-align: center; }
+.ps2__spots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; margin: 0; padding: 0; list-style: none; }
+.ps2__spots li { display: flex; flex-direction: column; min-width: 0; }
+.ps2__spi { display: block; aspect-ratio: 334 / 207; flex: none; overflow: hidden; border-radius: 12px; background: #f5f3f0; }
 .ps2__spi img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.ps2__spn { position: absolute; top: 8px; left: 8px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #FF6C00; font-size: 13px; font-weight: 900; color: #000; }
-.ps2__spots b { margin-top: 8px; font-size: 16px; font-weight: 800; line-height: 1.35; color: var(--color-ink); }
-.ps2__sps { font-size: 14px; line-height: 1.5; color: var(--color-ink-3); }
-.ps2__gnote { margin: 14px 0 0; padding-left: 14px; border-left: 3px solid #FF6C00; font-size: 14.5px; line-height: 1.6; color: var(--color-ink-2); }
-.ps2__parts { margin-top: 48px; }
-.ps2__groups { margin-top: 18px; padding: 8px 28px; border-radius: 24px; background: #fff; }
-.ps2__grp { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 22px 0; }
-.ps2__grp + .ps2__grp { border-top: 1px solid #ece5dd; }
-.ps2__gh h4 { margin: 0; font-size: 20px; font-weight: 900; line-height: 1.25; color: var(--color-ink); }
-.ps2__gh h4 span { display: block; margin-top: 2px; font-size: 14px; font-weight: 700; color: var(--color-ink-3); }
-.ps2__gh p { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--color-ink-2); }
-.ps2__pr { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
-.ps2__pi { display: grid; align-content: start; gap: 8px; }
-.ps2__pim { display: block; aspect-ratio: 335 / 300; overflow: hidden; border-radius: 12px; background: #eef1f5; }
+.ps2__spot-title { display: flex; align-items: baseline; gap: 9px; margin-top: 13px; }
+.ps2__spn { flex: none; color: #b74700; font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.ps2__spot-title b { font-size: 16px; font-weight: 750; line-height: 1.4; color: #24241f; }
+.ps2__spot-size { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 8px; margin: 7px 0 0; }
+.ps2__spot-size > span { font-size: 12px; color: #747067; }
+.ps2__spot-size strong { color: #24241f; font-size: 20px; font-weight: 750; white-space: nowrap; }
+.ps2__sps { margin-top: 7px; font-size: 12px; line-height: 1.6; color: #6b655d; }
+.ps2__spot--special { padding: 12px; margin: -12px; background: #faf7f2; border-radius: 18px; }
+.ps2__special-ask { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; color: #9f4107; font-size: 13px; font-weight: 700; text-decoration: none; }
+.ps2__special-ask:hover { text-decoration: underline; text-underline-offset: 4px; }
+.ps2__special-ask:focus-visible { outline: 2px solid #a84400; outline-offset: 4px; }
+.ps2__gnote { margin: 16px 0 0; padding: 0; border: 0; color: #70685f; font-size: 12px; line-height: 1.7; text-align: center; }
+.ps2__parts { margin-top: 64px; scroll-margin-top: 100px; }
+.ps2__parts > .ps2__oh { margin-top: 0; font-size: clamp(26px, 2.8vw, 36px); text-align: center; }
+.ps2__parts > .ps2__op { margin-top: 10px; text-align: center; }
+.ps2__groups { display: grid; gap: 24px; margin-top: 28px; }
+.ps2__grp { min-width: 0; padding: 24px; border: 1px solid #ebe5de; border-radius: 22px; background: #fff; }
+.ps2__gh { display: flex; justify-content: space-between; align-items: baseline; gap: 12px 24px; margin-bottom: 20px; }
+.ps2__gh h4 { display: flex; align-items: baseline; gap: 12px; flex: none; margin: 0; color: #24241f; font-size: 24px; font-weight: 800; line-height: 1.3; }
+.ps2__group-no { color: #ae480a; font-size: 13px; font-weight: 700; }
+.ps2__group-count { color: #837b71; font-size: 13px; font-weight: 500; }
+.ps2__gh p { max-width: 560px; margin: 0; font-size: 13px; line-height: 1.6; color: #70685f; text-align: right; }
+.ps2__pr { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.ps2__pi { display: flex; min-width: 0; }
+.ps2__choice { display: flex; flex-direction: column; gap: 12px; width: 100%; padding: 0 0 10px; border: 0; border-radius: 12px; background: transparent; color: #24241f; font: inherit; text-align: left; cursor: pointer; }
+.ps2__pim { position: relative; display: block; width: 100%; aspect-ratio: 335 / 300; flex: none; overflow: hidden; border: 2px solid transparent; border-radius: 12px; background: #f1f4f6; }
 .ps2__pim img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.ps2__pi b { font-size: 14.5px; font-weight: 800; line-height: 1.35; color: var(--color-ink); text-wrap: balance; }
-.ps2__ask { margin-top: 14px; }
+.ps2__pi b { padding: 0 4px; font-size: 14px; font-weight: 700; line-height: 1.5; text-wrap: pretty; }
+.ps2__choice-mark { position: absolute; right: 8px; bottom: 8px; display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid #d0c9c0; border-radius: 50%; background: #fffc; color: #fff; font-size: 13px; }
+.ps2__choice[aria-pressed="true"] { background: #fff4e9; }
+.ps2__choice[aria-pressed="true"] .ps2__pim { border-color: #c45209; }
+.ps2__choice[aria-pressed="true"] .ps2__choice-mark { border-color: #b74a08; background: #b74a08; }
+.ps2__choice[aria-pressed="true"] .ps2__choice-mark::after { content: "✓"; }
+.ps2__choice:hover .ps2__pim { border-color: #d69868; }
+.ps2__choice:focus-visible { outline: 2px solid #aa4408; outline-offset: 4px; }
+.ps2__selection { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 24px; padding: 24px; border: 1px solid #ded7ce; border-radius: 18px; background: #fff; }
+.ps2__selection-copy { min-width: 0; }
+.ps2__selection-copy > p { margin: 0; color: #26251f; font-size: 18px; font-weight: 750; }
+.ps2__selection-copy > small { display: block; margin-top: 8px; color: #7a7166; font-size: 12px; line-height: 1.6; }
+.ps2__selection-copy ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; padding: 0; list-style: none; }
+.ps2__selection-copy ul:empty { display: none; }
+.ps2__selection-copy li { padding: 8px 12px; border-radius: 9px; background: #f8f5f0; }
+.ps2__selection-copy li > span { display: block; margin-bottom: 3px; color: #7a7166; font-size: 11px; }
+.ps2__selection-copy li > strong { display: block; font-size: 13px; font-weight: 650; }
+.ps2__selection-actions { display: grid; justify-items: center; gap: 10px; flex: none; }
+.ps2__ask { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 48px; padding: 12px 20px; border-radius: 999px; background: #25251f; color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; }
+.ps2__ask:hover { background: #424138; }
+.ps2__ask:focus-visible { outline: 2px solid #aa4408; outline-offset: 4px; }
+.ps2__selection-actions button { min-height: 28px; padding: 0 10px; border: 0; background: none; color: #796f63; font: inherit; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.ps2__selection-actions button:disabled { opacity: .4; cursor: default; }
 @media (max-width: 1023px) {
-  .ps2__pgrid { grid-template-columns: 200px minmax(0, 1fr); gap: 20px; padding: 18px; } .ps2__spots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ps2__groups { padding: 4px 20px; }
-  .ps2__grp { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .ps2__gh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
-  .ps2__gh h4 span { display: inline; margin: 0 0 0 6px; }
-  .ps2__gh p { margin: 0; }
+  .ps2__pgrid { grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 20px; } .ps2__spots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ps2__pr { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ps2__gh { flex-wrap: wrap; }
+  .ps2__gh p { text-align: left; }
 }
 @media (max-width: 767px) {
   .ps2__pos { margin-top: 36px; }
-  .ps2__pgrid { grid-template-columns: minmax(0, 1fr); padding: 14px; }
+  .ps2__pgrid { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 16px; }
   .ps2__map { justify-self: center; width: min(170px, 50%); }
-  .ps2__spots { gap: 16px 10px; }
-  .ps2__spots b { font-size: 14.5px; }
-  .ps2__sps { font-size: 13px; }
+  .ps2__spots { gap: 24px 16px; }
+  .ps2__spot-title { gap: 6px; margin-top: 10px; }
+  .ps2__spot-title b { font-size: 14px; }
+  .ps2__spn { font-size: 11px; }
+  .ps2__spot-size { gap: 2px 5px; }
+  .ps2__spot-size strong { font-size: 17px; }
+  .ps2__spot-size > span { font-size: 11px; }
+  .ps2__sps { font-size: 11px; }
+  .ps2__spot--special { padding: 8px; margin: -8px; border-radius: 14px; }
+  .ps2__special-ask { font-size: 12px; }
   .ps2__parts { margin-top: 36px; }
-  .ps2__groups { padding: 0 14px; }
-  .ps2__grp { padding: 16px 0; }
-  .ps2__gh h4 { font-size: 17px; }
-  .ps2__gh p { font-size: 13.5px; }
-  .ps2__pr { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 40%; gap: 10px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; margin-inline: -14px; padding-inline: 14px; scroll-padding-inline: 14px; scrollbar-width: none; }
-  .ps2__pr::-webkit-scrollbar { display: none; }
-  .ps2__pi { scroll-snap-align: start; }
-  .ps2__pi b { font-size: 13.5px; }
+  .ps2__groups { gap: 18px; margin-top: 24px; }
+  .ps2__grp { padding: 16px; border-radius: 18px; }
+  .ps2__gh { margin-bottom: 16px; gap: 8px; }
+  .ps2__gh h4 { font-size: 22px; }
+  .ps2__gh p { font-size: 12px; }
+  .ps2__pr { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; }
+  .ps2__pi b { font-size: 13px; }
+  .ps2__choice { gap: 8px; }
+  .ps2__selection { flex-direction: column; align-items: stretch; padding: 18px; gap: 18px; }
+  .ps2__selection-copy > p { font-size: 16px; }
+  .ps2__selection-actions { justify-items: stretch; }
+  .ps2__ask { justify-content: center; }
+
 }

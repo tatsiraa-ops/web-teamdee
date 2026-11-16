@@ -14,32 +14,42 @@
     <div class="ps2__std">
       <figure class="ps2__img"><img src="{{img}}-760.webp" srcset="{{img}}-480.webp 480w, {{img}}-760.webp 760w, {{img}}-1200.webp 1200w" sizes="(min-width:1024px) 520px, 92vw" width="1200" height="1112" alt="{{alt}}" loading="lazy" decoding="async"></figure>
       <div class="ps2__list">
-        <h3 class="ps2__lh">{{stdH}}</h3>
-        <ul class="ps2__spec">{{#each spec}}<li class="ps2__si ps2__si--{{this.k}}"><b>{{this.t}}</b><span>{{this.s}}</span></li>{{/each}}</ul>
-        <p class="ps2__min">เริ่มสั่ง {{minQty}} ตัว</p>
+        <div class="ps2__list-head"><h3 class="ps2__lh">{{stdH}}</h3><p class="ps2__min">เริ่ม {{minQty}} ตัว</p></div>
+        <ul class="ps2__spec">{{#each spec}}<li class="ps2__si ps2__si--{{this.k}}">
+          <div class="ps2__visual{{#if this.detail}} ps2__visual--detail{{/if}}" aria-hidden="true">{{#if this.art}}<img src="{{this.art}}" width="72" height="72" alt="" loading="lazy" decoding="async">{{else}}<span class="ps2__measure">{{this.measure}}<small>นิ้ว</small></span>{{/if}}</div>
+          <div class="ps2__copy"><b>{{this.t}}</b><span>{{this.s}}</span></div>
+        </li>{{/each}}</ul>
+        <a class="ps2__next" href="#embroidery-spots">ดูตำแหน่งปักและรายละเอียดที่เลือกได้ <span aria-hidden="true">↓</span></a>
       </div>
     </div>
     {{#if guide}}
-    {{!-- 12 พ.ย. รอบ 215 อาร์ต "ทำแบบเดิมมาได้": ตำแหน่งปักกลับเป็นผังเสื้อ + การ์ดภาพ 6 ใบ (แบบรอบ 212) --}}
+    {{!-- Keep the five numbered positions matched to the garment map; special work is assessed separately. --}}
     <div class="ps2__pos" id="embroidery-spots">
       <h3 class="ps2__oh">{{guideH}}</h3>
       <p class="ps2__op">{{{ph guideP}}}</p>
       <div class="ps2__pgrid">
-        <figure class="ps2__map"><img src="/img/emb-guide/{{guide.map}}.webp" width="315" height="705" alt="ภาพจำลอง: เสื้อโปโลด้านหน้าและด้านหลัง เลข 01–05 บอกตำแหน่งปัก อกซ้าย อกขวา แขน ด้านหลังใต้คอ และกลางหลัง" loading="lazy" decoding="async"></figure>
-        <ol class="ps2__spots">{{#each guide.positions}}<li><span class="ps2__spi"><img src="{{this.src}}" width="{{this.w}}" height="{{this.h}}" alt="ภาพจำลองงานปักตำแหน่ง{{this.t}}" loading="lazy" decoding="async"></span><span class="ps2__spn" aria-hidden="true">0{{inc @index}}</span><b>{{this.t}}</b><span class="ps2__sps">{{this.s}}</span></li>{{/each}}</ol>
+        <figure class="ps2__map"><img src="/img/emb-guide/{{guide.map}}.webp" width="315" height="705" alt="ภาพจำลอง: เสื้อโปโลด้านหน้าและด้านหลัง เลข 01–05 บอกตำแหน่งปัก อกซ้าย อกขวา แขน ด้านหลังใต้คอ และกลางหลัง" loading="lazy" decoding="async"><figcaption>เทียบตำแหน่ง 01–05 บนเสื้อ</figcaption></figure>
+        <ol class="ps2__spots">{{#each guide.positions}}<li{{#if this.special}} class="ps2__spot--special"{{/if}}>
+          <span class="ps2__spi"><img src="{{this.src}}" width="{{this.w}}" height="{{this.h}}" alt="{{#if this.alt}}{{this.alt}}{{else}}ภาพจำลองงานปักตำแหน่ง{{this.t}}{{/if}}" loading="lazy" decoding="async"></span>
+          <div class="ps2__spot-title">{{#unless this.special}}<span class="ps2__spn" aria-hidden="true">0{{inc @index}}</span>{{/unless}}<b>{{this.t}}</b></div>
+          {{#if this.size}}<p class="ps2__spot-size"><span>กว้างไม่เกิน</span><strong>{{this.size}}</strong></p>{{else}}<span class="ps2__sps">{{this.s}}</span><a class="ps2__special-ask" href="{{../guide.specialAsk}}" data-track="line" data-where="pp-embroidery-special">ส่งแบบให้ประเมิน <span aria-hidden="true">↗</span></a>{{/if}}
+        </li>{{/each}}</ol>
       </div>
       <p class="ps2__gnote">{{guide.posNote}}</p>
     </div>
-    <div class="ps2__parts">
+    <div class="ps2__parts" id="polo-details" data-polo-options>
       <h3 class="ps2__oh">{{partsH}}</h3>
-      <p class="ps2__op">{{guide.imgNote}}</p>
+      <p class="ps2__op">เลือกแบบที่ชอบได้หมวดละ 1 แบบ แล้วส่งให้ทีมดีช่วยดูต่อ</p>
       <div class="ps2__groups">
         {{#each guide.groups}}<section class="ps2__grp" aria-labelledby="grp-{{this.k}}">
-          <div class="ps2__gh"><h4 id="grp-{{this.k}}">{{this.t}} <span>{{this.items.length}} แบบ</span></h4>{{#if this.note}}<p>{{this.note}}</p>{{/if}}</div>
-          <ul class="ps2__pr">{{#each this.items}}<li class="ps2__pi"><span class="ps2__pim"><img src="{{this.src}}" width="{{this.w}}" height="{{this.h}}" alt="ภาพจำลอง: {{this.t}} {{this.s}}" loading="lazy" decoding="async"></span><b>{{this.t}}</b></li>{{/each}}</ul>
+          <div class="ps2__gh"><h4 id="grp-{{this.k}}"><span class="ps2__group-no" aria-hidden="true">0{{inc @index}}</span>{{this.t}} <span class="ps2__group-count">{{this.items.length}} แบบ</span></h4>{{#if this.note}}<p>{{this.note}}</p>{{/if}}</div>
+          <ul class="ps2__pr">{{#each this.items}}<li class="ps2__pi"><button class="ps2__choice" type="button" data-polo-option data-group="{{../k}}" data-group-label="{{../t}}" data-option-name="{{this.t}}" aria-pressed="false" aria-label="เลือก{{this.t}}"><span class="ps2__pim"><img src="{{this.src}}" width="{{this.w}}" height="{{this.h}}" alt="ภาพจำลอง: {{this.t}} {{this.s}}" loading="lazy" decoding="async"><span class="ps2__choice-mark" aria-hidden="true"></span></span><b>{{this.t}}</b></button></li>{{/each}}</ul>
         </section>{{/each}}
       </div>
-      <a class="pp-more ps2__ask" href="{{ask}}" data-track="line" data-where="pp-options">บอกทีมดีว่าเลือกแบบไหน <span aria-hidden="true">→</span></a>
+      <div class="ps2__selection">
+        <div class="ps2__selection-copy"><p data-polo-status aria-live="polite">ยังไม่แน่ใจ ให้ทีมดีช่วยเลือกได้</p><ul data-polo-summary></ul><small>{{guide.imgNote}}</small></div>
+        <div class="ps2__selection-actions"><a class="ps2__ask" href="{{ask}}" data-polo-send data-track="line" data-where="pp-options"><span data-polo-send-label>ให้ทีมดีช่วยเลือก</span><span aria-hidden="true">↗</span></a><button type="button" data-polo-clear disabled>ล้างที่เลือก</button></div>
+      </div>
     </div>
     {{/if}}
   </div>

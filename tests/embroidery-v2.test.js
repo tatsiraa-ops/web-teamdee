@@ -156,25 +156,21 @@ test('หน้าพิมพ์ลายไม่เปลี่ยน: ยั
   assert.doesNotMatch(m, /pp2-stb--c/)
 })
 
-/* 12 พ.ย. รอบ 216 อาร์ต "สองอันนี้รวมกัน ทำกว้างพิเศษได้ ไปคิดมาดีๆ ครีเอทได้เต็มที่": ตารางราคา + เลือกผ้า/สี = บอร์ดเดียว กว้างพิเศษ */
-/* 12 พ.ย. รอบ 217 อาร์ต "ไม่อยากให้เลื่อนเยอะ เอาให้ครบในที่เดียว รื้อมาได้หมดเลย": ตารางแถว = ผ้า (กดเลือก) ซ้าย · รายละเอียด + สีผ้าที่เลือก ขวา */
-test('ตัวเลือกผ้าและราคาในจอเดียว: แถว = ผ้า 6 ชนิด (ปุ่มเลือก) · คอลัมน์ = 6 ช่วงจำนวน · รายละเอียดผ้าอยู่ข้างตาราง', () => {
+test('ผ้า 6 ชนิดแยกอ่านได้ครบ · แต่ละผ้ามีราคาทุกช่วงจำนวนและสีที่กดเปิดได้', () => {
   const f = sec(page('embroidery'), 'fabric')
-  assert.doesNotMatch(f, /role="tablist"|pf2__tabs|data-price-compare|pf3__/, 'ไม่มีแถบเลือกผ้าแยก / บอร์ดแบบเดิม')
-  const ids = ['juti', 'tc', 'tricot', 'pique', 'endurance', 'drytech']
-  const rows = [...f.matchAll(/<button type="button" class="pf4__f"[^>]*aria-controls="fab-([a-z]+)"/g)].map((x) => x[1])
-  assert.deepEqual(rows, ids, 'ปุ่มเลือกผ้าในหัวแถว 6 ผ้า')
-  assert.match(f, /class="pf4__f"[^>]*aria-pressed="true"[^>]*aria-controls="fab-juti"/, 'ผ้าแรกถูกเลือกตั้งต้น')
-  const head = f.slice(f.indexOf('<thead'), f.indexOf('</thead>'))
-  assert.equal([...head.matchAll(/<th scope="col"/g)].length, 7, 'หัวตาราง: ผ้า + 6 ช่วงจำนวน')
-  assert.equal([...f.matchAll(/<button type="button" class="pf4__q"/g)].length, 6, 'มือถือ: ชิปเลือกช่วงจำนวน 6 ช่วง')
-  const det = f.slice(f.indexOf('class="pf4__detail"'))
-  for (const id of ids) {
-    const at = det.indexOf(`id="fab-${id}"`)
-    assert.ok(at > 0, `แผง ${id} อยู่ในฝั่งรายละเอียด`)
-    assert.match(det.slice(at, det.indexOf('</article>', at)), /class="pf2__sw"/)
+  const prices = JSON.parse(readFileSync('src/data/prices.json', 'utf8')).products.polo
+  const panels = [...f.matchAll(/<article[^>]*id="fab-([a-z]+)"[^>]*>([\s\S]*?)<\/article>/g)]
+  assert.deepEqual(panels.map(x => x[1]), polo.fabrics.map(x => x.id))
+  for (const [markup, id, body] of panels) {
+    assert.doesNotMatch(markup.split('>')[0], /\bhidden\b/, `${id} อ่านได้โดยไม่เลือกแท็บ`)
+    const values = [...body.matchAll(/<td>(\d+)<\/td>/g)].map(x => Number(x[1]))
+    assert.deepEqual(values, prices.bands.map(b => b.price[id]), `${id} ราคาครบทุกช่วง`)
+    assert.equal([...body.matchAll(/<th scope="col"/g)].length, prices.bands.length)
+    assert.match(body, /<details class="pf5__color-picker">/, `${id} สีปิดไว้ตั้งต้น`)
+    const codes = [...body.matchAll(/data-code="([^"]+)"/g)].map(x => x[1]).sort()
+    assert.deepEqual(codes, polo.fabrics.find(x => x.id === id).colors.map(x => x.code).sort(), `${id} สีครบ`)
+    assert.match(body, /data-where="pp-price-board"/)
   }
-  assert.match(f, /data-where="pp-price-board"/)
 })
 
 test('บอร์ดผ้า + ราคา ใช้ความกว้างพิเศษ (1400) แบบเดียวกับส่วนกว้างอื่น', () => {

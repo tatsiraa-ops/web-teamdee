@@ -4,7 +4,7 @@
      ตารางแนวนอนเห็นครบโดยไม่ต้องกด (ไม่มี JS = นิ้ว + ไซซ์ M) · ตัวเลขจากกราฟิกทางการ "ตารางไซซ์ เสื้อทรงเดียวกันใส่ได้ทั้งชาย-หญิง"
      เบสบอล/เจอร์ซีย์ Oversize ยังไม่มีตาราง → ภาพ + ปุ่ม LINE ขอตาราง · id="size" แทนส่วนไซซ์เดิม --}}
 {{#with pp2.sizes}}
-<section class="pp2-sz{{#if even}} pp2-sz--even{{/if}}" id="size" aria-labelledby="pp2-sz-h" data-sz-root>
+<section class="pp2-sz{{#if even}} pp2-sz--even{{/if}}{{#if v2}} pp2-sz--v2{{/if}}" id="size" aria-labelledby="pp2-sz-h" data-sz-root>
   <div class="wrap">
     <header class="pp2-sz__head">
       <h2 id="pp2-sz-h">{{{hl h accent}}}</h2>
@@ -12,27 +12,47 @@
     </header>
     <div class="pp2-sz__card">
       <figure class="pp2-sz__stage">
+        {{#if v2}}
+        {{!-- 13 พ.ย. v2 (หน้าปัก): ภาพเสื้อโปโลทีมดีแยกทรง · เส้นวัดวางตามขอบเสื้อจริงของภาพนั้น (พิกัด % ใน pp-v2.json figs)
+             1 = รอบอก (ตะเข็บข้างถึงตะเข็บข้าง ใต้รักแร้) · 2 = ความยาว (จุดสูงสุดของไหล่ถึงชายเสื้อ · เส้นประโยงจุดวัด) เลขตรงกับขั้นวิธีวัด --}}
+        {{#each figs}}<div class="pp2-sz__fig" data-sz-fig="{{this.g}}"{{#unless @first}} hidden{{/unless}} style="--cy:{{this.cy}}%;--cx1:{{this.cx1}}%;--cx2:{{this.cx2}}%;--ly1:{{this.ly1}}%;--ly2:{{this.ly2}}%;--hx:{{this.hx}}%;--bx:{{this.bx}}%">
+          <div class="pp2-sz__box">
+            <img src="{{this.img}}" srcset="{{this.small}} 440w, {{this.img}} {{this.w}}w" sizes="(min-width: 1100px) 330px, 56vw" width="{{this.w}}" height="{{this.h}}" alt="{{this.alt}}" loading="lazy" decoding="async">
+            <span class="pp2-sz__gd pp2-sz__gd--t" aria-hidden="true"></span><span class="pp2-sz__gd pp2-sz__gd--b" aria-hidden="true"></span>
+            <span class="pp2-sz__ln pp2-sz__ln--w" aria-hidden="true"></span>
+            <span class="pp2-sz__ln pp2-sz__ln--h" aria-hidden="true"></span>
+            <span class="pp2-sz__tag pp2-sz__tag--w"><i aria-hidden="true">1</i><small>รอบอก</small><b data-sz-chest>{{this.def.[1]}}</b><em data-sz-u>นิ้ว</em></span>
+            <span class="pp2-sz__tag pp2-sz__tag--h"><i aria-hidden="true">2</i><small>ความยาว</small><b data-sz-len>{{this.def.[2]}}</b><em data-sz-u>นิ้ว</em></span>
+          </div>
+        </div><!-- /fig -->{{/each}}
+        {{else}}
         <img src="{{shirt.img}}" srcset="{{shirt.img}} 440w, {{shirt.img2}} 880w" sizes="(min-width: 1100px) 380px, 64vw" width="440" height="540" alt="{{shirt.alt}}" loading="lazy" decoding="async">
         <span class="pp2-sz__ln pp2-sz__ln--w" aria-hidden="true"></span>
         <span class="pp2-sz__ln pp2-sz__ln--h" aria-hidden="true"></span>
         <span class="pp2-sz__bub pp2-sz__bub--w"><small>รอบอก</small><b data-sz-chest>{{def.[1]}}</b><i data-sz-u>นิ้ว</i></span>
         <span class="pp2-sz__bub pp2-sz__bub--h"><small>ความยาว</small><b data-sz-len>{{def.[2]}}</b><i data-sz-u>นิ้ว</i></span>
+        {{/if}}
       </figure>
       <div class="pp2-sz__ctl">
         <div class="pp2-sz__segs">
           <div class="pp2-sz__seg" role="group" aria-label="{{#if groupLabel}}{{groupLabel}}{{else}}กลุ่มไซซ์{{/if}}"><button type="button" data-g-btn="adult" aria-pressed="true">{{labA}}</button><button type="button" data-g-btn="kids" aria-pressed="false">{{labB}}</button></div>
           <div class="pp2-sz__seg" role="group" aria-label="หน่วย"><button type="button" data-u-btn="in" aria-pressed="true">นิ้ว</button><button type="button" data-u-btn="cm" aria-pressed="false">ซม.</button></div>
         </div>
+        {{#if v2}}
+        <div class="pp2-sz__now"><p class="pp2-sz__nm"><span>ไซซ์ที่เลือก</span><b data-sz-name>M</b></p><dl class="pp2-sz__rd"><div><dt><i aria-hidden="true">1</i>รอบอก</dt><dd><b data-sz-chest>{{def.[1]}}</b> <span data-sz-u>นิ้ว</span></dd></div><div><dt><i aria-hidden="true">2</i>ความยาว</dt><dd><b data-sz-len>{{def.[2]}}</b> <span data-sz-u>นิ้ว</span></dd></div></dl></div><!-- /now -->
+        {{else}}
         <p class="pp2-sz__now"><span>ไซซ์ที่เลือก</span><b data-sz-name>M</b></p>
+        {{/if}}
         <div class="pp2-sz__picks" data-g="adult">{{#each adult}}<button type="button" class="pp2-sz__pick" data-g="adult" data-sz="{{this.[0]}}" data-chest="{{this.[1]}}" data-len="{{this.[2]}}" aria-pressed="{{#if (eq this.[0] "M")}}true{{else}}false{{/if}}">{{this.[0]}}</button>{{/each}}</div>
         <div class="pp2-sz__picks" data-g="kids" hidden>{{#each kids}}<button type="button" class="pp2-sz__pick" data-g="kids" data-sz="{{this.[0]}}" data-chest="{{this.[1]}}" data-len="{{this.[2]}}" aria-pressed="false">{{this.[0]}}</button>{{/each}}</div>
         <h3>{{measureH}}</h3>
         <ol class="pp2-sz__how">{{#each measure}}<li><b>{{this.t}}</b><span>{{{ph this.d}}}</span></li>{{/each}}</ol>
       </div>
     </div>
+    <p class="pp2-sz__hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>เลื่อนตารางไปทางขวาเพื่อดูไซซ์ใหญ่</p>
     <div class="pp2-sz__tables">
       <table class="pp2-sz__t" id="sz-adult"><caption>{{labA}}{{#if noteA}} <small>{{noteA}}</small>{{/if}} · <span data-sz-u>นิ้ว</span></caption><thead><tr><td></td>{{#each adult}}<th scope="col" data-c="{{this.[0]}}">{{this.[0]}}</th>{{/each}}</tr></thead><tbody><tr data-row="chest"><th scope="row">รอบอก</th>{{#each adult}}<td data-c="{{this.[0]}}" data-in="{{this.[1]}}">{{this.[1]}}</td>{{/each}}</tr><tr data-row="len"><th scope="row">ความยาว</th>{{#each adult}}<td data-c="{{this.[0]}}" data-in="{{this.[2]}}">{{this.[2]}}</td>{{/each}}</tr></tbody></table>
-      <table class="pp2-sz__t pp2-sz__t--kids" id="sz-kids"><caption>{{labB}}{{#if noteB}} <small>{{noteB}}</small>{{/if}} · <span data-sz-u>นิ้ว</span></caption><thead><tr><td></td>{{#each kids}}<th scope="col" data-c="{{this.[0]}}">{{this.[0]}}</th>{{/each}}</tr></thead><tbody><tr data-row="chest"><th scope="row">รอบอก</th>{{#each kids}}<td data-c="{{this.[0]}}" data-in="{{this.[1]}}">{{this.[1]}}</td>{{/each}}</tr><tr data-row="len"><th scope="row">ความยาว</th>{{#each kids}}<td data-c="{{this.[0]}}" data-in="{{this.[2]}}">{{this.[2]}}</td>{{/each}}</tr></tbody></table>
+      <table class="pp2-sz__t pp2-sz__t--kids" id="sz-kids"><caption>{{labB}}{{#if noteB}} <small>{{noteB}}</small>{{/if}} · <span data-sz-u>นิ้ว</span></caption><thead><tr><td></td>{{#each kids}}<th scope="col" data-c="{{this.[0]}}">{{this.[0]}}</th>{{/each}}{{#each padB}}<td class="pp2-sz__na"></td>{{/each}}</tr></thead><tbody><tr data-row="chest"><th scope="row">รอบอก</th>{{#each kids}}<td data-c="{{this.[0]}}" data-in="{{this.[1]}}">{{this.[1]}}</td>{{/each}}{{#each padB}}<td class="pp2-sz__na"></td>{{/each}}</tr><tr data-row="len"><th scope="row">ความยาว</th>{{#each kids}}<td data-c="{{this.[0]}}" data-in="{{this.[2]}}">{{this.[2]}}</td>{{/each}}{{#each padB}}<td class="pp2-sz__na"></td>{{/each}}</tr></tbody></table>
     </div>
     <p class="pp2-sz__tol">{{{ph tol}}}</p>
     {{#if others.length}}

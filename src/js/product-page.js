@@ -1,6 +1,7 @@
 import { initFabricCards } from './fabric-cards.js'
 import { initTypeCollars } from './type-collars.js'
 import { initPoloFabric } from './polo-fabric.js'
+import { initPoloOptions } from './polo-options.js'
 import './download-assets.js'
 import '../styles/v22-sections.css'
 /* หน้าสินค้า 6 หน้า · product-page.css (แกลเลอรีลูกค้า · รูปในการ์ด) โหลดใน head ของหน้า */
@@ -26,6 +27,7 @@ initPriceCompare()
 /* การ์ดสะสมผ้า (รอบ 185): เอียง/ฟอยล์ · พลิก · แจกการ์ด · สำรับมือถือ */
 initFabricCards()
 initPoloFabric() /* 11 พ.ย. หน้างานปัก: ผ้า + สี + ราคา */
+initPoloOptions()
 /* แผงเลือกเสื้อ (196c): กดทรง → บอกคอที่ทำได้ + ราคาทรง */
 initTypeCollars()
 
@@ -90,3 +92,22 @@ initReviewBoard()
 /* ปรับได้ทุกส่วน (pp2Custom): ห้องลองปรับ + เมนูตัวเลือก + ส่งสิ่งที่เลือกทาง LINE */
 initCustomize()
 initSizeChart()
+
+/* 13 พ.ย. หน้าปัก: ภาพเคลื่อนไหวจริงจากเครื่องปัก (pp2Proof loops · video[data-loop]) เล่นเมื่อเห็นในจอ หยุดเมื่อพ้นจอ
+   ผู้ใช้ตั้งค่า prefers-reduced-motion = ไม่เล่นเอง ให้ปุ่มควบคุมของเบราว์เซอร์แทน */
+{
+  const loops = [...document.querySelectorAll('video[data-loop]')]
+  if (loops.length) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+      for (const v of loops) v.controls = true
+    } else {
+      const io = new IntersectionObserver((es) => {
+        for (const e of es) {
+          if (e.isIntersecting) e.target.play().catch(() => { e.target.controls = true })
+          else e.target.pause()
+        }
+      }, { threshold: 0.35 })
+      for (const v of loops) io.observe(v)
+    }
+  }
+}

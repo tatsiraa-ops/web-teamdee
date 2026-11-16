@@ -1,7 +1,9 @@
 {{!-- /sublimation/ วิธีชำระเงิน · รอบ 139 (บอร์ด "วิธีชำระเงิน") · ชิ้นเดียวกับ /corporate/ (up2Pay.hbs) ทั้งชิ้น · ข้อมูล pp-v2.json print.payment
      CSS ร่วม src/styles/pay-block.css · รูปหลังเจนจากแบบจริง BALAC CHULA สีกรม · โลโก้บัตร SVG วาดเอง (ก่อนขึ้นจริงควรใช้ไฟล์ทางการ Visa / Mastercard) --}}
 {{#with pp2.payment}}
-<section class="up2-pay" id="payment" aria-label="{{h}}">
+<section class="up2-pay" id="payment" aria-labelledby="pp2-pay-h">
+  {{!-- 13 พ.ย. ตรวจหน้าปัก: ส่วนนี้ไม่มีหัวข้อในโครงหน้า → H2 สำหรับโปรแกรมอ่านจอ (หน้าตาเดิม) --}}
+  <h2 id="pp2-pay-h" class="sr-only">{{h}}</h2>
   <div class="wrap up2-pay__in">
     <div class="up2-pay__art">
       <img class="up2-pay__ph up2-pay__ph--back" src="{{back.img}}-960.webp" srcset="{{back.img}}-560.webp 560w, {{back.img}}-960.webp 960w" sizes="(min-width:1024px) 440px, 74vw" alt="{{back.alt}}" width="{{back.w}}" height="{{back.h}}" loading="lazy" decoding="async">

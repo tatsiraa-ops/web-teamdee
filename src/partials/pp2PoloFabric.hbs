@@ -1,10 +1,5 @@
-{{!-- 11 พ.ย. 2026 หน้างานปัก: ผ้า + สี + ราคา (spec docs/superpowers/specs/2026-11-11-embroidery-page-design.md ข้อ 7)
-     ข้อมูลไดรฟ์ "Info ปัก" (src/data/polo.json) · ราคา prices.json products.polo · ภาพผ้า public/img/emb-fabric (ครอปจากแผ่นรวมชนิดผ้า)
-     12 พ.ย. รอบ 217 อาร์ต "ไม่อยากให้เลื่อนเยอะ เอาให้ครบในที่เดียว รื้อมาได้หมดเลย" → ตัวเลือกผ้าแบบสองฝั่ง กว้างพิเศษ สูงไม่เกินหนึ่งจอ
-     - ซ้าย: ตารางราคา แถว = ผ้า (ปุ่มเลือกผ้า · ภาพผ้าเล็ก ชื่อ คำโปรย) × คอลัมน์ = ช่วงจำนวน · แถวที่เลือกไฮไลต์ · ท้ายการ์ด = เงื่อนไข + ปุ่ม LINE
-     - ขวา: ผ้าที่เลือก · แถบภาพเนื้อผ้า + ชื่อ · ข้อมูลผ้า 3 ช่อง · เหมาะกับ / ควรรู้ · สีพร้อมรหัส · ขอตัวอย่าง
-     - มือถือ: ชิปช่วงจำนวน → ตารางเหลือราคาช่วงที่เลือก (polo-fabric.js) · รายละเอียดผ้าต่อด้านล่าง
-     - ไม่มี JS: ตารางเต็ม + ทุกผ้าเรียงลงมาในฝั่งขวา · กดวงสี = ใส่รหัสสีในข้อความ LINE ขอตัวอย่าง --}}
+{{!-- Fabric and price comparison. Prices and quantity bands come from prices.json;
+     fabric specifications and colour codes come from polo.json. Without JS every panel remains available. --}}
 {{#with pp2.poloFabric}}
 <section class="pf2" id="fabric" aria-labelledby="pf2-h" data-pf2>
   <div class="wrap">
@@ -12,50 +7,40 @@
       <h2 id="pf2-h">{{{hl h accent}}}</h2>
       <p>{{{ph p}}}</p>
     </header>
-    <div class="pf4">
-      <div class="pf4__board">
-        <div class="pf4__qty" role="group" aria-label="เลือกจำนวนที่จะสั่ง">
-          <span>สั่งกี่ตัว</span>
-          {{#each matrix.rows}}<button type="button" class="pf4__q" data-band="{{@index}}" aria-pressed="{{#if @first}}true{{else}}false{{/if}}">{{this.label}}</button>{{/each}}
-        </div>
-        <div class="pf4__tw" role="region" aria-label="ตารางราคาเสื้อโปโลปักต่อตัว ตามผ้าและจำนวน" tabindex="0">
-          <table class="pf4__t" data-band="0">
-            <caption class="sr-only">ราคาต่อตัว (บาท) ตามผ้าและจำนวน · รวมปักโลโก้ 1 จุด · รวม VAT 7% · กดชื่อผ้าเพื่อดูเนื้อผ้าและสี</caption>
-            <colgroup><col class="pf4__c0">{{#each matrix.rows}}<col>{{/each}}</colgroup>
-            <thead><tr><th scope="col" class="pf4__corner">ผ้า <span>กดเพื่อดูเนื้อผ้าและสี</span></th>{{#each matrix.rows}}<th scope="col" data-b="{{@index}}">{{this.label}}<span>ตัว</span></th>{{/each}}</tr></thead>
-            <tbody>{{#each fabrics}}<tr data-f="{{this.id}}"{{#if @first}} class="is-sel"{{/if}}>
-              <th scope="row"><button type="button" class="pf4__f" data-pick="{{this.id}}" aria-pressed="{{#if @first}}true{{else}}false{{/if}}" aria-controls="fab-{{this.id}}"><img src="{{this.img}}-280.webp" width="280" height="162" alt="" loading="lazy" decoding="async"><b>{{{ph this.name}}}</b></button></th>
-              {{#each this.prices}}<td data-b="{{@index}}">{{this.price}}</td>{{/each}}
-            </tr>{{/each}}</tbody>
-          </table>
-        </div>
-        <div class="pf4__foot">
-          <ul><li>เริ่มสั่ง {{minQty}} ตัว</li><li>ทุกไซซ์ราคาเดียว</li><li>รวมปักโลโก้ 1 จุดที่อก</li><li>ปักเพิ่มจุด แจ้งราคาตอนประเมินงาน</li></ul>
-          <a class="cb cb--p" href="{{@root.priceAsk}}" data-track="line" data-where="pp-price-board"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ขอใบเสนอราคาทาง LINE</span></a>
-        </div>
-      </div>
-      <div class="pf4__detail">
+    <ul class="pf5__terms" aria-label="เงื่อนไขราคาเสื้อโปโลปัก">
+      <li><img src="/img/icons/team-shirts.webp" width="140" height="140" alt="" loading="lazy" decoding="async"><div><strong>เริ่มสั่ง {{minQty}} ตัว</strong></div></li>
+      <li><img src="/img/icons/benefit-size.webp" width="140" height="140" alt="" loading="lazy" decoding="async"><div><strong>ทุกไซซ์ราคาเดียว</strong></div></li>
+      <li><img src="/img/icons/dz-logo.webp" width="140" height="140" alt="" loading="lazy" decoding="async"><div><strong>รวมปักโลโก้ที่อก</strong><span>1 จุด · รวม VAT แล้ว</span></div></li>
+      <li><img src="/img/icons/talk-quote.webp" width="140" height="140" alt="" loading="lazy" decoding="async"><div><strong>ปักเพิ่มจุดได้</strong><span>แจ้งราคาตอนประเมินงาน</span></div></li>
+    </ul>
+    <div class="pf4 pf5">
         {{#each fabrics}}
-        <article class="pf4__panel" id="fab-{{this.id}}" aria-labelledby="fabn-{{this.id}}" data-fab="{{this.id}}" data-name="{{this.name}}">
+        <article class="pf4__panel pf5__card" id="fab-{{this.id}}" aria-labelledby="fabn-{{this.id}}" data-fab="{{this.id}}" data-name="{{this.name}}">
           <figure class="pf4__hero">
             <img src="{{this.hero}}" width="1120" height="648" alt="เนื้อ{{this.name}} ({{this.en}}) ระยะใกล้" loading="lazy" decoding="async">
-            <figcaption><h3 id="fabn-{{this.id}}">{{this.name}}</h3><span lang="en">{{this.en}}</span><p>{{this.tagline}}</p></figcaption>
+            <figcaption><span lang="en">{{this.en}}</span><h3 id="fabn-{{this.id}}">{{this.name}}</h3><p>{{this.tagline}}</p><small>~{{this.gsm}} แกรม · {{this.feel}}</small></figcaption>
           </figure>
           <div class="pf4__body">
-            <ul class="pf4__chips" aria-label="ข้อมูล{{this.name}}"><li>{{#if this.comp}}{{this.comp}}{{else}}เนื้อผ้า สอบถามทีมงาน{{/if}}</li><li>~{{this.gsm}} แกรม</li><li>{{this.feel}}</li></ul>
-            <p class="pf4__use"><span>เหมาะกับ</span>{{#each this.useTags}}<i>{{this}}</i>{{/each}}</p>
-            <p class="pf4__tip">{{this.note}}</p>
+            <div class="pf5__info"><p class="pf5__composition">{{#if this.comp}}{{this.comp}}{{else}}เนื้อผ้า สอบถามทีมงาน{{/if}}</p>
+            <div class="pf5__uses"><p>เหมาะกับ</p><ul style="--use-count:{{this.useTags.length}}">{{#each this.useTags}}<li><img src="{{this.icon}}" width="112" height="112" alt="" loading="lazy" decoding="async"><span>{{this.label}}</span></li>{{/each}}</ul></div>
+            <p class="pf4__tip">{{this.note}}</p></div>
+            <div class="pf5__prices">
+              <table><caption>ราคาต่อตัว <span>บาท · รวม VAT</span></caption><thead><tr>{{#each this.prices}}<th scope="col">{{this.label}}<span>ตัว</span></th>{{/each}}</tr></thead><tbody><tr>{{#each this.prices}}<td>{{this.price}}</td>{{/each}}</tr></tbody></table>
+            </div>
             <div class="pf2__colors">
-              <h4 class="pf2__ch">สีผ้า {{this.colors.length}} สี <span>กดวงสีเพื่อใส่รหัสในข้อความถึงทีมดี</span></h4>
-              <p class="pf2__picked" data-picked aria-live="polite"></p>
+              <details class="pf5__color-picker">
+                <summary><span class="pf5__palette" aria-hidden="true">{{#each this.main}}<i style="--swatch:{{this.hex}}"></i>{{/each}}</span><span class="pf5__color-label"><span class="pf5__color-show">ดูสีผ้า</span><span class="pf5__color-hide">ซ่อนสีผ้า</span><small>{{this.colors.length}} สีให้เลือก</small></span><span class="pf5__color-chevron" aria-hidden="true"></span></summary>
               <ul class="pf2__sw" aria-label="สี{{this.name}}">{{#each this.main}}<li><button type="button" class="pf2__c" style="--c:{{this.hex}}" data-code="{{this.code}}" aria-pressed="false"><span class="pf2__dot" aria-hidden="true"></span><span class="pf2__code">{{this.code}}</span></button></li>{{/each}}{{#each this.base}}<li><button type="button" class="pf2__c pf2__c--base" style="--c:{{this.hex}}" data-code="{{this.code}}" aria-pressed="false"><span class="pf2__dot" aria-hidden="true"></span><span class="pf2__code">{{this.code}}</span></button></li>{{/each}}</ul>
               {{#if this.base.length}}<p class="pf4__base"><i aria-hidden="true"></i> วงที่มีขีดใต้ = โทนพื้นฐาน</p>{{/if}}
-              <div class="pf4__ask"><a class="pp-more pf2__ask" href="{{this.ask}}" data-ask data-track="line" data-where="pp-fabric">ขอตัวอย่าง{{this.name}} <span aria-hidden="true">→</span></a><small>ฟรี ไม่ต้องวางมัดจำ · สีจริงอาจต่างจากจอเล็กน้อย</small></div>
+                <p class="pf5__color-note">สีจริงอาจต่างจากจอเล็กน้อย</p>
+              </details>
+              <p class="pf2__picked" data-picked aria-live="polite"></p>
+              <div class="pf5__actions"><a class="pf4__quote" href="{{@root.priceAsk}}" data-quote data-track="line" data-where="pp-price-board"><span data-quote-label>ขอใบเสนอราคาทาง LINE</span><span aria-hidden="true">↗</span></a>
+              <div class="pf4__ask"><a class="pp-more pf2__ask" href="{{this.ask}}" data-ask data-track="line" data-where="pp-fabric" aria-label="ขอตัวอย่าง{{this.name}}ฟรี">ขอตัวอย่างผ้า <span aria-hidden="true">→</span></a><small>ฟรี ไม่ต้องวางมัดจำ</small></div></div>
             </div>
           </div>
         </article>
         {{/each}}
-      </div>
     </div>
   </div>
 </section>
