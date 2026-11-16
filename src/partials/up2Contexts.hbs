@@ -21,7 +21,7 @@
             <h3>{{this.h}}</h3>
             <p class="up2-ctx__need"><span class="up2-ctx__k">งานนี้ต้องการ</span>{{{ph this.need}}}</p>
             <ul class="up2-ctx__gives" aria-label="ทีมดีจัดให้">{{#each this.gives}}<li class="up2-ctx__give"><span class="up2-ctx__gv">{{{ph this.v}}}</span></li>{{/each}}</ul>
-            <figure class="up2-ctx__proof"><figcaption class="up2-ctx__real">รูปจริงจากลูกค้า</figcaption><div class="up2-ctx__pp">{{#each this.photos}}<figure class="up2-ctx__ph up2-ctx__ph--{{inc @index}}"><img src="{{this.small}}" srcset="{{this.small}} 1x, {{this.img}} 2x" alt="{{this.alt}}" loading="lazy" decoding="async"></figure>{{/each}}</div></figure>
+            <figure class="up2-ctx__proof"><figcaption class="up2-ctx__real">{{#if this.photoLabel}}{{this.photoLabel}}{{else}}รูปจริงจากลูกค้า{{/if}}</figcaption><div class="up2-ctx__pp">{{#each this.photos}}<figure class="up2-ctx__ph up2-ctx__ph--{{inc @index}}"><img src="{{this.small}}" srcset="{{this.small}} 1x, {{this.img}} 2x" alt="{{this.alt}}" loading="lazy" decoding="async"></figure>{{/each}}</div></figure>
             {{#if this.review}}<blockquote class="up2-ctx__rv"><p>{{{ph this.review.quote}}}</p><footer>{{this.review.who}} · รีวิวจากแชทจริง</footer></blockquote>{{/if}}
             <a class="cb cb--p hm-line-cta up2-ctx__line" href="{{this.line}}" data-track="line" data-where="use-context-{{this.id}}"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ขอราคาเสื้อแบบนี้</span></a>
           </div>

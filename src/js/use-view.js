@@ -16,6 +16,15 @@ const BENEFIT_ICO = [
 /** H1 หน้ากลุ่ม "คำหลัก / คำค้น / คำค้น" → คำหลักตัวใหญ่ + คำค้นบรรทัดรอง (2 พ.ย. รอบ 64 · ข้อความใน H1 ครบเหมือนเดิม) */
 export const h1Parts = (h) => { const [main, ...rest] = String(h || '').split(' / '); return { main, rest: rest.join(' / ') } }
 
+/** 13 พ.ย. หัวข้อ hero หน้ากลุ่มโฉมใหม่: แบ่งคำหลัก (ใหญ่ ดำ) กับคำต่อท้าย (บรรทัดรอง ส้ม) ตามที่ตั้งใน use-v2.json hero.h1Main
+ *  ข้อความ H1 ไม่เปลี่ยน · sep = ตัวคั่นเดิมระหว่างสองส่วน (" / " หรือเว้นวรรค) ใส่ไว้ให้โปรแกรมอ่านจอ · แบ่งไม่ได้ = null */
+export const h1Split = (h, main) => {
+  const s = String(h || '')
+  if (!main || !s.startsWith(main) || s.length === main.length) return null
+  const tail = s.slice(main.length), sep = tail.startsWith(' / ') ? ' / ' : ' '
+  return { main, rest: tail.slice(sep.length).trim(), sep, sub: true }
+}
+
 /** ไอคอนของโจทย์คนสั่ง (2 พ.ย. รอบ 64) · คำเฉพาะก่อนคำกว้าง */
 const PAIN_ICO = [
   [/ไซซ์|ชั้นปี/, 'Ruler'], [/โลโก้|ตรา|สปอนเซอร์|เอกลักษณ์|ธีม|สีและโลโก้|แบบไม่เหมือน|เริ่มแบบ/, 'Pen'],

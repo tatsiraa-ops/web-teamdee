@@ -13,7 +13,7 @@ import { workOf, WORK } from './src/js/design-filter.js'
 import { buildRealGrid } from './src/js/real-grid.js'
 import { parseStat } from './src/js/count-up.js'
 import { productView, pending } from './src/js/product-view.js'
-import { useView, fullRows } from './src/js/use-view.js'
+import { useView, fullRows, h1Split } from './src/js/use-view.js'
 import { useCta, lineMessageUrl, pageLineText, REORDER_TEXT, TRACK_TEXT } from './src/js/use-cta.js'
 import { faqAskText } from './src/js/faq-search.js'
 import { prunePending } from './src/js/prune.js'
@@ -331,6 +331,8 @@ const loadData = () => ({
       items,
       faces: items.filter((x) => x.r >= 0.9 && x.r <= 1.1).slice(0, 3).map((x) => x.thumb),
       groups: Object.fromEntries(ids.map((id) => [id, mix(pool.filter((x) => (x.groups || []).includes(id))).slice(0, 30).map(view)])),
+      /* 12 พ.ย. หน้าร้านค้า (อาร์ต "1-4 มาก่อน" ข้อ 2): กลุ่มที่รูป q3 ไม่พอ ใช้รูปที่กลุ่มหลัก (primary) เป็นกลุ่มนั้น คุณภาพ 2 ขึ้นไป · use-v2.json reviewWall.from = "primary" */
+      primary: Object.fromEntries(ids.map((id) => [id, mix(lib.filter((x) => x.kind === 'customer' && x.q >= 2 && x.w && x.h && (x.alt || x.occ) && (x.primary || []).includes(id)).sort((a, b) => b.q - a.q || a.path.localeCompare(b.path))).slice(0, 30).map(view)])),
     }
   })(),
   homeUseRows: (() => {
@@ -942,26 +944,48 @@ export default defineConfig({
               const poloPr = json('prices.json').products.polo
               const bandLabel = (b) => b.max ? `${b.min.toLocaleString('en-US')}–${b.max.toLocaleString('en-US')}` : `${b.min.toLocaleString('en-US')} ขึ้นไป`
               /* 12 พ.ย. รอบ 213/216: บอร์ดราคาทุกผ้า × ทุกช่วงจำนวน (pp2PoloFabric.hbs) · ลำดับคอลัมน์ = prices.json cols = polo.json fabrics (เทส) */
-              const poloMatrix = v.poloFabric ? { rows: poloPr.bands.map((b) => ({ label: bandLabel(b), cells: poloPr.cols.map((c) => ({ id: c.id, price: b.price[c.id] })) })) } : null
+              const poloMatrix = v.poloFabric ? { rows: poloPr.bands.map((b) => ({ label: bandLabel(b), /* sh = ป้ายย่อหัวคอลัมน์บนมือถือ "10+" (ตารางราคาเห็นครบทุกช่วง · 13 พ.ย.) */ sh: `${bandLabel(b).split(/[–\s]/)[0]}+`, cells: poloPr.cols.map((c) => ({ id: c.id, price: b.price[c.id] })) })) } : null
+              const poloUseIcons = {
+                'เสื้อกิจกรรม': 'use-flags', 'เสื้อกิจกรรม / อีเวนต์': 'use-flags', 'กีฬาสี': 'use-sport', 'งานอีเวนต์': 'use-event', 'ยูนิฟอร์มจำนวนมาก': 'use-uniform',
+                'เสื้อบริษัท': 'use-corp', 'ยูนิฟอร์มออฟฟิศ': 'use-uniform', 'งานที่ต้องการทรงชัด': 'use-fashion',
+                'ฝ่ายต้อนรับ': 'use-team', 'บัญชี': 'use-work', 'การเงิน': 'use-work', 'บัญชี / การเงิน': 'use-work', 'หน่วยงานที่เน้นลุคภูมิฐาน': 'use-corp',
+                'งานกลางแจ้ง/กิจกรรม': 'use-flags', 'งานออนไซต์ที่ขยับตัวบ่อย': 'use-craft',
+                'ยูนิฟอร์มผู้บริหาร': 'use-work', 'เสื้อองค์กรบริษัทใหญ่': 'use-corp', 'เน้นภาพลักษณ์': 'use-fashion',
+                'ทีมภาคสนาม': 'use-craft', 'เสื้อองค์กร': 'use-corp', 'งานกลางแจ้งที่ใช้งานหนัก': 'use-craft',
+              }
+              const poloUseGroups = {
+                juti: ['เสื้อกิจกรรม / อีเวนต์', 'กีฬาสี', 'ยูนิฟอร์มจำนวนมาก'],
+                tricot: ['ยูนิฟอร์มออฟฟิศ', 'ฝ่ายต้อนรับ', 'บัญชี / การเงิน'],
+              }
               const poloFabric = v.poloFabric ? { ...v.poloFabric, matrix: poloMatrix, minQty: P.minQty, fabrics: P.fabrics.map((f) => {
                 if (!poloPr.cols.some((c) => c.id === f.id)) throw new Error(`polo.json: ผ้า ${f.id} ไม่มีใน prices.json products.polo`)
                 const prices = poloPr.bands.map((b) => ({ label: bandLabel(b), price: b.price[f.id] }))
                 if (prices.some((x) => typeof x.price !== 'number')) throw new Error(`prices.json polo: ราคา ${f.id} ไม่ครบ`)
-                return { ...f, img: `/img/emb-fabric/${f.id}`, useTags: f.use.split(/\s+/).filter(Boolean), hero: existsSync(resolve(root, `public/img/emb-fabric/${f.id}-1120.webp`)) ? `/img/emb-fabric/${f.id}-1120.webp` : `/img/emb-fabric/${f.id}-560.webp`, prices, from: Math.min(...prices.map((x) => x.price)), main: f.colors.filter((c) => !c.base), base: f.colors.filter((c) => c.base),
+                return { ...f, img: `/img/emb-fabric/${f.id}`, useTags: (poloUseGroups[f.id] || f.use.split(/\s+/).filter(Boolean)).map(label => ({ label, icon: `/img/icons/${poloUseIcons[label] || 'use-team'}.webp` })), hero: existsSync(resolve(root, `public/img/emb-fabric/${f.id}-1120.webp`)) ? `/img/emb-fabric/${f.id}-1120.webp` : `/img/emb-fabric/${f.id}-560.webp`, prices, from: Math.min(...prices.map((x) => x.price)), main: f.colors.filter((c) => !c.base), base: f.colors.filter((c) => c.base),
                   ask: lineMessageUrl(`ขอตัวอย่าง${f.name}\nสีที่สนใจ: \nจำนวนที่จะสั่งประมาณ:  ตัว`) }
               }) } : null
-              const poloSpec = v.poloSpec ? { ...v.poloSpec, spec: P.spec, minQty: P.minQty,
+              const poloSpecVisuals = {
+                logo: { art: '/img/icons/dz-logo.webp' },
+                collar: { art: '/img/emb-guide/col-1.webp', detail: true },
+                sleeve: { art: '/img/emb-guide/slv-1.webp', detail: true },
+                shoulder: { measure: '0.5' },
+                button: { art: '/img/icons/dz-option.webp' },
+                slit: { measure: '2' },
+              }
+              const poloSpec = v.poloSpec ? { ...v.poloSpec, spec: P.spec.map(item => ({ ...item, ...poloSpecVisuals[item.k] })), minQty: P.minQty,
                 /* 12 พ.ย. รอบ 213: ปุ่มเดียวท้ายส่วน · ข้อความตั้งต้นมีช่องให้กรอกแบบที่เลือกครบ 5 กลุ่ม */
                 ask: lineMessageUrl(`สนใจเสื้อโปโลปัก\nปก: \nสาบ: \nปลายแขน: \nกระเป๋า: \nตัดต่อ: \nจำนวนประมาณ:  ตัว`),
                 /* 12 พ.ย. คู่มือสั่งเสื้อโปโลปัก TEAMDEE (polo.json guide): ตำแหน่งปัก + รายละเอียดเสื้อ 5 กลุ่ม · ภาพครอปจากคู่มือ public/img/emb-guide */
                 guide: P.guide ? (() => {
-                  const g = P.guide, dim = (img) => img.startsWith('pkt-') ? [270, 235] : img.startsWith('pos-') ? [334, 207] : [335, 300]
+                  const g = P.guide, dim = (img) => img.startsWith('pkt-') ? [270, 235] : img === 'pos-6' ? [670, 364] /* 13 พ.ย. ภาพงานปักจริงแทนแพตช์ที่มีเบอร์โทรลูกค้า */ : img.startsWith('pos-') ? [334, 207] : [335, 300]
                   const pic = (x) => { const src = `/img/emb-guide/${x.img}.webp`; if (!existsSync(resolve(root, 'public' + src))) throw new Error(`polo.json guide: ไม่มีภาพ ${src}`); const [w, h] = dim(x.img); return { ...x, src, w, h } }
-                  return { ...g, positions: g.positions.map(pic), groups: g.groups.map((grp) => ({ ...grp, items: grp.items.map(pic) })) }
+                  return { ...g, positions: g.positions.map((position) => ({ ...pic(position), size: position.s.startsWith('กว้างไม่เกิน ') ? position.s.replace('กว้างไม่เกิน ', '') : null, special: position.img === 'pos-6' })), specialAsk: lineMessageUrl('สนใจงานปักพิเศษ\nแบบหรือโลโก้: \nตำแหน่งและขนาดที่ต้องการ: \nจำนวนเสื้อ:  ตัว'), groups: g.groups.map((grp) => ({ ...grp, items: grp.items.map(pic) })) }
                 })() : null } : null
               const vSizes = v.sizes && v.sizes.from === 'polo.json' ? { ...v.sizes, adult: P.sizes.men, kids: P.sizes.women, tol: P.sizes.tol, measure: P.sizes.measure, noteA: P.sizes.menNote, noteB: P.sizes.womenNote } : v.sizes
               /* ตารางไซซ์ (6 พ.ย.): ทรงที่ยังไม่มีตาราง → ปุ่ม LINE ขอตารางของทรงนั้น (ข้อความตั้งต้นมีแค่ชื่อทรง) */
-              const sizes = vSizes ? { labA: 'ผู้ใหญ่', labB: 'เด็ก', ...vSizes, def: vSizes.adult.find((r) => r[0] === 'M'), others: (vSizes.others || []).map((o) => ({ ...o, ask: lineMessageUrl(`ขอตารางไซซ์${o.name}\nจำนวนประมาณ:  ตัว`) })) } : null
+              /* 13 พ.ย. ส่วนไซซ์ v2 (หน้าปัก): ภาพเสื้อแยกทรง + ค่าตั้งต้นของแต่ละทรง (M) · padB = ช่องว่างให้ตารางกลุ่มที่สองคอลัมน์ตรงกับกลุ่มแรก */
+              const szDef = (rows) => rows.find((r) => r[0] === 'M') || rows[0]
+              const sizes = vSizes ? { labA: 'ผู้ใหญ่', labB: 'เด็ก', ...vSizes, figs: (vSizes.figs || []).map((g) => ({ ...g, def: szDef(g.g === 'kids' ? vSizes.kids : vSizes.adult) })), padB: vSizes.v2 ? Array.from({ length: Math.max(0, vSizes.adult.length - vSizes.kids.length) }, () => 1) : [], def: vSizes.adult.find((r) => r[0] === 'M'), others: (vSizes.others || []).map((o) => ({ ...o, ask: lineMessageUrl(`ขอตารางไซซ์${o.name}\nจำนวนประมาณ:  ตัว`) })) } : null
               /* เสื้อจริงใส่หุ่น (6 พ.ย.): คำบรรยายจาก home-work-showcase · แบบ 3D ก่อนผลิตจาก download-designs proofs · รหัสจาก designs.json (ไม่มีในคลัง = ไม่ใส่รหัส) */
               const real = v.real ? (() => {
                 const man = json('home-work-showcase.json').mannequin, proofs = json('download-designs.json').proofs
@@ -998,7 +1022,11 @@ export default defineConfig({
               /* 11 พ.ย. คลังรีวิว (อาร์ต "เพิ่มคลังรีวิว"): รูปลูกค้าคละทุกกลุ่มจากคลังกลาง ไม่ซ้ำรูปที่ส่วนอื่นของหน้านี้ใช้ · น้อยกว่า 24 = build พัง */
               const reviewWall = v.reviewWall ? (() => {
                 const usedHere = JSON.stringify({ v, proof, reviews, real, steps })
-                const items = data.reviewWall.items.filter((x) => !usedHere.includes(x.img.replace(/\.webp$/, '')))
+                /* 13 พ.ย. ตรวจหน้าปัก: reviewWall.first = กลุ่มที่ขึ้นก่อน (หน้าปัก = corp ตรงกับคนสั่งโปโล) แล้วตามด้วยรูปคละกลุ่มเดิม ไม่ซ้ำ */
+                const lead = v.reviewWall.first ? (data.reviewWall.groups[v.reviewWall.first] || []) : []
+                if (v.reviewWall.first && lead.length < 12) throw new Error(`pp-v2.json reviewWall.first: กลุ่ม ${v.reviewWall.first} รูปไม่พอ (${lead.length})`)
+                const seen = new Set()
+                const items = [...lead, ...data.reviewWall.items].filter((x) => !usedHere.includes(x.img.replace(/\.webp$/, '')) && !seen.has(x.img) && seen.add(x.img)).slice(0, 60)
                 if (items.length < 24) throw new Error(`pp-v2.json reviewWall: รูปไม่พอ (${items.length})`)
                 return { ...v.reviewWall, items }
               })() : null
@@ -1091,6 +1119,8 @@ export default defineConfig({
           /* โฉมใหม่ทีละส่วน (อาร์ต 3 พ.ย. "ทำแบบหน้าแรก" · src/data/use-v2.json · เริ่มที่ /corporate/) · แท็บบริบทใช้รูปลูกค้าจริง คำบรรยาย = occ */
           const v2 = json('use-v2.json')[id] || null
           const v2Photo = (k) => {
+            /* 13 พ.ย. แท็บที่ใช้ภาพถ่ายเสื้อจริงจากคลัง Packshot ใส่เป็น { img, small, alt } ตรงๆ (ไม่ใช่รหัสรูปลูกค้า) */
+            if (k && typeof k === 'object') { for (const f of [k.img, k.small]) if (!existsSync(resolve(root, 'public' + f))) throw new Error(`use-v2.json: ไม่มีรูป ${f}`); return { ...k, cap: k.alt } }
             const c = cs.find((x) => x.img === `/img/customer/${k}.webp`)
             if (c) return { img: c.img, small: c.imgSmall || c.img, alt: c.occ, cap: c.occ }
             const ctx = contextPhotos.find((x) => x?.img.includes(`/${k}`))
@@ -1123,7 +1153,8 @@ export default defineConfig({
           /* ภาพประกอบส่วน "ทำไมทีมดี" (2 พ.ย. รอบ 64): รูปถัดจาก 24 รูปที่แสดง ไม่ซ้ำกับรูปอื่นบนหน้า · กลุ่มที่รูปไม่ถึงไม่มีภาพ */
           const benefitPhoto = groupPhotos.filter((c) => !workCards.some((w) => w.img === c.img))[24] || null
           /* รีวิวตรงกลุ่ม (อาร์ตเคาะ 2 พ.ย.): ร้านค้า รีสอร์ท · หน่วยงาน โรงพยาบาลกับ NT · รุ่นและคณะยังไม่มีรีวิวตรงกลุ่ม = ซ่อน · วิ่ง กลุ่มนักวิ่งขึ้นก่อน · ที่เหลือตาม REVIEW_USE */
-          const REVIEW_PICK = { shop: ['resort'], gov: ['hospital', 'nt-snooker'], class: [], faculty: [], running: ['runners'], badminton: ['krungthai-badminton'] }
+          /* 14 พ.ย. หน้าเสื้อกีฬาโฉมใหม่: ทีมว่ายน้ำ + ทีมฟุตบอลบริษัท (np-connect) + ชมรมแบด · ไม่ใช้ runners (ของหน้าวิ่ง) */
+          const REVIEW_PICK = { shop: ['resort'], gov: ['hospital', 'nt-snooker'], class: [], faculty: [], running: ['runners'], badminton: ['krungthai-badminton'], sport: ['swim-kids', 'np-connect', 'krungthai-badminton'], event: ['outing-fabric', 'hr-outing', 'shrine'] }
           const useReviews = REVIEW_PICK[id] ? REVIEW_PICK[id].map((rid) => reviewItems().find((r) => r.id === rid)) : pickReviews(REVIEW_USE[id], 3, true)
           /* ภาพที่ขึ้นในกล่อง "จากภาพแบบ สู่เสื้อจริง" แล้วไม่ซ้ำในแบบเสื้อ (2 พ.ย.: 3d-082 brand-064) */
           const inProof = new Set(downloadAssetsFor('use', id, data.designs)?.proofs.flatMap((p) => [p.design?.img, p.real?.img]))
@@ -1142,17 +1173,48 @@ export default defineConfig({
             /* 11 พ.ย. กลุ่มที่อาร์ตเคาะรีวิวไว้ (REVIEW_PICK เช่น ร้านค้า = resort) ใช้เฉพาะรายการนั้น ไม่ยืมรีวิวองค์กร */
             const corpRv = reviewItems().filter((r) => (REVIEW_PICK[id] ? REVIEW_PICK[id].includes(r.id) : r.use === REVIEW_USE[id]) && r.img)
             v2.reviews.items = corpRv.map((r) => { const g = r.gallery?.length ? r.gallery : [{ img: r.img, imgSmall: r.imgSmall }]; return { ...r, total: g.length, mono: [...(r.who || r.kind)].find((c) => !'เแโใไ'.includes(c)) } })
+            /* 13 พ.ย. รีวิวไม่เกิน 2 ราย แสดงครบทุกใบ ไม่ใช้ปุ่มเลื่อน (อาร์ต: ข้อมูลหลักไม่ซ่อนหลังการกด) */
+            v2.reviews.few = v2.reviews.items.length <= 2
             for (const w of v2.reviews.wall) if (w.review) { const r = corpRv.find((x) => x.id === w.review); w.who = r.who || r.kind; w.alt = `งานจริงจากรีวิว ${w.who}` }
           }
           /* ผลงานโฉมใหม่: โชว์รูมหน้าแรก · แถวที่มี from = รูปบนหุ่นชุดหน้าแรก (home-work-showcase.json byType) */
           /* 11 พ.ย. คลังรีวิว (อาร์ต "เพิ่มคลังรีวิวตรงนี้"): use-v2.json reviewWall · รูปลูกค้ากลุ่มนี้จากคลังกลาง ไม่ซ้ำรูปที่หน้านี้ใช้แล้ว · น้อยกว่า 12 รูป = build พัง */
           if (v2?.reviewWall) {
             const inReviews = JSON.stringify(v2.reviews || {}) /* รูปในการ์ด/แกลเลอรีรีวิว */
-            const items = (data.reviewWall.groups[id] || []).filter((x) => !onPage.has(x.img) && !inReviews.includes(x.img.replace(/\.webp$/, '')))
+            /* exclude = ชื่อไฟล์ที่ไม่เอาเข้าคลัง (รูปมุมซ้ำ หรืองานเดียวกับรูปในส่วนรีวิวที่อยู่ติดกัน · 13 พ.ย.) */
+            const skip = new Set(v2.reviewWall.exclude || [])
+            const fresh = (x) => !onPage.has(x.img) && !inReviews.includes(x.img.replace(/\.webp$/, '')) && !skip.has(x.img.split('/').pop().replace(/\.webp$/, ''))
+            let items = (data.reviewWall[v2.reviewWall.from === 'primary' ? 'primary' : 'groups'][id] || []).filter(fresh)
+            /* fill = กลุ่มที่เติมต่อท้ายเมื่อรูปกลุ่มนี้ไม่พอ (ร้านค้า → พนักงานบริษัท · หัวข้อต้องบอกทั้งสองกลุ่ม) */
+            if (v2.reviewWall.fill) items = [...items, ...(data.reviewWall.groups[v2.reviewWall.fill] || []).filter((x) => fresh(x) && !items.some((y) => y.img === x.img))].slice(0, 30)
             if (items.length < 12) throw new Error(`use-v2.json ${id}.reviewWall: รูปไม่พอ (${items.length})`)
             v2.reviewWall = { ...v2.reviewWall, items }
           }
-          if (v2?.showroom) v2.showroom = v2.showroom.rows.map((r) => ({ ...r, items: r.items || json('home-work-showcase.json').byType[r.from] }))
+          /* 12 พ.ย. โลโก้ตามกลุ่ม (อาร์ต "1-4 มาก่อน" ข้อ 3): แถวแรก = โลโก้ของกลุ่มนี้ (use-v2.json logoFirst) แถวสอง = ที่เหลือ · โลโก้ชุดเดิมที่อาร์ตอนุมัติ 22 ต.ค. ไม่เพิ่มใหม่ */
+          if (v2?.logoFirst && json('home.json').logos.show) {
+            const fit = readdirSync(resolve(root, 'public/img/client-fit')).filter((f) => /\.(png|svg|webp)$/.test(f)).sort()
+            const names = json('client-logos.json'), key = (f) => f.replace(/\.\w+$/, ''), view = (f) => ({ img: `/img/client-fit/${f}`, alt: names[key(f)] || '' })
+            const first = v2.logoFirst.ids.map((c) => { const f = fit.find((x) => key(x) === c); if (!f) throw new Error(`use-v2.json ${id}.logoFirst: ไม่มีโลโก้ ${c}`); return f })
+            v2.logoRows = [first.map(view), fit.filter((f) => !first.includes(f)).map(view)]
+          }
+          /* 13 พ.ย. หัวข้อ hero: คำหลัก + บรรทัดรองสีส้ม (use-v2.json hero.h1Main) · ข้อความ H1 เดิม */
+          if (v2?.hero?.h1Main) { const sp = h1Split(up.hero.h1, v2.hero.h1Main); if (!sp) throw new Error(`use-v2.json ${id}.hero.h1Main ไม่ตรงต้น H1`); up.hero.h1p = sp }
+          /* 13 พ.ย. ส่วนตรวจตัวอย่าง → ตรวจก่อนแพ็ก → จัดส่ง (อาร์ต "เอาแค่ส่วน C") · ข้อเท็จจริงจากคู่มือโปโลปัก (polo.json guide) ที่เดียว ไม่พิมพ์ซ้ำ · หัวการ์ด/รูปจาก use-v2.json _check */
+          if (v2?.check) {
+            const c = json('use-v2.json')._check, g = json('polo.json').guide
+            const tier = (t) => { const [when, ...what] = t.split(' · '); return { when, what: what.join(' · ') } }
+            const pic = (x) => ({ ...x, img: `${x.img}-1280.webp`, small: `${x.img}-640.webp` })
+            for (const k of ['sample', 'qa', 'ship']) for (const f of [`${c[k].img}-1280.webp`, `${c[k].img}-640.webp`]) if (!existsSync(resolve(root, 'public' + f))) throw new Error(`use-v2.json _check: ไม่มีรูป ${f}`)
+            v2.check = {
+              ...v2.check, note: c.note, printTag: c.printTag, cta: c.cta, claim: g.delivery.claim,
+              line: lineMessageUrl(`สวัสดี ทีมดี ${c.brief}\nจำนวนประมาณ:  ตัว\n(จากหน้า ${url('uses', id)})`),
+              sample: { ...pic(c.sample), tiers: [tier(g.sample.lt100), tier(g.sample.ge100)], checks: g.sample.check, pay: g.sample.pay.split(' · ') },
+              qa: { ...pic(c.qa), items: g.qa },
+              ship: { ...pic(c.ship), ways: g.delivery.ways, notes: g.delivery.note.split(' · ') },
+            }
+          }
+          /* 13 พ.ย. แถวที่มีทั้ง items และ from = รูปของกลุ่มนี้ขึ้นก่อน แล้วตามด้วยชุดกลาง (ภาพถ่ายเสื้อจริงจากคลัง Packshot) */
+          if (v2?.showroom) v2.showroom = v2.showroom.rows.map((r) => ({ ...r, items: [...(r.items || []), ...(r.from ? json('home-work-showcase.json').byType[r.from] : [])] }))
           /* บริการของเรา (โฉมใหม่): การ์ดสินค้าเดิม + รูปบริการตามสินค้า */
           if (v2?.products) v2.products.cards = up.products.cards.map((c) => ({ ...c, photo: v2.products.photos[c.to.split('.')[1]] }))
           /* ปุ่ม v22 เปิด LINE พร้อมเรื่องที่ v22 ส่งให้ทีมขาย */

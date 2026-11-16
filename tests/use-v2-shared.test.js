@@ -18,7 +18,7 @@ test('partial up2* ไม่มีคำของกลุ่มบริษั�
 
 test('/corporate/ หัวข้อสีส้มเหมือนเดิมทุกส่วนหลังย้ายคำไปไว้ในข้อมูล', () => {
   const hl = [...main('corporate').matchAll(/<h2[^>]*>[\s\S]*?<span class="hm-hl">([\s\S]*?)<\/span><\/span>[\s\S]*?<\/h2>/g)].map((m) => text(m[1]))
-  assert.deepEqual(hl, ['ไว้วางใจทีมดี', 'มากกว่าเลือกแบบ', 'แต่ละลักษณะธุรกิจ', 'งานของบริษัทคุณ?', 'เหมาะกับทีม?', 'คนใส่เสื้อบริษัท', 'ใส่เสื้อทีมดี', 'เสื้อบริษัทที่ผลิตจริง', 'จัดการง่ายขึ้น?', 'เสื้อบริษัท', 'นนทบุรี'])
+  assert.deepEqual(hl, ['ไว้วางใจทีมดี', 'มากกว่าเลือกแบบ', 'แต่ละลักษณะธุรกิจ', 'งานของบริษัทคุณ?', 'เหมาะกับทีม?', 'คนใส่เสื้อบริษัท', 'ใส่เสื้อทีมดี', 'เสื้อบริษัทที่ผลิตจริง', /* 13 พ.ย. ส่วนตรวจตัวอย่าง-ตรวจก่อนแพ็ก-จัดส่ง (tests/use-check.test.js) */ 'ตรวจอีกรอบก่อนส่ง', 'จัดการง่ายขึ้น?', 'เสื้อบริษัท', 'นนทบุรี'])
   assert.match(main('corporate'), /id="corp-review-wall"/)
 })
 
@@ -64,5 +64,6 @@ test('hero หน้ากลุ่มจอ 1024–1179: หัวข้อย�
 test('แถบแท็บบริบท: จำนวนคอลัมน์ตามจำนวนแท็บ การ์ดกว้างเท่ากันทุกหน้า จัดกลาง', () => {
   const css = readFileSync('src/styles/use-page.css', 'utf8')
   assert.match(css, /\.up2-ctx__shelf \{[^}]*grid-template-columns: repeat\(var\(--n, 6\), minmax\(0, calc\(\(100% - 70px\) \/ 6\)\)\)[^}]*justify-content: center/)
-  for (const [f, n] of [['corporate', 6], ['custom-staff-shirts', 3]]) assert.match(main(f), new RegExp(`class="up2-ctx__shelf"[^>]*style="--n:${n}"`), f)
+  /* 13 พ.ย. ร้านค้ามี 4 แท็บ (เพิ่มร้านสัตว์เลี้ยง) · หน่วยงาน 6 แท็บ (เพิ่มรัฐวิสาหกิจ กองทัพ ชุมชน) · โรงเรียน 4 แท็บ (เพิ่มเสื้อรุ่น ม.6) */
+  for (const [f, n] of [['corporate', 6], ['custom-staff-shirts', 4], ['custom-organization-shirts', 6], ['education', 4], ['custom-university-shirts', 5], ['custom-class-shirts', 4], ['sport', 4], ['custom-badminton-shirts', 4], ['custom-running-shirts', 4], ['event', 4]]) assert.match(main(f), new RegExp(`class="up2-ctx__shelf"[^>]*style="--n:${n}"`), f)
 })

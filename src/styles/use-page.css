@@ -227,6 +227,12 @@ ul.pp-photos.m-rail.is-open + .m-rail-controls { display: none; }
 @media (min-width: 1024px) and (max-width: 1179px) {
   .up2-hero .th-o__h { font-size: 2.85vw; }
 }
+/* 13 พ.ย. บรรทัดรองของหัวข้อ hero (use-v2.json hero.h1Main · หน่วยงาน โรงเรียน ร้านค้า): คำต่อท้ายยาว → เล็กกว่าคำหลัก อยู่บรรทัดเดียวบนจอใหญ่ หัวข้อรวม 2 บรรทัดแบบหน้าบริษัท */
+.up2-hero .th-o__accent--sub { margin-top: .32em; font-size: .6em; line-height: 1.3; letter-spacing: 0; }
+@media (min-width: 1024px) {
+  .up2-hero .th-o__accent--sub { white-space: nowrap; }
+}
+@media (max-width: 1023px) { .up2-hero .th-o__accent--sub { font-size: .68em; text-wrap: balance; } }
 /* 11 พ.ย. หัวข้อ hero ยาว (โรงเรียน 3 บรรทัด) ล้นแบนเนอร์ที่ 1280/1440 → use-v2.json hero.compact = หัวข้อเล็กลงเฉพาะหน้านั้น */
 @media (min-width: 1024px) {
   .up2-hero--compact .th-o__h { font-size: clamp(26px, 2.55vw, 48px); }
@@ -467,6 +473,8 @@ body:has(.up2-hero) #main #up2-ctx { padding: 64px 0 56px; }
 .up2-show__kind { display: inline-flex; align-items: center; align-self: center; min-height: 28px; padding: 3px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; line-height: 1.2; white-space: nowrap; }
 .up2-show__kind--3d { border: 1.5px solid #d6cfc7; background: #fff; color: var(--color-ink); }
 .up2-show__kind--real { background: var(--color-ink); color: #fff; }
+/* 13 พ.ย. แถวภาพจำลอง (คนใส่เสื้อแบบจริงของกลุ่ม) · ป้ายพื้นส้มอ่อน ตัวน้ำตาลเข้ม ต่างจากแบบ 3D (ขาว) และภาพถ่ายจริง (ดำ) */
+.up2-show__kind--mock { background: #FFF1E6; color: #8A3600; }
 #real-work .hm-show__row.up2-show--real { margin-top: 44px; padding-top: 36px; border-top: 1px solid #ebe5de; }
 @media (max-width: 767px) {
   .up2-show__kind { min-height: 26px; padding: 2px 10px; font-size: 12.5px; }
@@ -486,3 +494,81 @@ body:has(.up2-hero) #main #up2-ctx { padding: 64px 0 56px; }
 .up2-show-ctl button[aria-disabled="true"] { opacity: .3; cursor: default; }
 @media (hover: hover) { .up2-show-ctl button:not([aria-disabled="true"]):hover { border-color: var(--color-orange); } }
 .up2-show-ctl button:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+
+/* ตรวจตัวอย่าง → ตรวจก่อนแพ็ก → จัดส่ง (13 พ.ย. 2026 อาร์ต "เอาแค่ส่วน C") · up2Check.hbs · ความกว้างพิเศษ 1400 (รูป 3 ใบ)
+   การ์ดรูป + แถบไล่ส้ม หัวข้อขาว + ป้ายเลขขั้นพื้นขาวตัวดำ · ลูกศรส้มตัวดำเชื่อมขั้น (จอ 1024 ขึ้นไป) · จอเล็กเรียงลงมา เนื้อหาครบ */
+.up2-chk { padding: 48px 0 56px; background: #fff; }
+.up2-chk > .wrap { width: calc(100% - 64px); max-width: 1400px; padding-inline: 0; }
+.up2-chk__head { text-align: center; margin-bottom: 20px; }
+.up2-chk__head h2 { margin: 0; font-size: clamp(28px, 3.1vw, 44px); font-weight: 800; line-height: 1.3; color: var(--color-ink); text-wrap: balance; }
+.up2-chk__head p { margin: 4px 0 0; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; color: var(--color-ink-2); }
+.up2-chk__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
+.up2-chk__card { position: relative; display: flex; flex-direction: column; min-width: 0; border-radius: 24px; background: var(--color-shell); box-shadow: inset 0 0 0 1px var(--color-line); }
+.up2-chk__ph { position: relative; margin: 0; }
+.up2-chk__ph img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 38%; border-radius: 24px 24px 0 0; }
+.up2-chk__no { position: absolute; top: 14px; left: 14px; display: grid; place-items: center; min-width: 46px; height: 32px; padding: 0 12px; border-radius: 999px; background: #fff; color: #000; font-size: 15px; font-weight: 800; line-height: 1; box-shadow: 0 6px 16px -8px rgb(0 0 0 / .45); }
+.up2-chk__band { position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 2px; padding: 52px 22px 14px; background: linear-gradient(180deg, rgb(240 90 0 / 0) 0%, rgb(240 90 0 / .88) 52%, #A33A00 100%); color: #fff; }
+.up2-chk__band h3 { margin: 0; font-size: clamp(22px, 1.9vw, 28px); font-weight: 800; line-height: 1.3; color: #fff; }
+.up2-chk__band span { font-size: 15px; font-weight: 600; line-height: 1.45; color: #fff; }
+.up2-chk__body { display: flex; flex: 1; flex-direction: column; gap: 12px; padding: 16px 20px 18px; }
+.up2-chk__tiers { display: grid; gap: 8px; margin: 0; }
+.up2-chk__tiers > div { display: grid; align-content: start; gap: 2px; padding: 10px 14px; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1px var(--color-line); }
+.up2-chk__tiers dt { font-size: 14.5px; font-weight: 600; line-height: 1.45; color: var(--color-ink-2); }
+.up2-chk__tiers dd { margin: 0; font-size: 16px; font-weight: 800; line-height: 1.45; color: var(--color-ink); }
+.up2-chk__chips { display: grid; gap: 6px; }
+.up2-chk__chips > span { font-size: 14.5px; font-weight: 700; line-height: 1.4; color: var(--color-ink-2); }
+.up2-chk__chips ul { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.up2-chk__chips li { padding: 4px 10px; border-radius: 10px; background: #FFF1E6; color: #8A3600; font-size: 13.5px; font-weight: 800; line-height: 1.35; }
+.up2-chk__list, .up2-chk__ways, .up2-chk__notes { display: grid; margin: 0; padding: 0; list-style: none; }
+.up2-chk__list { gap: 0; }
+.up2-chk__list li { display: grid; grid-template-columns: 26px minmax(0, 1fr); align-items: start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--color-line); font-size: 17px; font-weight: 700; line-height: 1.5; color: var(--color-ink); }
+.up2-chk__list li:last-child { border-bottom: 0; }
+.up2-chk__tick { display: block; width: 26px; height: 26px; color: var(--color-orange-text); }
+.up2-chk__ways { gap: 6px; }
+.up2-chk__ways li { display: grid; gap: 0; padding: 9px 14px; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1px var(--color-line); }
+.up2-chk__ways b { font-size: 17px; font-weight: 800; line-height: 1.45; color: var(--color-ink); }
+.up2-chk__ways span { font-size: 14.5px; line-height: 1.5; color: var(--color-ink-2); }
+.up2-chk__notes { gap: 2px; }
+.up2-chk__notes li { position: relative; padding-left: 16px; font-size: 14.5px; line-height: 1.55; color: var(--color-ink-2); }
+.up2-chk__notes li::before { content: ''; position: absolute; left: 2px; top: .7em; width: 6px; height: 6px; border-radius: 50%; background: var(--color-orange); }
+.up2-chk__print { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: auto 0 0; padding-top: 12px; border-top: 1px dashed var(--color-line-2); font-size: 15px; line-height: 1.6; color: var(--color-ink-2); }
+.up2-chk__print b { padding: 3px 10px; border-radius: 8px; background: var(--color-ink); color: #fff; font-size: 13px; font-weight: 700; line-height: 1.4; }
+.up2-chk__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 14px; padding: 12px 12px 12px 24px; border-radius: 24px; background: #FFF1E6; }
+.up2-chk__claim { display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: center; gap: 12px; flex: 1 1 320px; margin: 0; font-size: clamp(16px, 1.3vw, 18px); font-weight: 700; line-height: 1.55; color: #3D1900; }
+.up2-chk__shield { display: block; width: 30px; height: 30px; color: var(--color-orange-text); }
+.up2-chk__imgnote { margin: 10px 0 0; text-align: right; font-size: 13px; line-height: 1.5; color: var(--color-ink-3); }
+@media (min-width: 1024px) {
+  .up2-chk__card + .up2-chk__card .up2-chk__ph::before { content: ''; position: absolute; z-index: 1; top: 50%; left: -27px; width: 36px; height: 36px; margin-top: -18px; border-radius: 50%; background: var(--color-orange) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 5 7 7-7 7'/%3E%3C/svg%3E") center / 18px no-repeat; box-shadow: 0 0 0 4px #fff; }
+}
+@media (min-width: 1280px) { .up2-chk__tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 640px) and (max-width: 1023px) {
+  .up2-chk__grid { grid-template-columns: minmax(0, 1fr); }
+  .up2-chk__card { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+  .up2-chk__ph { display: grid; }
+  .up2-chk__ph img { height: 100%; aspect-ratio: auto; min-height: 280px; border-radius: 24px 0 0 24px; }
+  .up2-chk__band { border-radius: 0 0 0 24px; }
+}
+@media (max-width: 767px) {
+  .up2-chk { padding: 40px 0 48px; }
+  .up2-chk > .wrap { width: calc(100% - 32px); }
+}
+@media (max-width: 639px) {
+  .up2-chk__grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .up2-chk__ph img { aspect-ratio: 3 / 2; object-position: 50% 50%; }
+  .up2-chk__band { padding: 44px 18px 12px; }
+  .up2-chk__body { padding: 16px 16px 18px; }
+  .up2-chk__foot { padding: 16px; }
+  .up2-chk__foot .cb { width: 100%; }
+  .up2-chk__imgnote { text-align: left; }
+}
+
+/* 13 พ.ย. รีวิวไม่เกิน 2 ราย (หน่วยงาน โรงเรียน ร้านค้า): แสดงครบทุกใบเคียงกัน ไม่มีปุ่มเลื่อน · รายเดียว = การ์ดเดียวกลางจอ ไม่กว้างจนโล่ง */
+.up2-rv__board--all { max-width: 1040px; }
+.up2-rv__board--all .hm-rvb__right { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.up2-rv__board--all .hm-rvb__top { grid-column: 1 / -1; justify-content: center; }
+.up2-rv__board--all .hm-rvb__item { display: flex; margin-top: 0; }
+.up2-rv__board--all .hm-rvb__item + .hm-rvb__item { margin-top: 0; }
+.up2-rv__board--all .hm-rvb__card { flex: 1; display: flex; flex-direction: column; }
+.up2-rv__board--all .hm-rvb__acts { margin-top: auto; }
+.up2-rv__board--all .hm-rvb__item:only-of-type { grid-column: 1 / -1; width: 100%; max-width: 620px; margin-inline: auto; }
+@media (max-width: 767px) { .up2-rv__board--all .hm-rvb__right { grid-template-columns: minmax(0, 1fr); } }

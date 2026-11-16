@@ -8,7 +8,7 @@
     <nav class="crumb2 up2-hero__crumb" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">{{firstName item.name}}</span></nav>
     <div class="up2-hero__copy">
       <p class="th-o__kick">{{up.v2.hero.kicker}}</p>
-      <h1 id="up2-h1" class="th-o__h"><span class="inline-block">{{{ph up.hero.h1p.main}}}</span>{{#if up.hero.h1p.rest}}<span class="sr-only"> / </span><span class="th-o__accent">{{{ph up.hero.h1p.rest}}}</span>{{/if}}</h1>
+      <h1 id="up2-h1" class="th-o__h"><span class="inline-block">{{{ph up.hero.h1p.main}}}</span>{{#if up.hero.h1p.rest}}<span class="sr-only">{{#if up.hero.h1p.sep}}{{up.hero.h1p.sep}}{{else}} / {{/if}}</span><span class="th-o__accent{{#if up.hero.h1p.sub}} th-o__accent--sub{{/if}}">{{{ph up.hero.h1p.rest}}}</span>{{/if}}</h1>
       <p class="th-o__sub">{{up.hero.lead}}</p>
       <a class="cb cb--p cb--2l th-o__cta" href="{{cta.primary.href}}" data-track="line" data-where="use-hero"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__lbl"><span class="cb__t">{{cta.primary.label}}</span><span class="cb__sub" data-float-status><span class="cb__dot" aria-hidden="true"></span><span data-float-status-t>{{site.hours}}</span></span></span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>

@@ -8,7 +8,7 @@
   </header>
   {{#if homeV4.logoRows.length}}
   <div class="hm-marquee" data-marquee data-marquee-nobtn>
-    {{#each homeV4.logoRows}}
+    {{#each (or up.v2.logoRows homeV4.logoRows)}}
     <div class="hm-marquee__row{{#if @index}} is-reverse{{/if}}">
       <ul class="hm-marquee__track" aria-label="โลโก้ลูกค้า แถว {{inc @index}}">{{#each this}}{{#if this.img}}<li><img src="{{this.img}}" alt="{{this.alt}}" width="336" height="144" loading="lazy" decoding="async"></li>{{/if}}{{/each}}</ul>
       <ul class="hm-marquee__track" aria-hidden="true">{{#each this}}{{#if this.img}}<li><img src="{{this.img}}" alt="" width="336" height="144" loading="lazy" decoding="async"></li>{{/if}}{{/each}}</ul>

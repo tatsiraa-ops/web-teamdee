@@ -1,6 +1,6 @@
 /* /custom-staff-shirts/ ร้านค้า โฉมใหม่ · 11 พ.ย. 2026 อาร์ต "เริ่มหน้าร้านค้าได้เลย เอาหน้าบริษัทคือต้นแบบของหน้าประเภทลูกค้า"
    ใช้ partial ชุดเดียวกับ /corporate/ ทุกส่วน · ข้อมูลร้านค้า (use-pages.json shop + use-v2.json shop) · ห้ามมีคำของกลุ่มบริษัท
-   รอภาพเจน (Magnific ใช้ไม่ได้ตอนทำ): hero + ฉากแท็บบริบท · คลังรีวิวยังไม่เปิด (รูปร้านค้า q3 ไม่พอ ไม่ซ้ำกับส่วนอื่น) */
+   รอภาพเจน (Magnific ใช้ไม่ได้ตอนทำ): hero + ฉากแท็บบริบท · คลังรีวิวเปิด 12 พ.ย. (รูปร้านค้าขึ้นก่อน เติมรูปพนักงานจริง) */
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
@@ -11,9 +11,9 @@ const text = (h) => h.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')
 const pub = (s) => existsSync(new URL(`../public${s}`, import.meta.url))
 const shop = main('custom-staff-shirts')
 
-test('ร้านค้า: ส่วนเรียงตามหน้าบริษัท (ยกเว้นคลังรีวิวที่รอรูป)', () => {
-  const pending = new Set(['rvw-sec'])
-  const want = order(main('corporate')).filter((c) => !pending.has(c))
+/* 12 พ.ย. คลังรีวิวเปิดแล้ว (tests/use-segment-proof.test.js) → ไม่ยกเว้นแล้ว เรียงครบเหมือนหน้าบริษัท */
+test('ร้านค้า: ส่วนเรียงตามหน้าบริษัท', () => {
+  const want = order(main('corporate'))
   assert.deepEqual(order(shop).filter((c) => want.includes(c)), want)
   for (const id of ['plan', 'photos', 'work']) assert.doesNotMatch(shop, new RegExp(`<section[^>]*id="${id}"`), `ไม่มีส่วนเดิม #${id}`)
   for (const [, id] of shop.matchAll(/href="#([^"]+)"/g)) assert.ok(shop.includes(`id="${id}"`), `ลิงก์ #${id} ไม่มีปลายทาง`)
@@ -66,17 +66,21 @@ test('ร้านค้า: แท็บบริบท 3 ประเภทร
   assert.ok(at > shop.indexOf('id="up2-pain"') && at < shop.indexOf('id="services"'), 'อยู่ระหว่างปัญหาคนสั่งกับบริการ')
   const ctx = shop.slice(at, shop.indexOf('</section>', at))
   const tabs = [...ctx.matchAll(/role="tab"[^>]*id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1])
-  assert.deepEqual(tabs, ['retail', 'parts', 'car'])
+  /* 13 พ.ย. เพิ่มแท็บร้านสัตว์เลี้ยงจากเสื้อจริง Neko Petshop ในคลัง Packshot (อาร์ต "เจนมาเต็มที่") */
+  assert.deepEqual(tabs, ['retail', 'parts', 'car', 'pet'])
   for (const t of tabs) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/shop-${t}-${f}.webp`), `shop-${t}-${f}`)
   const scenes = [...ctx.matchAll(/class="up2-ctx__img" src="([^"]+)"[^>]*alt="([^"]+)"/g)]
-  assert.equal(scenes.length, 3); for (const [, , alt] of scenes) assert.match(alt, /^ภาพจำลอง/)
+  assert.equal(scenes.length, 4); for (const [, , alt] of scenes) assert.match(alt, /^ภาพจำลอง/)
   const lib = JSON.parse(readFileSync('src/data/media-library.json', 'utf8')).items
   const photos = [...ctx.matchAll(/class="up2-ctx__ph[^"]*"><img src="([^"]+)"/g)].map((m) => m[1])
-  assert.equal(photos.length, 6)
-  for (const s of photos) { const full = s.replace(/-(?:320|400|480)\.webp$/, '.webp'); assert.ok((lib.find((x) => x.path === full)?.groups || []).includes('shop'), `${s}: รูปร้านค้า`) }
+  assert.equal(photos.length, 8)
+  assert.equal((ctx.match(/class="up2-ctx__real">ภาพถ่ายเสื้อจริง</g) || []).length, 1, 'แท็บร้านสัตว์เลี้ยงบอกว่าเป็นภาพถ่ายเสื้อจริง')
+  for (const s of photos.filter((x) => x.includes('/use-real/'))) assert.ok(pub(s), s)
+  for (const s of photos.filter((x) => !x.includes('/use-real/'))) { const full = s.replace(/-(?:320|400|480)\.webp$/, '.webp'); assert.ok((lib.find((x) => x.path === full)?.groups || []).includes('shop'), `${s}: รูปร้านค้า`) }
   const rest = shop.slice(0, at) + shop.slice(shop.indexOf('</section>', at))
   for (const s of photos) assert.ok(!rest.includes(s.replace(/(-\d+)?\.webp$/, '')), `${s}: ไม่ซ้ำส่วนอื่น`)
   /* อาร์ต "ห้ามมั่ว": เสื้อบนแท่น = แบบร้านค้าที่ยืนยันชื่องานแล้ว · alt ระบุชื่อร้าน */
-  for (const n of ['Coin Museum Shop', 'บ้านแบตเตอรี่รถยนต์', 'AUTO QUIKS']) assert.ok(scenes.some(([, , alt]) => alt.includes(n)), n)
+  /* 13 พ.ย. คละโทน (เดิมดำ/กรมทั้ง 4 แท็บ): ร้านอะไหล่/วัสดุ = 2000 ค้าวัสดุ (น้ำเงินสด) · เต็นท์รถ = ซี โฮมคาร์ (ขาวดำเหลือง · เสื้อจริงจาก Packshot) */
+  for (const n of ['Coin Museum Shop', '2000 ค้าวัสดุ', 'ซี โฮมคาร์', 'Neko Petshop']) assert.ok(scenes.some(([, , alt]) => alt.includes(n)), n)
   for (const [, href] of ctx.matchAll(/href="(https:\/\/line\.me[^"]+)"/g)) assert.match(decodeURIComponent(href.replace(/&amp;/g, '&')), /เสื้อพนักงานร้านค้า/)
 })

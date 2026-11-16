@@ -1,0 +1,40 @@
+{{!-- ตรวจตัวอย่าง → ตรวจก่อนแพ็ก → จัดส่ง (13 พ.ย. 2026 อาร์ต "เอาแค่ส่วน C เริ่มทำมาได้ · ไปเจนใหม่ได้ครับ") · หน้ากลุ่มโฉมใหม่ทุกหน้า ต่อจากผลงานจริง ก่อน "ทำไมทีมดี"
+     เป็นลำดับจริง 3 ขั้น (ol + เลขขั้น) · การ์ดรูป + แถบไล่ส้ม หัวข้อขาว (แบบที่อาร์ตชอบ 5 พ.ย.) · เนื้อหาเห็นครบ ไม่ซ่อนหลังแท็บ
+     ข้อเท็จจริงจากคู่มือโปโลปัก (vite.config.js up.v2.check ← polo.json guide) · บรรทัดเสื้อพิมพ์ลายจาก pp-v2.json print.steps · รูปเจน = บอก "ภาพจำลอง" --}}
+{{#with up.v2.check}}
+<section class="up2-chk" id="check" aria-labelledby="up2-chk-h">
+  <div class="wrap">
+    <header class="up2-chk__head"><h2 id="up2-chk-h">{{{hl this.h this.accent}}}</h2><p>{{this.lead}}</p></header>
+    <ol class="up2-chk__grid">
+      <li class="up2-chk__card">
+        <figure class="up2-chk__ph"><img src="{{this.sample.img}}" srcset="{{this.sample.small}} 640w, {{this.sample.img}} 1280w" sizes="(min-width: 1024px) 440px, 92vw" width="1280" height="859" alt="{{this.sample.alt}}" loading="lazy" decoding="async"><span class="up2-chk__no" aria-hidden="true">01</span><figcaption class="up2-chk__band"><h3>{{this.sample.t}}</h3><span>{{this.sample.sub}}</span></figcaption></figure>
+        <div class="up2-chk__body">
+          <dl class="up2-chk__tiers">{{#each this.sample.tiers}}<div><dt>{{this.when}}</dt><dd>{{{ph this.what}}}</dd></div>{{/each}}</dl>
+          <div class="up2-chk__chips"><span>{{this.sample.checkLabel}}</span><ul>{{#each this.sample.checks}}<li>{{this}}</li>{{/each}}</ul></div>
+          <ul class="up2-chk__notes">{{#each this.sample.pay}}<li>{{{ph this}}}</li>{{/each}}</ul>
+          <p class="up2-chk__print"><b>{{this.printTag}}</b><span>{{{ph this.sample.print}}}</span></p>
+        </div>
+      </li>
+      <li class="up2-chk__card">
+        <figure class="up2-chk__ph"><img src="{{this.qa.img}}" srcset="{{this.qa.small}} 640w, {{this.qa.img}} 1280w" sizes="(min-width: 1024px) 440px, 92vw" width="1280" height="853" alt="{{this.qa.alt}}" loading="lazy" decoding="async"><span class="up2-chk__no" aria-hidden="true">02</span><figcaption class="up2-chk__band"><h3>{{this.qa.t}}</h3><span>{{this.qa.sub}}</span></figcaption></figure>
+        <div class="up2-chk__body">
+          <ul class="up2-chk__list">{{#each this.qa.items}}<li><span class="up2-chk__tick">{{> icoCheck}}</span>{{this}}</li>{{/each}}</ul>
+          <p class="up2-chk__print"><b>{{this.printTag}}</b><span>{{{ph this.qa.print}}}</span></p>
+        </div>
+      </li>
+      <li class="up2-chk__card">
+        <figure class="up2-chk__ph"><img src="{{this.ship.img}}" srcset="{{this.ship.small}} 640w, {{this.ship.img}} 1280w" sizes="(min-width: 1024px) 440px, 92vw" width="1280" height="859" alt="{{this.ship.alt}}" loading="lazy" decoding="async"><span class="up2-chk__no" aria-hidden="true">03</span><figcaption class="up2-chk__band"><h3>{{this.ship.t}}</h3><span>{{this.ship.sub}}</span></figcaption></figure>
+        <div class="up2-chk__body">
+          <ul class="up2-chk__ways">{{#each this.ship.ways}}<li><b>{{this.t}}</b><span>{{{ph this.s}}}</span></li>{{/each}}</ul>
+          <ul class="up2-chk__notes">{{#each this.ship.notes}}<li>{{{ph this}}}</li>{{/each}}</ul>
+        </div>
+      </li>
+    </ol>
+    <div class="up2-chk__foot">
+      <p class="up2-chk__claim"><span class="up2-chk__shield" aria-hidden="true">{{> icoShield}}</span><span>{{{ph this.claim}}}</span></p>
+      <a class="cb cb--p hm-line-cta" href="{{this.line}}" data-track="line" data-where="use-check"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{this.cta}}</span></a>
+    </div>
+    <p class="up2-chk__imgnote">{{this.note}}</p>
+  </div>
+</section>
+{{/with}}

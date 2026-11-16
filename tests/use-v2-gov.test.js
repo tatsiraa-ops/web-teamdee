@@ -28,12 +28,19 @@ test('หน่วยงาน: hero ภาพหน่วยงาน · ไม
 test('หน่วยงาน: แท็บ 3 ประเภท เสื้อจริงยืนยันแล้ว · รูปจริงไม่ซ้ำส่วนอื่น · รีวิวตรงแท็บ', () => {
   const at = gov.indexOf('<section class="up2-ctx"')
   const ctx = gov.slice(at, gov.indexOf('</section>', at))
-  assert.deepEqual([...ctx.matchAll(/role="tab"[^>]*id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), ['hosp', 'office', 'sports'])
-  for (const t of ['hosp', 'office', 'sports']) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/gov-${t}-${f}.webp`), `gov-${t}-${f}`)
+  /* 13 พ.ย. เพิ่ม 3 แท็บจากเสื้อจริงในคลัง Packshot (อาร์ต "เจนมาเต็มที่"): รัฐวิสาหกิจ (AEROTHAI) · กองทัพ (กรมช่างโยธาทหารอากาศ) · ชุมชน (หมู่บ้านดินไก่ทับ) */
+  const TABS = ['hosp', 'office', 'sports', 'soe', 'military', 'community']
+  assert.deepEqual([...ctx.matchAll(/role="tab"[^>]*id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
+  for (const t of TABS) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/gov-${t}-${f}.webp`), `gov-${t}-${f}`)
   const alts = [...ctx.matchAll(/class="up2-ctx__img"[^>]*alt="([^"]+)"/g)].map((m) => m[1])
-  for (const n of ['BANGKRATHUM HOSPITAL', 'กรมประชาสัมพันธ์', 'MWA']) assert.ok(alts.some((a) => a.startsWith('ภาพจำลอง') && a.includes(n)), n)
+  /* 13 พ.ย. อาร์ต "เสื้อบนแท่นในแต่ละหน้า ขอแบบคละๆโทน": แท็บรัฐวิสาหกิจเปลี่ยนจาก AEROTHAI (ฟ้า ซ้ำกับ 2 แท็บถัดไป) เป็น NT เหลืองเทา */
+  for (const n of ['BANGKRATHUM HOSPITAL', 'กรมประชาสัมพันธ์', 'MWA', 'i am nt', 'กรมช่างโยธาทหารอากาศ', 'ดินไก่ทับ']) assert.ok(alts.some((a) => a.startsWith('ภาพจำลอง') && a.includes(n)), n)
   const photos = [...ctx.matchAll(/class="up2-ctx__ph[^"]*"><img src="([^"]+)"/g)].map((m) => m[1])
-  assert.equal(photos.length, 6)
+  assert.equal(photos.length, 12)
+  /* แท็บใหม่ใช้ภาพถ่ายเสื้อจริงจาก Packshot แทนรูปลูกค้าใส่เสื้อ → ป้ายต้องบอกตรงๆ ว่าเป็นภาพถ่ายเสื้อจริง */
+  assert.equal((ctx.match(/class="up2-ctx__real">ภาพถ่ายเสื้อจริง</g) || []).length, 3)
+  assert.equal((ctx.match(/class="up2-ctx__real">รูปจริงจากลูกค้า</g) || []).length, 3)
+  for (const s of photos.filter((x) => x.includes('/use-real/'))) assert.ok(pub(s), s)
   const rest = gov.slice(0, at) + gov.slice(gov.indexOf('</section>', at))
   for (const s of photos) assert.ok(!rest.includes(s.replace(/(-\d+)?\.webp$/, '')), `${s}: ไม่ซ้ำ`)
   assert.match(ctx, /blockquote[\s\S]*โทรคมนาคมแห่งชาติ/, 'แท็บกีฬามีรีวิว NT')
