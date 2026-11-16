@@ -1,23 +1,27 @@
 /* กล่องดูรูปรีวิว (27 ต.ค. อาร์ต "กดรีวิวเพื่อดูอีกหลายๆรูปได้") · ข้อมูลจาก <script data-rv-json> ในหน้า (reviewCards / reviewMarquee)
    คอม: รูปใหญ่ซ้าย + คำรีวิว ชื่อ ปุ่ม LINE ขวา · มือถือ: รูปบน แผงล่าง · ลูกศร/ปัดซ้ายขวา/ปุ่มลูกศรคีย์บอร์ด เปลี่ยนรูป · แถบรูปย่อกดได้
    ปิด: ปุ่มปิด / Esc / กดพื้นหลัง / ปัดลง · โฟกัสกลับไปที่การ์ดที่กด (dialog เดิมของเบราว์เซอร์)
-   ท่าทาง (audit มือถือ 30 ต.ค. ข้อ 17): ใช้ swipe-pager.js ตัวเดียวกับ lightbox · ลากตามนิ้ว · บีบ/แตะสองครั้งซูมรูปแชทได้ */
+   ท่าทาง (audit มือถือ 30 ต.ค. ข้อ 17): ใช้ swipe-pager.js ตัวเดียวกับ lightbox · ลากตามนิ้ว · บีบ/แตะสองครั้งซูมรูปแชทได้
+   16 พ.ย. 2026 อาร์ต "ไม่ต้องให้ popup แบบนี้ (กล่องดำ) เอาแบบภาพสอง (กล่องนี้)": กล่องเดียวกันเปิด "ชุดรูปงานจริง" ได้ (openPhotos)
+   ใช้กับรูปลูกค้า/งานจริงทุกกริด (lightbox.js ส่งต่อมา) และโมเสกรูปในส่วนรีวิว (.hm-rvb__tile) · ชุดรูป: หัวข้อ/บรรทัดรองจาก alt ของแต่ละรูป
+   ไม่มีคำรีวิว · ปุ่ม LINE ส่งข้อความบอกภาพที่ดู · แถบรูปย่อเลื่อนแนวนอน (.is-set) · ไม่มีปุ่มเซฟ */
 import icoLineRaw from '../partials/icoLine.hbs?raw'
 import { backClose } from './back-close.js'
 import { createSwipePager } from './swipe-pager.js'
+import { lineMessageUrl } from './contact-send.js'
+import { splitCaption, photoMessage } from './photo-set.js'
 import '../styles/viewer.css'
 
 const ICO_LINE = icoLineRaw.replace(/\{\{!--[\s\S]*?--\}\}\s*/g, '')
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
 const svg = (d) => `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`
+const REVIEW_NOTE = 'รูปและข้อความจากแชทลูกค้า ลงเว็บตามที่ลูกค้าอนุญาต'
 
-export function initReviewDialog() {
-  const data = new Map()
-  document.querySelectorAll('script[data-rv-json]').forEach((s) => {
-    try { for (const r of JSON.parse(s.textContent)) data.set(r.id, r) } catch { /* ข้อมูลเสีย = การ์ดยังอ่านได้ แค่เปิดกล่องไม่ได้ */ }
-  })
-  if (!data.size) return
-
+/* กล่องเดียวทั้งหน้า สร้างตอนเปิดครั้งแรก
+   set = { kind: 'review'|'photos', pics: [{ img, imgSmall, alt? }], quote, who, small, line, note } */
+let box = null
+function ensure() {
+  if (box) return box
   const dlg = document.createElement('dialog')
   dlg.className = 'rvd'
   dlg.setAttribute('aria-labelledby', 'rvdWho')
@@ -36,7 +40,7 @@ export function initReviewDialog() {
         <div class="rvd__btns">
           <a class="cb cb--p rvd__line" href="#" data-track="line" data-where="review-dialog"><span class="cb__ico" aria-hidden="true">${ICO_LINE}</span><span class="cb__t">อยากได้เสื้อแบบนี้</span></a>
         </div>
-        <p class="rvd__note">รูปและข้อความจากแชทลูกค้า ลงเว็บตามที่ลูกค้าอนุญาต</p>
+        <p class="rvd__note"></p>
       </div>
       <button type="button" class="rvd__x" aria-label="ปิด">${svg('M18 6 6 18M6 6l12 12')}</button>
     </div>`
@@ -44,10 +48,10 @@ export function initReviewDialog() {
   const $ = (s) => dlg.querySelector(s)
   const img = $('.rvd__img')
   const thumbs = $('.rvd__thumbs')
-  let r = null
+  let set = null
   let at = 0
 
-  const pics = () => (r?.gallery?.length ? r.gallery : r?.img ? [{ img: r.img, imgSmall: r.imgSmall }] : [])
+  const pics = () => set?.pics || []
   const show = (i) => {
     const g = pics()
     const one = g.length < 2
@@ -57,23 +61,39 @@ export function initReviewDialog() {
     if (!g.length) { $('.rvd__count').textContent = ''; return }
     at = (i + g.length) % g.length
     img.src = g[at].img
-    img.alt = `${r.who || r.kind} ใส่เสื้อที่ทีมดีผลิต รูปที่ ${at + 1}`
     $('.rvd__count').textContent = one ? '' : `${at + 1} / ${g.length}`
-    thumbs.querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-current', String(k === at)))
+    if (set.kind === 'photos') {
+      /* ชุดรูป: หัวข้อ บรรทัดรอง และข้อความ LINE ตามรูปที่ดูอยู่ */
+      const c = splitCaption(g[at].alt)
+      img.alt = g[at].alt || c.title
+      $('#rvdWho').textContent = c.title
+      $('.rvd__who small').textContent = c.small
+      $('.rvd__line').href = lineMessageUrl(photoMessage(g[at].alt || c.title, location.origin, location.pathname))
+    } else {
+      img.alt = `${set.who} ใส่เสื้อที่ทีมดีผลิต รูปที่ ${at + 1}`
+    }
+    thumbs.querySelectorAll('button').forEach((b, k) => {
+      b.setAttribute('aria-current', String(k === at))
+      if (k === at && set.kind === 'photos') b.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+    })
     pager.sync()
   }
 
-  const open = (id, from) => {
-    r = data.get(id)
-    if (!r) return
-    const g = r.gallery?.length ? r.gallery : []
+  const open = (s, i, from) => {
+    set = s
+    const g = pics()
+    dlg.classList.toggle('is-set', s.kind === 'photos')
     thumbs.hidden = g.length < 2
-    thumbs.innerHTML = g.map((x, k) => `<li><button type="button" data-k="${k}" aria-label="รูปที่ ${k + 1}"><img src="${esc(x.imgSmall)}" alt="" width="120" height="80" loading="lazy"></button></li>`).join('')
-    $('.rvd__q p').textContent = r.quote
-    $('#rvdWho').textContent = r.who || r.kind
-    $('.rvd__who small').textContent = r.who ? `${r.kind} · รีวิวจากแชทจริง` : 'รีวิวจากแชทจริง'
-    $('.rvd__line').href = r.line || '#'
-    show(0)
+    thumbs.innerHTML = g.map((x, k) => `<li><button type="button" data-k="${k}" aria-label="รูปที่ ${k + 1}"><img src="${esc(x.imgSmall || x.img)}" alt="" width="120" height="80" loading="lazy"></button></li>`).join('')
+    $('.rvd__q').hidden = !s.quote
+    $('.rvd__q p').textContent = s.quote || ''
+    $('#rvdWho').textContent = s.who || ''
+    $('.rvd__who small').textContent = s.small || ''
+    $('.rvd__line').href = s.line || '#'
+    $('.rvd__line').dataset.where = s.kind === 'photos' ? 'photo-dialog' : 'review-dialog'
+    $('.rvd__note').hidden = !s.note
+    $('.rvd__note').textContent = s.note || ''
+    show(i || 0)
     dlg.showModal()
     dlg._from = from
     /* โฟกัสแรกที่ปุ่มปิด (เดิมเบราว์เซอร์เลือก "รูปก่อนหน้า" ทั้งที่อยู่รูปแรก) */
@@ -101,11 +121,45 @@ export function initReviewDialog() {
     onClose: () => dlg.close(),
   })
   dlg.addEventListener('close', () => { img.removeAttribute('src'); dlg._from?.focus?.({ preventScroll: true }); back.closed() })
+  box = { open }
+  return box
+}
+
+/** เปิดชุดรูปงานจริงในกล่องขาว · pics = [{ img (ไฟล์เต็ม), imgSmall, alt }] · from = ปุ่มที่กด (โฟกัสกลับตอนปิด) */
+export function openPhotos(pics, i = 0, from = null) {
+  if (!pics.length) return
+  ensure().open({ kind: 'photos', pics }, i, from)
+}
+
+/* รูปจากโมเสกในส่วนรีวิว: ชุด = รูปในกลุ่มที่แสดงอยู่ (figure เดียวกัน) */
+const tileSet = (tile) => {
+  const tiles = [...tile.parentElement.querySelectorAll(':scope > .hm-rvb__tile')]
+  return { at: tiles.indexOf(tile), pics: tiles.map((t) => { const im = t.querySelector('img'); return { img: im.getAttribute('src'), imgSmall: im.currentSrc || im.getAttribute('src'), alt: im.alt } }) }
+}
+
+export function initReviewDialog() {
+  const data = new Map()
+  document.querySelectorAll('script[data-rv-json]').forEach((s) => {
+    try { for (const r of JSON.parse(s.textContent)) data.set(r.id, r) } catch { /* ข้อมูลเสีย = การ์ดยังอ่านได้ แค่เปิดกล่องไม่ได้ */ }
+  })
 
   document.addEventListener('click', (e) => {
+    const tile = e.target.closest('.hm-rvb__tile')
+    if (tile) {
+      e.preventDefault()
+      const s = tileSet(tile)
+      return openPhotos(s.pics, s.at, tile)
+    }
     const b = e.target.closest('[data-rv-open]')
     if (!b) return
+    const r = data.get(b.dataset.rvOpen)
+    if (!r) return
     e.preventDefault()
-    open(b.dataset.rvOpen, b.closest('[aria-hidden="true"]') ? null : b)
+    const pics = r.gallery?.length ? r.gallery : r.img ? [{ img: r.img, imgSmall: r.imgSmall }] : []
+    ensure().open({
+      kind: 'review', pics, quote: r.quote, who: r.who || r.kind,
+      small: r.who ? `${r.kind} · รีวิวจากแชทจริง` : 'รีวิวจากแชทจริง',
+      line: r.line || '#', note: REVIEW_NOTE,
+    }, 0, b.closest('[aria-hidden="true"]') ? null : b)
   })
 }

@@ -1913,6 +1913,10 @@ button.rvc__img:focus-visible { outline: 3px solid var(--color-ink); outline-off
 .rvd__x { position: absolute; top: 14px; right: 14px; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--color-shell); color: var(--color-ink); cursor: pointer; }
 .rvd__x svg { width: 20px; height: 20px; }
 .rvd :is(button, a):focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+/* ชุดรูปงานจริง (openPhotos · 16 พ.ย. 2026): รูปเยอะ (30–60) → แถบรูปย่อแถวเดียวเลื่อนแนวนอน ไม่ดันแผงยาว */
+.rvd.is-set .rvd__thumbs { flex-wrap: nowrap; flex-shrink: 0; overflow-x: auto; margin-right: 48px; padding-right: 0; padding-bottom: 4px; scrollbar-width: thin; }
+.rvd.is-set .rvd__thumbs li { flex: none; }
+.rvd__q[hidden], .rvd__note[hidden] { display: none; }
 .rvd.is-noimg .rvd__in { grid-template-columns: minmax(0, 1fr); }
 .rvd.is-noimg .rvd__stage { display: none; }
 @media (max-width: 767px) {
@@ -1924,6 +1928,7 @@ button.rvc__img:focus-visible { outline: 3px solid var(--color-ink); outline-off
   .rvd__thumbs { flex-wrap: nowrap; flex-shrink: 0; overflow-x: auto; padding: 2px 0 4px; margin: 0 -18px; padding-inline: 18px; scrollbar-width: none; }
   .rvd__thumbs::-webkit-scrollbar { display: none; }
   .rvd__thumbs li { flex: none; }
+  .rvd.is-set .rvd__thumbs { margin-right: -18px; } /* มือถือ: ปุ่มปิดอยู่บนรูป ไม่ต้องเว้นที่ · แถบรูปย่อชิดขอบจอเหมือนรีวิว */
   .rvd__q p { font-size: 17px; }
   .rvd__x { background: rgb(255 255 255 / .92); }
 }

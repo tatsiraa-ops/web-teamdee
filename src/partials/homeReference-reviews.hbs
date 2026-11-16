@@ -10,7 +10,7 @@
       <p class="hm-rvb__lead">คำพูดจริงจากแชทลูกค้าหลังได้รับเสื้อ เลือกกลุ่มงานเพื่อดูรูปงานจริง</p>
       <div class="hm-rvb__chips" role="group" aria-label="เลือกรีวิวตามกลุ่มงาน">{{#each homeCustomerProof.boardChips}}<button type="button" data-rvb-use="{{this.use}}" aria-pressed="{{#if @first}}true{{else}}false{{/if}}">{{this.name}}</button>{{/each}}</div>
       {{#each homeCustomerProof.boardGroups}}
-      <figure class="hm-rvb__mosaic" data-rvb-group="{{this.use}}"{{#unless @first}} hidden{{/unless}}>{{#each this.photos}}<img src="{{this}}"{{#unless (eq @index 2)}}{{#unless (eq @index 4)}} data-sizes="(min-width:1024px) 200px, 33vw"{{/unless}}{{/unless}} alt="ภาพงานจริงของลูกค้ากลุ่ม{{../name}}" width="800" height="600" loading="lazy" decoding="async">{{/each}}</figure>
+      <figure class="hm-rvb__mosaic" data-rvb-group="{{this.use}}"{{#unless @first}} hidden{{/unless}}>{{#each this.photos}}<button type="button" class="hm-rvb__tile" aria-label="ดูรูปใหญ่ ภาพงานจริงของลูกค้ากลุ่ม{{../name}}"><img src="{{this}}"{{#unless (eq @index 2)}}{{#unless (eq @index 4)}} data-sizes="(min-width:1024px) 200px, 33vw"{{/unless}}{{/unless}} alt="ภาพงานจริงของลูกค้ากลุ่ม{{../name}}" width="800" height="600" loading="lazy" decoding="async"></button>{{/each}}</figure>
       {{/each}}
     </div>
     <div class="hm-rvb__right">

@@ -601,6 +601,6 @@ test('แบบเสื้อหน้าแรก: ทุกกลุ่มล
     assert.ok(existsSync(new URL(`../public${f}`, import.meta.url)), f)
     assert.match(c.b, /alt="แบบเสื้อ[^"]+ งานพิมพ์ลาย/)
   }
-  /* กล่องดูรูปเปิดโหมดสว่างให้แบบที่ไม่มีรหัสด้วย */
-  assert.match(readFileSync(new URL('../src/js/lightbox.js', import.meta.url), 'utf8'), /dlg\.classList\.toggle\('lb--design', !!code \|\| el\.dataset\.design === '1'\)/)
+  /* กล่องดูรูปเปิดโหมดสว่างให้แบบที่ไม่มีรหัสด้วย · 16 พ.ย.: กล่องแบบเสื้อสว่างเสมอ (tests/photo-dialog.test.js) */
+  assert.match(readFileSync(new URL('../src/js/lightbox.js', import.meta.url), 'utf8'), /dlg\.classList\.add\('lb--design'\)/)
 })

@@ -5,6 +5,8 @@ import '../styles/viewer.css'
 import { lineUrlFor, lineMessageUrl } from './contact-send.js'
 import { fullText } from './design-picks.js'
 import icoLineRaw from '../partials/icoLine.hbs?raw'
+import { openPhotos } from './review-dialog.js'
+import { isDesignItem } from './photo-set.js'
 
 /* ไอคอน LINE ชุดเดียวกับปุ่มเขียวทั้งเว็บ (ตัดคอมเมนต์ Handlebars ออก) */
 const ICO_LINE = icoLineRaw.replace(/\{\{!--[\s\S]*?--\}\}\s*/g, '')
@@ -97,7 +99,9 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
     const code = el.dataset.code && /^TD-/.test(el.dataset.code) ? el.dataset.code : ''
     cap.querySelector('.lb__code').textContent = code
     /* 9 พ.ย. อาร์ต "ดูไม่ตัดขาดออกจากเว็บ": แบบเสื้อที่มีรหัส = กล่องขาวลอยบนหน้าเว็บ (viewer.css .lb--design) · ชื่อทรงตัวใหญ่ รหัสบรรทัดรอง */
-    dlg.classList.toggle('lb--design', !!code || el.dataset.design === '1')
+    /* 16 พ.ย. 2026: ชุดรูปงานจริงล้วนไปกล่องรีวิวขาวแล้ว (open) · กล่องนี้เปิดเฉพาะชุดที่มีแบบเสื้อ
+       รูปไม่มีรหัสที่ปนอยู่ (เช่น เสื้อจริงหน้า /sublimation/) ก็ใช้กล่องสว่าง ไม่สลับเป็นกล่องดำกลางชุด */
+    dlg.classList.add('lb--design')
     cap.querySelector('.lb__title').textContent = code || el.dataset.design === '1' ? titleOf(src.alt) : ''
     /* แบบที่มีรหัส: ป้ายประเภท · การใช้งาน · สไตล์ เป็นชิป · รูปงานลูกค้า: คำบรรยายจาก alt */
     /* แบบเสื้อไม่มีรหัส (แกลเลอรีเว็บเดิม · data-design) ใช้ชิปเหมือนแบบมีรหัส · หมายเหตุบอกให้เซฟภาพแนบแชท */
@@ -187,6 +191,12 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
     if (i < 0) return
     /* ปิดแล้วโฟกัสกลับปุ่มขยายรูป (เดิมการ์ดแบบเสื้อได้ปุ่ม "เลือก" ที่อยู่ก่อน · 30 ต.ค.) */
     opener = el.querySelector('.lb-open') || el.querySelector('button') || el
+    /* 16 พ.ย. 2026 อาร์ต "ไม่ต้องให้ popup แบบนี้ (กล่องดำ) เอาแบบภาพสอง": ชุดที่เป็นรูปงานจริงล้วน (ไม่มีแบบเสื้อ)
+       เปิดในกล่องรีวิวขาว (review-dialog.js openPhotos) · ชุดที่มีแบบเสื้อยังใช้กล่องแบบเสื้อด้านล่าง */
+    if (!items.some((x) => isDesignItem(x.dataset))) {
+      const pics = items.map((x) => { const im = x.querySelector('img'); return { img: x.dataset.full || im.src, imgSmall: im.currentSrc || im.src, alt: im.alt } })
+      return openPhotos(pics, i, opener)
+    }
     show(i)
     document.documentElement.classList.add('lb-on')
     dlg.showModal()

@@ -9,7 +9,10 @@ const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
 
 test('กล่องแบบเสื้อ: โหมดสว่างเมื่อมีรหัส · มีชื่อทรง · รูปในกล่องไม่ถูกแทนด้วยภาพแถบรหัส', () => {
   const js = read('src/js/lightbox.js')
-  assert.match(js, /dlg\.classList\.toggle\('lb--design', !!code \|\| el\.dataset\.design === '1'\)/) /* 10 พ.ย. แบบไม่มีรหัสจากแกลเลอรีเว็บเดิมก็เป็นโหมดสว่าง */
+  /* 10 พ.ย. แบบไม่มีรหัสจากแกลเลอรีเว็บเดิมก็เป็นโหมดสว่าง · 16 พ.ย. อาร์ต "ไม่ต้องให้ popup (กล่องดำ)": กล่องนี้สว่างเสมอ
+     (ชุดรูปงานจริงล้วนไปกล่องรีวิวขาว · รูปไม่มีรหัสที่ปนในชุดแบบเสื้อไม่สลับเป็นกล่องดำ · tests/photo-dialog.test.js) */
+  assert.match(js, /dlg\.classList\.add\('lb--design'\)/)
+  assert.doesNotMatch(js, /classList\.toggle\('lb--design'/)
   assert.match(js, /class="lb__title"/)
   assert.match(js, /titleOf\(/)
   /* ภาพพร้อมรหัสใช้เป็นไฟล์เซฟ ไม่สลับรูปที่แสดง */
