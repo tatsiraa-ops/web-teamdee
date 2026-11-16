@@ -2,6 +2,22 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.0 — 2026-11-16
+
+รูปย้ายออกจากธีมไป wp-content/uploads/teamdee/img (zip ธีมจาก 201MB เหลือ ~1.5MB) · ตัวตรวจข้อมูล npm run check · จัดโครงโค้ด (vite.config.js แยกเป็น src/build · หนึ่งหน้าหนึ่งไฟล์เนื้อหา src/content) หน้าเว็บเหมือนเดิมทุกตัวอักษร
+
+**ติดตั้ง:** วางชุดรูป (teamdee-images-full-v0.4.0.zip) ใน wp-content/uploads/ ก่อน แล้วค่อยลงธีม · staging วางรูปแล้ว 16 พ.ย.
+
+### Features
+
+- **scripts:** add npm run check to report data mistakes in Thai (414c13f)
+- **wp-theme:** serve site images from wp-content/uploads instead of the theme (6338ca8)
+
+### Refactoring
+
+- **build:** split vite.config.js into src/build and give each page one content file (eb28afc)
+- **data:** move history notes out of the data files into docs/data-notes.md (8215b4d)
+
 ## v0.3.1 — 2026-11-16
 
 หน้า /sublimation/ แสดงรีวิวครบทุกราย · รูปขั้นตรวจตัวอย่างไม่มีชื่อแบรนด์ · คำอธิบายหน้าร้านค้ามีร้านอาหารและคาเฟ่
