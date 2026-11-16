@@ -443,6 +443,25 @@ add_action('wp_enqueue_scripts', function () {
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
 
+/* 16 พ.ย. 2026 (staging หน้าแรกพื้นดำ ตัวหนังสือดำหาย): หน้า Elementor ของเว็บเดิม (#50) มี CSS เอง html, body { background-color:#050505; padding:0 !important }
+   Elementor ยังโหลด CSS ของหน้าเดิมและ CSS กลางของมันลงหน้าที่ธีมแสดงเอง (หลัง CSS ธีม) → ทับพื้นขาวและที่เว้นแถบล่างมือถือ
+   หน้าจากต้นแบบไม่ใช้ Elementor เลย → เอา CSS ของ Elementor ออกทั้งที่ใส่ใน head และที่ใส่ท้ายหน้า · บทความและหน้าอื่นไม่แตะ · tests/wp-no-elementor-css.test.js */
+function td_is_elementor_style(string $handle, string $src): bool {
+	if (str_starts_with($handle, 'elementor-') || str_starts_with($handle, 'elementor_')) return true;
+	return (bool) preg_match('~/(?:plugins/elementor(?:-pro)?|uploads/elementor)/~', $src);
+}
+function td_dequeue_elementor_styles(): void {
+	if (!td_current()) return;
+	$styles = wp_styles();
+	foreach ((array) $styles->queue as $h) {
+		$src = (string) ($styles->registered[$h]->src ?? '');
+		if (td_is_elementor_style((string) $h, $src)) wp_dequeue_style($h);
+	}
+}
+add_action('wp_print_styles', 'td_dequeue_elementor_styles', 1);
+add_action('wp_print_footer_scripts', 'td_dequeue_elementor_styles', 1);
+add_filter('style_loader_tag', fn ($tag, $handle, $href) => (td_current() && td_is_elementor_style($handle, (string) $href)) ? '' : $tag, 10, 3);
+
 /* ---------- Google Tag Manager · ใส่ ID ที่ ลักษณะ > ปรับแต่ง > TEAMDEE ---------- */
 
 add_action('customize_register', function (WP_Customize_Manager $c) {
