@@ -7,6 +7,7 @@ import { fullText } from './design-picks.js'
 import icoLineRaw from '../partials/icoLine.hbs?raw'
 import { openPhotos } from './review-dialog.js'
 import { isDesignItem } from './photo-set.js'
+import { withBase } from './base-path.js'
 
 /* ไอคอน LINE ชุดเดียวกับปุ่มเขียวทั้งเว็บ (ตัดคอมเมนต์ Handlebars ออก) */
 const ICO_LINE = icoLineRaw.replace(/\{\{!--[\s\S]*?--\}\}\s*/g, '')
@@ -147,7 +148,7 @@ export function initLightbox(gridSel, itemSel, label, opts = {}) {
       dlg.querySelector('.lb__line-t').textContent = code ? `ส่งรหัส ${code} ทาง LINE` : isDesign ? 'ส่งแบบนี้ทาง LINE' : 'คุยเรื่องภาพนี้ทาง LINE'
     }
     const quote = dlg.querySelector('.lb__quote')
-    if (quote) { quote.hidden = !code; quote.href = `${dlg.dataset.contactUrl || '/contact-us/'}?code=${encodeURIComponent(code)}&from=${encodeURIComponent(location.pathname)}` }
+    if (quote) { quote.hidden = !code; quote.href = `${dlg.dataset.contactUrl || withBase('/contact-us/')}?code=${encodeURIComponent(code)}&from=${encodeURIComponent(location.pathname)}` }
     drawPick()
     const solo = items.length < 2
     dlg.querySelector('.lb__prev').hidden = solo

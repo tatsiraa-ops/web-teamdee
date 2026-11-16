@@ -1,3 +1,4 @@
+import { withBase, stripBase } from './base-path.js'
 /* ส่งฟอร์มติดต่อเข้าระบบจริงบน WordPress + ลิงก์ LINE ที่แนบรหัสแบบ · มีเทส tests/contact-send.test.js
    - cfg มาจาก window.TD_FORM ที่ธีมพิมพ์ไว้ (functions.php) · ยังไม่ตั้งอีเมลรับฟอร์ม = enabled false → หน้าใช้ทางสำรอง (ส่งต่อทาง LINE)
    - ไม่มีช่องแนบไฟล์แล้ว (อาร์ตเคาะ 24 ต.ค. ข้อ 6) ไฟล์โลโก้/แบบส่งทาง LINE หลังส่งฟอร์ม (หน้า /thank-you/)
@@ -58,7 +59,7 @@ export function b2bPrefill(use) {
     - from=quote / มาจากหน้าคำนวณ / ?p=polo (หน้าโปโลปักมีปุ่มขอใบเสนอราคา) / กลุ่มองค์กร → ติ๊กใบเสนอราคา + กางกล่อง
     - from=reorder → โหมดสั่งซ้ำ (หัวฟอร์ม + ช่องเลขออเดอร์เดิม) */
 export function prefillFor({ use = '', from = '', product = '' } = {}) {
-  const f = String(from || '')
+  const f = stripBase(String(from || ''))
   if (f === 'reorder') return { reorder: true, openOrg: false, docs: [] }
   if (f === 'company-docs') return { reorder: false, openOrg: true, docs: ['ใบเสนอราคา', 'หนังสือรับรองบริษัท', 'ภ.พ.20'], emailHelp: B2B_HELP }
   const b2b = b2bPrefill(use)
@@ -68,7 +69,7 @@ export function prefillFor({ use = '', from = '', product = '' } = {}) {
 
 /** สินค้าและงานจากหน้าที่กดมา (ตรวจมือถือ 30 ต.ค.) · แกลเลอรี/หน้าแบบเสื้อ = เสื้อพิมพ์ลาย · หน้าที่ไม่รู้จัก = ว่าง */
 export function contextFromPath(path, routes) {
-  const p = String(path || '')
+  const p = stripBase(String(path || ''))
   const hit = (map) => Object.entries(map || {}).find(([, u]) => u === p)?.[0] || ''
   const product = hit(routes.products)
   const use = hit(routes.uses) || hit(routes.galleries)
@@ -109,7 +110,7 @@ const THANKS = '/thank-you/'
 
 /** ผลการส่ง → หน้าจอที่ต้องแสดง · สำเร็จเท่านั้นที่ไปหน้าขอบคุณ ค่าที่ไม่รู้จักถือว่าล้ม (ห้ามตกไปเป็นสำเร็จ) */
 export function outcomeOf(sent) {
-  if (sent && sent.ok === true) return { view: 'thanks', to: sent.redirect || THANKS }
+  if (sent && sent.ok === true) return { view: 'thanks', to: sent.redirect || withBase(THANKS) }
   if (sent && sent.reason === 'off') return { view: 'off' }
   return { view: 'failed' }
 }

@@ -98,9 +98,23 @@ add_action('admin_notices', function () {
 	echo '<div class="notice notice-error"><p><strong>ธีม TEAMDEE: รูปบนเซิร์ฟเวอร์ไม่ครบ ' . (int) $r['missing'] . ' จาก ' . (int) $r['total'] . ' ไฟล์</strong> · วางชุดรูปจาก Release (teamdee-images-*.zip) ลงโฟลเดอร์ wp-content/uploads/ แล้วรอ 5 นาทีหรือรีเฟรชหน้านี้ · ตัวอย่างที่หาย: <code>' . esc_html(implode(', ', $r['sample'])) . '</code></p></div>';
 });
 
+/* 16 พ.ย. 2026 อาร์ต "ลิงก์ยังไปหน้าเดิมในเว็บเก่า" (staging อยู่ team-dee.com/enterprise/): ลิงก์ต้นแบบเป็น /sublimation/ เริ่มจากรากโดเมน
+   → WordPress ในโฟลเดอร์ย่อย: เติม path โฟลเดอร์หน้าลิงก์ภายใน (href action และ URL หน้าในดัชนีค้นหา "u":) · ติดตั้งที่ราก = ไม่แตะ
+   ไม่แตะลิงก์ไฟล์ของ WordPress (/wp-content/ /wp-admin/ …) ลิงก์นอก และ #anchor · JS ที่สร้างลิงก์เองอ่าน <meta name="td-base"> (src/js/base-path.js) · tests/base-path.test.js */
+function td_base_path(): string {
+	return rtrim((string) wp_parse_url(home_url('/'), PHP_URL_PATH), '/');
+}
+function td_portable_links(string $html): string {
+	$base = td_base_path();
+	if ($base === '') return $html;
+	$skip = '(?!/|wp-(?:content|admin|includes|json|login)\b)';
+	$html = preg_replace('~(\s(?:href|action)=")/' . $skip . '~', '$1' . $base . '/', $html);
+	return preg_replace('~("u":")/' . $skip . '~', '$1' . $base . '/', $html);
+}
+
 function td_read_part(string $slug, string $part): string {
 	$f = TD_BUILD . "/pages/$slug.$part.html";
-	$html = td_portable_paths(is_readable($f) ? (string) file_get_contents($f) : '');
+	$html = td_portable_paths(td_portable_links(is_readable($f) ? (string) file_get_contents($f) : ''));
 	if ($part !== 'body') return $html;
 	/* หน้าแรกและ /blog/: บทความจริงจาก WordPress (บล็อก "บทความจริงจาก WordPress" ด้านล่าง) */
 	if ($slug === 'home' || $slug === 'blog') $html = td_posts_live($slug, $html, td_posts_from_wp(), td_post_cat_counts());
@@ -177,7 +191,7 @@ function td_posts_from_wp(): array {
 		if ($ex === '' || str_contains($ex, '%')) $ex = wp_trim_words(wp_strip_all_tags(strip_shortcodes((string) $p->post_content)), 40, '…');
 		$out[] = [
 			'url' => wp_make_link_relative((string) get_permalink($p)),
-			'key' => '/' . $p->post_name . '/',
+			'key' => td_base_path() . '/' . $p->post_name . '/', /* ลิงก์ในหน้าเติม path โฟลเดอร์ย่อยแล้ว (td_portable_links) → เทียบด้วย path เดียวกัน */
 			'title' => wp_strip_all_tags(html_entity_decode(get_the_title($p), ENT_QUOTES, 'UTF-8')),
 			'img' => $tid ? (string) wp_get_attachment_image_url($tid, 'large') : '',
 			'srcset' => $tid ? (string) wp_get_attachment_image_srcset($tid, 'large') : '',
@@ -411,6 +425,7 @@ function td_cms_asset_head(string $head): string {
 }
 
 add_action('wp_head', function () {
+	if (($base = td_base_path()) !== '') printf("<meta name=\"td-base\" content=\"%s\">\n", esc_attr($base));
 	$p = td_current();
 	if ($p) {
 		if (!td_has_seo_plugin() && !empty($p['description'])) {

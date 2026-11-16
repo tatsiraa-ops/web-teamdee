@@ -5,6 +5,7 @@ import { makeUrl } from './routes.js'
 import { planFor } from './home-plan.js'
 import { visibleIndexes } from './real-grid.js'
 import { calcPricing } from './prices.js'
+import { withBase } from './base-path.js'
 
 const url = makeUrl(routes)
 const pricing = calcPricing(prices)
@@ -26,7 +27,7 @@ export function initHomePicker() {
     const alts = $('[data-pick-alts]')
     alts.hidden = !p.alts.length
     alts.replaceChildren('หรือดู', ...p.alts.map((a) => Object.assign(document.createElement('a'), { href: url('products', a.id), textContent: a.name })))
-    calc.href = url('calculations') + p.calcQuery
+    calc.href = withBase(url('calculations') + p.calcQuery)
   }
   form.addEventListener('change', render)
   /* ไม่มี JS ฟอร์มส่งแบบ GET ไปหน้าคิดราคาได้ · มี JS ใช้ลิงก์ที่คำนวณไว้แทน */
