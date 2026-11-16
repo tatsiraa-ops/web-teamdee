@@ -301,7 +301,15 @@ function td_fallback_seo(string $field) {
 	if ($field === 'canonical') return home_url($p['route']);
 	return ($p[$field] ?? '') !== '' ? $p[$field] : null;
 }
-add_filter('rank_math/frontend/title', fn ($v) => td_fallback_seo('title') ?? $v);
+/* 16 พ.ย. 2026 อาร์ตเลือกข้อ ข: title หน้าแรกบน staging เป็นค่าเดิมใน Rank Math "โรงงานรับผลิตเสื้อ…" (ขัดกติกาไม่ใช้คำว่าโรงงาน)
+   → หน้าที่ธีมแสดงเองใช้ title จากต้นแบบทุกหน้า (มี Page หรือไม่ก็ตาม) รวม title ตอนแชร์ลิงก์ · บทความและหน้าอื่นใช้ Rank Math · tests/wp-page-title.test.js */
+function td_page_title(): ?string {
+	$p = td_current();
+	return ($p && ($p['title'] ?? '') !== '') ? $p['title'] : null;
+}
+add_filter('rank_math/frontend/title', fn ($v) => td_page_title() ?? $v);
+add_filter('rank_math/opengraph/facebook/og_title', fn ($v) => td_page_title() ?? $v);
+add_filter('rank_math/opengraph/twitter/twitter_title', fn ($v) => td_page_title() ?? $v);
 add_filter('rank_math/frontend/description', fn ($v) => td_fallback_seo('description') ?? $v);
 add_filter('rank_math/frontend/canonical', fn ($v) => td_fallback_seo('canonical') ?? $v);
 /* index ได้เมื่อหน้านั้นไม่ได้ตั้ง noindex และเว็บไม่ได้ปิดไม่ให้ Google เก็บ (staging) · หน้าร่างยังโดนตัวกรอง noindex ด้านล่างทับอีกชั้น */
