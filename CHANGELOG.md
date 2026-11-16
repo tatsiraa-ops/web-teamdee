@@ -2,6 +2,14 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.3 — 2026-11-16
+
+title ของทุกหน้าที่ธีมแสดงมาจากต้นแบบ (หน้าแรกบน staging เคยเป็น "โรงงานรับผลิตเสื้อ…" จาก Rank Math) รวม title ตอนแชร์ลิงก์ · บทความใช้ Rank Math เหมือนเดิม
+
+### Fixes
+
+- **wp-theme:** use the prototype title on every page the theme renders (a05b7f7)
+
 ## v0.4.2 — 2026-11-16
 
 ลิงก์ในหน้าบน staging (WordPress ในโฟลเดอร์ย่อย /enterprise/) พาไปเว็บเก่า → ธีมเติม path โฟลเดอร์ย่อยหน้าลิงก์เอง · เว็บที่รากโดเมน HTML เหมือนเดิมทุกตัวอักษร
