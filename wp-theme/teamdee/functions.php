@@ -181,6 +181,17 @@ add_filter('template_include', function ($template) {
 	return $template;
 }, 99);
 
+/* ---------- บทความและหมวด ใช้แม่แบบของธีมเสมอ ---------- */
+/* 16 พ.ย. 2026: staging มีเทมเพลต Elementor Pro "Single Post" (เงื่อนไข Posts) จากเว็บเดิม ทับหน้าบทความทั้งหน้า
+   (Elementor Pro เปลี่ยน template_include ที่ priority 12) → บทความเป็นหน้าตาเว็บเก่า · เนื้อบทความเป็นโพสต์ปกติ ธีมแสดงเองได้
+   จึงดึงกลับมาใช้แม่แบบของธีมทีหลังสุด · หน้า (Page) จัดการในตัวกรองด้านบนแล้ว · tests/wp-post-template.test.js */
+add_filter('template_include', function ($template) {
+	if (is_singular('post')) return get_theme_file_path('single.php');
+	if (is_category()) return get_theme_file_path('category.php');
+	return $template;
+}, 100);
+
+/* ---------- URL ที่ต้นแบบมีหน้า ---------- */
 /* URL ที่ต้นแบบมีหน้า ห้าม WordPress เดา slug แล้ว 301 ไปหน้าชื่อคล้าย (เช่น /project/ → /projects/)
    การเดานี้ทำงานก่อน template_include · เจอ 22 ต.ค. 2026 ตอนย้าย URL ตาม Wireframe v22 */
 add_filter('redirect_canonical', function ($redirect) {
