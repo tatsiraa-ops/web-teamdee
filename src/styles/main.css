@@ -1112,6 +1112,8 @@ html.ck-on footer { padding-bottom: 180px; }
 @media (min-width: 1024px) {
   .fcta__btn--line .fcta__orb { width: 40px; height: 40px; filter: drop-shadow(0 2px 3px rgb(0 0 0 / .16)); }
   .fcta__btn--line .fcta__orb :is(img, svg) { display: block; width: 100%; height: 100%; object-fit: contain; }
+  /* จุดออนไลน์ (เวลาทำการ) เกาะมุมนอกไอคอน 40px ไม่ทับฟองแชท (16 พ.ย. อาร์ต "ไม่ทับไอคอนไลน์จนเกินไป" · tests/line-online-dot.test.js) */
+  .fcta__btn--line:has(.fcta__sub.is-open) .fcta__orb::after { top: -3px; right: -5px; width: 13px; height: 13px; border-width: 2.5px; box-shadow: 0 1px 3px rgb(0 0 0 / .2); }
 }
 /* หน้าคำนวณ: ช่องที่ 3 โชว์ยอดรวมสด ต้องกว้างขึ้น · ไอคอนถูกซ่อน (calc-page.js) */
 @media (max-width: 1023px) { .mobilebar:has([data-bar-live]) { grid-template-columns: minmax(0, .8fr) minmax(0, 1.9fr) minmax(0, 1.4fr); } }
