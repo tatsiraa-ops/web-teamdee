@@ -1,5 +1,4 @@
 {
-  "_note": "สร้างจาก Wireframe v22 ด้วย scripts/v22/use-pages.mjs · base = บทความเดิมใน articles.json ที่เรื่องตรงกัน ต่อท้ายเนื้อหา v22",
   "polo": {
     "base": "print-vs-embroidery",
     "h1": "เสื้อโปโลปักกับเสื้อพิมพ์ลาย เลือกแบบไหนสำหรับพนักงาน?",

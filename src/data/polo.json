@@ -1,5 +1,4 @@
 {
-  "_note": "ข้อมูลเสื้อโปโลปักจากไดรฟ์บริษัท \"Info ปัก\" (MARKETING&CONTENT/01_TEAMDEE/TD_Raw Materials/ADD/Info ปัก · id 1pvWTj7t2jFqI9jXAIB3lnKAi7ngoL7Gb · ไฟล์ลงวันที่ 1 ต.ค. 2026) · อาร์ตให้ลงครบ 11 พ.ย. 2026 · ราคาอยู่ prices.json products.polo (ที่มาเดียวกัน) · tests/polo-data.test.js",
   "_sourceNotes": [
     "สเปกผ้า = แผ่นผ้าแต่ละชนิด Artboard 2 copy 6–11@2x · เนื้อผ้าแอ็นดูแรนซ์/ดรายเทคในไดรฟ์เป็น \"-\" → null (หน้าเว็บแสดง สอบถามทีมงาน)",
     "tags = แผ่น \"รวมชนิดเนื้อผ้างานปัก\" (Artboard 22 copy 6@2x) · ตัดแท็กที่ขัดกับแผ่นผ้า: TC \"น้ำหนักเบา\" (แผ่นผ้าบอก ~220 แกรม หนา) · แอ็นดูแรนซ์ \"เนื้อนุ่ม\" (แผ่นผ้าบอก เนื้อแน่น)",
@@ -990,7 +989,6 @@
     ]
   },
   "guide": {
-    "_source": "คู่มือสั่งเสื้อโปโลปัก TEAMDEE (โพสต์เพจ 9 พ.ย. 2026 · ไดรฟ์ TD_Content&Media/202611-NOV/TD-PIC ALBUM BLOGS/09112026-TD-คู่มือสั่งเสื้อโปโลปัก-AB) · ภาพ public/img/emb-guide ครอปจากคู่มือ (ภาพจำลองของทีมดี)",
     "map": "pos-map",
     "positions": [
       {

@@ -1,5 +1,4 @@
 {
-  "_note": "คลังรูปกลาง · สร้างด้วย node scripts/media-library.mjs (อย่าแก้มือ รันใหม่จะทับ) · แท็กมาจากข้อมูลที่มีอยู่ (sources) · usedOn อ่านจาก dist/ ที่ build ล่าสุด · ดู/ค้นที่ /ui/media/",
   "kinds": {
     "design": "แบบมีรหัส TD",
     "customer": "ภาพลูกค้าจริง",

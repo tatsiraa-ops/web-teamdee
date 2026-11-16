@@ -1,5 +1,4 @@
 {
-  "_note": "URL ทุกหน้าอยู่ที่นี่ที่เดียว ตาม Wireframe v22 (docs/spec/teamdee-v22 · 22 ต.ค. 2026) · lock = URL เดิมที่ออนไลน์บน team-dee.com ห้ามเปลี่ยน (มาจาก URL-MIGRATION-MAP.json) · หน้าใหม่รับสั่งทำใช้ /custom-…/ · tests/routes-v22.test.js ตรวจทุกครั้ง",
   "home": "/",
   "products": {
     "polo": "/embroidery/",

@@ -57,7 +57,6 @@
   "baseUrl": "https://team-dee.com",
   "ogImage": "/img/hero/banner-expert.jpg",
   "proof": {
-    "_note": "หลักฐานใน hero หน้าแรก (Brief: หลักฐานสั้น 3 ข้อ ตรวจสอบได้) · value = ตัวเลขที่ยืนยันแล้ว ใส่เมื่อพี่ทัชยืนยัน · candidate = ค่าที่เว็บเดิมใช้ ยังขัดกันเอง (ดู todo) · ถ้า value ยังว่าง หน้าเว็บโชว์ candidate ในวงเล็บ",
     "source": "ตัวเลขในวงเล็บยกจากเว็บเดิม รอยืนยันก่อนเผยแพร่",
     "items": [
       {

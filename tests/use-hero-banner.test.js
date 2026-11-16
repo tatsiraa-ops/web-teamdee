@@ -7,13 +7,14 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
 import { h1Split } from '../src/js/use-view.js'
+import { usePages, useV2 } from '../src/build/content.js'
 
 const read = (f) => readFileSync(new URL(`../${f}`, import.meta.url), 'utf8')
 const main = (f) => { const h = read(`dist-wp/${f}/index.html`); return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
 const text = (h) => h.replace(/<\/?t-[a-z]+>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
 const flat = (s) => s.replace(/\s+/g, '')
-const pages = JSON.parse(read('src/data/use-pages.json'))
-const v2 = JSON.parse(read('src/data/use-v2.json'))
+const pages = usePages()
+const v2 = useV2()
 const PAGES = { gov: 'custom-organization-shirts', edu: 'education', shop: 'custom-staff-shirts', faculty: 'custom-university-shirts', class: 'custom-class-shirts', sport: 'sport', badminton: 'custom-badminton-shirts', running: 'custom-running-shirts', event: 'event' }
 
 test('h1Split: แบ่งคำหลักกับคำต่อท้าย · มี " / " คั่นเดิมก็เก็บไว้ให้โปรแกรมอ่านจอ · แบ่งไม่ได้ = ไม่แบ่ง', () => {
@@ -36,7 +37,11 @@ for (const [id, f] of Object.entries(PAGES)) {
   test(`${f}: ภาพ hero ชุดใหม่ครบทุกขนาด · คำบรรยายภาพตรงกับภาพ (ฉากขาวเดียวกับหน้าบริษัท)`, () => {
     for (const s of ['2304', '1280', '800', 'm-768', 'm-480']) assert.ok(existsSync(new URL(`../public/img/use-hero/${id}-${s}.webp`, import.meta.url)), `${id}-${s}`)
     assert.doesNotMatch(v2[id].hero.alt, /ร้านกาแฟ|อาคารเรียน/)
-    assert.match(v2[id].hero._imgNote, /13 พ\.ย\./)
+    /* 16 พ.ย. 2026 A3: บันทึกที่มาของภาพย้ายจาก use-v2.json ไป docs/data-notes.md (หัวข้อ = ตำแหน่งในไฟล์) */
+    const notes = readFileSync(new URL('../docs/data-notes.md', import.meta.url), 'utf8')
+    const at = notes.indexOf(`### \`${id}.hero._imgNote\``)
+    assert.ok(at >= 0, `${id}: มีบันทึกที่มาของภาพ hero`)
+    assert.match(notes.slice(at, notes.indexOf('\n### ', at + 5)), /13 พ\.ย\./)
   })
 }
 

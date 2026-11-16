@@ -1,5 +1,4 @@
 {
-  "_note": "คลิปจาก IG @teamdee_ และเพจ Facebook teamdee (FB ไม่ล็อกอินเห็นแค่ 9 คลิปแรก) · อาร์ตเลือกทำ ก หน้าเคส ข ช่องคลิปในหน้าที่มี ค บทความ (26 ต.ค. 2026) · title/summary เรียบเรียงจากแคปชันของทีมดีเอง ไม่แต่งคำพูดลูกค้า · ขึ้นเว็บจริงเมื่อครบ: file (mp4 ต้นฉบับ ไม่มีหน้าจอ IG) poster duration(วินาที) consent=true music=ok (เพลงใช้นอก IG ได้ หรือไม่มีเพลง) · places = จุดที่วางคลิป (key ของ routes) · quotes = คำพูดลูกค้าในคลิปที่ทีมพิมพ์ให้ · captions = ไฟล์ซับ .vtt · links = ที่โพสต์ไว้ (ig/fb) · date = วันโพสต์จริง (FB บอกแค่ \"x สัปดาห์ที่แล้ว\" → null จนกว่าจะรู้วัน) · durationPosted = ความยาวที่เห็นบนเพจ (duration จริงใส่เมื่อได้ไฟล์)",
   "items": [
     {
       "id": "assumption",
@@ -197,6 +196,5 @@
         "about"
       ]
     }
-  ],
-  "_noteAbout": "9 พ.ย. /about-us/ อาร์ต \"เอาแค่ fb ไปเอาคลิปมาได้เต็มที่\": คลิป Facebook 4 ตัว (assumption · embroidery-asmr · backstage · one-stop) · why-teamdee (IG) ไม่ขึ้นหน้านี้แล้ว → places \"unlisted\" = เก็บข้อมูลไว้ ยังไม่วางหน้าไหน"
+  ]
 }

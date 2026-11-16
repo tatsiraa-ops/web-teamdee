@@ -1,5 +1,4 @@
 {
-  "_note": "สร้างจาก Wireframe v22 ด้วย scripts/v22/use-pages.mjs · กริดแบบเติมจาก designs.json ตอน build",
   "groups": {
     "corp": {
       "kicker": "แบบกราฟิกพิมพ์ลาย",
