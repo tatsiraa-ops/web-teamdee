@@ -24,7 +24,8 @@ test('แบด: hero ภาพเสื้อแบด · ไม่มีคำ
   const hero = bad.slice(at, bad.indexOf('</section>', at))
   for (const f of ['badminton-2304', 'badminton-1280', 'badminton-800', 'badminton-m-768', 'badminton-m-480']) { assert.match(hero, new RegExp(`/img/use-hero/${f}\\.webp`)); assert.ok(pub(`/img/use-hero/${f}.webp`), f) }
   assert.doesNotMatch(hero, /corp-|shop-|gov-|edu-|faculty-|class-|sport-/)
-  const body = text(bad.replace(/<script[\s\S]*?<\/script>/g, ''))
+  /* 16 พ.ย. 2026 รีวิวข้ามกลุ่ม (review-pool.js · อาร์ต "คนละประเภทลูกค้าไม่เป็นไร"): ป้ายประเภทลูกค้าในรีวิว (เช่น "หน่วยงานโรงพยาบาล") ไม่นับ · ตรวจเฉพาะข้อความของหน้า */
+  const body = text(bad.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<section class="hm-customer-proof up2-rv"[\s\S]*?<\/section>|<blockquote class="up2-ctx__rv">[\s\S]*?<\/blockquote>/g, ''))
   assert.doesNotMatch(body, /ร้านค้า|หน่วยงาน/, (body.match(/.{30}(ร้านค้า|หน่วยงาน).{30}/) || [])[0])
 })
 
@@ -57,6 +58,9 @@ test('แบด: แถวแบบเสื้อ = แบบแบดจริ
 
 test('แบด: รีวิวชมรมแบดกรุงไทย · กล่องชำระเงินเป็นเสื้อแบด', () => {
   const rv = bad.slice(bad.indexOf('id="reviews"'), bad.indexOf('</section>', bad.indexOf('id="reviews"')))
-  assert.deepEqual([...new Set([...rv.matchAll(/data-rv-open="([^"]+)"/g)].map((m) => m[1]))], ['krungthai-badminton'])
+  /* 16 พ.ย. คลังรีวิวเดียว (review-pool.js): แถวรูปเติมจนครบ 10 ด้วยรูปจากรีวิวกลุ่มอื่น · รีวิวของกลุ่มนี้ขึ้นก่อน */
+  const ids = [...new Set([...rv.matchAll(/data-rv-open="([^"]+)"/g)].map((m) => m[1]))]
+  assert.deepEqual(ids.slice(0, 1), ['krungthai-badminton'])
+  assert.ok(ids.length > 1, 'มีรีวิวกลุ่มอื่นต่อท้าย')
   assert.match(bad, /\/img\/use-pay\/badminton-box/)
 })

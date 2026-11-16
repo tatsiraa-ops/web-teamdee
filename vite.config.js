@@ -20,6 +20,7 @@ import { prunePending } from './src/js/prune.js'
 import { homeView } from './src/js/home-view.js'
 import { iconFor, FABRIC_ICONS, USE_ICON } from './src/js/fabric-icons.js'
 import { blogView } from './src/js/blog-model.js'
+import { planReviews, poolFor, topUpWall, PICK as REVIEW_PICK_POOL } from './src/js/review-pool.js'
 import { guideView } from './src/js/guide-view.js'
 import { guidePresentation } from './src/js/guide-presentation.js'
 import { gallerySelection } from './src/js/gallery-selection.js'
@@ -925,9 +926,14 @@ export default defineConfig({
               const proof = v.proof ? { ...v.proof, clipsV: v.proof.clips.map(vid).filter(Boolean) } : null
     /* รีวิวโฉมใหม่ (5 พ.ย. ใช้ up2Reviews ของ /corporate/) · กำแพงรูปรีวิว img/review + การ์ดตามลำดับใน pp-v2.json */
     const rvAll = reviewItems()
+    /* 16 พ.ย. 2026 อาร์ต "ภาพสองรีวิวตรงหน้าปักน้อยๆ": หน้าที่ fill (งานปัก) เติมแถวรูปให้ครบ 10 จากรีวิวบนการ์ดตามลำดับ (topUpWall · กติกาเดียวกับหน้ากลุ่มลูกค้า) */
+    const rvIds = v.reviews ? [...v.reviews.items, ...(!v.reviews.fill ? [] : poolFor({ polo: 'corp', print: 'sport', screen: 'event', warmup: 'edu', baseball: 'sport', jersey: 'sport' }[id] || 'corp', json('reviews.json').items).map((r) => r.id).filter((rid) => !v.reviews.items.includes(rid)))] : []
+    const rvWall = v.reviews ? (v.reviews.fill ? topUpWall(v.reviews.wall, rvIds.map((rid) => rvAll.find((x) => x.id === rid)).filter(Boolean), mediaLib().items) : v.reviews.wall) : []
     const reviews = v.reviews ? { ...v.reviews,
-      wall: v.reviews.wall.map((w) => { const r = rvAll.find((x) => x.id === w.review); return { ...w, img: `/img/review/${w.img}.webp`, small: `/img/review/${w.img}-480.webp`, sw: 480, r: (w.w / w.h).toFixed(3), who: r.who || r.kind, alt: `งานจริงจากรีวิว ${r.who || r.kind}` } }),
-      items: v.reviews.items.map((rid) => { const r = rvAll.find((x) => x.id === rid); if (!r) throw new Error(`pp-v2.json reviews: ไม่มีรีวิว ${rid}`); return { ...r, mono: [...(r.who || r.kind)].find((c) => !'เแโใไ'.includes(c)) } }) } : null
+      wall: rvWall.map((w) => { const r = rvAll.find((x) => x.id === w.review); return { ...w, img: `/img/review/${w.img}.webp`, small: `/img/review/${w.img}-480.webp`, sw: 480, r: (w.w / w.h).toFixed(3), who: r.who || r.kind, alt: `งานจริงจากรีวิว ${r.who || r.kind}` } }),
+      /* 16 พ.ย. 2026 คลังรีวิวเดียว (อาร์ต "แก้ตรงภาพแรกด้วย" = หน้างานปัก): reviews.fill → รีวิวที่เลือกไว้ก่อน แล้วรีวิวที่เหลือทุกราย เรียงตามกลุ่มใกล้ (review-pool.js) · ไม่ fill = เฉพาะที่เลือก (หน้าพิมพ์ลาย) */
+      rowLabel: v.reviews.fill ? 'รีวิวจากแชทลูกค้าจริง' : v.reviews.label || 'รีวิวจากลูกค้าเสื้อพิมพ์ลาย',
+      items: rvIds.map((rid) => { const r = rvAll.find((x) => x.id === rid); if (!r) throw new Error(`pp-v2.json reviews: ไม่มีรีวิว ${rid}`); return { ...r, mono: [...(r.who || r.kind)].find((c) => !'เแโใไ'.includes(c)) } }) } : null
               /* เนื้อผ้า (6 พ.ย.): "เหมาะกับ" ดึงจาก sizing.json ที่เดียว (ข้อมูลเดียวกับส่วนผ้าเดิม) · ไม่มีชื่อผ้าในคลัง = build พัง */
               const fabric = v.fabric ? { ...v.fabric, sampleAsk: lineMessageUrl(`ขอตัวอย่างผ้า${sp(item.name)}\nผ้าที่สนใจ: \nจำนวนที่จะสั่งประมาณ:  ตัว`), guide: url('guides.fabric'), items: v.fabric.items.map((f) => { const s = f.use ? { use: f.use } : data.sizing.fabrics.find((x) => x.name === (f.sz || f.t)); if (!s) throw new Error(`pp-v2.json fabric: ไม่มี ${f.sz || f.t} ใน sizing.json`); const pf = json('prices.json').products.print.fabrics?.find((x) => x.id === f.k); if (!pf) throw new Error(`pp-v2.json fabric: ไม่มี ${f.k} ใน prices.json print.fabrics`); return { ...f, use: s.use, gsm: pf.gsm, tagsI: f.tags.map((t) => ({ t, icon: iconFor(t) })), ask: lineMessageUrl(`ขอตัวอย่าง${f.t}\nใช้ทำเสื้ออะไร: \nจำนวนที่จะสั่งประมาณ:  ตัว`) } }), icons: Object.entries(FABRIC_ICONS).map(([id, d]) => ({ id, d })) } : null
               /* รอบ 143: "เหมาะกับ" เป็นไอคอน 3D (use-*.webp · Magnific 6 พ.ย.) · คำจาก sizing.json ตัด "เสื้อ"/"ทั่วไป" ให้สั้น · คำที่ไม่มีไอคอน = build พัง */
@@ -979,7 +985,21 @@ export default defineConfig({
                 guide: P.guide ? (() => {
                   const g = P.guide, dim = (img) => img.startsWith('pkt-') ? [270, 235] : img === 'pos-6' ? [670, 364] /* 13 พ.ย. ภาพงานปักจริงแทนแพตช์ที่มีเบอร์โทรลูกค้า */ : img.startsWith('pos-') ? [334, 207] : [335, 300]
                   const pic = (x) => { const src = `/img/emb-guide/${x.img}.webp`; if (!existsSync(resolve(root, 'public' + src))) throw new Error(`polo.json guide: ไม่มีภาพ ${src}`); const [w, h] = dim(x.img); return { ...x, src, w, h } }
-                  return { ...g, positions: g.positions.map((position) => ({ ...pic(position), size: position.s.startsWith('กว้างไม่เกิน ') ? position.s.replace('กว้างไม่เกิน ', '') : null, special: position.img === 'pos-6' })), specialAsk: lineMessageUrl('สนใจงานปักพิเศษ\nแบบหรือโลโก้: \nตำแหน่งและขนาดที่ต้องการ: \nจำนวนเสื้อ:  ตัว'), groups: g.groups.map((grp) => ({ ...grp, items: grp.items.map(pic) })) }
+                  return { ...g, positions: g.positions.map((position) => ({ ...pic(position), size: position.s.startsWith('กว้างไม่เกิน ') ? position.s.replace('กว้างไม่เกิน ', '') : null, special: position.img === 'pos-6' })), specialAsk: lineMessageUrl('สนใจงานปักพิเศษ\nแบบหรือโลโก้: \nตำแหน่งและขนาดที่ต้องการ: \nจำนวนเสื้อ:  ตัว'), groups: g.groups.map((grp) => ({ ...grp, items: grp.items.map(pic) })),
+                    /* 16 พ.ย. 2026 ผังเสื้อ TEAMDEE หน้า-หลัง + เส้นชี้ (partial shirtCallouts · อาร์ต "เอาเป็นตัวเสื้อหน้าหลัง แบบมีเส้นชี้ไปแต่ละจุด")
+                       x/y = % ของภาพ shirt-fb (หน้าซ้าย · หลังขวา) · ป้ายซ้ายชี้เสื้อด้านหน้า ป้ายขวาชี้ด้านหลัง (เส้นไม่ข้ามตัวเสื้ออีกตัว)
+                       รอบ 3 (อาร์ต "เอารูปใหญ่ๆ"): ภาพตัดพื้นโปร่งใส + ครอปชิดตัวเสื้อ (2286×1362 จากต้นฉบับ 2528×1696) · พิกัดคำนวณใหม่จากจุดเดิม */
+                    shirt: (() => {
+                      const POS = [[32.2, 30.2, 'l'], [16.7, 30.2, 'l'], [5.6, 41.3, 'l'], [76.4, 9.8, 'r'], [76.4, 35.7, 'r']]
+                      const PART = { col: [18.4, 14.4, 'l'], plk: [24.2, 24.6, 'l'], pkt: [32.2, 30.2, 'l'], slv: [97.4, 42.3, 'r'], cut: [88.6, 70.9, 'r'] }
+                      const regular = g.positions.filter((x) => x.img !== 'pos-6')
+                      if (regular.length !== POS.length) throw new Error('polo.json guide: ตำแหน่งปักไม่ตรงผังเสื้อ (5 จุด)')
+                      return {
+                        img: '/img/emb-guide/shirt-fb',
+                        pos: regular.map((x, i) => ({ n: `0${i + 1}`, t: x.t, s: x.s, x: POS[i][0], y: POS[i][1], side: POS[i][2], thumb: `/img/emb-guide/${x.img}.webp`, thumbAlt: x.alt || `ภาพจำลองงานปักตำแหน่ง${x.t}` })),
+                        parts: g.groups.map((grp, i) => { const c = PART[grp.k]; if (!c) throw new Error(`polo.json guide: กลุ่ม ${grp.k} ไม่มีจุดบนผังเสื้อ`); return { n: `0${i + 1}`, t: grp.t, s: `${grp.items.length} แบบ`, x: c[0], y: c[1], side: c[2], href: `#grp-${grp.k}` } }),
+                      }
+                    })() }
                 })() : null } : null
               const vSizes = v.sizes && v.sizes.from === 'polo.json' ? { ...v.sizes, adult: P.sizes.men, kids: P.sizes.women, tol: P.sizes.tol, measure: P.sizes.measure, noteA: P.sizes.menNote, noteB: P.sizes.womenNote } : v.sizes
               /* ตารางไซซ์ (6 พ.ย.): ทรงที่ยังไม่มีตาราง → ปุ่ม LINE ขอตารางของทรงนั้น (ข้อความตั้งต้นมีแค่ชื่อทรง) */
@@ -1128,6 +1148,15 @@ export default defineConfig({
             throw new Error(`use-v2.json: ไม่มีรูป ${k}`)
           }
           if (v2?.pain?.photo) v2.pain.photo = v2Photo(v2.pain.photo)
+          /* 16 พ.ย. 2026 คลังรีวิวเดียว (src/js/review-pool.js · อาร์ต "การ์ดรีวิว + คำรีวิวในแท็บ เอารวมกัน คนละประเภทลูกค้าไม่เป็นไร เอาให้ครบๆ")
+             ทุกแท็บมีคำรีวิว · รีวิวจริงทุกรายขึ้นหน้านี้ (แท็บ + การ์ด) ไม่ซ้ำกัน · หน้าที่ยังไม่มีส่วนรีวิว (คณะ เสื้อรุ่น) แถวรูป = รูปหลักของรีวิวบนการ์ด */
+          const rvPlan = v2?.contexts ? planReviews(id, json('reviews.json').items, v2.contexts.tabs) : null
+          if (rvPlan) {
+            v2.contexts.tabs = rvPlan.tabs
+            if (!v2.reviews) v2.reviews = { tags: [], wall: [] }
+            /* แถวรูปบนสุด 10 รูป (2 แถวเต็ม) · รูปที่จัดไว้ใน use-v2.json ก่อน แล้ววนหยิบรูปที่ 1 ของทุกรีวิวบนการ์ด รูปที่ 2 … (ไม่ซ้ำ) · กดรูป = กล่องรีวิวรายนั้น */
+            v2.reviews.wall = topUpWall(v2.reviews.wall, rvPlan.board, mediaLib().items)
+          }
           /* กำแพงรูปรีวิว: รูปหลักรีวิว (img/review) หรือรูปลูกค้าจริง (customers.json · alt = occ) · สัดส่วนจริงจาก use-v2.json */
           if (v2?.reviews) v2.reviews.wall = v2.reviews.wall.map((w) => {
             const k = w.img
@@ -1154,7 +1183,7 @@ export default defineConfig({
           const benefitPhoto = groupPhotos.filter((c) => !workCards.some((w) => w.img === c.img))[24] || null
           /* รีวิวตรงกลุ่ม (อาร์ตเคาะ 2 พ.ย.): ร้านค้า รีสอร์ท · หน่วยงาน โรงพยาบาลกับ NT · รุ่นและคณะยังไม่มีรีวิวตรงกลุ่ม = ซ่อน · วิ่ง กลุ่มนักวิ่งขึ้นก่อน · ที่เหลือตาม REVIEW_USE */
           /* 14 พ.ย. หน้าเสื้อกีฬาโฉมใหม่: ทีมว่ายน้ำ + ทีมฟุตบอลบริษัท (np-connect) + ชมรมแบด · ไม่ใช้ runners (ของหน้าวิ่ง) */
-          const REVIEW_PICK = { shop: ['resort'], gov: ['hospital', 'nt-snooker'], class: [], faculty: [], running: ['runners'], badminton: ['krungthai-badminton'], sport: ['swim-kids', 'np-connect', 'krungthai-badminton'], event: ['outing-fabric', 'hr-outing', 'shrine'] }
+          const REVIEW_PICK = REVIEW_PICK_POOL /* 16 พ.ย. ย้ายไป src/js/review-pool.js (ที่เดียว) */
           const useReviews = REVIEW_PICK[id] ? REVIEW_PICK[id].map((rid) => reviewItems().find((r) => r.id === rid)) : pickReviews(REVIEW_USE[id], 3, true)
           /* ภาพที่ขึ้นในกล่อง "จากภาพแบบ สู่เสื้อจริง" แล้วไม่ซ้ำในแบบเสื้อ (2 พ.ย.: 3d-082 brand-064) */
           const inProof = new Set(downloadAssetsFor('use', id, data.designs)?.proofs.flatMap((p) => [p.design?.img, p.real?.img]))
@@ -1170,12 +1199,18 @@ export default defineConfig({
           up.v2 = v2
           /* รีวิวโฉมใหม่: การ์ดรีวิวเฉพาะกลุ่มองค์กร (แบบกระดานหน้าแรก) + กำแพงรูปจากแกลเลอรีรีวิว */
           if (v2?.reviews) {
-            /* 11 พ.ย. กลุ่มที่อาร์ตเคาะรีวิวไว้ (REVIEW_PICK เช่น ร้านค้า = resort) ใช้เฉพาะรายการนั้น ไม่ยืมรีวิวองค์กร */
-            const corpRv = reviewItems().filter((r) => (REVIEW_PICK[id] ? REVIEW_PICK[id].includes(r.id) : r.use === REVIEW_USE[id]) && r.img)
-            v2.reviews.items = corpRv.map((r) => { const g = r.gallery?.length ? r.gallery : [{ img: r.img, imgSmall: r.imgSmall }]; return { ...r, total: g.length, mono: [...(r.who || r.kind)].find((c) => !'เแโใไ'.includes(c)) } })
-            /* 13 พ.ย. รีวิวไม่เกิน 2 ราย แสดงครบทุกใบ ไม่ใช้ปุ่มเลื่อน (อาร์ต: ข้อมูลหลักไม่ซ่อนหลังการกด) */
-            v2.reviews.few = v2.reviews.items.length <= 2
-            for (const w of v2.reviews.wall) if (w.review) { const r = corpRv.find((x) => x.id === w.review); w.who = r.who || r.kind; w.alt = `งานจริงจากรีวิว ${w.who}` }
+            /* 16 พ.ย. การ์ด = รีวิวที่ไม่อยู่ในแท็บ (review-pool.js) · own ของหน้าก่อน แล้วรีวิวกลุ่มอื่น */
+            const rvAllUse = reviewItems()
+            const board = rvPlan ? rvPlan.board : []
+            const ownN = board.filter((b) => b.own).length
+            v2.reviews.items = board.map((b) => { const r = rvAllUse.find((x) => x.id === b.id); return { ...r, own: b.own, mono: [...(r.who || r.kind)].find((c) => !'เแโใไ'.includes(c)) } })
+            /* แถวเดียวมีลูกศร (partial reviewRow · อาร์ต 16 พ.ย. "เอารวมมาในแถวเดียวพอ มีลูกศรให้กดเลื่อน") */
+            for (const w of v2.reviews.wall) if (w.review) { const r = rvAllUse.find((x) => x.id === w.review); w.who = r.who || r.kind; w.alt = `งานจริงจากรีวิว ${w.who}` }
+            /* หน้าที่ไม่มีรีวิวของกลุ่มตัวเอง: หัวข้อกลาง ไม่อ้างว่าเป็นรีวิวของกลุ่มนี้ */
+            if (!ownN) {
+              up.reviews = { ...up.reviews, h: 'รีวิวจากลูกค้าที่สั่งทำเสื้อกับทีมดี' }
+              v2.copy = { ...v2.copy, reviews: 'ที่สั่งทำเสื้อกับทีมดี', reviewsLabel: 'รีวิวจากลูกค้าทีมดี', reviewsSub: 'คำพูดจริงจากแชทลูกค้ากลุ่มอื่นของทีมดี กดรูปเพื่อดูงานทั้งชุด' }
+            }
           }
           /* ผลงานโฉมใหม่: โชว์รูมหน้าแรก · แถวที่มี from = รูปบนหุ่นชุดหน้าแรก (home-work-showcase.json byType) */
           /* 11 พ.ย. คลังรีวิว (อาร์ต "เพิ่มคลังรีวิวตรงนี้"): use-v2.json reviewWall · รูปลูกค้ากลุ่มนี้จากคลังกลาง ไม่ซ้ำรูปที่หน้านี้ใช้แล้ว · น้อยกว่า 12 รูป = build พัง */
@@ -1202,14 +1237,16 @@ export default defineConfig({
           /* 13 พ.ย. ส่วนตรวจตัวอย่าง → ตรวจก่อนแพ็ก → จัดส่ง (อาร์ต "เอาแค่ส่วน C") · ข้อเท็จจริงจากคู่มือโปโลปัก (polo.json guide) ที่เดียว ไม่พิมพ์ซ้ำ · หัวการ์ด/รูปจาก use-v2.json _check */
           if (v2?.check) {
             const c = json('use-v2.json')._check, g = json('polo.json').guide
-            const tier = (t) => { const [when, ...what] = t.split(' · '); return { when, what: what.join(' · ') } }
+            /* 16 พ.ย.: "ช่วงจำนวน · ตัวอย่างที่ได้ · ตรวจอะไร" → หัวตัวหนาสั้น + บรรทัดรองเล็ก (กล่องแคบไม่ตัด 3 บรรทัด) */
+            const tier = (t) => { const [when, what, ...more] = t.split(' · '); return { when, what, more: more.join(' · ') } }
             const pic = (x) => ({ ...x, img: `${x.img}-1280.webp`, small: `${x.img}-640.webp` })
             for (const k of ['sample', 'qa', 'ship']) for (const f of [`${c[k].img}-1280.webp`, `${c[k].img}-640.webp`]) if (!existsSync(resolve(root, 'public' + f))) throw new Error(`use-v2.json _check: ไม่มีรูป ${f}`)
             v2.check = {
-              ...v2.check, note: c.note, printTag: c.printTag, cta: c.cta, claim: g.delivery.claim,
+              ...v2.check, note: c.note, cta: c.cta, claim: g.delivery.claim,
               line: lineMessageUrl(`สวัสดี ทีมดี ${c.brief}\nจำนวนประมาณ:  ตัว\n(จากหน้า ${url('uses', id)})`),
-              sample: { ...pic(c.sample), tiers: [tier(g.sample.lt100), tier(g.sample.ge100)], checks: g.sample.check, pay: g.sample.pay.split(' · ') },
-              qa: { ...pic(c.qa), items: g.qa },
+              /* 16 พ.ย. 2026 อาร์ต "ไม่ต้องแยก ปักกับพิมพ์ลาย รวมมาได้เลย": ตัวอย่าง 2 ระดับ · สิ่งที่ตรวจ · ตรวจก่อนแพ็ก เขียนรวมใน use-v2.json _check · มัดจำ/ส่ง/เคลม จากคู่มือเหมือนเดิม */
+              sample: { ...pic(c.sample), tiers: c.sample.tiers.map(tier), checks: c.sample.checks, pay: g.sample.pay.split(' · ') },
+              qa: { ...pic(c.qa), items: c.qa.items },
               ship: { ...pic(c.ship), ways: g.delivery.ways, notes: g.delivery.note.split(' · ') },
             }
           }

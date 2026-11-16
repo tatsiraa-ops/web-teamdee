@@ -9,17 +9,15 @@
       <li class="up2-chk__card">
         <figure class="up2-chk__ph"><img src="{{this.sample.img}}" srcset="{{this.sample.small}} 640w, {{this.sample.img}} 1280w" sizes="(min-width: 1024px) 440px, 92vw" width="1280" height="859" alt="{{this.sample.alt}}" loading="lazy" decoding="async"><span class="up2-chk__no" aria-hidden="true">01</span><figcaption class="up2-chk__band"><h3>{{this.sample.t}}</h3><span>{{this.sample.sub}}</span></figcaption></figure>
         <div class="up2-chk__body">
-          <dl class="up2-chk__tiers">{{#each this.sample.tiers}}<div><dt>{{this.when}}</dt><dd>{{{ph this.what}}}</dd></div>{{/each}}</dl>
+          <dl class="up2-chk__tiers">{{#each this.sample.tiers}}<div><dt>{{this.when}}</dt><dd>{{{ph this.what}}}</dd>{{#if this.more}}<dd class="up2-chk__tier-more">{{this.more}}</dd>{{/if}}</div>{{/each}}</dl>
           <div class="up2-chk__chips"><span>{{this.sample.checkLabel}}</span><ul>{{#each this.sample.checks}}<li>{{this}}</li>{{/each}}</ul></div>
           <ul class="up2-chk__notes">{{#each this.sample.pay}}<li>{{{ph this}}}</li>{{/each}}</ul>
-          <p class="up2-chk__print"><b>{{this.printTag}}</b><span>{{{ph this.sample.print}}}</span></p>
         </div>
       </li>
       <li class="up2-chk__card">
         <figure class="up2-chk__ph"><img src="{{this.qa.img}}" srcset="{{this.qa.small}} 640w, {{this.qa.img}} 1280w" sizes="(min-width: 1024px) 440px, 92vw" width="1280" height="853" alt="{{this.qa.alt}}" loading="lazy" decoding="async"><span class="up2-chk__no" aria-hidden="true">02</span><figcaption class="up2-chk__band"><h3>{{this.qa.t}}</h3><span>{{this.qa.sub}}</span></figcaption></figure>
         <div class="up2-chk__body">
           <ul class="up2-chk__list">{{#each this.qa.items}}<li><span class="up2-chk__tick">{{> icoCheck}}</span>{{this}}</li>{{/each}}</ul>
-          <p class="up2-chk__print"><b>{{this.printTag}}</b><span>{{{ph this.qa.print}}}</span></p>
         </div>
       </li>
       <li class="up2-chk__card">

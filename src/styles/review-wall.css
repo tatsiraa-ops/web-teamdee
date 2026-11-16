@@ -16,6 +16,14 @@
 @media (hover: hover) { .up2-rv__wall li:hover img { transform: scale(1.04); } }
 .up2-rv__wall button:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .up2-rv__wall img { transition: none; } }
+/* 16 พ.ย. 2026: คอมแบ่งแถวตายตัว 5 รูปแรกแถวบน ที่เหลือแถวล่าง (ตัวคั่น ::after กว้าง 100%) · ความกว้างแต่ละรูปตามสัดส่วนจริง (--r)
+   เดิมตัดแถวเอง รูปพาโนรามาหน้างานปักดันรูปที่ 10 ไปอยู่เดี่ยวแถวที่ 3 · ช่องห่างแถว 5+5 = 10 เท่าเดิม */
+@media (min-width: 1024px) { /* wall-rows */
+  .up2-rv__wall { row-gap: 5px; }
+  .up2-rv__wall > li { flex: var(--r) 1 0; }
+  .up2-rv__wall::after { content: ''; order: 1; flex: 0 0 100%; height: 0; }
+  .up2-rv__wall > li:nth-child(n+6) { order: 2; }
+}
 .up2-rv__tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin: 20px 0 0; font-size: 16px; font-weight: 800; color: var(--color-ink); }
 .up2-rv__tags span::first-letter { color: #C24B00; }
 /* การ์ดคำรีวิว (ไม่มีรูป · อาร์ต "ไม่เอารูปซ้ำ"): การ์ดหน้าแรกกว้างกลางหน้า 880 · ตัวย่อชื่อในวงกลมส้มแทนรูปโปรไฟล์ */
@@ -27,3 +35,29 @@
 .up2-rv .hm-rvb__q p { font-size: 19px; }
 .up2-rv__wall figure { width: 100%; height: 100%; margin: 0; overflow: hidden; border-radius: 16px; background: #E6E1DC; cursor: zoom-in; }
 
+
+/* แถวการ์ดรีวิว (partial reviewRow · 16 พ.ย. 2026 อาร์ต "เอารวมมาในแถวเดียวพอ มีลูกศรให้กดเลื่อน") · คอม 3 ใบ · แท็บเล็ต 2 · มือถือ 1 ใบเห็นขอบใบถัดไป
+   ลูกศรเลื่อนทีละใบ (review-board.js initReviewRows) · ปลายแถวลูกศรจาง · การ์ดไม่พอเต็มแถวซ่อนลูกศร (.is-static) */
+.rvrow { margin-top: 36px; }
+.rvrow__top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.rvrow__n { margin-left: 6px; font-weight: 600; color: var(--color-ink-3); }
+.rvrow__nav { display: flex; gap: 10px; }
+.rvrow__btn { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid var(--color-line); border-radius: 50%; background: #fff; color: var(--color-ink); cursor: pointer; transition: border-color .2s, opacity .2s; }
+.rvrow__btn:hover:not(:disabled) { border-color: var(--color-ink); }
+.rvrow__btn:disabled { opacity: .35; cursor: default; }
+.rvrow__btn:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+.rvrow.is-static .rvrow__nav { visibility: hidden; }
+.rvrow__track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 3); gap: 16px; margin-top: -22px; padding: 58px 2px 8px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.rvrow__track::-webkit-scrollbar { display: none; }
+.rvrow__track:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4px; border-radius: 24px; }
+.rvrow__item, .rvrow__item + .rvrow__item { display: flex; margin: 0; scroll-snap-align: start; }
+.rvrow .hm-rvb__card { flex: 1; display: flex; flex-direction: column; }
+.rvrow .hm-rvb__acts { margin-top: auto; padding-top: 18px; }
+@media (max-width: 1023px) { .rvrow__track { grid-auto-columns: calc((100% - 16px) / 2); } }
+@media (max-width: 767px) { .rvrow__track { grid-auto-columns: 86%; } .rvrow__btn { width: 44px; height: 44px; } }
+/* การ์ดในแถว (กว้างราว 1/3 จอ): ไอคอนคำพูดเล็กลงและลอยเหนือการ์ดมากขึ้น · หัวการ์ดกันที่ไอคอนน้อยลง ชื่อยาวไม่ถูกบีบหลายบรรทัด */
+.rvrow .hm-rvb__card { padding: 26px 24px 24px; }
+.rvrow .hm-rvb__pop { top: -48px; right: 18px; width: 84px; height: 84px; }
+.rvrow .hm-rvb__head { padding-right: 56px; }
+.rvrow .hm-rvb__who b { font-size: 16px; }
+.rvrow .hm-rvb__q p { font-size: 17px; }

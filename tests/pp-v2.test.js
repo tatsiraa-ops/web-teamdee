@@ -146,7 +146,8 @@ test('/sublimation/ รีวิวลูกค้า (บอร์ด "รี�
   assert.ok(wall.length >= 8, 'กำแพงรูปลูกค้าจริง')
   assert.equal(new Set(wall).size, wall.length, 'รายละรูป ไม่ซ้ำ')
   for (const id of wall) assert.ok(PRINT.includes(id), id)
-  const cards = [...s.matchAll(/<article class="hm-rvb__item[^"]*" data-rvb-item/g)]
+  /* 16 พ.ย. แถวเลื่อน (partial reviewRow) · การ์ดมี role/data-rv-id ต่อจาก class */
+  const cards = [...s.matchAll(/<article class="hm-rvb__item[^"]*"[^>]*data-rvb-item/g)]
   assert.equal(cards.length, PRINT.length)
   assert.match(s, /สีที่พิมพ์ลายก็ตรงกับแบบ/, 'รีวิวที่พูดถึงงานพิมพ์ลายโดยตรงอยู่ในชุด')
   assert.doesNotMatch(text(s.replace(/<script[\s\S]*?<\/script>/g, '')), /\[|รอข้อมูล|รีสอร์ท|ศาลเจ้า/)

@@ -1,0 +1,10 @@
+{{!-- ผังเสื้อ TEAMDEE หน้า-หลัง + เส้นชี้ (16 พ.ย. 2026 อาร์ต "เอาเป็นตัวเสื้อหน้าหลัง และเอาแบบมีเส้นแล้วชี้ไปในแต่ละจุด")
+     id · img (ไม่มีขนาดท้าย) · alt · points [{ n, t, s, x, y, side: l|r, href?, thumb?, thumbAlt? }]
+     คอม: ป้ายซ้าย-ขวาของภาพ เส้นวาดด้วย shirt-callouts.js · มือถือ: จุดมีเลขบนภาพ + รายการใต้ภาพ (ไม่มีเส้น)
+     ป้ายมี href = ลิงก์ไปแถวแบบ · ป้ายมี thumb = รูปงานจริงของจุดนั้น กดดูรูปใหญ่ (lightbox บน .sc__item) --}}
+<div class="sc" data-sc id="{{id}}">
+  <ul class="sc__col sc__col--l">{{#each points}}{{#if (eq this.side "l")}}<li class="sc__item" data-x="{{this.x}}" data-y="{{this.y}}">{{#if this.href}}<a class="sc__lab" href="{{this.href}}">{{else}}<div class="sc__lab">{{/if}}{{#if this.thumb}}<img class="sc__thumb" src="{{this.thumb}}" alt="{{this.thumbAlt}}" width="104" height="64" loading="lazy" decoding="async">{{/if}}<span class="sc__n">{{this.n}}</span><span class="sc__t"><b>{{this.t}}</b><small>{{this.s}}</small></span>{{#if this.href}}</a>{{else}}</div>{{/if}}</li>{{/if}}{{/each}}</ul>
+  <figure class="sc__fig"><img src="{{img}}-1000.webp" srcset="{{img}}-640.webp 640w, {{img}}-1000.webp 1000w, {{img}}-1600.webp 1600w" sizes="(min-width:1024px) 900px, 92vw" width="1000" height="596" alt="{{alt}}" loading="lazy" decoding="async">{{#each points}}<span class="sc__dot" style="left:{{this.x}}%;top:{{this.y}}%" aria-hidden="true">{{this.n}}</span>{{/each}}</figure>
+  <ul class="sc__col sc__col--r">{{#each points}}{{#if (eq this.side "r")}}<li class="sc__item" data-x="{{this.x}}" data-y="{{this.y}}">{{#if this.href}}<a class="sc__lab" href="{{this.href}}">{{else}}<div class="sc__lab">{{/if}}{{#if this.thumb}}<img class="sc__thumb" src="{{this.thumb}}" alt="{{this.thumbAlt}}" width="104" height="64" loading="lazy" decoding="async">{{/if}}<span class="sc__n">{{this.n}}</span><span class="sc__t"><b>{{this.t}}</b><small>{{this.s}}</small></span>{{#if this.href}}</a>{{else}}</div>{{/if}}</li>{{/if}}{{/each}}</ul>
+  <svg class="sc__lines" aria-hidden="true"></svg>
+</div>

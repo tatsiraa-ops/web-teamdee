@@ -55,9 +55,9 @@ test('ขั้นตอน: ขั้น 03 ตรวจตัวอย่า�
 
 test('ไม่มีข้อมูลติดต่อของลูกค้าในภาพ: การ์ด "งานปักพิเศษ" เป็นภาพงานปักจริงใหม่ (ไม่ใช่แพตช์ที่มีเบอร์โทรร้านลูกค้า)', () => {
   const o = secBy(/<section[^>]*id="options"/)
-  const six = o.match(/<img src="[^"]*emb-guide\/pos-6\.webp"[^>]*>/)[0]
-  assert.match(six, /width="670"/, 'ไฟล์ pos-6 ถูกแทนด้วยภาพใหม่ 670px')
-  assert.match(six, /alt="ภาพจริง[^"]*"/)
+  /* 16 พ.ย. 2026 ตำแหน่งปักเป็นผังเสื้อมีเส้นชี้ · งานปักพิเศษเหลือแถบข้อความ ไม่มีภาพ (แพตช์เดิมที่มีเบอร์โทรร้านลูกค้าไม่กลับมา) */
+  assert.doesNotMatch(o, /emb-guide\/pos-6\.webp/)
+  assert.match(o, /class="ps2__special"/)
   assert.doesNotMatch(text(main), /081[ -]?592/)
 })
 

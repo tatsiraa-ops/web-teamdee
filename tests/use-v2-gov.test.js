@@ -43,7 +43,10 @@ test('หน่วยงาน: แท็บ 3 ประเภท เสื้�
   for (const s of photos.filter((x) => x.includes('/use-real/'))) assert.ok(pub(s), s)
   const rest = gov.slice(0, at) + gov.slice(gov.indexOf('</section>', at))
   for (const s of photos) assert.ok(!rest.includes(s.replace(/(-\d+)?\.webp$/, '')), `${s}: ไม่ซ้ำ`)
-  assert.match(ctx, /blockquote[\s\S]*โทรคมนาคมแห่งชาติ/, 'แท็บกีฬามีรีวิว NT')
+  /* 16 พ.ย. รีวิวของหน่วยงาน (โรงพยาบาล · NT) ขึ้นการ์ดในส่วนรีวิว (review-pool.js) · แท็บได้รีวิวจริงจากกลุ่มอื่น ทุกแท็บ */
+  assert.equal((ctx.match(/<blockquote class="up2-ctx__rv">/g) || []).length, 6, 'ทุกแท็บมีรีวิว')
+  const rvSec = gov.slice(gov.indexOf('<section class="hm-customer-proof up2-rv"'))
+  assert.match(rvSec.slice(0, rvSec.indexOf('</section>')), /data-rvb-item data-use="corp"[\s\S]*โทรคมนาคมแห่งชาติ/, 'การ์ดรีวิว NT')
 })
 
 test('หน่วยงาน: การ์ดรีวิวเฉพาะ hospital + nt-snooker · คลังรีวิวไม่มีรูปที่ไม่ใช่หน่วยงาน (cr11 lc428)', () => {

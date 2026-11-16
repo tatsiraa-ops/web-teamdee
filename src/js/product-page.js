@@ -1,7 +1,7 @@
 import { initFabricCards } from './fabric-cards.js'
 import { initTypeCollars } from './type-collars.js'
 import { initPoloFabric } from './polo-fabric.js'
-import { initPoloOptions } from './polo-options.js'
+import { initShirtCallouts } from './shirt-callouts.js'
 import './download-assets.js'
 import '../styles/v22-sections.css'
 /* หน้าสินค้า 6 หน้า · product-page.css (แกลเลอรีลูกค้า · รูปในการ์ด) โหลดใน head ของหน้า */
@@ -27,7 +27,11 @@ initPriceCompare()
 /* การ์ดสะสมผ้า (รอบ 185): เอียง/ฟอยล์ · พลิก · แจกการ์ด · สำรับมือถือ */
 initFabricCards()
 initPoloFabric() /* 11 พ.ย. หน้างานปัก: ผ้า + สี + ราคา */
-initPoloOptions()
+/* 16 พ.ย. 2026 หน้างานปัก: ผังเสื้อหน้า-หลังมีเส้นชี้ (ตำแหน่งปัก · รายละเอียดเสื้อ) · ไม่มีการกดเลือกแบบแล้ว (เดิม polo-options.js)
+   กดรูปงานปักแต่ละจุด / รูปแบบเสื้อแต่ละแบบ = ป๊อปอัปขาว (lightbox → review-dialog openPhotos) */
+initShirtCallouts()
+initLightbox('#emb-pos', '.sc__item', 'ดูงานปักแต่ละตำแหน่ง')
+for (const k of ['col', 'plk', 'slv', 'pkt', 'cut']) initLightbox(`#ps2-grp-${k}`, 'li', 'ดูรายละเอียดเสื้อแบบใหญ่')
 /* แผงเลือกเสื้อ (196c): กดทรง → บอกคอที่ทำได้ + ราคาทรง */
 initTypeCollars()
 

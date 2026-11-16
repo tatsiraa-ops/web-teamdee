@@ -13,9 +13,11 @@ const pub = (s) => existsSync(new URL(`../public${s}`, import.meta.url))
 const cls = main('custom-class-shirts')
 const fac = main('custom-university-shirts')
 
-test('รุ่น: ส่วนเรียงตามหน้าคณะ (ไม่มีการ์ดรีวิว) · ไม่มีส่วนเดิม · ลิงก์ในหน้ามีปลายทาง', () => {
+/* 16 พ.ย. 2026 คลังรีวิวเดียว (review-pool.js): หน้าเสื้อรุ่นมีส่วนรีวิวแล้ว (รีวิวจริงจากกลุ่มอื่น · หัวข้อกลาง) */
+test('รุ่น: ส่วนเรียงตามหน้าคณะ · ไม่มีส่วนเดิม · ลิงก์ในหน้ามีปลายทาง', () => {
   assert.deepEqual(order(cls), order(fac))
-  for (const id of ['plan', 'photos', 'work', 'reviews']) assert.doesNotMatch(cls, new RegExp(`<section[^>]*id="${id}"`))
+  for (const id of ['plan', 'photos', 'work']) assert.doesNotMatch(cls, new RegExp(`<section[^>]*id="${id}"`))
+  assert.match(cls, /<section class="hm-customer-proof up2-rv" id="reviews"/)
   for (const [, id] of cls.matchAll(/href="#([^"]+)"/g)) assert.ok(cls.includes(`id="${id}"`), `#${id}`)
   assert.match(cls, /id="class-review-wall"/)
 })
@@ -25,7 +27,8 @@ test('รุ่น: hero ภาพเสื้อรุ่น · ไม่มี
   const hero = cls.slice(at, cls.indexOf('</section>', at))
   for (const f of ['class-2304', 'class-1280', 'class-800', 'class-m-768', 'class-m-480']) { assert.match(hero, new RegExp(`/img/use-hero/${f}\\.webp`)); assert.ok(pub(`/img/use-hero/${f}.webp`), f) }
   assert.doesNotMatch(hero, /corp-|shop-|gov-|edu-|faculty-/)
-  const body = text(cls.replace(/<script[\s\S]*?<\/script>/g, ''))
+  /* 16 พ.ย. 2026 รีวิวข้ามกลุ่ม (review-pool.js · อาร์ต "คนละประเภทลูกค้าไม่เป็นไร"): ป้ายประเภทลูกค้าในรีวิว (เช่น "หน่วยงานโรงพยาบาล") ไม่นับ · ตรวจเฉพาะข้อความของหน้า */
+  const body = text(cls.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<section class="hm-customer-proof up2-rv"[\s\S]*?<\/section>|<blockquote class="up2-ctx__rv">[\s\S]*?<\/blockquote>/g, ''))
   assert.doesNotMatch(body, /ร้านค้า|หน่วยงาน/, (body.match(/.{30}(ร้านค้า|หน่วยงาน).{30}/) || [])[0])
 })
 

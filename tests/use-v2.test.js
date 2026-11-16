@@ -119,7 +119,10 @@ test('/corporate/ รีวิว (แบบ Delicake): หัวข้อ H2 v2
   assert.doesNotMatch(r.slice(r.indexOf('data-rvb')), /class="hm-rvb__photo"|hm-rvb__avatar/, 'การ์ดไม่มีรูป')
   assert.ok((r.match(/<span>#/g) || []).length >= 6)
   const items = [...r.matchAll(/data-rvb-item data-use="([a-z]+)"/g)].map((x) => x[1])
-  assert.ok(items.length >= 3 && items.every((u) => u === 'corp'), items.join())
+  /* 16 พ.ย. คลังรีวิวเดียว: รีวิวองค์กรทั้งหมดขึ้นก่อน แล้วค่อยรีวิวกลุ่มอื่น (มีป้ายคั่น) */
+  const firstOther = items.findIndex((u) => u !== 'corp')
+  assert.ok(firstOther >= 3 && items.slice(firstOther).every((u) => u !== 'corp'), items.join())
+  assert.match(r, /<div class="rvrow" data-rvrow>/, 'แถวเลื่อน (16 พ.ย.)')
   assert.match(r, /data-where="use-review"/)
   assert.match(m, /<script type="application\/json" data-rv-json>/)
   for (const [, id] of wall) assert.ok(r.includes(`data-rv-open="${id}"`))
@@ -362,7 +365,6 @@ test('/corporate/ บริบทงาน รอบ 198: แท็บใต้�
   })
   /* แผง: รูปลูกค้าจริง 3 รูป · รีวิวเฉพาะ สัมมนา ทริป ธุรกิจบริการ */
   const lib = JSON.parse(readFileSync(new URL('../src/data/customers.json', import.meta.url), 'utf8'))
-  const RV = { seminar: 'ฝ่ายบุคคล งานกิจกรรมพนักงาน', trip: 'เสื้อทริปเอาต์ติ้ง', business: 'หน่วยงานโรงพยาบาล' }
   const panels = [...c.matchAll(/<div class="up2-ctx__panel" role="tabpanel" id="up2-ctx-([a-z]+)" aria-labelledby="up2-ctx-tab-([a-z]+)"( hidden)?>([\s\S]*?)<!-- \/panel -->/g)]
   assert.equal(panels.length, 6)
   const all = []
@@ -385,7 +387,8 @@ test('/corporate/ บริบทงาน รอบ 198: แท็บใต้�
     assert.match(a, /<h3>/); assert.equal((a.match(/class="up2-ctx__give"/g) || []).length, 3)
     assert.match(a, new RegExp(`data-track="line" data-where="use-context-${id}"`))
     const rv = a.match(/<blockquote class="up2-ctx__rv">([\s\S]*?)<\/blockquote>/)
-    if (RV[id]) { assert.ok(rv, `${id}: มีรีวิว`); assert.match(text(rv[1]), new RegExp(RV[id])); assert.match(text(rv[1]), /รีวิวจากแชทจริง/) } else assert.ok(!rv, `${id}: ไม่มีรีวิวตรงงาน = ไม่ใส่`)
+    /* 16 พ.ย. คลังรีวิวเดียว (review-pool.js): ทุกแท็บมีรีวิวจริง · รีวิวองค์กรขึ้นการ์ดในส่วนรีวิว (รายการต่อแท็บตรวจใน tests/review-pool.test.js) */
+    assert.ok(rv, `${id}: มีรีวิว`); assert.match(text(rv[1]), /รีวิวจากแชทจริง/)
   })
   assert.equal(new Set(all).size, 12, 'รูปจริงไม่ซ้ำกันทั้ง 6 แท็บ')
   const rest = m.replace(c, '')

@@ -190,8 +190,9 @@ test('หน้ากลุ่มลูกค้า: รีวิวตรงก
   assert.deepEqual(rv('/custom-staff-shirts/'), ['rv384'])
   assert.deepEqual(rv('/custom-organization-shirts/'), ['rv417', 'rv235'])
   assert.equal(rv('/custom-running-shirts/')[0], 'rv271')
-  assert.equal(useMain('/custom-class-shirts/').includes('id="reviews"'), false)
-  assert.equal(useMain('/custom-university-shirts/').includes('id="reviews"'), false)
+  /* 16 พ.ย. คลังรีวิวเดียว (review-pool.js): หน้าเสื้อรุ่นกับคณะมีส่วนรีวิวแล้ว (รีวิวจริงจากกลุ่มอื่น · หัวข้อกลาง) */
+  assert.ok(rv('/custom-class-shirts/').length >= 3)
+  assert.ok(rv('/custom-university-shirts/').length >= 3)
 })
 
 test('หน้ากลุ่มลูกค้า: แถบสรุปใต้ hero มีสิทธิพิเศษ (strip ตาม v22 · ราคาออกตามอาร์ต 2 พ.ย.) · ปุ่ม LINE ยังอยู่', () => {

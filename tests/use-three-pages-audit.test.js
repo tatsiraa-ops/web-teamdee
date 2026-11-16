@@ -92,15 +92,16 @@ test('5 · รีวิวไม่เกิน 2 ราย แสดงคร�
   for (const [id, f] of Object.entries(P)) {
     const s = sec(main(f), 'id="reviews"')
     const n = (s.match(/data-rvb-item/g) || []).length
-    assert.ok(n >= 1 && n <= 2, `${id}: ${n} ราย`)
-    assert.match(s, /class="hm-rvb up2-rv__board up2-rv__board--all"/, id)
-    assert.doesNotMatch(s, /data-rvb-step|data-rvb-count/, `${id}: ไม่มีปุ่มเลื่อน`)
-    assert.doesNotMatch(s, /<div class="hm-rvb [^"]*"[^>]* data-rvb[ >]/, `${id}: ไม่ให้สคริปต์ซ่อนใบที่สอง`)
+    /* 16 พ.ย. คลังรีวิวเดียว (review-pool.js): ทุกหน้าได้รีวิวครบ แบ่งแท็บ + การ์ด → การ์ดหลายใบ แต่ยังแสดงครบไม่ซ่อนหลังปุ่ม */
+    assert.ok(n >= 5, `${id}: ${n} ราย`)
+    /* 16 พ.ย. อาร์ต "เอารวมมาในแถวเดียวพอ มีลูกศรให้กดเลื่อน": แถวเลื่อน (reviewRow) · การ์ดทุกใบอยู่ในหน้า ไม่มีสคริปต์ซ่อนใบอื่น */
+    assert.match(s, /<div class="rvrow" data-rvrow>/, id)
+    assert.doesNotMatch(s, /data-rvb-step|data-rvb-count|data-rvb[ >]/, `${id}: ไม่มีกระดานแบบซ่อนใบ`)
   }
   const corp = sec(main('corporate'), 'id="reviews"')
-  assert.match(corp, /data-rvb-step/); assert.doesNotMatch(corp, /up2-rv__board--all/)
-  const css = read('src/styles/use-page.css')
-  assert.match(css, /\.up2-rv__board--all \.hm-rvb__right \{[^}]*display: grid/)
+  /* 16 พ.ย.: หน้าบริษัทก็แสดงครบทุกใบ ไม่ใช้ปุ่มเลื่อนแล้ว */
+  assert.doesNotMatch(corp, /data-rvb-step/); assert.match(corp, /data-rvrow-next/)
+  assert.match(read('src/styles/review-wall.css'), /\.rvrow__track \{[^}]*overflow-x: auto;[^}]*scroll-snap-type: x mandatory;/)
 })
 
 test('6 · หน่วยงาน: FAQ ครบ 6 ข้อ · ข้อใหม่เรื่องจัดส่งตรงคู่มือ · ทุกหน้าไอคอนครบทุกข้อ', () => {

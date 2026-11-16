@@ -1,0 +1,23 @@
+{{!-- แถวการ์ดรีวิว (16 พ.ย. 2026 อาร์ต "เอารวมมาในแถวเดียวพอครับ มีลูกศรให้กดเลื่อนๆ") · ใช้ร่วม up2Reviews (หน้ากลุ่มลูกค้า) + pp2Reviews (หน้าสินค้า)
+     การ์ดเดิมทุกอย่าง (คำรีวิว ชื่อ ประเภทลูกค้า ปุ่ม LINE) · รีวิวทุกรายอยู่ในหน้า (เลื่อนด้วยนิ้ว/แทร็กแพด/ลูกศร · ไม่มี JS ก็เลื่อนได้)
+     ลูกศร = review-board.js initReviewRows (เลื่อนทีละการ์ด · ปุ่มจางที่ปลายแถว) · items · label · where (ป้ายติดตาม LINE)
+     ชื่อ + คำรีวิวไม่ใช้ {{ph}}: การ์ดแคบ ก้อนวลีห้ามหักหล่นทั้งก้อนจนเหลือคำเดียวต่อบรรทัด (อาร์ต 16 พ.ย. "ตัดบรรทัดแปลกๆ") · ตัดตามคำด้วยปลั๊กอินตัดบรรทัดไทยแทน --}}
+<div class="rvrow" data-rvrow>
+  <div class="rvrow__top">
+    <p class="hm-rvb__label">{{label}} <span class="rvrow__n tabular-nums">{{items.length}} รีวิว</span></p>
+    <div class="rvrow__nav">
+      <button type="button" class="rvrow__btn" data-rvrow-prev aria-label="รีวิวก่อนหน้า"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button type="button" class="rvrow__btn" data-rvrow-next aria-label="รีวิวถัดไป"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div class="rvrow__track" role="list" tabindex="0" aria-label="{{label}} เลื่อนดูได้">
+    {{#each items}}<article class="hm-rvb__item rvrow__item" role="listitem" data-rvb-item data-use="{{this.use}}" data-rv-id="{{this.id}}" aria-label="รีวิวจาก {{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}">
+      <div class="hm-rvb__card">
+        <img class="hm-rvb__pop" src="/img/icons/review-quote.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
+        <div class="hm-rvb__head"><span class="up2-rv__mono" aria-hidden="true">{{this.mono}}</span><p class="hm-rvb__who"><b>{{#if this.who}}{{this.who}}{{else}}{{this.kind}}{{/if}}</b><small>{{#if this.who}}{{this.kind}} · {{/if}}รีวิวจากแชทจริง</small></p></div>
+        <blockquote class="hm-rvb__q"><p>{{this.quote}}</p></blockquote>
+        <div class="hm-rvb__acts"><a class="cb cb--p hm-rvb__cta" href="{{this.line}}" data-track="line" data-where="{{../where}}"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">อยากได้เสื้อแบบนี้</span></a><a class="hm-rvb__all" href="/project/#reviews">ดูรีวิวทั้งหมด <span aria-hidden="true">→</span></a></div>
+      </div>
+    </article>{{/each}}
+  </div>
+</div>

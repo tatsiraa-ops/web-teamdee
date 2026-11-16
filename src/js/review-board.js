@@ -12,7 +12,35 @@ export const firstOfUse = (uses, use, current) => {
 /* โมเสกรูปซ้ายตามกลุ่มของรีวิวที่แสดง (index เกินช่วง = กลุ่มของรีวิวแรก) */
 export const groupFor = (uses, i) => uses[i] ?? uses[0]
 
+/* แถวการ์ดรีวิว (partial reviewRow · 16 พ.ย. 2026) · ลูกศรเลื่อนทีละใบ · ปุ่มจางที่ปลายแถว · การ์ดไม่พอเต็มแถว = ซ่อนลูกศร */
+export function initReviewRows() {
+  for (const row of document.querySelectorAll('[data-rvrow]')) {
+    const track = row.querySelector('.rvrow__track')
+    const prev = row.querySelector('[data-rvrow-prev]')
+    const next = row.querySelector('[data-rvrow-next]')
+    if (!track || !prev || !next) continue
+    const step = () => {
+      const it = track.querySelector('.rvrow__item')
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 16
+      return it ? it.getBoundingClientRect().width + gap : track.clientWidth
+    }
+    const sync = () => {
+      const max = track.scrollWidth - track.clientWidth - 2
+      prev.disabled = track.scrollLeft <= 2
+      next.disabled = track.scrollLeft >= max
+      row.classList.toggle('is-static', max <= 0)
+    }
+    const go = (dir) => track.scrollBy({ left: dir * step(), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+    prev.addEventListener('click', () => go(-1))
+    next.addEventListener('click', () => go(1))
+    track.addEventListener('scroll', sync, { passive: true })
+    addEventListener('resize', sync)
+    sync()
+  }
+}
+
 export function initReviewBoard() {
+  initReviewRows()
   const root = document.querySelector('[data-rvb]')
   if (!root) return
   const items = [...root.querySelectorAll('[data-rvb-item]')]

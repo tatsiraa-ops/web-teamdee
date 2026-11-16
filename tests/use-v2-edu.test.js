@@ -21,7 +21,8 @@ test('โรงเรียน: hero ภาพโรงเรียน · ไม
   const hero = edu.slice(edu.indexOf('<section class="band-hero up2-hero'), edu.indexOf('</section>', edu.indexOf('<section class="band-hero up2-hero')))
   for (const f of ['edu-2304', 'edu-1280', 'edu-800', 'edu-m-768', 'edu-m-480']) { assert.match(hero, new RegExp(`/img/use-hero/${f}\\.webp`)); assert.ok(pub(`/img/use-hero/${f}.webp`), f) }
   assert.doesNotMatch(hero, /corp-|shop-|gov-/)
-  const body = text(edu.replace(/<script[\s\S]*?<\/script>/g, '')).replace(/บริษัท ดีดี ฟินิกซ์ จำกัด|2,800\s*\+?\s*องค์กร|หนังสือรับรองบริษัท/g, '')
+  /* 16 พ.ย. 2026 รีวิวข้ามกลุ่ม (review-pool.js · อาร์ต "คนละประเภทลูกค้าไม่เป็นไร"): ป้ายประเภทลูกค้าในรีวิว (เช่น "หน่วยงานโรงพยาบาล") ไม่นับ · ตรวจเฉพาะข้อความของหน้า */
+  const body = text(edu.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<section class="hm-customer-proof up2-rv"[\s\S]*?<\/section>|<blockquote class="up2-ctx__rv">[\s\S]*?<\/blockquote>/g, '')).replace(/บริษัท ดีดี ฟินิกซ์ จำกัด|2,800\s*\+?\s*องค์กร|หนังสือรับรองบริษัท/g, '')
   assert.doesNotMatch(body, /บริษัท|ร้านค้า|หน่วยงาน/, (body.match(/.{30}(บริษัท|ร้านค้า|หน่วยงาน).{30}/) || [])[0])
 })
 

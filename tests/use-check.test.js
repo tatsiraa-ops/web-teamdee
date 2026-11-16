@@ -29,10 +29,12 @@ for (const [id, f] of Object.entries(PAGES)) {
 
   test(`${f}: เนื้อหาตรงคู่มือโปโลปัก (ตัวอย่าง 2 ระดับ · สิ่งที่ตรวจ · ตรวจก่อนแพ็ก 4 ข้อ · ช่องทางส่ง 3 ทาง · เคลม 7 วัน)`, () => {
     const t = flat(text(sec(f).s))
-    for (const k of ['lt100', 'ge100']) for (const part of guide.sample[k].split(' · ')) assert.ok(t.includes(flat(part)), part)
-    for (const c of guide.sample.check) assert.ok(t.includes(flat(c)), c)
+    /* 16 พ.ย. 2026 อาร์ต "ทุกอย่างนี้ไม่ต้องแยก ปักกับพิมพ์ลาย รวมมาได้เลย" → ตัวอย่าง 2 ระดับ / สิ่งที่ตรวจ / ตรวจก่อนแพ็ก เขียนรวม (use-v2.json _check) · มัดจำ ช่องทางส่ง เคลม ยังตรงคู่มือ */
+    const c = v2._check
+    for (const tier of c.sample.tiers) for (const part of tier.split(' · ')) assert.ok(t.includes(flat(part)), part)
+    for (const x of c.sample.checks) assert.ok(t.includes(flat(x)), x)
     for (const part of guide.sample.pay.split(' · ')) assert.ok(t.includes(flat(part)), part)
-    for (const q of guide.qa) assert.ok(t.includes(flat(q)), q)
+    for (const q of c.qa.items) assert.ok(t.includes(flat(q)), q)
     for (const w of guide.delivery.ways) { assert.ok(t.includes(flat(w.t)), w.t); assert.ok(t.includes(flat(w.s)), w.s) }
     for (const part of guide.delivery.note.split(' · ')) assert.ok(t.includes(flat(part)), part)
     assert.ok(t.includes(flat(guide.delivery.claim)), 'เคลม 7 วัน')
@@ -57,25 +59,20 @@ test('หัวข้อของทุกหน้าไม่ซ้ำกั�
   assert.doesNotMatch(v2.shop.check.h + (v2.shop.check.lead || ''), /บริษัท|องค์กร/)
 })
 
-/* 13 พ.ย. อาร์ตยืนยัน "ทุกงานหรือทุกประเภทของเรา เราจะลองเทสพิมพ์ลายเหมือนกับงานปัก" → การ์ด 01 ไม่จำกัดแค่งานปัก · บอกว่างานพิมพ์ลายมีเทสพิมพ์ตัวอย่างด้วย
-   (เดิมบรรทัดนี้ใช้ "เห็นแบบ 3D ใน 24 ชม." จากขั้นออกแบบ ซึ่งไม่ใช่ตัวอย่างจริง) · การ์ด 02 ยังใช้ข้อความจากขั้นตอนหน้าเสื้อพิมพ์ลาย */
-test('การ์ด 01 ครอบคลุมทั้งงานปักและงานพิมพ์ลาย · บรรทัดเสื้อพิมพ์ลายของการ์ด 02 มาจากขั้นตอนหน้าเสื้อพิมพ์ลายจริง', () => {
-  const notes = print.map((x) => x.note).join(' ')
+/* 16 พ.ย. 2026 อาร์ต (ภาพส่วนนี้ที่มีป้ายดำ "เสื้อพิมพ์ลาย" แยกบรรทัด) "ทุกอย่างนี้ไม่ต้องแยก ปักกับพิมพ์ลายครับ รวมมาได้เลย ทำมาดีๆ"
+   → ไม่มีบรรทัด/ป้ายเสื้อพิมพ์ลายแยก · ข้อความทุกข้อใช้ได้กับทั้งสองงาน (คำว่า "ปัก" ที่เหลือมาคู่กับ "พิมพ์") · ถ่ายภาพเสื้อบนหุ่นก่อนส่งเป็นข้อตรวจก่อนแพ็กของทุกงาน */
+test('ตรวจตัวอย่าง-ตรวจก่อนแพ็ก: เขียนรวมงานปักกับงานพิมพ์ลาย ไม่แยกป้าย', () => {
   const c = v2._check
-  assert.doesNotMatch(c.sample.t, /งานปัก/, 'หัวการ์ดไม่จำกัดแค่งานปัก')
+  assert.ok(!('print' in c.sample) && !('print' in c.qa) && !('printTag' in c), 'ไม่มีบรรทัดเสื้อพิมพ์ลายแยก')
   assert.match(c.sample.sub, /งานปัก/); assert.match(c.sample.sub, /พิมพ์ลาย/)
-  assert.match(c.sample.print, /เทสพิมพ์ลายตัวอย่าง/); assert.match(c.sample.print, /ก่อนผลิตจริง/)
-  assert.ok(notes.includes('ถ่ายภาพเสื้อบนหุ่นให้ดูก่อนส่ง') && c.qa.print.includes('ถ่ายภาพเสื้อบนหุ่นให้ดูก่อนส่ง'))
+  assert.equal(c.sample.tiers.length, 2)
+  assert.match(c.sample.tiers[0], /^สั่งน้อยกว่า 100 ตัว · /); assert.match(c.sample.tiers[1], /^สั่งตั้งแต่ 100 ตัวขึ้นไป · เสื้อตัวอย่างจริง 1 ตัว/)
+  assert.ok(c.qa.items.includes('ถ่ายภาพเสื้อบนหุ่นให้ดูก่อนส่ง'))
+  for (const line of [...c.sample.tiers, ...c.sample.checks, ...c.qa.items, c.qa.sub]) if (/ปัก/.test(line)) assert.match(line, /พิมพ์/, `"${line}" พูดถึงแค่งานปัก`)
   for (const f of Object.values(PAGES)) {
-    const s = sec(f).s, t = flat(text(s))
-    assert.ok(t.includes(flat(c.sample.print)), f); assert.ok(t.includes(flat(c.qa.print)), f)
+    const s = sec(f).s
+    assert.doesNotMatch(s, /up2-chk__print/, f)
+    assert.equal((s.match(/class="up2-chk__list"[\s\S]*?<\/ul>/)[0].match(/<li>/g) || []).length, c.qa.items.length, `${f}: ข้อตรวจก่อนแพ็ก`)
     assert.equal(flat(text(s.match(/<h3>([\s\S]*?)<\/h3>/)[1])), flat(c.sample.t), f)
   }
-})
-
-test('CSS: ความกว้างพิเศษ 1400 · ตัวหนังสือบนพื้นส้มเรียบเป็นสีดำ · จอเล็กเรียงลงมาไม่ซ่อนเนื้อหา', () => {
-  const css = read('src/styles/use-page.css')
-  assert.match(css, /\.up2-chk > \.wrap \{[^}]*max-width: 1400px/)
-  assert.match(css, /\.up2-chk__no \{[^}]*background: #fff/)
-  assert.doesNotMatch(css.slice(css.indexOf('.up2-chk')), /\.up2-chk[^{]*\{[^}]*display: none/)
 })

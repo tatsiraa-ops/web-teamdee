@@ -1375,6 +1375,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
 }
 /* 12 พ.ย. รอบ 213 หน้างานปัก (pp2PoloSpec.hbs): ตำแหน่งปัก = ผัง + รายการสั้น · รายละเอียดเสื้อ 28 แบบเห็นครบ ไม่มีแท็บ
    จอใหญ่ แถวละกลุ่ม: หัวกลุ่มซ้าย ภาพ 6 ช่องขวา · มือถือ หัวกลุ่มบน ภาพเป็นรางปัดข้าง (เห็นใบถัดไปโผล่ = รู้ว่าปัดได้) */
+@media (min-width: 768px) { .ps2 > .wrap { width: calc(100% - 64px); max-width: 1400px; padding-inline: 0; } } /* รอบ 3 อาร์ต "กว้างพิเศษได้" · ค่าเดียวกับส่วนกว้างอื่น (memory site-widths) */
 .ps2__pos { margin-top: 64px; scroll-margin-top: 100px; }
 .ps2__pos > .ps2__oh { margin-top: 0; font-size: clamp(26px, 2.8vw, 36px); text-align: center; }
 .ps2__pos > .ps2__op { margin-top: 10px; text-align: center; }
@@ -1471,3 +1472,70 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
   .ps2__ask { justify-content: center; }
 
 }
+
+/* ---- 16 พ.ย. 2026 หน้างานปัก: ผังเสื้อ TEAMDEE หน้า-หลัง + เส้นชี้ (partial shirtCallouts · shirt-callouts.js) ----
+   อาร์ต "เอาเป็นตัวเสื้อหน้าหลัง และเอาแบบมีเส้นแล้วชี้ไปในแต่ละจุด" · คอม: ป้าย | ภาพ | ป้าย + เส้นส้ม · ต่ำกว่า 1024: ภาพบน ป้ายเป็นรายการใต้ภาพ (เลขตรงกับจุดบนภาพ ไม่มีเส้น)
+   เลขบนพื้นส้ม #FF6C00 เป็นตัวดำตามกติกาแบรนด์ */
+/* รอบ 3 (16 พ.ย. อาร์ต "ทำมาดีๆ กว้างพิเศษได้ เอารูปใหญ่ๆมาได้เลย"): ทั้งส่วน .ps2 กว้างพิเศษ 1400 · ภาพเสื้อพื้นโปร่งใสครอปชิดตัว · คอลัมน์ป้ายกว้างพอดีเนื้อหา ที่เหลือให้ภาพ
+   ผังที่ป้ายมีรูปงานปัก (ตำแหน่งปัก) คอลัมน์ 320 · ผังที่ป้ายมีแต่ข้อความ (รายละเอียดเสื้อ) คอลัมน์ 190 ภาพใหญ่กว่า */
+.sc { position: relative; display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr) minmax(0, 320px); gap: 28px; align-items: center; margin-top: 28px; padding: 56px 32px; border-radius: 28px; background: #F0ECE8; }
+.sc:not(:has(.sc__thumb)) { grid-template-columns: minmax(0, 190px) minmax(0, 1fr) minmax(0, 190px); }
+/* รอบ 2 (16 พ.ย. อาร์ต "แปลกๆ ไม่สวยเลย"): พื้นกล่อง = พื้นภาพเสื้อ (#F0ECE8 วัดจากไฟล์ webp ที่เบราว์เซอร์ถอดรหัสแล้ว) ภาพกลืนกับกล่อง ไม่เป็นกล่องเทาซ้อนในกล่องขาว
+   คอม (.is-placed จาก JS): ป้ายไม่มีกรอบ วางระดับเดียวกับจุด · จุดบนภาพเล็กลงไม่มีเลข (เลขอยู่ที่ป้ายปลายเส้น) */
+.sc__col { position: relative; z-index: 2; display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.sc__item { position: relative; }
+.sc__fig { position: relative; margin: 0; }
+.sc__fig img { display: block; width: 100%; height: auto; }
+.sc__dot { position: absolute; z-index: 4; display: grid; place-items: center; width: 26px; height: 26px; margin: -13px 0 0 -13px; border: 2px solid #fff; border-radius: 50%; background: #FF6C00; color: #000; font-size: 11px; font-weight: 800; box-shadow: 0 2px 6px rgb(0 0 0 / .25); }
+.sc__lines { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; overflow: visible; pointer-events: none; fill: none; stroke: #FF6C00; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sc__lab { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 10px 14px 10px 10px; border: 1px solid #e2dbd5; border-radius: 16px; background: #fff; color: var(--color-ink); text-decoration: none; transition: border-color .2s; }
+a.sc__lab:hover, .sc__item.lb-host:hover .sc__lab { border-color: #FF6C00; }
+a.sc__lab:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4px; border-radius: 8px; }
+.sc__item.lb-host { cursor: zoom-in; }
+.sc__thumb { flex: none; width: 104px; height: 64px; border-radius: 10px; object-fit: cover; background: #111; }
+.sc__n { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #FF6C00; color: #000; font-size: 12px; font-weight: 800; }
+.sc__t { display: grid; gap: 2px; min-width: 0; }
+.sc__t b { font-size: 15px; font-weight: 800; line-height: 1.35; }
+.sc__t small { font-size: 13px; line-height: 1.45; color: var(--color-ink-2); }
+/* คอม: คอลัมน์ป้ายสูงเท่าภาพ · ป้ายชิดฝั่งภาพ เลขอยู่ปลายเส้น (ซ้าย: รูป ข้อความ เลข · ขวา: เลข ข้อความ รูป) */
+.sc.is-placed .sc__col { display: block; align-self: stretch; }
+.sc.is-placed .sc__item { position: absolute; left: 0; right: 0; display: flex; }
+.sc.is-placed .sc__col--l .sc__item { justify-content: flex-end; }
+.sc.is-placed .sc__lab { min-height: 0; padding: 0; border: 0; border-radius: 0; background: none; }
+.sc.is-placed .sc__col--l .sc__lab { text-align: right; }
+.sc.is-placed .sc__col--l .sc__thumb { order: 1; } .sc.is-placed .sc__col--l .sc__t { order: 2; } .sc.is-placed .sc__col--l .sc__n { order: 3; }
+.sc.is-placed .sc__col--r .sc__n { order: 1; } .sc.is-placed .sc__col--r .sc__t { order: 2; } .sc.is-placed .sc__col--r .sc__thumb { order: 3; }
+.sc.is-placed .sc__t b { font-size: 18px; }
+.sc.is-placed .sc__t small { font-size: 15px; }
+.sc.is-placed .sc__thumb { box-shadow: 0 0 0 2px #fff; transition: box-shadow .2s; }
+.sc.is-placed a.sc__lab:hover b { text-decoration: underline; text-decoration-color: #FF6C00; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.sc.is-placed .sc__item.lb-host:hover .sc__thumb { box-shadow: 0 0 0 2px #FF6C00; }
+.sc.is-placed .sc__dot { width: 14px; height: 14px; margin: -7px 0 0 -7px; border-width: 3px; font-size: 0; box-shadow: 0 1px 4px rgb(0 0 0 / .3); }
+@media (max-width: 1023px) {
+  .sc { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 16px; }
+  .sc__fig { grid-column: 1 / -1; order: -1; }
+  .sc__col { gap: 10px; align-content: start; }
+  .sc__lines { display: none; }
+}
+@media (max-width: 559px) { .sc { grid-template-columns: minmax(0, 1fr); } .sc__dot { width: 22px; height: 22px; margin: -11px 0 0 -11px; font-size: 10px; } }
+
+/* งานปักพิเศษ (เดิมเป็นการ์ดที่ 6) · แถบใต้ผังเสื้อ */
+.ps2__special { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin-top: 14px; padding: 16px 20px; border-radius: 16px; background: #fbf6f0; font-size: 15px; line-height: 1.6; }
+.ps2__special b { font-weight: 800; }
+.ps2__special span { flex: 1 1 260px; color: var(--color-ink-2); }
+.ps2__special a { font-weight: 800; color: #B23F00; }
+
+/* แบบเสื้อแต่ละแบบ: กดรูปดูใหญ่ (ป๊อปอัปขาว) · ไม่มีวงกลมเลือกแล้ว */
+.ps2__pi { position: relative; }
+.ps2__opt { display: flex; flex-direction: column; gap: 10px; width: 100%; margin: 0; }
+.ps2__opt figcaption { padding: 0 4px; font-size: 14px; font-weight: 700; line-height: 1.5; text-wrap: pretty; }
+.ps2__pi:hover .ps2__pim { border-color: #d69868; }
+@media (max-width: 767px) { .ps2__opt { gap: 8px; } .ps2__opt figcaption { font-size: 13px; } }
+
+/* กล่องให้ทีมดีช่วยเลือก (อาร์ต "ทำมาดีๆหน่อย") · ไอคอน 3D ช่วยคิด + คำอธิบาย + ปุ่ม LINE เขียว */
+.ps2__help { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 22px; margin-top: 28px; padding: 22px 28px 22px 22px; border: 1px solid rgb(255 108 0 / .18); border-radius: 24px; background: radial-gradient(120% 140% at 0% 0%, #FFE9D8 0%, #FFF7F1 45%, #fff 100%); }
+.ps2__help-ico { width: 88px; height: 88px; object-fit: contain; }
+.ps2__help h4 { margin: 0; font-size: clamp(19px, 1.8vw, 22px); font-weight: 800; line-height: 1.4; }
+.ps2__help p { max-width: 60ch; margin: 6px 0 0; font-size: 15px; line-height: 1.65; color: var(--color-ink-2); }
+.ps2__help small { display: block; margin-top: 6px; font-size: 12px; color: var(--color-ink-3); }
+@media (max-width: 767px) { .ps2__help { grid-template-columns: 64px minmax(0, 1fr); gap: 14px; padding: 18px; } .ps2__help-ico { width: 64px; height: 64px; } .ps2__help-cta { grid-column: 1 / -1; justify-content: center; } }

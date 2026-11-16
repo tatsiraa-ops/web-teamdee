@@ -24,7 +24,12 @@ test('อีเวนต์: hero ภาพเสื้ออีเวนต์ 
   const hero = evt.slice(at, evt.indexOf('</section>', at))
   for (const f of ['event-2304', 'event-1280', 'event-800', 'event-m-768', 'event-m-480']) { assert.match(hero, new RegExp(`/img/use-hero/${f}\\.webp`)); assert.ok(pub(`/img/use-hero/${f}.webp`), f) }
   assert.doesNotMatch(hero, /corp-|shop-|gov-|edu-|faculty-|class-|sport-|badminton-|running-/)
-  const body = text(evt.replace(/<script[\s\S]*?<\/script>/g, ''))
+  /* 16 พ.ย. 2026 อาร์ต "ทำข้อ 6": เสื้อแดงลายไทยใน hero (ลายเลียนแบบจากภาพความละเอียดต่ำ) → เสื้อ Motor Expo จากไฟล์แบบจริง */
+  const heroAlt = (hero.match(/<img[^>]*alt="([^"]+)"/) || [])[1] || ""
+  assert.match(heroAlt, /Motor Expo/)
+  assert.doesNotMatch(heroAlt, /ลายไทย/)
+  /* 16 พ.ย. 2026 รีวิวข้ามกลุ่ม (review-pool.js · อาร์ต "คนละประเภทลูกค้าไม่เป็นไร"): ป้ายประเภทลูกค้าในรีวิว (เช่น "หน่วยงานโรงพยาบาล") ไม่นับ · ตรวจเฉพาะข้อความของหน้า */
+  const body = text(evt.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<section class="hm-customer-proof up2-rv"[\s\S]*?<\/section>|<blockquote class="up2-ctx__rv">[\s\S]*?<\/blockquote>/g, ''))
   assert.doesNotMatch(body, /ร้านค้า|หน่วยงาน/, (body.match(/.{30}(ร้านค้า|หน่วยงาน).{30}/) || [])[0])
 })
 
@@ -57,6 +62,9 @@ test('อีเวนต์: แถวแบบเสื้อ = ไฟล์แ
 
 test('อีเวนต์: รีวิว 3 รายของกลุ่มนี้ · กล่องชำระเงินเป็นเสื้ออีเวนต์', () => {
   const rv = evt.slice(evt.indexOf('id="reviews"'), evt.indexOf('</section>', evt.indexOf('id="reviews"')))
-  assert.deepEqual([...new Set([...rv.matchAll(/data-rv-open="([^"]+)"/g)].map((m) => m[1]))].sort(), ['hr-outing', 'outing-fabric', 'shrine'])
+  /* 16 พ.ย. คลังรีวิวเดียว (review-pool.js): แถวรูปเติมจนครบ 10 ด้วยรูปจากรีวิวกลุ่มอื่น · รีวิวของกลุ่มนี้ขึ้นก่อน */
+  const ids = [...new Set([...rv.matchAll(/data-rv-open="([^"]+)"/g)].map((m) => m[1]))]
+  assert.deepEqual(ids.slice(0, 3).sort(), ['hr-outing','outing-fabric','shrine'])
+  assert.ok(ids.length > 3, 'มีรีวิวกลุ่มอื่นต่อท้าย')
   assert.match(evt, /\/img\/use-pay\/event-box/)
 })

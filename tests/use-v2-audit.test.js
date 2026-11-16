@@ -30,5 +30,6 @@ test('kicker ร้านค้าตรงเนื้อหา · รีวิ
   const rv = shop.slice(shop.indexOf('id="reviews"'), shop.indexOf('</section>', shop.indexOf('id="reviews"')))
   assert.doesNotMatch(rv, /data-rvb-step|data-rvb-count/)
   /* 13 พ.ย. รีวิวไม่เกิน 2 ราย (โรงเรียน หน่วยงาน) แสดงครบทุกใบ ไม่มีลูกศรแล้ว (tests/use-three-pages-audit.test.js ข้อ 5) · หน้าที่มี 3 รายขึ้นไป (บริษัท 5 ราย) ยังมีลูกศร */
-  assert.match(main('corporate'), /data-rvb-step/, 'หน้าที่มีหลายรีวิวยังมีลูกศร')
+  /* 16 พ.ย. คลังรีวิวเดียว: ทุกหน้าแสดงการ์ดครบ ไม่มีลูกศร (รวมหน้าบริษัท) */
+  assert.doesNotMatch(main('corporate'), /data-rvb-step/, 'หน้าบริษัทไม่มีลูกศรแล้ว')
 })
