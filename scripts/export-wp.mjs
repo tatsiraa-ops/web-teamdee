@@ -30,7 +30,10 @@ const copyRewritten = (from, to) => {
   for (const e of readdirSync(from, { withFileTypes: true })) {
     const a = join(from, e.name), b = join(to, e.name)
     if (e.isDirectory()) { mkdirSync(b, { recursive: true }); copyRewritten(a, b) }
-    else if (/\.(js|css)$/.test(e.name)) writeFileSync(b, rewrite(readFileSync(a, 'utf8')))
+    /* CSS อยู่ใน build/assets ทั้งหมด → ฟอนต์/รูปใน CSS ใช้ path relative ไม่ฝังโฟลเดอร์ธีม
+       (16 พ.ย. 2026 staging ใน sub-folder ฟอนต์ไม่ขึ้น · tests/wp-theme-portable.test.js) */
+    else if (/\.css$/.test(e.name)) writeFileSync(b, rewrite(readFileSync(a, 'utf8')).replaceAll(`${THEME_URL}/assets/`, './').replaceAll(`${THEME_URL}/`, '../'))
+    else if (/\.js$/.test(e.name)) writeFileSync(b, rewrite(readFileSync(a, 'utf8')))
     else cpSync(a, b)
   }
 }

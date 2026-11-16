@@ -62,9 +62,18 @@ function td_has_seo_plugin(): bool {
 	return defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION') || defined('AIOSEO_VERSION') || defined('SEOPRESS_VERSION');
 }
 
+/* HTML ที่ export ฝัง path ไฟล์ไว้เป็น /wp-content/themes/teamdee/build/ (WordPress ที่ราก · ชื่อโฟลเดอร์ teamdee)
+   16 พ.ย. 2026: staging ของทีมโฮสต์อยู่ที่ /enterprise/ → CSS JS รูป ไปโหลดจากเว็บจริงไม่เจอ
+   เปลี่ยนให้ชี้โฟลเดอร์ธีมที่ติดตั้งจริงตอนส่งหน้า · ติดตั้งที่ราก + ชื่อ teamdee = ไม่แตะอะไรเลย (tests/wp-theme-portable.test.js) */
+function td_portable_paths(string $html): string {
+	$from = '/wp-content/themes/teamdee/build/';
+	$to = rtrim((string) wp_parse_url(get_template_directory_uri(), PHP_URL_PATH), '/') . '/build/';
+	return $to === $from ? $html : str_replace($from, $to, $html);
+}
+
 function td_read_part(string $slug, string $part): string {
 	$f = TD_BUILD . "/pages/$slug.$part.html";
-	$html = is_readable($f) ? (string) file_get_contents($f) : '';
+	$html = td_portable_paths(is_readable($f) ? (string) file_get_contents($f) : '');
 	return $part === 'body' ? td_body_live($html) : $html;
 }
 
@@ -117,13 +126,46 @@ function td_chrome(string $which, string $from = '/blog/'): string {
 	return $which === 'header' ? substr($body, 0, $a) : substr($body, $b + 7);
 }
 
+/* ---------- หน้าที่ต้นแบบมี แต่ WordPress ไม่มี Page ---------- */
+/* 16 พ.ย. 2026 ตรวจ staging (มี Rank Math): หน้าแบบนี้ (/faq/ /custom-class-shirts/ ฯลฯ) เดิมปล่อยให้ WordPress ตั้ง 404 ก่อน
+   แล้วค่อยพลิกใน template_include → Rank Math ตัดสินเป็น 404 ไปแล้ว ได้ title "Page Not Found" + noindex ไม่มี description/canonical
+   แก้: ไม่ให้ตั้ง 404 ตั้งแต่ต้น · บอก Rank Math ค่าจาก pages.json เฉพาะหน้าที่ไม่มี Page (หน้าที่มี Page ใช้ค่าที่ตั้งใน Rank Math เหมือนเดิม)
+   tests/wp-fallback-seo.test.js */
+add_filter('pre_handle_404', function ($preempt, $query = null) {
+	if ($preempt || is_admin() || !$query || !$query->is_main_query() || !empty($query->posts)) return $preempt;
+	$p = td_page();
+	if (!$p || $p['route'] === '404') return $preempt;
+	$GLOBALS['td_fallback'] = true;
+	status_header(200);
+	return true;
+}, 10, 2);
+
+/** ค่า SEO ของหน้าที่ไม่มี Page ใน WordPress (null = ใช้ค่าของ Rank Math) */
+function td_fallback_seo(string $field) {
+	$p = td_current();
+	if (!$p || empty($GLOBALS['td_fallback'])) return null;
+	if ($field === 'canonical') return home_url($p['route']);
+	return ($p[$field] ?? '') !== '' ? $p[$field] : null;
+}
+add_filter('rank_math/frontend/title', fn ($v) => td_fallback_seo('title') ?? $v);
+add_filter('rank_math/frontend/description', fn ($v) => td_fallback_seo('description') ?? $v);
+add_filter('rank_math/frontend/canonical', fn ($v) => td_fallback_seo('canonical') ?? $v);
+/* index ได้เมื่อหน้านั้นไม่ได้ตั้ง noindex และเว็บไม่ได้ปิดไม่ให้ Google เก็บ (staging) · หน้าร่างยังโดนตัวกรอง noindex ด้านล่างทับอีกชั้น */
+add_filter('rank_math/frontend/robots', function ($robots) {
+	$p = td_current();
+	if (!$p || empty($GLOBALS['td_fallback']) || get_option('blog_public') === '0' || str_contains($p['robots'] ?? '', 'noindex')) return $robots;
+	$robots['index'] = 'index';
+	$robots['follow'] = 'follow';
+	return $robots;
+}, 5);
+
 /* ---------- เลือก template ---------- */
 
 add_filter('template_include', function ($template) {
 	$p = td_page();
 	/* หน้าแรก หน้า (Page) ที่ slug ตรงกับต้นแบบ หรือ URL ที่ WordPress ยังไม่มีหน้า (404) แต่ต้นแบบมี
 	   ไม่ทับหน้ารวมบทความของ WordPress (is_home ที่ไม่ใช่หน้าแรก) เพราะต้องเป็นโพสต์จริง */
-	if ($p && $p['route'] !== '404' && (is_front_page() || is_page() || is_404())) {
+	if ($p && $p['route'] !== '404' && (is_front_page() || is_page() || is_404() || !empty($GLOBALS['td_fallback']))) {
 		if (is_404()) {
 			global $wp_query;
 			$wp_query->is_404 = false;
