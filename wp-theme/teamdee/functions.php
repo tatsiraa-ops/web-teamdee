@@ -108,8 +108,10 @@ function td_portable_links(string $html): string {
 	$base = td_base_path();
 	if ($base === '') return $html;
 	$skip = '(?!/|wp-(?:content|admin|includes|json|login)\b)';
-	$html = preg_replace('~(\s(?:href|action)=")/' . $skip . '~', '$1' . $base . '/', $html);
-	return preg_replace('~("u":")/' . $skip . '~', '$1' . $base . '/', $html);
+	/* ใส่ path ด้วย callback (ไม่ใช่สตริงแทนที่) · path ที่มี $ หรือ \ จะไม่ถูกอ่านเป็นตัวอ้างอิงกลุ่ม */
+	$add = static fn (array $m): string => $m[1] . $base . '/';
+	$html = preg_replace_callback('~(\s(?:href|action)=")/' . $skip . '~', $add, $html);
+	return preg_replace_callback('~("u":")/' . $skip . '~', $add, $html);
 }
 
 function td_read_part(string $slug, string $part): string {
