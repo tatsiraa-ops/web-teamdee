@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "test": "node --test --test-concurrency=1 tests/*.test.js",
     "export:wp": "node scripts/export-wp.mjs",
-    "pack": "node scripts/pack-release.mjs"
+    "pack": "node scripts/pack-release.mjs",
+    "check": "node scripts/check-data.mjs",
+    "compare": "node scripts/compare-build.mjs"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
