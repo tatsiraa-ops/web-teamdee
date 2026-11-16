@@ -102,6 +102,8 @@ test('/sublimation/ ทำไมต้องสั่งกับทีมดี
   assert.match(s, /facebook\.com%2Fteamdee%2Fvideos%2F1071563669119050/, 'คลิปหลังบ้านทีมดี')
   assert.match(text(s), /ภาพขั้น 01 และ 06 เป็นภาพประกอบ/)
   assert.doesNotMatch(text(s), /โรงงาน|อันดับ 1|ISO/)
+  /* 16 พ.ย. 2026 พิมพ์ลายมีตรวจตัวอย่างเหมือนงานปัก: ขั้นยืนยันแบบบอกว่าตรวจตัวอย่างก่อนผลิต ไม่ใช่มัดจำแล้วผลิตเลย */
+  assert.match(text(steps[2]), /มัดจำ 50%[\s\S]*ตรวจตัวอย่าง[\s\S]*ผลิต/)
   for (const f of ['3D ใน 24 ชม.', '15–20 วัน', '7 วัน']) assert.ok(text(s).includes(f), f)
   assert.match(readFileSync('src/styles/product-page.css', 'utf8'), /\.pp2-pf__vgrid \{ position: relative;[^}]*overflow-x: auto/)
 })
@@ -425,27 +427,30 @@ test('/sublimation/ เสื้อจริงใส่หุ่น (บอร�
   assert.match(rcss, /\.rlc \{[^}]*min-height: 64px/, 'สูงเท่าปุ่มหลักของเว็บ'); assert.match(rcss, /\.rlc:focus-visible \{[^}]*outline:/); assert.match(rcss, /\.rlc__faces span \+ span \{[^}]*margin-left: -1[0-9]px/)
 })
 
-test('/sublimation/ ขั้นตอนสั่งผลิต (รอบ 136–138 อาร์ตเลือกแบบ B "การเดินทางของเสื้อ"): แผนที่ 5 ขั้น · ภาพซิกแซกจากแบบจริง · ป้ายเวลาจากข้อมูลเว็บ · ตั๋วชำระเงินระหว่างขั้นตามกราฟิกทางการ · ภาพปิดท้ายถึงมือทีม', () => {
+/* 16 พ.ย. 2026 อาร์ตยืนยัน "เหมือนกันทั้งหมด": งานพิมพ์ลายตรวจตัวอย่างเกณฑ์เดียวกับงานปัก (ต่ำกว่า 100 ตัว ลายบนชิ้นผ้า · ตั้งแต่ 100 ตัว เสื้อตัวอย่างจริง 1 ตัว · มัดจำ 50% ก่อนทำตัวอย่าง)
+   → ขั้นตอน /sublimation/ เพิ่มขั้น "ตรวจตัวอย่าง" ต่อจากสรุปออเดอร์ = 6 ขั้น · ชำระ 50% แรกหลังสรุปออเดอร์ ก่อนทำตัวอย่าง */
+test('/sublimation/ ขั้นตอนสั่งผลิต (รอบ 136–138 อาร์ตเลือกแบบ B "การเดินทางของเสื้อ"): แผนที่ 6 ขั้น (มีตรวจตัวอย่าง) · ภาพซิกแซกจากแบบจริง · ป้ายเวลาจากข้อมูลเว็บ · ตั๋วชำระเงินระหว่างขั้นตามกราฟิกทางการ · ภาพปิดท้ายถึงมือทีม', () => {
   const m = main('sublimation')
   const s = sec(m, 'pp2-stb')
   assert.ok(m.indexOf('class="pp2-rl') < m.indexOf('class="pp2-stb'), 'ต่อจากเสื้อจริงใส่หุ่น')
   assert.match(s, /^<section class="pp2-stb" id="order"/)
   assert.doesNotMatch(m, /class="pp2-st"|pp2-st__|ทางเลือก 2|ชั่วคราว/, 'ลบแบบ A และป้ายชั่วคราวแล้ว')
-  const map = [...s.matchAll(/<a href="#step-(\d)"/g)].map((x) => x[1]); assert.deepEqual(map, ['1', '2', '3', '4', '5'], 'แผนที่ลิงก์ไปทุกขั้น')
+  const map = [...s.matchAll(/<a href="#step-(\d)"/g)].map((x) => x[1]); assert.deepEqual(map, ['1', '2', '3', '4', '5', '6'], 'แผนที่ลิงก์ไปทุกขั้น')
   const steps = [...s.matchAll(/<article class="pp2-stb__s pp2-stb__s--(\d)" id="step-\1">([\s\S]*?)<\/article>/g)]
-  assert.deepEqual(steps.map((x) => x[1]), ['1', '2', '3', '4', '5'])
-  assert.deepEqual(steps.map((x) => text(x[2].match(/<h3[^>]*>([\s\S]*?)<\/h3>/)[1]).trim()), ['คุยโจทย์', 'ออกแบบ', 'สรุปออเดอร์', 'ผลิตและอัปเดต', 'จัดส่ง'])
+  assert.deepEqual(steps.map((x) => x[1]), ['1', '2', '3', '4', '5', '6'])
+  assert.deepEqual(steps.map((x) => text(x[2].match(/<h3[^>]*>([\s\S]*?)<\/h3>/)[1]).trim()), ['คุยโจทย์', 'ออกแบบ', 'สรุปออเดอร์', 'ตรวจตัวอย่าง', 'ผลิตและอัปเดต', 'จัดส่ง'])
+  assert.match(text(steps[3][2]), /น้อยกว่า 100 ตัว[\s\S]*ชิ้นผ้า[\s\S]*ตั้งแต่ 100 ตัว[\s\S]*เสื้อตัวอย่างจริง 1 ตัว/)
   for (const [, n, x] of steps) {
     for (const [tag] of x.matchAll(/<img[^>]*>/g)) { const src = tag.match(/src="([^"]+)"/)[1]; assert.ok(pub(src), src) }
     assert.ok((x.match(/<li>/g) || []).length >= 3, `ขั้น ${n} ขั้นย่อย ≥ 3`)
   }
   const times = steps.map((x) => (x[2].match(/<span class="pp2-stb__time">([^<]+)<\/span>/) || [, ''])[1])
-  assert.deepEqual(times, ['ตอบใน 5 นาที', 'แบบ 3D ใน 24 ชม.', '', 'ผลิต 15–20 วัน', 'ส่งฟรีทั่วประเทศ'])
+  assert.deepEqual(times, ['ตอบใน 5 นาที', 'แบบ 3D ใน 24 ชม.', '', 'ก่อนผลิตจริง', 'ผลิต 15–20 วัน', 'ส่งฟรีทั่วประเทศ'])
   const tix = [...s.matchAll(/<div class="pp2-stb__go[^"]*" data-between="(\d-\d)">([\s\S]*?)<\/div><!-- \/go -->/g)].map((t) => [t[1], text(t[2])])
-  assert.deepEqual(tix.map((t) => t[0]), ['1-2', '2-3', '3-4', '4-5'])
+  assert.deepEqual(tix.map((t) => t[0]), ['1-2', '2-3', '3-4', '4-5', '5-6'])
   const paid = tix.filter((t) => /บาท|%/.test(t[1]))
-  assert.deepEqual(paid.map((t) => t[0]), ['1-2', '3-4', '4-5'])
-  assert.match(paid[0][1], /มัดจำค่าออกแบบ 500 บาท[\s\S]*หักค่าเสื้อ/); assert.match(paid[1][1], /50%[\s\S]*ก่อนผลิต/); assert.match(paid[2][1], /50%[\s\S]*ก่อนจัดส่ง/)
+  assert.deepEqual(paid.map((t) => t[0]), ['1-2', '3-4', '5-6'])
+  assert.match(paid[0][1], /มัดจำค่าออกแบบ 500 บาท[\s\S]*หักค่าเสื้อ/); assert.match(paid[1][1], /50%[\s\S]*ก่อนทำตัวอย่าง/); assert.match(paid[2][1], /50%[\s\S]*ก่อนจัดส่ง/)
   const fin = s.match(/<figure class="pp2-stb__fin">([\s\S]*?)<\/figure>/)[1]
   assert.ok(pub(fin.match(/src="([^"]+)"/)[1])); assert.match(fin, /data-where="pp-steps"/)
   assert.match(text(s), /ออกแบบฟรี/); assert.match(text(s), /จำลองจากแบบเสื้อจริงของทีมดี/)
