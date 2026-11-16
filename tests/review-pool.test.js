@@ -90,10 +90,10 @@ test('หน้ากลุ่มลูกค้า: ส่วนรีวิว
 })
 
 /* 16 พ.ย. อาร์ต (ภาพหน้างานปัก "รีวิวจากลูกค้าองค์กร 1/2") "แก้ตรงภาพแรกด้วย": หน้าสินค้าก็ใช้คลังเดียว รีวิวที่เลือกไว้ก่อน แล้วรีวิวที่เหลือครบทุกราย */
-/* หน้าพิมพ์ลายไม่เติม (เฉพาะรายที่เห็นเสื้อพิมพ์ลายในรูป · tests/pp-v2.test.js) แต่ใช้แถวเลื่อนแบบเดียวกัน */
-test('หน้าสินค้า: งานปักเติมรีวิวครบทุกราย (ที่เลือกไว้ขึ้นก่อน) · พิมพ์ลายคงเฉพาะที่เลือก · ทั้งสองหน้าเป็นแถวเลื่อน', { skip: !existsSync(page('embroidery')) }, () => {
+/* 16 พ.ย. 2026 อาร์ตให้หน้าพิมพ์ลายเติมเหมือนกัน (รายที่เห็นเสื้อพิมพ์ลายขึ้นก่อน · tests/pp-v2.test.js) */
+test('หน้าสินค้า: งานปักและพิมพ์ลายเติมรีวิวครบทุกราย (ที่เลือกไว้ขึ้นก่อน) · ทั้งสองหน้าเป็นแถวเลื่อน', { skip: !existsSync(page('embroidery')) }, () => {
   const PP = read('src/data/pp-v2.json')
-  for (const [id, key, n] of [['embroidery', 'polo', REVIEWS.length], ['sublimation', 'print', PP.print.reviews.items.length]]) {
+  for (const [id, key, n] of [['embroidery', 'polo', REVIEWS.length], ['sublimation', 'print', REVIEWS.length]]) {
     const sec = rvSection(readFileSync(page(id), 'utf8'))
     rowOk(sec, id, n)
     const ids = [...sec.matchAll(/data-rvb-item data-use="[a-z]+" data-rv-id="([^"]+)"/g)].map((m) => m[1])

@@ -137,22 +137,26 @@ test('/sublimation/ ทำไมต้องสั่งกับทีมดี
   assert.ok(s.indexOf('pp2-pf__steps') < s.indexOf('pp2-pf__bts') && s.indexOf('pp2-pf__bts') < s.indexOf('pp2-pf__note'))
 })
 
-test('/sublimation/ รีวิวลูกค้า (บอร์ด "รีวิวลูกค้า"): ใช้รีวิวโฉมใหม่ของ /corporate/ · เฉพาะรายที่เห็นเสื้อพิมพ์ลายในรูป · ไม่มีช่องรอข้อมูล', () => {
+/* 16 พ.ย. 2026 อาร์ต "หน้า /sublimation/ จะให้เติมรีวิวจากคลังรวมเหมือนหน้างานปัก": รายที่เห็นเสื้อพิมพ์ลายในรูป (คัดไว้เดิม 9 ราย) ขึ้นก่อน แล้วรีวิวที่เหลือครบทุกราย
+   แถวรูปบนสุด: รูปที่คัดไว้ 8 รูปก่อน แล้วเติมให้ครบ 10 (topUpWall) */
+test('/sublimation/ รีวิวลูกค้า (บอร์ด "รีวิวลูกค้า"): ใช้รีวิวโฉมใหม่ของ /corporate/ · รายที่เห็นเสื้อพิมพ์ลายขึ้นก่อน แล้วรีวิวครบทุกราย · ไม่มีช่องรอข้อมูล', () => {
   const m = main('sublimation')
   const s = sec(m, 'hm-customer-proof up2-rv')
   assert.ok(m.indexOf('pp2-pf') < m.indexOf('up2-rv'), 'ต่อจากส่วนทำไมต้องสั่งกับทีมดี')
   assert.equal((m.match(/id="reviews"/g) || []).length, 1, 'ส่วนรีวิวเดียว (ไม่ซ้ำ ppReviews เดิม)')
-  assert.match(text(s).replace(/\s+/g, ''), /รีวิวจากลูกค้าเสื้อพิมพ์ลาย/)
+  assert.match(text(s).replace(/\s+/g, ''), /รีวิวจากแชทลูกค้าจริง/)
   const PRINT = ['print-fabric', 'np-connect', 'krungthai-badminton', 'runners', 'school-sportsday', 'swim-kids', 'outing-fabric', 'hr-outing', 'school-crossword']
   const wall = [...s.matchAll(/data-rv-open="([a-z-]+)"/g)].map((x) => x[1])
-  assert.ok(wall.length >= 8, 'กำแพงรูปลูกค้าจริง')
-  assert.equal(new Set(wall).size, wall.length, 'รายละรูป ไม่ซ้ำ')
-  for (const id of wall) assert.ok(PRINT.includes(id), id)
+  assert.equal(wall.length, 10, 'กำแพงรูปลูกค้าจริงครบ 10')
+  for (const id of wall.slice(0, 8)) assert.ok(PRINT.includes(id), `รูปที่คัดไว้ขึ้นก่อน: ${id}`)
+  const srcs = [...s.slice(s.indexOf('up2-rv__wall'), s.indexOf('</ul>', s.indexOf('up2-rv__wall'))).matchAll(/<img src="([^"]+)"/g)].map((x) => x[1])
+  assert.equal(new Set(srcs).size, srcs.length, 'รูปไม่ซ้ำ')
   /* 16 พ.ย. แถวเลื่อน (partial reviewRow) · การ์ดมี role/data-rv-id ต่อจาก class */
-  const cards = [...s.matchAll(/<article class="hm-rvb__item[^"]*"[^>]*data-rvb-item/g)]
-  assert.equal(cards.length, PRINT.length)
+  const cards = [...s.matchAll(/<article class="hm-rvb__item[^"]*"[^>]*data-rv-id="([^"]+)"/g)].map((x) => x[1])
+  assert.deepEqual(cards.slice(0, PRINT.length), PRINT, 'รายที่เห็นเสื้อพิมพ์ลายขึ้นก่อน')
+  assert.equal(cards.length, JSON.parse(readFileSync(new URL('../src/data/reviews.json', import.meta.url), 'utf8')).items.length, 'รีวิวครบทุกราย')
   assert.match(s, /สีที่พิมพ์ลายก็ตรงกับแบบ/, 'รีวิวที่พูดถึงงานพิมพ์ลายโดยตรงอยู่ในชุด')
-  assert.doesNotMatch(text(s.replace(/<script[\s\S]*?<\/script>/g, '')), /\[|รอข้อมูล|รีสอร์ท|ศาลเจ้า/)
+  assert.doesNotMatch(text(s.replace(/<script[\s\S]*?<\/script>/g, '')), /\[|รอข้อมูล/)
   assert.match(s, /data-rv-json/)
 })
 
