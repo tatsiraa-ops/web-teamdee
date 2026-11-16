@@ -2,6 +2,20 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.3.0 — 2026-11-16
+
+รีวิวคลังเดียวทุกหน้า · ผังเสื้อหน้า-หลังหน้า /embroidery/ · ขั้นตอนพิมพ์ลายมีตรวจตัวอย่าง · ธีมไฟล์แนบใน GitHub Release
+
+### Features
+
+- **sublimation:** add a sample check step to the print order steps (235b48c)
+- **pages:** one review pool, single-row reviews, shirt diagrams and one check section (a874a2a)
+- **seo:** give /corporate/ a full meta description (2259c79)
+
+### Fixes
+
+- **event:** replace event hero image with the Motor Expo staff scene (07ff5b7)
+
 ## v0.2.0 — 2026-11-16
 
 รุ่นแรกที่ติด tag: เว็บ TEAMDEE โฉมใหม่ (Vite + Handlebars → ธีม WordPress `teamdee`) ตั้งแต่ 4 ก.ย. 2026 ถึง commit นี้ · ธีมไฟล์แนบใน GitHub Release
