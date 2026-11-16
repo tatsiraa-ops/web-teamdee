@@ -8,10 +8,11 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
 import { planReviews, OWN } from '../src/js/review-pool.js'
+import { ppV2, useV2 } from '../src/build/content.js'
 
 const read = (p) => JSON.parse(readFileSync(new URL(`../${p}`, import.meta.url), 'utf8'))
 const REVIEWS = read('src/data/reviews.json').items
-const V2 = read('src/data/use-v2.json')
+const V2 = useV2()
 const PAGES = ['corp', 'shop', 'gov', 'edu', 'faculty', 'class', 'sport', 'badminton', 'running', 'event']
 const SLUG = { corp: 'corporate', shop: 'custom-staff-shirts', gov: 'custom-organization-shirts', edu: 'education', faculty: 'custom-university-shirts', class: 'custom-class-shirts', sport: 'sport', badminton: 'custom-badminton-shirts', running: 'custom-running-shirts', event: 'event' }
 const ALL = REVIEWS.map((r) => r.id)
@@ -92,7 +93,7 @@ test('หน้ากลุ่มลูกค้า: ส่วนรีวิว
 /* 16 พ.ย. อาร์ต (ภาพหน้างานปัก "รีวิวจากลูกค้าองค์กร 1/2") "แก้ตรงภาพแรกด้วย": หน้าสินค้าก็ใช้คลังเดียว รีวิวที่เลือกไว้ก่อน แล้วรีวิวที่เหลือครบทุกราย */
 /* 16 พ.ย. 2026 อาร์ตให้หน้าพิมพ์ลายเติมเหมือนกัน (รายที่เห็นเสื้อพิมพ์ลายขึ้นก่อน · tests/pp-v2.test.js) */
 test('หน้าสินค้า: งานปักและพิมพ์ลายเติมรีวิวครบทุกราย (ที่เลือกไว้ขึ้นก่อน) · ทั้งสองหน้าเป็นแถวเลื่อน', { skip: !existsSync(page('embroidery')) }, () => {
-  const PP = read('src/data/pp-v2.json')
+  const PP = ppV2()
   for (const [id, key, n] of [['embroidery', 'polo', REVIEWS.length], ['sublimation', 'print', REVIEWS.length]]) {
     const sec = rvSection(readFileSync(page(id), 'utf8'))
     rowOk(sec, id, n)

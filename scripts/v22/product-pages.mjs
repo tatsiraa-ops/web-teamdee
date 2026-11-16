@@ -10,6 +10,10 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { claim, STATS } from './claims.mjs'
 import { fixProductCopy } from './copy-fixes.mjs'
+/* เลิกใช้ 16 พ.ย. 2026 (B2): สคริปต์นี้แปลงจาก Wireframe v22 ครั้งเดียว แล้วข้อมูลถูกแก้มือต่อมาหลายรอบ · ข้อมูลย้ายไป src/content/<use|product>/<id>.json แล้ว
+   รันตอนนี้จะเขียน product-pages.json ที่ไม่มีใครอ่านแล้ว และถ้าคัดลอกผลกลับไปจะทับงานแก้มือทั้งหมด → หยุดทันที */
+console.error('scripts/v22: เลิกใช้แล้ว · แก้เนื้อหาที่ src/content/<use|product>/<id>.json (ดู src/build/content.js)')
+process.exit(1)
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..')
 const raw = JSON.parse(readFileSync(join(root, 'docs/spec/teamdee-v22/extracted/products.json'), 'utf8'))

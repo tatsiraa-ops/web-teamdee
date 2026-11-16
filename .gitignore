@@ -24,3 +24,6 @@ sites/
 
 # zip สำหรับ Release (npm run pack)
 release/
+
+# ด่านเทียบผล build (scripts/compare-build.mjs)
+.build-baseline/

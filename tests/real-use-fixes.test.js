@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { RAILS } from '../src/js/mobile-ui.js'
+import { buildSource } from './lib/build-source.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const read = (p) => readFileSync(join(root, p), 'utf8')
@@ -46,7 +47,7 @@ test('ป้ายคุกกี้มือถือกะทัดรัด �
 test('เรื่องราวลูกค้าหน้าผลงานเป็นราง · ค้นหาครอบคำถาม FAQ และมีในเมนูมือถือ', () => {
   assert.ok(RAILS.includes('ol.sty'))
   assert.match(read('site/search/index.html'), /\{\{#each faqSearch\}\}[^\n]*"k":"คำถาม"/)
-  assert.match(read('vite.config.js'), /if \(at === '\/search\/'\) base\.faqSearch =/)
+  assert.match(buildSource(), /if \(at === '\/search\/'\) base\.faqSearch =/)
   assert.match(read('src/partials/siteHeader.hbs'), /<a class="btn btn-line btn-sm gap-2" href="\{\{url 'search'\}\}">[\s\S]*?ค้นหา<\/a>/)
 })
 

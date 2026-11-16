@@ -7,6 +7,7 @@ import { execSync } from 'node:child_process'
 import { readFileSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { ppV2, usePages as loadUsePages, useV2 } from '../src/build/content.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const spec = (f) => JSON.parse(readFileSync(join(root, 'docs/spec/teamdee-v22', f), 'utf8')).pages
@@ -106,10 +107,10 @@ test('ทุกหน้าในผัง v22 มีไฟล์ · H2 ขอ�
    ส่วนเพิ่มจาก v22 มี 2 ที่เท่านั้น: กล่องหลักฐานแบบ (#design-evidence-h ต่อจากแบบเสื้อ) · ปิดหน้า "เล่าโจทย์ของทีมคุณมา" (#end-h ท้ายสุด) */
 const useRoutes = JSON.parse(readFileSync(join(root, 'src/data/routes.json'), 'utf8')).uses
 const customers = JSON.parse(readFileSync(join(root, 'src/data/customers.json'), 'utf8'))
-const ups = JSON.parse(readFileSync(join(root, 'src/data/use-pages.json'), 'utf8'))
+const ups = loadUsePages()
 const usePages = Object.entries(useRoutes).map(([id, url]) => ({ id, url, spec: pages.find((p) => p.proposed_url === url) }))
 /* โฉมใหม่ (use-v2.json · อาร์ต 3 พ.ย. "ลบ" แถบสิทธิพิเศษ + สารบัญ) ไม่มีแถบและสารบัญ · ตรวจแทนที่ tests/use-v2.test.js */
-const v2Ids = new Set(Object.keys(JSON.parse(readFileSync(join(root, 'src/data/use-v2.json'), 'utf8'))).filter((k) => k[0] !== '_'))
+const v2Ids = new Set(Object.keys(useV2()).filter((k) => k[0] !== '_'))
 const useMain = (url) => { const h = readFileSync(join(root, 'dist', `${url}index.html`), 'utf8'); return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
 const sectionOf = (html, id) => { const at = html.indexOf(`id="${id}"`); return at < 0 ? '' : html.slice(at, html.indexOf('</section>', at)) }
 const imgs = (html) => [...html.matchAll(/<img[^>]*\ssrc="([^"]+)"/g)].map((m) => m[1])
@@ -144,7 +145,7 @@ test('หน้ากลุ่มลูกค้า: สารบัญเรี
 })
 
 test('หน้ากลุ่มลูกค้า: ภาพลูกค้ามาจากกลุ่มของหน้าเท่านั้น เรียง q · คำบรรยายและ alt = occ ไม่ซ้ำกัน', () => {
-  const v2All = JSON.parse(readFileSync(join(root, 'src/data/use-v2.json'), 'utf8'))
+  const v2All = useV2()
   for (const { id, url } of usePages) {
     /* ส่วนที่อาร์ตสั่งลบในหน้านั้น (use-v2.json drop) ต้องไม่มีจริง · ตรวจแทนที่ tests/use-v2.test.js */
     if (v2All[id]?.drop?.includes('photos')) { assert.equal(sectionOf(useMain(url), 'photos'), '', url); continue }
@@ -228,13 +229,13 @@ test('คำค้นทุกคำบนการ์ดผังเว็บ v
 /* ลำดับส่วนหน้าสินค้า 6 หน้าตาม v22 (อาร์ตเคาะ 2 พ.ย. 2026 · แทนลำดับ 24 ต.ค. ข้อ 5 และ 26 ต.ค.)
    ที่มา: sections ใน extracted/products.json + H2 ใน PAGE-CONTENT.json */
 /* หน้าโฉมใหม่ที่จบที่ FAQ (pp-v2.json lean · อาร์ต 6 พ.ย. "ลบทิ้งได้หมดยกเว้น footer") · ตรวจที่ tests/pp-v2.test.js */
-const LEAN = new Set(Object.entries(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).filter(([, v]) => v && v.lean).map(([id]) => ({ print: 'printed', polo: 'polo' })[id]).filter(Boolean))
+const LEAN = new Set(Object.entries(ppV2()).filter(([, v]) => v && v.lean).map(([id]) => ({ print: 'printed', polo: 'polo' })[id]).filter(Boolean))
 const PRODUCTS = { polo: '/embroidery/', printed: '/sublimation/', screen: '/screen-printing/', warmup: '/custom-printed-warmup-shirts/', oversize: '/custom-oversize-jerseys/', baseball: '/custom-baseball-shirts/' }
 const raw = JSON.parse(readFileSync(join(root, 'docs/spec/teamdee-v22/extracted/products.json'), 'utf8'))
 /* key ของ wireframe → id ใน HTML · n11 = ส่วน "ตามงานที่ใช้" · quote / contact = ctaBox (id อยู่ที่หัวข้อ) */
-const v2Reviews = new Set(Object.entries(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]))
+const v2Reviews = new Set(Object.entries(ppV2()).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]))
 /* ส่วนที่หน้าโฉมใหม่ย้ายขึ้นตามบอร์ด (รีวิว 5 พ.ย. · เนื้อผ้า 6 พ.ย.) */
-const v2Moved = Object.fromEntries(Object.entries(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
+const v2Moved = Object.fromEntries(Object.entries(ppV2()).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
 const SECTION_ID = { embroidery: 'detail', n11: 'uses', quote: 'quote-h', contact: 'end-h' }
 
 test('หน้าสินค้า 6 หน้า: id ส่วนเรียงตาม v22 ทุกส่วน', () => {
@@ -268,7 +269,7 @@ test('หน้าสินค้า 6 หน้า: H2 ของ v22 เรี�
 test('หน้าสินค้า 6 หน้า: ใช้แม่แบบเดียว · แถบสรุปอยู่ติดใต้ hero ตาม v22 · ลิงก์สารบัญมีปลายทางครบ', () => {
   const template = readFileSync(join(root, 'src/partials/productPage.hbs'), 'utf8')
   /* หน้าโฉมใหม่ (src/data/pp-v2.json · อาร์ต 5 พ.ย. "ไม่เอา" แถบราคา + สารบัญ) ไม่มีแถบสรุป/สารบัญ · ตรวจที่ tests/pp-v2.test.js */
-  const v2Routes = new Set(Object.keys(JSON.parse(readFileSync(join(root, 'src/data/pp-v2.json'), 'utf8'))).filter((k) => !k.startsWith('_')).map((k) => ({ polo: '/embroidery/', print: '/sublimation/', screen: '/screen-printing/' })[k]))
+  const v2Routes = new Set(Object.keys(ppV2()).filter((k) => !k.startsWith('_')).map((k) => ({ polo: '/embroidery/', print: '/sublimation/', screen: '/screen-printing/' })[k]))
   for (const route of Object.values(PRODUCTS)) {
     assert.match(readFileSync(join(root, 'site', route, 'index.html'), 'utf8'), /\{\{> productPage\}\}/, route)
     if (v2Routes.has(route)) continue

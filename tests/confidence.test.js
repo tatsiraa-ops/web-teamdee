@@ -6,15 +6,18 @@ import { promoTrigger, promoDue } from '../src/js/promo.js'
 import { priceSummary } from '../src/js/prices.js'
 import { quietFloats } from '../src/js/nudge.js'
 import { HERO_CTA } from '../src/js/mobile-ui.js'
+import { buildSource } from './lib/build-source.js'
+import { productPages, usePages } from '../src/build/content.js'
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
 const json = (p) => JSON.parse(read(p))
-const pages = json('src/data/product-pages.json')
-const uses = json('src/data/use-pages.json')
+const pages = productPages()
+const uses = usePages()
 const entries = (o) => Object.entries(o).filter(([k]) => k[0] !== '_')
 
 test('สกรีนไม่มีมัดจำออกแบบ (อาร์ตเคาะ 2 พ.ย.) · ยังมัดจำ 50% ก่อนผลิต', () => {
-  for (const f of ['src/data/product-pages.json', 'src/data/prices.json', 'src/data/faq.json']) assert.doesNotMatch(read(f), /มัดจำออกแบบ|มัดจำ 500/, f)
+  for (const f of ['src/data/prices.json', 'src/data/faq.json']) assert.doesNotMatch(read(f), /มัดจำออกแบบ|มัดจำ 500/, f)
+  assert.doesNotMatch(JSON.stringify(productPages()), /มัดจำออกแบบ|มัดจำ 500/, 'src/content/product (เดิม product-pages.json)')
   assert.match(JSON.stringify(pages.screen.order), /ชำระ 50% ก่อนผลิต/)
 })
 
@@ -42,7 +45,7 @@ test('FAQ ที่ถามว่าได้ไหม ขึ้นต้นด
 })
 
 test('หน้าสินค้าไม่มีคำบรรยายรูปหรือคำนักพัฒนา', () => {
-  const s = read('src/data/product-pages.json')
+  const s = JSON.stringify(productPages(), null, 2)
   for (const w of ['เห็นวิธีทำลาย', 'แสดงจุดต่อลาย', 'แสดงจุดที่ลาย', 'ข้อมูลประกอบการตัดสินใจ', 'พร้อมตารางแยกสินค้า', 'พร้อมภาพผู้สวม', 'ยังไม่รับรองระยะเวลา']) assert.ok(!s.includes(w), w)
 })
 
@@ -133,12 +136,12 @@ test('ข้อ 5 หน้ากลุ่ม: ภาพลูกค้าเร
   const t = read('src/partials/usePage.hbs')
   assert.match(t, /lt @index \.\.\/up\.photos\.shown/)
   assert.match(t, /lt up\.photos\.shown up\.photos\.items\.length/)
-  assert.match(read('vite.config.js'), /fullRows\(/)
+  assert.match(buildSource(), /fullRows\(/)
 })
 
 test('รูปลูกค้าจริงที่เคยไม่ได้ลงทะเบียน (2 พ.ย.) มีกลุ่ม คำบรรยาย และไฟล์จริง', () => {
   const cs = json('src/data/customers.json')
-  const groups = Object.keys(json('src/data/use-pages.json')).filter((k) => k[0] !== '_')
+  const groups = Object.keys(usePages()).filter((k) => k[0] !== '_')
   /* 2 พ.ย. รอบ 63: เทียบรูปซ้ำแบบเลื่อนหา (ncc) แล้วตัด co08 co18 sp14 sp19 (= real/r06 r08 r01 r05) และ lc218 lc420 lc427 (ซ้ำ lc217 sp26 co35) */
   const want = 'lc161 lc174 lc211 lc222 lc246 lc262 lc289 lc298 lc307 lc323 lc346 lc379 lc391'.split(' ')
   for (const n of 'co08 co18 sp14 sp19 lc218 lc420 lc427'.split(' ')) assert.ok(!cs.find((x) => x.img === `/img/customer/${n}.webp`)?.photoGroup, `${n}: ซ้ำ ต้องไม่อยู่ในกลุ่ม`)
@@ -196,7 +199,7 @@ test('ส่วนทีมดีหน้ากลุ่ม: สองคอล
   assert.doesNotMatch(sec, /site\.hours|site\.phonePrimary/)
   for (const k of ['site.address', 'site.mapUrl', 'site.claimDays']) assert.ok(sec.includes(k), k)
   assert.doesNotMatch(sec, /#each up\.team\.p/)
-  for (const [id, up] of Object.entries(json('src/data/use-pages.json'))) if (id[0] !== '_') assert.equal(up.team.p.length, 1, id)
+  for (const [id, up] of Object.entries(usePages())) if (id[0] !== '_') assert.equal(up.team.p.length, 1, id)
 })
 
 test('ส่วนวางงบหน้ากลุ่ม: แผ่นเดียวสองฝั่ง · รายการเป็นไอคอนเช็ก · ขั้นตอนเป็นเส้นเวลา · ปุ่มถามมีไอคอน LINE', () => {
@@ -217,14 +220,14 @@ test('ส่วน "ทำไมทีมดี": ทุกข้อได้ไ
   assert.equal(benefitIcon('มีคนดูแลหลังรับเสื้อ'), 'Shield')
   assert.equal(benefitIcon('ดูตัวอย่างก่อนตัดสินใจ'), 'Swatch')
   assert.equal(benefitIcon('วางแผนตามวันแจกจริง'), 'Calendar')
-  for (const [id, up] of Object.entries(json('src/data/use-pages.json'))) {
+  for (const [id, up] of Object.entries(usePages())) {
     if (id[0] === '_') continue
     for (const c of up.benefits.cards) assert.ok(existsSync(`src/partials/ico${benefitIcon(c.h)}.hbs`), `${id}: ${c.h}`)
   }
   const t = read('src/partials/usePage.hbs')
   assert.match(t, /class="up-why__list"/)
   assert.match(t, /\{\{> \(concat 'ico' this\.ico\)\}\}/)
-  assert.match(read('vite.config.js'), /benefitPhoto/)
+  assert.match(buildSource(), /benefitPhoto/)
 })
 
 test('แถบสรุปใต้ hero หน้ากลุ่ม (อาร์ต 2 พ.ย.: ลบราคา เหลือสิทธิพิเศษ) · ส่วนตัวเลขมีโลโก้ลูกค้าวิ่ง พร้อมปุ่มหยุด', () => {
@@ -247,7 +250,7 @@ test('ส่วนโจทย์คนสั่ง: การ์ดแยกป
   assert.equal(painIcon('ต้องรวบรวมไซซ์หลายแผนก'), 'Ruler')
   assert.equal(painIcon('ต้องพร้อมก่อนวันแข่งขัน'), 'Calendar')
   assert.equal(painIcon('สปอนเซอร์หลายรายต้องอนุมัติโลโก้'), 'Pen')
-  for (const [id, up] of Object.entries(json('src/data/use-pages.json'))) {
+  for (const [id, up] of Object.entries(usePages())) {
     if (id[0] === '_') continue
     for (const c of up.pain.cards || []) assert.ok(existsSync(`src/partials/ico${painIcon(c.h)}.hbs`), `${id}: ${c.h}`)
   }

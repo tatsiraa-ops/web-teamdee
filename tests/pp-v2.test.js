@@ -3,6 +3,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
+import { ppV2 } from '../src/build/content.js'
 const main = (f) => { const h = readFileSync(`dist-wp/${f}/index.html`, 'utf8'); return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
 const sec = (html, cls) => { const at = html.indexOf(`<section class="${cls}`); assert.ok(at >= 0, cls); return html.slice(at, html.indexOf('</section>', at)) }
 const pub = (s) => existsSync(new URL(`../public${s}`, import.meta.url))
@@ -363,7 +364,7 @@ test('/sublimation/ แผงเลือกเสื้อ รอบ 196 (อ�
   const js = readFileSync(new URL('../src/js/product-page.js', import.meta.url), 'utf8')
   assert.doesNotMatch(js, /collar-cards|collar-room|collar-viewer/)
   assert.match(js, /^import \{ initTypeCollars \} from '\.\/type-collars\.js'/m); assert.match(js, /^initTypeCollars\(\)/m)
-  const data = JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8')).print
+  const data = ppV2().print
   assert.equal(data.collars.tiers, undefined, 'ไม่มีกลุ่มตามราคาในข้อมูลแล้ว')
 })
 

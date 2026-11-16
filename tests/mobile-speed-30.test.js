@@ -5,10 +5,11 @@ import { readFileSync, existsSync, statSync } from 'node:fs'
 import { loadPics } from '../src/js/nudge.js'
 import { fontPreloadTag, injectFontPreload } from '../scripts/lib/font-preload.mjs'
 import { makeRewrite } from '../scripts/wp-rewrite.mjs'
+import { buildSource } from './lib/build-source.js'
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
 const pub = (p) => new URL(`../public${p}`, import.meta.url)
-const vite = read('vite.config.js')
+const vite = buildSource()
 
 /* 1. /project/ รูปรีวิวในแถวเลื่อน + รูปเล็กในโมเสกเรื่องราว: เดิมไฟล์ -480 (~40KB) ในช่องกว้าง 96–132px */
 test('รูปรีวิวทุกรูปมีไฟล์ย่อ -480-320 / -480-400 (ย่อจากไฟล์ -480 · srcset ไม่เกิน 480) และเล็กกว่าไฟล์ -480 จริง', () => {

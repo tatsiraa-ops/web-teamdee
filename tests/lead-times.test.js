@@ -2,10 +2,11 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
+import { productPages } from '../src/build/content.js'
 
 const json = (f) => JSON.parse(readFileSync(new URL(`../src/data/${f}`, import.meta.url), 'utf8'))
 const lead = json('lead-times.json')
-const pages = json('product-pages.json')
+const pages = productPages()
 
 test('ทุกสินค้ามีเวลาผลิตเป็นจำนวนวัน (เปิดทุกวัน ไม่ใช้คำว่าวันทำการ)', () => {
   for (const id of ['polo', 'print', 'screen', 'warmup', 'baseball', 'jersey']) assert.match(lead[id].days, /\d+–\d+ วัน(?!ทำการ)/, id)

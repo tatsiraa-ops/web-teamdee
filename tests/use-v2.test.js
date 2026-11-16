@@ -3,6 +3,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { statSync, readFileSync, existsSync } from 'node:fs'
+import { usePages } from '../src/build/content.js'
 
 const main = (f) => { const h = readFileSync(`dist-wp/${f}/index.html`, 'utf8'); return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
 const sec = (html, cls) => { const at = html.indexOf(`<section class="${cls}`); assert.ok(at >= 0, cls); return html.slice(at, html.indexOf('</section>', at)) }
@@ -235,7 +236,7 @@ test('/corporate/ FAQ: ชิ้น FAQ หน้าแรก · H2 v22 · ค�
   assert.equal(new Set(qs).size, 6, 'ไอคอนไม่ซ้ำ')
   assert.match(f, /class="hm-faq__help"[\s\S]*data-where="use-faq"/)
   assert.doesNotMatch(m, /hs-accordion/)
-  const up = JSON.parse(readFileSync('src/data/use-pages.json', 'utf8')).corp
+  const up = usePages().corp
   for (const [q] of up.faq.items) assert.ok(text(f).includes(q), q)
 })
 

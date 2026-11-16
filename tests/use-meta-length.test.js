@@ -3,6 +3,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
+import { usePages } from '../src/build/content.js'
 
 const PAGES = ['corporate', 'custom-staff-shirts', 'custom-organization-shirts', 'education', 'custom-university-shirts', 'custom-class-shirts', 'sport', 'custom-badminton-shirts', 'custom-running-shirts', 'event']
 
@@ -26,6 +27,6 @@ test('/custom-staff-shirts/: title · H1 · description มีทั้งร้
   const html = readFileSync(new URL('../site/custom-staff-shirts/index.html', import.meta.url), 'utf8')
   const title = html.match(/<title>([^<]*)<\/title>/)[1]
   const d = html.match(/<meta name="description" content="([^"]*)"/)[1]
-  const h1 = JSON.parse(readFileSync(new URL('../src/data/use-pages.json', import.meta.url), 'utf8')).shop.hero.h1
+  const h1 = usePages().shop.hero.h1
   for (const [k, s] of [['title', title], ['h1', h1], ['description', d]]) for (const w of ['ร้านค้า', 'ร้านอาหาร', 'คาเฟ่']) assert.ok(s.includes(w), `${k}: ${w}`)
 })

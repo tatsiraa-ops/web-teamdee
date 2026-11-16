@@ -9,6 +9,7 @@ import { hrefWithDate, pageLineText } from '../src/js/use-cta.js'
 import { planNeedBy, needByText } from '../src/js/need-by.js'
 import { picksMessage } from '../src/js/design-picks.js'
 import { faqAskText } from '../src/js/faq-search.js'
+import { usePages } from '../src/build/content.js'
 
 /* ประวัติเบราว์เซอร์จำลอง: back() ยิง popstate แบบ async เหมือนจริง */
 function fakeHistory() {
@@ -172,7 +173,7 @@ test('cleanFrom: รับสรุปจากหน้าคำนวณได
 test('หน้ากลุ่มบนเว็บจริง: การ์ดบริบทที่ไม่มีภาพลูกค้าไม่ขึ้น · ต้นแบบยังเห็นครบ', async () => {
   const { useView } = await import('../src/js/use-view.js')
   const { readFileSync } = await import('node:fs')
-  const up = JSON.parse(readFileSync(new URL('../src/data/use-pages.json', import.meta.url), 'utf8')).corp
+  const up = usePages().corp
   const contextPhotos = [{ img: '/a.webp', alt: 'ก' }, { img: '/b.webp', alt: 'ข' }, null]
   const has = () => true
   const wp = useView(up, { contextPhotos }, { forWp: true, has })

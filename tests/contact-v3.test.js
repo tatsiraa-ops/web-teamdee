@@ -7,6 +7,7 @@ import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { buildSource } from './lib/build-source.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const read = (p) => readFileSync(join(root, p), 'utf8')
@@ -47,7 +48,7 @@ test('การ์ด LINE: H2 เริ่มคุยกับทีมดี 
   assert.ok(existsSync(join(root, 'public/img/contact/stopwatch-240.webp')))
   assert.match(c, /class="lc__chat" aria-hidden="true"/)
   assert.doesNotMatch(main, /\{\{> lineCta/, 'ไม่ใช้แบนเนอร์ LINE ตัวใหญ่ของ /designs/ บนหน้านี้')
-  assert.match(read('vite.config.js'), /base\.contactLineUrl = /)
+  assert.match(buildSource(), /base\.contactLineUrl = /)
 })
 
 test('การ์ดโทร: 2 เบอร์จาก site.json · เวลาทำการ', () => {

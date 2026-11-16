@@ -8,6 +8,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { inspectPage, INTERNAL_PAGES, CMS_PAGES as CMS } from '../scripts/seo-check.mjs'
 import { OLD_NARRATIVE, BLOCKLIST, MACHINE_IMG } from '../scripts/lib/clean-rules.mjs'
+import { ppV2 } from '../src/build/content.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist-wp')
@@ -233,11 +234,11 @@ const PP_ROUTES = ['/embroidery/', '/sublimation/', '/screen-printing/', '/custo
 const PP_ORDER = ['options', 'fabric', 'detail', 'price', 'quote-h', 'production', 'work', 'reviews', 'size', 'order', 'faq', 'uses', 'end-h']
 /* works.json ยังไม่มีงานของ 3 สินค้านี้ · เว็บจริงซ่อนส่วนผลงาน ไม่แต่งรูป · ได้งานจริงแล้วเอาออกจากรายการ */
 const NO_WORK_YET = new Set(['/custom-printed-warmup-shirts/', '/custom-oversize-jerseys/', '/custom-baseball-shirts/'])
-const PP2_REVIEWS = new Set(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]).filter(Boolean))
+const PP2_REVIEWS = new Set(Object.entries(ppV2()).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]).filter(Boolean))
 /* หน้าโฉมใหม่ที่จบที่ FAQ (pp-v2.json lean · อาร์ต 6 พ.ย. "ที่เหลือต่อจากอันนี้ลบทิ้งได้หมดยกเว้น footer") ไม่มีส่วนเดิมของ v22 · ตรวจที่ tests/pp-v2.test.js */
-const PP2_LEAN = new Set(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).filter(([, v]) => v && v.lean).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]).filter(Boolean))
+const PP2_LEAN = new Set(Object.entries(ppV2()).filter(([, v]) => v && v.lean).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]).filter(Boolean))
 /* หน้าโฉมใหม่ย้ายส่วนขึ้นตามบอร์ดอาร์ต: รีวิว (5 พ.ย.) · เนื้อผ้า (6 พ.ย.) → ส่วนที่ย้ายไม่นับลำดับ v22 */
-const PP2_MOVED = Object.fromEntries(Object.entries(JSON.parse(readFileSync(new URL('../src/data/pp-v2.json', import.meta.url), 'utf8'))).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
+const PP2_MOVED = Object.fromEntries(Object.entries(ppV2()).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
 const ppMain = (route) => { const h = pages.find((p) => p.route === route).html; return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
 
 test('เว็บจริง: ส่วนหน้าสินค้าครบและเรียงตาม v22', () => {

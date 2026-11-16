@@ -3,9 +3,10 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
+import { usePages } from '../src/build/content.js'
 
 const d = JSON.parse(readFileSync(new URL('../src/data/design-pages.json', import.meta.url), 'utf8'))
-const ug = JSON.parse(readFileSync(new URL('../src/data/use-pages.json', import.meta.url), 'utf8'))
+const ug = usePages()
 
 test('/designs/: ชื่อหน้า "แบบเสื้อที่ใช่ สำหรับทีมคุณ" · หัวข้อตัวกรอง "ค้นหาและกรองแบบเสื้อ" · ย่อหน้าแรกมีคำค้น', () => {
   assert.equal(d.index.h1, 'แบบเสื้อที่ใช่ สำหรับทีมคุณ', 'รอบ 150 บอร์ด "หน้าแบบเสื้อ"')

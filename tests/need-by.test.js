@@ -5,6 +5,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { planNeedBy, needByText, thaiDate, addDays, maxDays } from '../src/js/need-by.js'
 import { hrefWithDate, lineMessageUrl } from '../src/js/use-cta.js'
+import { buildSource } from './lib/build-source.js'
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
 const lead = JSON.parse(read('src/data/lead-times.json'))
@@ -131,7 +132,7 @@ test('วางบนหน้า: hero หน้าสินค้ามีช�
   const use = read('src/partials/usePage.hbs')
   assert.match(use, /id="useDate"[^>]*data-need-by="\{\{up\.hero\.price\.pid\}\}"/)
   assert.match(use, /id="useDateOut"[^>]*aria-live="polite"/)
-  assert.match(read('vite.config.js'), /pid: firstPriced/)
+  assert.match(buildSource(), /pid: firstPriced/)
   assert.match(read('src/js/product-page.js'), /initNeedBy/)
   assert.match(read('src/js/use-page.js'), /bindNeedBy/)
   assert.match(read('src/js/need-by-ui.js'), /^import '\.\.\/styles\/need-by\.css'/m)

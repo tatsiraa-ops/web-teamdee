@@ -3,6 +3,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
+import { useV2 } from '../src/build/content.js'
 
 const main = (f) => { const h = readFileSync(`dist-wp/${f}/index.html`, 'utf8'); return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
 const pub = (s) => existsSync(new URL(`../public${s}`, import.meta.url))
@@ -31,7 +32,7 @@ test('/corporate/ คลังรีวิว: อยู่ต่อจากร
 })
 
 test('คลังรีวิวเปิดเฉพาะหน้าที่ตั้งไว้ใน use-v2.json (ตอนนี้ /corporate/)', () => {
-  const v2 = JSON.parse(readFileSync(new URL('../src/data/use-v2.json', import.meta.url), 'utf8'))
+  const v2 = useV2()
   assert.ok(v2.corp.reviewWall, 'corp ตั้งไว้')
   const tpl = readFileSync(new URL('../src/partials/usePage.hbs', import.meta.url), 'utf8')
   assert.match(tpl, /\{\{#if up\.v2\.reviewWall\}\}\{\{> reviewWall items=up\.v2\.reviewWall\.items/, 'ใช้ partial กลาง ไม่ copy')

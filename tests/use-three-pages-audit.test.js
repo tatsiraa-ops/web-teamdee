@@ -6,6 +6,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
+import { usePages, useV2 } from '../src/build/content.js'
 
 const read = (f) => readFileSync(new URL(`../${f}`, import.meta.url), 'utf8')
 const pub = (s) => existsSync(new URL(`../public${s}`, import.meta.url))
@@ -14,7 +15,7 @@ const text = (h) => h.replace(/<\/?t-[a-z]+>/g, '').replace(/<[^>]+>/g, ' ').rep
 const flat = (s) => s.replace(/\s+/g, '')
 const sec = (m, marker) => { const at = m.indexOf(marker); assert.ok(at > 0, marker); return m.slice(m.lastIndexOf('<section', at), m.indexOf('</section>', at)) }
 const lib = JSON.parse(read('src/data/media-library.json')).items
-const v2 = JSON.parse(read('src/data/use-v2.json')), pages = JSON.parse(read('src/data/use-pages.json'))
+const v2 = useV2(), pages = usePages()
 const guide = JSON.parse(read('src/data/polo.json')).guide
 const P = { gov: 'custom-organization-shirts', edu: 'education', shop: 'custom-staff-shirts' }
 const wall = (id) => [...sec(main(P[id]), `id="${id}-review-wall"`).matchAll(/<li class="rvw__ph"[^>]*><img src="([^"]+)"/g)].map((x) => x[1])

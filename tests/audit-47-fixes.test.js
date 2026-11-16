@@ -5,6 +5,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { buildSource } from './lib/build-source.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const read = (p) => readFileSync(join(root, p), 'utf8')
@@ -65,7 +66,7 @@ test('SEO: ลิงก์เข้าหน้าทรงคอ · breadcrumb 
   assert.match(read('src/partials/footer.hbs'), /url 'guides' 'collar'/)
   assert.match(read('src/partials/guidePage.hbs'), /"name":"คู่มือและบทความ","item":/)
   assert.match(read('site/faq/index.html'), /"name":"คู่มือและบทความ","item":/)
-  assert.match(read('vite.config.js'), /const mainAt = html\.indexOf\('<main'\)/)
+  assert.match(buildSource(), /const mainAt = html\.indexOf\('<main'\)/)
 })
 
 test('ไม่ใช้คำว่าโรงงาน (มติ 22 ต.ค.) แม้ SEO แนะนำ', () => {

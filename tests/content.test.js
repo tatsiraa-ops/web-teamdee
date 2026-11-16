@@ -2,12 +2,13 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
+import { usePages } from '../src/build/content.js'
 
 const read = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), 'utf8'))
 
 test('หน้ากลุ่มลูกค้า: คำอธิบายขั้นตอน 01–03 ไม่ใช่รายการ "เตรียมข้อมูล" ที่ยกมาวาง', () => {
   const bad = []
-  for (const [id, up] of Object.entries(read('../src/data/use-pages.json'))) {
+  for (const [id, up] of Object.entries(usePages())) {
     if (id[0] === '_') continue
     const need = up.plan.need?.items || []
     for (const s of up.plan.steps) if (need.some((n) => n && s.p.includes(n))) bad.push(`${id}: ${s.h} → ${s.p}`)
@@ -26,7 +27,7 @@ test('FAQ: คำตอบตรงเรื่องกับคำถามท
 })
 
 test('หน้ากลุ่มลูกค้า: FAQ ไม่ตอบแบบปฏิเสธลอย ๆ · หน่วยงานไม่ถามเรื่องเครดิตซ้ำ · อีเวนต์/วิ่งบอกว่ารู้ตั้งแต่แรกถ้าไม่ทัน', () => {
-  const up = read('../src/data/use-pages.json')
+  const up = usePages()
   const neg = []
   for (const [id, v] of Object.entries(up)) if (id[0] !== '_') for (const [q, a] of v.faq.items) if (/ไม่ยืนยัน|ไม่ถือว่า|ไม่รับรอง|อัตโนมัติ/.test(a)) neg.push(`${id}: ${q}`)
   assert.deepEqual(neg, [])
@@ -35,7 +36,7 @@ test('หน้ากลุ่มลูกค้า: FAQ ไม่ตอบแ�
 })
 
 test('หน้ากลุ่มลูกค้า: เอกสารและการชำระเงินแยกบรรทัด ให้ข้อที่ยืนยันแล้วยังอยู่บนเว็บจริง', () => {
-  for (const [id, v] of Object.entries(read('../src/data/use-pages.json'))) {
+  for (const [id, v] of Object.entries(usePages())) {
     if (id[0] === '_' || !v.plan.payment) continue
     assert.ok(v.plan.payment.p.includes('ออกใบเสร็จ / ใบกำกับภาษีได้'), id)
     /* เอกสารจัดซื้อเฉพาะกลุ่มที่ต้องใช้ (2 พ.ย.) */
@@ -44,7 +45,7 @@ test('หน้ากลุ่มลูกค้า: เอกสารและ
 })
 
 test('หน้ากลุ่มลูกค้า: hero บอกจุดขายที่ยืนยันแล้ว · กลุ่มงานพิมพ์บอกชื่อ-เบอร์รายคน', () => {
-  for (const [id, v] of Object.entries(read('../src/data/use-pages.json'))) {
+  for (const [id, v] of Object.entries(usePages())) {
     if (id[0] === '_') continue
     const f = v.hero.facts.join(' | ')
     assert.match(f, /ออกแบบฟรี/, id)
@@ -54,7 +55,7 @@ test('หน้ากลุ่มลูกค้า: hero บอกจุดข�
 })
 
 test('หน้ากลุ่มลูกค้า: ชื่อยาวแบบ "ก / ข / ค" อยู่แค่หัวข้อแบบเสื้อกับ FAQ ไม่ซ้ำทุก H2', () => {
-  const up = read('../src/data/use-pages.json')
+  const up = usePages()
   for (const u of read('../src/data/uses.json')) {
     if (!u.name.includes(' / ')) continue
     const v = up[u.id]
@@ -64,7 +65,7 @@ test('หน้ากลุ่มลูกค้า: ชื่อยาวแบ
 })
 
 test('หน้ากลุ่มลูกค้า: ทุกหน้ามีกล่องงบ/ราคาในส่วนวางแผน และลิงก์เช็คลิสต์ตาม v22 (ยกเว้นบริษัทที่ v22 ไม่มี)', () => {
-  for (const [id, v] of Object.entries(read('../src/data/use-pages.json'))) {
+  for (const [id, v] of Object.entries(usePages())) {
     if (id[0] === '_') continue
     assert.ok(v.plan.price && v.plan.price.p.length, `${id}: ไม่มีกล่องงบ`)
     if (id !== 'corp') assert.ok(v.plan.links.some((l) => l.to === 'posts.checklist'), `${id}: ไม่มีลิงก์เช็คลิสต์`)

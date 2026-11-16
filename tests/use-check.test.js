@@ -5,14 +5,15 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
+import { ppV2, useV2 } from '../src/build/content.js'
 
 const read = (f) => readFileSync(new URL(`../${f}`, import.meta.url), 'utf8')
 const main = (f) => { const h = read(`dist-wp/${f}/index.html`); return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
 const text = (h) => h.replace(/<\/?t-[a-z]+>/g, '').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ')
 const flat = (s) => s.replace(/\s+/g, '')
 const guide = JSON.parse(read('src/data/polo.json')).guide
-const v2 = JSON.parse(read('src/data/use-v2.json'))
-const print = JSON.parse(read('src/data/pp-v2.json')).print.steps.items
+const v2 = useV2()
+const print = ppV2().print.steps.items
 const PAGES = { corp: 'corporate', gov: 'custom-organization-shirts', edu: 'education', shop: 'custom-staff-shirts', faculty: 'custom-university-shirts', class: 'custom-class-shirts', sport: 'sport', badminton: 'custom-badminton-shirts', running: 'custom-running-shirts', event: 'event' }
 const sec = (f) => { const m = main(f); const at = m.indexOf('<section class="up2-chk"'); return { m, at, s: at < 0 ? '' : m.slice(at, m.indexOf('</section>', at)) } }
 

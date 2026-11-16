@@ -7,11 +7,12 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { sizeFor, toCm, visibleResults } from '../src/js/size-finder.js'
+import { ppV2 } from '../src/build/content.js'
 
 const html = readFileSync('dist-wp/size-chart/index.html', 'utf8')
 const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'))
 const text = (h) => h.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')
-const print = JSON.parse(readFileSync('src/data/pp-v2.json', 'utf8')).print.sizes
+const print = ppV2().print.sizes
 const polo = JSON.parse(readFileSync('src/data/polo.json', 'utf8')).sizes
 const tables = [...main.matchAll(/<table[\s\S]*?<\/table>/g)].map((m) => m[0])
 const rowsOf = (t) => [...t.matchAll(/<tr[^>]*>\s*<th scope="row"[^>]*>([^<]+)<\/th>\s*<td[^>]*>(\d+)/g)].map((m) => [m[1].trim(), Number(m[2])])

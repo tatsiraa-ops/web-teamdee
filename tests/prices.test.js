@@ -2,6 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import { bandLabel, bandId, qtyText, bandFor, calcPricing, productPrice, priceFact, heroPrice, priceLine, useQuote, calcHref, fabricRanges } from '../src/js/prices.js'
+import { buildSource } from './lib/build-source.js'
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
 const P = JSON.parse(read('src/data/prices.json'))
@@ -65,7 +66,7 @@ test('ตารางราคาหน้าเครื่องคำนว�
 
 test('ไม่มีไฟล์ราคาที่สอง · vite.config ไม่ดึงเลขราคาด้วย regex', () => {
   assert.ok(!readdirSync(new URL('../src/data/', import.meta.url)).includes('pricing.json'))
-  const vite = read('vite.config.js')
+  const vite = buildSource()
   assert.doesNotMatch(vite, /pricing\.json/)
   assert.doesNotMatch(vite, /\.exec\(box\.strong\)/)
 })

@@ -3,13 +3,14 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
+import { productPages, usePages } from '../src/build/content.js'
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
 const json = (p) => JSON.parse(read(p))
 const v22P = json('docs/spec/teamdee-v22/extracted/products.json')
 const v22U = json('docs/spec/teamdee-v22/extracted/uses.json')
-const pages = json('src/data/product-pages.json')
-const uses = json('src/data/use-pages.json')
+const pages = productPages()
+const uses = usePages()
 const P = { polo: 'polo', printed: 'print', screen: 'screen', warmup: 'warmup', baseball: 'baseball', oversize: 'jersey' }
 const U = { business: 'corp', shop: 'shop', organization: 'gov', education: 'edu', class: 'class', faculty: 'faculty', sport: 'sport', badminton: 'badminton', running: 'running', activity: 'event' }
 const isFile = (p) => /\.webp$/.test(p || '') && existsSync(new URL(`../public${p}`, import.meta.url))

@@ -4,12 +4,13 @@ import { readFileSync } from 'node:fs'
 import { heroPrice } from '../src/js/prices.js'
 import { lineMessageUrl } from '../src/js/contact-send.js'
 import { homeView } from '../src/js/home-view.js'
+import { buildSource } from './lib/build-source.js'
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
 const data = (p) => JSON.parse(read(`src/data/${p}.json`))
 
 test('หน้าแรกใช้ราคาที่ระบุคอเสื้อและส่วนต่างจากตารางเดียวกัน', () => {
-  assert.match(read('vite.config.js'), /const price = heroPrice\(prices, c.id\)/)
+  assert.match(buildSource(), /const price = heroPrice\(prices, c.id\)/)
   const price = heroPrice(data('prices'), 'print')
   assert.match(price.v, /279.*10–20/)
   assert.match(price.sub, /คอกลม \/ คอวี/)
@@ -43,5 +44,5 @@ test('ป๊อปอัปขอผ้าตัวอย่าง (30 ต.ค. 
   for (const s of ['ผ้าตัวอย่าง', 'ประเภทเสื้อที่สนใจ:', 'จำนวนประมาณ:', 'ที่อยู่จัดส่งผ้าตัวอย่าง:']) assert.ok(p.cta.message.includes(s), s)
   const href = lineMessageUrl(p.cta.message)
   assert.equal(decodeURIComponent(href.split('?')[1]), p.cta.message)
-  assert.ok(read('vite.config.js').includes('p.cta.message ? lineMessageUrl(p.cta.message) : data.site.lineUrl'))
+  assert.ok(buildSource().includes('p.cta.message ? lineMessageUrl(p.cta.message) : data.site.lineUrl'))
 })

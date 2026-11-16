@@ -4,6 +4,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { pageLineText, REORDER_TEXT, TRACK_TEXT } from '../src/js/use-cta.js'
+import { buildSource } from './lib/build-source.js'
 
 const names = {
   products: { polo: 'เสื้อโปโลปัก', print: 'เสื้อพิมพ์ลาย' },
@@ -43,7 +44,7 @@ test('ปุ่ม LINE ส่วนกลางใช้ข้อความ�
   assert.match(read('src/partials/floats.hbs'), /fcta__btn--line" href="\{\{@root\.pageLine\}\}"/)
   assert.match(read('src/partials/siteHeader.hbs'), /href="\{\{@root\.pageLine\}\}" data-track="line" data-where="mobile-menu"/)
   assert.match(read('src/partials/heroTeam.hbs'), /href="\{\{@root\.pageLine\}\}" data-track="line" data-where="hero"/)
-  assert.match(read('vite.config.js'), /base\.pageLine = lineMessageUrl\(pageLineText\(page, /)
+  assert.match(buildSource(), /base\.pageLine = lineMessageUrl\(pageLineText\(page, /)
 })
 
 test('build: หน้าสินค้าได้ข้อความขอราคาสินค้านั้นจริง (products.json / uses.json เป็น array)', async () => {
