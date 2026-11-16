@@ -74,7 +74,10 @@ function td_portable_paths(string $html): string {
 function td_read_part(string $slug, string $part): string {
 	$f = TD_BUILD . "/pages/$slug.$part.html";
 	$html = td_portable_paths(is_readable($f) ? (string) file_get_contents($f) : '');
-	return $part === 'body' ? td_body_live($html) : $html;
+	if ($part !== 'body') return $html;
+	/* หน้าแรกและ /blog/: บทความจริงจาก WordPress (บล็อก "บทความจริงจาก WordPress" ด้านล่าง) */
+	if ($slug === 'home' || $slug === 'blog') $html = td_posts_live($slug, $html, td_posts_from_wp(), td_post_cat_counts());
+	return td_body_live($html);
 }
 
 /* ส่วนของ body ที่รู้ได้ตอนเปิดหน้าเท่านั้น (30 ต.ค.)
@@ -125,6 +128,114 @@ function td_chrome(string $which, string $from = '/blog/'): string {
 	if ($a === false || $b === false) return '';
 	return $which === 'header' ? substr($body, 0, $a) : substr($body, $b + 7);
 }
+
+/* ---------- บทความจริงจาก WordPress บนหน้าแรกและ /blog/ ---------- */
+/* 16 พ.ย. 2026 (อาร์ต "จะอัพเดทบทความใหม่ๆยังไง" → "ทำข้อ 1 เลย"): หน้าแรกและ /blog/ ฝังรายการบทความตอน build (legacy-posts.json)
+   บทความที่ลงในหลังบ้านหลังเปิดเว็บจึงไม่ขึ้น → ใส่บทความจริงตอนเปิดหน้า ด้วย HTML ชุดเดียวกับต้นแบบ
+   - หน้าแรก: การ์ด 4 เรื่องล่าสุด (ไม่มีโพสต์เลย = HTML เดิม)
+   - /blog/: หน้านิตยสาร 12 เรื่องเดิมคงไว้ (จัดหัวข้อด้วยมือ) · เรื่องที่ยังไม่อยู่ในหน้า → ส่วน "ใหม่ล่าสุด" ใต้เรื่องปก
+     + ชิปหัวข้อ + ผลค้นหา (#artGrid) + จำนวนเรื่อง/วันที่บนหัวหน้า · ตัวเลขหมวดตาม WordPress
+   tests/wp-posts-live.test.js */
+
+/** แปลงโพสต์ WordPress เป็นข้อมูลการ์ด (ใหม่สุดก่อน) · url = path ที่ใช้ลิงก์ · key = /slug/ ใช้เทียบกับลิงก์ในหน้าที่ export (ติดตั้งในโฟลเดอร์ย่อยก็เทียบถูก) */
+function td_posts_from_wp(): array {
+	$mon = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+	$out = [];
+	$list = get_posts(['post_type' => 'post', 'post_status' => 'publish', 'numberposts' => 60, 'orderby' => 'date', 'order' => 'DESC', 'has_password' => false]);
+	foreach ($list as $p) {
+		$cat = (get_the_category($p->ID) ?: [null])[0];
+		$tid = (int) get_post_thumbnail_id($p);
+		$ts = (int) get_post_timestamp($p);
+		$ex = has_excerpt($p) ? (string) $p->post_excerpt : (string) get_post_meta($p->ID, 'rank_math_description', true);
+		if ($ex === '' || str_contains($ex, '%')) $ex = wp_trim_words(wp_strip_all_tags(strip_shortcodes((string) $p->post_content)), 40, '…');
+		$out[] = [
+			'url' => wp_make_link_relative((string) get_permalink($p)),
+			'key' => '/' . $p->post_name . '/',
+			'title' => wp_strip_all_tags(html_entity_decode(get_the_title($p), ENT_QUOTES, 'UTF-8')),
+			'img' => $tid ? (string) wp_get_attachment_image_url($tid, 'large') : '',
+			'srcset' => $tid ? (string) wp_get_attachment_image_srcset($tid, 'large') : '',
+			'cat' => $cat ? (string) $cat->slug : '',
+			'catName' => $cat ? html_entity_decode((string) $cat->name, ENT_QUOTES, 'UTF-8') : '',
+			'date' => wp_date('Y-m-d', $ts),
+			'dateTh' => wp_date('j', $ts) . ' ' . $mon[(int) wp_date('n', $ts) - 1] . ' ' . wp_date('Y', $ts),
+			'excerpt' => trim(wp_strip_all_tags(html_entity_decode($ex, ENT_QUOTES, 'UTF-8'))),
+		];
+	}
+	return $out;
+}
+
+/** จำนวนบทความที่เผยแพร่ของแต่ละหมวด [slug => n] */
+function td_post_cat_counts(): array {
+	$n = [];
+	foreach (get_categories(['hide_empty' => false]) as $c) $n[$c->slug] = (int) $c->count;
+	return $n;
+}
+
+/** รูปปกการ์ด · ไม่มีรูปปก = ไม่ใส่ <img> (กรอบใช้สีพื้นของการ์ด) */
+function td_post_img(array $p, string $sizes): string {
+	if (($p['img'] ?? '') === '') return '';
+	return '<img src="' . esc_url($p['img']) . '" srcset="' . esc_attr($p['srcset'] ?? '') . '" sizes="' . $sizes . '" alt="" width="1024" height="512" loading="lazy" decoding="async">';
+}
+
+/** การ์ดแบบผลค้นหาของ /blog/ (.mz-card) · data-* ให้ articles-page.js ค้นได้ */
+function td_post_mz_card(array $p): string {
+	return '<a class="mz-card" href="' . esc_url($p['url']) . '" data-cat="' . esc_attr($p['cat']) . '" data-topics="" data-title="' . esc_attr($p['title']) . '" data-excerpt="' . esc_attr($p['excerpt']) . '" data-cat-name="' . esc_attr($p['catName']) . '">'
+		. '<span class="mz-row__img">' . td_post_img($p, '(min-width: 1024px) 400px, (min-width: 640px) 50vw, calc(100vw - 40px)') . '</span>'
+		. '<span class="mz-kicker">' . esc_html($p['catName']) . '</span><span class="mz-row__t">' . esc_html($p['title']) . '</span>'
+		. '<time datetime="' . esc_attr($p['date']) . '">' . esc_html($p['dateTh']) . '</time></a>';
+}
+
+function td_posts_live(string $slug, string $html, array $posts, array $counts = []): string {
+	if ($slug === 'home') {
+		if (!$posts) return $html;
+		$li = '';
+		foreach (array_slice($posts, 0, 4) as $p) {
+			$li .= "\n      <li><a class=\"hm-post\" href=\"" . esc_url($p['url']) . "\">\n        <span class=\"hm-post__img\">" . td_post_img($p, '(min-width: 1280px) 300px, (min-width: 768px) 24vw, 80vw') . "</span>\n"
+				. '        <span class="hm-post__body"><span class="hm-post__cat">' . esc_html($p['catName']) . '</span><span class="hm-post__t">' . esc_html($p['title']) . '</span><time datetime="' . esc_attr($p['date']) . '">' . esc_html($p['dateTh']) . "</time></span>\n      </a></li>";
+		}
+		return (string) preg_replace_callback('~(<ul class="hm-posts">)(.*?)(\s*</ul>)~s', fn ($m) => $m[1] . $li . $m[3], $html, 1);
+	}
+	if ($slug !== 'blog') return $html;
+
+	/* ตัวเลขหมวด (เฉพาะแถบ "อ่านตามหมวดเดิม") */
+	if ($counts) {
+		$html = (string) preg_replace_callback('~<nav class="mz-archives".*?</nav>~s', fn ($nav) => (string) preg_replace_callback(
+			'~(<a href="[^"]*/category/([^/"]+)/">.*?<b class="tabular-nums">)(\d+)(</b>)~s',
+			fn ($m) => $m[1] . (isset($counts[$m[2]]) ? $counts[$m[2]] : $m[3]) . $m[4],
+			$nav[0]
+		), $html, 1);
+	}
+
+	$new = array_values(array_filter($posts, fn ($p) => !str_contains($html, 'href="' . ($p['key'] ?? $p['url']) . '"')));
+	if (!$new) return $html;
+
+	$cards = implode('', array_map('td_post_mz_card', $new));
+	$n = count($new);
+	/* จำนวนเรื่อง + วันที่ล่าสุดบนหัวหน้า */
+	preg_match_all('~datetime="(\d{4}-\d{2}-\d{2})"~', $html, $d);
+	$latest = $new[0];
+	foreach ($new as $p) if ($p['date'] > $latest['date']) $latest = $p;
+	$html = (string) preg_replace_callback('~<p class="mz-head__meta">(\d+) เรื่อง · อัปเดตล่าสุด ([^<]*)</p>~u', function ($m) use ($n, $latest, $d) {
+		$keep = $d[1] && max($d[1]) > $latest['date'];
+		return '<p class="mz-head__meta">' . ((int) $m[1] + $n) . ' เรื่อง · อัปเดตล่าสุด ' . ($keep ? $m[2] : esc_html($latest['dateTh'])) . '</p>';
+	}, $html, 1);
+	/* ชิปหัวข้อ */
+	$html = str_replace('<ul class="mz-topics" aria-label="ไปที่หัวข้อ">', '<ul class="mz-topics" aria-label="ไปที่หัวข้อ"><li style="--i:0"><a href="#t-latest">ใหม่ล่าสุด<b class="tabular-nums">' . $n . '</b></a></li>', $html);
+	/* ส่วน "ใหม่ล่าสุด" ใต้เรื่องปก ก่อนหัวข้อเดิม (สูงสุด 6 เรื่อง · ที่เหลืออยู่ในผลค้นหาและหน้าหมวด) */
+	$sec = '<section class="mz-sec mz-sec--latest" id="t-latest" aria-labelledby="t-latest-h">'
+		. '<header class="mz-sec__hd"><h2 id="t-latest-h">ใหม่ล่าสุด</h2><span class="tabular-nums">' . $n . ' เรื่อง</span></header>'
+		. '<div class="mz-grid">' . implode('', array_map('td_post_mz_card', array_slice($new, 0, 6))) . '</div></section>' . "\n    ";
+	$html = str_replace('<div class="mz-sections">', $sec . '<div class="mz-sections">', $html);
+	/* ผลค้นหา: เรื่องใหม่ขึ้นก่อน */
+	return str_replace('id="artGrid">', 'id="artGrid">' . $cards, $html);
+}
+
+/* เผยแพร่ / แก้ / ถอนบทความ → ให้ LiteSpeed Cache ล้างหน้าแรกและ /blog/ (ไม่มีปลั๊กอิน = do_action ไม่มีผู้รับ ไม่เกิดอะไร) */
+add_action('transition_post_status', function ($new, $old, $post) {
+	if (($post->post_type ?? '') !== 'post' || ($new !== 'publish' && $old !== 'publish')) return;
+	do_action('litespeed_purge_url', home_url('/'));
+	do_action('litespeed_purge_url', home_url('/blog/'));
+}, 10, 3);
 
 /* ---------- หน้าที่ต้นแบบมี แต่ WordPress ไม่มี Page ---------- */
 /* 16 พ.ย. 2026 ตรวจ staging (มี Rank Math): หน้าแบบนี้ (/faq/ /custom-class-shirts/ ฯลฯ) เดิมปล่อยให้ WordPress ตั้ง 404 ก่อน

@@ -118,6 +118,10 @@
 .mz-sections { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); grid-auto-flow: dense; gap: 0 56px; padding-top: 36px; }
 .mz-sec { padding-bottom: 32px; scroll-margin-top: calc(var(--hdr-b, 78px) + 20px); }
 .mz-sec--wide { grid-row: span 3; }
+/* บทความที่ลงในหลังบ้านหลังเปิดเว็บ (ธีมใส่ตอนเปิดหน้า · td_posts_live) · อยู่ใต้เรื่องปก ใช้การ์ดแบบผลค้นหา */
+.mz-sec--latest { padding-top: 36px; }
+.mz-sec--latest .mz-grid { padding-top: 14px; }
+.mz-row__img:empty { aspect-ratio: 2 / 1; } /* บทความไม่มีรูปปก: กรอบสีพื้นขนาดเท่ารูป การ์ดเรียงตรงกัน */
 .mz-sec__hd { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 12px; margin-bottom: 6px; border-bottom: 2px solid var(--color-ink); }
 .mz-sec__hd h2 { font-size: clamp(20px, 2vw, 26px); font-weight: 800; line-height: 1.35; }
 .mz-sec__hd span { flex: none; font-size: 14px; color: var(--color-ink-3); }
