@@ -2,6 +2,15 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.2 — 2026-11-16
+
+ลิงก์ในหน้าบน staging (WordPress ในโฟลเดอร์ย่อย /enterprise/) พาไปเว็บเก่า → ธีมเติม path โฟลเดอร์ย่อยหน้าลิงก์เอง · เว็บที่รากโดเมน HTML เหมือนเดิมทุกตัวอักษร
+
+### Fixes
+
+- **wp-theme:** insert the sub-folder path with a callback, not a replacement string (34043da)
+- **wp-theme:** point internal links at the sub-folder when WordPress is not at the domain root (1ffb28a)
+
 ## v0.4.1 — 2026-11-16
 
 หน้าแรกบน staging พื้นดำ ตัวหนังสือหาย (CSS หน้า Elementor เดิมทับธีม) → หน้าที่ธีมแสดงเองไม่โหลด CSS ของ Elementor · เลขเวอร์ชันในธีมตรงกับ Release
