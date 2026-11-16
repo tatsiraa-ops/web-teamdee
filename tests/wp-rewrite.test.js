@@ -24,3 +24,18 @@ test('URL เต็มของหน้า (canonical · og:url) ไม่แ�
   const once = rw('"https://team-dee.com/img/a.jpg" src="/img/b.webp"')
   assert.equal(rw(once), once)
 })
+
+/* 16 พ.ย. 2026 C1 ระยะ 1 (อาร์ต "เริ่มเตรียมบนเครื่องไว้ก่อนเลย"): รูปย้ายออกจากธีมไปโฟลเดอร์ wp-content/uploads/teamdee/img
+   ธีมเหลือ ~10MB อัปโหลดผ่านหลังบ้านได้ · รูปวางครั้งเดียว ต่อไปส่งเฉพาะรูปใหม่ · assets โลโก้ ไฟล์ดาวน์โหลด ยังอยู่ในธีม */
+const I = '/wp-content/uploads/teamdee/img'
+const rwImg = makeRewrite({ themeUrl: T, imgUrl: I, baseUrl: 'https://team-dee.com' })
+test('รูป (/img/) ชี้โฟลเดอร์ uploads · ไฟล์อื่นยังชี้ธีม', () => {
+  assert.equal(rwImg('<img src="/img/a.webp">'), `<img src="${I}/a.webp">`)
+  assert.equal(rwImg('srcset="/img/a.webp 1x, /img/b.webp 2x"'), `srcset="${I}/a.webp 1x, ${I}/b.webp 2x"`)
+  assert.equal(rwImg('"https://team-dee.com/img/a.jpg"'), `"https://team-dee.com${I}/a.jpg"`)
+  assert.equal(rwImg('url(/assets/x.css)'), `url(${T}/assets/x.css)`)
+  assert.equal(rwImg('"/logo/x.svg" "/files/a.csv"'), `"${T}/logo/x.svg" "${T}/files/a.csv"`)
+  assert.equal(rwImg('<link rel="icon" href="/favicon.svg">'), `<link rel="icon" href="${T}/favicon.svg">`)
+  const once = rwImg('"https://team-dee.com/img/a.jpg" src="/img/b.webp"')
+  assert.equal(rwImg(once), once, 'รันซ้ำได้ผลเท่าเดิม')
+})

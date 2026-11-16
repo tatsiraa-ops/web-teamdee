@@ -20,7 +20,7 @@ test('ธีมย้ายโฟลเดอร์ได้: path ไฟล์�
   try {
     const html = '<link rel="stylesheet" href="/wp-content/themes/teamdee/build/assets/a.css"><img src="/wp-content/themes/teamdee/build/img/x.webp" srcset="/wp-content/themes/teamdee/build/img/x-540.webp 540w"><a href="/corporate/">'
     php.writeFile('/in.html', html)
-    const run = async (uri) => (await php.run({ code: `<?php function get_template_directory_uri(){ return '${uri}'; } function wp_parse_url($u,$c=-1){ return parse_url($u,$c); } ${fnSrc('td_portable_paths')} echo td_portable_paths(file_get_contents('/in.html'));` }))
+    const run = async (uri) => (await php.run({ code: `<?php function get_template_directory_uri(){ return '${uri}'; } function wp_upload_dir(){ return ['baseurl' => str_replace('/themes/teamdee-final', '/uploads', str_replace('/themes/teamdee', '/uploads', '${uri}'))]; } function wp_parse_url($u,$c=-1){ return parse_url($u,$c); } ${fnSrc('td_portable_paths')} echo td_portable_paths(file_get_contents('/in.html'));` }))
     const root = await run('https://team-dee.com/wp-content/themes/teamdee')
     assert.equal(root.errors, ''); assert.equal(root.text, html, 'ราก + ชื่อ teamdee ไม่เปลี่ยนอะไร')
     const sub = await run('https://team-dee.com/enterprise/wp-content/themes/teamdee')

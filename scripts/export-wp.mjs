@@ -17,6 +17,11 @@ const out = join(root, 'wp-theme/teamdee/build')
 /* ธีมติดตั้งที่ /wp-content/themes/teamdee ทั้งในเครื่องและเว็บจริง (WordPress อยู่ที่ราก)
    ถ้าเว็บจริงติดตั้งใน sub-folder ต้องเปลี่ยนค่านี้ */
 const THEME_URL = process.env.TD_THEME_URL || '/wp-content/themes/teamdee/build'
+/* 16 พ.ย. 2026 C1 ระยะ 1: รูปอยู่นอกธีมที่ wp-content/uploads/teamdee/img (ธีมเล็ก อัปโหลดผ่านหลังบ้านได้ · รูปวางครั้งเดียว ต่อไปส่งเฉพาะรูปใหม่)
+   ในเครื่อง export ลง wp-theme/uploads/teamdee/img (WordPress ในเครื่อง mount ตรงนี้ · scripts/pack-release.mjs แพ็กเป็น zip รูป)
+   functions.php td_portable_paths เปลี่ยน path ตาม uploads ที่ติดตั้งจริง (WordPress ในโฟลเดอร์ย่อยก็ถูก) */
+const IMG_URL = process.env.TD_IMG_URL || '/wp-content/uploads/teamdee/img'
+const imgOut = join(root, 'wp-theme/uploads/teamdee/img')
 /* หน้าที่มีไว้ใช้ภายในต้นแบบ ไม่ขึ้นเว็บจริง */
 
 execSync('npx vite build', { cwd: root, stdio: 'inherit', env: { ...process.env, TD_TARGET: 'wp' } })
@@ -24,7 +29,7 @@ execSync('npx vite build', { cwd: root, stdio: 'inherit', env: { ...process.env,
 rmSync(out, { recursive: true, force: true })
 mkdirSync(join(out, 'pages'), { recursive: true })
 
-const rewrite = makeRewrite({ themeUrl: THEME_URL, baseUrl: JSON.parse(readFileSync(join(root, 'src/data/site.json'), 'utf8')).baseUrl })
+const rewrite = makeRewrite({ themeUrl: THEME_URL, imgUrl: IMG_URL, baseUrl: JSON.parse(readFileSync(join(root, 'src/data/site.json'), 'utf8')).baseUrl })
 
 const copyRewritten = (from, to) => {
   for (const e of readdirSync(from, { withFileTypes: true })) {
@@ -37,11 +42,25 @@ const copyRewritten = (from, to) => {
     else cpSync(a, b)
   }
 }
-for (const d of ['assets', 'img', 'logo', 'files']) {
+for (const d of ['assets', 'logo', 'files']) {
   if (!existsSync(join(dist, d))) continue
   mkdirSync(join(out, d), { recursive: true })
   copyRewritten(join(dist, d), join(out, d))
 }
+/* รูป: ออกนอกธีม + รายการรูปที่หน้าเว็บต้องใช้ (หลังบ้านใช้เตือนเมื่อรูปบนเซิร์ฟเวอร์ไม่ครบ · functions.php td_missing_images) */
+rmSync(imgOut, { recursive: true, force: true })
+mkdirSync(imgOut, { recursive: true })
+const imgFiles = []
+const copyImg = (from, rel = '') => {
+  for (const e of readdirSync(from, { withFileTypes: true })) {
+    if (e.name === '.DS_Store') continue
+    const r = rel ? `${rel}/${e.name}` : e.name
+    if (e.isDirectory()) { mkdirSync(join(imgOut, r), { recursive: true }); copyImg(join(from, e.name), r) }
+    else { cpSync(join(from, e.name), join(imgOut, r)); imgFiles.push(r) }
+  }
+}
+if (existsSync(join(dist, 'img'))) copyImg(join(dist, 'img'))
+writeFileSync(join(out, 'img-manifest.json'), JSON.stringify({ imgUrl: IMG_URL, files: imgFiles.sort() }))
 for (const f of ['favicon.svg', 'apple-touch-icon.png']) if (existsSync(join(dist, f))) cpSync(join(dist, f), join(out, f))
 
 const walk = (dir) => readdirSync(dir).flatMap((n) => {
@@ -85,4 +104,4 @@ for (const file of walk(dist)) {
   }
 }
 writeFileSync(join(out, 'pages.json'), JSON.stringify({ generated: new Date().toISOString(), themeUrl: THEME_URL, pages }, null, 1))
-console.log(`export-wp: ${Object.keys(pages).length} หน้า → ${relative(root, out)}`)
+console.log(`export-wp: ${Object.keys(pages).length} หน้า → ${relative(root, out)} · รูป ${imgFiles.length} ไฟล์ → ${relative(root, imgOut)}`)

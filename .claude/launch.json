@@ -22,6 +22,7 @@
         "--mount-before-install=./wordpress-local:/wordpress",
         "--wordpress-install-mode=install-from-existing-files-if-needed",
         "--mount=./wp-theme/teamdee:/wordpress/wp-content/themes/teamdee",
+        "--mount=./wp-theme/uploads/teamdee:/wordpress/wp-content/uploads/teamdee",
         "--blueprint=./wp-theme/blueprint.json",
         "--login"
       ],

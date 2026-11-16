@@ -68,8 +68,35 @@ function td_has_seo_plugin(): bool {
 function td_portable_paths(string $html): string {
 	$from = '/wp-content/themes/teamdee/build/';
 	$to = rtrim((string) wp_parse_url(get_template_directory_uri(), PHP_URL_PATH), '/') . '/build/';
-	return $to === $from ? $html : str_replace($from, $to, $html);
+	if ($to !== $from) $html = str_replace($from, $to, $html);
+	/* 16 พ.ย. 2026 รูปอยู่นอกธีม (wp-content/uploads/teamdee/img) → ชี้ uploads ที่ติดตั้งจริง (WordPress ในโฟลเดอร์ย่อยก็ถูก) */
+	$imgFrom = '/wp-content/uploads/teamdee/';
+	$imgTo = rtrim((string) wp_parse_url((string) (wp_upload_dir()['baseurl'] ?? ''), PHP_URL_PATH), '/') . '/teamdee/';
+	return ($imgTo === $imgFrom || $imgTo === '/teamdee/') ? $html : str_replace($imgFrom, $imgTo, $html);
 }
+
+/* 16 พ.ย. 2026 รูปอยู่นอกธีม: นับรูปในรายการ (build/img-manifest.json) ที่ไม่มีบนเซิร์ฟเวอร์ · ใช้เตือนในหลังบ้านเมื่อลืมวางชุดรูปเพิ่ม */
+function td_missing_images(string $manifest, string $dir): array {
+	$m = is_readable($manifest) ? json_decode((string) file_get_contents($manifest), true) : null;
+	$files = is_array($m['files'] ?? null) ? $m['files'] : [];
+	$miss = [];
+	foreach ($files as $f) if (is_string($f) && !is_file($dir . '/' . $f)) $miss[] = $f;
+	return ['total' => count($files), 'missing' => count($miss), 'sample' => array_slice($miss, 0, 5)];
+}
+
+add_action('admin_notices', function () {
+	if (!current_user_can('manage_options')) return;
+	/* แคชผลนับไว้ (ตรวจไฟล์หลายพันไฟล์ทุกหน้าหลังบ้านไม่คุ้ม) · ติดตั้งธีมใหม่ = รายการรูปเปลี่ยน (filemtime) → ตรวจใหม่ทันที */
+	$man = TD_BUILD . '/img-manifest.json';
+	$v = is_file($man) ? (int) filemtime($man) : 0;
+	$r = get_transient('td_img_check');
+	if (!is_array($r) || ($r['v'] ?? -1) !== $v) {
+		$r = td_missing_images($man, rtrim((string) (wp_upload_dir()['basedir'] ?? ''), '/') . '/teamdee/img') + ['v' => $v];
+		set_transient('td_img_check', $r, $r['missing'] ? 5 * MINUTE_IN_SECONDS : HOUR_IN_SECONDS);
+	}
+	if (!$r['missing']) return;
+	echo '<div class="notice notice-error"><p><strong>ธีม TEAMDEE: รูปบนเซิร์ฟเวอร์ไม่ครบ ' . (int) $r['missing'] . ' จาก ' . (int) $r['total'] . ' ไฟล์</strong> · วางชุดรูปจาก Release (teamdee-images-*.zip) ลงโฟลเดอร์ wp-content/uploads/ แล้วรอ 5 นาทีหรือรีเฟรชหน้านี้ · ตัวอย่างที่หาย: <code>' . esc_html(implode(', ', $r['sample'])) . '</code></p></div>';
+});
 
 function td_read_part(string $slug, string $part): string {
 	$f = TD_BUILD . "/pages/$slug.$part.html";
