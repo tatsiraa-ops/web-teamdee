@@ -141,8 +141,10 @@ export const thaiBreaks = (html) => {
     const lead = tok.match(/^\s*/)[0]
     const trail = tok.match(/\s*$/)[0]
     const text = tok.slice(lead.length, tok.length - trail.length)
-    const m = ODD_ENTITY.test(text) ? 'glue' : mode(stack)
-    const para = m === 'glue' && PARA.has(stack[stack.length - 1]?.tag)
+    const odd = ODD_ENTITY.test(text)
+    const m = odd ? 'glue' : mode(stack)
+    /* paraText ถอดแล้ว esc() ใหม่ → entity แปลกต้องข้าม ไม่งั้น &copy; กลายเป็น &amp;copy; (footer 16 พ.ย. 2026) */
+    const para = !odd && m === 'glue' && PARA.has(stack[stack.length - 1]?.tag)
     const body = m === 'head' ? headText(text, 70) : m === 'short' ? headText(text, 40) : m === 'done' ? doneText(text) : m === 'link' ? linkText(text) : para ? paraText(text) : glue(text)
     /* ข้อความที่แทรกแท็กแล้วกลายเป็นหลายชิ้น ห่อ t-g ทั้งก้อน: ในกล่อง flex (ลิงก์ pp-more · ปุ่มคำถาม) ชิ้นเดียวเท่าข้อความเดิม */
     const one = body === text || body.startsWith('<t-g>') || (body.startsWith('<t-') && body.split('<t-').length === 2 && body.endsWith('>'))

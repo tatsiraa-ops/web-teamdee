@@ -93,3 +93,11 @@ test('หัวข้อไม่มีเว้นวรรค: แบ่งท
   assert.equal(thaiBreaks('<h3>ยังไม่แน่ใจว่าเสื้อแบบไหน</h3>').includes('<t-nw>ยังไม่แน่ใจว่า</t-nw><t-nw>เสื้อแบบไหน</t-nw>'), true, 'หัวข้อธรรมดา (ไม่ห่อ ph) ก็แบ่งเหมือนกัน')
   assert.equal(thaiBreaks('<h2><span class="inline-block">เหมาะกับงานของคุณ</span></h2>'), '<h2><span class="inline-block"><t-g>เหมาะกับงาน<t-nw>ของคุณ</t-nw></t-g></span></h2>', 'ไม่มีคำเชื่อมที่กำหนด = เหมือนเดิม')
 })
+
+/* 16 พ.ย. 2026 footer ทุกหน้าขึ้น "&copy; TEAMDEE" เป็นตัวอักษร: ข้อความใน <p> ที่มี entity แปลก ถูกส่งเข้า paraText → esc() ซ้ำเป็น &amp;copy; */
+test('ย่อหน้าที่มี entity แปลก (&copy; · &nbsp;) ไม่ถูก escape ซ้ำ', () => {
+  const out = thaiBreaks('<p>&copy; TEAMDEE · บริษัท ดีดี ฟินิกซ์ จำกัด</p>')
+  assert.doesNotMatch(out, /&amp;/)
+  assert.equal(strip(out), '<p>&copy; TEAMDEE · บริษัท ดีดี ฟินิกซ์ จำกัด</p>')
+  assert.doesNotMatch(thaiBreaks('<li>ส่งฟรี&nbsp;ทั่วไทย ภายใน 7 วัน</li>'), /&amp;nbsp;/)
+})
