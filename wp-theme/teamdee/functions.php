@@ -47,7 +47,14 @@ function td_request_route(): string {
 	return $path === '' ? '/' : "/$path/";
 }
 
+/** คำขอที่ระบุเลขของ WordPress (?p= ?page_id= ?attachment_id=) · 17 พ.ย. 2026 ตรวจ staging: /?p=999999 เคยตอบ 200 เป็นหน้าแรก (tests/wp-query-by-id.test.js) */
+function td_asks_wp_object(array $get): bool {
+	foreach (['p', 'page_id', 'attachment_id'] as $k) if (isset($get[$k]) && is_string($get[$k]) && $get[$k] !== '') return true;
+	return false;
+}
 function td_page(?string $route = null): ?array {
+	/* ขอของ WordPress ด้วยเลข = ไม่ใช่หน้าของต้นแบบ → WordPress จัดการเอง (มี = redirect ไป URL จริง · ไม่มี = 404) */
+	if ($route === null && td_asks_wp_object($_GET)) return null;
 	$pages = td_manifest()['pages'] ?? [];
 	$route = $route ?? td_request_route();
 	return isset($pages[$route]) ? ['route' => $route] + $pages[$route] : null;
@@ -375,7 +382,8 @@ function td_rm_jsonld(array $data, bool $themePage, string $base): array {
 			if ($themePage) continue;
 			$node = array_intersect_key($node, ['logo' => 1, 'image' => 1]) + ['@type' => 'Organization', '@id' => $biz, 'name' => 'TEAMDEE', 'alternateName' => 'ทีมดี', 'url' => $base . '/'];
 		}
-		if ($themePage && (in_array('BreadcrumbList', $types, true) || str_starts_with((string) $k, 'schema-'))) continue;
+		/* หน้าธีม: Rank Math ใส่ Article (richSnippet · en-US) + ผู้เขียน (Person) ให้ Page เดิม · หน้าธีมไม่ใช่บทความ (ตรวจ staging 17 พ.ย. หน้า /blog/) */
+		if ($themePage && (in_array('BreadcrumbList', $types, true) || in_array('Person', $types, true) || $k === 'richSnippet' || str_starts_with((string) $k, 'schema-'))) continue;
 		if (in_array('WebSite', $types, true)) {
 			$node['name'] = 'TEAMDEE';
 			$node['alternateName'] = 'ทีมดี';
@@ -387,7 +395,7 @@ function td_rm_jsonld(array $data, bool $themePage, string $base): array {
 	/* ตัดจนว่าง: ห้ามคืน $data เดิม (ธุรกิจเก่ากลับมา) · ห้ามคืน array ว่าง → WebSite ขั้นต่ำที่ชี้ /#business (code review 17 พ.ย. 2026) */
 	return $out ?: ['WebSite' => ['@type' => 'WebSite', '@id' => $base . '/#website', 'url' => $base . '/', 'name' => 'TEAMDEE', 'alternateName' => 'ทีมดี', 'inLanguage' => 'th', 'publisher' => ['@id' => $biz]]];
 }
-add_filter('rank_math/json_ld', fn ($data) => is_array($data) ? td_rm_jsonld($data, (bool) td_current(), untrailingslashit(home_url())) : $data, 99);
+add_filter('rank_math/json_ld', fn ($data) => is_array($data) ? td_rm_jsonld($data, (bool) td_current(), untrailingslashit(home_url())) : $data, PHP_INT_MAX); /* ท้ายสุด: Rank Math ใส่ Article หลัง 99 (ตรวจ staging 17 พ.ย.) */
 /* 17 พ.ย. 2026 รอบตรวจ SEO: ไม่มีปลั๊กอิน SEO → WordPress พิมพ์ canonical ให้เฉพาะ Page/โพสต์ หน้าแรกแบบรายการโพสต์ไม่มี · ธีมพิมพ์เอง */
 function td_canonical_fallback(): void {
 	$p = td_current();

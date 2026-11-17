@@ -147,18 +147,19 @@ test('A10: td_rm_jsonld จัด graph ของ Rank Math ให้เหล�
     'schema-123': { '@type': 'Service', provider: { '@id': `${B}/#organization` } },
     org: { '@type': 'Organization', '@id': `${B}/#organization`, name: 'TEAMDEE', address: { streetAddress: '109/20' } },
     richSnippet: { '@type': 'BlogPosting', publisher: { '@id': `${B}/#person` }, author: { '@id': `${B}/author/admin/` } },
+    author: { '@type': 'Person', '@id': `${B}/author/admin/`, name: 'admin' },
   }
   try {
     const run = async (theme) => JSON.parse((await p.run({ code: `<?php ${fnSrc('td_rm_ref')} ${fnSrc('td_rm_jsonld')} echo json_encode(td_rm_jsonld(json_decode(${JSON.stringify(JSON.stringify(data))}, true), ${theme ? 'true' : 'false'}, '${B}'), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);` })).text)
     const t = await run(true)
-    assert.deepEqual(Object.keys(t).sort(), ['WebPage', 'WebSite', 'richSnippet'], 'หน้าธีม: ไม่มีธุรกิจ/breadcrumb/schema รายหน้าของ Rank Math')
+    assert.deepEqual(Object.keys(t).sort(), ['WebPage', 'WebSite'], 'หน้าธีม: ไม่มีธุรกิจ/breadcrumb/schema รายหน้า/บทความ (richSnippet · Person ผู้เขียน) ของ Rank Math')
     assert.equal(t.WebSite.name, 'TEAMDEE'); assert.equal(t.WebSite.alternateName, 'ทีมดี'); assert.equal(t.WebSite.inLanguage, 'th')
     assert.equal(t.WebSite.potentialAction, undefined)
     assert.deepEqual(t.WebSite.publisher, { '@id': `${B}/#business` })
     assert.equal(t.WebPage.inLanguage, 'th'); assert.deepEqual(t.WebPage.about, { '@id': `${B}/#business` })
-    assert.deepEqual(t.richSnippet.publisher, { '@id': `${B}/#business` })
     const post = await run(false)
     assert.ok(post.BreadcrumbList && post['schema-123'], 'บทความ: breadcrumb + schema รายหน้าของ Rank Math คงไว้')
+    assert.ok(post.author, 'บทความ: ผู้เขียนคงไว้'); assert.deepEqual(post.richSnippet.publisher, { '@id': `${B}/#business` })
     assert.equal(post.publisher.name, 'TEAMDEE'); assert.equal(post.publisher['@id'], `${B}/#business`); assert.equal(post.publisher['@type'], 'Organization')
     assert.equal(post.org, undefined, 'องค์กรซ้ำ (#organization) ตัดทิ้ง')
     assert.deepEqual(post['schema-123'].provider, { '@id': `${B}/#business` })
@@ -173,5 +174,6 @@ test('A10: td_rm_jsonld จัด graph ของ Rank Math ให้เหล�
   } finally { p.exit() }
 })
 test('A10: ใส่ filter rank_math/json_ld · หน้าธีม = td_current()', () => {
-  assert.match(php, /add_filter\('rank_math\/json_ld', fn \(\$data\) => is_array\(\$data\) \? td_rm_jsonld\(\$data, \(bool\) td_current\(\), untrailingslashit\(home_url\(\)\)\) : \$data, 99\)/)
+  /* 17 พ.ย. ตรวจ staging: Rank Math ใส่ Article (richSnippet en-US) หลัง priority 99 → ต้องรันท้ายสุด */
+  assert.match(php, /add_filter\('rank_math\/json_ld', fn \(\$data\) => is_array\(\$data\) \? td_rm_jsonld\(\$data, \(bool\) td_current\(\), untrailingslashit\(home_url\(\)\)\) : \$data, PHP_INT_MAX\)/)
 })
