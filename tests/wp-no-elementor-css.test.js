@@ -26,7 +26,7 @@ test('แยก CSS ของ Elementor ออกจาก CSS อื่น (ต
       ['dashicons', '/wp-includes/css/dashicons.min.css', false],
       ['cmplz-general', '/wp-content/plugins/complianz-gdpr/assets/css/cookieblocker.min.css', false],
     ]
-    const r = await php.run({ code: `<?php ${fnSrc('td_is_elementor_style')} echo json_encode(array_map(fn ($c) => td_is_elementor_style($c[0], $c[1]), json_decode('${JSON.stringify(cases)}', true)));` })
+    const r = await php.run({ code: `<?php ${fnSrc('td_is_elementor_asset')} echo json_encode(array_map(fn ($c) => td_is_elementor_asset($c[0], $c[1]), json_decode('${JSON.stringify(cases)}', true)));` })
     assert.equal(r.errors, '')
     assert.deepEqual(JSON.parse(r.text), cases.map((c) => c[2]))
   } finally { php.exit() }
@@ -38,5 +38,5 @@ test('หน้าที่ธีมแสดงเอง: เอา CSS ขอ�
   assert.match(f, /wp_dequeue_style\(/)
   assert.match(source, /add_action\('wp_print_styles', 'td_dequeue_elementor_styles', 1\)/)
   assert.match(source, /add_action\('wp_print_footer_scripts', 'td_dequeue_elementor_styles', 1\)/)
-  assert.match(source, /add_filter\('style_loader_tag', fn \(\$tag, \$handle, \$href\) => \(td_current\(\) && td_is_elementor_style\(\$handle, \(string\) \$href\)\) \? '' : \$tag, 10, 3\)/)
+  assert.match(source, /add_filter\('style_loader_tag', fn \(\$tag, \$handle, \$href\) => \(td_current\(\) && td_is_elementor_asset\(\$handle, \(string\) \$href\)\) \? '' : \$tag, 10, 3\)/)
 })

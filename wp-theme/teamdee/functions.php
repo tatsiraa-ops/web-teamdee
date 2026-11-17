@@ -603,7 +603,7 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 /* 16 พ.ย. 2026 (staging หน้าแรกพื้นดำ ตัวหนังสือดำหาย): หน้า Elementor ของเว็บเดิม (#50) มี CSS เอง html, body { background-color:#050505; padding:0 !important }
    Elementor ยังโหลด CSS ของหน้าเดิมและ CSS กลางของมันลงหน้าที่ธีมแสดงเอง (หลัง CSS ธีม) → ทับพื้นขาวและที่เว้นแถบล่างมือถือ
    หน้าจากต้นแบบไม่ใช้ Elementor เลย → เอา CSS ของ Elementor ออกทั้งที่ใส่ใน head และที่ใส่ท้ายหน้า · บทความและหน้าอื่นไม่แตะ · tests/wp-no-elementor-css.test.js */
-function td_is_elementor_style(string $handle, string $src): bool {
+function td_is_elementor_asset(string $handle, string $src): bool {
 	if (str_starts_with($handle, 'elementor-') || str_starts_with($handle, 'elementor_')) return true;
 	return (bool) preg_match('~/(?:plugins/elementor(?:-pro)?|uploads/elementor)/~', $src);
 }
@@ -612,12 +612,36 @@ function td_dequeue_elementor_styles(): void {
 	$styles = wp_styles();
 	foreach ((array) $styles->queue as $h) {
 		$src = (string) ($styles->registered[$h]->src ?? '');
-		if (td_is_elementor_style((string) $h, $src)) wp_dequeue_style($h);
+		if (td_is_elementor_asset((string) $h, $src)) wp_dequeue_style($h);
 	}
 }
 add_action('wp_print_styles', 'td_dequeue_elementor_styles', 1);
 add_action('wp_print_footer_scripts', 'td_dequeue_elementor_styles', 1);
-add_filter('style_loader_tag', fn ($tag, $handle, $href) => (td_current() && td_is_elementor_style($handle, (string) $href)) ? '' : $tag, 10, 3);
+add_filter('style_loader_tag', fn ($tag, $handle, $href) => (td_current() && td_is_elementor_asset($handle, (string) $href)) ? '' : $tag, 10, 3);
+
+/* 17 พ.ย. 2026 staging console "elementorFrontendConfig is not defined" (Elementor 4.2.4) · อาร์ตเลือกข้อ ก
+   สคริปต์ Elementor ยังโหลดลงหน้าที่ธีมแสดงเอง (Page เดิมเป็นหน้า Elementor) แต่ค่าตั้งต้นไม่มา → error ทุกหน้า + โหลดสคริปต์ที่ไม่ได้ใช้
+   → ตัดสคริปต์ Elementor และสคริปต์ที่พึ่ง Elementor (ทางอ้อมก็นับ · ปลั๊กอินเสริม widget) · jQuery และปลั๊กอินอื่นคงไว้ · บทความและหน้าอื่นไม่แตะ
+   tests/wp-no-elementor-js.test.js */
+function td_script_needs_elementor(string $handle, array $registered, array $seen = []): bool {
+	$r = $registered[$handle] ?? null;
+	if (!$r || isset($seen[$handle])) return false;
+	if (td_is_elementor_asset($handle, (string) ($r->src ?? ''))) return true;
+	$seen[$handle] = true;
+	foreach ((array) ($r->deps ?? []) as $d) if (td_script_needs_elementor((string) $d, $registered, $seen)) return true;
+	return false;
+}
+function td_dequeue_elementor_scripts(): void {
+	if (!td_current()) return;
+	$scripts = wp_scripts();
+	foreach ((array) $scripts->queue as $h) {
+		if (td_script_needs_elementor((string) $h, $scripts->registered)) wp_dequeue_script($h);
+	}
+}
+add_action('wp_print_scripts', 'td_dequeue_elementor_scripts', 1);
+add_action('wp_print_footer_scripts', 'td_dequeue_elementor_scripts', 1);
+/* กันหลุด: ตัวที่ยังถูกพิมพ์ (เป็น dependency ของตัวอื่น) ตัดทั้งแท็ก รวมสคริปต์ inline ก่อน/หลัง (ค่าตั้งต้น elementorFrontendConfig) */
+add_filter('script_loader_tag', fn ($tag, $handle) => (td_current() && td_script_needs_elementor($handle, wp_scripts()->registered)) ? '' : $tag, 10, 2);
 
 /* ---------- Google Tag Manager · ใส่ ID ที่ ลักษณะ > ปรับแต่ง > TEAMDEE ---------- */
 
