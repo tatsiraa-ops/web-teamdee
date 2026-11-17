@@ -17,7 +17,7 @@ test('คณะ: ส่วนเรียงตามหน้าโรงเร
   assert.deepEqual(order(fac), order(edu))
   for (const id of ['plan', 'photos', 'work']) assert.doesNotMatch(fac, new RegExp(`<section[^>]*id="${id}"`))
   assert.match(fac, /<section class="hm-customer-proof up2-rv" id="reviews"/)
-  for (const [, id] of fac.matchAll(/href="#([^"]+)"/g)) assert.ok(fac.includes(`id="${id}"`), `#${id}`)
+  for (const [, id] of fac.matchAll(/(?<!<use )href="#([^"]+)"/g)) assert.ok(fac.includes(`id="${id}"`), `#${id}`)
   assert.match(fac, /id="faculty-review-wall"/)
 })
 
@@ -35,7 +35,7 @@ test('คณะ: แท็บ 5 ประเภท จากเสื้อจ�
   const at = fac.indexOf('<section class="up2-ctx"')
   const ctx = fac.slice(at, fac.indexOf('</section>', at))
   const TABS = ['major', 'polo', 'sports', 'freshy', 'dept']
-  assert.deepEqual([...ctx.matchAll(/role="tab"[^>]*id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
+  assert.deepEqual([...ctx.matchAll(/class="up2-ctx__pick" id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
   assert.match(ctx, /class="up2-ctx__shelf"[^>]*style="--n:5"/)
   for (const t of TABS) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/faculty-${t}-${f}.webp`), `faculty-${t}-${f}`)
   const alts = [...ctx.matchAll(/class="up2-ctx__img"[^>]*alt="([^"]+)"/g)].map((m) => m[1])

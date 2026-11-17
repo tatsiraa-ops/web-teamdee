@@ -26,7 +26,7 @@ test('Rank Math ได้ title/description/canonical/robots จริงขอ�
   const block = source.slice(a, source.indexOf('/* ---------- ', a + START.length))
   const stubs = `
     $GLOBALS['F'] = [];
-    function add_filter($h, $cb, $p = 10, $n = 1) { $GLOBALS['F'][$h][] = $cb; }
+    function add_filter($h, $cb, $p = 10, $n = 1) { $GLOBALS['F'][$h][] = $cb; } function add_action($h, $cb, $p = 10, $n = 1) {}
     function apply($h, ...$args) { foreach ($GLOBALS['F'][$h] ?? [] as $cb) $args[0] = $cb(...$args); return $args[0]; }
     function is_admin() { return false; }
     function status_header($c) { $GLOBALS['status'] = $c; }

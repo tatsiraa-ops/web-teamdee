@@ -32,7 +32,7 @@ test('fabric comparison has two real default photos and the existing fabric choi
 test('size explanation stays illustrative and all measurement instructions exist without JS',()=>{
   const html=material({item:{id:'size'},sizing})
   for(const id of ['chest','length','shoulder']) assert.ok(html.includes(`data-measure-answer="${id}"`))
-  assert.match(html,/ไม่ใช่มาตราส่วนจริง/)
+  assert.doesNotMatch(html,/ไม่ใช่มาตราส่วนจริง/) // 17 พ.ย. อาร์ตให้เอาข้อความใต้รูปวัดไซซ์ออก
   assert.match(html,/ขอตารางไซซ์ที่ตรงกับทรง/)
   assert.doesNotMatch(html,/ดูตารางขนาดอ้างอิง/)
 })

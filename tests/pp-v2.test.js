@@ -106,7 +106,7 @@ test('/sublimation/ ทำไมต้องสั่งกับทีมดี
   /* 16 พ.ย. 2026 พิมพ์ลายมีตรวจตัวอย่างเหมือนงานปัก: ขั้นยืนยันแบบบอกว่าตรวจตัวอย่างก่อนผลิต ไม่ใช่มัดจำแล้วผลิตเลย */
   assert.match(text(steps[2]), /มัดจำ 50%[\s\S]*ตรวจตัวอย่าง[\s\S]*ผลิต/)
   for (const f of ['3D ใน 24 ชม.', '15–20 วัน', '7 วัน']) assert.ok(text(s).includes(f), f)
-  assert.match(readFileSync('src/styles/product-page.css', 'utf8'), /\.pp2-pf__vgrid \{ position: relative;[^}]*overflow-x: auto/)
+  assert.match((readFileSync('src/styles/pp-base.css', 'utf8') + readFileSync('src/styles/product-page.css', 'utf8')), /\.pp2-pf__vgrid \{ position: relative;[^}]*overflow-x: auto/)
 })
 
 test('/sublimation/ ทำไมต้องสั่งกับทีมดี (รอบ "เยอะๆ ดีกว่านี้"): แบนเนอร์โปสเตอร์ภาพเครื่อง · เบื้องหลังงานพิมพ์ลาย 10 การ์ดภาพจริงแถบไล่สี', () => {
@@ -203,26 +203,19 @@ test('/sublimation/ เนื้อผ้า (รอบ 189): 2 แถว ผ้
   const P = JSON.parse(readFileSync(new URL('../src/data/prices.json', import.meta.url), 'utf8'))
   assert.deepEqual(P.products.print.fabrics.map((f) => [f.id, f.gsm]), [['micro', 145], ['drytech', 145], ['corn', 145], ['star', 145], ['rain', 145], ['honeycomb', 145], ['square', 145], ['rice', 145], ['stripe', 150], ['golf', 150], ['checker', 150], ['thick', 160], ['tricot', 160], ['endurance', 210]], 'ตรงตารางทางการ "รวมเนื้อผ้าทั้งหมด"')
   assert.ok(m.indexOf('pp2-cz') < m.indexOf('class="pp2-fab'), 'ต่อจากออกแบบให้เป็นทีมคุณ')
-  assert.match(text(s.slice(0, s.indexOf('class="fx"'))), /14 ชนิด/)
+  assert.match(text(s.slice(0, s.indexOf('class="fx'))), /14 ชนิด/)
   assert.doesNotMatch(text(s), /บาท\/ตัว|ไม่บวกเพิ่ม|\+\d+ บาท/, 'ไม่แสดงราคาบวกเพิ่ม (อาร์ต "ไม่ต้องแสดง +ตัง")')
   assert.doesNotMatch(s, /fc__flip|fc__face|fc__hole|fc-ring|data-ring|พลิก/, 'ไม่มีพลิก/ห่วง/วงแหวนเดิม')
   assert.match(s, /<svg[^>]*class="fc-sprite"[^>]*aria-hidden="true"[\s\S]*?<symbol id="fi-air"/)
   /* 2 แถว แยกเก่า/ใหม่ */
-  const rows = [...s.matchAll(/<div class="fx" data-fx>([\s\S]*?)<\/div><!-- \/fx -->/g)].map((r) => r[1])
+  const rows = [...s.matchAll(/<div class="fx(?: fx--3)?" data-fx>([\s\S]*?)<\/div><!-- \/fx -->/g)].map((r) => r[1])
   assert.equal(rows.length, 2, 'แยกเป็น 2 แถว')
   assert.match(text(rows[0].slice(0, rows[0].indexOf('fx__track'))), /ผ้ามาตรฐาน 8 ชนิด[^]*145 แกรม/)
   assert.match(text(rows[1].slice(0, rows[1].indexOf('fx__track'))), /ผ้าใหม่ 6 ชนิด[^]*150–210 แกรม/)
-  /* รอบ 191: บอกตำแหน่ง · จุดต่อแถวละ 1 จุดต่อผ้า (กดไปผ้านั้น) + ตัวนับอ่านออกเสียง · สำเนาวนไม่อยู่ใน HTML (JS สร้าง) */
-  rows.forEach((r, ri) => {
-    const dots = [...r.matchAll(/<button type="button" class="fx__dot" aria-label="ไปที่([^"]+)"/g)].map((d) => d[1])
-    assert.equal(dots.length, ri === 0 ? 8 : 6, 'จุดบอกตำแหน่งครบทุกผ้า')
-    assert.match(r, /<p class="fx__count" aria-live="polite"><\/p>/)
-    assert.doesNotMatch(r, /is-clone|fx__sep/, 'สำเนา/แผ่นคั่น JS สร้าง ไม่อยู่ใน HTML')
-  })
+  /* 17 พ.ย. 2026 อาร์ต "เปลี่ยนเป็นโชว์ทั้งหมด" (เดิมรอบ 191 รางเลื่อนวน เห็นทีละ ~3 ใบ): ทุกใบอยู่ในตาราง ไม่มีปุ่มเลื่อน/จุด/ตัวนับ */
   for (const r of rows) {
-    assert.match(r, /<button type="button" class="fx__btn fx__btn--prev" aria-label="ผ้าก่อนหน้า"/)
-    assert.match(r, /<button type="button" class="fx__btn fx__btn--next" aria-label="ผ้าถัดไป"/)
     assert.match(r, /<ul class="fx__track"/)
+    assert.doesNotMatch(r, /fx__btn|fx__dot|fx__count|fx__pager|fx__nav/, 'ไม่มีปุ่มเลื่อน จุด ตัวนับ')
   }
   const cardsOf = (r) => [...r.matchAll(/<li class="fx__c"[^>]*>([\s\S]*?)<\/li><!-- \/c -->/g)].map((c) => c[1])
   const oldC = cardsOf(rows[0]); const newC = cardsOf(rows[1])
@@ -267,24 +260,16 @@ test('/sublimation/ เนื้อผ้า (รอบ 189): 2 แถว ผ้
   assert.match(s, /data-where="pp-fabric"/)
   assert.equal((m.match(/ id="fabric"/g) || []).length, 1)
   assert.doesNotMatch(text(s), /ยอดนิยม|เย็น|LPJ|LPP|LPS|Light Plus|\[|โรงงาน/)
-  const fcss = readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8')
+  const fcss = (readFileSync(new URL('../src/styles/pp-base.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8'))
   const fb = fcss.slice(fcss.indexOf('แถวใบสเปก'), fcss.indexOf('.pp2-fab__guide'))
   assert.ok(fb.length > 500, 'มีบล็อก CSS แถวใบสเปก')
-  assert.match(fb, /\.fx__track \{[^}]*scroll-snap-type: x mandatory;/, 'รางเลื่อนเข้าใบ')
-  /* รอบ 190 อาร์ต "กระตุกเยอะในการขยาย · uiux โหล sloppy" → เลือก B เก็บแถวเลื่อน แก้ให้ลื่น
-     ต้นเหตุ: ยืดความสูง (grid-template-rows) = layout ทุกเฟรม · --p/scale/เงาเปลี่ยนตามการเลื่อน = repaint ทุกเฟรม */
-  assert.doesNotMatch(fb, /grid-template-rows|scale: calc|var\(--p\)|calc\(\.15 \+/, 'ไม่มีการยืด/ย่อ/เงาตามการเลื่อน')
-  assert.match(fb, /\.fx__card::after \{[^}]*opacity: 0;[^}]*transition: opacity/, 'เน้นใบกลางด้วยเงาคงที่ที่เฟดเฉพาะ opacity')
-  assert.match(fb, /\.fx__c \{[^}]*flex: 0 0 var\(--fx-w\);/, 'ทุกใบกว้างเท่ากัน')
-  assert.match(fb, /\.fx__track \{[^}]*gap: /, 'ช่องไฟจริงระหว่างใบ')
-  assert.match(fb, /\.fx__sep \{/, 'แผ่นคั่นจุดวนกลับ')
-  assert.match(fb, /\.fx:not\(\.is-js\) \.fx__pager \{[^}]*display: none;/, 'ไม่มี JS ไม่โชว์จุด/ตัวนับที่กดไม่ได้')
-  assert.match(fb, /\.fx__track \{[^}]*position: relative;/, 'รางเป็นจุดอ้างอิง offsetLeft')
+  assert.match(fb, /\.fx__track \{[^}]*display: grid;/, 'ตารางโชว์ทุกใบ')
+  assert.doesNotMatch(fb, /scroll-snap|\.fx__sep|\.fx__pager|is-center|overflow-x: auto/, 'ไม่มีรางเลื่อน')
   assert.match(fb, /@media \(prefers-reduced-motion: reduce\)/)
   assert.doesNotMatch(fb, /preserve-3d|mix-blend-mode|conic-gradient/, 'ทางการ: ไม่มี 3D/เงารุ้ง/ขอบหยัก')
   assert.doesNotMatch(fcss, /\.fc-ring|\.fc__hole/, 'ลบ CSS วงแหวน/ห่วงเดิม')
   const js = readFileSync(new URL('../src/js/product-page.js', import.meta.url), 'utf8')
-  assert.match(js, /^import \{ initFabricCards \} from '\.\/fabric-cards\.js'/m)
+  assert.doesNotMatch(js, /fabric-cards/, 'ไม่มี JS รางผ้าแล้ว')
 })
 
 test('/sublimation/ แผงเลือกเสื้อ รอบ 196 (อาร์ต "รวมให้ครบในที่เดียว") + 196e (อาร์ต "ไม่ต้องแสดงราคา และทำมาให้ดีๆ"): ทรง 3 ทรง (ซ้าย กดเลือก) + คอ 13 ทรงตามตระกูล 5×3 (ขวา) · รูปคอจริง · ไม่มีราคา', () => {
@@ -353,7 +338,7 @@ test('/sublimation/ แผงเลือกเสื้อ รอบ 196 (อ�
   assert.doesNotMatch(text(all), /16 แบบ|ไม่ซ้ำใคร|\[|โรงงาน|ลูกค้าจริง/)
   assert.doesNotMatch(all, /pp2-ty__foot|pp2-ty__note|href="#size"/, '196f อาร์ต "ภาพแรกลบ": ไม่มีบรรทัดหมายเหตุไซซ์/ภาพใต้แผง')
   /* CSS + JS */
-  const css = readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8')
+  const css = (readFileSync(new URL('../src/styles/pp-base.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8'))
   assert.match(css, /@media \(min-width: 1200px\) \{[^@]*\.spk \{[^}]*grid-template-columns:/, 'คอม: ทรงซ้าย คอขวา')
   assert.match(css, /\.cfx \{[^}]*grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/); assert.match(css, /\.cfm \{[^}]*grid-template-columns: subgrid/); assert.match(css, /\.cfm__cs \{[^}]*display: contents/)
   assert.match(css, /\.ctz__x \{[^}]*margin-top: auto/, 'ป้ายจุดเด่นชิดล่างการ์ด')
@@ -428,7 +413,7 @@ test('/sublimation/ เสื้อจริงใส่หุ่น (บอร�
     assert.equal(urls.length, 3, 'รูป 3 วง'); for (const u of urls) { assert.ok(u.startsWith(dir), u); assert.ok(pub(u), u) }
     assert.match(ctas[i][2], /<svg[^>]*aria-hidden="true"/, 'ลูกศร SVG')
   }
-  const rcss = readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8')
+  const rcss = (readFileSync(new URL('../src/styles/pp-base.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8'))
   assert.match(rcss, /\.rlc \{[^}]*min-height: 64px/, 'สูงเท่าปุ่มหลักของเว็บ'); assert.match(rcss, /\.rlc:focus-visible \{[^}]*outline:/); assert.match(rcss, /\.rlc__faces span \+ span \{[^}]*margin-left: -1[0-9]px/)
 })
 
@@ -486,7 +471,7 @@ test('/sublimation/ วิธีชำระเงิน + FAQ (บอร์ด 
    หน้าแรก (home.css): ทุกส่วน 40/40 บนจอใหญ่ · 36/36 มือถือ · H2 clamp(30px, 3.06vw, 44px)/800/1.35 · มือถือ 24/800/1.4
    /sublimation/ เดิม: ส่วนละ 56–96 (ช่องระหว่างส่วน 112–192) · H2 ปน 44–68 → ใช้จังหวะเดียวกับหน้าแรก (แบบเดียวกับ use-page.css หน้ากลุ่มลูกค้า) */
 test('/sublimation/ ระยะทั้งหน้าเท่าหน้าแรก: ทุกส่วน 40/40 (มือถือ 36/36) · H2 ขนาดเดียวกับหน้าแรก', () => {
-  const css = readFileSync('src/styles/product-page.css', 'utf8')
+  const css = (readFileSync('src/styles/pp-base.css', 'utf8') + readFileSync('src/styles/product-page.css', 'utf8'))
   const block = (q) => { const i = css.indexOf(`@media ${q} {\n  /* pp2-rhythm`); assert.ok(i > -1, `มีชุดระยะ ${q}`); return css.slice(i, css.indexOf('\n}\n', i)) }
   const ids = ['.pp2-hl', '.pp2-dz', '.pp2-pf', '#reviews', '.pp2-cz', '.pp2-fab', '.pp2-ty', '.pp2-sz', '.pp2-rl', '.pp2-stb', '.rvw-sec', '#payment', '#faq'] /* .rvw-sec คลังรีวิว 11 พ.ย. */
   for (const [q, y, h2] of [['(min-width: 768px)', 40, 'font-size: clamp(30px, 3.06vw, 44px); font-weight: 800; line-height: 1.35;'], ['(max-width: 767px)', 36, 'font-size: 24px; font-weight: 800; line-height: 1.4;']]) {
@@ -500,7 +485,7 @@ test('/sublimation/ ระยะทั้งหน้าเท่าหน้า
 })
 
 test('/sublimation/ ส่วนผ้า + คอเสื้อ ใช้ความกว้างพิเศษชุดเดียวกับหน้าบริษัท (รอบ 144 · 100% − 64 สูงสุด 1400)', () => {
-  const css = readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8')
+  const css = (readFileSync(new URL('../src/styles/pp-base.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8'))
   const use = readFileSync(new URL('../src/styles/use-page.css', import.meta.url), 'utf8')
   const ref = use.match(/\.up2-why > \.wrap \{ width: (calc\(100% - \d+px\)); max-width: (\d+px);/)
   assert.ok(ref, 'หน้าบริษัทยังมีความกว้างพิเศษ')
@@ -511,7 +496,7 @@ test('/sublimation/ ส่วนผ้า + คอเสื้อ ใช้ค�
 })
 
 test('/sublimation/ หัวข้ออยู่กลางทุกส่วนที่ทำได้ (6 พ.ย. อาร์ต "เน้นเอาแบบ headline ตรงกลาง ถ้าอันไหนกลางไม่ได้ไม่เป็นไร")', () => {
-  const css = readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8')
+  const css = (readFileSync(new URL('../src/styles/pp-base.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8'))
   const block = css.slice(css.indexOf('/* pp2-center'))
   assert.ok(css.includes('/* pp2-center'), 'มีชุดกฎจัดกลาง')
   for (const sel of ['.pp2-dz__head', '.pp2-cz .dz__head', '.pp2-fab__head', '.pp2-ty__head', '.pp2-rl__head', '.pp2-sz__head', '.pp2-faq .hm-faq__head']) assert.ok(block.includes(sel), `${sel} อยู่ในชุดจัดกลาง`)

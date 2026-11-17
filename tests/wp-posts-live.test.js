@@ -86,6 +86,23 @@ test('หน้าแรก: การ์ดบทความ = 4 เรื่�
   assert.ok(!o.xss.includes('<script>x</script>') && o.xss.includes('&lt;script&gt;x&lt;/script&gt; &amp; &quot;q&quot;'), 'ชื่อบทความถูก escape')
 })
 
+/* 17 พ.ย. 2026 audit: หน้าแรกโชว์ "Hello world!" (Uncategorized) และการ์ดกล่องเทาไม่มีรูป
+   → หน้าแรกเอาเฉพาะเรื่องที่มีรูปปกและมีหมวดจริง · ไม่ครบ 4 = เติมการ์ดเดิมจากตอน build (ไม่ซ้ำลิงก์) · /blog/ ก็ไม่เอา Uncategorized */
+test('หน้าแรก: ข้ามเรื่อง Uncategorized และเรื่องไม่มีรูปปก · ไม่ครบ 4 เติมการ์ดเดิม', { skip: !runtime || !built }, async () => {
+  const orig = [...between(homeFile(), '<ul class="hm-posts">', '</ul>').matchAll(/class="hm-post" href="([^"]+)"/g)].map((m) => m[1])
+  const o = await run({
+    mixed: { slug: 'home', posts: [post(5, { cat: 'uncategorized', catName: 'Uncategorized', title: 'Hello world!' }), post(4, { img: '', srcset: '' }), post(3), post(2)] },
+    junk: { slug: 'home', posts: [post(5, { cat: 'uncategorized' }), post(4, { img: '' })] },
+    blog: { slug: 'blog', posts: [post(2, { cat: 'uncategorized', title: 'Hello world!' })] },
+  })
+  const list = between(o.mixed, '<ul class="hm-posts">', '</ul>')
+  const hrefs = [...list.matchAll(/class="hm-post" href="([^"]+)"/g)].map((m) => m[1])
+  assert.deepEqual(hrefs, ['/new-post-3/', '/new-post-2/', ...orig.slice(0, 2)])
+  assert.ok(!list.includes('Hello world') && !list.includes('/new-post-4/'))
+  assert.equal(o.junk, homeFile(), 'ไม่มีเรื่องที่ใช้ได้ = HTML เดิมทุกตัวอักษร')
+  assert.equal(o.blog, readFileSync(page('blog'), 'utf8'), '/blog/ ไม่ใส่เรื่อง Uncategorized')
+})
+
 test('/blog/: บทความเดิมครบ = HTML เดิม · มีเรื่องใหม่ = ส่วน "ใหม่ล่าสุด" + ชิป + ผลค้นหา + จำนวน/วันที่ + ตัวเลขหมวด', { skip: !runtime || !built }, async () => {
   const o = await run({
     same: { slug: 'blog', posts: LEGACY, counts: { 'purchasing-guide': 8, 'fabric-technique': 3, 'sportswear-sublimation': 1 } },

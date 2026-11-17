@@ -30,3 +30,17 @@ test('ทุกหน้าที่ export: CSS กลางตัวแรก 
     assert.deepEqual(names, ordered, `${f}: ${names}`)
   }
 })
+
+/* 17 พ.ย. 2026 รอบตรวจความเร็ว: กฎเฉพาะหน้าแรกแยกจาก home.css (โหลดทุกหน้า) ไป home-page.css (โหลดเฉพาะหน้าแรก)
+   เดิมกฎพวกนี้อยู่ในไฟล์กลาง → ต้องมาต่อจาก CSS กลางทันที ก่อน CSS ชิ้นส่วน (review-wall ฯลฯ) ลำดับชนะกันจึงใกล้เดิมที่สุด */
+test('home-page.css อยู่ต่อจาก CSS กลาง ก่อน CSS ชิ้นส่วน', () => {
+  const out = orderStylesheets(`${L('review-wall')}${L('home-page')}${L('site-extras')}`)
+  assert.deepEqual([...out.matchAll(/assets\/([a-z-]+)-AbCdEfGh/g)].map((m) => m[1]), ['site-extras', 'home-page', 'review-wall'])
+  /* Vite ตั้งชื่อ CSS ของ entry หน้าแรกเป็น main-*.css */
+  const out2 = orderStylesheets(`${L('review-wall')}${L('main')}${L('site-extras')}`)
+  assert.deepEqual([...out2.matchAll(/assets\/([a-z-]+)-AbCdEfGh/g)].map((m) => m[1]), ['site-extras', 'main', 'review-wall'])
+})
+test('home-page.css โหลดเฉพาะหน้าแรก', () => {
+  assert.match(readFileSync(new URL('../site/index.html', import.meta.url), 'utf8'), /<link rel="stylesheet" href="\/src\/styles\/home-page\.css" data-page-css>/)
+  assert.doesNotMatch(readFileSync(new URL('../src/partials/head.hbs', import.meta.url), 'utf8'), /home-page\.css/)
+})

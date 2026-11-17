@@ -247,7 +247,7 @@ test('/corporate/ ไม่มี 4 ส่วนที่อาร์ตสั�
   assert.doesNotMatch(m, /id="plan"|วางงบและขั้นตอนสั่งเสื้อบริษัท/, 'วางงบและขั้นตอน')
   assert.doesNotMatch(m, /id="photos"|id="usePhotos"|ภาพลูกค้าบริษัทสวมเสื้อในวันใช้งานจริง/, 'ภาพลูกค้าสวมเสื้อ')
   assert.doesNotMatch(m, /id="schedule-h"|id="useDate"|มีวันที่ต้องใช้เสื้อแล้ว/, 'มีวันใช้แล้ว')
-  for (const [, id] of m.matchAll(/href="#([^"]+)"/g)) assert.ok(m.includes(`id="${id}"`), `ลิงก์ #${id} ไม่มีปลายทาง`)
+  for (const [, id] of m.matchAll(/(?<!<use )href="#([^"]+)"/g)) assert.ok(m.includes(`id="${id}"`), `ลิงก์ #${id} ไม่มีปลายทาง`)
   for (const f of []) { /* ร้านค้าเป็นโฉมใหม่แล้ว (use-v2-shop.test.js) · เสื้อรุ่นด้วย 14 พ.ย. (use-v2-class.test.js) */
     const o = main(f)
     for (const id of ['id="plan"', 'id="schedule-h"', 'id="end-h"']) assert.ok(o.includes(id), `${f} ${id}`)
@@ -347,30 +347,27 @@ test('/corporate/ บริบทงาน รอบ 198: แท็บใต้�
   assert.equal((m.match(/<section class="up2-ctx[ "]/g) || []).length, 1)
   const c = sec(m, 'up2-ctx')
   assert.doesNotMatch(c, /ต้นแบบ|up2-ctx__dot|up2-ctx__frame/)
-  /* ลำดับ: หัวข้อ+คำโปรย → คำนำ → แถบแท็บ → แผง → ‹ › ตัวนับ */
+  /* 17 พ.ย. 2026 อาร์ต "เปลี่ยนเป็นโชว์ทั้งหมด": เลิกแท็บ → ทุกลักษณะงานเรียงลงมา · แถบภาพจิ๋วเป็นลิงก์กระโดดไปแต่ละงาน (ไม่ซ่อนอะไร)
+     ลำดับ: หัวข้อ+คำโปรย → คำนำ → แถบลิงก์ → รายการงานทั้งหมด */
   const at = (s) => { const i = c.indexOf(s); assert.ok(i > 0, s); return i }
-  assert.ok(at('class="up2-ctx__head"') < at('class="up2-ctx__hint"') && at('class="up2-ctx__hint"') < at('class="up2-ctx__shelf"') && at('class="up2-ctx__shelf"') < at('class="up2-ctx__views"'), 'แท็บอยู่ใต้หัวข้อ ก่อนแผง')
-  /* 198c อาร์ต "ทำมาดีๆหน่อย เอากว้างพิเศษได้": ตัวนับ + ‹ › อยู่ในแผง (มุมขวาบน ติดหัวข้อ) ไม่ใช่แถวลอยใต้แผง */
-  assert.match(c, /<div class="up2-ctx__views"><div class="up2-ctx__nav">/, 'ตัวนับ+ลูกศรอยู่ในแผง')
+  assert.ok(at('class="up2-ctx__head"') < at('class="up2-ctx__hint"') && at('class="up2-ctx__hint"') < at('class="up2-ctx__shelf"') && at('class="up2-ctx__shelf"') < at('class="up2-ctx__list"'), 'แถบลิงก์อยู่ใต้หัวข้อ ก่อนรายการ')
+  assert.doesNotMatch(c, /role="tab|tabpanel|aria-selected|up2-ctx__step|up2-ctx__count|up2-ctx__nav| hidden>/, 'ไม่มีแท็บ ลูกศร ตัวนับ หรือแผงที่ซ่อน')
   assert.match(text(c.match(/<p class="up2-ctx__hint" id="up2-ctx-hint">([\s\S]*?)<\/p>/)[1]), /เลือกงานของคุณ/)
-  assert.match(c, /<div class="up2-ctx__shelf"(?: style="--n:\d+")? role="tablist" aria-label="[^"]+" aria-describedby="up2-ctx-hint">/)
-  assert.match(c, /<button type="button" class="up2-ctx__step" data-ctx-step="-1" aria-label="ลักษณะงานก่อนหน้า">/)
-  assert.match(c, /<button type="button" class="up2-ctx__step" data-ctx-step="1" aria-label="ลักษณะงานถัดไป">/)
-  assert.match(c, /<span class="up2-ctx__count" aria-live="polite">1 \/ 6<\/span>/)
-  const tabs = [...c.matchAll(/<button type="button" role="tab" class="up2-ctx__pick" id="up2-ctx-tab-([a-z]+)" aria-controls="up2-ctx-([a-z]+)" aria-selected="(true|false)" tabindex="(0|-1)">([\s\S]*?)<\/button>/g)]
+  assert.match(c, /<nav class="up2-ctx__shelf"(?: style="--n:\d+")? aria-label="[^"]+" aria-describedby="up2-ctx-hint">/)
+  const tabs = [...c.matchAll(/<a class="up2-ctx__pick" id="up2-ctx-tab-([a-z]+)" href="#up2-ctx-([a-z]+)">([\s\S]*?)<\/a>/g)]
   assert.deepEqual(tabs.map((t) => t[1]), ['office', 'seminar', 'trip', 'party', 'field', 'business'])
-  tabs.forEach(([, id, ctl, sel, ti, inner], i) => {
-    assert.equal(ctl, id); assert.equal(sel, String(i === 0)); assert.equal(ti, i === 0 ? '0' : '-1')
+  tabs.forEach(([, id, to, inner]) => {
+    assert.equal(to, id)
     const th = inner.match(/<img class="up2-ctx__thumb" src="([^"]+)"[^>]* alt=""/); assert.ok(th && pub(th[1]), `${id}: ภาพจิ๋วเสื้อ`)
     assert.match(inner, /class="up2-ctx__pname"/)
   })
   /* แผง: รูปลูกค้าจริง 3 รูป · รีวิวเฉพาะ สัมมนา ทริป ธุรกิจบริการ */
   const lib = JSON.parse(readFileSync(new URL('../src/data/customers.json', import.meta.url), 'utf8'))
-  const panels = [...c.matchAll(/<div class="up2-ctx__panel" role="tabpanel" id="up2-ctx-([a-z]+)" aria-labelledby="up2-ctx-tab-([a-z]+)"( hidden)?>([\s\S]*?)<!-- \/panel -->/g)]
+  const panels = [...c.matchAll(/<article class="up2-ctx__panel" id="up2-ctx-([a-z]+)" aria-labelledby="up2-ctx-h-([a-z]+)">([\s\S]*?)<!-- \/panel -->/g)]
   assert.equal(panels.length, 6)
   const all = []
-  panels.forEach(([, id, lab, hid, a], i) => {
-    assert.equal(lab, id); assert.equal(!!hid, i !== 0)
+  panels.forEach(([, id, lab, a]) => {
+    assert.equal(lab, id)
     /* 196b-ctx อาร์ต "ต้องมีรูปอันเดิมด้วย": ภาพไดโอรามาเดิมเป็นภาพใหญ่ + รูปจริง 2 รูป (ป้าย "รูปจริงจากลูกค้า") · 198c: 2 คอลัมน์ ซ้ายไดโอรามา ขวาข้อความ + แถวรูปจริง */
     assert.match(a, /<div class="up2-ctx__media"><figure class="up2-ctx__scene">/, 'ซ้าย = ไดโอรามาอย่างเดียว')
     const body = a.slice(a.indexOf('class="up2-ctx__body"'))
@@ -385,7 +382,7 @@ test('/corporate/ บริบทงาน รอบ 198: แท็บใต้�
       const c0 = lib.find((x) => src === x.img || src === x.imgSmall); assert.ok(c0 && pub(src), `${id}: ${src} รูปลูกค้าจริง`)
       assert.ok(alt.trim()); all.push(c0.img)
     }
-    assert.match(a, /<h3>/); assert.equal((a.match(/class="up2-ctx__give"/g) || []).length, 3)
+    assert.match(a, new RegExp(`<h3 id="up2-ctx-h-${id}">`)); assert.equal((a.match(/class="up2-ctx__give"/g) || []).length, 3)
     assert.match(a, new RegExp(`data-track="line" data-where="use-context-${id}"`))
     const rv = a.match(/<blockquote class="up2-ctx__rv">([\s\S]*?)<\/blockquote>/)
     /* 16 พ.ย. คลังรีวิวเดียว (review-pool.js): ทุกแท็บมีรีวิวจริง · รีวิวองค์กรขึ้นการ์ดในส่วนรีวิว (รายการต่อแท็บตรวจใน tests/review-pool.test.js) */
@@ -401,8 +398,9 @@ test('/corporate/ บริบทงาน รอบ 198: แท็บใต้�
   assert.doesNotMatch(acts, /class="hm-more"/, 'ไม่ใช่ลิงก์ตัวหนังสือแล้ว')
   /* CSS + JS */
   const css = readFileSync('src/styles/use-page.css', 'utf8')
-  assert.match(css, /\.up2-ctx__pick\[aria-selected="true"\] \{[^}]*border-color: var\(--color-orange\)/, 'แท็บที่เลือก = กรอบส้ม')
   assert.match(css, /\.up2-ctx__pick \{[^}]*cursor: pointer/); assert.match(css, /\.up2-ctx__pick:focus-visible \{[^}]*outline:/)
+  assert.doesNotMatch(css, /aria-selected|\.up2-ctx__step|\.up2-ctx__count|\.up2-ctx__panel\[hidden\]/, 'ไม่มี CSS แท็บเดิม')
+  assert.match(css, /\.up2-ctx__panel \{[^}]*scroll-margin-top/, 'กดลิงก์แล้วหัวข้อไม่มุดใต้หัวเว็บ')
   assert.match(css, /#up2-ctx > \.wrap \{[^}]*width: calc\(100% - 64px\);[^}]*max-width: 1400px/, 'กว้างพิเศษ (ความกว้างที่ 2 ของเว็บ)')
   assert.match(css, /\.up2-ctx__pp \{[^}]*display: grid/)
   assert.match(css, /\.up2-ctx__img \{[^}]*mask-image: radial-gradient/, 'ไดโอรามากลืนพื้น ไม่เห็นกรอบ')
@@ -410,12 +408,10 @@ test('/corporate/ บริบทงาน รอบ 198: แท็บใต้�
   assert.match(css, /\.up2-ctx__panel \{[^}]*align-items: stretch/, 'สองฝั่งสูงเท่ากัน')
   assert.match(css, /\.up2-ctx__media \{[^}]*display: flex;[^}]*border-radius:[^}]*background:/, 'การ์ดเวทีภาพ')
   assert.doesNotMatch(css, /\.up2-ctx__body h3 \{ padding-right/, 'หัวข้อไม่ถูกบีบ')
-  assert.match(css, /\.up2-ctx__panel \{ grid-area: 2 \/ 1;/, 'ทุกแผงซ้อนช่องเดียว = ทุกแท็บสูงเท่ากัน ไม่กระโดดตอนสลับ'); assert.match(css, /\.up2-ctx__panel\[hidden\] \{[^}]*visibility: hidden/, 'แผงที่ซ่อนยังกันที่ แต่โปรแกรมอ่านจอไม่อ่าน')
+  assert.match(css, /\.up2-ctx__panel:nth-child\(even\) \.up2-ctx__media \{[^}]*order: 2/, 'สลับซ้ายขวาให้มีจังหวะ')
   assert.match(css, /prefers-reduced-motion: reduce/)
   const js = readFileSync('src/js/use-page.js', 'utf8')
-  const g = js.slice(js.indexOf('[data-ctx-gal]'), js.indexOf('initReviewBoard()'))
-  assert.match(g, /ArrowRight/); assert.match(g, /aria-selected/); assert.match(g, /data-ctx-step/); assert.match(g, /up2-ctx__count/)
-  assert.doesNotMatch(g, /mouseenter/)
+  assert.doesNotMatch(js, /data-ctx-gal|data-ctx-step|up2-ctx__count/, 'ไม่มี JS แท็บแล้ว (ลิงก์ # ทำงานเอง)')
 })
 
 /* 11 พ.ย. อาร์ต "ยังไม่แน่ใจว่า / เสื้อแบบไหนเหมาะกับทีม? ตัดแบบนี้แทน": บังคับขึ้นบรรทัดหลัง "ว่า" (hl ตัวที่ 3) · ข้อความ v22 ไม่เปลี่ยน */
@@ -424,4 +420,10 @@ test('/corporate/ การ์ดชวนคุย: หัวข้อขึ้
   const h = m.match(/<h2 id="up2-help-h">([\s\S]*?)<\/h2>/)[1].replace(/<\/?t-[a-z]+>/g, '') /* ตัดแท็กตัดบรรทัดไทย */
   assert.match(h, /^<span class="inline-block">[\s\S]*?ยังไม่แน่ใจว่า[\s\S]*?<\/span><br><span class="inline-block">[\s\S]*?เสื้อแบบไหน[\s\S]*?<\/span><wbr><span class="hm-hl">[\s\S]*?เหมาะกับทีม\?/)
   assert.equal(text(h).replace(/\s/g, ''), 'ยังไม่แน่ใจว่าเสื้อแบบไหนเหมาะกับทีม?', 'ข้อความ v22 เดิม')
+})
+
+/* 17 พ.ย. 2026: แถบภาพจิ๋วบนจอเล็กเป็นรางปัด · justify-content: center ที่ติดมาจากจอใหญ่ทำให้ใบแรกล้นออกซ้าย ปัดกลับไม่ได้ */
+test('แถบภาพจิ๋วบริบทงานบนจอเล็กเริ่มชิดซ้าย (ใบแรกไม่หลุดขอบ)', () => {
+  const css = readFileSync('src/styles/use-page.css', 'utf8')
+  assert.match(css, /@media \(max-width: 1023px\) \{[^@]*\.up2-ctx__shelf \{ display: flex; justify-content: flex-start;/)
 })

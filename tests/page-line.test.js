@@ -61,3 +61,10 @@ test('หน้าแรก: ไม่มีปุ่ม LINE เปล่าเ
     assert.match(readFileSync(new URL(`../${f}`, import.meta.url), 'utf8'), new RegExp(`href="\\{\\{@root\\.${k}\\}\\}" data-track="line"`), f)
   }
 })
+
+/* 17 พ.ย. 2026 รอบตรวจ E2E: หน้า 404 ส่ง "(จากหน้า /404.html)" ไปใน LINE = ชื่อไฟล์ตอน build ไม่ใช่หน้าที่ลูกค้าเปิด → ไม่ต่อท้ายหน้าที่มา */
+test('หน้า 404: ข้อความ LINE ไม่มี "(จากหน้า /404.html)"', () => {
+  const t = pageLineText({ kind: undefined }, { products: {}, uses: {} }, '/404.html')
+  assert.doesNotMatch(t, /404/)
+  assert.match(t, /^สวัสดี ทีมดี สนใจทำเสื้อทีม/)
+})

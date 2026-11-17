@@ -40,7 +40,7 @@ test('วางป้าย: ไม่ล้นขอบบน-ล่าง', ()
 })
 
 test('ผังเสื้อ: พื้นกล่องสีเดียวกับพื้นภาพเสื้อ (#F0ECE8 วัดจาก webp ในเบราว์เซอร์) ไม่เป็นกล่องเทาซ้อนในกล่องขาว · ป้ายบนคอมไม่มีกรอบ', () => {
-  const css = readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8')
+  const css = (readFileSync(new URL('../src/styles/pp-base.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8'))
   assert.match(css, /\.sc \{[^}]*background: #F0ECE8/)
   assert.match(css, /\.sc\.is-placed \.sc__lab \{[^}]*border: 0/)
 })
@@ -96,7 +96,7 @@ test('กล่องช่วยเลือก: หัวข้อ + คำอ
    → ภาพเสื้อตัดพื้นออก (โปร่งใส) + ครอปชิดตัวเสื้อ = เสื้อใหญ่ขึ้น ไม่มีกรอบสี่เหลี่ยมจางๆ รอบภาพ
    → รูปงานปักบนป้ายเป็นแนวนอนเต็มภาพ (ภาพต้นฉบับ 334×207) ไม่ครอปจน "TEAMDEE" ขาด */
 test('ส่วนแบบเสื้อมาตรฐาน (.ps2) ใช้ความกว้างพิเศษ 1400 ค่าเดียวกับส่วนกว้างอื่น', () => {
-  const css = readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8')
+  const css = (readFileSync(new URL('../src/styles/pp-base.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8'))
   assert.match(css, /@media \(min-width: 768px\) \{ \.ps2 > \.wrap \{ width: calc\(100% - 64px\); max-width: 1400px; padding-inline: 0; \} \}/)
 })
 test('ภาพเสื้อหน้า-หลัง: พื้นโปร่งใส (webp มีช่อง alpha) ทุกขนาด', () => {
@@ -110,6 +110,6 @@ test('ผังเสื้อ: ขนาดภาพตามไฟล์ให
   const s = sc(page(), 'emb-pos')
   assert.match(s, /src="[^"]*\/img\/emb-guide\/shirt-fb-1000\.webp"[^>]*width="1000" height="596"/)
   assert.match(s, /<img class="sc__thumb" [^>]*width="104" height="64"/)
-  const css = readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8')
+  const css = (readFileSync(new URL('../src/styles/pp-base.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/product-page.css', import.meta.url), 'utf8'))
   assert.doesNotMatch(css, /\.sc__fig img \{[^}]*mask-image/)
 })

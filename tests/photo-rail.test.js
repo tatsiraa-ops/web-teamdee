@@ -34,7 +34,7 @@ test('/project/ แบนเนอร์: ข้อความซ้าย ก�
   const at = html.indexOf('id="pjPile"')
   assert.ok(at > 0, 'ไม่มีกองภาพ')
   const ul = html.slice(at, html.indexOf('</ul>', at))
-  const src = [...ul.matchAll(/<img src="([^"]+)" alt="([^"]+)"/g)]
+  const src = [...ul.matchAll(/<img src="([^"]+)"[^>]*? alt="([^"]+)"/g)]
   assert.equal(src.length, 5)
   assert.equal(new Set(src.map((m) => m[1])).size, 5)
   assert.equal((ul.match(/class="pj-print__tag"/g) || []).length, 5)

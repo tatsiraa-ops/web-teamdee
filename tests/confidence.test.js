@@ -99,6 +99,8 @@ test('หน้าที่มีสารบัญพร้อมปุ่ม L
 test('แถบล่างมือถือหลบตอนปุ่ม LINE ในจอแรกยังเห็นอยู่ ทุกแม่แบบ ไม่ใช่แค่หน้าแรก', () => {
   for (const w of ['hero', 'pp-hero', 'use-hero']) assert.ok(HERO_CTA.includes(`[data-where="${w}"]`), w)
   assert.match(read('src/js/page.js'), /initHeroBar\(\)/)
+  /* 17 พ.ย. 2026 รอบตรวจ UI: หน้าแรกโหลด home.js ไม่ใช่ page.js → ไม่เคยเรียก initHeroBar ปุ่ม LINE ซ้ำ 2 ปุ่มในจอแรกมือถือ */
+  assert.match(read('src/js/home.js'), /initHeroBar\(\)/)
   assert.doesNotMatch(read('src/js/home.js'), /is-hero-cta/)
 })
 

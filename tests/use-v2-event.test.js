@@ -15,7 +15,7 @@ const spt = main('sport')
 test('อีเวนต์: ส่วนเรียงตามหน้าเสื้อกีฬา · ไม่มีส่วนเดิม · ลิงก์ในหน้ามีปลายทาง', () => {
   assert.deepEqual(order(evt), order(spt))
   for (const id of ['plan', 'photos', 'work']) assert.doesNotMatch(evt, new RegExp(`<section[^>]*id="${id}"`))
-  for (const [, id] of evt.matchAll(/href="#([^"]+)"/g)) assert.ok(evt.includes(`id="${id}"`), `#${id}`)
+  for (const [, id] of evt.matchAll(/(?<!<use )href="#([^"]+)"/g)) assert.ok(evt.includes(`id="${id}"`), `#${id}`)
   assert.match(evt, /id="event-review-wall"/)
 })
 
@@ -37,7 +37,7 @@ test('อีเวนต์: แท็บ 4 แบบ จากเสื้อ�
   const at = evt.indexOf('<section class="up2-ctx"')
   const ctx = evt.slice(at, evt.indexOf('</section>', at))
   const TABS = ['outing', 'seminar', 'festival', 'staff']
-  assert.deepEqual([...ctx.matchAll(/role="tab"[^>]*id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
+  assert.deepEqual([...ctx.matchAll(/class="up2-ctx__pick" id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
   assert.match(ctx, /class="up2-ctx__shelf"[^>]*style="--n:4"/)
   for (const t of TABS) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/event-${t}-${f}.webp`), `event-${t}-${f}`)
   const alts = [...ctx.matchAll(/class="up2-ctx__img"[^>]*alt="([^"]+)"/g)].map((m) => m[1])

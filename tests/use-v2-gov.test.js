@@ -13,7 +13,7 @@ const gov = main('custom-organization-shirts')
 test('หน่วยงาน: ส่วนเรียงตามหน้าบริษัททุกส่วน · ไม่มีส่วนเดิม · ลิงก์ในหน้ามีปลายทาง', () => {
   assert.deepEqual(order(gov).filter((c) => order(main('corporate')).includes(c)), order(main('corporate')))
   for (const id of ['plan', 'photos', 'work']) assert.doesNotMatch(gov, new RegExp(`<section[^>]*id="${id}"`))
-  for (const [, id] of gov.matchAll(/href="#([^"]+)"/g)) assert.ok(gov.includes(`id="${id}"`), `#${id}`)
+  for (const [, id] of gov.matchAll(/(?<!<use )href="#([^"]+)"/g)) assert.ok(gov.includes(`id="${id}"`), `#${id}`)
   assert.match(gov, /id="gov-review-wall"/)
 })
 
@@ -30,7 +30,7 @@ test('หน่วยงาน: แท็บ 3 ประเภท เสื้�
   const ctx = gov.slice(at, gov.indexOf('</section>', at))
   /* 13 พ.ย. เพิ่ม 3 แท็บจากเสื้อจริงในคลัง Packshot (อาร์ต "เจนมาเต็มที่"): รัฐวิสาหกิจ (AEROTHAI) · กองทัพ (กรมช่างโยธาทหารอากาศ) · ชุมชน (หมู่บ้านดินไก่ทับ) */
   const TABS = ['hosp', 'office', 'sports', 'soe', 'military', 'community']
-  assert.deepEqual([...ctx.matchAll(/role="tab"[^>]*id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
+  assert.deepEqual([...ctx.matchAll(/class="up2-ctx__pick" id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
   for (const t of TABS) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/gov-${t}-${f}.webp`), `gov-${t}-${f}`)
   const alts = [...ctx.matchAll(/class="up2-ctx__img"[^>]*alt="([^"]+)"/g)].map((m) => m[1])
   /* 13 พ.ย. อาร์ต "เสื้อบนแท่นในแต่ละหน้า ขอแบบคละๆโทน": แท็บรัฐวิสาหกิจเปลี่ยนจาก AEROTHAI (ฟ้า ซ้ำกับ 2 แท็บถัดไป) เป็น NT เหลืองเทา */

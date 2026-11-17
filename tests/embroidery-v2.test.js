@@ -176,6 +176,6 @@ test('ผ้า 6 ชนิดแยกอ่านได้ครบ · แต�
 })
 
 test('บอร์ดผ้า + ราคา ใช้ความกว้างพิเศษ (1400) แบบเดียวกับส่วนกว้างอื่น', () => {
-  const css = readFileSync('src/styles/product-page.css', 'utf8')
+  const css = (readFileSync('src/styles/pp-base.css', 'utf8') + readFileSync('src/styles/product-page.css', 'utf8'))
   assert.match(css, /\.pf2 > \.wrap \{ width: calc\(100% - 64px\); max-width: 1400px; padding-inline: 0; \}/)
 })

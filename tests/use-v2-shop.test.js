@@ -16,7 +16,7 @@ test('ร้านค้า: ส่วนเรียงตามหน้าบ
   const want = order(main('corporate'))
   assert.deepEqual(order(shop).filter((c) => want.includes(c)), want)
   for (const id of ['plan', 'photos', 'work']) assert.doesNotMatch(shop, new RegExp(`<section[^>]*id="${id}"`), `ไม่มีส่วนเดิม #${id}`)
-  for (const [, id] of shop.matchAll(/href="#([^"]+)"/g)) assert.ok(shop.includes(`id="${id}"`), `ลิงก์ #${id} ไม่มีปลายทาง`)
+  for (const [, id] of shop.matchAll(/(?<!<use )href="#([^"]+)"/g)) assert.ok(shop.includes(`id="${id}"`), `ลิงก์ #${id} ไม่มีปลายทาง`)
 })
 
 test('ร้านค้า: ไม่มีคำของกลุ่มบริษัท ทั้งในหน้าและข้อความ LINE', () => {
@@ -65,7 +65,7 @@ test('ร้านค้า: แท็บบริบท 3 ประเภทร
   const at = shop.indexOf('<section class="up2-ctx"')
   assert.ok(at > shop.indexOf('id="up2-pain"') && at < shop.indexOf('id="services"'), 'อยู่ระหว่างปัญหาคนสั่งกับบริการ')
   const ctx = shop.slice(at, shop.indexOf('</section>', at))
-  const tabs = [...ctx.matchAll(/role="tab"[^>]*id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1])
+  const tabs = [...ctx.matchAll(/class="up2-ctx__pick" id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1])
   /* 13 พ.ย. เพิ่มแท็บร้านสัตว์เลี้ยงจากเสื้อจริง Neko Petshop ในคลัง Packshot (อาร์ต "เจนมาเต็มที่") */
   assert.deepEqual(tabs, ['retail', 'parts', 'car', 'pet'])
   for (const t of tabs) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/shop-${t}-${f}.webp`), `shop-${t}-${f}`)

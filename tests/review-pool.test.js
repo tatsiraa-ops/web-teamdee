@@ -7,7 +7,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
-import { planReviews, OWN } from '../src/js/review-pool.js'
+import { planReviews, poolFor, OWN } from '../src/js/review-pool.js'
 import { ppV2, useV2 } from '../src/build/content.js'
 
 const read = (p) => JSON.parse(readFileSync(new URL(`../${p}`, import.meta.url), 'utf8'))
@@ -131,4 +131,12 @@ test('แถวรูปรีวิวบนคอม: 5 รูปแรกแ�
   assert.match(desk, /\.up2-rv__wall::after \{ content: ''; order: 1; flex: 0 0 100%; height: 0; \}/)
   assert.match(desk, /\.up2-rv__wall > li:nth-child\(n\+6\) \{ order: 2; \}/)
   assert.match(desk, /\.up2-rv__wall > li \{ flex: var\(--r\) 1 0; \}/)
+})
+
+/* 17 พ.ย. 2026 B4 npm run new:page: กลุ่มใหม่ยังไม่มีในตาราง OWN/PICK/RELATED → poolFor พัง (own is not a function) build ล้ม
+   กลุ่มที่ไม่รู้จัก = ไม่มีรีวิวของกลุ่มเอง ใช้รีวิวทั้งหมดตามลำดับเดิม */
+test('poolFor / planReviews: กลุ่มใหม่ที่ยังไม่มีในตาราง ไม่พัง', () => {
+  const reviews = [{ id: 'a', use: 'corp', img: 'x' }, { id: 'b', use: 'sport' }]
+  assert.deepEqual(poolFor('new-group', reviews).map((r) => [r.id, r.own]), [['a', false], ['b', false]])
+  assert.doesNotThrow(() => planReviews('new-group', reviews, []))
 })

@@ -7,7 +7,9 @@ import { readFileSync, existsSync } from 'node:fs'
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
 const home = () => { const h = read('dist-wp/index.html'); return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
-const css = () => read('src/styles/home.css')
+const css = () => (read('src/styles/home.css') + read('src/styles/home-page.css'))
+/* ส่วน CSS จากคอมเมนต์หัวส่วนถึงคอมเมนต์หัวส่วนถัดไป (17 พ.ย. 2026: แยก home-page.css แล้ว ส่วนท้ายไฟล์ไม่ใช่ส่วนนี้อีกต่อไป) */
+const cssBlock = (mark) => { const s = css(); const i = s.lastIndexOf(mark); const j = s.indexOf('\n/* ', i + mark.length); return s.slice(i, j < 0 ? undefined : j) }
 const rule = (sel) => (css().match(new RegExp(`${sel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\{([^}]*)\\}`)) || [])[1] || ''
 const px = (body, prop) => Number((body.match(new RegExp(`(?:^|;|\\s)${prop}:\\s*(\\d+)px`)) || [])[1] || 0)
 
@@ -394,7 +396,7 @@ test('กล่องพบทีมดี: ภาพ 3D ไดโอราม�
   assert.match(v, /href="tel:0975495941"/)
   const mapHref = (v.match(/class="hm-visit__map" href="([^"]+)"/) || [])[1] || ''
   assert.equal(mapHref.replace(/&#x3D;/g, '=').replace(/&amp;/g, '&'), site.mapUrl, 'ลิงก์แผนที่')
-  assert.doesNotMatch(css().slice(css().lastIndexOf('/* กล่องพบทีมดี')), /background:\s*#2[0-9a-f]{5}|background:\s*#1[0-9a-f]{5}/i)
+  assert.doesNotMatch(cssBlock('/* กล่องพบทีมดี'), /background:\s*#2[0-9a-f]{5}|background:\s*#1[0-9a-f]{5}/i)
 })
 
 /* 3 พ.ย. อาร์ต: เรื่องจุดเริ่มต้นตามอินโฟกราฟิกของทีมดีเอง · รอบ 3 "รายละเอียดตามเดิมได้ อยากทำโครงแบบ wireframe v22 เอารูปหรือไอคอนเด่นๆ ชูโรง"
@@ -540,7 +542,7 @@ test('การ์ดชวนคุย: 2 ทางเลือก ไอคอ
     assert.equal((s.match(/<li>/g) || []).length, 3, id)
     assert.match(s, new RegExp(`data-where="${where}"`), id)
   }
-  const s = css(); const blk = s.slice(s.lastIndexOf('/* การ์ดชวนคุย 2 ทาง'))
+  const blk = cssBlock('/* การ์ดชวนคุย 2 ทาง')
   assert.ok(blk.length > 50)
   assert.doesNotMatch(blk, /background:\s*#(?:1|2)[0-9a-f]{5}/i)
 })
@@ -571,7 +573,7 @@ test('hero มือถือ: <picture> มี source ภาพแนวตั�
 })
 
 test('หน้าแรก กลุ่มลูกค้า (6 พ.ย. อาร์ต "เอาแถบส้มที่ผมชอบมาใส่ + ปรับความกว้างเป็นพิเศษ"): ชื่อบนแถบส้มไล่สีในรูป · กว้างพิเศษ 100% − 64 สูงสุด 1400', () => {
-  const css = readFileSync(new URL('../src/styles/home.css', import.meta.url), 'utf8')
+  const css = readFileSync(new URL('../src/styles/home.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/home-page.css', import.meta.url), 'utf8')
   const blk = css.slice(css.indexOf('/* uses-band'))
   assert.ok(css.includes('/* uses-band'), 'มีชุดกฎแถบส้ม')
   assert.match(blk, /\.hm-use-card__body \{[^}]*position: absolute;[^}]*linear-gradient\(180deg, rgb\(240 90 0 \/ 0\)[^}]*#A33A00/, 'แถบส้มไล่สีแบบการ์ดผ้า/ภาพงาน')

@@ -11,3 +11,9 @@ test('popup โปรไม่เด้งแย่งโฟกัสขณะ�
   assert.match(busy, /Date\.now\(\) - lastTab < KEYBOARD_MS/)
   assert.match(busy, /a\?\.matches\?\.\(':focus-visible'\)/)
 })
+
+/* 17 พ.ย. 2026 audit E2E: กดส่งฟอร์มติดต่อไม่ครบ → โฟกัสไปกล่องแจ้งผิด (#formErrs role=alert) แล้ว popup เด้งมาดึงโฟกัสไปภายใน ~4 วิ */
+test('popup โปรไม่เด้งตอนโฟกัสอยู่ในฟอร์ม หรือในกล่องแจ้งเตือน role=alert', () => {
+  const busy = src.slice(src.indexOf('const busy = () =>'), src.indexOf('const open = () =>'))
+  assert.match(busy, /a\?\.closest\?\.\('form, \[role=alert\]'\)/)
+})

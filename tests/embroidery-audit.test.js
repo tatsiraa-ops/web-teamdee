@@ -10,7 +10,7 @@ const read = (f) => readFileSync(f, 'utf8')
 const main = (() => { const h = read('dist-wp/embroidery/index.html'); return h.slice(h.indexOf('<main'), h.indexOf('</main>')).replace(/<\/?t-[a-z]+>/g, '') })()
 const text = (s) => s.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')
 const secBy = (re) => { const at = main.search(re); assert.ok(at >= 0, `ไม่พบส่วน ${re}`); return main.slice(at, main.indexOf('</section>', at)) }
-const css = read('src/styles/product-page.css').replace(/\/\*[\s\S]*?\*\//g, '')
+const css = (read('src/styles/pp-base.css') + read('src/styles/product-page.css')).replace(/\/\*[\s\S]*?\*\//g, '')
 const pub = (s) => existsSync(`public${s}`)
 const REAL = ['sample', 'machine'] // เฟรมวิดีโอจริงที่ยังใช้ (ขั้น 03 · 05)
 const GEN = ['logo', 'digitize', 'thread', 'hoop', 'position', 'heads', 'needle', 'sample', 'trim', 'qc', 'pack', 'operator', 'positions']

@@ -13,7 +13,7 @@ const edu = main('education')
 test('โรงเรียน: ส่วนเรียงตามหน้าบริษัททุกส่วน · ไม่มีส่วนเดิม · ลิงก์ในหน้ามีปลายทาง', () => {
   assert.deepEqual(order(edu).filter((c) => order(main('corporate')).includes(c)), order(main('corporate')))
   for (const id of ['plan', 'photos', 'work']) assert.doesNotMatch(edu, new RegExp(`<section[^>]*id="${id}"`))
-  for (const [, id] of edu.matchAll(/href="#([^"]+)"/g)) assert.ok(edu.includes(`id="${id}"`), `#${id}`)
+  for (const [, id] of edu.matchAll(/(?<!<use )href="#([^"]+)"/g)) assert.ok(edu.includes(`id="${id}"`), `#${id}`)
   assert.match(edu, /id="edu-review-wall"/)
 })
 
@@ -32,7 +32,7 @@ test('โรงเรียน: แท็บ 4 ประเภท เสื้�
   /* 13 พ.ย. อาร์ตเลือก "เพิ่มแท็บเสื้อรุ่น ม.6" จากเสื้อจริง BHS CREW · CLASS OF 2026 ในคลัง Packshot
      ไม่ระบุว่า BHS เป็นโรงเรียนไหน (ดูจากรูปบอกไม่ได้) → ข้อความพูดถึงชื่อบนเสื้อเท่านั้น */
   const TABS = ['teachers', 'sportsday', 'classroom', 'batch']
-  assert.deepEqual([...ctx.matchAll(/role="tab"[^>]*id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
+  assert.deepEqual([...ctx.matchAll(/class="up2-ctx__pick" id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
   for (const t of TABS) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/edu-${t}-${f}.webp`), `edu-${t}-${f}`)
   const alts = [...ctx.matchAll(/class="up2-ctx__img"[^>]*alt="([^"]+)"/g)].map((m) => m[1])
   for (const n of ['บ้านหนองมีหัวดง', 'SRIBOONYANON', 'ROOM 8', 'BHS CREW']) assert.ok(alts.some((a) => !/^(ภาพจำลอง|ภาพประกอบ)/.test(a) && a.includes(n)), n)

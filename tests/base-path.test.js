@@ -84,3 +84,20 @@ test('td_read_part เติมลิงก์ก่อนแก้ path ไฟ�
 test('บทความใหม่บน /blog/: เทียบลิงก์ด้วย path เดียวกับที่เติมแล้ว (ไม่งั้นบน staging บทความเดิมทุกเรื่องขึ้นซ้ำในส่วนใหม่ล่าสุด)', () => {
   assert.match(source, /'key' => td_base_path\(\) \. '\/' \. \$p->post_name \. '\/'/)
 })
+
+/* 17 พ.ย. 2026 audit: ธีมส่ง TD_FORM.thanks = "/thank-you/" (ไม่มี path โฟลเดอร์ย่อย) → ส่งสำเร็จบน staging เด้งไปเว็บเก่า */
+test('ฟอร์มติดต่อ: redirect จากธีม (/thank-you/) ได้ path โฟลเดอร์ย่อยด้วย · ไม่เติมซ้ำถ้ามีแล้ว', () => {
+  const had = globalThis.document
+  globalThis.document = fakeDoc('/enterprise')
+  try {
+    assert.deepEqual(outcomeOf({ ok: true, redirect: '/thank-you/' }), { view: 'thanks', to: '/enterprise/thank-you/' })
+    assert.deepEqual(outcomeOf({ ok: true, redirect: '/enterprise/thank-you/' }), { view: 'thanks', to: '/enterprise/thank-you/' })
+  } finally { globalThis.document = had }
+})
+
+test('ลิงก์ที่ JS สร้างในหน้าค้นหา และ "หรือดู" ในตัวเลือกหน้าแรก ใช้ withBase', () => {
+  const search = readFileSync(new URL('../src/js/search-page.js', import.meta.url), 'utf8')
+  assert.match(search, /faqAll\.href = withBase\(`\$\{routes\.faq\}\?q=/)
+  assert.match(search, /allDesigns\.href = withBase\(`\$\{routes\.designs\}\?q=/)
+  assert.match(readFileSync(new URL('../src/js/home-picker.js', import.meta.url), 'utf8'), /href: withBase\(url\('products', a\.id\)\)/)
+})

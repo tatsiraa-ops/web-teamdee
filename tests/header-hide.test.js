@@ -3,7 +3,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { nextHidden } from '../src/js/header-hide.js'
+import { nextHidden, uncoverDelta } from '../src/js/header-hide.js'
 
 const base = { hidden: false, header: 64, menuOpen: false }
 
@@ -25,4 +25,14 @@ test('CSS: หลบเฉพาะจอเล็กกว่า 768 · ลด�
   assert.match(css, /@media \(max-width: 767px\) \{\n  \[data-header\] \{ transition: transform \.25s cubic-bezier\(\.2, \.7, \.2, 1\); \}\n  html\.hdr-hidden \[data-header\] \{ transform: translateY\(-100%\); \}/)
   assert.match(css, /@media \(max-width: 1023px\) \{ \.nudge \{ display: none !important; \} \}/)
   assert.match(readFileSync(new URL('../src/js/site-extras.js', import.meta.url), 'utf8'), /safe\(initHeaderHide\)/)
+})
+
+/* 17 พ.ย. 2026 audit (WCAG 2.4.11): กด Shift+Tab ย้อนขึ้น ตัวที่โฟกัสยังอยู่ "ในจอ" แต่อยู่ใต้หัวเว็บที่ติดบน → เบราว์เซอร์ไม่เลื่อน มองไม่เห็น
+   uncoverDelta = ระยะที่ต้องเลื่อนขึ้น (ค่าติดลบ) ให้พ้นขอบล่างหัวเว็บ + เผื่อ 16px · ไม่ถูกบัง = 0 */
+test('uncoverDelta: ตัวที่โฟกัสอยู่ใต้หัวเว็บ → เลื่อนให้พ้น · ไม่ถูกบัง = 0', () => {
+  assert.equal(uncoverDelta({ top: 45, bottom: 63 }, 77), 45 - 77 - 16)
+  assert.equal(uncoverDelta({ top: 70, bottom: 120 }, 77), 70 - 77 - 16, 'บังบางส่วนก็เลื่อน')
+  assert.equal(uncoverDelta({ top: 100, bottom: 140 }, 77), 0)
+  assert.equal(uncoverDelta({ top: -300, bottom: -200 }, 77), 0, 'อยู่นอกจอด้านบน เบราว์เซอร์เลื่อนเองแล้ว')
+  assert.equal(uncoverDelta({ top: 45, bottom: 63 }, 0), 0, 'หัวเว็บหลบอยู่ (มือถือ)')
 })

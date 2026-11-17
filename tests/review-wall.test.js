@@ -8,6 +8,8 @@ const src = readFileSync(new URL('../src/js/review-wall.js', import.meta.url), '
 /* ไฟล์ import lightbox.js (ใช้ DOM) → ทดสอบฟังก์ชันคำนวณโดยดึงโค้ดออกมาตรงๆ */
 const rowsToHide = new Function(`${src.slice(src.indexOf('export function rowsToHide')).replace('export function', 'function').split('\nexport function initReviewWall')[0]}; return rowsToHide`)()
 
+const coveredByCta = new Function(`${src.match(/export const coveredByCta = [^\n]+/)[0].replace('export const', 'const')}; return coveredByCta`)()
+
 const row = (top, n, w) => Array.from({ length: n }, () => ({ top, w }))
 
 test('ซ่อนแถวท้ายที่ไม่เต็ม (เหลือรูปเดี่ยว)', () => {
@@ -29,4 +31,13 @@ test('อาร์ต "เอาเป็น 6 แถวพอ" · import lightb
   assert.match(src, /export const MAX_ROWS = 6/)
   assert.match(src, /^import \{ initLightbox \} from '\.\/lightbox\.js'/)
   assert.doesNotMatch(src, /import\('\.\/lightbox\.js'\)/)
+})
+
+/* 17 พ.ย. 2026 รอบตรวจ a11y (WCAG 2.5.8 + 2.4.11): ปุ่ม "ดูรีวิวลูกค้าทั้งหมด" / LINE วางทับแถวท้ายที่จาง (margin-top ติดลบ)
+   รูปใต้ปุ่มเหลือพื้นที่กดแค่ ~13px และกด Tab แล้วโฟกัสไปอยู่ใต้ปุ่ม → รูปที่ขอบล่างเลยขอบบนของปุ่ม = inert (ยังเห็นจางๆ แต่กด/Tab ไม่ได้) */
+test('coveredByCta: รูปที่ขอบล่างเลยขอบบนกล่องปุ่ม = ถูกบัง', () => {
+  const items = [{ top: 0, bottom: 200 }, { top: 210, bottom: 410 }, { top: 420, bottom: 620 }]
+  assert.deepEqual(coveredByCta(items, { top: 500 }), [2])
+  assert.deepEqual(coveredByCta(items, { top: 400 }), [1, 2])
+  assert.deepEqual(coveredByCta(items, { top: 700 }), [])
 })

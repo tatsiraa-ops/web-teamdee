@@ -20,3 +20,13 @@ test('หน้าที่ export ไม่มีป้ายภาพจำล
   }
   assert.deepEqual(bad.slice(0, 8), [], `${bad.length} จุด`)
 })
+
+/* 17 พ.ย. 2026 รอบตรวจ SEO: ป้ายใต้รูปคู่มือ (guideProcessStudio) "ภาพจำลองแบบเสื้อ · ใช้ดูภาพรวม ไม่ใช่ภาพถ่ายงานผลิต" หลุดรอบ 16 พ.ย.
+   เพราะคำ "ภาพจำลองแบบเสื้อ" อยู่ในรายการยกเว้น (ใช้ในเนื้อหาเรื่องบริการ) → ตรวจ figcaption ทุกอันใน partial ตรงๆ */
+test('figcaption ใน partial ไม่มีป้ายภาพจำลอง/ภาพประกอบ', async () => {
+  const { readdirSync, readFileSync: rf } = await import('node:fs')
+  const dir = new URL('../src/partials/', import.meta.url)
+  const bad = []
+  for (const f of readdirSync(dir).filter((x) => x.endsWith('.hbs'))) for (const m of rf(new URL(f, dir), 'utf8').matchAll(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/g)) if (/ภาพจำลอง|ภาพประกอบ/.test(m[1])) bad.push(`${f}: ${m[1].slice(0, 60)}`)
+  assert.deepEqual(bad, [])
+})

@@ -64,8 +64,9 @@ test('a11y: การ์ดรีวิวอ่านคำรีวิวไ�
 
 test('SEO: ลิงก์เข้าหน้าทรงคอ · breadcrumb คู่มือ/FAQ มี item · รูปแชร์จากเนื้อหา', () => {
   assert.match(read('src/partials/footer.hbs'), /url 'guides' 'collar'/)
-  assert.match(read('src/partials/guidePage.hbs'), /"name":"คู่มือและบทความ","item":/)
-  assert.match(read('site/faq/index.html'), /"name":"คู่มือและบทความ","item":/)
+  /* 17 พ.ย. 2026 A7: ชื่อ /blog/ ชุดเดียว "บทความและไอเดีย" (ตรงกับหน้า /blog/ และหน้าบทความ) */
+  assert.match(read('src/partials/guidePage.hbs'), /"name":"บทความและไอเดีย","item":/)
+  assert.match(read('site/faq/index.html'), /"name":"บทความและไอเดีย","item":/)
   assert.match(buildSource(), /const mainAt = html\.indexOf\('<main'\)/)
 })
 
