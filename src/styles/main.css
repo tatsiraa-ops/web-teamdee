@@ -1065,7 +1065,7 @@ html.ck-on footer { padding-bottom: 180px; }
 .mb__orb svg { width: 100%; height: 100%; }
 .mb__lbl { display: grid; gap: 1px; min-width: 0; line-height: 1.25; text-align: left; }
 .mb__main { font-size: 16px; font-weight: 800; white-space: nowrap; }
-.mb__sub { display: inline-flex; align-items: center; gap: 5px; min-width: 0; font-size: 12px; font-weight: 600; color: rgb(4 52 26 / .82); white-space: nowrap; }
+.mb__sub { display: inline-flex; align-items: center; gap: 5px; min-width: 0; font-size: 12px; font-weight: 600; color: rgb(4 52 26); white-space: nowrap; }
 .mb__dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: rgb(4 52 26 / .35); }
 .mb__sub.is-open .mb__dot { background: #fff; box-shadow: 0 0 0 2px rgb(255 255 255 / .45); }
 .mb__btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; padding: 0 2px; border-radius: 16px; color: var(--color-ink); text-align: center; }

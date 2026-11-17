@@ -101,7 +101,7 @@ test('/sublimation/ ทำไมต้องสั่งกับทีมดี
   /* อาร์ต 5 พ.ย. "แสดงมาเลย": ตัวเล่นขึ้นเองแบบหน้าแรก (video-slot.js autoStart) ไม่ใช่กล่องดำให้กดเล่น */
   assert.match(s, /<div class="pp2-pf__clips" data-embed-auto>/)
   assert.match(s, /facebook\.com%2Fteamdee%2Fvideos%2F1071563669119050/, 'คลิปหลังบ้านทีมดี')
-  assert.match(text(s), /ภาพขั้น 01 และ 06 เป็นภาพประกอบ/)
+  assert.doesNotMatch(text(s), /ภาพประกอบ/) /* 16 พ.ย. 2026 อาร์ต "ไม่เอาป้ายภาพจำลอง" → "เอาออกทั้งหมด": ไม่มีป้ายภาพจำลอง/ภาพประกอบ (tests/no-image-labels.test.js) */
   assert.doesNotMatch(text(s), /โรงงาน|อันดับ 1|ISO/)
   /* 16 พ.ย. 2026 พิมพ์ลายมีตรวจตัวอย่างเหมือนงานปัก: ขั้นยืนยันแบบบอกว่าตรวจตัวอย่างก่อนผลิต ไม่ใช่มัดจำแล้วผลิตเลย */
   assert.match(text(steps[2]), /มัดจำ 50%[\s\S]*ตรวจตัวอย่าง[\s\S]*ผลิต/)
@@ -135,7 +135,7 @@ test('/sublimation/ ทำไมต้องสั่งกับทีมดี
   }
   assert.ok(cards.some((c) => c[1] === ' pp2-pf__bc--big') && cards.some((c) => c[1] === ' pp2-pf__bc--wide'), 'การ์ดใหญ่ + การ์ดกว้าง')
   for (const f of ['พิมพ์ลายตามไฟล์ที่อนุมัติ', 'สีซึมเข้าเส้นใย', 'เทียบลายกับแบบที่อนุมัติ', 'ถ่ายรูปงานจริงส่งให้ดูก่อน', 'ตรวจจำนวนแยกไซซ์']) assert.ok(text(bts[1]).replace(/\s+/g, '').includes(f.replace(/\s+/g, '')), f)
-  assert.ok(s.indexOf('pp2-pf__steps') < s.indexOf('pp2-pf__bts') && s.indexOf('pp2-pf__bts') < s.indexOf('pp2-pf__note'))
+  assert.ok(s.indexOf('pp2-pf__steps') < s.indexOf('pp2-pf__bts')); assert.doesNotMatch(s, /pp2-pf__note/, 'ไม่มีหมายเหตุภาพประกอบแล้ว')
 })
 
 /* 16 พ.ย. 2026 อาร์ต "หน้า /sublimation/ จะให้เติมรีวิวจากคลังรวมเหมือนหน้างานปัก": รายที่เห็นเสื้อพิมพ์ลายในรูป (คัดไว้เดิม 9 ราย) ขึ้นก่อน แล้วรีวิวที่เหลือครบทุกราย
@@ -318,7 +318,7 @@ test('/sublimation/ แผงเลือกเสื้อ รอบ 196 (อ�
   const head = s.match(/<header class="pp2-ty__step">([\s\S]*?)<\/header>/)[1]
   assert.match(head, /<span class="pp2-ty__n" aria-hidden="true">2<\/span>/); assert.match(text(head.match(/<h3[^>]*>([\s\S]*?)<\/h3>/)[1]), /เลือกคอเสื้อ 13 ทรง/)
   const grid = s.slice(s.indexOf('<div class="cfx">'), s.indexOf('<!-- /cfx -->'))
-  const fams = [...grid.matchAll(/<div class="cfm" style="--n:(\d)"><h4 class="cfm__h">([\s\S]*?)<\/h4><div class="cfm__cs">([\s\S]*?)<\/div><\/div><!-- \/fam -->/g)]
+  const fams = [...grid.matchAll(/<div class="cfm" style="--n:(\d)"><h4 class="cfm__h">([\s\S]*?)<\/h4><div class="cfm__cs" tabindex="0" role="region" aria-label="[^"]+">([\s\S]*?)<\/div><\/div><!-- \/fam -->/g)] /* 16 พ.ย. 2026: แถบคอเสื้อกด Tab ถึงได้ (tests/scroll-region.test.js) */
   assert.deepEqual(fams.map((f) => text(f[2]).trim()), ['คอกลม', 'คอปก', 'คอวี', 'คอห้าเหลี่ยม', 'คอจีน', 'คอคางหมู'])
   assert.deepEqual(fams.map((f) => Number(f[1])), [2, 3, 4, 1, 2, 2]); assert.equal(fams.reduce((n, f) => n + Number(f[1]), 0) + 1, 15, '15 ช่อง = 5×3 พอดี (รวมถามทรงคอ)')
   for (const [, n, , cs] of fams) assert.equal((cs.match(/<(article class="ctz__c"|figure class="pp2-col__pk")/g) || []).length, Number(n), 'จำนวนช่องตรงกับ --n')
@@ -458,7 +458,7 @@ test('/sublimation/ ขั้นตอนสั่งผลิต (รอบ 136
   assert.match(paid[0][1], /มัดจำค่าออกแบบ 500 บาท[\s\S]*หักค่าเสื้อ/); assert.match(paid[1][1], /50%[\s\S]*ก่อนทำตัวอย่าง/); assert.match(paid[2][1], /50%[\s\S]*ก่อนจัดส่ง/)
   const fin = s.match(/<figure class="pp2-stb__fin">([\s\S]*?)<\/figure>/)[1]
   assert.ok(pub(fin.match(/src="([^"]+)"/)[1])); assert.match(fin, /data-where="pp-steps"/)
-  assert.match(text(s), /ออกแบบฟรี/); assert.match(text(s), /จำลองจากแบบเสื้อจริงของทีมดี/)
+  assert.match(text(s), /ออกแบบฟรี/); assert.doesNotMatch(text(s), /จำลองจากแบบเสื้อจริงของทีมดี/) /* 16 พ.ย. 2026 อาร์ต "ไม่เอาป้ายภาพจำลอง" → "เอาออกทั้งหมด": ไม่มีป้ายภาพจำลอง/ภาพประกอบ (tests/no-image-labels.test.js) */
   assert.doesNotMatch(text(s), /\[|โรงงาน/)
 })
 

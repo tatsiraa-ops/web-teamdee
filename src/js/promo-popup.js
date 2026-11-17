@@ -27,10 +27,15 @@ export function initPromo() {
   let shown = false
   let timer
 
+  /* 16 พ.ย. 2026 audit: กำลังใช้คีย์บอร์ด (กด Tab ใน 15 วินาที หรือโฟกัสแบบ focus-visible) = ยุ่ง ไม่เด้งแย่งโฟกัส · tests/promo-keyboard.test.js */
+  const KEYBOARD_MS = 15000
+  let lastTab = 0
+  document.addEventListener('keydown', (e) => { if (e.key === 'Tab') lastTab = Date.now() })
   const busy = () => {
     const a = document.activeElement
     /* เมนูมือถือเปิดอยู่ = ไม่เด้งทับ (30 ต.ค. · เมนูเป็น div ไม่ใช่ dialog) */
     return document.querySelector('dialog[open], #mobileMenu:not([hidden])') || a?.matches?.('input, textarea, select, iframe, video') || [...document.querySelectorAll('video')].some((v) => !v.paused)
+      || Date.now() - lastTab < KEYBOARD_MS || (a && a !== document.body && a?.matches?.(':focus-visible'))
   }
   const open = () => {
     if (shown || (document.querySelector('[data-hero-team]') && matchMedia('(max-width: 767px)').matches)) return

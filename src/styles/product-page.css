@@ -432,6 +432,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .pp2-fab__cta p { display: grid; gap: 2px; margin: 0; }
 .pp2-fab__cta b { font-size: 20px; font-weight: 900; color: var(--color-ink); }
 .pp2-fab__cta span { font-size: 15px; line-height: 1.5; color: var(--color-ink-3); }
+.pp2-fab__cta .cb span, .pp2-col__ask .cb span { color: inherit; } /* 16 พ.ย. 2026 audit: สีเทาของคำอธิบายหลุดเข้าปุ่ม LINE (2.38:1) */
 @media (max-width: 767px) {
   .pp2-fab { padding: 52px 0; }
   .pp2-fab__head { text-align: center; }
@@ -473,7 +474,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .spk__go { position: absolute; right: 12px; bottom: 12px; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #fff; font-size: 17px; font-weight: 900; color: var(--color-ink); text-decoration: none; transition: translate .2s ease-out; }
 .spk__go:hover { translate: 2px -2px; }
 .spk__go:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
-.spk__more { display: inline-flex; gap: 4px; margin-top: 12px; font-size: 14px; font-weight: 800; color: #C24B00; text-decoration: underline; text-underline-offset: 3px; }
+.spk__more { display: inline-flex; gap: 4px; margin-top: 12px; font-size: 14px; font-weight: 800; color: #A84000; text-decoration: underline; text-underline-offset: 3px; }
 /* ขั้น 2 คอ · 196e อาร์ต "ไม่ต้องแสดงราคา และทำมาให้ดีๆ" → ตระกูลคอ 6 กลุ่ม เต็ม 5×3 (subgrid · .cfm__cs display: contents)
    การ์ดสูงเท่ากันทั้งแถว · ป้ายจุดเด่นชิดล่าง · คำอธิบายตัดบรรทัดเฉพาะช่องว่าง (helper ph) · มือถือ ตระกูลละแถบปัด */
 .is-off { opacity: .38; filter: grayscale(1); transition: opacity .2s ease-out, filter .2s ease-out; } /* คอที่ทรงที่เลือกไม่มี */
@@ -1008,7 +1009,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
 .czp__wt { display: grid; gap: 4px; min-width: 0; }
 .czp__wt b { font-size: 18px; font-weight: 900; line-height: 1.3; color: var(--color-ink); }
 .czp__wt > span { font-size: 15px; line-height: 1.5; color: var(--color-ink-3); }
-.czp__wl { justify-self: start; margin-top: 2px; font-size: 15px; font-weight: 800; color: #C24E00; text-decoration: none; }
+.czp__wl { justify-self: start; margin-top: 2px; font-size: 15px; font-weight: 800; color: #A84000; text-decoration: none; }
 .czp__wl:hover { text-decoration: underline; text-underline-offset: 3px; }
 .czp__go { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px; margin-top: 26px; padding-top: 26px; border-top: 1px solid #EEE7DF; }
 .czp__flow { display: grid; gap: 6px; }
@@ -1407,7 +1408,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; } /* ค�
 .ps2__gh { display: flex; justify-content: space-between; align-items: baseline; gap: 12px 24px; margin-bottom: 20px; }
 .ps2__gh h4 { display: flex; align-items: baseline; gap: 12px; flex: none; margin: 0; color: #24241f; font-size: 24px; font-weight: 800; line-height: 1.3; }
 .ps2__group-no { color: #ae480a; font-size: 13px; font-weight: 700; }
-.ps2__group-count { color: #837b71; font-size: 13px; font-weight: 500; }
+.ps2__group-count { color: #6F6860; font-size: 13px; font-weight: 500; }
 .ps2__gh p { max-width: 560px; margin: 0; font-size: 13px; line-height: 1.6; color: #70685f; text-align: right; }
 .ps2__pr { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
 .ps2__pi { display: flex; min-width: 0; }

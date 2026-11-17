@@ -50,7 +50,7 @@
       </div>
     </div>
     <p class="pp2-sz__hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>เลื่อนตารางไปทางขวาเพื่อดูไซซ์ใหญ่</p>
-    <div class="pp2-sz__tables">
+    <div class="pp2-sz__tables" tabindex="0" role="region" aria-label="ตารางไซซ์ เลื่อนดูได้">
       <table class="pp2-sz__t" id="sz-adult"><caption>{{labA}}{{#if noteA}} <small>{{noteA}}</small>{{/if}} · <span data-sz-u>นิ้ว</span></caption><thead><tr><td></td>{{#each adult}}<th scope="col" data-c="{{this.[0]}}">{{this.[0]}}</th>{{/each}}</tr></thead><tbody><tr data-row="chest"><th scope="row">รอบอก</th>{{#each adult}}<td data-c="{{this.[0]}}" data-in="{{this.[1]}}">{{this.[1]}}</td>{{/each}}</tr><tr data-row="len"><th scope="row">ความยาว</th>{{#each adult}}<td data-c="{{this.[0]}}" data-in="{{this.[2]}}">{{this.[2]}}</td>{{/each}}</tr></tbody></table>
       <table class="pp2-sz__t pp2-sz__t--kids" id="sz-kids"><caption>{{labB}}{{#if noteB}} <small>{{noteB}}</small>{{/if}} · <span data-sz-u>นิ้ว</span></caption><thead><tr><td></td>{{#each kids}}<th scope="col" data-c="{{this.[0]}}">{{this.[0]}}</th>{{/each}}{{#each padB}}<td class="pp2-sz__na"></td>{{/each}}</tr></thead><tbody><tr data-row="chest"><th scope="row">รอบอก</th>{{#each kids}}<td data-c="{{this.[0]}}" data-in="{{this.[1]}}">{{this.[1]}}</td>{{/each}}{{#each padB}}<td class="pp2-sz__na"></td>{{/each}}</tr><tr data-row="len"><th scope="row">ความยาว</th>{{#each kids}}<td data-c="{{this.[0]}}" data-in="{{this.[2]}}">{{this.[2]}}</td>{{/each}}{{#each padB}}<td class="pp2-sz__na"></td>{{/each}}</tr></tbody></table>
     </div>

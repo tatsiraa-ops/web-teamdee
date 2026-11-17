@@ -87,7 +87,7 @@
     {{#with aboutV2.team}}
     <div class="ab2-wide">
       <header class="ab2-team__head"><h2 id="team-h" class="ab2-h">{{{hl "ทีมงาน ออฟฟิศ และการผลิต" "และการผลิต"}}}</h2></header>
-      <ol class="ab2-film">{{#each this.steps}}<li><span class="ab2-film__n tabular-nums" aria-hidden="true">0{{inc @index}}</span><img src="/img/about/{{this.img}}-960.webp" srcset="/img/about/{{this.img}}-640.webp 640w, /img/about/{{this.img}}-960.webp 960w, /img/about/{{this.img}}-1600.webp 1600w" sizes="(min-width:1024px) 230px, 60vw" alt="{{this.alt}}" width="1600" height="1067" loading="lazy" decoding="async"><h3>{{this.t}}</h3><p>{{this.d}}</p></li>{{/each}}</ol>
+      <ol class="ab2-film" tabindex="0" aria-label="ขั้นตอนทำเสื้อ เลื่อนดูได้">{{#each this.steps}}<li><span class="ab2-film__n tabular-nums" aria-hidden="true">0{{inc @index}}</span><img src="/img/about/{{this.img}}-960.webp" srcset="/img/about/{{this.img}}-640.webp 640w, /img/about/{{this.img}}-960.webp 960w, /img/about/{{this.img}}-1600.webp 1600w" sizes="(min-width:1024px) 230px, 60vw" alt="{{this.alt}}" width="1600" height="1067" loading="lazy" decoding="async"><h3>{{this.t}}</h3><p>{{this.d}}</p></li>{{/each}}</ol>
     </div>
     {{/with}}
   </section>
@@ -109,7 +109,7 @@
         <img class="ab2-wear__img" src="/img/about/ab-shirts-1600.webp" srcset="/img/about/ab-shirts-960.webp 960w, /img/about/ab-shirts-1600.webp 1600w, /img/about/ab-shirts-2400.webp 2400w" sizes="100vw" alt="{{this.alt}}" width="2400" height="1018" loading="lazy" decoding="async">
       </picture>
       <ul class="ab2-wear__tags" aria-label="ชนิดเสื้อในภาพ">{{#each this.tags}}<li class="ab2-wear__tag" style="--x:{{this.x}}%"><a href="{{url this.key this.id}}">{{this.t}}</a></li>{{/each}}</ul>
-      <figcaption class="ab2-wear__note">{{this.note}}</figcaption>
+      {{#if this.note}}<figcaption class="ab2-wear__note">{{this.note}}</figcaption>{{/if}}
     </figure>
     {{/with}}
   </section>

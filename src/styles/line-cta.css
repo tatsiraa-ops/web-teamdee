@@ -2,7 +2,7 @@
 /* ---------- แบนเนอร์ "แชทผ่าน LINE" (รอบ 155 · lineCta.hbs · อาร์ต "cta ทำดีๆหน่อย ไปเจนอะไรมาได้เต็มที่") ----------
    เขียว LINE เข้ม (ตัวขาวบน #04A443 = 3.28:1 ผ่าน AA ตัวใหญ่ · ตัวเล็ก ≥ 18.7px หนา) · ซ้ายข้อความ+ปุ่ม · ขวามือถือ 3D เจน ตั้งล้นขอบบน เอียง 4° · จอ = แชท HTML ขนาดตามมือถือ (cqw) */
 .lc { padding: 64px 0 72px; overflow-x: clip; } /* 6 พ.ย. "ช่องว่างเยอะเกิน": ปุ่มโหลดเพิ่ม→แถบ 206 → ~120 · มือถือ 3D อยู่ขวา ไม่ชนปุ่มกลาง */
-.lc__card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 560px; align-items: center; gap: 24px; min-height: 300px; padding: 44px 56px; border-radius: 30px; background: linear-gradient(110deg, #038A39 0%, #04A443 55%, #07B34C 100%); color: #fff; isolation: isolate; box-shadow: 0 30px 60px -40px rgb(3 90 35 / .7); }
+.lc__card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 560px; align-items: center; gap: 24px; min-height: 300px; padding: 44px 56px; border-radius: 30px; background: linear-gradient(110deg, #026E2E 0%, #037A33 55%, #04A443 100%); /* 16 พ.ย. 2026 audit: ตัวหนังสือขาวด้านซ้าย 2.78–4.4:1 → 5.48–6.41:1 */ color: #fff; isolation: isolate; box-shadow: 0 30px 60px -40px rgb(3 90 35 / .7); }
 .lc__bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: inherit; pointer-events: none; background: linear-gradient(115deg, transparent 38%, rgb(255 255 255 / .09) 52%, transparent 66%), radial-gradient(50% 90% at 82% 100%, rgb(200 247 176 / .22), transparent 70%); }
 .lc__copy { display: grid; justify-items: start; gap: 18px; }
 .lc__head { display: flex; align-items: center; gap: 18px; }
@@ -44,7 +44,7 @@
 /* ช่องพิมพ์ล่างจอ (ภาพประกอบ) */
 .lc__input { position: absolute; left: 3.6cqw; right: 3.6cqw; bottom: 5cqw; display: flex; align-items: center; gap: 2.4cqw; margin: 0; }
 .lc__plus { display: grid; place-items: center; width: 9cqw; height: 9cqw; border-radius: 50%; background: #dfe3e8; font-size: 6cqw; font-weight: 700; line-height: 1; color: #6b7076; }
-.lc__field { flex: 1; padding: 2.4cqw 4cqw; border-radius: 999px; background: #fff; font-size: 4.6cqw; color: #9aa0a6; }
+.lc__field { flex: 1; padding: 2.4cqw 4cqw; border-radius: 999px; background: #fff; font-size: 4.6cqw; color: #6B7178; } /* 16 พ.ย. 2026 audit: 2.64:1 → 4.9:1 */
 .lc__send { display: grid; place-items: center; width: 9cqw; height: 9cqw; border-radius: 50%; background: #06C755; color: #fff; }
 .lc__send svg { width: 4.4cqw; height: 4.4cqw; }
 /* เสื้อลายจริงลอยเข้าหามือถือ (รอบ 156) · การ์ดขาวมุมมน ภาพตัวหน้า + ป้ายรหัสส้มตัวดำ · ลอยขึ้นลงคนละจังหวะ · เส้นประจางนำทางเข้าจอ */

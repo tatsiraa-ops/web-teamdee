@@ -29,7 +29,8 @@
 /* การ์ด LINE: เขียวสดฝั่งมือถือ · ฝั่งตัวหนังสือเข้มขึ้นพอให้ขาวอ่านผ่าน (≥4.5:1 ที่ตัวเล็ก ≥3:1 ที่หัวข้อ) */
 /* การ์ด LINE รอบ 170e (อาร์ตเลือกแบบ ก.): เขียว LINE เรียบ #06C755 ตัวขาวแบบบอร์ด · ไม่มีไล่สีนีออน · ป้ายบริการขาวทึบ · สติกเกอร์นาฬิกาไม่ทับแชท
    โลโก้ LINE ทางการแบบขาวล้วน (icoLine.hbs) วางบนพื้นเขียวตรงๆ */
-.cx-lc { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) 300px; grid-template-areas: "copy vis" "go go"; column-gap: 8px; padding: 34px 34px 28px; border-radius: 24px; color: #fff; background: linear-gradient(180deg, #06C755 0%, #05B94F 100%); }
+/* 16 พ.ย. 2026 audit (WCAG): ตัวหนังสือขาวบนเขียว LINE 2.26:1 → เขียวเข้ม #04341A 6.16:1 แบบแถบปุ่มล่างมือถือ */
+.cx-lc { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) 300px; grid-template-areas: "copy vis" "go go"; column-gap: 8px; padding: 34px 34px 28px; border-radius: 24px; color: #04341A; background: linear-gradient(180deg, #06C755 0%, #05B94F 100%); }
 .cx-lc__copy { grid-area: copy; position: relative; z-index: 2; }
 .cx-lc__head { display: flex; align-items: center; gap: 20px; }
 .cx-lc__logo { display: block; flex: none; width: 88px; height: 88px; filter: drop-shadow(0 8px 12px rgb(0 60 20 / .3)); }
@@ -59,7 +60,7 @@
 }
 /* การ์ดโทร: ตัวหนังสือเป็นหลัก (บอร์ด "โทรหาทีมดี") */
 .cx-call { display: flex; flex-direction: column; padding: 26px 28px 22px; border: 1px solid var(--color-line); border-radius: 24px; background: var(--color-paper); }
-.cx-call__k { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--color-orange-text); }
+.cx-call__k { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #B84500; } /* 16 พ.ย. 2026 audit: #E05F00 บนขาว 3.61:1 → 5.40:1 */
 .cx-call__ki { display: block; width: 36px; height: 36px; }
 .cx-call__t { margin-top: 10px; font-family: var(--font-display); font-size: 30px; font-weight: 800; line-height: 1.2; }
 .cx-call__p { margin-top: 2px; font-size: 15px; line-height: 1.5; color: var(--color-ink-3); }
@@ -108,7 +109,7 @@
 .cx-rows div > span { display: block; margin-top: 1px; font-size: 14px; line-height: 1.55; color: var(--color-ink-3); }
 .cx-office__acts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-line); }
 /* ป้าย LINE แบบบอร์ด "สอบถาม คลิก! @…" · เขียวเข้มพอให้ขาวอ่านผ่าน */
-.cx-linebadge { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 14px 6px 10px; border-radius: 14px; background: linear-gradient(180deg, #06C755 0%, #05B94F 100%); color: #fff; text-decoration: none; transition: filter .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.cx-linebadge { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 14px 6px 10px; border-radius: 14px; background: linear-gradient(180deg, #06C755 0%, #05B94F 100%); color: #04341A; text-decoration: none; transition: filter .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
 .cx-linebadge__ico { display: block; flex: none; width: 40px; height: 40px; }
 .cx-linebadge__ico svg { display: block; width: 100%; height: 100%; }
 .cx-linebadge small, .cx-office__tel small { display: block; font-size: 13px; font-weight: 600; line-height: 1.25; }

@@ -46,6 +46,7 @@ let railSeq = 0
 export function addRailControls(rail, className = 'm-rail-controls') {
   if ([...rail.children].filter((el) => !el.hidden).length < 2) return
   if (!rail.id) rail.id = `m-rail-${++railSeq}`
+  keyboardScrollable(rail, 'รายการเลื่อนดูได้') /* ทุกแถบที่มีปุ่มเลื่อน (หน้าแรก หน้าสินค้า หน้ากลุ่ม) กด Tab ถึงได้ · 16 พ.ย. 2026 */
   const controls = document.createElement('div')
   controls.className = className
   /* ปุ่มลูกศรมีบริบทสำหรับโปรแกรมอ่านจอ: กลุ่มชื่อ "เลื่อนดู: <หัวข้อส่วนนั้น>" (ตรวจมือถือ 30 ต.ค.) · ไม่ใส่ role ที่ราง (ul/ol ต้องคงความเป็นรายการ) */
@@ -91,6 +92,16 @@ export function addRailControls(rail, className = 'm-rail-controls') {
   /* ใบถูกเพิ่ม/ย้าย/ซ่อนด้วย class (ตัวกรองสี · หมุนจอ) → นับใหม่ */
   new MutationObserver(() => requestAnimationFrame(update)).observe(rail, { childList: true, attributes: true, attributeFilter: ['class', 'hidden'], subtree: true })
   update()
+}
+
+/** แถบเลื่อนแนวนอนที่ข้างในไม่มีปุ่ม/ลิงก์ ให้กด Tab ถึงแล้วเลื่อนด้วยลูกศรได้ (16 พ.ย. 2026 audit · WCAG 2.1.1) · มีจุดกดอยู่แล้วไม่แตะ
+ *  รายการ ol/ul คงเป็นรายการ (ไม่ใส่ role) · ชื่อที่ตั้งไว้แล้วไม่ทับ */
+export function keyboardScrollable(el, label) {
+  if (!el || el.querySelector(':is(a[href], button, input, select, textarea, [tabindex]):not([tabindex="-1"])')) return el
+  el.setAttribute('tabindex', '0')
+  if (!/^(OL|UL)$/.test(el.tagName) && !el.hasAttribute('role')) el.setAttribute('role', 'region')
+  if (!el.hasAttribute('aria-label') && !el.hasAttribute('aria-labelledby')) el.setAttribute('aria-label', label)
+  return el
 }
 
 export function initMobileUi() {

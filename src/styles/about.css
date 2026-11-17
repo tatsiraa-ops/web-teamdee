@@ -306,7 +306,7 @@
 .ab2-named__more { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px; margin: 24px 0 0; padding: 0; list-style: none; }
 .ab2-named__more li { padding: 8px 16px; border-radius: 999px; background: #F6F1EC; font-size: 14.5px; line-height: 1.5; color: var(--color-ink); }
 .ab2-named__more b { font-weight: 700; }
-.ab2-named__more .tabular-nums { margin-left: 4px; font-weight: 800; color: #C24A00; }
+.ab2-named__more .tabular-nums { margin-left: 4px; font-weight: 800; color: #A84000; }
 
 /* ส่วนเดิมที่ยังใช้ (โลโก้ ข้อมูลบริษัท นัดหมาย) ระยะเท่าส่วนใหม่ */
 .ab-logos { padding-block: clamp(40px, 4.5vw, 64px) clamp(32px, 3.5vw, 48px); border-top: 1px solid var(--color-line); }
