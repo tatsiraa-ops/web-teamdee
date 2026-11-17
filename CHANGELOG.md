@@ -2,6 +2,22 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.4 — 2026-11-17
+
+ถอดป้ายภาพจำลอง/ภาพประกอบทั้งเว็บ (อาร์ตสั่ง) · แก้จุดจากการตรวจทั้งเว็บ: คอนทราสต์ แถบเลื่อนกด Tab ถึงได้ popup ไม่แย่งโฟกัส รูปแถวแรกโหลดทันที preload ฟอนต์ละติน ล็อกลำดับ CSS
+
+### Features
+
+- **content:** remove "ภาพจำลอง" and "ภาพประกอบ" labels from images site-wide (d877d34)
+
+### Fixes
+
+- **a11y:** raise text contrast, make scrollers keyboard-reachable, stop the promo popup stealing focus (8ae7857)
+
+### Performance
+
+- load first-row images eagerly, preload the Latin font and fix the stylesheet order (b3eeb84)
+
 ## v0.4.3 — 2026-11-16
 
 title ของทุกหน้าที่ธีมแสดงมาจากต้นแบบ (หน้าแรกบน staging เคยเป็น "โรงงานรับผลิตเสื้อ…" จาก Rank Math) รวม title ตอนแชร์ลิงก์ · บทความใช้ Rank Math เหมือนเดิม
