@@ -41,9 +41,20 @@ test('td_content_has_h1: เนื้อหาที่มี <h1 ของต�
 
 test('index.php: หน้าเดี่ยวใส่ H1 ชื่อหน้าเฉพาะเมื่อเนื้อหายังไม่มี H1 · แสดงเนื้อหาที่ผ่าน the_content แล้วครั้งเดียว', () => {
   assert.match(index, /\$content = apply_filters\('the_content', get_the_content\(\)\);/)
-  assert.match(index, /<\?php if \(!td_content_has_h1\(\$content\)\) : \?><h1 class="t-display text-\[clamp\(30px,4\.4vw,52px\)\]"><\?php the_title\(\); \?><\/h1><\?php endif; \?>/)
-  assert.match(index, /<div class="td-prose mt-8"><\?php echo \$content; \/\/ phpcs:ignore \?><\/div>/)
+  /* หน้า Elementor ที่ไม่มี H1 ในเนื้อหา: H1 ชื่อหน้าอยู่ในกรอบ wrap (ไม่ชิดขอบจอ เพราะ main เต็มความกว้าง) */
+  assert.match(index, /<\?php if \(!td_content_has_h1\(\$content\)\) : \?><h1 class="<\?php echo \$td_builder \? 'wrap mt-10 ' : ''; \?>t-display text-\[clamp\(30px,4\.4vw,52px\)\]"><\?php the_title\(\); \?><\/h1><\?php endif; \?>/)
   assert.doesNotMatch(index, /<\?php the_content\(\); \?>/)
   /* มีเนื้อหาไหม ตัดสินจากเนื้อหาที่ผ่าน the_content แล้ว (Elementor สร้างเนื้อหาตอนนี้ · ของดิบอาจว่าง) ไม่งั้นซ่อน H1 ธีมแต่ไม่แสดง H1 ของเนื้อหา = หน้าไม่มี H1 */
   assert.match(index, /<\?php if \(trim\(wp_strip_all_tags\(\$content\)\) !== ''\) : \?>/)
+})
+
+/* 17 พ.ย. 2026 ตรวจ staging /collar-styles/: เว็บจริงส่วนต่างๆ เต็มจอ (1920) · บน staging ถูกครอบด้วย <main class="wrap section"> → บีบเหลือ 1160 + ช่องว่างบน ~100px
+   หน้าเดิมที่สร้างด้วย Elementor (_elementor_edit_mode = builder) จัด layout เองทั้งหน้า → แสดงเต็มความกว้าง ไม่ครอบ wrap/section/max-width ของธีม */
+test('index.php: หน้า Elementor (builder) แสดงเต็มความกว้างแบบเว็บจริง · หน้าอื่นใช้กรอบเดิม', () => {
+  assert.match(index, /\$td_builder = is_singular\(\) && get_post_meta\(get_queried_object_id\(\), '_elementor_edit_mode', true\) === 'builder';/)
+  assert.match(index, /<main id="main" class="<\?php echo \$td_builder \? 'td-elementor' : 'wrap section'; \?>">/)
+  assert.match(index, /<article <\?php post_class\(\$td_builder \? '' : \(is_singular\(\) \? 'max-w-\[72ch\]' : 'py-6 border-b border-line'\)\); \?>>/)
+  assert.match(index, /<div class="<\?php echo \$td_builder \? 'td-elementor__content' : 'td-prose mt-8'; \?>"><\?php echo \$content; \/\/ phpcs:ignore \?><\/div>/)
+  /* หน้า Elementor ที่เนื้อหาว่าง: ข้อความแทนอยู่ในกรอบ wrap ไม่ชิดขอบจอ */
+  assert.match(index, /<div class="<\?php echo \$td_builder \? 'wrap ' : ''; \?>td-prose mt-8"><p>หน้านี้ยังไม่มีเนื้อหาที่พร้อมแสดง/)
 })

@@ -13,18 +13,20 @@ defined('ABSPATH') || exit;
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <?php echo td_chrome('header'); // phpcs:ignore ?>
-<main id="main" class="wrap section">
+<?php /* หน้าเดิมที่สร้างด้วย Elementor จัด layout เองทั้งหน้า → เต็มความกว้างแบบเว็บจริง ไม่ครอบกรอบของธีม (17 พ.ย. 2026 /collar-styles/ คงไว้) */
+$td_builder = is_singular() && get_post_meta(get_queried_object_id(), '_elementor_edit_mode', true) === 'builder'; ?>
+<main id="main" class="<?php echo $td_builder ? 'td-elementor' : 'wrap section'; ?>">
 	<?php if (have_posts()) : ?>
 		<?php if (!is_singular()) : ?><h1 class="t-display text-[clamp(30px,4.4vw,52px)] mb-10"><?php echo esc_html(is_home() ? 'บทความ' : wp_strip_all_tags(get_the_archive_title())); ?></h1><?php endif; ?>
 		<?php while (have_posts()) : the_post(); ?>
-			<article <?php post_class(is_singular() ? 'max-w-[72ch]' : 'py-6 border-b border-line'); ?>>
+			<article <?php post_class($td_builder ? '' : (is_singular() ? 'max-w-[72ch]' : 'py-6 border-b border-line')); ?>>
 				<?php if (is_singular()) : ?>
 					<?php $content = apply_filters('the_content', get_the_content()); /* หน้า Elementor เดิมมี H1 ของตัวเอง → ไม่ใส่ชื่อหน้าเป็น H1 ซ้ำ (17 พ.ย. 2026 /collar-styles/ คงไว้) */ ?>
-					<?php if (!td_content_has_h1($content)) : ?><h1 class="t-display text-[clamp(30px,4.4vw,52px)]"><?php the_title(); ?></h1><?php endif; ?>
+					<?php if (!td_content_has_h1($content)) : ?><h1 class="<?php echo $td_builder ? 'wrap mt-10 ' : ''; ?>t-display text-[clamp(30px,4.4vw,52px)]"><?php the_title(); ?></h1><?php endif; ?>
 					<?php if (trim(wp_strip_all_tags($content)) !== '') : ?>
-					<div class="td-prose mt-8"><?php echo $content; // phpcs:ignore ?></div>
+					<div class="<?php echo $td_builder ? 'td-elementor__content' : 'td-prose mt-8'; ?>"><?php echo $content; // phpcs:ignore ?></div>
 					<?php else : ?>
-					<div class="td-prose mt-8"><p>หน้านี้ยังไม่มีเนื้อหาที่พร้อมแสดง หากต้องการข้อมูล กรุณาติดต่อทีมดีเพื่อขอรายละเอียดก่อนดำเนินการ</p><p><a href="<?php echo esc_url(home_url('/contact-us/')); ?>">ติดต่อทีมดี →</a></p></div>
+					<div class="<?php echo $td_builder ? 'wrap ' : ''; ?>td-prose mt-8"><p>หน้านี้ยังไม่มีเนื้อหาที่พร้อมแสดง หากต้องการข้อมูล กรุณาติดต่อทีมดีเพื่อขอรายละเอียดก่อนดำเนินการ</p><p><a href="<?php echo esc_url(home_url('/contact-us/')); ?>">ติดต่อทีมดี →</a></p></div>
 					<?php endif; ?>
 				<?php else : ?>
 					<h2 class="text-[22px]"><a class="underline decoration-orange decoration-2 underline-offset-4" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
