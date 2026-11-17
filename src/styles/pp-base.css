@@ -1,0 +1,184 @@
+/* pp-base.css · ส่วนของ product-page.css ที่หน้าสินค้าแบบเดิม 4 หน้าใช้ (custom-baseball-shirts · custom-oversize-jerseys · custom-printed-warmup-shirts · screen-printing) · แยก 17 พ.ย. 2026 รอบตรวจความเร็ว
+   หน้าสินค้า 6 หน้าโหลดไฟล์นี้ · /sublimation/ /embroidery/ โหลด product-page.css ต่อท้าย · tests/pp-css-split.test.js */
+/* CSS เฉพาะหน้าสินค้า 6 หน้า (โหลดใน head ของหน้า · data-page-css)
+   เดิมเป็นไฟล์เทียบหน้าโปโลปัก 3 แบบ (27 ต.ค.) · ลบ poloV1–3 แล้ว (2 พ.ย. อาร์ตให้กลับแม่แบบ v22) เหลือเฉพาะของที่แม่แบบใช้จริง */
+
+/* รูปจริงในการ์ดรายละเอียด (ppDetail.hbs) */
+.pp-card__img { overflow: hidden; margin-bottom: 14px; border-radius: 12px; aspect-ratio: 4 / 3; background: var(--color-shell); }
+.pp-card__img img { width: 100%; height: 100%; object-fit: cover; }
+/* เสื้อตัวเดียวบนหุ่น/พื้นขาว วางทั้งตัว ไม่ครอปแขนหรือชายเสื้อ */
+.pp-card__img--fit { background: var(--color-paper); border: 1px solid var(--color-line); }
+.pp-card__img--fit img { object-fit: contain; }
+/* สเปกพับไว้ */
+.pp-specs { margin-top: 8px; border-top: 1px solid var(--color-line); }
+.pp-specs > summary { display: flex; align-items: center; min-height: 48px; font-weight: 700; cursor: pointer; }
+/* ช่องวันใช้เสื้อในส่วนขั้นตอน */
+.nb--order { max-width: none; margin-top: 0; }
+.pp2-dz__rail { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * 16px) / 3.5); /* การ์ดจัตุรัสตัวหน้า: 3.5 ใบต่อจอ ใบถัดไปโผล่ให้รู้ว่าเลื่อนได้ */ gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+.pp2-dz__rail::-webkit-scrollbar { display: none; }
+.pp2-dz-ctl { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+.pp2-dz-ctl > span { margin-right: auto; font-size: 13px; font-variant-numeric: tabular-nums; color: #67635d; }
+.pp2-dz-ctl button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ded9d2; border-radius: 50%; background: #fff; color: var(--color-ink); font-size: 18px; cursor: pointer; }
+.pp2-dz-ctl button[aria-disabled="true"] { opacity: .3; cursor: default; }
+@media (max-width: 1023px) { .pp2-dz__rail { grid-auto-columns: calc((100% - 2 * 16px) / 2.4); } }
+@media (max-width: 767px) {
+  .pp2-dz__rail { grid-auto-columns: 72%; gap: 10px; margin-inline: -20px; padding: 0 20px 4px; scroll-padding-inline: 20px; }
+}
+.pp2-pf__steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 14px 0 0; padding: 0; list-style: none; }
+.pp2-pf__vgrid { position: relative; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: calc((100% - 48px) / 4); gap: 16px; margin: 0; padding: 0; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.pp2-pf__vgrid::-webkit-scrollbar { display: none; }
+.pp2-pf__vgrid > li { scroll-snap-align: start; }
+/* เบื้องหลังงานพิมพ์ลาย: bento 4 คอลัมน์ · การ์ดใหญ่ 2×2 + การ์ดกว้าง 2×1 · แถบไล่ส้มเดียวกับการ์ดขั้นตอน */
+.pp2-pf__bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(200px, 18vw, 250px); gap: 14px; margin: 0; padding: 0; list-style: none; }
+@media (max-width: 1023px) {
+  .pp2-pf__bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 220px; }
+  .pp2-pf__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pp2-pf__vgrid { grid-auto-columns: calc((100% - 32px) / 3); }
+}
+@media (max-width: 767px) {
+  /* มือถือ: การ์ด 6 ใบเรียงลงยาว ~1,900px → รางปัด 84% (เห็นใบถัดไปขอบขวา) */
+  .pp2-pf__steps { position: relative; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 84%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -20px; padding: 0 20px 4px; scroll-padding-inline: 20px; }
+  .pp2-pf__steps::-webkit-scrollbar { display: none; }
+  .pp2-pf__steps > li { scroll-snap-align: start; }
+  /* มือถือ: bento → รางปัดแบบเดียวกับขั้นตอน (ทุกใบ 4:3) */
+  .pp2-pf__bento { position: relative; grid-auto-flow: column; grid-template-columns: none; grid-auto-rows: auto; grid-auto-columns: 84%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -20px; padding: 0 20px 4px; scroll-padding-inline: 20px; }
+  .pp2-pf__bento::-webkit-scrollbar { display: none; }
+  /* position: relative = ชิ้นที่วางแบบ absolute ในตัวเล่น FB ถูกตัดในราง ไม่ดันหน้ากว้างเกินจอ (เดิม scrollWidth 764 ที่ 414) */
+  .pp2-pf__vgrid { position: relative; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 62%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -20px; padding: 0 20px 4px; }
+  .pp2-pf__vgrid > li { scroll-snap-align: start; }
+  .pp2-pf__vgrid { scroll-padding-inline: 20px; }
+}
+.dz { position: relative; display: grid; grid-template-columns: minmax(0, 272px) minmax(0, 1fr) minmax(0, 272px); grid-template-areas: "color hero logo" "graphic hero text"; gap: 22px 28px; align-items: stretch; margin-top: 36px; }
+.dz__lines { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.dz__lines path { fill: none; stroke: #FF6C00; stroke-width: 2; stroke-linejoin: round; transition: opacity .2s ease; }
+.dz__lines circle { fill: #FF6C00; stroke: #fff; stroke-width: 2; transition: opacity .2s ease; }
+.dz[data-on]:not([data-on=""]) .dz__lines circle { opacity: .25; }
+.dz[data-on="color"] .dz__lines circle[data-line="color"], .dz[data-on="logo"] .dz__lines circle[data-line="logo"], .dz[data-on="graphic"] .dz__lines circle[data-line="graphic"], .dz[data-on="text"] .dz__lines circle[data-line="text"] { opacity: 1; }
+.dz[data-on]:not([data-on=""]) .dz__lines path { opacity: .25; }
+.dz[data-on="color"] .dz__lines path[data-line="color"], .dz[data-on="logo"] .dz__lines path[data-line="logo"], .dz[data-on="graphic"] .dz__lines path[data-line="graphic"], .dz[data-on="text"] .dz__lines path[data-line="text"] { opacity: 1; stroke-width: 3; }
+.dz__hero { grid-area: hero; position: relative; align-self: center; display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 0 -56px 34px; }
+.dz__hero::before { content: ''; position: absolute; inset: -8% -4% -4%; background: radial-gradient(closest-side, rgb(255 222 192 / .75), rgb(255 222 192 / 0)); pointer-events: none; }
+.dz[data-on="color"] [data-dot="color"], .dz[data-on="logo"] [data-dot="logo"], .dz[data-on="graphic"] [data-dot="graphic"], .dz[data-on="text"] [data-dot="text"] { scale: 1.25; box-shadow: 0 0 0 9px rgb(255 108 0 / .25), 0 4px 10px rgb(0 0 0 / .25); }
+@media (max-width: 1099px) {
+  .dz { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "hero hero" "color logo" "graphic text"; gap: 16px; }
+  .dz__lines { display: none; }
+  .dz__hero { width: min(100%, 620px); justify-self: center; margin: 0 0 40px; }
+}
+@media (max-width: 767px) {
+  .dz { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "color" "logo" "graphic" "text"; margin-top: 24px; }
+  .dz__hero { margin-bottom: 36px; }
+}
+.fx { margin-top: 40px; }
+.fx + .fx { margin-top: 56px; }
+.spk { display: grid; gap: 40px; margin-top: 32px; }
+.spk__pick { position: relative; display: block; width: 100%; aspect-ratio: 3 / 2; padding: 0; overflow: hidden; border: 0; border-radius: inherit; background: #EDE8E2; color: #fff; text-align: left; cursor: pointer; isolation: isolate; }
+.spk__pick img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; transition: scale .6s cubic-bezier(.2, .7, .2, 1); }
+.spk__pick:hover img { scale: 1.04; }
+.spk__pick:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 3px; }
+.spk.is-js .spk__pick[aria-pressed="true"] { box-shadow: 0 0 0 4px #FF6C00, 0 14px 28px -16px rgb(176 64 0 / .7); }
+.spk.is-js .spk__pick[aria-pressed="true"]::after { content: ""; position: absolute; top: 12px; left: 12px; z-index: 2; width: 30px; height: 30px; border-radius: 50%; background: #FF6C00 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 17px no-repeat; box-shadow: 0 0 0 3px #fff; } /* เลือกอยู่: กรอบส้ม + เครื่องหมายถูก (ไม่ใช้สีอย่างเดียว) */
+.spk:not(.is-js) .spk__pick { cursor: default; }
+/* ขั้น 2 คอ · 196e อาร์ต "ไม่ต้องแสดงราคา และทำมาให้ดีๆ" → ตระกูลคอ 6 กลุ่ม เต็ม 5×3 (subgrid · .cfm__cs display: contents)
+   การ์ดสูงเท่ากันทั้งแถว · ป้ายจุดเด่นชิดล่าง · คำอธิบายตัดบรรทัดเฉพาะช่องว่าง (helper ph) · มือถือ ตระกูลละแถบปัด */
+.is-off { opacity: .38; filter: grayscale(1); transition: opacity .2s ease-out, filter .2s ease-out; }
+@media (min-width: 1200px) {
+  .spk { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); align-items: start; gap: 44px; }
+}
+@media (max-width: 767px) {
+  .spk { gap: 32px; margin-top: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .spk__pick img, .spk__go, .is-off { transition: none; } .spk__pick:hover img { scale: none; } }
+.pp2-sz__picks { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.pp2-sz__picks[data-g="kids"] { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.pp2-sz__picks[hidden] { display: none; }
+.pp2-sz__pick { min-height: 46px; border: 1.5px solid #E6DED6; border-radius: 16px; background: #fff; font: inherit; font-size: 15px; font-weight: 900; color: var(--color-ink); cursor: pointer; transition: border-color .15s ease, background-color .15s ease, color .15s ease, translate .15s ease; }
+.pp2-sz__pick:hover { border-color: #FF6C00; }
+.pp2-sz__pick[aria-pressed="true"] { border-color: #FF6C00; background: #FF6C00; color: #17130f; }
+.pp2-sz__pick:active { translate: 0 1px; }
+.pp2-sz__seg button:focus-visible, .pp2-sz__pick:focus-visible { outline: 3px solid #17130f; outline-offset: 2px; }
+@media (max-width: 767px) {
+  .pp2-sz__picks { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .pp2-sz__picks[data-g="kids"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) { .pp2-sz__o img, .pp2-sz__pick, .pp2-sz__seg button { transition: none; } }
+
+/* ---------- ระยะทั้งหน้าแบบหน้าแรก (อาร์ต 6 พ.ย. "ทั้งหน้านี้ทำให้ย่อความห่างหรือกระชับอะไรให้เหมือนกันหน้าแรก") ----------
+   หน้าแรก (home.css): ทุกส่วน 40/40 (ช่อง ~80) · มือถือ 36/36 · H2 44/800/1.35 · มือถือ 24/800/1.4
+   เดิม /sublimation/: ส่วนละ 56–96 (ช่องระหว่างส่วน 112–192) · H2 ปน 44–68 · จับเฉพาะหน้าสินค้าโฉมใหม่ (มี .pp2-hero) แบบเดียวกับ use-page.css
+   ชุดนี้วางท้ายไฟล์ + มี #main → ชนะกฎระยะของแต่ละส่วน · ไม่แตะเลย์เอาต์ภายในส่วน */
+@media (min-width: 768px) {
+  /* pp2-rhythm */
+  body:has(.pp2-hero) #main :is(.pp2-hl, .pp2-dz, .pp2-pf, #reviews, .pp2-cz, .pp2-fab, .pp2-ty, .pp2-sz, .pp2-rl, .pp2-stb, .rvw-sec, #payment, #faq) { padding-top: 40px; padding-bottom: 40px; }
+  body:has(.pp2-hero) #main section:not(.pp2-hero) h2 { font-size: clamp(30px, 3.06vw, 44px); font-weight: 800; line-height: 1.35; }
+}
+@media (max-width: 767px) {
+  /* pp2-rhythm */
+  body:has(.pp2-hero) #main :is(.pp2-hl, .pp2-dz, .pp2-pf, #reviews, .pp2-cz, .pp2-fab, .pp2-ty, .pp2-sz, .pp2-rl, .pp2-stb, .rvw-sec, #payment, #faq) { padding-top: 36px; padding-bottom: 36px; }
+  body:has(.pp2-hero) #main section:not(.pp2-hero) h2 { font-size: 24px; font-weight: 800; line-height: 1.4; }
+} /* คำรองแบบชิปเรียงแถว (flex) */
+
+/* ---------- เสื้อ 1 ตัวทำอะไรได้บ้าง (pp2Custom · 10 พ.ย. 2026) ----------
+   อาร์ต "อธิบายเพิ่ม · ทำให้อธิบายว่าเสื้อ 1 ตัวทำไรได้บ้าง" → "เอารวมในหน้าเดียวสิ เสื้อตรงกลางใช้เสื้อของ teamdee"
+   แผนผังเดียว 8 เรื่อง: สี โลโก้ ข้อความ กราฟิก ซ้ายขวา (เส้นโยง) · คอ แขน ผ้า ทรง แถวล่าง 4 ใบ (เลขบนเสื้อ · ชี้แล้วจุดเด่น ไม่มีเส้น)
+   + ออปชันเสริม 8 อย่างใต้แผนผัง ภาพทางการ add-* · ราคาบวกเพิ่มเป็นป้ายส้มอ่อน */
+.dz { grid-template-columns: minmax(0, 272px) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 272px); grid-template-areas: "color hero hero logo" "graphic hero hero text" "collar sleeve fabric shape"; }
+.dz[data-on="collar"] [data-dot="collar"], .dz[data-on="sleeve"] [data-dot="sleeve"], .dz[data-on="fabric"] [data-dot="fabric"], .dz[data-on="shape"] [data-dot="shape"] { scale: 1.35; box-shadow: 0 0 0 9px rgb(255 108 0 / .25), 0 4px 10px rgb(0 0 0 / .25); }
+@media (max-width: 1099px) {
+  .dz { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "hero hero" "color logo" "graphic text" "collar sleeve" "fabric shape"; }
+}
+@media (max-width: 767px) {
+  .dz { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "color" "logo" "graphic" "text" "collar" "sleeve" "fabric" "shape"; }
+}
+.spec { width: 100%; border-collapse: collapse; text-align: left; }
+.spec caption { padding: 22px 28px 14px; font-size: 22px; font-weight: 900; text-align: left; color: var(--color-ink); caption-side: top; border-top: 5px solid #FF6C00; }
+.spec thead th { padding: 10px 20px; border-block: 1px solid rgb(23 19 15 / .08); background: #FAF8F5; font-size: 13.5px; font-weight: 800; color: var(--color-ink-3); }
+.spec thead th:first-child { padding-left: 28px; width: 260px; }
+.spec thead th:last-child { width: 300px; }
+.spec tbody th, .spec tbody td { padding: 16px 20px; border-bottom: 1px solid rgb(23 19 15 / .07); vertical-align: middle; }
+.spec tbody th { padding-left: 28px; font-weight: 400; }
+.spec tbody tr:last-child :is(th, td) { border-bottom: 0; }
+.spec tbody tr:target { background: #FFF7F0; }
+@media (max-width: 899px) {
+  .spec thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .spec, .spec tbody, .spec tr, .spec th, .spec td { display: block; }
+  .spec caption { display: block; padding: 18px 18px 12px; font-size: 20px; }
+  .spec tbody tr { padding: 14px 18px; border-bottom: 1px solid rgb(23 19 15 / .08); }
+  .spec tbody th, .spec tbody td { padding: 0; border: 0; }
+  .spec tbody td { margin-top: 10px; }
+}
+.pf2__c { display: grid; justify-items: center; gap: 5px; width: 100%; padding: 4px 0; border: 0; background: none; cursor: pointer; font: inherit; color: var(--color-ink); }
+.pf2__c:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; border-radius: 10px; } /* สองฝั่งตั้งแต่ 1280 (1100–1279 การ์ดขวาแคบจนสีล้น) */
+.pf4__panel { display: flex; flex-direction: column; height: 100%; }
+.pf4__panel[hidden] { display: none; }
+.pf4__panel + .pf4__panel { border-top: 1px solid #f2d9c2; }
+@keyframes pf4-in { from { opacity: .35; transform: scale(1.06); } to { opacity: 1; transform: scale(1); } }
+@media (max-width: 1279px) {
+  .pf4__panel { display: grid; grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- 16 พ.ย. 2026 หน้างานปัก: ผังเสื้อ TEAMDEE หน้า-หลัง + เส้นชี้ (partial shirtCallouts · shirt-callouts.js) ----
+   อาร์ต "เอาเป็นตัวเสื้อหน้าหลัง และเอาแบบมีเส้นแล้วชี้ไปในแต่ละจุด" · คอม: ป้าย | ภาพ | ป้าย + เส้นส้ม · ต่ำกว่า 1024: ภาพบน ป้ายเป็นรายการใต้ภาพ (เลขตรงกับจุดบนภาพ ไม่มีเส้น)
+   เลขบนพื้นส้ม #FF6C00 เป็นตัวดำตามกติกาแบรนด์ */
+/* รอบ 3 (16 พ.ย. อาร์ต "ทำมาดีๆ กว้างพิเศษได้ เอารูปใหญ่ๆมาได้เลย"): ทั้งส่วน .ps2 กว้างพิเศษ 1400 · ภาพเสื้อพื้นโปร่งใสครอปชิดตัว · คอลัมน์ป้ายกว้างพอดีเนื้อหา ที่เหลือให้ภาพ
+   ผังที่ป้ายมีรูปงานปัก (ตำแหน่งปัก) คอลัมน์ 320 · ผังที่ป้ายมีแต่ข้อความ (รายละเอียดเสื้อ) คอลัมน์ 190 ภาพใหญ่กว่า */
+.sc { position: relative; display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr) minmax(0, 320px); gap: 28px; align-items: center; margin-top: 28px; padding: 56px 32px; border-radius: 28px; background: #F0ECE8; }
+.sc:not(:has(.sc__thumb)) { grid-template-columns: minmax(0, 190px) minmax(0, 1fr) minmax(0, 190px); }
+/* รอบ 2 (16 พ.ย. อาร์ต "แปลกๆ ไม่สวยเลย"): พื้นกล่อง = พื้นภาพเสื้อ (#F0ECE8 วัดจากไฟล์ webp ที่เบราว์เซอร์ถอดรหัสแล้ว) ภาพกลืนกับกล่อง ไม่เป็นกล่องเทาซ้อนในกล่องขาว
+   คอม (.is-placed จาก JS): ป้ายไม่มีกรอบ วางระดับเดียวกับจุด · จุดบนภาพเล็กลงไม่มีเลข (เลขอยู่ที่ป้ายปลายเส้น) */
+.sc__col { position: relative; z-index: 2; display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.sc__item { position: relative; }
+.sc__fig { position: relative; margin: 0; }
+.sc__fig img { display: block; width: 100%; height: auto; }
+.sc__lines { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; overflow: visible; pointer-events: none; fill: none; stroke: #FF6C00; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sc__item.lb-host { cursor: zoom-in; }
+/* คอม: คอลัมน์ป้ายสูงเท่าภาพ · ป้ายชิดฝั่งภาพ เลขอยู่ปลายเส้น (ซ้าย: รูป ข้อความ เลข · ขวา: เลข ข้อความ รูป) */
+.sc.is-placed .sc__col { display: block; align-self: stretch; }
+.sc.is-placed .sc__item { position: absolute; left: 0; right: 0; display: flex; }
+.sc.is-placed .sc__col--l .sc__item { justify-content: flex-end; }
+@media (max-width: 1023px) {
+  .sc { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 16px; }
+  .sc__fig { grid-column: 1 / -1; order: -1; }
+  .sc__col { gap: 10px; align-content: start; }
+  .sc__lines { display: none; }
+}
+@media (max-width: 559px) { .sc { grid-template-columns: minmax(0, 1fr); } }
