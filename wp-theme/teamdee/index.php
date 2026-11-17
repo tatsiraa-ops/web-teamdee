@@ -19,9 +19,10 @@ defined('ABSPATH') || exit;
 		<?php while (have_posts()) : the_post(); ?>
 			<article <?php post_class(is_singular() ? 'max-w-[72ch]' : 'py-6 border-b border-line'); ?>>
 				<?php if (is_singular()) : ?>
-					<h1 class="t-display text-[clamp(30px,4.4vw,52px)]"><?php the_title(); ?></h1>
-					<?php if (trim(wp_strip_all_tags(get_the_content())) !== '') : ?>
-					<div class="td-prose mt-8"><?php the_content(); ?></div>
+					<?php $content = apply_filters('the_content', get_the_content()); /* หน้า Elementor เดิมมี H1 ของตัวเอง → ไม่ใส่ชื่อหน้าเป็น H1 ซ้ำ (17 พ.ย. 2026 /collar-styles/ คงไว้) */ ?>
+					<?php if (!td_content_has_h1($content)) : ?><h1 class="t-display text-[clamp(30px,4.4vw,52px)]"><?php the_title(); ?></h1><?php endif; ?>
+					<?php if (trim(wp_strip_all_tags($content)) !== '') : ?>
+					<div class="td-prose mt-8"><?php echo $content; // phpcs:ignore ?></div>
 					<?php else : ?>
 					<div class="td-prose mt-8"><p>หน้านี้ยังไม่มีเนื้อหาที่พร้อมแสดง หากต้องการข้อมูล กรุณาติดต่อทีมดีเพื่อขอรายละเอียดก่อนดำเนินการ</p><p><a href="<?php echo esc_url(home_url('/contact-us/')); ?>">ติดต่อทีมดี →</a></p></div>
 					<?php endif; ?>

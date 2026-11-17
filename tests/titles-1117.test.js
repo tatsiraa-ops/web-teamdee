@@ -7,15 +7,16 @@ import { readFileSync } from 'node:fs'
 
 const pages = JSON.parse(readFileSync(new URL('../wp-theme/teamdee/build/pages.json', import.meta.url), 'utf8')).pages
 
-test('title ทุกหน้าที่ index ได้ ≤ 60 ตัวอักษร', () => {
-  const long = Object.entries(pages).filter(([r, p]) => r.startsWith('/') && !/noindex/.test(p.robots || '') && [...p.title].length > 60).map(([r, p]) => `${r} ${[...p.title].length}`)
+test('title ทุกหน้าที่ index ได้ ≤ 60 ตัวอักษร (ยกเว้น /size-chart/ ใช้ title เดิมที่ติดอันดับ)', () => {
+  const long = Object.entries(pages).filter(([r, p]) => r.startsWith('/') && r !== '/size-chart/' && !/noindex/.test(p.robots || '') && [...p.title].length > 60).map(([r, p]) => `${r} ${[...p.title].length}`)
   assert.deepEqual(long, [])
 })
 test('หน้าขายหลักบอกขั้นต่ำใน title · /size-chart/ มีช่วงไซซ์ · /sublimation/ ไม่มีราคา', () => {
   assert.match(pages['/embroidery/'].title, /เริ่ม 10 ตัว/)
   assert.match(pages['/sublimation/'].title, /เริ่ม 10 ตัว/)
   assert.match(pages['/screen-printing/'].title, /เริ่ม 1 ตัว/)
-  assert.match(pages['/size-chart/'].title, /SS–7XL/)
+  /* /size-chart/ ใช้ title เดิมของเว็บจริง (อาร์ต 17 พ.ย. "คงไว้" · tests/legacy-keep-1117.test.js) · ยังมีช่วงไซส์ */
+  assert.match(pages['/size-chart/'].title, /S-5XL/)
   assert.doesNotMatch(pages['/sublimation/'].title + pages['/sublimation/'].description, /\d{3} บาท|฿/)
   assert.match(pages['/'].description, /เริ่ม 10 ตัว/)
 })

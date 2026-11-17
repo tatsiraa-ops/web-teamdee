@@ -61,6 +61,10 @@ function td_page(?string $route = null): ?array {
 }
 
 /** หน้าที่กำลังแสดงด้วย HTML จากต้นแบบ (ตั้งค่าตอน template_include) */
+/** เนื้อหาหน้ามี <h1> ของตัวเองแล้ว (หน้า Elementor เดิม) → แม่แบบไม่ใส่ H1 ชื่อหน้าซ้ำ · 17 พ.ย. 2026 อาร์ต "/collar-styles/ คงไว้" (tests/legacy-keep-1117.test.js) */
+function td_content_has_h1(string $html): bool {
+	return (bool) preg_match('~<h1[\s>]~i', $html);
+}
 function td_current(): ?array {
 	return $GLOBALS['td_current'] ?? null;
 }
