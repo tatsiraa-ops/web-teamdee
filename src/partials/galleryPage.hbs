@@ -35,7 +35,7 @@
     {{#if this.real}}
     <div class="gcard" data-thumb="{{this.img}}">
     <figure class="gcard__fig bg-shell" data-code="" data-meta="งานจริงของลูกค้า">
-      <img src="{{this.img}}" data-sizes="(min-width:1024px) 33vw, 50vw" width="{{this.w}}" height="{{this.h}}" loading="lazy" decoding="async" alt="{{this.alt}}" class="w-full h-full object-cover">
+      <img src="{{this.img}}" data-sizes="(min-width:1024px) 33vw, 50vw" width="{{this.w}}" height="{{this.h}}" loading="{{#if (lt @index 4)}}eager{{else}}lazy{{/if}}" decoding="async" alt="{{this.alt}}" class="w-full h-full object-cover">
     </figure>
       <div class="gcard__cap">
         <p class="gcard__t"><b class="tabular-nums">รูปที่ {{inc @index}}</b><span>งานจริงของลูกค้า</span></p>
@@ -45,7 +45,7 @@
     {{else if this.square}}
     <div class="gcard" data-thumb="{{this.img}}">
     <figure class="gcard__fig bg-paper" data-code="" data-meta="แบบจากคลังผลงานทีมดี">
-      {{!-- ไฟล์ 540 สำหรับช่องเล็ก (มือถือเคยโหลดไฟล์ 1080 ทุกช่อง ~4MB/หน้า · audit 26 ต.ค.) --}}<img src="{{this.img}}" data-sizes="(min-width:1024px) 33vw, 50vw" width="{{#if this.w}}{{this.w}}{{else}}1080{{/if}}" height="{{#if this.h}}{{this.h}}{{else}}1080{{/if}}" loading="lazy" decoding="async" alt="{{this.alt}}" class="w-full h-full object-contain">
+      {{!-- ไฟล์ 540 สำหรับช่องเล็ก (มือถือเคยโหลดไฟล์ 1080 ทุกช่อง ~4MB/หน้า · audit 26 ต.ค.) --}}<img src="{{this.img}}" data-sizes="(min-width:1024px) 33vw, 50vw" width="{{#if this.w}}{{this.w}}{{else}}1080{{/if}}" height="{{#if this.h}}{{this.h}}{{else}}1080{{/if}}" loading="{{#if (lt @index 4)}}eager{{else}}lazy{{/if}}" decoding="async" alt="{{this.alt}}" class="w-full h-full object-contain">
     </figure>
       <div class="gcard__cap">
         <p class="gcard__t"><b class="tabular-nums">รูปที่ {{inc @index}}</b><span>แบบอ้างอิง ไม่มีรหัส</span></p>
@@ -55,7 +55,7 @@
     {{else}}
     <div class="gcard" data-thumb="{{this.imgSmall}}">
     <figure class="gcard__fig bg-paper {{#if this.thumbBoard}}board-thumb{{/if}}" data-code="{{this.code}}" data-meta="{{this.meta}}">
-      <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} {{#if this.width}}{{this.width}}{{else}}1080{{/if}}w" sizes="(min-width:1024px) 33vw, 50vw" width="1080" height="720" loading="lazy" decoding="async" alt="แบบ{{this.garmentName}} {{this.techName}} รหัส {{this.code}}" class="w-full h-full object-contain">
+      <img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} {{#if this.width}}{{this.width}}{{else}}1080{{/if}}w" sizes="(min-width:1024px) 33vw, 50vw" width="1080" height="720" loading="{{#if (lt @index 4)}}eager{{else}}lazy{{/if}}" decoding="async" alt="แบบ{{this.garmentName}} {{this.techName}} รหัส {{this.code}}" class="w-full h-full object-contain">
     </figure>
       <div class="gcard__cap">
         <p class="gcard__t"><b class="tabular-nums">{{this.code}}</b><span>{{this.garmentName}}</span></p>

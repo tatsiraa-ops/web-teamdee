@@ -34,7 +34,7 @@
         <legend class="calc__lg"><span class="calc__no" aria-hidden="true">1</span>เลือกเสื้อ <span class="calc__lg-sub">ราคาต่อตัวตามจำนวนขั้นต่ำของแต่ละสินค้า รวม VAT</span></legend>
         <div class="kgrid">
           {{#each calculator.kinds}}<label class="kcard"><input class="sr-only" type="radio" name="kind" value="{{this.id}}"{{#if @first}} checked{{/if}}>
-            <span class="kcard__img">{{#if this.img}}<img src="{{this.img.sm}}" alt="" width="540" height="367" loading="lazy" decoding="async">{{else}}<span class="kcard__ico">{{> icoPrinter}}</span>{{/if}}</span>
+            <span class="kcard__img">{{#if this.img}}<img src="{{this.img.sm}}" alt="" width="540" height="367" loading="{{#if (lt @index 6)}}eager{{else}}lazy{{/if}}" decoding="async">{{else}}<span class="kcard__ico">{{> icoPrinter}}</span>{{/if}}</span>
             <span class="kcard__txt"><span class="kcard__t">{{#each this.nameParts}}<span>{{this}}</span> {{/each}}</span><span class="kcard__p tabular-nums">{{#if this.byDesign}}{{{ph this.sub}}}{{else}}<span class="inline-block"><b>{{baht this.from}}</b> บาท/ตัว</span>{{/if}}</span></span>
           </label>{{/each}}
         </div>

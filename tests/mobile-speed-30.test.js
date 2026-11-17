@@ -83,7 +83,8 @@ test('/embroidery/: รูปแกลเลอรีและรูปหลั
 /* 4. preload ฟอนต์ไทย (ชุด thai) ด้วยชื่อไฟล์จริงหลัง Vite ใส่ hash */
 test('fontPreloadTag: หาไฟล์ฟอนต์ไทยที่ hash แล้วจาก bundle · ไม่เจอ = ไม่ใส่', () => {
   const names = ['assets/noto-sans-thai-latin-N3v1vcg9.woff2', 'assets/noto-sans-thai-thai-DvQ_ZkZP.woff2', 'assets/page-x.js']
-  assert.equal(fontPreloadTag(names), '<link rel="preload" href="/assets/noto-sans-thai-thai-DvQ_ZkZP.woff2" as="font" type="font/woff2" crossorigin>')
+  /* 16 พ.ย. 2026 audit: ฟอนต์ละติน (ใช้ทุกหน้า) ไม่ได้ preload → ตอนฟอนต์มาถึงหน้ากระตุก CLS 0.19 ในหน้าแกลเลอรี · preload ทั้งไทยและละติน (ไม่เอา latin-ext ที่ไม่ได้ใช้) */
+  assert.equal(fontPreloadTag([...names, 'assets/noto-sans-thai-latin-ext-DUQ1fxjz.woff2']), '<link rel="preload" href="/assets/noto-sans-thai-thai-DvQ_ZkZP.woff2" as="font" type="font/woff2" crossorigin>\n<link rel="preload" href="/assets/noto-sans-thai-latin-N3v1vcg9.woff2" as="font" type="font/woff2" crossorigin>')
   assert.equal(fontPreloadTag(['assets/page-x.js']), '')
 })
 

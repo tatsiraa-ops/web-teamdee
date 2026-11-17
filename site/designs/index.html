@@ -74,7 +74,7 @@
             {{!-- 6 พ.ย. "ทำรูปให้มันเต็มๆหน่อย": ภาพตัด 3:2 (thumb) ถ้ามี · กดดูใหญ่ใช้ data-full = ไฟล์เต็ม --}}
             <figure class="dcard__fig{{#unless this.thumb}}{{#if this.thumbBoard}} board-thumb{{/if}}{{/unless}}">
               {{#if this.thumb}}<img src="{{this.thumbSmall}}" srcset="{{this.thumbSmall}} 540w, {{this.thumb}} 1080w" sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"{{else}}<img src="{{this.img}}" srcset="{{this.imgSmall}} 540w, {{this.img}} {{#if this.width}}{{this.width}}{{else}}1080{{/if}}w" sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"{{/if}}
-                   width="1080" height="720" loading="lazy" decoding="async"
+                   width="1080" height="720" loading="{{#if (lt @index 6)}}eager{{else}}lazy{{/if}}"{{#if (eq @index 0)}} fetchpriority="high"{{/if}} decoding="async"
                    alt="แบบ{{this.garmentName}} {{this.techName}} รหัส {{this.code}}">
             </figure>
             <div class="dcard__cap">

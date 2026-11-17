@@ -153,3 +153,24 @@ export const seoFiles = () => ({
     })
   },
 })
+
+/* 16 พ.ย. 2026 audit: Vite สลับลำดับ <link rel="stylesheet"> เองทุก build · กฎที่ความเจาะจงเท่ากันจึงชนะสลับกันไปมา (88 จุดใน 39 หน้า)
+   ล็อกลำดับ: CSS กลาง (site-extras / nav) → CSS ชิ้นส่วนที่ใช้หลายหน้า → CSS ของหน้า (ชนะท้ายสุด) · ในกลุ่มเรียงตามชื่อ · tests/css-order.test.js */
+const CSS_SHARED = ['site-extras', 'nav']
+const CSS_PARTS = ['article-reader', 'line-cta', 'need-by-ui', 'pick-tray', 'review-wall']
+const cssName = (tag) => (tag.match(/\/([a-z0-9-]+?)-[A-Za-z0-9_-]{8}\.css/) || [])[1] || ''
+const cssRank = (n) => (CSS_SHARED.includes(n) ? 0 : CSS_PARTS.includes(n) ? 1 : 2)
+export function orderStylesheets(html) {
+  const re = /<link\b[^>]*\brel="stylesheet"[^>]*>\n?/g
+  const tags = html.match(re) || []
+  if (tags.length < 2) return html
+  const sorted = [...tags].map((t) => t.replace(/\n$/, '')).sort((a, b) => cssRank(cssName(a)) - cssRank(cssName(b)) || cssName(a).localeCompare(cssName(b)))
+  const first = html.search(re)
+  const rest = html.replace(re, '')
+  return rest.slice(0, first) + sorted.join('\n') + '\n' + rest.slice(first)
+}
+export const cssOrder = () => ({
+  name: 'teamdee-css-order',
+  apply: 'build',
+  transformIndexHtml: { order: 'post', handler: (html) => orderStylesheets(html) },
+})
