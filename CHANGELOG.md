@@ -2,6 +2,18 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.9 — 2026-11-17
+
+คง /size-chart/ และ /collar-styles/ ไว้กัน SEO เก่าหลุด · ปรับหน้าบทความ: วันที่ไทย หมวด เวลาอ่าน สารบัญสั้นลง ตารางอ่านง่าย กล่องถามทาง LINE กลางบทความ ป๊อปอัปไม่เด้งกลางเนื้อหา
+
+### Features
+
+- **article:** Thai dates, category and reading time, shorter contents, lighter tables, quiet LINE prompt (d12c745)
+
+### Fixes
+
+- **seo:** keep the ranking /size-chart/ title and H1, single H1 on legacy Elementor pages (b5a1148)
+
 ## v0.4.8 — 2026-11-17
 
 แก้จากการตรวจ staging หลัง v0.4.7: หน้าธีมไม่มี Article/ผู้เขียน (en-US) ของ Rank Math แล้ว · /?p= ที่ไม่มีอยู่จริงได้ 404 (เดิม 200 เป็นหน้าแรก)
