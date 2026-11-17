@@ -1,0 +1,20 @@
+# 17 พ.ย. 2026 รอบตรวจความปลอดภัย: ไฟล์ข้อมูลของธีมไม่ต้องเปิดตรงจากเว็บ (WordPress อ่านจากดิสก์เอง)
+# .json = pages.json · img-manifest.json · seo-legacy.json   .head.html / .body.html = ส่วนหน้าที่ธีมประกอบ
+<FilesMatch "\.json$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+<FilesMatch "\.(head|body)\.html$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

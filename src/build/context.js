@@ -1,7 +1,7 @@
 /* ข้อมูลของแต่ละหน้า (แยกจาก vite.config.js · 16 พ.ย. 2026 B1e) · pageContext(pagePath) คืนข้อมูลที่เทมเพลตของหน้านั้นใช้
    ส่วนที่ทุกหน้าใช้ร่วม (base) อยู่ที่นี่ · ส่วนเฉพาะประเภทหน้าอยู่ใน src/build/pages/<ประเภท>.js */
 import { pageFor } from '../../src/js/routes.js'
-import { faqSchema, businessSchema, ldJson } from '../../src/js/seo-schema.js'
+import { faqSchema, businessSchema, priceRangeOf, ldJson } from '../../src/js/seo-schema.js'
 import { videosFor, videoView, videoSchema } from '../../src/js/video-view.js'
 import { lineMessageUrl, pageLineText, REORDER_TEXT, TRACK_TEXT } from '../../src/js/use-cta.js'
 import { faqAskText } from '../../src/js/faq-search.js'
@@ -76,7 +76,10 @@ export function pageContext(pagePath) {
           base.videoLd = base.vids.filter((v) => v.ready).map((v) => ldJson(videoSchema(v, data.site.baseUrl)))
         }
         /* หน้าแรก: ข้อมูลธุรกิจ + FAQ ให้ Google อ่าน (SEO เสื้อโปโล / ยูนิฟอร์ม 21 ต.ค. 2026) */
-        if (at === '/') base.homeLd = [businessSchema(data.site), faqSchema(json('home.json').faq.items)].filter(Boolean).map(ldJson)
+        /* /about-us/: schema ธุรกิจชุดเดียวกับหน้าแรก (@id /#business ร่วม · 17 พ.ย. 2026 เดิมเป็น Organization แยก ข้อมูลไม่ตรงกัน) */
+        /* 17 พ.ย. 2026 A4: ทุกหน้าอ้างธุรกิจเดียวกัน (@id /#business · head.hbs) · หน้าแรกอยู่ใน homeLd พร้อม FAQ */
+        if (at !== '/') base.businessLd = [ldJson(businessSchema(data.site, { priceRange: priceRangeOf(json('prices.json')) }))]
+        if (at === '/') base.homeLd = [businessSchema(data.site, { priceRange: priceRangeOf(json('prices.json')) }), faqSchema(json('home.json').faq.items)].filter(Boolean).map(ldJson)
         /* เครื่องคำนวณ: FAQ ราคาให้ Google อ่าน (audit calc-11) · เว็บจริงใช้ FAQ ที่ตัดข้อรอยืนยันแล้ว */
         /* /designs/ (ตรวจมือถือ 30 ต.ค.): หน้าแบบเสื้อไม่มีราคาเลย · แบบทั้งหมดเป็นเสื้อพิมพ์ลาย → ราคาเริ่ม ขั้นต่ำ วันผลิต ของพิมพ์ลาย */
         if (at === '/designs/') {

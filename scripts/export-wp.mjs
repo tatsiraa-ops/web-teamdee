@@ -7,6 +7,7 @@
 import { execSync } from 'node:child_process'
 import { isExported } from './seo-check.mjs'
 import { makeRewrite } from './wp-rewrite.mjs'
+import { llmsText } from '../src/build/llms.js'
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -104,4 +105,7 @@ for (const file of walk(dist)) {
   }
 }
 writeFileSync(join(out, 'pages.json'), JSON.stringify({ generated: new Date().toISOString(), themeUrl: THEME_URL, pages }, null, 1))
+/* /llms.txt ให้ AI อ่านข้อมูลบริษัทในไฟล์เดียว (17 พ.ย. 2026 · src/build/llms.js · ธีมส่งที่ /llms.txt) */
+const dataJson = (f) => JSON.parse(readFileSync(join(root, 'src/data', f), 'utf8'))
+writeFileSync(join(out, 'llms.txt'), llmsText({ site: dataJson('site.json'), prices: dataJson('prices.json'), lead: dataJson('lead-times.json'), pages }))
 console.log(`export-wp: ${Object.keys(pages).length} หน้า → ${relative(root, out)} · รูป ${imgFiles.length} ไฟล์ → ${relative(root, imgOut)}`)

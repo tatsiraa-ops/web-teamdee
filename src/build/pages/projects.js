@@ -40,7 +40,7 @@ export function projectsPage({ data, base, at, page, kind, id, rel, sizeCharts, 
             const x = json('customers.json').find((c) => c.img === `/img/customer/${id}.webp`)
             const u = x && data.uses.find((y) => y.id === x.photoGroup)
             if (!u) throw new Error(`heroPile: ไม่มีภาพ ${id} หรือกลุ่มลูกค้า`)
-            return { img: x.img, tag: u.shortName, alt: `${x.occ || 'ทีมลูกค้าใส่เสื้อ'} · ลูกค้ากลุ่ม${u.shortName}ของทีมดี` }
+            return { img: x.img, small: x.imgSmall || x.img, tag: u.shortName, alt: `${x.occ || 'ทีมลูกค้าใส่เสื้อ'} · ลูกค้ากลุ่ม${u.shortName}ของทีมดี` }
           })
           /* รีวิว 2 แถวเลื่อน (อาร์ต 27 ต.ค. "เอาแบบสองแถวเลื่อนๆ กดดูหลายรูป") · แถวบนเลขคู่ แถวล่างเลขคี่
              รีวิวที่เป็นเรื่องราวแล้วไม่วิ่งซ้ำในแถว (28 ต.ค. คนเห็นคำพูดเดิมสองรอบ) · allReviews ยังครบ ให้กล่องดูรูปเปิดได้ทุกราย */

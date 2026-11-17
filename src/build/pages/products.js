@@ -4,7 +4,7 @@
    ส่วนที่ทุกหน้าใช้ร่วม (base) อยู่ที่นี่ · ส่วนเฉพาะประเภทหน้าอยู่ใน src/build/pages/<ประเภท>.js */
 import { resolve } from 'node:path'
 import { existsSync } from 'node:fs'
-import { faqSchema, ldJson } from '../../../src/js/seo-schema.js'
+import { faqSchema, productSchema, ldJson } from '../../../src/js/seo-schema.js'
 import { videosFor, videoView } from '../../../src/js/video-view.js'
 import { productView } from '../../../src/js/product-view.js'
 import { lineMessageUrl } from '../../../src/js/use-cta.js'
@@ -50,6 +50,8 @@ export function productsPage({ data, base, at, page, kind, id, rel, sizeCharts, 
           return {
             ...base,
             item,
+            /* 17 พ.ย. 2026 A5: Product + ช่วงราคา (head.hbs) · พิมพ์ลาย/วอร์ม = ไม่มี */
+            offerLd: ((s) => s && ldJson(s))(productSchema(item, json('prices.json'), data.site, at, page?.description)),
             promos: id === 'screen' ? [] : base.promos,
             screenColors: id === 'screen' ? [{name:'ขาว',hex:'#fafafa'},{name:'ดำ',hex:'#202020'},{name:'กรม',hex:'#242c40'},{name:'เบจ',hex:'#c5b598'},{name:'ครีม',hex:'#eee4cc'},{name:'เทา',hex:'#969892'},{name:'ช็อกโกแลต (น้ำตาล)',hex:'#4d3c30'}] : [],
             screenExtras: id === 'screen' ? [{size:'7 × 10',price:25},{size:'10 × 15',price:30},{size:'15 × 20',price:35},{size:'20 × 30',price:45},{size:'30 × 40',price:55}] : [],

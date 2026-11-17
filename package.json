@@ -11,7 +11,8 @@
     "export:wp": "node scripts/export-wp.mjs",
     "pack": "node scripts/pack-release.mjs",
     "check": "node scripts/check-data.mjs",
-    "compare": "node scripts/compare-build.mjs"
+    "compare": "node scripts/compare-build.mjs",
+    "new:page": "node scripts/new-page.mjs"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",

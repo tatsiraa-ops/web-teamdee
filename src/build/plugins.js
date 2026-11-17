@@ -38,7 +38,10 @@ export const seoTags = () => ({
       const big = firstImg.replace(/-(?:320|400|440|480|540|640)(\.\w+)$/, '$1')
       if (big !== firstImg && existsSync(resolve(root, 'public' + big))) firstImg = big
     }
-    const image = site.baseUrl + ((ogMark && ogMark[1]) || firstImg || site.ogImage)
+    /* 17 พ.ย. 2026 A8: รูปแชร์ JPG 1200×630 รายหน้า public/img/og/<slug>.jpg (scripts/make-og.py) มาก่อน · tests/og-images.test.js */
+    const ogSlug = path.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'home'
+    const ogFile = existsSync(resolve(root, `public/img/og/${ogSlug}.jpg`)) ? `/img/og/${ogSlug}.jpg` : null
+    const image = site.baseUrl + (ogFile || (ogMark && ogMark[1]) || firstImg || site.ogImage)
 
     const tags = [
       `<link rel="canonical" href="${esc(url)}">`,
@@ -52,7 +55,7 @@ export const seoTags = () => ({
       `<meta property="og:description" content="${esc(desc)}">`,
       `<meta property="og:image" content="${esc(image)}">`,
       `<meta property="og:image:alt" content="${esc(title)}">`,
-      ...(ogMark ? ['<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">'] : []),
+      ...(ogFile || ogMark ? ['<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">'] : []),
       `<meta name="twitter:card" content="summary_large_image">`,
       `<meta name="twitter:title" content="${esc(title)}">`,
       `<meta name="twitter:description" content="${esc(desc)}">`,
@@ -125,18 +128,21 @@ export const fontPreload = () => ({
 
 /* สร้าง robots.txt กับ sitemap.xml ตอน build จากรายชื่อหน้าจริง
    จะได้ไม่ต้องมานั่งไล่แก้มือทุกครั้งที่เพิ่มหน้า */
+/** [path ใน dist, HTML ที่ render แล้ว] → path ที่ใส่ sitemap · ข้ามหน้า noindex (ทุกรูปแบบ) และ 404
+    17 พ.ย. 2026: เดิมอ่าน template ดิบ → หน้าที่มี noindex ในเงื่อนไข {{#unless}} หลุด · noindex,nofollow ไม่ตรงสตริง เลยหลุดเข้า */
+export const sitemapPaths = (pages) => pages
+  .filter(([f]) => f.endsWith('index.html'))
+  .filter(([, html]) => !/<meta\b(?=[^>]*\bname="robots")(?=[^>]*\bcontent="[^"]*noindex)[^>]*>/i.test(html))
+  .map(([f]) => '/' + f.slice(0, -10))
+  .sort()
+
 export const seoFiles = () => ({
   name: 'teamdee-seo-files',
   apply: 'build',
-  generateBundle() {
+  /* order post: HTML ของหน้า (vite:build-html) ต้องอยู่ใน bundle แล้ว */
+  generateBundle: { order: 'post', handler(_, bundle) {
     const site = json('site.json')
-    const urls = []
-    for (const f of walk('.').sort()) {
-      if (!f.endsWith('index.html')) continue // 404.html ไม่ใช่หน้าที่ให้ค้นเจอ
-      const html = readFileSync(resolve(siteDir, f), 'utf8')
-      if (html.includes('name="robots" content="noindex"')) continue
-      urls.push('/' + f.slice(0, -10))
-    }
+    const urls = sitemapPaths(Object.values(bundle).filter((a) => a.type === 'asset' && a.fileName.endsWith('.html')).map((a) => [a.fileName, String(a.source)]))
     const today = new Date().toISOString().slice(0, 10)
     const body = urls
       .map((u) => `  <url>\n    <loc>${site.baseUrl}${u}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${u === '/' ? '1.0' : '0.7'}</priority>\n  </url>`)
@@ -151,7 +157,7 @@ export const seoFiles = () => ({
       fileName: 'robots.txt',
       source: `User-agent: *\nAllow: /\n\nSitemap: ${site.baseUrl}/sitemap.xml\n`,
     })
-  },
+  } },
 })
 
 /* 16 พ.ย. 2026 audit: Vite สลับลำดับ <link rel="stylesheet"> เองทุก build · กฎที่ความเจาะจงเท่ากันจึงชนะสลับกันไปมา (88 จุดใน 39 หน้า)
@@ -159,7 +165,10 @@ export const seoFiles = () => ({
 const CSS_SHARED = ['site-extras', 'nav']
 const CSS_PARTS = ['article-reader', 'line-cta', 'need-by-ui', 'pick-tray', 'review-wall']
 const cssName = (tag) => (tag.match(/\/([a-z0-9-]+?)-[A-Za-z0-9_-]{8}\.css/) || [])[1] || ''
-const cssRank = (n) => (CSS_SHARED.includes(n) ? 0 : CSS_PARTS.includes(n) ? 1 : 2)
+/* home-page.css = กฎเฉพาะหน้าแรกที่แยกจาก home.css (17 พ.ย. 2026) · Vite ตั้งชื่อ chunk ตาม entry หน้าแรก = main-*.css
+   เดิมกฎอยู่ในไฟล์กลาง → ต่อจากกลางทันที ก่อนชิ้นส่วน */
+const CSS_HOME = ['home-page', 'main']
+const cssRank = (n) => (CSS_SHARED.includes(n) ? 0 : CSS_HOME.includes(n) ? 0.5 : CSS_PARTS.includes(n) ? 1 : 2)
 export function orderStylesheets(html) {
   const re = /<link\b[^>]*\brel="stylesheet"[^>]*>\n?/g
   const tags = html.match(re) || []
@@ -174,3 +183,50 @@ export const cssOrder = () => ({
   apply: 'build',
   transformIndexHtml: { order: 'post', handler: (html) => orderStylesheets(html) },
 })
+
+/* ---------- SVG ซ้ำในหน้า → sprite (17 พ.ย. 2026 อาร์ตเลือกข้อ 6ก · tests/svg-sprite.test.js) ----------
+   หน้าแรกฝัง SVG 303 อันแต่มีแค่ 27 แบบ (ไอคอนขยายซ้ำ 188 ครั้ง) · ตอน build เก็บแบบที่ซ้ำไว้ครั้งเดียวใน <symbol> ต้น <body>
+   จุดใช้เหลือ <svg ขนาด/class/aria><use href="#iN"/></svg> · หน้าตาเหมือนเดิม (fill/stroke/viewBox ย้ายไปที่ symbol สืบทอดเหมือนเดิม)
+   ไม่แตะ: ข้างในมี class/id/style/title/defs/use/text (CSS/JS เข้าไม่ถึงข้างใน <use>) · ตัว svg มี id/hidden · class ที่ CSS เจาะข้างใน */
+const SVG_KEEP = /^(width|height|viewBox|class|role|focusable|style|xmlns|aria-[\w-]+)$/
+const SVG_SKIP_INNER = /\s(class|id|style)=|<(title|desc|defs|use|symbol|animate|text|foreignObject|linearGradient|radialGradient|clipPath|mask|svg)\b/
+/* class ของ SVG ที่ CSS เจาะรูปทรงข้างใน (เช่น ".pp2-stb__path path" เส้นประ) · tests/svg-sprite.test.js สแกน CSS ทุกไฟล์ว่าไม่ตกหล่น */
+export const SVG_SKIP_CLASS = /\b(th-mark|th-arc|g-lab|fc-sprite|hm-end__arc|dz__lines|pp2-stb__path|fl__lines|lb__ico)/
+const svgAttrs = (s) => [...s.matchAll(/\s([\w:-]+)(?:="([^"]*)")?/g)].map((m) => [m[1], m[2]])
+export function svgSprite(html) {
+  const body = /<body\b[^>]*>/.exec(html)
+  if (!body) return html
+  const re = /<svg\b([^>]*)>([\s\S]*?)<\/svg>/g
+  const items = []
+  for (const m of html.matchAll(re)) {
+    if (m.index < body.index) continue
+    const attrs = svgAttrs(m[1])
+    const get = (k) => attrs.find(([n]) => n === k)
+    if (!get('viewBox') || get('id') || get('hidden') || SVG_SKIP_INNER.test(m[2]) || SVG_SKIP_CLASS.test(get('class')?.[1] || '')) continue
+    /* viewBox อยู่ทั้งสองที่: ตัวนอก "0 0 W H" ให้สัดส่วนกับ SVG ที่ CSS กำหนดแค่ความกว้าง · symbol คงของเดิม (viewBox ไม่เริ่ม 0 ไม่เลื่อนซ้ำสองชั้น) */
+    const vb = get('viewBox')[1].trim().split(/[\s,]+/)
+    const keep = attrs.filter(([n]) => SVG_KEEP.test(n)).map(([n, v]) => [n, n === 'viewBox' ? `0 0 ${vb[2]} ${vb[3]}` : v])
+    const draw = attrs.filter(([n]) => n === 'viewBox' || !SVG_KEEP.test(n))
+    const fmt = (list) => list.map(([n, v]) => (v === undefined ? ` ${n}` : ` ${n}="${v}"`)).join('')
+    items.push({ start: m.index, end: m.index + m[0].length, keep: fmt(keep), draw: fmt(draw), inner: m[2], key: fmt(draw) + '|' + m[2] })
+  }
+  const count = new Map()
+  for (const it of items) count.set(it.key, (count.get(it.key) || 0) + 1)
+  const ids = new Map(); const symbols = []
+  for (const it of items) {
+    if (count.get(it.key) < 2 || ids.has(it.key)) continue
+    const id = `i${ids.size + 1}`
+    ids.set(it.key, id); symbols.push(`<symbol id="${id}"${it.draw}>${it.inner}</symbol>`)
+  }
+  if (!symbols.length) return html
+  let out = '', at = 0
+  for (const it of items) {
+    const id = ids.get(it.key)
+    if (!id) continue
+    out += html.slice(at, it.start) + `<svg${it.keep}><use href="#${id}"/></svg>`; at = it.end
+  }
+  out += html.slice(at)
+  const b = /<body\b[^>]*>/.exec(out)
+  return out.slice(0, b.index + b[0].length) + `<svg hidden aria-hidden="true" style="display:none">${symbols.join('')}</svg>` + out.slice(b.index + b[0].length)
+}
+export const svgSpriteP = () => ({ name: 'teamdee-svg-sprite', apply: 'build', transformIndexHtml: { order: 'post', handler: (html) => svgSprite(html) } })

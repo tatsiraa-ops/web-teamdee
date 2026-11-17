@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import handlebars from 'vite-plugin-handlebars'
 import tailwindcss from '@tailwindcss/vite'
 import { root, siteDir, forWp, input, mediaFor } from './src/build/shared.js'
-import { seoTags, webpImages, thaiLines, fontPreload, seoFiles, cssOrder } from './src/build/plugins.js'
+import { seoTags, webpImages, thaiLines, fontPreload, seoFiles, cssOrder, svgSpriteP } from './src/build/plugins.js'
 import { helpers } from './src/build/helpers.js'
 import { pageContext } from './src/build/context.js'
 export { mediaFor }
@@ -22,6 +22,7 @@ export default defineConfig({
     thaiLines(),
     fontPreload(),
     cssOrder(),
+    svgSpriteP(),
     ...(forWp ? [] : [seoFiles()]),
     handlebars({
       partialDirectory: resolve(root, 'src/partials'),

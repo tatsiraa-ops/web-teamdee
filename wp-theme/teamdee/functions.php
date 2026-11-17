@@ -110,16 +110,17 @@ function td_portable_links(string $html): string {
 	$skip = '(?!/|wp-(?:content|admin|includes|json|login)\b)';
 	/* ใส่ path ด้วย callback (ไม่ใช่สตริงแทนที่) · path ที่มี $ หรือ \ จะไม่ถูกอ่านเป็นตัวอ้างอิงกลุ่ม */
 	$add = static fn (array $m): string => $m[1] . $base . '/';
-	$html = preg_replace_callback('~(\s(?:href|action)=")/' . $skip . '~', $add, $html);
-	return preg_replace_callback('~("u":")/' . $skip . '~', $add, $html);
+	/* regex ล้ม (null · backtrack limit บนโฮสต์ร่วม) = ใช้ HTML เดิม ไม่ใช่หน้าว่าง (17 พ.ย. 2026) */
+	$html = preg_replace_callback('~(\s(?:href|action)=")/' . $skip . '~', $add, $html) ?? $html;
+	return preg_replace_callback('~("u":")/' . $skip . '~', $add, $html) ?? $html;
 }
 
-function td_read_part(string $slug, string $part): string {
+function td_read_part(string $slug, string $part, bool $live = true): string {
 	$f = TD_BUILD . "/pages/$slug.$part.html";
 	$html = td_portable_paths(td_portable_links(is_readable($f) ? (string) file_get_contents($f) : ''));
 	if ($part !== 'body') return $html;
 	/* หน้าแรกและ /blog/: บทความจริงจาก WordPress (บล็อก "บทความจริงจาก WordPress" ด้านล่าง) */
-	if ($slug === 'home' || $slug === 'blog') $html = td_posts_live($slug, $html, td_posts_from_wp(), td_post_cat_counts());
+	if ($live && ($slug === 'home' || $slug === 'blog')) $html = td_posts_live($slug, $html, td_posts_from_wp(), td_post_cat_counts());
 	return td_body_live($html);
 }
 
@@ -163,9 +164,11 @@ function td_nojs_fail(string $why): string {
  * ตัดจาก body ของหน้า /blog/ · header = ก่อน <main · footer = หลัง </main>
  */
 function td_chrome(string $which, string $from = '/blog/'): string {
+	/* 17 พ.ย. 2026: หน้าบทความเรียก 2 ครั้ง (header + footer) → อ่านไฟล์ครั้งเดียว · ไม่ดึงบทความ WordPress (ใช้แค่หัว/ท้ายเว็บ) */
+	static $cache = [];
 	$p = td_page($from) ?? td_page('/');
 	if (!$p) return '';
-	$body = td_read_part($p['slug'], 'body');
+	$body = $cache[$from] ??= td_read_part($p['slug'], 'body', false);
 	$a = strpos($body, '<main');
 	$b = strrpos($body, '</main>');
 	if ($a === false || $b === false) return '';
@@ -229,24 +232,33 @@ function td_post_mz_card(array $p): string {
 }
 
 function td_posts_live(string $slug, string $html, array $posts, array $counts = []): string {
+	/* 17 พ.ย. 2026 audit: "Hello world!" (Uncategorized) ขึ้นหน้าแรกและ /blog/ → ไม่เอาเรื่องที่ยังไม่ได้ใส่หมวด */
+	$posts = array_values(array_filter($posts, fn ($p) => ($p['cat'] ?? '') !== 'uncategorized'));
 	if ($slug === 'home') {
+		/* หน้าแรกเอาเฉพาะเรื่องที่มีรูปปก (ไม่มีรูป = กล่องเทาว่าง) · ไม่ครบ 4 = เติมการ์ดเดิมจากตอน build ที่ลิงก์ไม่ซ้ำ */
+		$posts = array_slice(array_values(array_filter($posts, fn ($p) => ($p['img'] ?? '') !== '')), 0, 4);
 		if (!$posts) return $html;
+		if (!preg_match('~<ul class="hm-posts">(.*?)\s*</ul>~s', $html, $old)) return $html;
+		preg_match_all('~\s*<li><a class="hm-post" href="([^"]+)".*?</li>~s', $old[1], $keep, PREG_SET_ORDER);
+		$used = array_map(fn ($p) => $p['key'] ?? $p['url'], $posts);
+		$fill = array_slice(array_filter($keep, fn ($m) => !in_array($m[1], $used, true) && !in_array($m[1], array_column($posts, 'url'), true)), 0, 4 - count($posts));
 		$li = '';
-		foreach (array_slice($posts, 0, 4) as $p) {
+		foreach ($posts as $p) {
 			$li .= "\n      <li><a class=\"hm-post\" href=\"" . esc_url($p['url']) . "\">\n        <span class=\"hm-post__img\">" . td_post_img($p, '(min-width: 1280px) 300px, (min-width: 768px) 24vw, 80vw') . "</span>\n"
 				. '        <span class="hm-post__body"><span class="hm-post__cat">' . esc_html($p['catName']) . '</span><span class="hm-post__t">' . esc_html($p['title']) . '</span><time datetime="' . esc_attr($p['date']) . '">' . esc_html($p['dateTh']) . "</time></span>\n      </a></li>";
 		}
-		return (string) preg_replace_callback('~(<ul class="hm-posts">)(.*?)(\s*</ul>)~s', fn ($m) => $m[1] . $li . $m[3], $html, 1);
+		foreach ($fill as $m) $li .= $m[0];
+		return preg_replace_callback('~(<ul class="hm-posts">)(.*?)(\s*</ul>)~s', fn ($m) => $m[1] . $li . $m[3], $html, 1) ?? $html;
 	}
 	if ($slug !== 'blog') return $html;
 
 	/* ตัวเลขหมวด (เฉพาะแถบ "อ่านตามหมวดเดิม") */
 	if ($counts) {
-		$html = (string) preg_replace_callback('~<nav class="mz-archives".*?</nav>~s', fn ($nav) => (string) preg_replace_callback(
+		$html = preg_replace_callback('~<nav class="mz-archives".*?</nav>~s', fn ($nav) => preg_replace_callback(
 			'~(<a href="[^"]*/category/([^/"]+)/">.*?<b class="tabular-nums">)(\d+)(</b>)~s',
 			fn ($m) => $m[1] . (isset($counts[$m[2]]) ? $counts[$m[2]] : $m[3]) . $m[4],
 			$nav[0]
-		), $html, 1);
+		) ?? $nav[0], $html, 1) ?? $html;
 	}
 
 	$new = array_values(array_filter($posts, fn ($p) => !str_contains($html, 'href="' . ($p['key'] ?? $p['url']) . '"')));
@@ -258,10 +270,10 @@ function td_posts_live(string $slug, string $html, array $posts, array $counts =
 	preg_match_all('~datetime="(\d{4}-\d{2}-\d{2})"~', $html, $d);
 	$latest = $new[0];
 	foreach ($new as $p) if ($p['date'] > $latest['date']) $latest = $p;
-	$html = (string) preg_replace_callback('~<p class="mz-head__meta">(\d+) เรื่อง · อัปเดตล่าสุด ([^<]*)</p>~u', function ($m) use ($n, $latest, $d) {
+	$html = preg_replace_callback('~<p class="mz-head__meta">(\d+) เรื่อง · อัปเดตล่าสุด ([^<]*)</p>~u', function ($m) use ($n, $latest, $d) {
 		$keep = $d[1] && max($d[1]) > $latest['date'];
 		return '<p class="mz-head__meta">' . ((int) $m[1] + $n) . ' เรื่อง · อัปเดตล่าสุด ' . ($keep ? $m[2] : esc_html($latest['dateTh'])) . '</p>';
-	}, $html, 1);
+	}, $html, 1) ?? $html;
 	/* ชิปหัวข้อ */
 	$html = str_replace('<ul class="mz-topics" aria-label="ไปที่หัวข้อ">', '<ul class="mz-topics" aria-label="ไปที่หัวข้อ"><li style="--i:0"><a href="#t-latest">ใหม่ล่าสุด<b class="tabular-nums">' . $n . '</b></a></li>', $html);
 	/* ส่วน "ใหม่ล่าสุด" ใต้เรื่องปก ก่อนหัวข้อเดิม (สูงสุด 6 เรื่อง · ที่เหลืออยู่ในผลค้นหาและหน้าหมวด) */
@@ -295,10 +307,14 @@ add_filter('pre_handle_404', function ($preempt, $query = null) {
 }, 10, 2);
 
 /** ค่า SEO ของหน้าที่ไม่มี Page ใน WordPress (null = ใช้ค่าของ Rank Math) */
+/** canonical เฉพาะหน้าที่ index ได้ · หน้า 404 / noindex ไม่มี canonical (17 พ.ย. 2026 · เดิม 404 ชี้ /404) */
+function td_canonical_ok(array $p): bool {
+	return str_starts_with($p['route'], '/') && !str_contains((string) ($p['robots'] ?? ''), 'noindex');
+}
 function td_fallback_seo(string $field) {
 	$p = td_current();
 	if (!$p || empty($GLOBALS['td_fallback'])) return null;
-	if ($field === 'canonical') return home_url($p['route']);
+	if ($field === 'canonical') return td_canonical_ok($p) ? home_url($p['route']) : null;
 	return ($p[$field] ?? '') !== '' ? $p[$field] : null;
 }
 /* 16 พ.ย. 2026 อาร์ตเลือกข้อ ข: title หน้าแรกบน staging เป็นค่าเดิมใน Rank Math "โรงงานรับผลิตเสื้อ…" (ขัดกติกาไม่ใช้คำว่าโรงงาน)
@@ -310,12 +326,79 @@ function td_page_title(): ?string {
 add_filter('rank_math/frontend/title', fn ($v) => td_page_title() ?? $v);
 add_filter('rank_math/opengraph/facebook/og_title', fn ($v) => td_page_title() ?? $v);
 add_filter('rank_math/opengraph/twitter/twitter_title', fn ($v) => td_page_title() ?? $v);
-add_filter('rank_math/frontend/description', fn ($v) => td_fallback_seo('description') ?? $v);
+/* 17 พ.ย. 2026 อาร์ตเลือกข้อ ก: description หน้าเดิมใน Rank Math ยังเป็นของเว็บเก่า ("โรงงาน…" · ตัวเลขที่ไม่มีที่มา)
+   → หน้าที่ธีมแสดงเองใช้ description จากต้นแบบ (ผ่านตัวตรวจความยาว npm run check แล้ว) รวมตอนแชร์ลิงก์ · tests/wp-page-title.test.js */
+function td_page_description(): ?string {
+	$p = td_current();
+	return ($p && ($p['description'] ?? '') !== '') ? $p['description'] : null;
+}
+add_filter('rank_math/frontend/description', fn ($v) => td_page_description() ?? $v);
+add_filter('rank_math/opengraph/facebook/og_description', fn ($v) => td_page_description() ?? $v);
+add_filter('rank_math/opengraph/twitter/twitter_description', fn ($v) => td_page_description() ?? $v);
 add_filter('rank_math/frontend/canonical', fn ($v) => td_fallback_seo('canonical') ?? $v);
+/* 17 พ.ย. 2026 แผน SEO/GEO ข้อ A9: มี Rank Math → ธีมตัดแท็กแชร์ของตัวเอง (กันซ้ำ) · ส่งรูปแชร์รายหน้า (JPG 1200×630 · public/img/og)
+   และภาษาไทยให้ Rank Math แทน ไม่งั้นได้รูปเว็บเก่า/โลโก้ และ en_US · ชื่อ filter ตามเอกสาร Rank Math ต้องลองบน staging ยืนยัน */
+function td_og_from_head(string $head): ?string {
+	return preg_match('~<meta property="og:image" content="([^"]+)"~', $head, $m) ? html_entity_decode($m[1], ENT_QUOTES) : null;
+}
+function td_page_og_image(): ?string {
+	static $cache = [];
+	$p = td_current();
+	if (!$p) return null;
+	return $cache[$p['slug']] ??= td_og_from_head(td_read_part($p['slug'], 'head', false));
+}
+add_filter('rank_math/opengraph/facebook/image', fn ($v) => td_page_og_image() ?? $v);
+add_filter('rank_math/opengraph/twitter/image', fn ($v) => td_page_og_image() ?? $v);
+add_filter('rank_math/opengraph/facebook/og_locale', fn ($v) => td_current() ? 'th_TH' : $v);
+
+/* 17 พ.ย. 2026 แผน SEO/GEO ข้อ A10: graph ของ Rank Math ให้เหลือธุรกิจเดียว (/#business ของธีม · LocalBusiness ทุกหน้า head.hbs)
+   เว็บจริงเดิม: #person "TEAMDEE STUDIO - โรงงาน…" + #organization ที่อยู่เก่า + BreadcrumbList "Home" + schema รายหน้าเก่า (Service/HowTo) + en-US
+   หน้าธีม: ตัดธุรกิจ / breadcrumb / schema รายหน้าของ Rank Math (ธีมพิมพ์เองแล้ว) · บทความ: คงของ Rank Math แต่ผู้เผยแพร่ = TEAMDEE /#business
+   ทุกหน้า: อ้างอิง #person / #organization → /#business · WebSite ชื่อ TEAMDEE ภาษาไทย ไม่มี SearchAction · ห้ามคืน array ว่าง
+   key ใน $data ของ Rank Math รุ่นที่ติดตั้งต้อง dump ดูบน staging ก่อน · tests/theme-hardening.test.js */
+function td_rm_ref($v, string $biz, array $old) {
+	if (!is_array($v)) return $v;
+	if (count($v) === 1 && isset($v['@id']) && in_array($v['@id'], $old, true)) return ['@id' => $biz];
+	foreach ($v as $k => $x) $v[$k] = td_rm_ref($x, $biz, $old);
+	return $v;
+}
+function td_rm_jsonld(array $data, bool $themePage, string $base): array {
+	$biz = $base . '/#business';
+	$old = [$base . '/#person', $base . '/#organization'];
+	$out = [];
+	foreach ($data as $k => $node) {
+		if (!is_array($node)) { $out[$k] = $node; continue; }
+		$id = $node['@id'] ?? '';
+		$types = (array) ($node['@type'] ?? []);
+		if ($id === $base . '/#organization') continue;
+		if ($id === $base . '/#person') {
+			if ($themePage) continue;
+			$node = array_intersect_key($node, ['logo' => 1, 'image' => 1]) + ['@type' => 'Organization', '@id' => $biz, 'name' => 'TEAMDEE', 'alternateName' => 'ทีมดี', 'url' => $base . '/'];
+		}
+		if ($themePage && (in_array('BreadcrumbList', $types, true) || str_starts_with((string) $k, 'schema-'))) continue;
+		if (in_array('WebSite', $types, true)) {
+			$node['name'] = 'TEAMDEE';
+			$node['alternateName'] = 'ทีมดี';
+			unset($node['potentialAction']);
+		}
+		if (isset($node['inLanguage'])) $node['inLanguage'] = 'th';
+		$out[$k] = td_rm_ref($node, $biz, $old);
+	}
+	return $out ?: $data;
+}
+add_filter('rank_math/json_ld', fn ($data) => is_array($data) ? td_rm_jsonld($data, (bool) td_current(), untrailingslashit(home_url())) : $data, 99);
+/* 17 พ.ย. 2026 รอบตรวจ SEO: ไม่มีปลั๊กอิน SEO → WordPress พิมพ์ canonical ให้เฉพาะ Page/โพสต์ หน้าแรกแบบรายการโพสต์ไม่มี · ธีมพิมพ์เอง */
+function td_canonical_fallback(): void {
+	$p = td_current();
+	if (!$p || td_has_seo_plugin() || is_singular() || !td_canonical_ok($p)) return;
+	echo '<link rel="canonical" href="' . esc_url(home_url($p['route'])) . '">' . "\n";
+}
+add_action('wp_head', 'td_canonical_fallback');
 /* index ได้เมื่อหน้านั้นไม่ได้ตั้ง noindex และเว็บไม่ได้ปิดไม่ให้ Google เก็บ (staging) · หน้าร่างยังโดนตัวกรอง noindex ด้านล่างทับอีกชั้น */
 add_filter('rank_math/frontend/robots', function ($robots) {
 	$p = td_current();
-	if (!$p || empty($GLOBALS['td_fallback']) || get_option('blog_public') === '0' || str_contains($p['robots'] ?? '', 'noindex')) return $robots;
+	/* 17 พ.ย. 2026: ใช้กับทุกหน้าที่ธีมแสดง (เดิมเฉพาะหน้าที่ยังไม่มี Page · หน้าที่ sync ไปตอน noindex ค้าง noindex ใน Rank Math) */
+	if (!$p || get_option('blog_public') === '0' || str_contains($p['robots'] ?? '', 'noindex')) return $robots;
 	$robots['index'] = 'index';
 	$robots['follow'] = 'follow';
 	return $robots;
@@ -353,11 +436,58 @@ add_filter('template_include', function ($template) {
 	return $template;
 }, 100);
 
+/* ---------- /llms.txt (17 พ.ย. 2026 แผน SEO/GEO ข้อ A1 · tests/llms-txt.test.js) ----------
+   ไฟล์สรุปให้ AI อ่านข้อมูลบริษัท เงื่อนไข ราคาเริ่มต้น วันผลิต หน้าหลัก · export สร้างจาก site.json / prices.json / lead-times.json
+   ส่งก่อน WordPress หา query (ไม่มีไฟล์จริงที่รากเว็บ) · ติดตั้งในโฟลเดอร์ย่อยก็ตอบที่ /<โฟลเดอร์>/llms.txt */
+function td_serve_llms(): void {
+	if (td_request_route() !== '/llms.txt/') return;
+	$f = TD_BUILD . '/llms.txt';
+	if (!is_readable($f)) return;
+	status_header(200);
+	header('Content-Type: text/plain; charset=utf-8');
+	header('X-Robots-Tag: noindex');
+	readfile($f);
+	exit;
+}
+add_action('parse_request', 'td_serve_llms', 0);
+
 /* ---------- URL ที่ต้นแบบมีหน้า ---------- */
 /* URL ที่ต้นแบบมีหน้า ห้าม WordPress เดา slug แล้ว 301 ไปหน้าชื่อคล้าย (เช่น /project/ → /projects/)
    การเดานี้ทำงานก่อน template_include · เจอ 22 ต.ค. 2026 ตอนย้าย URL ตาม Wireframe v22 */
-add_filter('redirect_canonical', function ($redirect) {
-	return td_page() ? false : $redirect;
+/** URL ที่ path ไม่มี / ท้าย → URL เดียวกันที่มี / (query คงไว้) · มีแล้ว = null (17 พ.ย. 2026: /faq กับ /faq/ เคยตอบ 200 ทั้งคู่) */
+function td_slash_url(string $url): ?string {
+	$path = (string) wp_parse_url($url, PHP_URL_PATH);
+	if ($path === '' || str_ends_with($path, '/')) return null;
+	$at = strpos($url, $path, (int) strpos($url, '//') + 2);
+	return $at === false ? null : substr_replace($url, $path . '/', $at, strlen($path));
+}
+add_filter('redirect_canonical', function ($redirect, $requested = '') {
+	/* ?p= / ?page_id= (ลิงก์ถาวรแบบเลข) ให้ WordPress redirect ไป URL จริงตามปกติ (17 พ.ย. 2026 · เดิม /?p=1 ตอบ 200 เป็นหน้าแรก) */
+	if (isset($_GET['p']) || isset($_GET['page_id'])) return $redirect;
+	return td_page() ? td_slash_url($requested) ?? false : $redirect;
+}, 10, 2);
+
+/** path ตัวพิมพ์ใหญ่ที่มีหน้าตัวเล็ก → path ตัวเล็ก · ไม่มี = null (17 พ.ย. 2026 · เดิม /FAQ/ ตอบ 200 เป็นหน้า WP เปล่า) */
+function td_case_target(string $route, callable $exists): ?string {
+	$low = strtolower($route);
+	return ($low !== $route && $exists($low)) ? $low : null;
+}
+/* ค้นหาของ WordPress (?s=) เปิดหน้าภาษาอังกฤษ "Archives" → หน้าค้นหาของเว็บ /search/?q= (Rank Math SearchAction ชี้ ?s=) */
+function td_search_redirect(): void {
+	if (is_admin() || is_feed() || !isset($_GET['s']) || !is_string($_GET['s']) || !td_page('/search/')) return;
+	wp_safe_redirect(add_query_arg('q', rawurlencode(wp_unslash((string) $_GET['s'])), home_url('/search/')), 301);
+	exit;
+}
+add_action('template_redirect', function () {
+	td_search_redirect();
+	$to = td_case_target(td_request_route(), fn ($r) => td_page($r) !== null);
+	if ($to) { $q = (string) ($_SERVER['QUERY_STRING'] ?? ''); wp_safe_redirect(home_url($to) . ($q !== '' ? "?$q" : ''), 301); exit; } /* คง ?q= / utm ไว้ */
+}, 0);
+/* sitemap ของ WordPress (ตอนไม่มีปลั๊กอิน SEO): ไม่เอาหน้าผู้ใช้ · หน้า archive ผู้เขียน/วันที่ไม่ให้ Google เก็บ (หน้าบาง ซ้ำกับ /blog/) */
+add_filter('wp_sitemaps_add_provider', fn ($provider, $name) => $name === 'users' ? false : $provider, 10, 2);
+add_filter('wp_robots', function (array $robots) {
+	if (is_author() || is_date()) $robots['noindex'] = true;
+	return $robots;
 });
 add_filter('do_redirect_guess_404_permalink', function ($guess) {
 	return td_page() ? false : $guess;
@@ -367,7 +497,8 @@ add_filter('do_redirect_guess_404_permalink', function ($guess) {
 
 add_filter('pre_get_document_title', function ($title) {
 	$p = td_current();
-	return ($p && !td_has_seo_plugin() && !empty($p['title'])) ? $p['title'] : $title;
+	/* 17 พ.ย. 2026: WordPress พิมพ์ค่านี้ใน <title> โดยไม่ escape · pages.json ถอด entity แล้ว (&amp; → &) */
+	return ($p && !td_has_seo_plugin() && !empty($p['title'])) ? esc_html($p['title']) : $title;
 });
 
 add_filter('wp_robots', function (array $robots) {
