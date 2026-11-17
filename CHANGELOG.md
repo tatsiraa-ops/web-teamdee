@@ -2,6 +2,14 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.7 — 2026-11-17
+
+หน้าที่ธีมแสดงเองไม่โหลดสคริปต์ Elementor แล้ว (staging ขึ้น error "elementorFrontendConfig is not defined") · บทความและหน้าอื่นไม่แตะ
+
+### Fixes
+
+- **wp-theme:** keep Elementor scripts off pages the theme renders itself (3c1003d)
+
 ## v0.4.6 — 2026-11-17
 
 แก้ตามผลตรวจโค้ดของ v0.4.5 ครบทุกจุด: schema ธุรกิจเก่าไม่กลับมาแม้ Rank Math โดนตัดหมด · SVG quote เดี่ยวไม่ทำ build พัง · ราคาสกรีนใน llms.txt บอกรุ่นเสื้อ · ลดโค้ดซ้ำใน schema
