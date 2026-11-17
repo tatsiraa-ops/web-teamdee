@@ -637,12 +637,18 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 /* 16 พ.ย. 2026 (staging หน้าแรกพื้นดำ ตัวหนังสือดำหาย): หน้า Elementor ของเว็บเดิม (#50) มี CSS เอง html, body { background-color:#050505; padding:0 !important }
    Elementor ยังโหลด CSS ของหน้าเดิมและ CSS กลางของมันลงหน้าที่ธีมแสดงเอง (หลัง CSS ธีม) → ทับพื้นขาวและที่เว้นแถบล่างมือถือ
    หน้าจากต้นแบบไม่ใช้ Elementor เลย → เอา CSS ของ Elementor ออกทั้งที่ใส่ใน head และที่ใส่ท้ายหน้า · บทความและหน้าอื่นไม่แตะ · tests/wp-no-elementor-css.test.js */
+/** หน้านี้ไม่ใช้ Elementor: หน้าจากต้นแบบ หรือบทความที่ไม่ได้สร้างด้วย Elementor (single.php ของธีม) · บทความ builder คงไว้
+    17 พ.ย. 2026 ตรวจ staging: บทความ 12 เรื่องไม่ได้สร้างด้วย Elementor แต่ Elementor Pro ยังโหลดสคริปต์ → error elementorFrontendConfig (tests/wp-no-elementor-js.test.js) */
+function td_elementor_free(): bool {
+	if (td_current()) return true;
+	return is_singular('post') && get_post_meta((int) get_queried_object_id(), '_elementor_edit_mode', true) !== 'builder';
+}
 function td_is_elementor_asset(string $handle, string $src): bool {
 	if (str_starts_with($handle, 'elementor-') || str_starts_with($handle, 'elementor_')) return true;
 	return (bool) preg_match('~/(?:plugins/elementor(?:-pro)?|uploads/elementor)/~', $src);
 }
 function td_dequeue_elementor_styles(): void {
-	if (!td_current()) return;
+	if (!td_elementor_free()) return;
 	$styles = wp_styles();
 	foreach ((array) $styles->queue as $h) {
 		$src = (string) ($styles->registered[$h]->src ?? '');
@@ -651,7 +657,7 @@ function td_dequeue_elementor_styles(): void {
 }
 add_action('wp_print_styles', 'td_dequeue_elementor_styles', 1);
 add_action('wp_print_footer_scripts', 'td_dequeue_elementor_styles', 1);
-add_filter('style_loader_tag', fn ($tag, $handle, $href) => (td_current() && td_is_elementor_asset($handle, (string) $href)) ? '' : $tag, 10, 3);
+add_filter('style_loader_tag', fn ($tag, $handle, $href) => (td_elementor_free() && td_is_elementor_asset($handle, (string) $href)) ? '' : $tag, 10, 3);
 
 /* 17 พ.ย. 2026 staging console "elementorFrontendConfig is not defined" (Elementor 4.2.4) · อาร์ตเลือกข้อ ก
    สคริปต์ Elementor ยังโหลดลงหน้าที่ธีมแสดงเอง (Page เดิมเป็นหน้า Elementor) แต่ค่าตั้งต้นไม่มา → error ทุกหน้า + โหลดสคริปต์ที่ไม่ได้ใช้
@@ -666,7 +672,7 @@ function td_script_needs_elementor(string $handle, array $registered, array $see
 	return false;
 }
 function td_dequeue_elementor_scripts(): void {
-	if (!td_current()) return;
+	if (!td_elementor_free()) return;
 	$scripts = wp_scripts();
 	foreach ((array) $scripts->queue as $h) {
 		if (td_script_needs_elementor((string) $h, $scripts->registered)) wp_dequeue_script($h);
@@ -675,7 +681,7 @@ function td_dequeue_elementor_scripts(): void {
 add_action('wp_print_scripts', 'td_dequeue_elementor_scripts', 1);
 add_action('wp_print_footer_scripts', 'td_dequeue_elementor_scripts', 1);
 /* กันหลุด: ตัวที่ยังถูกพิมพ์ (เป็น dependency ของตัวอื่น) ตัดทั้งแท็ก รวมสคริปต์ inline ก่อน/หลัง (ค่าตั้งต้น elementorFrontendConfig) */
-add_filter('script_loader_tag', fn ($tag, $handle) => (td_current() && td_script_needs_elementor($handle, wp_scripts()->registered)) ? '' : $tag, 10, 2);
+add_filter('script_loader_tag', fn ($tag, $handle) => (td_elementor_free() && td_script_needs_elementor($handle, wp_scripts()->registered)) ? '' : $tag, 10, 2);
 
 /* ---------- Google Tag Manager · ใส่ ID ที่ ลักษณะ > ปรับแต่ง > TEAMDEE ---------- */
 

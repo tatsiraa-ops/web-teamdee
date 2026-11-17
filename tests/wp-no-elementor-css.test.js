@@ -34,9 +34,9 @@ test('แยก CSS ของ Elementor ออกจาก CSS อื่น (ต
 
 test('หน้าที่ธีมแสดงเอง: เอา CSS ของ Elementor ออกก่อนพิมพ์ทั้งใน head และท้ายหน้า · หน้าอื่นไม่แตะ', () => {
   const f = fnSrc('td_dequeue_elementor_styles')
-  assert.match(f, /if \(!td_current\(\)\) return;/)
+  assert.match(f, /if \(!td_elementor_free\(\)\) return;/)
   assert.match(f, /wp_dequeue_style\(/)
   assert.match(source, /add_action\('wp_print_styles', 'td_dequeue_elementor_styles', 1\)/)
   assert.match(source, /add_action\('wp_print_footer_scripts', 'td_dequeue_elementor_styles', 1\)/)
-  assert.match(source, /add_filter\('style_loader_tag', fn \(\$tag, \$handle, \$href\) => \(td_current\(\) && td_is_elementor_asset\(\$handle, \(string\) \$href\)\) \? '' : \$tag, 10, 3\)/)
+  assert.match(source, /add_filter\('style_loader_tag', fn \(\$tag, \$handle, \$href\) => \(td_elementor_free\(\) && td_is_elementor_asset\(\$handle, \(string\) \$href\)\) \? '' : \$tag, 10, 3\)/)
 })

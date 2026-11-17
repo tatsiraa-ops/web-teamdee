@@ -51,15 +51,42 @@ test('สคริปต์ Elementor + สคริปต์ที่พึ่�
 
 test('หน้าที่ธีมแสดงเอง: เอาสคริปต์ Elementor ออกก่อนพิมพ์ทั้งใน head และท้ายหน้า + ตัดแท็กที่หลุด (รวมค่าตั้งต้น inline) · หน้าอื่นไม่แตะ', () => {
   const f = fnSrc('td_dequeue_elementor_scripts')
-  assert.match(f, /if \(!td_current\(\)\) return;/)
+  assert.match(f, /if \(!td_elementor_free\(\)\) return;/)
   assert.match(f, /wp_dequeue_script\(/)
   assert.match(f, /td_script_needs_elementor\(/)
   assert.match(source, /add_action\('wp_print_scripts', 'td_dequeue_elementor_scripts', 1\)/)
   assert.match(source, /add_action\('wp_print_footer_scripts', 'td_dequeue_elementor_scripts', 1\)/)
-  assert.match(source, /add_filter\('script_loader_tag', fn \(\$tag, \$handle\) => \(td_current\(\) && td_script_needs_elementor\(\$handle, wp_scripts\(\)->registered\)\) \? '' : \$tag, 10, 2\)/)
+  assert.match(source, /add_filter\('script_loader_tag', fn \(\$tag, \$handle\) => \(td_elementor_free\(\) && td_script_needs_elementor\(\$handle, wp_scripts\(\)->registered\)\) \? '' : \$tag, 10, 2\)/)
 })
 
 test('CSS กับสคริปต์ใช้กฎแยก Elementor ตัวเดียวกัน', () => {
   assert.match(fnSrc('td_dequeue_elementor_styles'), /td_is_elementor_asset\(/)
-  assert.match(source, /add_filter\('style_loader_tag', fn \(\$tag, \$handle, \$href\) => \(td_current\(\) && td_is_elementor_asset\(\$handle, \(string\) \$href\)\) \? '' : \$tag, 10, 3\)/)
+  assert.match(source, /add_filter\('style_loader_tag', fn \(\$tag, \$handle, \$href\) => \(td_elementor_free\(\) && td_is_elementor_asset\(\$handle, \(string\) \$href\)\) \? '' : \$tag, 10, 3\)/)
+})
+
+/* 17 พ.ย. 2026 ตรวจ staging หลัง v0.4.9: error elementorFrontendConfig ยังขึ้นในหน้าบทความ (single.php ของธีม)
+   บทความทั้ง 12 เรื่องไม่ได้สร้างด้วย Elementor (_elementor_edit_mode ว่าง · เนื้อหาไม่มีคลาส elementor) แต่ Elementor Pro (เทมเพลต 2041) ยังโหลดสคริปต์
+   → หน้าที่ไม่ใช้ Elementor = หน้าจากต้นแบบ + บทความที่ไม่ได้สร้างด้วย Elementor · บทความที่สร้างด้วย Elementor (builder) คงไว้ */
+test('td_elementor_free: หน้าจากต้นแบบ · บทความที่ไม่ได้สร้างด้วย Elementor = true · บทความ builder / หน้าอื่น = false', { skip: !runtime }, async () => {
+  const { PHP } = await import(pathToFileURL(resolve(runtime, '@php-wasm/universal/index.js')).href)
+  const { loadNodeRuntime } = await import(pathToFileURL(resolve(runtime, '@php-wasm/node/index.js')).href)
+  const php = new PHP(await loadNodeRuntime('8.3', { emscriptenOptions: { processId: process.pid } }))
+  try {
+    const code = `<?php
+      $S = ['current' => null, 'post' => false, 'mode' => ''];
+      function td_current() { global $S; return $S['current']; }
+      function is_singular($t = '') { global $S; return $S['post'] && $t === 'post'; }
+      function get_queried_object_id() { return 7; }
+      function get_post_meta($id, $k, $single) { global $S; return $id === 7 && $k === '_elementor_edit_mode' ? $S['mode'] : ''; }
+      ${fnSrc('td_elementor_free')}
+      $r = [];
+      $S = ['current' => ['slug' => 'home'], 'post' => false, 'mode' => '']; $r[] = td_elementor_free();
+      $S = ['current' => null, 'post' => true, 'mode' => '']; $r[] = td_elementor_free();
+      $S = ['current' => null, 'post' => true, 'mode' => 'builder']; $r[] = td_elementor_free();
+      $S = ['current' => null, 'post' => false, 'mode' => '']; $r[] = td_elementor_free();
+      echo json_encode($r);`
+    const r = await php.run({ code })
+    assert.equal(r.errors, '')
+    assert.deepEqual(JSON.parse(r.text), [true, true, false, false])
+  } finally { php.exit() }
 })

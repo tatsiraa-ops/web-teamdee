@@ -26,7 +26,7 @@ $td_published = td_thai_date(get_the_date('Y-m-d'));
 $td_updated = (get_the_modified_time('U') > get_the_time('U') && get_the_modified_date('Y-m-d') !== get_the_date('Y-m-d')) ? td_thai_date(get_the_modified_date('Y-m-d')) : '';
 /* กล่องถามระหว่างอ่าน: เงียบ รองจากเนื้อหา (PRODUCT.md) · ไม่เข้าสารบัญ (data-reader-exclude) · ข้อความ LINE บอกชื่อบทความ */
 $td_ask = '<aside class="td-reader__ask" data-reader-exclude aria-label="ถามทีมดีเรื่องบทความนี้"><p class="td-reader__ask-t">อ่านแล้วมีคำถามเรื่องนี้</p><p class="td-reader__ask-d">ส่งคำถามให้ทีมดีทาง LINE ได้เลย ข้อความที่บอกชื่อบทความนี้พิมพ์รอไว้ให้แล้ว</p>'
-	. '<a class="btn btn-line td-reader__ask-btn" href="' . esc_url(td_article_line_url(get_the_title())) . '" data-track="line" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.4c0 4.2-4 7.6-9 7.6-.9 0-1.8-.1-2.6-.3L4 21l1.2-3.5C3.8 16.1 3 13.9 3 11.4 3 7.2 7 3.8 12 3.8s9 3.4 9 7.6Z"/></svg>ถามทีมดีทาง LINE</a></aside>';
+	. '<a class="btn btn-line td-reader__ask-btn" href="' . esc_attr(td_article_line_url(get_the_title())) /* ไม่ใช้ esc_url: ตัด %0A ทิ้ง ข้อความ LINE ติดกัน */ . '" data-track="line" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.4c0 4.2-4 7.6-9 7.6-.9 0-1.8-.1-2.6-.3L4 21l1.2-3.5C3.8 16.1 3 13.9 3 11.4 3 7.2 7 3.8 12 3.8s9 3.4 9 7.6Z"/></svg>ถามทีมดีทาง LINE</a></aside>';
 ?>
 	<article <?php post_class(); ?>>
 		<header class="td-reader__header wrap">

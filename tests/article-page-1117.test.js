@@ -81,7 +81,9 @@ test('single.php: วันที่ไทย · หมวด + เวลาอ�
   assert.match(single, /อ่านประมาณ/)
   assert.match(single, /class="td-reader__cat"/)
   assert.match(single, /td_insert_mid_cta\(/)
-  assert.match(single, /td_article_line_url\(get_the_title\(\)\)/)
+  /* esc_url ตัด %0A (ขึ้นบรรทัด) ทิ้ง → ข้อความ LINE ติดกัน "…แล้วมีคำถามคำถาม:" (staging 17 พ.ย.) · URL สร้างเองด้วย rawurlencode จึงใช้ esc_attr */
+  assert.match(single, /esc_attr\(td_article_line_url\(get_the_title\(\)\)\)/)
+  assert.doesNotMatch(single, /esc_url\(td_article_line_url/)
   assert.match(single, /class="td-reader__ask" data-reader-exclude/)
   assert.doesNotMatch(single, /the_author|get_the_author/)
 })
