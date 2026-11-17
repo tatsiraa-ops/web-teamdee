@@ -2,6 +2,14 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.11 — 2026-11-17
+
+/collar-styles/ ย้ายจาก Elementor เป็นหน้าคู่มือของธีม: URL title H1 เนื้อหา และรูปคอเสื้อ 12 แบบเหมือนเว็บจริง แต่ฟอนต์และสไตล์ตรงกับทั้งเว็บ · เพิ่ม "ทรงคอเสื้อและปกเสื้อ" ในเมนูคู่มือและบทความ
+
+### Features
+
+- **guide:** /collar-styles/ as a theme guide page with the live content and photos, menu link (ec2f40b)
+
 ## v0.4.10 — 2026-11-17
 
 แก้จากการตรวจ staging หลัง v0.4.9: ข้อความ LINE ในบทความขึ้นบรรทัดถูกต้อง · หน้าบทความไม่โหลด Elementor (error elementorFrontendConfig หาย) · หน้า Elementor เดิมอย่าง /collar-styles/ เต็มความกว้างแบบเว็บจริง
