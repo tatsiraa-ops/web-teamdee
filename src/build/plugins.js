@@ -192,7 +192,8 @@ const SVG_KEEP = /^(width|height|viewBox|class|role|focusable|style|xmlns|aria-[
 const SVG_SKIP_INNER = /\s(class|id|style)=|<(title|desc|defs|use|symbol|animate|text|foreignObject|linearGradient|radialGradient|clipPath|mask|svg)\b/
 /* class ของ SVG ที่ CSS เจาะรูปทรงข้างใน (เช่น ".pp2-stb__path path" เส้นประ) · tests/svg-sprite.test.js สแกน CSS ทุกไฟล์ว่าไม่ตกหล่น */
 export const SVG_SKIP_CLASS = /\b(th-mark|th-arc|g-lab|fc-sprite|hm-end__arc|dz__lines|pp2-stb__path|fl__lines|lb__ico)/
-const svgAttrs = (s) => [...s.matchAll(/\s([\w:-]+)(?:="([^"]*)")?/g)].map((m) => [m[1], m[2]])
+/* ค่าใน "…" หรือ '…' (code review 17 พ.ย.: เดิมอ่านแค่ "…" · quote เดี่ยว = ค่าหาย → build พัง) */
+const svgAttrs = (s) => [...s.matchAll(/\s([\w:-]+)(?:=(?:"([^"]*)"|'([^']*)'))?/g)].map((m) => [m[1], m[2] ?? m[3]])
 export function svgSprite(html) {
   const body = /<body\b[^>]*>/.exec(html)
   if (!body) return html
@@ -202,7 +203,7 @@ export function svgSprite(html) {
     if (m.index < body.index) continue
     const attrs = svgAttrs(m[1])
     const get = (k) => attrs.find(([n]) => n === k)
-    if (!get('viewBox') || get('id') || get('hidden') || SVG_SKIP_INNER.test(m[2]) || SVG_SKIP_CLASS.test(get('class')?.[1] || '')) continue
+    if (!get('viewBox')?.[1]?.trim() || get('id') || get('hidden') || SVG_SKIP_INNER.test(m[2]) || SVG_SKIP_CLASS.test(get('class')?.[1] || '')) continue
     /* viewBox อยู่ทั้งสองที่: ตัวนอก "0 0 W H" ให้สัดส่วนกับ SVG ที่ CSS กำหนดแค่ความกว้าง · symbol คงของเดิม (viewBox ไม่เริ่ม 0 ไม่เลื่อนซ้ำสองชั้น) */
     const vb = get('viewBox')[1].trim().split(/[\s,]+/)
     const keep = attrs.filter(([n]) => SVG_KEEP.test(n)).map(([n, v]) => [n, n === 'viewBox' ? `0 0 ${vb[2]} ${vb[3]}` : v])

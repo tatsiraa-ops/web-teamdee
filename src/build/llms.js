@@ -17,7 +17,11 @@ function priceLines(prices) {
     out.push(`- โปโลปักโลโก้ (${polo.min}–${polo.max} ตัว · ${P.polo.include?.short || ''}): ${Object.entries(polo.price).map(([k, v]) => `${names[k] || k} ${v}`).join(' · ')} บาท/ตัว`)
   }
   const screen = first(P.screen)
-  if (screen) out.push(`- สกรีน DFT เริ่ม ${screen.min} ตัว: ${Object.values(screen.price).filter(Number).join(' / ')} บาท/ตัว (${screen.min}–${screen.max} ตัว)`)
+  if (screen) {
+    /* บอกรุ่นเสื้อของแต่ละราคา (code review 17 พ.ย.: เดิม "290 / 320" ไม่รู้ว่าราคาไหนของอะไร) */
+    const cols = Object.fromEntries((P.screen.cols || []).map((c) => [c.id, c.name]))
+    out.push(`- สกรีน DFT เริ่ม ${screen.min} ตัว: ${Object.entries(screen.price).filter(([, v]) => typeof v === 'number').map(([k, v]) => `${cols[k] || k} ${v}`).join(' · ')} บาท/ตัว (${screen.min}–${screen.max} ตัว · ${P.screen.include?.short || ''})`)
+  }
   for (const [id, name] of [['baseball', 'เสื้อเบสบอล'], ['jersey', 'เสื้อเจอร์ซีย์ทรงโอเวอร์ไซส์']]) {
     const b = first(P[id])
     if (b) out.push(`- ${name}: ${Object.values(b.price).filter(Number)[0]} บาท/ตัว (${b.min}–${b.max} ตัว) · ราคาลดตามจำนวน`)

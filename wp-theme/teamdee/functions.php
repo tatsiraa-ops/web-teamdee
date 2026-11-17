@@ -384,7 +384,8 @@ function td_rm_jsonld(array $data, bool $themePage, string $base): array {
 		if (isset($node['inLanguage'])) $node['inLanguage'] = 'th';
 		$out[$k] = td_rm_ref($node, $biz, $old);
 	}
-	return $out ?: $data;
+	/* ตัดจนว่าง: ห้ามคืน $data เดิม (ธุรกิจเก่ากลับมา) · ห้ามคืน array ว่าง → WebSite ขั้นต่ำที่ชี้ /#business (code review 17 พ.ย. 2026) */
+	return $out ?: ['WebSite' => ['@type' => 'WebSite', '@id' => $base . '/#website', 'url' => $base . '/', 'name' => 'TEAMDEE', 'alternateName' => 'ทีมดี', 'inLanguage' => 'th', 'publisher' => ['@id' => $biz]]];
 }
 add_filter('rank_math/json_ld', fn ($data) => is_array($data) ? td_rm_jsonld($data, (bool) td_current(), untrailingslashit(home_url())) : $data, 99);
 /* 17 พ.ย. 2026 รอบตรวจ SEO: ไม่มีปลั๊กอิน SEO → WordPress พิมพ์ canonical ให้เฉพาะ Page/โพสต์ หน้าแรกแบบรายการโพสต์ไม่มี · ธีมพิมพ์เอง */

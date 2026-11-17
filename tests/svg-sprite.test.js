@@ -62,3 +62,13 @@ test('ทุก selector ที่เจาะรูปทรงข้างใ�
   }
   assert.deepEqual([...miss], [])
 })
+
+/* 17 พ.ย. 2026 code review: เดิมอ่านแค่ค่าใน "…" · viewBox='…' หรือ viewBox ไม่มีค่า → .trim() ของ undefined → build ทั้งเว็บพัง */
+test("SVG ที่ใช้ quote เดี่ยว ทำ sprite ได้ · viewBox ไม่มีค่า = ข้าม ไม่พัง", () => {
+  const sq = "<svg width='16' height='16' viewBox='0 0 24 24' aria-hidden='true'><path d='M5 12h14'/></svg>"
+  const out = svgSprite(page(sq + sq))
+  assert.match(out, /<symbol id="i1" viewBox="0 0 24 24"><path d='M5 12h14'\/><\/symbol>/)
+  assert.equal((out.match(/<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i1"\/><\/svg>/g) || []).length, 2)
+  const bad = '<svg viewBox aria-hidden="true"><path d="M1 1"/></svg>'
+  assert.equal(svgSprite(page(bad + bad)), page(bad + bad))
+})

@@ -94,8 +94,10 @@ test('ทุกหน้าอ้างธุรกิจเดียวกั�
   assert.doesNotMatch(html, /"@type":"Organization"|businessLd/)
   assert.match(readFileSync(new URL('../src/partials/head.hbs', import.meta.url), 'utf8'), /\{\{#each businessLd\}\}<script type="application\/ld\+json">\{\{\{this\}\}\}<\/script>\{\{\/each\}\}/)
   const ctx = readFileSync(new URL('../src/build/context.js', import.meta.url), 'utf8')
-  assert.match(ctx, /if \(at !== '\/'\) base\.businessLd = \[ldJson\(businessSchema\(data\.site, \{ priceRange: priceRangeOf\(json\('prices\.json'\)\) \}\)\)\]/)
-  assert.match(ctx, /base\.homeLd = \[businessSchema\(data\.site, \{ priceRange: priceRangeOf\(json\('prices\.json'\)\) \}\)/)
+  /* ชุดเดียวกันทั้งหน้าแรก (homeLd) และหน้าอื่น (businessLd) · คำนวณครั้งเดียว (code review 17 พ.ย.) */
+  assert.match(ctx, /const business = businessSchema\(data\.site, \{ priceRange: priceRangeOf\(json\('prices\.json'\)\) \}\)/)
+  assert.match(ctx, /if \(at !== '\/'\) base\.businessLd = \[ldJson\(business\)\]/)
+  assert.match(ctx, /if \(at === '\/'\) base\.homeLd = \[business, faqSchema/)
 })
 
 /* 17 พ.ย. 2026 แผน SEO/GEO A5: Product + AggregateOffer หน้าสินค้าที่เปิดราคา (โปโลปัก · สกรีน · เบสบอล · เจอร์ซีย์)

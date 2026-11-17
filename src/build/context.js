@@ -78,8 +78,9 @@ export function pageContext(pagePath) {
         /* หน้าแรก: ข้อมูลธุรกิจ + FAQ ให้ Google อ่าน (SEO เสื้อโปโล / ยูนิฟอร์ม 21 ต.ค. 2026) */
         /* /about-us/: schema ธุรกิจชุดเดียวกับหน้าแรก (@id /#business ร่วม · 17 พ.ย. 2026 เดิมเป็น Organization แยก ข้อมูลไม่ตรงกัน) */
         /* 17 พ.ย. 2026 A4: ทุกหน้าอ้างธุรกิจเดียวกัน (@id /#business · head.hbs) · หน้าแรกอยู่ใน homeLd พร้อม FAQ */
-        if (at !== '/') base.businessLd = [ldJson(businessSchema(data.site, { priceRange: priceRangeOf(json('prices.json')) }))]
-        if (at === '/') base.homeLd = [businessSchema(data.site, { priceRange: priceRangeOf(json('prices.json')) }), faqSchema(json('home.json').faq.items)].filter(Boolean).map(ldJson)
+        const business = businessSchema(data.site, { priceRange: priceRangeOf(json('prices.json')) })
+        if (at !== '/') base.businessLd = [ldJson(business)]
+        if (at === '/') base.homeLd = [business, faqSchema(json('home.json').faq.items)].filter(Boolean).map(ldJson)
         /* เครื่องคำนวณ: FAQ ราคาให้ Google อ่าน (audit calc-11) · เว็บจริงใช้ FAQ ที่ตัดข้อรอยืนยันแล้ว */
         /* /designs/ (ตรวจมือถือ 30 ต.ค.): หน้าแบบเสื้อไม่มีราคาเลย · แบบทั้งหมดเป็นเสื้อพิมพ์ลาย → ราคาเริ่ม ขั้นต่ำ วันผลิต ของพิมพ์ลาย */
         if (at === '/designs/') {

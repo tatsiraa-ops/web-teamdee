@@ -22,6 +22,7 @@ test('llms.txt: เงื่อนไข + ราคาเริ่มต้น�
   assert.match(t, /ขั้นต่ำ 10 ตัว/); assert.match(t, /รวม VAT/); assert.match(t, /มัดจำ 50%/)
   assert.match(t, /โปโลปัก[^\n]*จูติ 220[^\n]*ดรายเทค 390/)
   assert.match(t, /สกรีน DFT[^\n]*เริ่ม 1 ตัว[^\n]*290/)
+  assert.match(t, /สกรีน DFT[^\n]*Premium C32 290 · Oversize C20 320 บาท\/ตัว/, 'ราคาสกรีนบอกว่าเป็นเสื้อรุ่นไหน (code review 17 พ.ย.)')
   assert.match(t, /เบสบอล[^\n]*359/)
   assert.doesNotMatch(t, /279|329/, 'ไม่มีราคาพิมพ์ลาย')
   assert.match(t, /งานปัก 10–15 วัน/); assert.match(t, /งานด่วนเร็วสุด 7 วัน/)

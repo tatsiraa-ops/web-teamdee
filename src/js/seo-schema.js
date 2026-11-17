@@ -65,6 +65,8 @@ export function productSchema(item, prices, site, path, description, skip = ['pr
 
 export function businessSchema(site, extra = {}) {
   const abs = (p) => site.baseUrl + p
+  const hours = openingHoursSpec(site.openingHours)
+  const sameAs = [site.lineUrl, ...(site.social || [])].filter(Boolean)
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -79,12 +81,12 @@ export function businessSchema(site, extra = {}) {
     logo: abs('/apple-touch-icon.png'),
     image: abs(site.ogImage),
     telephone: intl(site.phonePrimaryTel) || site.phonePrimary,
-    ...(openingHoursSpec(site.openingHours).length ? { openingHoursSpecification: openingHoursSpec(site.openingHours) } : {}),
+    ...(hours.length ? { openingHoursSpecification: hours } : {}),
     ...(extra.priceRange ? { priceRange: extra.priceRange } : {}),
     ...(site.foundedYear ? { foundingDate: String(site.foundedYear) } : {}),
     address: { '@type': 'PostalAddress', addressRegion: 'นนทบุรี', ...thaiAddress(site.address), addressCountry: 'TH' },
     /* 17 พ.ย. 2026: LINE + Facebook + Instagram (site.json social) ให้ Google ผูกบัญชีเป็นธุรกิจเดียวกัน */
-    ...([site.lineUrl, ...(site.social || [])].filter(Boolean).length ? { sameAs: [site.lineUrl, ...(site.social || [])].filter(Boolean) } : {}),
+    ...(sameAs.length ? { sameAs } : {}),
     ...(site.mapUrl ? { hasMap: site.mapUrl } : {}),
     ...(site.geo ? { geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng } } : {}),
     areaServed: 'TH',

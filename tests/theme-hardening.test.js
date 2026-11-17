@@ -163,6 +163,13 @@ test('A10: td_rm_jsonld จัด graph ของ Rank Math ให้เหล�
     assert.equal(post.org, undefined, 'องค์กรซ้ำ (#organization) ตัดทิ้ง')
     assert.deepEqual(post['schema-123'].provider, { '@id': `${B}/#business` })
     assert.doesNotMatch(JSON.stringify(post), /โรงงาน|TEAMDEE STUDIO/)
+    /* 17 พ.ย. 2026 code review: ตัดจนว่าง เดิมคืน $data ทั้งก้อน = ธุรกิจเก่า "โรงงาน…" กลับมา · ต้องได้ WebSite ขั้นต่ำที่ชี้ /#business แทน */
+    const only = { publisher: data.publisher, org: data.org, BreadcrumbList: data.BreadcrumbList }
+    const bare = JSON.parse((await p.run({ code: `<?php ${fnSrc('td_rm_ref')} ${fnSrc('td_rm_jsonld')} echo json_encode(td_rm_jsonld(json_decode(${JSON.stringify(JSON.stringify(only))}, true), true, '${B}'), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);` })).text)
+    assert.ok(Object.keys(bare).length > 0, 'ห้ามคืน graph ว่าง')
+    assert.doesNotMatch(JSON.stringify(bare), /#person|#organization|โรงงาน|TEAMDEE STUDIO|BreadcrumbList/)
+    assert.equal(bare.WebSite['@type'], 'WebSite'); assert.equal(bare.WebSite.name, 'TEAMDEE'); assert.equal(bare.WebSite.inLanguage, 'th')
+    assert.deepEqual(bare.WebSite.publisher, { '@id': `${B}/#business` })
   } finally { p.exit() }
 })
 test('A10: ใส่ filter rank_math/json_ld · หน้าธีม = td_current()', () => {
