@@ -7,8 +7,8 @@ import { readFileSync } from 'node:fs'
 
 const pages = JSON.parse(readFileSync(new URL('../wp-theme/teamdee/build/pages.json', import.meta.url), 'utf8')).pages
 
-test('title ทุกหน้าที่ index ได้ ≤ 60 ตัวอักษร (ยกเว้น /size-chart/ ใช้ title เดิมที่ติดอันดับ)', () => {
-  const long = Object.entries(pages).filter(([r, p]) => r.startsWith('/') && r !== '/size-chart/' && !/noindex/.test(p.robots || '') && [...p.title].length > 60).map(([r, p]) => `${r} ${[...p.title].length}`)
+test('title ทุกหน้าที่ index ได้ ≤ 60 ตัวอักษร (ยกเว้น /size-chart/ /collar-styles/ ใช้ title เดิมที่ติดอันดับ · อาร์ต 17 พ.ย. "คงไว้")', () => {
+  const long = Object.entries(pages).filter(([r, p]) => r.startsWith('/') && !['/size-chart/', '/collar-styles/'].includes(r) && !/noindex/.test(p.robots || '') && [...p.title].length > 60).map(([r, p]) => `${r} ${[...p.title].length}`)
   assert.deepEqual(long, [])
 })
 test('หน้าขายหลักบอกขั้นต่ำใน title · /size-chart/ มีช่วงไซซ์ · /sublimation/ ไม่มีราคา', () => {

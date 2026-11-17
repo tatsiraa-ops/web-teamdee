@@ -40,8 +40,8 @@ test('export ขึ้นธีมเฉพาะหน้าจริง · ไ
   assert.equal(isExported('/blog/pick-fabric/'), false)
   assert.equal(isExported('/ui/'), false)
   assert.equal(isExported('/hero-storyboard/'), false)
-  /* v22: หน้าเดิมบนเว็บจริงที่ไม่มีต้นแบบ ใช้เนื้อหาเดิมจาก CMS ห้ามทับ */
-  assert.equal(isExported('/collar-styles/'), false)
+  /* 17 พ.ย. 2026 อาร์ตเลือกข้อ ข: /collar-styles/ ย้ายจาก Elementor เป็นหน้าคู่มือของธีม (URL · title · H1 · เนื้อหา · รูปเดิม) */
+  assert.equal(isExported('/collar-styles/'), true)
   /* เครื่องคำนวณราคา: ใช้ของเรา (อาร์ต 24 ต.ค.) */
   assert.equal(isExported('/calculations/'), true)
   /* ร่างนโยบาย / เงื่อนไขยังไม่ผ่านการตรวจทางกฎหมาย · เว็บจริงใช้หน้าเดิม */

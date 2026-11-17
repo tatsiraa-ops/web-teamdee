@@ -75,7 +75,8 @@
 </details>{{/each}}</div>{{/if}}
 {{#if (eq this.kind 'cards')}}
 <ul class="gblock-cards">{{#each this.cards}}<li class="gblock-card">
-  {{#if this.img}}<img src="{{this.img}}" alt="ผิว{{this.t}}ระยะใกล้" width="1200" height="558" loading="lazy" decoding="async" class="gblock-card__image">{{/if}}
+  {{!-- alt / ขนาดต่อการ์ดได้ (17 พ.ย. 2026 คอเสื้อ /collar-styles/ รูปจัตุรัส) · ไม่ระบุ = แบบรูปผ้าเดิม · data-sizes = build เติม srcset จากไฟล์ -480/-760 --}}
+  {{#if this.img}}<img src="{{this.img}}" alt="{{#if this.alt}}{{this.alt}}{{else}}ผิว{{this.t}}ระยะใกล้{{/if}}" width="{{#if this.w}}{{this.w}}{{else}}1200{{/if}}" height="{{#if this.h}}{{this.h}}{{else}}558{{/if}}" data-sizes="(min-width: 1024px) 260px, (min-width: 768px) 30vw, 45vw" loading="lazy" decoding="async" class="gblock-card__image">{{/if}}
   {{#if this.ph}}{{#unless @root.wp}}<span class="img-pending gblock-card__placeholder">{{this.ph}}</span>{{/unless}}{{/if}}
   {{#if (eq ../blockHeading 'h4')}}<h4 class="gblock-title">{{this.t}}</h4>{{else}}<h3 class="gblock-title">{{this.t}}</h3>{{/if}}{{#if this.d}}<p class="gblock-description">{{this.d}}</p>{{/if}}
 </li>{{/each}}</ul>{{/if}}

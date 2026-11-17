@@ -14,8 +14,8 @@ for (const forWp of [true, false]) {
       assert.deepEqual(after.sections, before.sections)
       assert.equal(after.h1, before.h1)
       assert.equal(after.hidden, before.hidden)
-      assert.equal(after.guideNav.length, 7)
-      assert.ok(after.guideNav.every(g => g.id !== 'collar'))
+      /* 17 พ.ย. 2026: คู่มือทรงคอเปิดแล้ว (ย้ายจาก Elementor) → 8 เล่ม */
+      assert.equal(after.guideNav.length, 8)
       assert.ok(after.quickLinks.every(q => after.sections.some(s => s.id === q.id)))
       assert.ok(after.quickLinks.length >= 2, item.id)
     }

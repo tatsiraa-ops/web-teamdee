@@ -17,7 +17,8 @@ test('all eight guides have a visual opening with valid existing chapter destina
   for (const guide of guides) {
     const item = guideView(guide,pages[guide.id],{forWp:true})
     const html = material({item,sizing}) + studio({item,sizing})
-    assert.match(html, /<section/, guide.id)
+    /* 17 พ.ย. 2026: คู่มือทรงคอเปิดด้วยการ์ดรูปคอเสื้อจริง 12 แบบเป็นหัวข้อแรก (ตัดภาพวาดต้นแบบออก · tests/collar-page-1117.test.js) */
+    assert.ok(/<section/.test(html) || item.sections[0]?.cards?.some((c) => c.img), guide.id)
     const ids = new Set(item.sections.flatMap(s=>[s.id,...(s.parts||[]).map(p=>`${s.id}-${p.id}`)]))
     for (const [,id] of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.has(id),`${guide.id}: #${id}`)
     for (const [,src] of html.matchAll(/src="(\/img\/[^"?]+)"/g)) assert.ok(existsSync(new URL(`../public${src}`,import.meta.url)),src)

@@ -9,7 +9,8 @@ export const INTERNAL_PAGES = new Set(['/ui/', '/hero-storyboard/', '/design-sam
 /* หน้าที่เว็บจริงมีเนื้อหาใน CMS อยู่แล้ว และของเรายังไม่พร้อมแทน → ไม่ export ให้ WordPress ใช้หน้าเดิม
    privacy / terms: ร่างของเรายังไม่ผ่านการตรวจทางกฎหมาย (22 ต.ค. 2026)
    /calculations/ เอาออกจากรายการแล้ว (อาร์ต 24 ต.ค. "คำนวณราคาเอาตามในเว็บของเรา") → ธีมแสดงเครื่องคำนวณของเราแทนหน้าเดิม */
-export const CMS_PAGES = new Set(['/collar-styles/', '/privacy-policy/', '/terms-conditions/'])
+/* /collar-styles/ ย้ายเป็นหน้าคู่มือของธีม 17 พ.ย. 2026 (อาร์ตเลือกข้อ ข · tests/collar-page-1117.test.js) */
+export const CMS_PAGES = new Set(['/privacy-policy/', '/terms-conditions/'])
 
 /* หน้าเคสจากคลิปใต้ /project/…/ (videos.json · 26 ต.ค.) อยู่แค่ในต้นแบบ จนกว่าคลิปพร้อมและสร้างหน้าใน WordPress แล้ว */
 export const isExported = (route) => !INTERNAL_PAGES.has(route) && !route.startsWith('/design-preview/') && !route.startsWith('/ui/') && !CMS_PAGES.has(route) && !/^\/blog\/.+\//.test(route) && !/^\/project\/.+\//.test(route)

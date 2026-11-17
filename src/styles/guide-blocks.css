@@ -93,6 +93,16 @@
 /* หน้าเลือกผ้า: รูปใหญ่อยู่ในส่วนเทียบผ้าด้านบนแล้ว · การ์ดผิวผ้าใช้รูปแถบเตี้ย ไม่ซ้ำขนาดเดิม */
 .td-guide--fabric #texture .gblock-cards { gap: 22px 20px; }
 .td-guide--fabric #texture .gblock-card__image { aspect-ratio: 4 / 1; margin-bottom: 10px; border-radius: 10px; }
+/* /collar-styles/ (17 พ.ย. 2026 ย้ายจาก Elementor): รูปคอเสื้อจัตุรัส (กราฟิกงานจริงพร้อมชื่อ) 3 คอลัมน์ · มือถือ 2 */
+.td-guide--collar #styles .gblock-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; }
+.td-guide--collar #styles .gblock-card__image { aspect-ratio: 1 / 1; margin-bottom: 12px; border-radius: 16px; border: 1px solid var(--color-line); }
+.td-guide--collar #styles .gblock-description { font-size: 15px; line-height: 1.65; }
+.td-guide--collar #details .gblock-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.td-guide--collar #details .gblock-card { padding: 20px 22px 22px; border: 1px solid var(--color-line); border-radius: 20px; background: var(--color-shell); }
+@media (max-width: 767px) {
+  .td-guide--collar #styles .gblock-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; }
+  .td-guide--collar #details .gblock-cards { grid-template-columns: minmax(0, 1fr); }
+}
 
 /* ───── 12 พ.ย. 2026 หน้า /size-chart/ ตารางไซส์จริง + ตัวช่วยหาไซส์ (guideBlock.hbs kind sizeCharts · size-finder.js)
    ตารางเห็นครบทุกตาราง · ตัวเลขนิ้วตัวหนา ซม. ตัวเล็กกำกับ (ไม่ต้องสลับหน่วย) · แถวที่ตรงกับรอบอกที่กรอก = .is-fit ───── */

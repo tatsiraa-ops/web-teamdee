@@ -300,7 +300,7 @@ const NAV_V22 = [
     ['อีเวนต์และกิจกรรม'], ['สั่งทำเสื้ออีเวนต์ / เสื้อกิจกรรม / เสื้อ Outing', '/event/']]],
   ['แบบเสื้อ', '/designs/'],
   ['รีวิวลูกค้า', '/project/'],
-  ['คู่มือและบทความ', [['คู่มือสั่งทำ'], ['วิธีสั่งเสื้อพิมพ์ลาย', '/printed-shirt-order-guide/'], ['วิธีสั่งเสื้อสกรีน', '/screen-printing-order-guide/'], ['วิธีสั่งเสื้อโปโลปัก', '/embroidered-polo-order-guide/'], ['เลือกผ้าเสื้อทีม', '/fabric-technology/'], ['ตารางไซซ์และวิธีวัด', '/size-chart/'], ['เตรียมโลโก้และข้อมูล', '/artwork-preparation-guide/'], ['จัดส่งและหลังการขาย', '/delivery-after-sales-guide/'], ['บทความและไอเดีย', '/blog/'], ['คำถามที่พบบ่อย', '/faq/']]],
+  ['คู่มือและบทความ', [['คู่มือสั่งทำ'], ['วิธีสั่งเสื้อพิมพ์ลาย', '/printed-shirt-order-guide/'], ['วิธีสั่งเสื้อสกรีน', '/screen-printing-order-guide/'], ['วิธีสั่งเสื้อโปโลปัก', '/embroidered-polo-order-guide/'], ['เลือกผ้าเสื้อทีม', '/fabric-technology/'], ['ตารางไซซ์และวิธีวัด', '/size-chart/'], ['ทรงคอเสื้อและปกเสื้อ', '/collar-styles/'], ['เตรียมโลโก้และข้อมูล', '/artwork-preparation-guide/'], ['จัดส่งและหลังการขาย', '/delivery-after-sales-guide/'], ['บทความและไอเดีย', '/blog/'], ['คำถามที่พบบ่อย', '/faq/']]],
   ['รู้จักทีมดี', '/about-us/'],
 ]
 const flat = (nav) => nav.flatMap(([t, x]) => (Array.isArray(x) ? [t, ...x.map((i) => i.join(' '))] : [`${t} ${x}`]))
