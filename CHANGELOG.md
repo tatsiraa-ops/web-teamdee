@@ -2,6 +2,15 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.10 — 2026-11-17
+
+แก้จากการตรวจ staging หลัง v0.4.9: ข้อความ LINE ในบทความขึ้นบรรทัดถูกต้อง · หน้าบทความไม่โหลด Elementor (error elementorFrontendConfig หาย) · หน้า Elementor เดิมอย่าง /collar-styles/ เต็มความกว้างแบบเว็บจริง
+
+### Fixes
+
+- **article:** keep the LINE message line breaks, no Elementor assets on non-Elementor posts (5652738)
+- **wp-theme:** full-width layout for legacy Elementor pages like the live site (9bfa8f9)
+
 ## v0.4.9 — 2026-11-17
 
 คง /size-chart/ และ /collar-styles/ ไว้กัน SEO เก่าหลุด · ปรับหน้าบทความ: วันที่ไทย หมวด เวลาอ่าน สารบัญสั้นลง ตารางอ่านง่าย กล่องถามทาง LINE กลางบทความ ป๊อปอัปไม่เด้งกลางเนื้อหา
