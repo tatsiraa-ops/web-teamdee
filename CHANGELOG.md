@@ -2,6 +2,14 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.6 — 2026-11-17
+
+แก้ตามผลตรวจโค้ดของ v0.4.5 ครบทุกจุด: schema ธุรกิจเก่าไม่กลับมาแม้ Rank Math โดนตัดหมด · SVG quote เดี่ยวไม่ทำ build พัง · ราคาสกรีนใน llms.txt บอกรุ่นเสื้อ · ลดโค้ดซ้ำใน schema
+
+### Fixes
+
+- code-review follow-ups (JSON-LD fallback, SVG quotes, llms screen labels, schema dedupe) (c061f59)
+
 ## v0.4.5 — 2026-11-17
 
 ชุด SEO/GEO A1–A12 (llms.txt · ธุรกิจเดียว /#business ทุกหน้า · Product schema · รูปแชร์รายหน้า 41 รูป · redirect/canonical) · หน้ากลุ่มลูกค้าและ /sublimation/ โชว์ทั้งหมดไม่ต้องกด · แยก CSS หน้าแรก/หน้าสินค้า · SVG sprite · แก้บั๊กและ a11y จากรอบตรวจ
