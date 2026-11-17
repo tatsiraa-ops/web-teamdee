@@ -2,6 +2,27 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.5 — 2026-11-17
+
+ชุด SEO/GEO A1–A12 (llms.txt · ธุรกิจเดียว /#business ทุกหน้า · Product schema · รูปแชร์รายหน้า 41 รูป · redirect/canonical) · หน้ากลุ่มลูกค้าและ /sublimation/ โชว์ทั้งหมดไม่ต้องกด · แยก CSS หน้าแรก/หน้าสินค้า · SVG sprite · แก้บั๊กและ a11y จากรอบตรวจ
+
+### Features
+
+- **seo:** SEO/GEO plan A1–A12 — llms.txt, business + product schema, per-page share images (5cd2a06)
+- **ui:** show all work contexts and fabrics, plus bug, a11y and breadcrumb fixes (4d11b85)
+
+### Performance
+
+- split home-only and product-base CSS, resize 15 icons (c5f619d)
+
+### Tests
+
+- guards for SEO/GEO, CSS split, SVG sprite, show-all and a11y fixes (b4c3b8c)
+
+### Docs
+
+- SEO/GEO audit 17 Nov 2026 (reports + plan) and content drafts (a373ea6)
+
 ## v0.4.4 — 2026-11-17
 
 ถอดป้ายภาพจำลอง/ภาพประกอบทั้งเว็บ (อาร์ตสั่ง) · แก้จุดจากการตรวจทั้งเว็บ: คอนทราสต์ แถบเลื่อนกด Tab ถึงได้ popup ไม่แย่งโฟกัส รูปแถวแรกโหลดทันที preload ฟอนต์ละติน ล็อกลำดับ CSS
