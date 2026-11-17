@@ -22,7 +22,7 @@ test('การ์ดกลุ่ม: โปสเตอร์ภาพบรร
        เป็นภาพจำลอง (AI) อยู่ในส่วนรูปลูกค้าจริง → ต้องมีป้าย "ภาพจำลอง" ให้เห็น ห้ามทำให้เข้าใจว่าเป็นลูกค้า */
     assert.equal(side[1], `/img/uses-row/${cat}-960.webp`, `${cat}: ภาพบรรยากาศกลุ่มที่เคยเจน`)
     const s2 = side[2]
-    assert.match(s2, /<span class="pj-grp__sim">(<t-nw>)?ภาพจำลอง(<\/t-nw>)?<\/span>/, `${cat}: ป้ายภาพจำลอง`)
+    assert.doesNotMatch(s2, /pj-grp__sim|ภาพจำลอง/, `${cat}: ไม่มีป้ายภาพจำลอง`) /* 16 พ.ย. 2026 อาร์ต "ไม่เอาป้ายภาพจำลอง" → "เอาออกทั้งหมด": ไม่มีป้ายภาพจำลอง/ภาพประกอบ (tests/no-image-labels.test.js) */
     assert.doesNotMatch(s2, /pj-grp__n|pj-grp__faces|\d+\s*(<[^>]+>\s*)*ภาพ/, `${cat}: ไม่มีจำนวนภาพ`)
     const sub = s2.match(/<p class="pj-grp__sub">([\s\S]*?)<\/p>/); assert.ok(sub, `${cat}: คำบรรยายกลุ่ม`)
     assert.equal(text(sub[1]), H[cat].sub)

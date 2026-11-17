@@ -121,7 +121,7 @@ test('ส่วนเสื้อทุกแบบ: ภาพสตูดิโ
   const tags = [...f.matchAll(/<li class="ab2-wear__tag"[^>]*><a href="([^"]+)"/g)].map((m) => m[1])
   assert.equal(tags.length, 4)
   assert.ok(tags.every((h) => /^\/[a-z0-9-]+\/$/.test(h)), tags.join())
-  assert.match(f.replace(/<\/?t-[a-z]+>/g, ''), /ภาพจำลองจากลายเสื้อจริงของทีมดี/)
+  assert.doesNotMatch(f.replace(/<\/?t-[a-z]+>/g, ''), /ภาพจำลอง/) /* 16 พ.ย. 2026 อาร์ต "ไม่เอาป้ายภาพจำลอง" → "เอาออกทั้งหมด": ไม่มีป้ายภาพจำลอง/ภาพประกอบ (tests/no-image-labels.test.js) */
   assert.doesNotMatch(f, /FTI|ab-fabric-bg|ab2-feat__/)
 })
 

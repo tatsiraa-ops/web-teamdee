@@ -34,7 +34,7 @@ test('หน่วยงาน: แท็บ 3 ประเภท เสื้�
   for (const t of TABS) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/gov-${t}-${f}.webp`), `gov-${t}-${f}`)
   const alts = [...ctx.matchAll(/class="up2-ctx__img"[^>]*alt="([^"]+)"/g)].map((m) => m[1])
   /* 13 พ.ย. อาร์ต "เสื้อบนแท่นในแต่ละหน้า ขอแบบคละๆโทน": แท็บรัฐวิสาหกิจเปลี่ยนจาก AEROTHAI (ฟ้า ซ้ำกับ 2 แท็บถัดไป) เป็น NT เหลืองเทา */
-  for (const n of ['BANGKRATHUM HOSPITAL', 'กรมประชาสัมพันธ์', 'MWA', 'i am nt', 'กรมช่างโยธาทหารอากาศ', 'ดินไก่ทับ']) assert.ok(alts.some((a) => a.startsWith('ภาพจำลอง') && a.includes(n)), n)
+  for (const n of ['BANGKRATHUM HOSPITAL', 'กรมประชาสัมพันธ์', 'MWA', 'i am nt', 'กรมช่างโยธาทหารอากาศ', 'ดินไก่ทับ']) assert.ok(alts.some((a) => !/^(ภาพจำลอง|ภาพประกอบ)/.test(a) && a.includes(n)), n)
   const photos = [...ctx.matchAll(/class="up2-ctx__ph[^"]*"><img src="([^"]+)"/g)].map((m) => m[1])
   assert.equal(photos.length, 12)
   /* แท็บใหม่ใช้ภาพถ่ายเสื้อจริงจาก Packshot แทนรูปลูกค้าใส่เสื้อ → ป้ายต้องบอกตรงๆ ว่าเป็นภาพถ่ายเสื้อจริง */

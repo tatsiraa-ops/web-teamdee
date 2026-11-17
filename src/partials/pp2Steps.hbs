@@ -28,7 +28,7 @@
       <img src="{{fin.img}}" srcset="{{fin.img}} 960w, {{fin.img2}} 1600w, {{fin.img3}} 2400w" sizes="(min-width: 1240px) 1200px, 100vw" width="960" height="407" alt="{{fin.alt}}" loading="lazy" decoding="async">
       <figcaption><b>{{fin.h}}</b><span>{{{ph fin.p}}}</span><a class="cb cb--p" href="{{@root.priceAsk}}" data-track="line" data-where="pp-steps"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{fin.cta}}</span></a></figcaption>
     </figure>
-    <p class="pp2-stb__note">{{photoNote}}</p>
+    {{#if photoNote}}<p class="pp2-stb__note">{{photoNote}}</p>{{/if}}
   </div>
 </section>
 {{/with}}

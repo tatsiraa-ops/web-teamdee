@@ -133,7 +133,7 @@ export function productsPage({ data, base, at, page, kind, id, rel, sizeCharts, 
                       if (regular.length !== POS.length) throw new Error('polo.json guide: ตำแหน่งปักไม่ตรงผังเสื้อ (5 จุด)')
                       return {
                         img: '/img/emb-guide/shirt-fb',
-                        pos: regular.map((x, i) => ({ n: `0${i + 1}`, t: x.t, s: x.s, x: POS[i][0], y: POS[i][1], side: POS[i][2], thumb: `/img/emb-guide/${x.img}.webp`, thumbAlt: x.alt || `ภาพจำลองงานปักตำแหน่ง${x.t}` })),
+                        pos: regular.map((x, i) => ({ n: `0${i + 1}`, t: x.t, s: x.s, x: POS[i][0], y: POS[i][1], side: POS[i][2], thumb: `/img/emb-guide/${x.img}.webp`, thumbAlt: x.alt || `งานปักตำแหน่ง${x.t}` })),
                         parts: g.groups.map((grp, i) => { const c = PART[grp.k]; if (!c) throw new Error(`polo.json guide: กลุ่ม ${grp.k} ไม่มีจุดบนผังเสื้อ`); return { n: `0${i + 1}`, t: grp.t, s: `${grp.items.length} แบบ`, x: c[0], y: c[1], side: c[2], href: `#grp-${grp.k}` } }),
                       }
                     })() }

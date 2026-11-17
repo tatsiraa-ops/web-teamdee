@@ -46,8 +46,8 @@ for (const [id, f] of Object.entries(PAGES)) {
     const { s } = sec(f)
     const imgs = [...s.matchAll(/<img[^>]*src="([^"]+)"[^>]*alt="([^"]*)"/g)].map((x) => ({ src: x[1], alt: x[2] }))
     assert.equal(imgs.length, 3)
-    for (const { src, alt } of imgs) { assert.ok(existsSync(new URL(`../public${src}`, import.meta.url)), src); assert.match(alt, /^ภาพจำลอง: /, src) }
-    assert.match(text(s), /ภาพจำลองจากเสื้อจริงของทีมดี/)
+    for (const { src, alt } of imgs) { assert.ok(existsSync(new URL(`../public${src}`, import.meta.url)), src); assert.doesNotMatch(alt, /^(ภาพจำลอง|ภาพประกอบ)/, src) }
+    assert.doesNotMatch(text(s), /ภาพจำลอง/, 'ไม่มีหมายเหตุภาพจำลอง (อาร์ต 16 พ.ย.)')
     const line = s.match(/<a[^>]*href="(https:\/\/line\.me[^"]+)"[^>]*data-track="line"[^>]*data-where="use-check"/)
     assert.ok(line, 'ปุ่ม LINE data-where="use-check"')
     if (id === 'shop') assert.doesNotMatch(decodeURIComponent(line[1].replace(/&amp;/g, '&')), /บริษัท|องค์กร/)

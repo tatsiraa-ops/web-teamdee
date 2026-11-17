@@ -87,7 +87,7 @@ test('กล่องช่วยเลือก: หัวข้อ + คำอ
   assert.ok(box, 'มีกล่อง')
   assert.match(txt(box), /ยังไม่แน่ใจ ให้ทีมดีช่วยเลือก/)
   assert.match(box, /<a class="cb cb--p ps2__help-cta" href="https:\/\/line\.me\/R\/oaMessage\/[^"]+" data-track="line" data-where="pp-options">/)
-  assert.match(txt(box), /ภาพจำลอง/)
+  assert.doesNotMatch(txt(box), /ภาพจำลอง/) /* 16 พ.ย. 2026 อาร์ต "ไม่เอาป้ายภาพจำลอง" → "เอาออกทั้งหมด": ไม่มีป้ายภาพจำลอง/ภาพประกอบ (tests/no-image-labels.test.js) */
   assert.doesNotMatch(box, /ล้างที่เลือก|data-polo/)
 })
 

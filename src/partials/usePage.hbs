@@ -25,7 +25,7 @@
           {{#if item.img}}<img src="{{item.img}}"{{#if up.hero.srcset}} srcset="{{up.hero.srcset}}" sizes="(min-width:1024px) 58vw, 100vw"{{/if}} alt="{{item.name}} · ทีมลูกค้าใส่เสื้อที่ทีมดีผลิต" width="760" height="760" fetchpriority="high" decoding="async" class="w-full h-full object-cover {{item.imgPos}}">
           {{else}}<span class="prod-noimg" role="img" aria-label="ยังไม่มีภาพ{{item.name}}"><span class="block size-14">{{> icoUsers}}</span><span>{{item.name}}</span></span>{{/if}}
         </div>
-        {{#if item.img}}<figcaption class="up-hero__proof">{{#if (eq item.imgKind 'real')}}<span class="up-checks__i">{{> icoCheck}}</span>งานผลิตจริงของลูกค้าทีมดี{{else}}ภาพจำลอง{{/if}}</figcaption>{{/if}}
+        {{#if item.img}}{{#if (eq item.imgKind 'real')}}<figcaption class="up-hero__proof"><span class="up-checks__i">{{> icoCheck}}</span>งานผลิตจริงของลูกค้าทีมดี</figcaption>{{/if}}{{/if}}
         {{#with up.designs.items.[0]}}<div class="up-hero__design"><img src="{{this.img}}" alt="" width="1080" height="720" loading="lazy" decoding="async"><span><b>ตัวอย่างแบบ 3D</b>ทีมดีออกแบบให้ฟรี</span></div>{{/with}}
       </figure>
       <div class="up-hero__copy">

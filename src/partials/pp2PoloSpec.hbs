@@ -28,7 +28,7 @@
       <h3 class="ps2__oh">{{guideH}}</h3>
       <p class="ps2__op">{{{ph guideP}}}</p>
       {{!-- 16 พ.ย. 2026 อาร์ต "ตำแหน่งปัก เอาเป็นตัวเสื้อหน้าหลัง และเอาแบบมีเส้นแล้วชี้ไปในแต่ละจุดมาพอ" · กดป้ายดูรูปงานปักจุดนั้นใหญ่ได้ --}}
-      {{> shirtCallouts id="emb-pos" img=guide.shirt.img alt="ภาพจำลอง: เสื้อโปโล TEAMDEE ด้านหน้าและด้านหลัง เส้นชี้ตำแหน่งปัก 01–05" points=guide.shirt.pos}}
+      {{> shirtCallouts id="emb-pos" img=guide.shirt.img alt="เสื้อโปโล TEAMDEE ด้านหน้าและด้านหลัง เส้นชี้ตำแหน่งปัก 01–05" points=guide.shirt.pos}}
       {{#each guide.positions}}{{#if this.special}}<div class="ps2__special"><b>{{this.t}}</b><span>{{this.s}}</span><a href="{{../guide.specialAsk}}" data-track="line" data-where="pp-special">ส่งแบบให้ประเมิน <span aria-hidden="true">↗</span></a></div>{{/if}}{{/each}}
       <p class="ps2__gnote">{{guide.posNote}}</p>
     </div>
@@ -36,11 +36,11 @@
       <h3 class="ps2__oh">{{partsH}}</h3>
       <p class="ps2__op">กดรูปเพื่อดูแบบใหญ่ แล้วบอกแบบที่ชอบในแชทได้เลย</p>
       {{!-- 16 พ.ย. 2026 อาร์ต "ทำเป็นเสื้อของเราหน้าหลัง และชี้ไปยังจุดต่างๆ · กดรูปแต่ละออปชันมีป๊อปอัป · ไม่ต้องให้กดเลือกแล้ว" --}}
-      {{> shirtCallouts id="emb-parts" img=guide.shirt.img alt="ภาพจำลอง: เสื้อโปโล TEAMDEE ด้านหน้าและด้านหลัง เส้นชี้ ปก สาบ กระเป๋า ปลายแขน และตัดต่อ" points=guide.shirt.parts}}
+      {{> shirtCallouts id="emb-parts" img=guide.shirt.img alt="เสื้อโปโล TEAMDEE ด้านหน้าและด้านหลัง เส้นชี้ ปก สาบ กระเป๋า ปลายแขน และตัดต่อ" points=guide.shirt.parts}}
       <div class="ps2__groups">
         {{#each guide.groups}}<section class="ps2__grp" aria-labelledby="grp-{{this.k}}">
           <div class="ps2__gh"><h4 id="grp-{{this.k}}"><span class="ps2__group-no" aria-hidden="true">0{{inc @index}}</span>{{this.t}} <span class="ps2__group-count">{{this.items.length}} แบบ</span></h4>{{#if this.note}}<p>{{this.note}}</p>{{/if}}</div>
-          <ul class="ps2__pr" id="ps2-grp-{{this.k}}">{{#each this.items}}<li class="ps2__pi"><figure class="ps2__opt"><span class="ps2__pim"><img src="{{this.src}}" width="{{this.w}}" height="{{this.h}}" alt="ภาพจำลอง: {{this.t}} · {{this.s}}" loading="lazy" decoding="async"></span><figcaption>{{this.t}}</figcaption></figure></li>{{/each}}</ul>
+          <ul class="ps2__pr" id="ps2-grp-{{this.k}}">{{#each this.items}}<li class="ps2__pi"><figure class="ps2__opt"><span class="ps2__pim"><img src="{{this.src}}" width="{{this.w}}" height="{{this.h}}" alt="{{this.t}} · {{this.s}}" loading="lazy" decoding="async"></span><figcaption>{{this.t}}</figcaption></figure></li>{{/each}}</ul>
         </section>{{/each}}
       </div>
       {{!-- 16 พ.ย. 2026 อาร์ต "ทำมาดีๆหน่อย" · ไม่มีการเลือกแล้ว → ไม่มี "ล้างที่เลือก" · ปุ่ม LINE เขียวชุดเดียวกับทั้งเว็บ --}}
@@ -49,7 +49,7 @@
         <div class="ps2__help-copy">
           <h4>ยังไม่แน่ใจ ให้ทีมดีช่วยเลือก</h4>
           <p>บอกงานที่จะใช้ หรือส่งรูปเสื้อที่ชอบมาในแชท ทีมดีแนะนำปก สาบ ปลายแขน และสีที่เข้ากับทีมให้</p>
-          <small>{{guide.imgNote}}</small>
+          {{#if guide.imgNote}}<small>{{guide.imgNote}}</small>{{/if}}
         </div>
         <a class="cb cb--p ps2__help-cta" href="{{ask}}" data-track="line" data-where="pp-options"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">ให้ทีมดีช่วยเลือก</span></a>
       </div>

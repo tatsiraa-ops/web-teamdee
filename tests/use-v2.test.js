@@ -378,7 +378,7 @@ test('/corporate/ บริบทงาน รอบ 198: แท็บใต้�
     assert.ok(body.indexOf('up2-ctx__proof') > body.indexOf('up2-ctx__gives') && body.indexOf('up2-ctx__proof') < body.indexOf('up2-ctx__line'), 'แถวรูปจริงอยู่ใต้ทีมดีจัดให้ ก่อนปุ่ม LINE')
     const sc = a.match(/<figure class="up2-ctx__scene"><img class="up2-ctx__img" src="([^"]+)" srcset="([^"]+)"[^>]*alt="([^"]+)"/); assert.ok(sc, `${id}: ภาพไดโอรามาเดิม`)
     for (const u of sc[2].split(',').map((x) => x.trim().split(' ')[0])) assert.ok(pub(u), u)
-    assert.match(sc[3], /ภาพจำลอง 3D/, 'alt บอกว่าเป็นภาพจำลอง')
+    assert.doesNotMatch(sc[3], /^(ภาพจำลอง|ภาพประกอบ)/, 'ไม่มีป้ายภาพจำลอง (อาร์ต 16 พ.ย.)'); assert.ok(sc[3].length > 10, 'alt ยังบรรยายภาพ')
     const pics = [...a.matchAll(/<figure class="up2-ctx__ph up2-ctx__ph--(\d)"><img src="([^"]+)"[^>]*alt="([^"]+)"/g)]
     assert.deepEqual(pics.map((p) => p[1]), ['1', '2'], `${id}: รูปจริง 2 รูป`)
     for (const [, , src, alt] of pics) {

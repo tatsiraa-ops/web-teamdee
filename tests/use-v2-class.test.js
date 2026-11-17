@@ -40,7 +40,7 @@ test('รุ่น: แท็บ 4 ประเภท จากเสื้อ�
   assert.match(ctx, /class="up2-ctx__shelf"[^>]*style="--n:4"/)
   for (const t of TABS) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/class-${t}-${f}.webp`), `class-${t}-${f}`)
   const alts = [...ctx.matchAll(/class="up2-ctx__img"[^>]*alt="([^"]+)"/g)].map((m) => m[1])
-  for (const n of ['คริสเตียน 137', '๖๐', 'WARRIORS ESPORTS', 'BHS CREW']) assert.ok(alts.some((a) => a.startsWith('ภาพจำลอง') && a.includes(n)), n)
+  for (const n of ['คริสเตียน 137', '๖๐', 'WARRIORS ESPORTS', 'BHS CREW']) assert.ok(alts.some((a) => !/^(ภาพจำลอง|ภาพประกอบ)/.test(a) && a.includes(n)), n)
   const photos = [...ctx.matchAll(/class="up2-ctx__ph[^"]*"><img src="([^"]+)"/g)].map((m) => m[1])
   assert.equal(photos.length, 8)
   assert.equal((ctx.match(/class="up2-ctx__real">ภาพถ่ายเสื้อจริง</g) || []).length, 2)
@@ -57,7 +57,7 @@ test('รุ่น: ไม่มีแถวแบบเสื้อ · แถ�
   const show = cls.slice(cls.indexOf('id="real-work"'))
   assert.doesNotMatch(show, /id="show-designs"/)
   for (let i = 1; i <= 4; i++) { assert.match(show, new RegExp(`/img/use-worn/class-${i}\\.webp`)); assert.ok(pub(`/img/use-worn/class-${i}-540.webp`)) }
-  assert.match(show, /alt="ภาพจำลอง: [^"]*คริสเตียน 137/)
+  assert.match(show, /alt="[^"]*คริสเตียน 137/); assert.doesNotMatch(show, /alt="ภาพจำลอง/)
   const at = show.indexOf('id="show-real"')
   const first = [...show.slice(at).matchAll(/<img src="([^"]+)"/g)].slice(0, 4).map((m) => m[1])
   assert.deepEqual(first, ['christian', 'sixty', 'warriors', 'bhs'].map((k) => `/img/use-real/class-${k}.webp`))

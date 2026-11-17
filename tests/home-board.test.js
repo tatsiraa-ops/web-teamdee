@@ -287,12 +287,12 @@ test('กลุ่มลูกค้าหน้าแรก: ภาพจำล
   const cards = JSON.parse(readFileSync(new URL('../src/data/home.json', import.meta.url), 'utf8')).uses.cards
   assert.equal(Object.keys(cards).length, 12)
   for (const [k, c] of Object.entries(cards)) {
-    assert.match(c.alt, /^ภาพจำลองจากลายเสื้อจริงของทีมดี /, k)
+    assert.doesNotMatch(c.alt, /^(ภาพจำลอง|ภาพประกอบ)/, k); assert.ok(c.alt.length > 10, k) /* 16 พ.ย. 2026 อาร์ต "ไม่เอาป้ายภาพจำลอง" → "เอาออกทั้งหมด": ไม่มีป้ายภาพจำลอง/ภาพประกอบ (tests/no-image-labels.test.js) */
     assert.doesNotMatch(c.alt, /ลูกค้า/, k)
   }
   const m = home()
   const sec = m.slice(m.indexOf('id="uses"'), m.indexOf('</section>', m.indexOf('id="uses"')))
-  assert.equal((sec.match(/alt="ภาพจำลองจากลายเสื้อจริงของทีมดี /g) || []).length, 12)
+  assert.equal((sec.match(/alt="ภาพจำลอง/g) || []).length, 0, 'ไม่มีป้ายภาพจำลอง (อาร์ต 16 พ.ย.)')
 })
 
 /* 3 พ.ย. อาร์ต "พวกระยะยังดูขัดๆ" · วัดจริง 1440: เนื้อหา→หัวข้อบริการ 112 · การ์ดบริการ→ตัวเลข 32 · เส้นคั่นตัวเลขชนขอบพื้นครีม → ตั้งจังหวะ 96 / 48 / 80 */

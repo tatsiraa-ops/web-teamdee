@@ -70,7 +70,7 @@ test('ร้านค้า: แท็บบริบท 3 ประเภทร
   assert.deepEqual(tabs, ['retail', 'parts', 'car', 'pet'])
   for (const t of tabs) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/shop-${t}-${f}.webp`), `shop-${t}-${f}`)
   const scenes = [...ctx.matchAll(/class="up2-ctx__img" src="([^"]+)"[^>]*alt="([^"]+)"/g)]
-  assert.equal(scenes.length, 4); for (const [, , alt] of scenes) assert.match(alt, /^ภาพจำลอง/)
+  assert.equal(scenes.length, 4); for (const [, , alt] of scenes) assert.doesNotMatch(alt, /^(ภาพจำลอง|ภาพประกอบ)/)
   const lib = JSON.parse(readFileSync('src/data/media-library.json', 'utf8')).items
   const photos = [...ctx.matchAll(/class="up2-ctx__ph[^"]*"><img src="([^"]+)"/g)].map((m) => m[1])
   assert.equal(photos.length, 8)

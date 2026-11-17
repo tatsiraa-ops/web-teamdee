@@ -32,12 +32,11 @@ test('ส่วนงานจริงครบกว่าหน้าพิ�
   assert.equal(cards.length, 13)
   const print = read('dist-wp/sublimation/index.html')
   assert.ok(cards.length > [...print.matchAll(/<li class="pp2-pf__bc/g)].length, 'การ์ดเบื้องหลังมากกว่าหน้าพิมพ์ลาย')
-  for (const [, src, alt] of cards) { assert.match(src, /\/img\/emb-real\/g-/, src); assert.match(alt, /^ภาพประกอบ: /, alt); assert.doesNotMatch(alt, /พิมพ์ลาย/) }
+  for (const [, src, alt] of cards) { assert.match(src, /\/img\/emb-real\/g-/, src); assert.doesNotMatch(alt, /^(ภาพจำลอง|ภาพประกอบ)/, alt); assert.doesNotMatch(alt, /พิมพ์ลาย/) }
   const loops = [...pf.matchAll(/<video[^>]*data-loop[^>]*>/g)].map((m) => m[0])
   assert.equal(loops.length, 4)
   for (const v of loops) { assert.match(v, / muted /); assert.match(v, / loop /); assert.match(v, / playsinline /); assert.match(v, /preload="none"/); assert.match(v, /poster="[^"]*\/img\/emb-real\/loop-[a-z]+\.webp"/); assert.match(v, /aria-label="[^"]+"/) }
-  assert.match(text(pf), /ภาพนิ่งในส่วนนี้เป็นภาพประกอบ/)
-  assert.match(text(pf), /ภาพเคลื่อนไหวและคลิปเป็นภาพจริง/)
+    assert.doesNotMatch(text(pf), /ภาพประกอบ|ภาพจำลอง/, 'ไม่มีหมายเหตุภาพประกอบ (อาร์ต 16 พ.ย.)')
   assert.match(pf, /embroidery-asmr|งานปักโลโก้บนเสื้อโปโล/)
   const js = read('src/js/product-page.js')
   assert.match(js, /\[data-loop\]/)
@@ -50,7 +49,7 @@ test('ขั้นตอน: ขั้น 03 ตรวจตัวอย่า�
   assert.match(photo(3)[1], /\/img\/emb-real\/sample-/)
   assert.match(photo(5)[1], /\/img\/emb-real\/machine-/)
   for (const n of [3, 5]) assert.doesNotMatch(photo(n)[2], /ภาพประกอบ/)
-  assert.match(text(st), /ขั้น 03 และ 05 เป็นภาพจริง/)
+  assert.doesNotMatch(text(st), /ภาพประกอบ|ภาพจำลอง/) /* 16 พ.ย. 2026 อาร์ต "ไม่เอาป้ายภาพจำลอง" → "เอาออกทั้งหมด": ไม่มีป้ายภาพจำลอง/ภาพประกอบ (tests/no-image-labels.test.js) */
 })
 
 test('ไม่มีข้อมูลติดต่อของลูกค้าในภาพ: การ์ด "งานปักพิเศษ" เป็นภาพงานปักจริงใหม่ (ไม่ใช่แพตช์ที่มีเบอร์โทรร้านลูกค้า)', () => {

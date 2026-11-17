@@ -39,7 +39,7 @@ test('คณะ: แท็บ 5 ประเภท จากเสื้อจ�
   assert.match(ctx, /class="up2-ctx__shelf"[^>]*style="--n:5"/)
   for (const t of TABS) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/faculty-${t}-${f}.webp`), `faculty-${t}-${f}`)
   const alts = [...ctx.matchAll(/class="up2-ctx__img"[^>]*alt="([^"]+)"/g)].map((m) => m[1])
-  for (const n of ['SOCIAL SCIENCES', 'MAHIDOL NAKHONSAWAN', 'SIT KMUTT', 'FRESHY GAME', 'KMUTNB']) assert.ok(alts.some((a) => a.startsWith('ภาพจำลอง') && a.includes(n)), n)
+  for (const n of ['SOCIAL SCIENCES', 'MAHIDOL NAKHONSAWAN', 'SIT KMUTT', 'FRESHY GAME', 'KMUTNB']) assert.ok(alts.some((a) => !/^(ภาพจำลอง|ภาพประกอบ)/.test(a) && a.includes(n)), n)
   const photos = [...ctx.matchAll(/class="up2-ctx__ph[^"]*"><img src="([^"]+)"/g)].map((m) => m[1])
   assert.equal(photos.length, 10)
   assert.equal((ctx.match(/class="up2-ctx__real">ภาพถ่ายเสื้อจริง</g) || []).length, 2)
@@ -54,7 +54,7 @@ test('คณะ: แถวแบบเสื้อ = ไฟล์แบบมห
   const show = fac.slice(fac.indexOf('id="real-work"'))
   for (const d of ['embroider-015', 'embroider-027', 'embroider-031']) assert.match(show, new RegExp(`/img/design-front/${d}`))
   for (let i = 1; i <= 4; i++) { assert.match(show, new RegExp(`/img/use-worn/faculty-${i}\\.webp`)); assert.ok(pub(`/img/use-worn/faculty-${i}-540.webp`)) }
-  assert.match(show, /alt="ภาพจำลอง: [^"]*LAW STOU/)
+  assert.match(show, /alt="[^"]*LAW STOU/); assert.doesNotMatch(show, /alt="ภาพจำลอง/)
   const at = show.indexOf('id="show-real"')
   const first = [...show.slice(at).matchAll(/<img src="([^"]+)"/g)].slice(0, 4).map((m) => m[1])
   assert.deepEqual(first, ['socsci', 'mahidol', 'kmutt', 'kmutnb'].map((k) => `/img/use-real/faculty-${k}.webp`))

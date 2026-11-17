@@ -41,11 +41,11 @@ for (const [id, f] of Object.entries(P)) {
     const a = m.indexOf('id="show-designs"'), b = m.indexOf('id="show-worn"'), c = m.indexOf('id="show-real"')
     assert.ok(a > 0 && a < b && b < c, 'ลำดับ: แบบ 3D → ภาพจำลอง → ภาพถ่ายจริง')
     const row = m.slice(b, c).replace(/<\/?t-[a-z]+>/g, '') /* ตัดแท็กกันตัดคำกลางวลีออกก่อนเทียบ */
-    assert.match(row, /<span class="up2-show__kind up2-show__kind--mock">ภาพจำลอง<\/span>/)
+    assert.doesNotMatch(row, /up2-show__kind--mock|ภาพจำลอง/) /* 16 พ.ย. 2026 อาร์ต "ไม่เอาป้ายภาพจำลอง" → "เอาออกทั้งหมด": ไม่มีป้ายภาพจำลอง/ภาพประกอบ (tests/no-image-labels.test.js) */
     const imgs = [...row.matchAll(/<figure class="hm-show__item"><img src="([^"]+)"[^>]*alt="([^"]*)"/g)]
     assert.equal(imgs.length, 4)
-    for (const [, src, alt] of imgs) { assert.match(src, new RegExp(`^/img/use-worn/${id}-\\d\\.webp$`)); assert.ok(pub(src), src); assert.ok(pub(src.replace('.webp', '-540.webp')), src); assert.match(alt, /^ภาพจำลอง: /) }
-    assert.match(text(row), /ภาพจำลองจากลายเสื้อจริง/)
+    for (const [, src, alt] of imgs) { assert.match(src, new RegExp(`^/img/use-worn/${id}-\\d\\.webp$`)); assert.ok(pub(src), src); assert.ok(pub(src.replace('.webp', '-540.webp')), src); assert.doesNotMatch(alt, /^(ภาพจำลอง|ภาพประกอบ)/) }
+    assert.match(text(row), /ลายเสื้อจริงของลูกค้า/); assert.doesNotMatch(text(row), /ภาพจำลอง/, 'ไม่มีป้ายภาพจำลอง (อาร์ต 16 พ.ย.)')
   })
 
   test(`8 · ${f}: รูปกล่องเสื้อในส่วนชำระเงินเป็นเสื้อของกลุ่มนี้`, () => {
@@ -53,7 +53,7 @@ for (const [id, f] of Object.entries(P)) {
     assert.match(s, new RegExp(`/img/use-pay/${id}-box-960\\.webp`))
     for (const w of [960, 560]) assert.ok(pub(`/img/use-pay/${id}-box-${w}.webp`))
     assert.doesNotMatch(s, /corp-box/)
-    assert.match(v2[id].payment.back.alt, /^ภาพจำลอง: /)
+    assert.doesNotMatch(v2[id].payment.back.alt, /^(ภาพจำลอง|ภาพประกอบ)/)
   })
 
   test(`9 · ${f}: มีบรรทัดอธิบายใต้หัวข้อโลโก้`, () => {

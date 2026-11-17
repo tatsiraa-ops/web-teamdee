@@ -32,7 +32,7 @@
       <p class="up2-chk__claim"><span class="up2-chk__shield" aria-hidden="true">{{> icoShield}}</span><span>{{{ph this.claim}}}</span></p>
       <a class="cb cb--p hm-line-cta" href="{{this.line}}" data-track="line" data-where="use-check"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__t">{{this.cta}}</span></a>
     </div>
-    <p class="up2-chk__imgnote">{{this.note}}</p>
+    {{#if this.note}}<p class="up2-chk__imgnote">{{this.note}}</p>{{/if}}
   </div>
 </section>
 {{/with}}

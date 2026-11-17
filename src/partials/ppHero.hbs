@@ -10,12 +10,12 @@
         <div class="overflow-hidden rounded-plate bg-paper aspect-[16/10] lg:aspect-[3/2]">
           {{!-- heroPhoto = รูปลูกค้าจริงแทนภาพจำลองของสินค้า (โปโลปัก · 2 พ.ย.) · บรรยายสิ่งที่เห็น ไม่เคลมว่าปัก · รูปหลักของหน้า data-sizes → srcset -320/-480/640 คง fetchpriority (ความเร็วมือถือ 30 ต.ค.) --}}
           {{#if heroPhoto}}<img src="{{heroPhoto.img}}" data-sizes="(min-width:1024px) 46vw, calc(100vw - 40px)" alt="{{heroPhoto.alt}}" width="640" height="640" fetchpriority="high" decoding="async" class="w-full h-full {{#if heroPhoto.fit}}object-contain{{else}}object-cover{{/if}}">
-          {{else if item.img}}<img src="{{item.img}}"{{#if heroSrcset}} srcset="{{heroSrcset}}" sizes="(min-width:1024px) 46vw, 100vw"{{/if}} alt="{{#if item.imgAlt}}{{item.imgAlt}}{{else}}{{#if (eq item.imgKind 'shape')}}{{item.imgNote}}{{else}}{{item.name}} ด้านหน้าและด้านหลัง {{#if (eq item.imgKind 'real')}}งานที่ทีมดีผลิต{{else}}ภาพจำลอง{{/if}}{{/if}}{{/if}}" width="1080" height="720" fetchpriority="high" decoding="async" class="w-full h-full object-contain">
+          {{else if item.img}}<img src="{{item.img}}"{{#if heroSrcset}} srcset="{{heroSrcset}}" sizes="(min-width:1024px) 46vw, 100vw"{{/if}} alt="{{#if item.imgAlt}}{{item.imgAlt}}{{else}}{{item.name}} ด้านหน้าและด้านหลัง{{#if (eq item.imgKind 'real')}} งานที่ทีมดีผลิต{{/if}}{{/if}}" width="1080" height="720" fetchpriority="high" decoding="async" class="w-full h-full object-contain">
           {{else if item.panel}}{{!-- เสื้อสกรีน: แผงตัวหนังสือแทนรูปเครื่อง DFT ที่พิสูจน์ที่มาไม่ได้ (24 ต.ค.) จนกว่าจะมีรูปงานสกรีนจริง --}}<span class="tech-panel" role="img" aria-label="{{item.name}} {{item.panel}}"><b lang="en" aria-hidden="true">{{item.panel}}</b></span>
           {{else}}<span class="prod-noimg" role="img" aria-label="ยังไม่มีภาพ{{item.name}}"><span class="block size-14">{{> icoShirt}}</span><span>{{item.name}}</span></span>{{/if}}
         </div>
         {{#if heroPhoto}}<figcaption class="tag absolute left-3 top-3 max-w-[calc(100%-1.5rem)]">{{heroPhoto.tag}}</figcaption>
-        {{else if item.img}}<figcaption class="tag {{#unless (eq item.imgKind 'real')}}tag-ink{{/unless}} absolute left-3 top-3 max-w-[calc(100%-1.5rem)]">{{#if (eq item.imgKind 'real')}}งานผลิตจริง{{else if (eq item.imgKind 'shape')}}ภาพประกอบทรง · ยังไม่ใช่งานพิมพ์สำเร็จ{{else}}ภาพจำลอง{{/if}}</figcaption>{{/if}}
+        {{else if (eq item.imgKind 'real')}}<figcaption class="tag absolute left-3 top-3 max-w-[calc(100%-1.5rem)]">งานผลิตจริง</figcaption>{{/if}}
       </figure>
       <div class="lg:col-start-1 lg:row-start-2 lg:pt-6">
         <p class="text-[17px] leading-[1.75] text-ink-2 max-w-[56ch] mt-3">{{pp.hero.lead}}</p>

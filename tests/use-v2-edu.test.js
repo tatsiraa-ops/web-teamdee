@@ -35,7 +35,7 @@ test('โรงเรียน: แท็บ 4 ประเภท เสื้�
   assert.deepEqual([...ctx.matchAll(/role="tab"[^>]*id="up2-ctx-tab-([a-z]+)"/g)].map((m) => m[1]), TABS)
   for (const t of TABS) for (const f of ['1200', '760', '480', 'thumb']) assert.ok(pub(`/img/use-ctx/edu-${t}-${f}.webp`), `edu-${t}-${f}`)
   const alts = [...ctx.matchAll(/class="up2-ctx__img"[^>]*alt="([^"]+)"/g)].map((m) => m[1])
-  for (const n of ['บ้านหนองมีหัวดง', 'SRIBOONYANON', 'ROOM 8', 'BHS CREW']) assert.ok(alts.some((a) => a.startsWith('ภาพจำลอง') && a.includes(n)), n)
+  for (const n of ['บ้านหนองมีหัวดง', 'SRIBOONYANON', 'ROOM 8', 'BHS CREW']) assert.ok(alts.some((a) => !/^(ภาพจำลอง|ภาพประกอบ)/.test(a) && a.includes(n)), n)
   const photos = [...ctx.matchAll(/class="up2-ctx__ph[^"]*"><img src="([^"]+)"/g)].map((m) => m[1])
   assert.equal(photos.length, 8)
   /* แท็บเสื้อรุ่นใช้ภาพถ่ายเสื้อจริงจาก Packshot (ไม่มีรูปลูกค้าใส่เสื้องานนี้) → ป้ายบอกตรงๆ */
