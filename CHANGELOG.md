@@ -2,6 +2,14 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.4.8 — 2026-11-17
+
+แก้จากการตรวจ staging หลัง v0.4.7: หน้าธีมไม่มี Article/ผู้เขียน (en-US) ของ Rank Math แล้ว · /?p= ที่ไม่มีอยู่จริงได้ 404 (เดิม 200 เป็นหน้าแรก)
+
+### Fixes
+
+- **wp-theme:** drop Rank Math Article/Person on theme pages, let WordPress answer ?p= / ?page_id= (bb6dd27)
+
 ## v0.4.7 — 2026-11-17
 
 หน้าที่ธีมแสดงเองไม่โหลดสคริปต์ Elementor แล้ว (staging ขึ้น error "elementorFrontendConfig is not defined") · บทความและหน้าอื่นไม่แตะ
