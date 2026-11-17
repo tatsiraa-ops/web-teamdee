@@ -1,11 +1,12 @@
-{{!-- /sublimation/ เนื้อผ้า · รอบ 191 วนไม่สุด + บอกตำแหน่ง (จุด · ตัวนับ · แผ่นคั่น "จบแถว · เริ่มใหม่" JS สร้าง) · รอบ 190 ลื่น ไม่ยืดย่อ · รอบ 189 (10 พ.ย. 2026 อาร์ต "แยกใหม่กับเก่าเป็นสองแถว · การ์ดทางการสุดๆ หรือขยายการ์ดเมื่ออยู่ตรงกลาง" → เลือก A)
+{{!-- 17 พ.ย. 2026 อาร์ต "เปลี่ยนเป็นโชว์ทั้งหมด": เลิกรางเลื่อนวน → ตารางเห็นผ้าทุกชนิดพร้อมกัน (4 คอลัมน์ · แถว 6 ใบใช้ 3 คอลัมน์ · มือถือ 1 คอลัมน์รูปจิ๋วข้างชื่อ) · ไม่มี JS
+     /sublimation/ เนื้อผ้า · รอบ 191 วนไม่สุด + บอกตำแหน่ง (จุด · ตัวนับ · แผ่นคั่น "จบแถว · เริ่มใหม่" JS สร้าง) · รอบ 190 ลื่น ไม่ยืดย่อ · รอบ 189 (10 พ.ย. 2026 อาร์ต "แยกใหม่กับเก่าเป็นสองแถว · การ์ดทางการสุดๆ หรือขยายการ์ดเมื่ออยู่ตรงกลาง" → เลือก A)
      ประวัติ: 185 การ์ดสะสม → 186 ทางการ → 187 สมุดตัวอย่างผ้า → 188 วงแหวน 3D → 189 สองแถว รางเลื่อน ใบกลางขยาย
      แถว = groups (vite: ผ้ามาตรฐาน / ผ้าใหม่ · ช่วงแกรมจาก prices.json) · ใบสเปกทางการ: รูปเต็มบน · เสื้อจริง (ผ้าใหม่ = ป้ายใหม่) · ชื่อ + แกรม
      ตารางสเปก dl เหมาะกับ/จุดเด่น ไอคอนเส้นเล็ก (src/js/fabric-icons.js) · ปุ่มขอตัวอย่างผ้านี้ (LINE พร้อมชื่อผ้า)
      fabric-cards.js: --p ความใกล้กลาง → ใบกลางขยาย · ไม่มี JS = ทุกใบเต็ม · ไม่มีราคาบวกเพิ่ม ไม่มีตัวเลขสมมติ --}}
 {{#*inline "fxCard"}}<li class="fx__c">
           <article class="fx__card">
-            <div class="fx__ph"><img class="fx__art" src="{{img}}" srcset="{{img}} 600w, {{img2}} 1200w" sizes="(min-width: 768px) 340px, 76vw" width="600" height="375" alt="{{alt}}" loading="lazy" decoding="async">{{#if shirt}}<img class="fx__shirt" src="{{shirt}}" srcset="{{shirt}} 200w, {{shirt2}} 400w" sizes="76px" width="200" height="200" alt="{{shirtAlt}}" loading="lazy" decoding="async">{{/if}}{{#if new}}<span class="fx__new">ใหม่</span>{{/if}}</div>
+            <div class="fx__ph"><img class="fx__art" src="{{img}}" srcset="{{img}} 600w, {{img2}} 1200w" sizes="(min-width: 1100px) 440px, (min-width: 640px) 46vw, 116px" width="600" height="375" alt="{{alt}}" loading="lazy" decoding="async">{{#if shirt}}<img class="fx__shirt" src="{{shirt}}" srcset="{{shirt}} 200w, {{shirt2}} 400w" sizes="76px" width="200" height="200" alt="{{shirtAlt}}" loading="lazy" decoding="async">{{/if}}{{#if new}}<span class="fx__new">ใหม่</span>{{/if}}</div>
             <div class="fx__body">
               <div class="fx__top"><h4 class="fx__name">{{t}}</h4><span class="fx__gsm"><b>{{gsm}}</b> แกรม</span></div>
               <div class="fx__more"><div class="fx__in">
@@ -27,15 +28,13 @@
       <h2 id="pp2-fab-h">{{{hl h accent}}}</h2>
       <p>{{{ph p}}}</p>
     </header>
-    {{#each groups}}<div class="fx" data-fx>
+    {{#each groups}}<div class="fx{{#if (eq this.items.length 6)}} fx--3{{/if}}" data-fx>
       <div class="fx__head">
         <div><h3 class="fx__h">{{this.h}}</h3><p class="fx__meta">{{this.meta}}</p></div>
-        <div class="fx__nav"><button type="button" class="fx__btn fx__btn--prev" aria-label="ผ้าก่อนหน้า"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="fx__btn fx__btn--next" aria-label="ผ้าถัดไป"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
       </div>
       <ul class="fx__track" aria-label="{{this.h}}">
         {{#each this.items}}{{> fxCard}}{{/each}}
       </ul>
-      <div class="fx__pager"><div class="fx__dots">{{#each this.items}}<button type="button" class="fx__dot" aria-label="ไปที่{{this.t}}" aria-current="false"></button>{{/each}}</div><p class="fx__count" aria-live="polite"></p></div>
     </div><!-- /fx -->{{/each}}
     <div class="pp2-fab__cta">
       <img src="/img/icons/dz-fabric.webp" width="240" height="240" alt="" loading="lazy" decoding="async">

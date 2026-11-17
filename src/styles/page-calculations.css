@@ -25,7 +25,7 @@
 .calc__qty { display: flex; align-items: center; gap: 8px; }
 .calc__unit { margin-left: 2px; font-size: 16px; font-weight: 600; color: var(--color-ink-2); }
 .calc__err { margin-top: 8px; font-size: 15px; font-weight: 700; }
-.kcard { position: relative; display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: center; gap: 12px; min-height: 76px; padding: 8px 30px 8px 8px; border: 2px solid var(--color-line-2); border-radius: 14px; background: var(--color-paper); cursor: pointer; transition: border-color .2s, box-shadow .25s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.kcard { position: relative; display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: center; gap: 12px; min-height: 76px; padding: 8px 30px 8px 8px; border: 2px solid var(--color-line-2); border-radius: 16px; background: var(--color-paper); cursor: pointer; transition: border-color .2s, box-shadow .25s, transform .2s cubic-bezier(.2, .7, .2, 1); }
 .kcard__img { display: block; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 8px; background: #fff; }
 .kcard__img img { width: 100%; height: 100%; object-fit: contain; transition: scale .45s cubic-bezier(.2, .7, .2, 1); }
 .kcard__ico { display: grid; place-items: center; height: 100%; background: var(--color-shell); color: var(--color-ink-3); }
@@ -67,12 +67,12 @@
 .slip__btns::before, .slip__btns::after { content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--color-paper); box-shadow: inset 0 0 0 1px rgb(60 30 0 / .06); }
 .slip__btns::before { left: -11px; }
 .slip__btns::after { right: -11px; }
-.slip__btns .cb--p { width: 100%; min-height: 66px; justify-content: flex-start; padding: 8px 20px 8px 10px; border-radius: 18px; }
+.slip__btns .cb--p { width: 100%; min-height: 66px; justify-content: flex-start; padding: 8px 20px 8px 10px; border-radius: 20px; }
 .slip__btns .cb--p .cb__ico { width: 44px; height: 44px; padding: 6px; border-radius: 12px; background: rgb(255 255 255 / .22); }
 .slip__btns .cb--p .cb__lbl { flex: 1; min-width: 0; }
 .slip__btns .cb--p .cb__t { font-size: 17px; }
 .slip__btns .cb--p .cb__arw { width: 22px; height: 22px; }
-.slip__alt { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); overflow: hidden; border: 1.5px solid var(--color-ink); border-radius: 14px; background: var(--color-paper); }
+.slip__alt { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); overflow: hidden; border: 1.5px solid var(--color-ink); border-radius: 16px; background: var(--color-paper); }
 .slip__alt a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 6px 12px; font-size: 15px; font-weight: 700; line-height: 1.25; text-align: center; transition: background-color .2s, color .2s; }
 .slip__alt a + a { border-left: 1.5px solid var(--color-ink); }
 /* ส่งให้หัวหน้าดู (ตรวจมือถือ 30 ต.ค.) · ลิงก์รองเต็มแถว จุดกด 48px */
@@ -85,10 +85,10 @@
 .slip__note { margin-top: 12px; font-size: 12px; color: var(--color-ink-3); text-align: center; }
 /* ตารางเต็ม (พับ) */
 .calc-more { padding-bottom: 8px; }
-.calc-table { border: 1px solid var(--color-line); border-radius: 18px; background: var(--color-shell); }
+.calc-table { border: 1px solid var(--color-line); border-radius: 20px; background: var(--color-shell); }
 .calc-table summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 22px; cursor: pointer; list-style: none; }
 .calc-table summary::-webkit-details-marker { display: none; }
-.calc-table summary:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; border-radius: 18px; }
+.calc-table summary:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; border-radius: 20px; }
 .calc-table__h { font-size: 20px; font-weight: 700; }
 .calc-table__s { display: block; font-size: 14px; color: var(--color-ink-3); }
 .calc-table__btn { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border: 2px solid var(--color-line-2); border-radius: 999px; background: var(--color-paper); font-size: 15px; font-weight: 700; }

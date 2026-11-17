@@ -5,6 +5,8 @@
   {{!-- เว็บจริงยังไม่มีรีวิว/คลิปที่ได้รับอนุญาต → ชื่อหน้าบอกตามของที่มีจริง (ภาพลูกค้า · audit 26 ต.ค.) --}}
   <title>{{#if wp}}ผลงานลูกค้าทีมดี / ภาพลูกค้าใส่เสื้อจริง | TEAMDEE{{else}}รีวิวลูกค้าทีมดี / ภาพลูกค้าใส่เสื้อจริง | TEAMDEE{{/if}}</title>
   <meta name="description" content="{{#if wp}}ภาพทีมลูกค้าใส่เสื้อที่ทีมดีผลิตในวันใช้งานจริง ทั้งงานบริษัท โรงเรียน กีฬา และอีเวนต์ พร้อมโลโก้ลูกค้าและตัวเลขงานที่ทีมดีดูแล{{else}}ดูโลโก้ลูกค้า รีวิวข้อความ คลิป และภาพลูกค้าใช้งานจริง รวมในหน้าเดียว พร้อมข้อมูลเพื่อเริ่มสั่งทำเสื้อกับทีมดี{{/if}}">
+  {{!-- 17 พ.ย. 2026 A7: breadcrumb schema ตรงกับที่เห็นบนหน้า --}}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"{{#if wp}}ผลงานลูกค้า{{else}}รีวิวลูกค้า{{/if}}"}]}</script>
 </head>
 <body>
 {{> siteHeader active="works"}}
@@ -32,7 +34,7 @@
         </div>
         {{!-- 9 พ.ย. อาร์ต "เอารูปรีวิวเต็มๆไปเลย ไม่ต้องมีที่โล่ง ซ้ายขวา" → ข้อความซ้าย → เลือกแบบ ค "กองภาพบนโต๊ะ แบบภาพส่งงาน"
              ภาพลูกค้าจริง 5 ใบ ขอบขาวแบบภาพอัด ป้ายกลุ่มลูกค้าที่ขอบล่าง · กดเปิดภาพใหญ่ (works-page.js #pjPile) --}}
-        <div class="pj-pile"><ul class="pj-pile__list" id="pjPile">{{#each wk.heroPile}}<li class="pj-print"><img src="{{this.img}}" alt="{{this.alt}}" width="1200" height="900"{{#if (eq @index 0)}} fetchpriority="high"{{/if}} decoding="async"><span class="pj-print__tag">{{this.tag}}</span></li>{{/each}}</ul></div>
+        <div class="pj-pile"><ul class="pj-pile__list" id="pjPile">{{#each wk.heroPile}}<li class="pj-print"><img src="{{this.img}}" srcset="{{this.small}} 480w, {{this.img}} 1200w" sizes="(min-width: 1024px) 420px, 56vw" alt="{{this.alt}}" width="1200" height="900"{{#if (lt @index 3)}} fetchpriority="high"{{else}} loading="lazy"{{/if}} decoding="async"><span class="pj-print__tag">{{this.tag}}</span></li>{{/each}}</ul></div>
       </div>
       {{!-- ทางลัด (รอบ 162b · อาร์ต "ทำตรงนี้มาใหม่ ครีเอทมาได้เต็มที่" → "เอาไอคอนแบบที่ผมชอบ"): การ์ดขาว + ไอคอน 3D ส้ม-ขาว ชุดเดียวของเว็บ (public/img/icons)
            ข้อความรีวิว review-quote · เรื่องราว talk-design · (11 พ.ย. อาร์ต "ไม่ต้องบอกจำนวน" → ไม่มีบรรทัดจำนวน · เรียงตามลำดับส่วน โลโก้ต่อจากเรื่องราว) · คลิป dz-new (จอ · ยังไม่มีไอคอนปุ่มเล่น 3D รอเจน) · ภาพลูกค้า dz-ref · โลโก้ลูกค้า use-corp --}}
@@ -87,7 +89,7 @@
         <div>
           {{!-- 9 พ.ย. อาร์ต: หัวข้อกลาง · ตัดตัวเลขรวมภาพ · "ในวันใช้งานจริง" สีส้ม --}}
           {{!-- หัวข้อ v22 ไม่มีเว้นวรรค มือถือเคยหักเป็น "…ใช้ | งานจริง" → แบ่ง 2 ก้อนด้วย <wbr> ข้อความเท่าเดิม --}}
-          <h2 id="photos-h" class="t-display text-[clamp(26px,3.4vw,40px)] max-w-[30ch] mx-auto"><span class="inline-block">ภาพลูกค้าสวมเสื้อ</span><wbr><span class="inline-block hm-hl">ในวันใช้งานจริง</span></h2>
+          <h2 id="photos-h" class="t-display text-[clamp(30px,3.06vw,44px)] max-w-[30ch] mx-auto"><span class="inline-block">ภาพลูกค้าสวมเสื้อ</span><wbr><span class="inline-block hm-hl">ในวันใช้งานจริง</span></h2>
           <p class="t-lead mt-3">{{{ph "ภาพทำงาน แข่งขัน และร่วมกิจกรรม"}}} {{{ph "แยกตามกลุ่มลูกค้า กดรูปเพื่อดูขนาดใหญ่"}}}</p>
         </div>
       </div>

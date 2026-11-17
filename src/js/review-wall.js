@@ -7,6 +7,9 @@ import { initLightbox } from './lightbox.js'
 /** items = [{ top, w }] ตามลำดับ · คืน index ที่ต้องซ่อน (แถวเกิน max และแถวท้ายที่กว้างรวมไม่ถึง 85%) */
 export const MAX_ROWS = 6
 
+/** รูปที่ขอบล่างเลยขอบบนกล่องปุ่ม (วางทับแถวท้ายที่จาง) · items = [{ top, bottom }] · คืน index (17 พ.ย. 2026 a11y) */
+export const coveredByCta = (items, cta) => items.map((b, i) => (b.bottom > cta.top ? i : -1)).filter((i) => i >= 0)
+
 export function rowsToHide(items, width, max) {
   const rows = []
   items.forEach((it, i) => {
@@ -32,6 +35,11 @@ export function initReviewWall() {
       const box = grid.getBoundingClientRect()
       const hide = new Set(rowsToHide(items.map((li) => { const b = li.getBoundingClientRect(); return { top: b.top, w: b.width } }), box.width, MAX_ROWS))
       items.forEach((li, i) => { li.hidden = hide.has(i) })
+      /* รูปใต้ปุ่ม: เห็นจางๆ แต่กด/Tab ไม่ได้ (ไม่งั้นโฟกัสไปอยู่ใต้ปุ่ม และพื้นที่กดเหลือไม่กี่ px) */
+      const cta = wall.querySelector('.rvw__cta')
+      const shown = items.filter((li) => !li.hidden)
+      const under = new Set(cta ? coveredByCta(shown.map((li) => li.getBoundingClientRect()), cta.getBoundingClientRect()) : [])
+      shown.forEach((li, i) => { li.inert = under.has(i) })
     }
     fit()
     let t = 0

@@ -5,7 +5,7 @@
 /* ---------- ถาด ---------- */
 .dg-tray { position: fixed; left: 50%; bottom: 18px; z-index: 55; width: min(760px, calc(100% - 32px)); translate: -50% 0; animation: dg-tray-in .35s cubic-bezier(.2, .7, .2, 1); }
 .dg-tray[hidden] { display: none; }
-.dg-tray__in { display: flex; align-items: center; gap: 14px; padding: 10px 10px 10px 12px; border-radius: 22px; background: var(--color-ink); color: var(--color-paper); box-shadow: 0 24px 50px -18px rgb(0 0 0 / .6); }
+.dg-tray__in { display: flex; align-items: center; gap: 14px; padding: 10px 10px 10px 12px; border-radius: 24px; background: var(--color-ink); color: var(--color-paper); box-shadow: 0 24px 50px -18px rgb(0 0 0 / .6); }
 .dg-tray__thumbs { flex: none; display: flex; }
 .dg-tray__thumbs img { width: 56px; height: 40px; object-fit: contain; border: 2px solid var(--color-ink); border-radius: 10px; background: #fff; }
 .dg-tray__thumbs img + img { margin-left: -18px; }
@@ -13,9 +13,9 @@
 .dg-tray__h { font-size: 16px; font-weight: 700; white-space: nowrap; }
 .dg-tray__codes { overflow: hidden; font-size: 13px; color: rgb(255 255 255 / .7); white-space: nowrap; text-overflow: ellipsis; }
 .dg-tray.is-undo .dg-tray__in { display: none; }
-.dg-tray__undo { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; padding: 8px 8px 8px 18px; border-radius: 18px; background: var(--color-ink); color: var(--color-paper); font-size: 15px; font-weight: 700; box-shadow: 0 24px 50px -18px rgb(0 0 0 / .6); }
+.dg-tray__undo { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; padding: 8px 8px 8px 18px; border-radius: 20px; background: var(--color-ink); color: var(--color-paper); font-size: 15px; font-weight: 700; box-shadow: 0 24px 50px -18px rgb(0 0 0 / .6); }
 .dg-tray__undo[hidden] { display: none; }
-.dg-tray__full { padding: 10px 16px; margin-bottom: 8px; border-radius: 14px; background: var(--color-ink); color: var(--color-paper); font-size: 15px; font-weight: 600; line-height: 1.5; }
+.dg-tray__full { padding: 10px 16px; margin-bottom: 8px; border-radius: 16px; background: var(--color-ink); color: var(--color-paper); font-size: 15px; font-weight: 600; line-height: 1.5; }
 .dg-tray__full[hidden] { display: none; }
 .dg-tray__undo button { min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--color-paper); color: var(--color-ink); font-size: 15px; font-weight: 700; }
 .dg-tray__undo button:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 2px; }
@@ -32,7 +32,7 @@ html.dg-tray-on [data-floats] { opacity: 0; pointer-events: none; }
 @media (max-width: 639px) {
   /* มือถือ: ถาดแถวเดียว ไม่บังจอ · ซ่อนรูปย่อและรายการรหัส (ข้อความในแชทมีครบ) */
   .dg-tray { width: calc(100% - 20px); }
-  .dg-tray__in { gap: 8px; padding: 8px 8px 8px 14px; border-radius: 18px; }
+  .dg-tray__in { gap: 8px; padding: 8px 8px 8px 14px; border-radius: 20px; }
   .dg-tray__thumbs, .dg-tray__codes { display: none; }
   .dg-tray__h { font-size: 15px; line-height: 1.3; }
   .dg-tray__clear { padding: 0 4px; }

@@ -3,7 +3,7 @@
      คอม: ข้อความซ้าย รูปขวา (grid 2 แถว รูปกินทั้งสองแถว) · มือถือ: เรียงตามลำดับใน HTML -->
 <section class="band-hero relative overflow-hidden">
   <div class="wrap relative pt-3 pb-8 md:pt-8 lg:py-10">
-    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>สินค้าและบริการ</span><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
     <div class="grid gap-3 mt-1 lg:mt-6 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-0">
       <h1 class="t-display text-[clamp(28px,4.6vw,56px)] text-ink lg:col-start-1 lg:row-start-1 lg:self-end">{{{ph pp.hero.h1}}}</h1>
       <figure class="relative lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center"{{#unless item.img}}{{#unless item.panel}} hidden{{/unless}}{{/unless}}>

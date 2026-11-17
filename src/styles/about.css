@@ -19,7 +19,7 @@
 /* แถบรูปลูกค้าใส่จริง · เลื่อนช้า ไม่หยุดตอนชี้ (แนวเดียวกับแถบโลโก้ที่อาร์ตเลือก) · พ้นจอหยุด (is-off) */
 .ab-strip { display: flex; width: max-content; }
 .ab-strip__track { display: flex; gap: 12px; padding-right: 12px; animation: ab-strip 90s linear infinite; }
-.ab-strip__track li { flex: none; width: clamp(180px, 17vw, 260px); aspect-ratio: 1; border-radius: 18px; overflow: hidden; background: var(--color-shell); }
+.ab-strip__track li { flex: none; width: clamp(180px, 17vw, 260px); aspect-ratio: 1; border-radius: 20px; overflow: hidden; background: var(--color-shell); }
 .ab-strip__track img { width: 100%; height: 100%; object-fit: cover; }
 .ab-strip.is-off .ab-strip__track { animation-play-state: paused; }
 @keyframes ab-strip { to { translate: -100% 0; } }
@@ -100,7 +100,7 @@
 .ab-pillars span { display: block; font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--color-ink-3); }
 .ab-pillars b { display: block; margin-top: 2px; font-size: 18px; }
 .ab-collage { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.ab-collage img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 18px; background: var(--color-paper); }
+.ab-collage img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 20px; background: var(--color-paper); }
 .ab-collage img:nth-child(2), .ab-collage img:nth-child(4) { translate: 0 28px; }
 .ab-collage figcaption { position: absolute; left: 14px; top: 14px; padding: 5px 12px; border-radius: 999px; background: var(--color-paper); font-size: 13px; font-weight: 700; color: var(--color-ink); }
 @media (max-width: 1023px) {
@@ -111,7 +111,7 @@
 /* ---------- 5 · ข้อมูลบริษัท + นัดเข้าพบ (170v) · ภาพออฟฟิศจริง + รายการข้อมูล ไม่มีกรอบการ์ด ---------- */
 .ab-co { padding-block: clamp(56px, 6vw, 96px); }
 .ab-co__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px clamp(40px, 5vw, 80px); align-items: center; }
-.ab-co__fig { position: relative; margin: 0; overflow: hidden; border-radius: 22px; background: #E9E3DC; }
+.ab-co__fig { position: relative; margin: 0; overflow: hidden; border-radius: 24px; background: #E9E3DC; }
 .ab-co__fig img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 34%; }
 .ab-co__fig figcaption { position: absolute; left: 16px; bottom: 16px; padding: 7px 14px; border-radius: 999px; background: rgb(255 255 255 / .94); font-size: 14px; font-weight: 700; color: var(--color-ink); }
 .ab-co__lead { margin-top: 14px; font-size: 17px; line-height: 1.7; color: var(--color-ink-2); }
@@ -154,7 +154,7 @@
    จังหวะพื้น: ขาว → ครีม → ขาว → ดำ → ขาว → ครีม(คลิป) → ผ้าส้ม → ขาว · ส้ม #FF6C00 = พื้นตัวดำ · ตัวขาวเฉพาะบนพื้นเข้ม */
 .ab2-wide { width: calc(100% - 40px); margin-inline: auto; }
 @media (min-width: 768px) { .ab2-wide { width: calc(100% - 64px); max-width: 1400px; } }
-.ab2-h { font-size: clamp(30px, 3.4vw, 46px); font-weight: 800; line-height: 1.28; color: var(--color-ink); text-wrap: balance; }
+.ab2-h { font-size: clamp(30px, 3.06vw, 44px); font-weight: 800; line-height: 1.28; color: var(--color-ink); text-wrap: balance; }
 .ab2-h .hm-hl { color: #F05A00; }
 .ab2-h--light { color: #fff; }
 .ab2-h--light .hm-hl { color: #FF8A3D; }
@@ -206,7 +206,7 @@
 .ab2-story__top { padding-bottom: 4px; }
 .ab2-story .hm-origin__story { margin-top: 32px; }
 .ab2-mile__pic { position: relative; }
-.ab2-mile__pic > img:first-child { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; }
+.ab2-mile__pic > img:first-child { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; }
 /* 170k วัตถุ 3D หลุดออกนอกกรอบภาพ มุมบนขวา (อาร์ต "อย่าอยู่แต่ในกรอบ") */
 .ab2-mile__obj { position: absolute; right: -18px; top: -44px; width: 46%; max-width: 150px; height: auto; filter: drop-shadow(0 16px 20px rgb(60 30 5 / .28)); pointer-events: none; }
 .ab2-mile__y { position: relative; margin-top: 20px; padding-top: 14px; font-size: clamp(28px, 2.6vw, 38px); font-weight: 800; line-height: 1.1; color: var(--color-ink); }
@@ -240,7 +240,7 @@
 .ab2-how__cards li { position: relative; display: flex; align-items: flex-end; min-height: clamp(420px, 34vw, 520px); overflow: hidden; border-radius: 24px; background: #ddd; isolation: isolate; }
 .ab2-how__img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; }
 .ab2-how__band { width: 100%; padding: 90px 24px 24px; background: linear-gradient(180deg, rgb(240 90 0 / 0) 0%, rgb(240 90 0 / .9) 46%, #A33A00 100%); color: #fff; }
-.ab2-how__ico { display: block; width: 64px; height: 64px; border-radius: 18px; background: #fff center / 82% no-repeat; box-shadow: 0 10px 22px -12px rgb(60 20 0 / .6); }
+.ab2-how__ico { display: block; width: 64px; height: 64px; border-radius: 20px; background: #fff center / 82% no-repeat; box-shadow: 0 10px 22px -12px rgb(60 20 0 / .6); }
 .ab2-how__band h3 { margin-top: 12px; font-size: clamp(24px, 2.2vw, 30px); font-weight: 800; }
 .ab2-how__band p { margin-top: 6px; font-size: 15.5px; line-height: 1.7; color: rgb(255 255 255 / .95); }
 
@@ -324,7 +324,7 @@
 .ab2-wear__tag a:hover::after { color: #fff; }
 .ab2-wear__tag a:focus-visible { outline: 3px solid #C24A00; outline-offset: 3px; }
 .ab2-wear__note { padding: 8px 32px 14px; text-align: right; font-size: 12.5px; color: #3B342E; }
-.ab-logos .ab2-h { font-size: clamp(26px, 3vw, 40px); }
+.ab-logos .ab2-h { font-size: clamp(30px, 3.06vw, 44px); }
 
 @media (max-width: 1023px) {
   .ab2-board { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 240px; }
@@ -386,7 +386,7 @@
 .ab2-end__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
 .ab2-end__box::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(23 19 15 / .86) 0%, rgb(23 19 15 / .62) 38%, rgb(23 19 15 / 0) 72%); }
 .ab2-end__txt { display: grid; justify-items: start; gap: 0; max-width: 560px; padding: clamp(32px, 5vw, 72px); color: #fff; }
-.ab2-end__h { font-size: clamp(30px, 3.4vw, 48px); font-weight: 800; line-height: 1.25; color: #fff; text-wrap: balance; }
+.ab2-end__h { font-size: clamp(30px, 3.06vw, 44px); font-weight: 800; line-height: 1.25; color: #fff; text-wrap: balance; }
 .ab2-end__h .hm-hl { color: #FF8A3D; }
 .ab2-end__p { margin: 12px 0 28px; font-size: 18px; line-height: 1.6; color: rgb(255 255 255 / .9); }
 .ab2-end__alt { margin-top: 16px; font-size: 15px; font-weight: 600; color: #fff; text-decoration: underline; text-decoration-color: rgb(255 255 255 / .5); text-underline-offset: 4px; }

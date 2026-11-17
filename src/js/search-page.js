@@ -6,6 +6,7 @@ import { lineMessageUrl } from './contact-send.js'
 import { askText, queryActions } from './faq-search.js'
 import { searchPages, searchDesigns } from './site-search.js'
 import routes from '../data/routes.json'
+import { withBase } from './base-path.js'
 
 /* ค้นหาจากชื่อสินค้า ชื่อแบบ รหัสแบบ และคำถาม FAQ (Brief ข้อ 04 · ตรวจมือถือ 30 ต.ค. ข้อ 6–7)
    ดัชนีฝังมากับหน้าเป็น JSON ตอน build ไม่ต้องเรียก API
@@ -18,6 +19,8 @@ const data = JSON.parse(document.getElementById('searchIndex').textContent)
 const isFaq = (p) => p.k === 'คำถาม'
 const input = document.getElementById('sq')
 const countEl = document.getElementById('searchCount')
+const popular = document.getElementById('searchPopular')
+const head = document.getElementById('searchHead')
 const actBox = document.getElementById('searchActions')
 const actRow = actBox?.querySelector('[data-sr-act-row]')
 const faqBox = document.getElementById('faqResults')
@@ -51,6 +54,8 @@ const showActions = (acts) => {
 
 const render = (raw) => {
   const q = raw.trim()
+  if (popular) popular.hidden = !!q
+  if (head) head.hidden = !q
 
   if (!q) {
     countEl.textContent = 'พิมพ์คำที่ต้องการค้นหา เช่น ชื่อสินค้า ชื่อแบบ รหัสแบบ หรือคำถามอย่าง "ส่งกี่วัน"'
@@ -85,7 +90,7 @@ const render = (raw) => {
   faqBox.classList.toggle('hidden', faqs.length === 0)
   /* หน้า /faq/ อ่าน ?q= แล้วกรองให้เลย */
   if (faqAll) {
-    faqAll.href = `${routes.faq}?q=${encodeURIComponent(q)}`
+    faqAll.href = withBase(`${routes.faq}?q=${encodeURIComponent(q)}`)
     faqAll.firstChild.textContent = faqs.length > FAQ_MAX ? `ดูทั้ง ${faqs.length} ข้อในหน้าคำถาม` : 'ดูในหน้าคำถาม'
   }
 
@@ -113,7 +118,7 @@ const render = (raw) => {
     .join('')
   designBox.classList.toggle('hidden', designs.length === 0)
   lb?.refresh()
-  if (allDesigns) allDesigns.href = `${routes.designs}?q=${encodeURIComponent(q)}`
+  if (allDesigns) allDesigns.href = withBase(`${routes.designs}?q=${encodeURIComponent(q)}`)
 
   /* ไม่พบ: ส่งคำค้นให้ทีมดีทาง LINE (ข้อความพิมพ์รอไว้) แบบเดียวกับ /faq/ */
   emptyTerm.textContent = `“${q}”`

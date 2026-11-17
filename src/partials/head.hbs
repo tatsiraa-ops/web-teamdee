@@ -10,6 +10,9 @@
 {{#unless site.cookieConsent}}<meta name="td-consent" content="off">{{/unless}}
 {{!-- คลิปทีมดีที่พร้อมขึ้นเว็บในหน้านี้ (VideoObject · video-view.js) --}}
 {{#each videoLd}}<script type="application/ld+json">{{{this}}}</script>{{/each}}
+{{!-- ธุรกิจเดียวกันทุกหน้า (@id /#business · 17 พ.ย. 2026 · หน้าแรกอยู่ใน homeLd) --}}
+{{#each businessLd}}<script type="application/ld+json">{{{this}}}</script>{{/each}}
+{{#if offerLd}}<script type="application/ld+json">{{{offerLd}}}</script>{{/if}}
 {{!-- ฟอนต์อยู่ในเว็บเอง (src/styles/fonts.css ใน main.css · 30 ต.ค. รอบ 48) · preload ฟอนต์ไทยใส่ตอน build (vite.config.js teamdee-font-preload) ด้วยชื่อไฟล์ที่ hash แล้ว
      ห้ามเขียน <link rel="preload"> ชี้ /src/... ตรงนี้: Vite ไม่แปลง href ของ preload (ได้ 404) --}}
 <link rel="stylesheet" href="/src/styles/main.css">

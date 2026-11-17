@@ -61,7 +61,7 @@ dialog.lb.lb--design { background: transparent; color: var(--color-ink); }
 dialog.lb.lb--design::backdrop { background: rgb(36 26 18 / calc(.5 * var(--vw-fade, 1))); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 dialog.lb.lb--design .lb__fig { width: min(1180px, calc(100% - 64px)); min-height: 0; margin: max(32px, calc((100dvh - 700px) / 2)) auto 32px; border-radius: 28px; background: #fff; overflow: hidden; box-shadow: 0 40px 90px -30px rgb(40 18 4 / .55); opacity: var(--vw-fade, 1); }
 dialog.lb.lb--design .lb__stage { min-height: 0; height: min(700px, calc(100dvh - 64px)); padding: 28px 84px; background: #F6F3EF; }
-dialog.lb.lb--design .lb__img { max-height: 100%; border-radius: 18px; background: #fff; box-shadow: 0 20px 44px -28px rgb(40 18 4 / .45); }
+dialog.lb.lb--design .lb__img { max-height: 100%; border-radius: 20px; background: #fff; box-shadow: 0 20px 44px -28px rgb(40 18 4 / .45); }
 dialog.lb.lb--design .lb__cap { min-height: 0; gap: 12px; padding: 40px 32px 32px; border-left: 1px solid rgb(23 19 15 / .07); background: #fff; color: var(--color-ink); }
 dialog.lb.lb--design .lb__count { color: var(--color-ink-3); }
 dialog.lb.lb--design .lb__title { font-size: clamp(26px, 2.2vw, 32px); font-weight: 800; line-height: 1.3; }
@@ -83,7 +83,7 @@ dialog.lb.lb--design .lb__close svg { width: 20px; height: 20px; }
 dialog.lb.lb--design .lb__bar { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
 dialog.lb.lb--design .lb__line { min-height: 60px; }
 dialog.lb.lb--design .lb__tiles { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 10px; }
-dialog.lb.lb--design .lb__tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 84px; padding: 10px 6px; border: 1.5px solid rgb(23 19 15 / .1); border-radius: 18px; background: #fff; font-size: 14.5px; font-weight: 750; line-height: 1.2; color: var(--color-ink); text-align: center; text-decoration: none; cursor: pointer; transition: border-color .2s, background-color .2s, transform .15s cubic-bezier(.2, .7, .2, 1); }
+dialog.lb.lb--design .lb__tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 84px; padding: 10px 6px; border: 1.5px solid rgb(23 19 15 / .1); border-radius: 20px; background: #fff; font-size: 14.5px; font-weight: 750; line-height: 1.2; color: var(--color-ink); text-align: center; text-decoration: none; cursor: pointer; transition: border-color .2s, background-color .2s, transform .15s cubic-bezier(.2, .7, .2, 1); }
 dialog.lb.lb--design .lb__tile[hidden] { display: none; }
 dialog.lb.lb--design .lb__tile:hover { border-color: rgb(23 19 15 / .35); background: #FFFAF6; }
 dialog.lb.lb--design .lb__tile:active { transform: scale(.96); }

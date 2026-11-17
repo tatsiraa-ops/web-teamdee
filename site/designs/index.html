@@ -48,7 +48,7 @@
           <kbd class="dz-search__kbd" aria-hidden="true">/</kbd>
           <button class="dz-search__x" type="button" id="dqClear" aria-label="ล้างคำค้น" hidden><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
           <span class="dz-search__hint" id="dqHint">พิมพ์แค่เลขก็ได้ เช่น 12 = TD-0012 · หรือ โปโล วิ่ง</span>
-          <button class="sr-only" type="submit">ค้นหา</button>
+          <button class="sr-only" type="submit" tabindex="-1">ค้นหา</button>
         </form>
         <div class="dz-bar" id="dzBar" hidden><button class="dz-bar__btn" type="button" id="dzOpen" aria-haspopup="dialog"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span>กรอง</span><b data-bar-n></b></button><span class="dz-bar__count" data-bar-count></span></div>
         <dialog class="dz-sheet" id="dzSheet" aria-label="ตัวกรองแบบเสื้อ"><div class="dz-sheet__head"><b>ตัวกรอง</b><button type="button" class="dz-sheet__x" id="dzClose" aria-label="ปิด"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div id="dzSheetBody"></div><div class="dz-sheet__foot"><button type="button" class="btn btn-ink w-full" id="dzDone">ดูแบบ</button></div></dialog>
@@ -96,6 +96,15 @@
       </div>
     </div>
 
+  </section>
+
+  {{!-- 17 พ.ย. 2026 อาร์ต "เพิ่มลิงก์จาก /designs/ ไปหน้าแกลเลอรี" (รอบตรวจ SEO: หน้าแกลเลอรี 10 หน้ามีลิงก์เข้าแค่ 1 ลิงก์)
+       การ์ดลิงก์ไปหน้าแบบเสื้อรวมของแต่ละกลุ่ม · รูป = แบบเสื้อมีรหัสของกลุ่มนั้น (dp.pills · designs.js) · ชื่อกลุ่มอยู่ในข้อความลิงก์ รูป alt ว่าง --}}
+  <section class="wrap dg-gal" aria-labelledby="dgGal-h">
+    <h2 id="dgGal-h" class="dg-h2">ดูแบบเสื้อรวมตามกลุ่มลูกค้า</h2>
+    <ul class="dg-gal__list">
+      {{#each dp.pills}}<li><a class="dg-gal__a" href="{{url this.to}}"><img src="{{this.photo}}" alt="" width="160" height="160" loading="lazy" decoding="async"><span class="dg-gal__t">{{this.short}}</span><span class="dg-gal__n tabular-nums">{{this.n}} แบบ</span></a></li>{{/each}}
+    </ul>
   </section>
 
   {{!-- ถาดแบบที่เลือกไว้ (ชุดเดียวกับแกลเลอรีรายกลุ่ม · audit มือถือ 30 ต.ค. ข้อ 11) --}}

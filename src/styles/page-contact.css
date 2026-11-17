@@ -47,11 +47,11 @@
 /* สติกเกอร์นาฬิกาอยู่ซ้ายล่างของมือถือ ไม่ทับบับเบิลแชท */
 .cx-lc__sticker { position: absolute; left: -62px; bottom: 26px; z-index: 2; display: flex; align-items: center; transform: rotate(-6deg); }
 .cx-lc__sticker img { width: 92px; height: 92px; filter: drop-shadow(0 10px 12px rgb(0 60 20 / .4)); }
-.cx-lc__sticker p { display: grid; grid-template-columns: auto auto; align-items: end; column-gap: 4px; margin-left: -16px; padding: 6px 12px 6px 14px; border-radius: 14px; background: #fff; color: #04341a; box-shadow: 0 10px 18px -10px rgb(0 0 0 / .5); line-height: 1; }
+.cx-lc__sticker p { display: grid; grid-template-columns: auto auto; align-items: end; column-gap: 4px; margin-left: -16px; padding: 6px 12px 6px 14px; border-radius: 16px; background: #fff; color: #04341a; box-shadow: 0 10px 18px -10px rgb(0 0 0 / .5); line-height: 1; }
 .cx-lc__sticker small { grid-column: 1 / -1; font-size: 13px; font-weight: 800; }
 .cx-lc__sticker b { font-family: var(--font-display); font-size: 34px; font-weight: 900; color: #F05A00; }
 .cx-lc__sticker span { padding-bottom: 4px; font-size: 15px; font-weight: 800; }
-.cx-lc__go { grid-area: go; position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 64px; margin-top: 22px; border-radius: 16px; background: #fff; font-size: 21px; font-weight: 800; color: #037A35; text-decoration: none; box-shadow: 0 -10px 24px -14px rgb(0 60 20 / .45); transition: transform .2s cubic-bezier(.2, .7, .2, 1), box-shadow .25s; }
+.cx-lc__go { grid-area: go; position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 64px; margin-top: 22px; border-radius: 999px; background: #fff; font-size: 21px; font-weight: 800; color: #037A35; text-decoration: none; box-shadow: 0 -10px 24px -14px rgb(0 60 20 / .45); transition: transform .2s cubic-bezier(.2, .7, .2, 1), box-shadow .25s; }
 .cx-lc__go svg { transition: transform .2s cubic-bezier(.2, .7, .2, 1); }
 .cx-lc__go:focus-visible { outline: 3px solid #04341a; outline-offset: 3px; }
 @media (hover: hover) {
@@ -75,7 +75,7 @@
 
 /* ---------- แถบติดตาม พื้นเทา (บอร์ด "ติดตามเราได้ที่ :") ---------- */
 .cx-followsec { margin-top: 20px; }
-.cx-follow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 32px; padding: 14px 24px; border-radius: 18px; background: #F2F0EC; }
+.cx-follow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 32px; padding: 14px 24px; border-radius: 20px; background: #F2F0EC; }
 /* main.css มือถือตั้ง main h2 24px → ใช้ id ให้แรงกว่า */
 #follow .cx-follow__h { margin: 0; font-size: 17px; font-weight: 800; line-height: 1.4; text-align: start; }
 .cx-follow__list { display: flex; flex-wrap: wrap; gap: 6px 28px; }
@@ -109,13 +109,13 @@
 .cx-rows div > span { display: block; margin-top: 1px; font-size: 14px; line-height: 1.55; color: var(--color-ink-3); }
 .cx-office__acts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-line); }
 /* ป้าย LINE แบบบอร์ด "สอบถาม คลิก! @…" · เขียวเข้มพอให้ขาวอ่านผ่าน */
-.cx-linebadge { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 14px 6px 10px; border-radius: 14px; background: linear-gradient(180deg, #06C755 0%, #05B94F 100%); color: #04341A; text-decoration: none; transition: filter .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.cx-linebadge { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 14px 6px 10px; border-radius: 999px; background: linear-gradient(180deg, #06C755 0%, #05B94F 100%); color: #04341A; text-decoration: none; transition: filter .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
 .cx-linebadge__ico { display: block; flex: none; width: 40px; height: 40px; }
 .cx-linebadge__ico svg { display: block; width: 100%; height: 100%; }
 .cx-linebadge small, .cx-office__tel small { display: block; font-size: 13px; font-weight: 600; line-height: 1.25; }
 .cx-linebadge b, .cx-office__tel b { display: block; font-size: 17px; font-weight: 800; line-height: 1.25; }
 .cx-linebadge:focus-visible, .cx-office__tel:focus-visible, .cx-nav:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
-.cx-office__tel { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 14px 6px 8px; border: 1px solid var(--color-line-2); border-radius: 14px; color: var(--color-ink); text-decoration: none; transition: border-color .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
+.cx-office__tel { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 14px 6px 8px; border: 1px solid var(--color-line-2); border-radius: 999px; color: var(--color-ink); text-decoration: none; transition: border-color .2s, transform .2s cubic-bezier(.2, .7, .2, 1); }
 .cx-office__tel small { color: var(--color-ink-3); }
 .cx-office__ti { display: block; flex: none; width: 44px; height: 44px; }
 @media (hover: hover) {
@@ -160,7 +160,7 @@
 .cx-order { max-width: calc(50% - 8px); margin-top: 16px; }
 .cx-send { margin-top: 24px; }
 /* ปุ่มส่งส้ม ข้อความชิดซ้าย ลูกศรขวา (บอร์ด) · พื้นส้มตัวดำ */
-.cx-send .cf-submit { justify-content: space-between; min-height: 56px; padding-inline: 24px; background: var(--color-orange); color: var(--color-ink); border-radius: 14px; }
+.cx-send .cf-submit { justify-content: space-between; min-height: 56px; padding-inline: 24px; background: var(--color-orange); color: var(--color-ink); border-radius: 16px; }
 .cx-send .cf-submit .cb__arw { color: var(--color-ink); }
 @media (hover: hover) { .cx-send .cf-submit:hover { background: #FF7F1F; box-shadow: 0 14px 28px -16px rgb(255 108 0 / .65); } }
 
@@ -182,7 +182,7 @@
   .cx-hero__p { margin-inline: auto; }
   .cx-hero__tag { justify-content: center; }
   .cx-ch { padding-top: 36px; }
-  .cx-lc { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "vis" "go"; padding: 24px 20px 20px; border-radius: 22px; }
+  .cx-lc { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "vis" "go"; padding: 24px 20px 20px; border-radius: 24px; }
   .cx-lc__logo { width: 64px; height: 64px; }
   .cx-lc__head { gap: 14px; }
   .cx-lc__vis { min-height: 220px; margin: 14px 0 -20px; }
@@ -190,11 +190,11 @@
   .cx-lc__sticker { left: 0; bottom: 40px; }
   .cx-lc__sticker img { width: 80px; height: 80px; }
   .cx-lc__go { margin-top: 16px; }
-  .cx-call { padding: 22px 20px 18px; border-radius: 22px; }
+  .cx-call { padding: 22px 20px 18px; border-radius: 24px; }
   .cx-follow { flex-direction: column; align-items: flex-start; padding: 14px 16px; }
   .cx-follow__pend { margin: 0; }
   .cx-pair { padding-block: 32px 56px; gap: 16px; }
-  .cx-office { border-radius: 22px; }
+  .cx-office { border-radius: 24px; }
   .cx-office__body { padding: 18px 16px 20px; }
   .cx-office__acts { grid-template-columns: minmax(0, 1fr); }
   /* main.css มือถือตั้ง main h2 24px กลาง · ในแถบรูปให้ชิดซ้าย */
@@ -202,7 +202,7 @@
   .cx-form__head { grid-template-columns: 44px minmax(0, 1fr); }
   .cx-form__ico { width: 44px; height: 44px; }
   .cx-form__req { grid-column: 2; padding-top: 0; }
-  .cx-form { padding: 22px 18px; border-radius: 22px; }
+  .cx-form { padding: 22px 18px; border-radius: 24px; }
   .cx-form__grid { grid-template-columns: minmax(0, 1fr); }
   .cx-order { max-width: none; }
 }

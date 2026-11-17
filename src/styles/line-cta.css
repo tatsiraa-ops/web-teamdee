@@ -2,7 +2,7 @@
 /* ---------- แบนเนอร์ "แชทผ่าน LINE" (รอบ 155 · lineCta.hbs · อาร์ต "cta ทำดีๆหน่อย ไปเจนอะไรมาได้เต็มที่") ----------
    เขียว LINE เข้ม (ตัวขาวบน #04A443 = 3.28:1 ผ่าน AA ตัวใหญ่ · ตัวเล็ก ≥ 18.7px หนา) · ซ้ายข้อความ+ปุ่ม · ขวามือถือ 3D เจน ตั้งล้นขอบบน เอียง 4° · จอ = แชท HTML ขนาดตามมือถือ (cqw) */
 .lc { padding: 64px 0 72px; overflow-x: clip; } /* 6 พ.ย. "ช่องว่างเยอะเกิน": ปุ่มโหลดเพิ่ม→แถบ 206 → ~120 · มือถือ 3D อยู่ขวา ไม่ชนปุ่มกลาง */
-.lc__card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 560px; align-items: center; gap: 24px; min-height: 300px; padding: 44px 56px; border-radius: 30px; background: linear-gradient(110deg, #026E2E 0%, #037A33 55%, #04A443 100%); /* 16 พ.ย. 2026 audit: ตัวหนังสือขาวด้านซ้าย 2.78–4.4:1 → 5.48–6.41:1 */ color: #fff; isolation: isolate; box-shadow: 0 30px 60px -40px rgb(3 90 35 / .7); }
+.lc__card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 560px; align-items: center; gap: 24px; min-height: 300px; padding: 44px 56px; border-radius: 28px; background: linear-gradient(110deg, #026E2E 0%, #037A33 55%, #04A443 100%); /* 16 พ.ย. 2026 audit: ตัวหนังสือขาวด้านซ้าย 2.78–4.4:1 → 5.48–6.41:1 */ color: #fff; isolation: isolate; box-shadow: 0 30px 60px -40px rgb(3 90 35 / .7); }
 .lc__bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: inherit; pointer-events: none; background: linear-gradient(115deg, transparent 38%, rgb(255 255 255 / .09) 52%, transparent 66%), radial-gradient(50% 90% at 82% 100%, rgb(200 247 176 / .22), transparent 70%); }
 .lc__copy { display: grid; justify-items: start; gap: 18px; }
 .lc__head { display: flex; align-items: center; gap: 18px; }
@@ -50,7 +50,7 @@
 /* เสื้อลายจริงลอยเข้าหามือถือ (รอบ 156) · การ์ดขาวมุมมน ภาพตัวหน้า + ป้ายรหัสส้มตัวดำ · ลอยขึ้นลงคนละจังหวะ · เส้นประจางนำทางเข้าจอ */
 .lc__trail { position: absolute; left: 0; top: 0; width: 72%; height: 100%; overflow: visible; fill: none; stroke: rgb(255 255 255 / .45); stroke-width: 2.5; stroke-dasharray: 2 10; stroke-linecap: round; pointer-events: none; }
 .lc__flies { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
-.lc__fly { position: absolute; width: var(--s, 100px); padding: 6px 6px 0; border-radius: 18px; background: #fff; box-shadow: 0 18px 30px -16px rgb(0 40 10 / .6); transform: rotate(var(--r, 0deg)); animation: lc-float 6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.lc__fly { position: absolute; width: var(--s, 100px); padding: 6px 6px 0; border-radius: 20px; background: #fff; box-shadow: 0 18px 30px -16px rgb(0 40 10 / .6); transform: rotate(var(--r, 0deg)); animation: lc-float 6s ease-in-out infinite; animation-delay: var(--d, 0s); }
 .lc__fly img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
 .lc__fly b { position: absolute; left: 8px; bottom: -9px; padding: 1px 9px; border-radius: 999px; background: #FF6C00; font-size: 12px; font-weight: 800; color: #17130f; }
 .lc__fly--1 { --s: 96px; --r: -9deg; --d: 0s; left: 2%; top: 46%; }
@@ -63,7 +63,7 @@
 @media (max-width: 1023px) { .lc__card { grid-template-columns: minmax(0, 1fr) 260px; padding: 36px 36px; } .lc__chat { right: 10px; width: 200px; } .lc__flies, .lc__trail { display: none; } }
 @media (max-width: 767px) {
   .lc { padding: 200px 0 48px; }
-  .lc__card { grid-template-columns: minmax(0, 1fr); gap: 0; min-height: 0; padding: 176px 22px 26px; border-radius: 26px; }
+  .lc__card { grid-template-columns: minmax(0, 1fr); gap: 0; min-height: 0; padding: 176px 22px 26px; border-radius: 28px; }
   .lc__vis { position: absolute; inset: 0 0 auto; height: 0; }
   .lc__chat { left: 50%; right: auto; bottom: auto; top: -210px; width: 180px; transform: translateX(-50%) rotate(4deg); }
   .lc__flies { display: block; } .lc__trail { display: none; }

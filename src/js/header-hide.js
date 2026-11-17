@@ -11,6 +11,12 @@ export function nextHidden({ y, lastY, hidden, header, menuOpen }) {
   return d > 0
 }
 
+/** ตัวที่โฟกัสอยู่ใต้หัวเว็บที่ติดบน → ระยะเลื่อน (ติดลบ = ขึ้น) ให้พ้นขอบล่างหัวเว็บ + 16px · ไม่ถูกบัง = 0 (17 พ.ย. WCAG 2.4.11) */
+export function uncoverDelta(rect, headerBottom) {
+  if (headerBottom <= 0 || rect.bottom <= 0 || rect.top >= headerBottom) return 0
+  return rect.top - headerBottom - 16
+}
+
 export function initHeaderHide() {
   const hdr = document.querySelector('[data-header]')
   if (!hdr) return
@@ -35,6 +41,15 @@ export function initHeaderHide() {
   }
   /* กด Tab เข้าหัวเว็บที่หลบอยู่ ต้องโผล่ · โฟกัสห้ามไปอยู่ของที่มองไม่เห็น (2 พ.ย.) */
   hdr.addEventListener('focusin', () => set(false))
+  /* Shift+Tab ย้อนขึ้น: ตัวที่โฟกัสอยู่ในจอแต่ใต้หัวเว็บ เบราว์เซอร์ไม่เลื่อนให้ (scroll-padding ไม่ช่วยกรณีนี้) → เลื่อนเอง */
+  document.addEventListener('focusin', (e) => {
+    const t = e.target
+    if (!(t instanceof Element) || hdr.contains(t) || t.closest('dialog, [role=dialog]') || !t.matches(':focus-visible')) return
+    const pos = getComputedStyle(hdr).position
+    if (pos !== 'sticky' && pos !== 'fixed') return
+    const d = uncoverDelta(t.getBoundingClientRect(), hidden ? 0 : hdr.getBoundingClientRect().bottom)
+    if (d) scrollBy({ top: d, behavior: 'instant' })
+  })
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(check) } }, { passive: true })
   mq.addEventListener?.('change', check)
 }

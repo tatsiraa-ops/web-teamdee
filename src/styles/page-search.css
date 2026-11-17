@@ -30,3 +30,12 @@
   .sr-acts { padding: 20px; }
   .sr-acts__btns .cb, .sr-empty .fq-empty__btns .cb { width: 100%; }
 }
+
+/* 17 พ.ย. 2026: คำค้นหาบ่อย (ช่องค้นหาว่าง) · ชิปแคปซูลเหมือนตัวกรองหน้าแบบเสื้อ */
+.sr-pop { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 18px; max-width: 640px; }
+.sr-pop[hidden] { display: none; }
+.sr-pop__h { width: 100%; margin: 0 0 2px; font-size: 14px; font-weight: 700; color: var(--color-ink-3); }
+.sr-pop__chip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid var(--color-line); border-radius: 999px; background: #fff; font-size: 15px; font-weight: 700; color: var(--color-ink); text-decoration: none; transition: border-color .15s ease-out, background-color .15s ease-out; }
+@media (hover: hover) { .sr-pop__chip:hover { border-color: var(--color-ink); } }
+.sr-pop__chip:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .sr-pop__chip { transition: none; } }

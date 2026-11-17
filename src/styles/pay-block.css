@@ -2,7 +2,7 @@
 /* ---------- วิธีชำระเงิน (up2Pay.hbs · อาร์ต 4 พ.ย. "พื้นหลังขาว ชอบวางแบบเดิม ทำให้ดีกว่าเดิม") ----------
    พื้นขาว ไม่มีการ์ด · รูปซ้อน 2 ใบบนแผ่นครีมทรงมน (--hm-studio) ซ้าย · ขวาข้อความกึ่งกลาง ตัวดำหนา · ชิปบัตรขอบบาง · เงื่อนไขเป็นป้ายครีม 3 อัน */
 .up2-pay { padding: 80px 0; background: #fff; }
-.up2-pay > .wrap { width: calc(100% - 64px); max-width: 1200px; padding-inline: 0; }
+/* 17 พ.ย. 2026: เดิม 1200 นอกกฎ → ใช้ .wrap ปกติ (1240) ขอบตรงกับส่วนข้างเคียง */
 .up2-pay__in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 64px; }
 .up2-pay__art { position: relative; width: 100%; max-width: 600px; aspect-ratio: 1.32; isolation: isolate; }
 .up2-pay__art::before { content: ''; position: absolute; z-index: -1; left: 10%; right: 4%; top: 12%; bottom: -6%; border-radius: 40px; background: var(--hm-studio); }
@@ -14,7 +14,7 @@
 .up2-pay__nw { display: inline-block; }
 .up2-pay__u { text-decoration: underline; text-decoration-color: #FF6C00; text-decoration-thickness: 3px; text-underline-offset: 7px; }
 .up2-pay__cards { display: flex; gap: 10px; margin: 0 0 6px; padding: 0; list-style: none; }
-.up2-pay__brand { display: grid; place-items: center; width: 104px; height: 58px; border: 1px solid rgb(17 17 17 / .1); border-radius: 14px; background: #fff; box-shadow: 0 6px 16px -12px rgb(17 17 17 / .35); }
+.up2-pay__brand { display: grid; place-items: center; width: 104px; height: 58px; border: 1px solid rgb(17 17 17 / .1); border-radius: 16px; background: #fff; box-shadow: 0 6px 16px -12px rgb(17 17 17 / .35); }
 .up2-pay__terms { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
 .up2-pay__terms li { padding: 7px 14px; border-radius: 999px; background: #F2EEE9; font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--color-ink-2); }
 @media (max-width: 1023px) {

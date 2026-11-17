@@ -20,7 +20,10 @@
       <button class="btn btn-ink" type="submit">ค้นหา</button>
     </form>
 
-    <h2 class="t-display text-[clamp(22px,2.6vw,30px)] mt-9">ผลการค้นหา</h2>
+    <!-- 17 พ.ย. 2026 รอบตรวจ UI: ช่องว่าง = ทางตัน → คำค้นหาบ่อย (ลิงก์ ?q= ไม่มี JS ก็กดได้) · มีคำค้นแล้วซ่อน -->
+    <div class="sr-pop" id="searchPopular"><p class="sr-pop__h">ค้นหาบ่อย</p><a class="sr-pop__chip" href="{{url 'search'}}?q=%E0%B9%82%E0%B8%9B%E0%B9%82%E0%B8%A5">โปโล</a><a class="sr-pop__chip" href="{{url 'search'}}?q=%E0%B9%80%E0%B8%AA%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%81%E0%B8%B5%E0%B8%AC%E0%B8%B2">เสื้อกีฬา</a><a class="sr-pop__chip" href="{{url 'search'}}?q=%E0%B8%AA%E0%B8%81%E0%B8%A3%E0%B8%B5%E0%B8%99">สกรีน</a><a class="sr-pop__chip" href="{{url 'search'}}?q=%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2">ราคา</a><a class="sr-pop__chip" href="{{url 'search'}}?q=%E0%B8%AA%E0%B9%88%E0%B8%87%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A7%E0%B8%B1%E0%B8%99">ส่งกี่วัน</a><a class="sr-pop__chip" href="{{url 'search'}}?q=%E0%B8%95%E0%B8%B2%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B9%84%E0%B8%8B%E0%B8%8B%E0%B9%8C">ตารางไซซ์</a></div>
+
+    <h2 class="t-display text-[clamp(22px,2.6vw,30px)] mt-9" id="searchHead">ผลการค้นหา</h2>
     <p class="t-sm mt-2 tabular-nums" id="searchCount" role="status" aria-live="polite"></p>
 
     <!-- ลูกค้าเดิม: สั่งซ้ำ / ติดตามงาน ขึ้นบนสุดเมื่อคำค้นเป็นเรื่องนี้ (ตรวจมือถือ 30 ต.ค. ข้อ 6) · ลิงก์ชุดเดียวกับเมนู/ท้ายเว็บ -->

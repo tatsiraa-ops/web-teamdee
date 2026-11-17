@@ -34,7 +34,7 @@ export function initPromo() {
   const busy = () => {
     const a = document.activeElement
     /* เมนูมือถือเปิดอยู่ = ไม่เด้งทับ (30 ต.ค. · เมนูเป็น div ไม่ใช่ dialog) */
-    return document.querySelector('dialog[open], #mobileMenu:not([hidden])') || a?.matches?.('input, textarea, select, iframe, video') || [...document.querySelectorAll('video')].some((v) => !v.paused)
+    return document.querySelector('dialog[open], #mobileMenu:not([hidden])') || a?.matches?.('input, textarea, select, iframe, video') || a?.closest?.('form, [role=alert]') || [...document.querySelectorAll('video')].some((v) => !v.paused)
       || Date.now() - lastTab < KEYBOARD_MS || (a && a !== document.body && a?.matches?.(':focus-visible'))
   }
   const open = () => {

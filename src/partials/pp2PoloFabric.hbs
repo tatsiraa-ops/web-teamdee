@@ -25,7 +25,7 @@
             <div class="pf5__uses"><p>เหมาะกับ</p><ul style="--use-count:{{this.useTags.length}}">{{#each this.useTags}}<li><img src="{{this.icon}}" width="112" height="112" alt="" loading="lazy" decoding="async"><span>{{this.label}}</span></li>{{/each}}</ul></div>
             <p class="pf4__tip">{{this.note}}</p></div>
             <div class="pf5__prices">
-              <table><caption>ราคาต่อตัว <span>บาท · รวม VAT</span></caption><thead><tr>{{#each this.prices}}<th scope="col">{{this.label}}<span>ตัว</span></th>{{/each}}</tr></thead><tbody><tr>{{#each this.prices}}<td>{{this.price}}</td>{{/each}}</tr></tbody></table>
+              <table><caption>ราคาต่อตัว {{this.name}} <span>บาท · รวม VAT</span></caption><thead><tr>{{#each this.prices}}<th scope="col">{{this.label}}<span>ตัว</span></th>{{/each}}</tr></thead><tbody><tr>{{#each this.prices}}<td>{{this.price}}</td>{{/each}}</tr></tbody></table>
             </div>
             <div class="pf2__colors">
               <details class="pf5__color-picker">

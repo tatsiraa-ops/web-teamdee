@@ -1,9 +1,9 @@
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"คู่มือและบทความ","item":"{{site.baseUrl}}{{url 'blog'}}"},{"@type":"ListItem","position":3,"name":"{{item.name}}"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"บทความและไอเดีย","item":"{{site.baseUrl}}{{url 'blog'}}"},{"@type":"ListItem","position":3,"name":"{{item.name}}"}]}</script>
 <div class="td-guide td-guide--{{item.id}}">
   {{!-- hero เดียว (ตรวจหน้าคู่มือ 27 ต.ค.): พื้น shell แบบหน้าแบบเสื้อ/รีวิว/FAQ · คำถามลัด 3 ข้อพาไปหัวข้อ (guide-presentation.js quickLinks)
        ปุ่ม "เลือกคู่มือเรื่องอื่น" ด้านบนเอาออก ซ้ำกับรายการคู่มือท้ายหน้าและเมนู --}}
   <header class="td-guide__header"><div class="wrap">
-    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'blog'}}">คู่มือและบทความ</a><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
+    <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'blog'}}">บทความและไอเดีย</a><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
     <h1 class="t-display td-guide__h1">{{#if item.h1}}{{{ph item.h1}}}{{else}}{{{ph item.name}}}{{/if}}</h1>
     {{#if item.lead}}<p class="td-guide__lead">{{item.lead}}</p>{{/if}}
     <p class="td-guide__meta"><span>{{item.sections.length}} หัวข้อ</span><span aria-hidden="true">·</span><span>อัปเดต {{item.updated}}</span></p>

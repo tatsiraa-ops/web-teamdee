@@ -7,7 +7,7 @@
      ข้อความ: src/data/use-pages.json (scripts/v22/use-pages.mjs) · ของจริง: แบบเสื้อรหัส TD · ผลงาน · ภาพลูกค้า
      src/js/use-view.js ตัดข้อความที่รอยืนยันออกบนเว็บจริง · ส่วนที่ยังไม่มีของจริงซ่อน · ต้นแบบโชว์พร้อมป้าย --}}
 {{#if useLd}}<script type="application/ld+json">{{{useLd}}}</script>
-{{/if}}<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"{{item.name}}"}]}</script>
+{{/if}}<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"{{firstName item.name}}"}]}</script>
 
 {{!-- โฉมใหม่ (use-v2.json · อาร์ต 3 พ.ย.) ใช้ส่วนใหม่ทีละส่วน กลุ่มอื่นใช้แบบเดิม --}}
 {{#if up.v2.hero}}{{> up2Hero}}{{else}}

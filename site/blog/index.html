@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="/src/styles/article-reader.css" data-page-css>
 <title>บทความและไอเดียสั่งทำเสื้อทีม | TEAMDEE</title>
 <meta name="description" content="อ่านเรื่องผ้า เทคนิคพิมพ์ลาย สกรีนและงานปัก พร้อมไอเดียเสื้อทีมและคำแนะนำเรื่องไซซ์ งบประมาณ และการเตรียมสั่งผลิตจาก TEAMDEE">
+  {{!-- 17 พ.ย. 2026 A7: breadcrumb schema ตรงกับที่เห็นบนหน้า --}}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"บทความและไอเดีย"}]}</script>
 </head><body>
 {{> siteHeader active="learn"}}
 {{!-- รื้อแนวนิตยสาร (27 ต.ค. อาร์ตเลือก "ข นิตยสาร") · src/js/blog-model.js magazine (มีเทส) · CSS src/styles/blog.css "นิตยสาร"
@@ -13,7 +15,7 @@
 <main id="main" class="td-blog mz">
   <header class="mz-head">
     <div class="wrap mz-head__in">
-      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>คู่มือและบทความ</span><span aria-hidden="true">/</span><span aria-current="page">บทความและไอเดีย</span></nav>
+      <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">บทความและไอเดีย</span></nav>
       <div class="mz-head__row">
         <div>
           <h1 class="t-display mz-head__h">{{{ph "บทความและไอเดียสั่งทำเสื้อทีม"}}}</h1>

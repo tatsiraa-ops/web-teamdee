@@ -26,7 +26,7 @@ export function initHomePicker() {
     $('[data-pick-why]').textContent = p.main.why
     const alts = $('[data-pick-alts]')
     alts.hidden = !p.alts.length
-    alts.replaceChildren('หรือดู', ...p.alts.map((a) => Object.assign(document.createElement('a'), { href: url('products', a.id), textContent: a.name })))
+    alts.replaceChildren('หรือดู', ...p.alts.map((a) => Object.assign(document.createElement('a'), { href: withBase(url('products', a.id)), textContent: a.name })))
     calc.href = withBase(url('calculations') + p.calcQuery)
   }
   form.addEventListener('change', render)

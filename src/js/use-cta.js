@@ -32,7 +32,8 @@ export function pageLineText(page, names, at) {
   if (['guides', 'faq'].includes(kind)) return `สวัสดี ทีมดี อ่านคู่มือบนเว็บแล้วมีคำถาม\nคำถาม: \n${FILL}${from}`
   if (['articles', 'posts', 'blog'].includes(kind)) return `สวัสดี ทีมดี อ่านบทความบนเว็บแล้วมีคำถาม\nคำถาม: \n${FILL}${from}`
   const general = `สวัสดี ทีมดี สนใจทำเสื้อทีม\nประเภทเสื้อ: \n${FILL}`
-  return kind === 'home' || at === '/' ? general : general + from
+  /* 404 (/404.html ตอน build ไม่ใช่หน้าที่ลูกค้าเปิด) = ไม่บอกหน้าที่มา (17 พ.ย. 2026) */
+  return kind === 'home' || at === '/' || /(^|\/)404(\.html)?$/.test(at || '') ? general : general + from
 }
 
 export const REORDER_TEXT = 'สวัสดี ทีมดี ลูกค้าเดิม ขอสั่งซ้ำ / เพิ่มจำนวน\nเลขออเดอร์เดิม (ถ้ามี): \nชื่อหน่วยงาน / ทีม: \nจำนวนและไซซ์: \nต้องได้วันที่: '

@@ -110,7 +110,7 @@ const THANKS = '/thank-you/'
 
 /** ผลการส่ง → หน้าจอที่ต้องแสดง · สำเร็จเท่านั้นที่ไปหน้าขอบคุณ ค่าที่ไม่รู้จักถือว่าล้ม (ห้ามตกไปเป็นสำเร็จ) */
 export function outcomeOf(sent) {
-  if (sent && sent.ok === true) return { view: 'thanks', to: sent.redirect || withBase(THANKS) }
+  if (sent && sent.ok === true) return { view: 'thanks', to: withBase(sent.redirect || THANKS) }
   if (sent && sent.reason === 'off') return { view: 'off' }
   return { view: 'failed' }
 }

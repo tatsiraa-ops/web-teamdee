@@ -40,7 +40,7 @@
          ผู้ใช้ตั้งค่าลดการเคลื่อนไหว = ไม่เล่นเอง มีปุ่มควบคุมของเบราว์เซอร์ · ไม่ใช่คลิปในระบบ videos.json --}}
     {{#if pp2.proof.loops}}
     <div class="pp2-pf__loops">
-      <div class="pp2-pf__bth"><h3 class="pp2-pf__gh">{{pp2.proof.loopsH}}</h3><p>{{pp2.proof.loopsP}}</p></div>
+      <div class="pp2-pf__bth"><h3 class="pp2-pf__gh">{{pp2.proof.loopsH}}</h3><p>{{pp2.proof.loopsP}}</p><button type="button" class="rvm__pause" data-loops-pause data-on="false" aria-pressed="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path class="rvm__pi" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/><path class="rvm__pl" d="M8 5.5v13l11-6.5z"/></svg><span>หยุดคลิป</span></button></div>
       <ul class="pp2-pf__lp">
         {{#each pp2.proof.loops}}<li><video muted loop playsinline preload="none" data-loop poster="/img/emb-real/loop-{{this.id}}.webp" width="540" height="720" aria-label="{{this.alt}}"><source src="/img/emb-real/loop-{{this.id}}.mp4" type="video/mp4"></video><span class="pp2-pf__lpt">{{this.t}}</span></li>{{/each}}
       </ul>

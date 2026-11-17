@@ -1,4 +1,3 @@
-import { initFabricCards } from './fabric-cards.js'
 import { initTypeCollars } from './type-collars.js'
 import { initPoloFabric } from './polo-fabric.js'
 import { initShirtCallouts } from './shirt-callouts.js'
@@ -24,8 +23,6 @@ initToc()
 initNeedBy()
 /* ตารางราคาหลายผ้าบนมือถือ: เลือกช่วงจำนวนแล้วเห็นราคาทุกผ้า (audit มือถือ 30 ต.ค. ข้อ 10) */
 initPriceCompare()
-/* การ์ดสะสมผ้า (รอบ 185): เอียง/ฟอยล์ · พลิก · แจกการ์ด · สำรับมือถือ */
-initFabricCards()
 initPoloFabric() /* 11 พ.ย. หน้างานปัก: ผ้า + สี + ราคา */
 /* 16 พ.ย. 2026 หน้างานปัก: ผังเสื้อหน้า-หลังมีเส้นชี้ (ตำแหน่งปัก · รายละเอียดเสื้อ) · ไม่มีการกดเลือกแบบแล้ว (เดิม polo-options.js)
    กดรูปงานปักแต่ละจุด / รูปแบบเสื้อแต่ละแบบ = ป๊อปอัปขาว (lightbox → review-dialog openPhotos) */
@@ -102,12 +99,26 @@ initSizeChart()
 {
   const loops = [...document.querySelectorAll('video[data-loop]')]
   if (loops.length) {
+    const btn = document.querySelector('[data-loops-pause]')
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
       for (const v of loops) v.controls = true
+      btn?.remove()
     } else {
+      /* 17 พ.ย. WCAG 2.2.2: ปุ่มหยุดคลิป · หยุดแล้วไม่เล่นเองอีกจนกดเล่นต่อ · tests/loop-pause.test.js */
+      let paused = false
+      const seen = new Set()
+      btn?.addEventListener('click', () => {
+        paused = !paused
+        btn.dataset.on = String(paused)
+        btn.setAttribute('aria-pressed', String(paused))
+        btn.querySelector('span').textContent = paused ? 'เล่นคลิปต่อ' : 'หยุดคลิป'
+        if (paused) for (const v of loops) v.pause()
+        else for (const v of seen) v.play().catch(() => { v.controls = true })
+      })
       const io = new IntersectionObserver((es) => {
         for (const e of es) {
-          if (e.isIntersecting) e.target.play().catch(() => { e.target.controls = true })
+          if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target)
+          if (e.isIntersecting && !paused) e.target.play().catch(() => { e.target.controls = true })
           else e.target.pause()
         }
       }, { threshold: 0.35 })

@@ -4,13 +4,15 @@
      กลุ่มที่ยังไม่มีแบบ: หน้าแจ้งตรงๆ + noindex (ตั้งใน index.html ของหน้า) จนกว่าจะมีแบบจริง
      30 ต.ค. (audit มือถือ ข้อ 11): ทุกภาพมีปุ่ม "เลือก" ใต้รูป + ถาดส่ง LINE ครั้งเดียว (pickTray.hbs · gallery-page.js)
      ภาพไม่มีรหัสใช้ป้าย "รูปที่ N" · JS เติม data-pick เป็น "รูปที่ N จาก /หน้า/ (ไฟล์)" ให้ฝ่ายขายหาเจอ --}}
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"แบบเสื้อ","item":"{{site.baseUrl}}{{url 'designs'}}"},{"@type":"ListItem","position":3,"name":"{{dp.h1}}"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"แบบเสื้อ","item":"{{site.baseUrl}}{{url 'designs'}}"},{"@type":"ListItem","position":3,"name":"{{firstName item.name}}"}]}</script>
 
 <section class="band-hero gallery-hero relative overflow-hidden">
   <div class="wrap relative py-12 md:py-16">
     <nav class="crumb2" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><a href="{{url 'designs'}}">แบบเสื้อ</a><span aria-hidden="true">/</span><span aria-current="page">{{firstName item.name}}</span></nav>
     <h1 class="t-display text-[clamp(30px,4.4vw,52px)] text-ink mt-7 max-w-[24ch]">{{dp.h1}}</h1>
     <p class="text-[18px] leading-[1.75] text-ink-2 max-w-[60ch] mt-5">{{dp.lead}}</p>
+    {{!-- 17 พ.ย. 2026 SEO/GEO A12: ข้อเท็จจริงสั้นให้ Google/AI หยิบไปตอบ (ไม่มีราคา) --}}
+    <p class="gallery-facts">สั่งทำขั้นต่ำ {{site.moq}} ตัว · ราคารวม VAT · ส่งฟรี · ดูแบบ 3D ก่อนผลิต</p>
     <a class="btn btn-lg bg-transparent text-ink border-ink/40 hover:bg-ink hover:text-paper hover:border-ink mt-8 max-sm:whitespace-normal max-sm:text-center" href="{{url 'uses' item.id}}">{{dp.back}}</a>
   </div>
 </section>

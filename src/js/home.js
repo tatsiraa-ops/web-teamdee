@@ -18,6 +18,7 @@ import { initReviewBoard } from './review-board.js'
 import { initHomeProcess } from './home-process.js'
 import { initHomeMotion } from './home-motion.js'
 import { initHomeMobile } from './home-mobile.js'
+import { initHeroBar } from './mobile-ui.js'
 
 /* ทีมดี เข้าใจคนสั่ง · ขีดฆ่าปัญหาทีละข้อตอนเลื่อนมาเห็น · ไม่มี JS / ลดการเคลื่อนไหว = เห็นขีดฆ่าและคำตอบนิ่งๆ */
 function initPainStrike() {
@@ -31,7 +32,8 @@ function initPainStrike() {
 /* แต่ละส่วนเริ่มแยกกัน ตัวหนึ่งพังไม่ลากตัวอื่นพังตาม (ตรวจโค้ด 23 ต.ค.) */
 const safe = (fn) => { try { fn() } catch (err) { console.error(err) } }
 safe(initHomeMobile)
-;[initNav, initAccordion, initTracking, initFloats, initSiteExtras, initHeroSets, initFaqMore, initCountUp, initPainStrike, initReviewDialog, initReviewMarquee, initReviewWall, initReviewBoard].forEach(safe)
+/* 17 พ.ย. 2026: แถบล่างมือถือหลบตอนปุ่ม LINE ของ hero ยังเห็นอยู่ (หน้าอื่นเรียกใน page.js · หน้าแรกไม่ได้โหลด page.js) */
+;[initNav, initAccordion, initTracking, initFloats, initSiteExtras, initHeroSets, () => initHeroBar(), initFaqMore, initCountUp, initPainStrike, initReviewDialog, initReviewMarquee, initReviewWall, initReviewBoard].forEach(safe)
 
 /* ธีม WordPress (TD_WP) ใช้ hero แบบทีมแบบเดียว (ตกลง 20 ต.ค. 2026) · hero ต้นแบบอีก 2 แบบ + Lenis มีเฉพาะในต้นแบบ
    ใช้ import แบบไดนามิก ตอน build ธีมโค้ดส่วนนี้จะถูกตัดทิ้งทั้งก้อน */

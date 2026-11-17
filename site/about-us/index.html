@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="/src/styles/about.css" data-page-css>
   <title>รู้จักทีมดี บริการรับทำเสื้อทีมในนนทบุรี | TEAMDEE</title>
   <meta name="description" content="รู้จัก TEAMDEE ทีมงาน วิธีดูแลการสั่งทำเสื้อ และออฟฟิศในนนทบุรี พร้อมข้อมูลสถานที่และการติดต่อก่อนเริ่มทำเสื้อทีม">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"TEAMDEE","legalName":"บริษัท ดีดี ฟินิกซ์ จำกัด","description":"รับทำเสื้อทีม ช่วยออกแบบและดูแลรายละเอียดจนส่งมอบ","telephone":"{{site.phonePrimary}}","url":"{{site.baseUrl}}","logo":"{{site.baseUrl}}/apple-touch-icon.png"}</script>
+  {{!-- 17 พ.ย. 2026 A7: breadcrumb schema ตรงกับที่เห็นบนหน้า --}}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"{{site.baseUrl}}/"},{"@type":"ListItem","position":2,"name":"รู้จักทีมดี"}]}</script>
 </head>
 <body>
 {{> siteHeader active="about"}}
@@ -163,6 +164,8 @@
 {{#unless wp}}          <div><dt>เลขทะเบียนนิติบุคคล</dt><dd class="is-pending">[รอยืนยัน]</dd></div>{{/unless}}
           <div><dt>สำนักงานใหญ่</dt><dd>{{{ph site.address}}}<a class="ab-co__map" href="{{site.mapUrl}}" target="_blank" rel="noopener">เปิดแผนที่ Google<span aria-hidden="true"> &rarr;</span></a></dd></div>
           <div><dt>เวลาทำการ</dt><dd>{{{ph site.hours}}}<span class="ab-co__sub">เข้าพบได้ตามนัด</span></dd></div>
+          <div><dt>เริ่มดูแลงานเสื้อทีม</dt><dd>ปี {{site.foundedYear}}</dd></div>
+          <div><dt>สั่งขั้นต่ำ</dt><dd>{{site.moq}} ตัว (สกรีน DFT เริ่ม 1 ตัว) · ราคารวม VAT</dd></div>
           <div><dt>โทรศัพท์</dt><dd class="tabular-nums"><a href="tel:{{site.phonePrimaryTel}}">{{site.phonePrimary}}</a></dd></div>
           <div><dt>เอกสารที่ขอได้</dt><dd><ul class="ab-docs"><li>ใบเสนอราคา</li><li>หนังสือรับรองบริษัท</li><li>ภ.พ.20</li><li>ใบกำกับภาษีเต็มรูปแบบ</li><li>ใบส่งของ</li></ul></dd></div>
         </dl>

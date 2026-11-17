@@ -3,7 +3,7 @@
 <section class="band-hero pp2-hero" aria-labelledby="pp2-h1">
   <div class="pp2-hero__reel">
     <picture class="pp2-hero__pic"><source media="(max-width: 767px)" srcset="{{pp2.hero.mobileSmall}} 480w, {{pp2.hero.mobile}} 768w" sizes="100vw" width="768" height="1024"><img class="pp2-hero__img"{{#if pp2.hero.tabPos}} style="--hero-tab-pos:{{pp2.hero.tabPos}}"{{/if}} src="{{pp2.hero.small}}" srcset="{{pp2.hero.tiny}} 800w, {{pp2.hero.small}} 1280w, {{pp2.hero.img}} 2304w" sizes="100vw" width="2304" height="800" alt="{{pp2.hero.alt}}" fetchpriority="high" decoding="async"></picture>
-    <nav class="crumb2 pp2-hero__crumb" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span>สินค้าและบริการ</span><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
+    <nav class="crumb2 pp2-hero__crumb" aria-label="เส้นทางหน้า"><a href="/">หน้าแรก</a><span aria-hidden="true">/</span><span aria-current="page">{{item.name}}</span></nav>
     <div class="pp2-hero__copy">
       <p class="th-o__kick">{{pp2.hero.kicker}}</p>
       <h1 id="pp2-h1" class="th-o__h"><span class="inline-block">{{{ph pp2.hero.h1main}}}</span><span class="sr-only"> </span><span class="th-o__accent">{{{ph pp2.hero.h1rest}}}</span></h1>

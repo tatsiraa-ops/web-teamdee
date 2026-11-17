@@ -13,6 +13,9 @@ export const statAt = (s, p) => Math.round(s.n * Math.min(1, Math.max(0, p))).to
 /** expo out · พุ่งเร็วแล้วค่อยๆ เข้าเป้า ให้ความรู้สึกตัวเลขใหญ่ */
 export const easeOut = (t) => (t >= 1 ? 1 : 1 - 2 ** (-10 * t))
 
+/** จังหวะนับ (ms) · 17 พ.ย. 2026 จากรอบตรวจ UI: เดิม 2200 + เหลื่อม 220 คนเลื่อนผ่านเร็วเห็นตัวเลขค้างครึ่งทาง */
+export const COUNT_MS = { desktop: 1400, mobile: 650, stagger: 120 }
+
 export function initCountUp(root = document) {
   const box = root.querySelector('[data-countup]')
   if (!box) return
@@ -22,7 +25,7 @@ export function initCountUp(root = document) {
   const mobile = matchMedia('(max-width: 767px)').matches
   items.forEach(({ s, num }) => { num.textContent = statAt(s, mobile ? 1 : 0) })
   box.classList.add('is-armed')
-  const DUR = mobile ? 650 : 2200
+  const DUR = mobile ? COUNT_MS.mobile : COUNT_MS.desktop
   const io = new IntersectionObserver((list) => {
     if (!list.some((e) => e.isIntersecting)) return
     io.disconnect()
@@ -31,7 +34,7 @@ export function initCountUp(root = document) {
     const frame = (now) => {
       let busy = false
       items.forEach(({ s, num, el }, i) => {
-        const t = (now - t0 - i * (mobile ? 0 : 220)) / DUR
+        const t = (now - t0 - i * (mobile ? 0 : COUNT_MS.stagger)) / DUR
         num.textContent = statAt(s, mobile ? .85 + .15 * easeOut(Math.max(0, t)) : easeOut(Math.max(0, t)))
         if (t >= 1) el.classList.add('is-hit')
         else busy = true

@@ -2,9 +2,11 @@
 <html lang="th">
 <head>
   {{> head}}
-  <title>รับทำเสื้อทีม โปโลปัก พิมพ์ลาย และสกรีน | TEAMDEE</title>
+  {{!-- กฎเฉพาะหน้าแรก (แยกจาก home.css 17 พ.ย. 2026 · home.css โหลดทุกหน้า) --}}
+  <link rel="stylesheet" href="/src/styles/home-page.css" data-page-css>
+  <title>รับทำเสื้อทีม เสื้อบริษัท โปโลปัก พิมพ์ลาย สกรีน | TEAMDEE</title>
   <meta name="td-og-image" content="/img/og/home.jpg">
-  <meta name="description" content="รับทำเสื้อทีมกับทีมดี สำหรับบริษัท กีฬา หน่วยงาน และกิจกรรม ดูแบบเสื้อ ผลงาน และแนวทางสั่งทำ พร้อมปรึกษาประเภทเสื้อและรายละเอียดก่อนผลิต">
+  <meta name="description" content="รับทำเสื้อทีม เสื้อบริษัท โปโลปักโลโก้ เสื้อพิมพ์ลาย และสกรีน DFT ออกแบบและผลิตให้ เริ่ม 10 ตัว ราคารวม VAT ส่งฟรี ดูแบบ 3D ก่อนผลิต สำนักงานนนทบุรี">
 {{#unless wp}}  <!-- เลือก hero ก่อนวาดหน้า ไม่ให้แบบที่ไม่ใช้กระพริบขึ้นมา · ตรรกะเดียวกับ src/js/hero-mode.js (มีเทส) -->
   <script>(function(){var m=['team','scroll','classic'],v='team';try{var p=new URLSearchParams(location.search).get('hero');v=m.indexOf(p)>-1?p:'team'}catch(e){}document.documentElement.setAttribute('data-hero-mode',v)})()</script>{{/unless}}
   {{#each homeLd}}<script type="application/ld+json">{{{this}}}</script>
@@ -219,7 +221,7 @@
         <ul class="hm-uses-row__cards">
           {{#each this.cards}}
           <li><a class="hm-use-card" href="{{url 'uses' this.use}}">
-            <span class="hm-use-card__img"><img src="{{this.img}}" srcset="{{this.imgSmall}} 640w, {{this.img}} 960w" sizes="(min-width:1024px) 31vw, (min-width:768px) 45vw, 80vw" width="960" height="720" alt="{{this.alt}}" loading="lazy" decoding="async"></span>
+            <span class="hm-use-card__img"><img src="{{this.img}}" srcset="{{this.imgSmall}} 640w, {{this.img}} 960w" sizes="(min-width:1024px) 31vw, (min-width:768px) 45vw, 72vw" width="960" height="720" alt="{{this.alt}}" loading="lazy" decoding="async"></span>
             <span class="hm-use-card__body"><span class="hm-use-card__t">{{this.title}}</span><span class="hm-use-card__sub">{{this.sub}}</span></span>
             <span class="hm-use-card__go" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </a></li>

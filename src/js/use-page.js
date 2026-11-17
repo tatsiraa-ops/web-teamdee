@@ -17,42 +17,7 @@ initLightbox('#up2RvWall', 'figure', 'ภาพลูกค้าใส่เส
 for (const id of ['designs', 'real']) initLightbox(`#homeWorks-${id}`, 'figure', 'ดูผลงานขนาดใหญ่')
 /* ผลงาน: แถวละหลายรูปเป็นรางเลื่อน · ปุ่มลูกศร + ตัวนับ ทุกขนาดจอ (4 พ.ย. อาร์ต "เอาแบบหลายๆรูปได้") */
 document.querySelectorAll('#real-work :is(.up2-show--3d, .up2-show--real) .hm-show__line5').forEach((rail) => addRailControls(rail, 'up2-show-ctl'))
-/* บริบทงาน: แท็บใต้หัวข้อ + แผงรูปลูกค้าจริง (11 พ.ย. · เดิมโชว์รูมไดโอรามา 4 พ.ย.)
-   ชั้นวางภาพจิ๋ว = แท็บ WAI-ARIA: คลิก / ลูกศรซ้ายขวา / Home / End · ไม่เปิดตอนชี้เมาส์ ("ลูกเล่นเยอะไป")
-   ไม่ใช้ tabs.js เพราะใส่คลาส chip ให้ปุ่ม (ปุ่มที่นี่เป็นภาพจิ๋ว) */
-document.querySelectorAll('[data-ctx-gal]').forEach((room) => {
-  const tabs = [...room.querySelectorAll('[role="tab"]')]
-  const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')))
-  const count = room.querySelector('.up2-ctx__count')
-  let cur = Math.max(0, tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true'))
-  const select = (i, focus) => {
-    cur = i
-    if (count) count.textContent = `${i + 1} / ${tabs.length}`
-    tabs.forEach((t, k) => {
-      const on = k === i
-      t.setAttribute('aria-selected', String(on))
-      t.tabIndex = on ? 0 : -1
-      panels[k].hidden = !on
-    })
-    // ภาพจิ๋วที่เลือกเลื่อนเข้ามาในราง (มือถือ) โดยไม่เลื่อนทั้งหน้า
-    const shelf = tabs[i].parentElement
-    const at = tabs[i].getBoundingClientRect().left - shelf.getBoundingClientRect().left + shelf.scrollLeft
-    if (shelf.scrollWidth > shelf.clientWidth) shelf.scrollTo({ left: at - (shelf.clientWidth - tabs[i].offsetWidth) / 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
-    if (focus) tabs[i].focus()
-  }
-  /* 11 พ.ย. ‹ › ใต้แผง (วนรอบ) + ตัวนับ "1 / 6" */
-  room.querySelectorAll('[data-ctx-step]').forEach((b) => b.addEventListener('click', () => select((cur + Number(b.dataset.ctxStep) + tabs.length) % tabs.length, false)))
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => select(i, false))
-    t.addEventListener('keydown', (e) => {
-      const last = tabs.length - 1
-      const go = { ArrowRight: i === last ? 0 : i + 1, ArrowLeft: i === 0 ? last : i - 1, Home: 0, End: last }[e.key]
-      if (go === undefined) return
-      e.preventDefault()
-      select(go, true)
-    })
-  })
-})
+/* บริบทงาน: 17 พ.ย. 2026 อาร์ต "เปลี่ยนเป็นโชว์ทั้งหมด" → เลิกแท็บ ทุกงานเรียงลงมา แถบภาพจิ๋วเป็นลิงก์ # (ไม่ต้องใช้ JS) */
 /* กระดานรีวิวหน้าแรก (โฉมใหม่ use-v2) */
 initReviewBoard()
 

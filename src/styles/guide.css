@@ -96,14 +96,14 @@
 .td-guide__copy:hover { background: var(--color-shell); color: var(--color-ink); }
 /* ภาพรวมขั้นตอน (การ์ดไม่มีรูป ใต้หัวข้อ overview) = แถบขั้นตอนเลขส้ม แบบส่วนขั้นตอนของหน้าสินค้า */
 .td-guide #overview .gblock-cards { counter-reset: gstep; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.td-guide #overview .gblock-card { counter-increment: gstep; padding: 18px 20px 20px; border: 1px solid var(--color-line); border-radius: 18px; background: var(--color-paper); }
+.td-guide #overview .gblock-card { counter-increment: gstep; padding: 18px 20px 20px; border: 1px solid var(--color-line); border-radius: 20px; background: var(--color-paper); }
 .td-guide #overview .gblock-card::before { content: counter(gstep, decimal-leading-zero); display: block; margin-bottom: 10px; font-size: 28px; font-weight: 800; line-height: 1; color: var(--color-orange); font-variant-numeric: tabular-nums; }
 .td-guide #overview .gblock-card .gblock-description { margin-top: 4px; font-size: 15px; line-height: 1.6; }
 @media (max-width: 767px) {
   .td-guide__header { padding: 16px 0 24px; }
   .td-guide__quick a { min-height: 44px; font-size: 14px; }
   .td-guide #overview .gblock-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .td-guide #overview .gblock-card { padding: 14px; border-radius: 14px; }
+  .td-guide #overview .gblock-card { padding: 14px; border-radius: 16px; }
   .td-guide #overview .gblock-card::before { font-size: 22px; margin-bottom: 6px; }
   .td-guide #overview .gblock-title { font-size: 16px; }
 }

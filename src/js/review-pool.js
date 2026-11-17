@@ -36,7 +36,7 @@ export const OWN = Object.fromEntries(Object.keys(USE).map((id) => [id, (r) => !
 
 /** ลำดับคลังของหน้านี้: own (ตามลำดับที่เคาะ) → กลุ่มใกล้ → ไกล · ในกลุ่มเดียวกัน รายการที่มีรูปก่อน */
 export function poolFor(id, reviews) {
-  const own = OWN[id]
+  const own = OWN[id] || (() => false) /* กลุ่มใหม่ (npm run new:page) ยังไม่มีในตาราง = ไม่มีรีวิวของกลุ่มเอง */
   const pinned = (PICK[id] || []).map((rid) => reviews.find((r) => r.id === rid)).filter(Boolean)
   const ownRest = reviews.filter((r) => own(r) && !pinned.includes(r))
   const others = (RELATED[id] || []).flatMap((u) => {
