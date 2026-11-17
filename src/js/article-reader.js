@@ -1,5 +1,13 @@
 import { createHeadingId } from './article-heading-id.js'
 
+/** หัวข้อที่เข้าสารบัญ · items = [{ tag: 'H2' | 'H3', text, exclude }]
+    17 พ.ย. 2026: เดิมใส่ทั้ง h2 + h3 (บทความจริง 19 บรรทัด) → หัวข้อใหญ่ (h2) อย่างเดียว · h2 ไม่ถึง 2 = ใช้ h2 + h3 (tests/article-page-1117.test.js) */
+export function tocHeadings(items) {
+  const valid = items.filter((h) => String(h.text || '').trim() && !h.exclude)
+  const big = valid.filter((h) => h.tag === 'H2')
+  return big.length >= 2 ? big : valid
+}
+
 /** Progressive enhancement: native links/details still work without this module. */
 export function initArticleReader() {
   document.querySelectorAll('.td-reader').forEach((reader) => {
@@ -8,8 +16,9 @@ export function initArticleReader() {
     const nav = reader.querySelector('[data-reader-toc]')
     if (!content || !nav) return
     reader.dataset.readerReady = 'true'
-    const headings = [...content.querySelectorAll('h2, h3')]
-      .filter((heading) => heading.textContent.trim() && !heading.closest('[data-reader-exclude]'))
+    const headings = tocHeadings([...content.querySelectorAll('h2, h3')]
+      .map((el) => ({ el, tag: el.tagName, text: el.textContent, exclude: !!el.closest('[data-reader-exclude]') })))
+      .map((h) => h.el)
     if (!headings.length) {
       const toc = nav.closest('.td-reader__toc')
       if (toc) toc.hidden = true

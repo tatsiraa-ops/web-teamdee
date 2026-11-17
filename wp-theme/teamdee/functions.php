@@ -194,9 +194,31 @@ function td_chrome(string $which, string $from = '/blog/'): string {
      + ชิปหัวข้อ + ผลค้นหา (#artGrid) + จำนวนเรื่อง/วันที่บนหัวหน้า · ตัวเลขหมวดตาม WordPress
    tests/wp-posts-live.test.js */
 
+/** "2026-10-05" → "5 ต.ค. 2026" (รูปแบบวันที่ทั้งเว็บ) · ค่าเพี้ยน = "" · 17 พ.ย. 2026 หน้าบทความเคยขึ้น "October 5, 2026" (tests/article-page-1117.test.js) */
+function td_thai_date(string $ymd): string {
+	if (!preg_match('~^(\d{4})-(\d{2})-(\d{2})$~', $ymd, $m) || (int) $m[2] < 1 || (int) $m[2] > 12) return '';
+	$mon = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+	return (int) $m[3] . ' ' . $mon[(int) $m[2] - 1] . ' ' . $m[1];
+}
+/** เวลาอ่านโดยประมาณ (นาที) · ตัวอักษรที่ไม่ใช่ช่องว่างหลังตัดแท็ก ÷ 1,000 ต่อนาที ปัดขึ้น · ขั้นต่ำ 1 */
+function td_reading_minutes(string $html): int {
+	$text = html_entity_decode(strip_tags($html), ENT_QUOTES, 'UTF-8');
+	return max(1, (int) ceil(((int) preg_match_all('~\S~u', $text)) / 1000));
+}
+/** กล่องถามระหว่างอ่าน: วางก่อนหัวข้อใหญ่ (h2) ช่วงกลางบทความ · h2 ไม่ถึง 3 = ไม่ใส่ (ท้ายบทความมีปุ่มติดต่ออยู่แล้ว) */
+function td_insert_mid_cta(string $html, string $box): string {
+	if (!preg_match_all('~<h2[\s>]~i', $html, $m, PREG_OFFSET_CAPTURE) || count($m[0]) < 3) return $html;
+	$at = $m[0][intdiv(count($m[0]), 2)][1];
+	return substr($html, 0, $at) . $box . substr($html, $at);
+}
+/** LINE OA พร้อมข้อความ "อ่านบทความ "ชื่อ" แล้วมีคำถาม" (ชุดเดียวกับ pageLineText ของบทความในต้นแบบ + ชื่อบทความแทน path) */
+function td_article_line_url(string $title): string {
+	$t = mb_substr(trim(html_entity_decode(strip_tags($title), ENT_QUOTES, 'UTF-8')), 0, 120);
+	return 'https://line.me/R/oaMessage/@teamdee/?' . rawurlencode("สวัสดี ทีมดี อ่านบทความ \"$t\" แล้วมีคำถาม\nคำถาม: ");
+}
+
 /** แปลงโพสต์ WordPress เป็นข้อมูลการ์ด (ใหม่สุดก่อน) · url = path ที่ใช้ลิงก์ · key = /slug/ ใช้เทียบกับลิงก์ในหน้าที่ export (ติดตั้งในโฟลเดอร์ย่อยก็เทียบถูก) */
 function td_posts_from_wp(): array {
-	$mon = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
 	$out = [];
 	$list = get_posts(['post_type' => 'post', 'post_status' => 'publish', 'numberposts' => 60, 'orderby' => 'date', 'order' => 'DESC', 'has_password' => false]);
 	foreach ($list as $p) {
@@ -214,7 +236,7 @@ function td_posts_from_wp(): array {
 			'cat' => $cat ? (string) $cat->slug : '',
 			'catName' => $cat ? html_entity_decode((string) $cat->name, ENT_QUOTES, 'UTF-8') : '',
 			'date' => wp_date('Y-m-d', $ts),
-			'dateTh' => wp_date('j', $ts) . ' ' . $mon[(int) wp_date('n', $ts) - 1] . ' ' . wp_date('Y', $ts),
+			'dateTh' => td_thai_date(wp_date('Y-m-d', $ts)),
 			'excerpt' => trim(wp_strip_all_tags(html_entity_decode($ex, ENT_QUOTES, 'UTF-8'))),
 		];
 	}

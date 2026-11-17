@@ -73,7 +73,9 @@ export function initPromo() {
     const onScroll = () => {
       const pricey = document.getElementById('price') || document.getElementById('products')
       const faq = pricey && document.getElementById('faq')
-      const markTop = faq ? faq.getBoundingClientRect().top + scrollY : null
+      /* หน้าบทความ (17 พ.ย. 2026): เดิมเด้งกลางเนื้อหาตอนเลื่อนเกินครึ่ง → รออ่านจบถึง "อ่านต่อ" / ท้ายบทความ (tests/article-page-1117.test.js) */
+      const readerEnd = document.querySelector('.td-reader__related, .td-reader__end')
+      const markTop = readerEnd ? readerEnd.getBoundingClientRect().top + scrollY : faq ? faq.getBoundingClientRect().top + scrollY : null
       if (!promoDue({ y: scrollY, view: innerHeight, doc: document.documentElement.scrollHeight, markTop })) return
       removeEventListener('scroll', onScroll)
       open()
