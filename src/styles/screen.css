@@ -2,9 +2,11 @@
 .screen-page .band-hero figure img { object-fit:cover; }
 .screen-page .band-hero figure > div { aspect-ratio: 1.16; }
 .screen-page .band-hero figure img { transform:scale(1.17); }
-.screen-heading { max-width:780px; margin-bottom:36px; }
-.screen-heading h2 { font-size:clamp(28px,3.6vw,46px); line-height:1.3; }
-.screen-heading p { margin-top:16px; }
+/* 18 พ.ย. 2026 หัวส่วนแบบหน้าโฉมใหม่ (pp2-hl__head): กลาง ตัวหนา คำท้ายสีส้ม */
+.screen-heading { max-width:860px; margin:0 auto 40px; text-align:center; }
+.screen-heading h2 { margin:0; font-size:clamp(28px,3.06vw,44px); font-weight:800; line-height:1.3; color:var(--color-ink); text-wrap:balance; }
+.screen-heading h2 .hm-hl { color:#F05A00; }
+.screen-heading p { margin:14px auto 0; max-width:680px; }
 .screen-material { display:grid; grid-template-columns:1.05fr 1fr; gap:64px; align-items:center; }
 .screen-material__photo { align-self:stretch; position:relative; min-height:440px; border-radius:24px; overflow:hidden; background:#f5f3ef; }
 .screen-material__photo img { width:100%; height:100%; object-fit:cover; }
@@ -90,4 +92,160 @@
 .screen-examples, .screen-own__fabrics, .screen-size { grid-template-columns:1fr; }
 .screen-ex { padding:18px; }
 .screen-price__cta .btn { flex:1 1 100%; justify-content:center; }
+}
+/* 18 พ.ย. 2026 เวทีเลือกขนาดลาย (อาร์ต "เสื้อสีขาวโทนเดียว ทำกรอบ เอาโลโก้ไปใส่") · src/js/screen-size.js
+   ภาพเสื้อ 600×750 ตัวเสื้อกว้าง 400px = อก 53 ซม. (C32 ไซซ์ L วางราบ) → 1 ซม. = กว้าง 1.25% สูง 1% ของภาพ · คอเสื้อด้านหน้า y≈23.7% */
+.szx { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px; align-items:center; }
+.szx__stage { position:relative; margin:0; border-radius:24px; overflow:hidden; background:#cfcac4; box-shadow:0 1px 2px rgba(0,0,0,.06), 0 12px 32px -12px rgba(60,40,20,.25); }
+.szx__stage img { display:block; width:100%; height:auto; }
+.szx__frame { position:absolute; left:37.5%; top:27.7%; width:25%; height:30%; display:flex; align-items:center; justify-content:center; border:2px dashed #FF6C00; border-radius:4px; background:rgba(255,108,0,.05); transition:left .55s cubic-bezier(.22,.8,.2,1), top .55s cubic-bezier(.22,.8,.2,1), width .55s cubic-bezier(.22,.8,.2,1), height .55s cubic-bezier(.22,.8,.2,1); }
+.szx__logo { width:86%; height:auto; color:#FF6C00; }
+.szx__w, .szx__h { position:absolute; font-size:clamp(11px,1vw,13px); font-weight:700; line-height:1; color:#000; background:#FF6C00; padding:4px 7px; border-radius:999px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.szx__w { left:50%; top:0; transform:translate(-50%,-140%); }
+.szx__h { right:0; top:50%; transform:translate(calc(100% + 8px),-50%); }
+.szx__stage[data-size="A7"] .szx__frame { left:58.1%; top:29.7%; width:8.75%; height:10%; }
+.szx__stage[data-size="A6"] .szx__frame { left:43.75%; top:28.7%; width:12.5%; height:15%; }
+.szx__stage[data-size="A5"] .szx__frame { left:40.6%; top:28.7%; width:18.75%; height:20%; }
+.szx__stage[data-size="A4"] .szx__frame { left:37.5%; top:27.7%; width:25%; height:30%; }
+.szx__stage[data-size="A3"] .szx__frame { left:31.25%; top:26.4%; width:37.5%; height:40%; }
+.szx__hint { margin:0 0 14px; font-size:15px; color:var(--color-ink-3); }
+.szx__picks { display:grid; gap:10px; margin:0 0 28px; padding:0; list-style:none; }
+.szx__pick { width:100%; display:grid; grid-template-columns:64px 112px 1fr auto; align-items:center; gap:12px; padding:14px 18px; text-align:left; font:inherit; color:var(--color-ink); background:var(--color-paper); border:1px solid var(--color-line); border-radius:16px; cursor:pointer; transition:border-color .2s, box-shadow .2s, transform .2s; }
+.szx__pick b { font-size:28px; font-weight:900; line-height:1; letter-spacing:-.01em; }
+.szx__cm { font-size:17px; font-weight:700; font-variant-numeric:tabular-nums; }
+.szx__use { font-size:14px; color:var(--color-ink-3); }
+.szx__pick em { font-style:normal; font-size:14px; font-weight:700; color:#ad4600; white-space:nowrap; }
+.szx__pick:hover { border-color:#ffb27a; }
+.szx__pick[aria-pressed="true"] { border-color:#FF6C00; box-shadow:inset 4px 0 0 #FF6C00, 0 8px 22px -14px rgba(255,108,0,.6); background:#fff8f2; }
+.szx__pick[aria-pressed="true"] b { color:#E05F00; }
+.szx__pick:focus-visible { outline:3px solid var(--color-ink); outline-offset:2px; }
+.screen-sz__foot { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px 32px; }
+.screen-sz__foot .screen-included { margin:0; }
+@media (prefers-reduced-motion: reduce) { .szx__frame { transition:none; } }
+@media(max-width:1023px){ .szx { grid-template-columns:1fr; gap:28px; } .szx__stage { max-width:520px; width:100%; margin-inline:auto; } }
+@media(max-width:767px){
+.szx__pick { grid-template-columns:52px 1fr auto; grid-template-areas:"id cm price" "id use price"; row-gap:2px; padding:12px 14px; }
+.szx__pick b { grid-area:id; font-size:24px; } .szx__cm { grid-area:cm; font-size:16px; } .szx__use { grid-area:use; font-size:13px; } .szx__pick em { grid-area:price; font-size:13px; text-align:right; white-space:normal; max-width:96px; }
+}
+/* 18 พ.ย. 2026 ส่วน "สั่งสกรีนกับทีมดีได้ 2 ทาง" (screenWays.hbs): การ์ดคู่ ภาพ + แถบส้ม (pp2-pf__band) · ตัวเลขเด่น 3 ช่อง · ตารางเต็มใต้การ์ด */
+.scw { background:var(--color-shell); }
+.scw__grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; align-items:stretch; }
+.scw__c { display:flex; flex-direction:column; gap:18px; padding:14px 14px 22px; background:var(--color-paper); border:1px solid var(--color-line); border-radius:28px; box-shadow:0 1px 2px rgba(0,0,0,.04), 0 18px 40px -26px rgba(60,40,20,.35); }
+.scw__ph { position:relative; margin:0; border-radius:20px; overflow:hidden; aspect-ratio:4/3; }
+.scw__ph img { width:100%; height:100%; object-fit:cover; display:block; }
+.scw__ph .pp2-pf__band { padding:70px 22px 20px; }
+.scw__ph .pp2-pf__t { font-size:clamp(22px,2.2vw,30px); }
+.scw__no { position:absolute; left:16px; top:12px; font-size:40px; font-weight:900; line-height:1; color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.35); }
+.scw__facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:0 6px; padding:0; list-style:none; }
+.scw__facts li { display:grid; gap:2px; padding:12px 14px; border-radius:16px; background:#fff6ee; }
+.scw__facts b { font-size:clamp(18px,1.6vw,22px); font-weight:900; line-height:1.2; font-variant-numeric:tabular-nums; }
+.scw__facts span { font-size:13px; line-height:1.4; color:var(--color-ink-3); }
+.scw__ticks { display:grid; gap:6px; margin:0 8px; padding:0; list-style:none; }
+.scw__ticks li { position:relative; padding-left:18px; font-size:15px; line-height:1.6; color:var(--color-ink-2); }
+.scw__ticks li::before { content:""; position:absolute; left:0; top:.72em; width:7px; height:7px; border-radius:50%; background:#FF6C00; }
+.scw__c .screen-table { margin:0; }
+.scw__fab { display:grid; gap:8px; margin:0 8px; }
+.scw__fab p { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0; }
+.scw__fab b { font-size:13px; font-weight:800; padding:4px 10px; border-radius:999px; margin-right:2px; }
+.scw__ok { background:#e5f5ea; color:#13652f; } .scw__care { background:#fff2d9; color:#7a4a00; } .scw__no-k { background:#fde8e6; color:#9b1c13; }
+.scw__fab span { font-size:13.5px; padding:4px 10px; border-radius:999px; background:var(--color-shell); border:1px solid var(--color-line); color:var(--color-ink-2); }
+.scw__more { margin-top:40px; display:grid; gap:28px; }
+.scw__extra { padding:24px; background:var(--color-paper); border:1px solid var(--color-line); border-radius:24px; }
+.scw__extra h3 { font-size:22px; margin:0 0 12px; } .scw__extra h3 span { display:block; font-size:14px; font-weight:500; color:var(--color-ink-3); margin-top:4px; }
+.scw__how { counter-reset:s; display:flex; flex-wrap:wrap; gap:8px 20px; margin:0 0 16px; padding:0; list-style:none; }
+.scw__how li { counter-increment:s; display:flex; align-items:center; gap:8px; font-size:15px; }
+.scw__how li::before { content:counter(s); width:24px; height:24px; border-radius:50%; background:#FF6C00; color:#000; font-weight:800; font-size:13px; display:grid; place-items:center; flex:none; }
+.scw__extra .screen-table { margin:0 0 10px; } .scw__extra .screen-note { margin:0; }
+.scw .screen-examples { margin:0; }
+.scw__bottom { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; align-items:start; }
+.scw__bottom .screen-lead, .scw__bottom .screen-terms { margin:0; }
+@media(max-width:1023px){ .scw__grid, .scw__bottom { grid-template-columns:1fr; } }
+@media(max-width:767px){ .scw__facts { grid-template-columns:1fr 1fr 1fr; gap:6px; margin:0; } .scw__facts li { padding:10px; } .scw__facts span { font-size:12px; } .scw__c { padding:10px 10px 18px; border-radius:20px; } .scw__no { font-size:30px; } .scw__extra { padding:16px; } }
+/* 18 พ.ย. 2026 แผงเทียบเสื้อ 2 ทรง รอบ 3: แผ่นเดียว 2 คอลัมน์ · แถวตรงกัน (subgrid) · เสื้อย้อมสีด้วย mask + multiply · โลโก้จริงทับอก */
+.scf__duo { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:auto auto auto auto; column-gap:0; background:var(--color-paper); border:1px solid var(--color-line); border-radius:28px; overflow:hidden; box-shadow:0 1px 2px rgba(0,0,0,.04), 0 24px 48px -32px rgba(60,40,20,.4); }
+.scf__c { display:grid; grid-row:span 4; grid-template-rows:subgrid; row-gap:0; }
+.scf__c + .scf__c { border-left:1px solid var(--color-line); }
+.scf__stage { position:relative; display:grid; place-items:center; padding:44px 24px 28px; background:radial-gradient(90% 75% at 50% 35%, #fffaf5 0%, #f2e9df 80%); }
+.scf__c--oversize .scf__stage { background:radial-gradient(90% 75% at 50% 35%, #f9f8f6 0%, #e8e4de 80%); }
+.scf__idx { position:absolute; left:28px; top:20px; margin:0; font-size:56px; font-weight:900; line-height:1; color:rgba(0,0,0,.07); letter-spacing:-.02em; }
+.scf__shirt { position:relative; width:min(72%, 330px); aspect-ratio:690/802; filter:drop-shadow(0 22px 22px rgba(60,40,20,.2)); }
+.scf__tint, .scf__shirt img { position:absolute; inset:0; width:100%; height:100%; }
+.scf__tint { background:var(--c); -webkit-mask-size:100% 100%; mask-size:100% 100%; transition:background-color .35s ease; }
+.scf__shirt img { mix-blend-mode:multiply; }
+.scf__logo { position:absolute; color:#FF6C00; }
+.scf__logo--premium { left:60.3%; top:26.6%; width:11.6%; }
+.scf__logo--oversize { left:59.1%; top:22.9%; width:10.9%; }
+.scf__svg { display:block; width:100%; height:auto; }
+.scf__head { padding:26px 32px 4px; }
+.scf__kick { margin:0 0 6px; font-size:13px; font-weight:800; letter-spacing:.04em; color:#ad4600; }
+.scf__head h3 { margin:0; font-size:clamp(22px,2vw,28px); line-height:1.25; }
+.scf__spec { margin:0; padding:14px 32px 6px; }
+.scf__spec div { display:grid; grid-template-columns:72px 1fr; gap:12px; padding:11px 0; border-bottom:1px solid var(--color-line); font-size:15px; }
+.scf__spec div:last-child { border-bottom:0; }
+.scf__spec dt { color:var(--color-ink-3); }
+.scf__spec dd { margin:0; font-weight:700; } .scf__spec dd span { font-weight:400; color:var(--color-ink-3); margin-left:6px; }
+.scf__colors { display:grid; gap:10px; align-content:start; padding:10px 32px 30px; }
+.scf__cname { margin:0; font-size:14px; } .scf__cname span { color:var(--color-ink-3); } .scf__cname small { color:var(--color-ink-3); margin-left:6px; }
+.scf__sw { display:flex; flex-wrap:wrap; gap:10px; }
+.scf__dot { width:34px; height:34px; border-radius:50%; padding:0; border:1px solid rgba(0,0,0,.18); background:var(--sw); cursor:pointer; box-shadow:inset 0 0 0 3px #fff; transition:transform .15s; }
+.scf__dot:hover { transform:scale(1.08); }
+.scf__dot[aria-pressed="true"] { outline:2px solid #FF6C00; outline-offset:2px; }
+.scf__dot:focus-visible { outline:3px solid var(--color-ink); outline-offset:2px; }
+.scf__more { margin:20px 0 0; display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:center; }
+/* การ์ด 2 ทางสั่ง: กล่องชวนทัก · แผงปิดท้าย */
+.scw__ask { display:grid; gap:12px; margin:0 6px; padding:16px 18px; border-radius:16px; background:#fff6ee; }
+.scw__ask p { margin:0; font-size:15px; line-height:1.6; color:var(--color-ink-2); } .scw__ask b { display:block; font-size:17px; color:var(--color-ink); }
+.scw__ask .cb { justify-self:start; }
+@media(max-width:767px){ .scf__duo { grid-template-columns:1fr; grid-template-rows:none; border-radius:20px; } .scf__c { grid-row:auto; grid-template-rows:none; } .scf__c + .scf__c { border-left:0; border-top:1px solid var(--color-line); } .scf__stage { padding:36px 12px 18px; } .scf__head, .scf__spec, .scf__colors { padding-left:18px; padding-right:18px; } }
+/* ตารางไซซ์: สลับรุ่นเสื้อแล้วการ์ดสูงเท่าเดิม (ปุ่มไซซ์ Premium 8 · Oversize 3) */
+.screen-page #size .pp2-sz__picks { align-content:start; min-height:var(--sz-picks-h, 0px); }
+/* 18 พ.ย. 2026 เสื้อจริงจากออเดอร์ลูกค้า (pp2Real · ภาพจาก Drive "ตัวอย่างสกรีน"): 10 ตัว = 5×2 ทุกจอใหญ่ · มือถือ 3×3
+   แถบภาพใกล้ 4 ภาพ (.pp2-rd) ใต้กริดหุ่น · กด = lightbox */
+.screen-page .pp2-rl__grid { grid-template-columns:repeat(5, minmax(0, 1fr)); }
+.pp2-rd { margin-top:44px; padding-top:36px; border-top:1px solid var(--color-line); }
+.pp2-rd__head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 24px; }
+.pp2-rd__head h3 { margin:0; font-size:clamp(22px, 2.2vw, 28px); font-weight:900; line-height:1.2; color:var(--color-ink); }
+.pp2-rd__head p { margin:0; font-size:15px; line-height:1.5; color:var(--color-ink-3); }
+.pp2-rd__grid { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:16px; margin:20px 0 0; padding:0; list-style:none; }
+.pp2-rd__c figure { margin:0; cursor:zoom-in; }
+.pp2-rd__c figure:focus-visible { outline:3px solid #FF6C00; outline-offset:3px; border-radius:20px; }
+.pp2-rd__ph { overflow:hidden; border-radius:20px; background:#1d1b19; }
+.pp2-rd__ph img { display:block; width:100%; height:auto; aspect-ratio:1; object-fit:cover; transition:scale .7s cubic-bezier(.2, .7, .2, 1); }
+.pp2-rd__c:hover .pp2-rd__ph img { scale:1.04; }
+.pp2-rd__c figcaption { display:grid; gap:2px; padding:12px 2px 0; }
+.pp2-rd__c figcaption b { font-size:16px; font-weight:800; line-height:1.3; color:var(--color-ink); }
+.pp2-rd__c figcaption span { font-size:14px; line-height:1.4; color:var(--color-ink-3); }
+@media(max-width:767px){
+  .screen-page .pp2-rl__grid { grid-template-columns:repeat(3, minmax(0, 1fr)); }
+  .screen-page .pp2-rl__c:nth-child(n+10) { display:none; } /* มือถือ 9 ตัว = 3×3 เต็มแถว */
+  .pp2-rd { margin-top:32px; padding-top:28px; } .pp2-rd__head { display:grid; text-align:center; justify-content:center; }
+  .pp2-rd__grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; } .pp2-rd__ph { border-radius:16px; }
+  .pp2-rd__c figcaption b { font-size:14.5px; } .pp2-rd__c figcaption span { font-size:13px; }
+}
+@media(prefers-reduced-motion:reduce){ .pp2-rd__ph img { transition:none; } .pp2-rd__c:hover .pp2-rd__ph img { scale:none; } }
+/* แผงปุ่มท้ายส่วน 2 ทาง (screenWays.hbs · 18 พ.ย. อาร์ต "ทำมาดีๆหน่อย"): ซ้าย = หัวข้อ + สิ่งที่ต้องเตรียม · ขวา = 3 ปุ่มทรงเดียวกัน สูงเท่ากัน */
+.scw__cta { margin-top:36px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,440px); gap:24px 56px; align-items:center; padding:40px 44px; border-radius:28px; background:#17130f; color:#fff; box-shadow:0 30px 60px -36px rgb(23 19 15 / .7); }
+.scw__cta h3 { margin:0; font-size:clamp(26px,2.6vw,36px); font-weight:900; line-height:1.2; letter-spacing:-.01em; color:#fff; text-wrap:balance; }
+.scw__cta-copy > p { margin:10px 0 0; font-size:16px; line-height:1.5; color:#d9d2ca; }
+.scw__cta ul { display:grid; gap:12px; margin:22px 0 0; padding:0; list-style:none; font-size:16.5px; font-weight:600; line-height:1.4; color:#fff; }
+.scw__cta li { display:flex; align-items:center; gap:12px; }
+.scw__cta li svg { flex:none; width:26px; height:26px; padding:4px; border-radius:50%; background:#FF6C00; color:#17130f; }
+.scw__cta-act { display:grid; gap:12px; }
+.scw__b.cb { width:100%; min-height:68px; justify-content:flex-start; gap:14px; padding:8px 24px 8px 14px; font-size:17px; }
+.scw__b .cb__arw { margin-left:auto; }
+.scw__b.cb--s { border-width:1.5px; border-color:rgb(255 255 255 / .28); color:#fff; }
+.scw__b.cb--s .cb__sub { color:#cfc7be; font-weight:500; }
+.scw__ico.cb__ico { width:36px; height:36px; padding:7px; border-radius:50%; background:rgb(255 255 255 / .12); color:#fff; }
+@media (hover:hover) { .scw__b.cb--s:hover { border-color:#fff; background:rgb(255 255 255 / .08); } }
+.scw__b.cb:focus-visible { outline-color:#FF8A33; }
+@media(max-width:900px){ .scw__cta { grid-template-columns:1fr; padding:28px 22px; } }
+@media(max-width:767px){ .scw__cta { border-radius:20px; } .scw__cta h3 { font-size:26px; } .scw__cta ul { margin-top:16px; font-size:15.5px; } .scw__b.cb { min-height:64px; font-size:16.5px; } .scw__b .cb__t { white-space:normal; } }
+/* แถวคลิปเบื้องหลัง (pp2Proof loops · loopsReel): 7 คลิปแนวตั้งแถวเดียว เห็นครบไม่ต้องเลื่อน · มือถือปัดแถวเดียว ไม่มีปุ่ม */
+.pp2-pf__lp--reel { grid-template-columns:repeat(7, minmax(0, 1fr)); gap:12px; }
+.pp2-pf__lp--reel li { aspect-ratio:9 / 16; border-radius:16px; }
+.pp2-pf__lp--reel .pp2-pf__lpt { left:8px; right:8px; bottom:8px; padding:5px 10px; font-size:13px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+@media(max-width:1023px){
+  .pp2-pf__lp--reel { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:calc((100% - 24px) / 2.6); overflow-x:auto; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none; margin-inline:calc(var(--gutter, 20px) * -1); padding-inline:var(--gutter, 20px); scroll-padding-inline:var(--gutter, 20px); }
+  .pp2-pf__lp--reel::-webkit-scrollbar { display:none; }
+  .pp2-pf__lp--reel li { scroll-snap-align:start; }
 }

@@ -23,7 +23,17 @@ function screenPage(S, calcUrl) {
   const ex = (t, o) => { const q = screenQuote(S, o); return { t, unit: fmtN(q.unit), total: fmtN(q.total), lines: q.lines.map((l) => `${l.label.replace(/^เสื้อ [^+]+\+ /, 'เสื้อ + ')} · ${fmtN(l.per)} บาท`) } }
   return {
     S,
+    /* 18 พ.ย. 2026 การ์ดขนาดลาย (อาร์ต "ทำมาดีๆ ครีเอทได้เต็มที่"): ภาพเสื้อจริงทั้งตัวพร้อมลายตามขนาด · ราคาจุดแรกต่ำสุดของขนาดนั้น (เสื้อของเรา) */
+    sizeCards: S.sizes.map((z) => ({ ...z, img: `/img/screen-size/${z.id.toLowerCase()}`, from: fmtN(Math.min(...S.own.first[z.id])) })),
     calcHref: `${calcUrl}?kind=screen`,
+    /* 18 พ.ย. 2026 ปุ่ม LINE ของส่วนเสื้อ 2 ทรง / 2 ทางสั่ง / ปิดท้ายราคา (อาร์ต "ทำ cta ดีๆ" · "ให้ลูกค้ามาสอบถามเราแทน") */
+    lines: {
+      own: lineMessageUrl(`สนใจสกรีนเสื้อ (เสื้อทีมดี)\nรุ่นเสื้อ / สี: \nลายที่จะสกรีน / ตำแหน่ง: \nจำนวนประมาณ:  ตัว\nต้องใช้วันที่: `),
+      customer: lineMessageUrl(`สนใจส่งเสื้อของตัวเองมาสกรีน\n(แนบรูปป้ายเสื้อ + รูปตัวเสื้อ)\nลายที่จะสกรีน / ตำแหน่ง: \nจำนวน:  ตัว`),
+      quote: lineMessageUrl(`ขอราคาสกรีนเสื้อ\n(แนบไฟล์ลาย)\nรุ่นเสื้อ / สี: \nจำนวนประมาณ:  ตัว\nต้องใช้วันที่: `),
+    },
+    /* 18 พ.ย. 2026 ส่วน "2 ทางสั่งสกรีน" (อาร์ตให้รวมราคา + เสื้อของคุณเป็นการ์ดคู่): ช่วงราคาจุดแรกจากตาราง */
+    ways: (() => { const r = (m) => { const v = Object.values(m).flat(); return `${fmtN(Math.min(...v))}–${fmtN(Math.max(...v))}` }; return { own: r(S.own.first), customer: r(S.customer.first), extra: r(S.extra.price) } })(),
     own: tbl('screen-price-own', 'เสื้อ Premium C32 + สกรีน 1 จุด · บาท/ตัว รวม VAT', S.own.bands, S.own.first),
     extra: tbl('screen-price-extra', 'จุดที่ 2–3 · บาท/จุด/ตัว รวม VAT', S.extra.bands, S.extra.price),
     customer: tbl('screen-price-customer', 'สกรีนบนเสื้อของคุณ 1 จุด · บาท/ตัว รวม VAT', S.customer.bands, S.customer.first),
@@ -32,7 +42,7 @@ function screenPage(S, calcUrl) {
       ex('120 ตัว · หลัง A3 + อก A7 + แขน A7', { qty: 120, spots: ['A3', 'A7', 'A7'] }),
     ],
     lead: S.lead.map(([a, b, d]) => ({ q: `${fmtN(a)}–${fmtN(b)} ตัว`, d })),
-    shirts: S.shirts.map((sh) => ({ ...sh, colors: sh.colors.map(([name, hex, note]) => ({ name, hex, note })), sizes: sh.sizes.map(([size, chest, length]) => ({ size, chest, length, big: !!sh.bigAdd && sh.sizes.findIndex((x) => x[0] === sh.bigFrom) <= sh.sizes.findIndex((x) => x[0] === size) })) })),
+    shirts: S.shirts.map((sh) => ({ ...sh, ask: `สนใจเสื้อสกรีน ${sh.name}`, line: lineMessageUrl(`สนใจเสื้อสกรีน ${sh.name}\nสี: ${sh.colors[0][0]}\nลายที่จะสกรีน / ตำแหน่ง: \nจำนวนประมาณ:  ตัว`), colors: sh.colors.map(([name, hex, note]) => ({ name, hex, note })), sizes: sh.sizes.map(([size, chest, length]) => ({ size, chest, length, big: !!sh.bigAdd && sh.sizes.findIndex((x) => x[0] === sh.bigFrom) <= sh.sizes.findIndex((x) => x[0] === size) })) })),
   }
 }
 
@@ -162,7 +172,10 @@ export function productsPage({ data, base, at, page, kind, id, rel, sizeCharts, 
                       }
                     })() }
                 })() : null } : null
-              const vSizes = v.sizes && v.sizes.from === 'polo.json' ? { ...v.sizes, adult: P.sizes.men, kids: P.sizes.women, tol: P.sizes.tol, measure: P.sizes.measure, noteA: P.sizes.menNote, noteB: P.sizes.womenNote } : v.sizes
+              const vSizes0 = v.sizes && v.sizes.from === 'polo.json' ? { ...v.sizes, adult: P.sizes.men, kids: P.sizes.women, tol: P.sizes.tol, measure: P.sizes.measure, noteA: P.sizes.menNote, noteB: P.sizes.womenNote } : v.sizes
+              /* 18 พ.ย. 2026 หน้าสกรีน: ตารางไซซ์โฉมใหม่ (pp2Sizes v2) อ่านจาก prices.json products.screen.shirts ที่เดียว · กลุ่ม 1 = Premium C32 · กลุ่ม 2 = Oversize C20 */
+              const scSh = json('prices.json').products.screen.shirts
+              const vSizes = v.sizes && v.sizes.from === 'prices.screen' ? { ...v.sizes, adult: scSh[0].sizes, kids: scSh[1].sizes, noteA: `${scSh[0].bigFrom} ขึ้นไป +${scSh[0].bigAdd} บาท/ตัว · ${scSh[0].sizeNote}`, noteB: scSh[1].sizeNote } : vSizes0
               /* ตารางไซซ์ (6 พ.ย.): ทรงที่ยังไม่มีตาราง → ปุ่ม LINE ขอตารางของทรงนั้น (ข้อความตั้งต้นมีแค่ชื่อทรง) */
               /* 13 พ.ย. ส่วนไซซ์ v2 (หน้าปัก): ภาพเสื้อแยกทรง + ค่าตั้งต้นของแต่ละทรง (M) · padB = ช่องว่างให้ตารางกลุ่มที่สองคอลัมน์ตรงกับกลุ่มแรก */
               const szDef = (rows) => rows.find((r) => r[0] === 'M') || rows[0]

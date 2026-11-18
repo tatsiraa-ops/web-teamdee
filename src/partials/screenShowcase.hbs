@@ -1,35 +1,55 @@
 {{!-- เสื้อสกรีน DTF: options + fabric + detail ตาม v22 · งานจริงแยกไป screenWork.hbs (2 พ.ย.)
      18 พ.ย. 2026 ข้อมูลเสื้อ สี ขนาดลาย จาก prices.json → products.screen ผ่าน screenPage (src/build/pages/products.js) · สไลด์ "ขายงานสกรีน DTF" 17 พ.ย. 2026 --}}
-<section class="wrap section screen-choice" id="options">
-  <header class="screen-heading"><span class="eyebrow">ตัวเสื้อ</span><h2 class="t-display">{{pp.options.h}}</h2><p class="t-lead">เริ่มจากทรงที่ทีมอยากใส่ แล้วค่อยเติมลายที่เป็นคุณ</p></header>
-  {{> ppOptCards}}
-  <div class="screen-material" id="fabric">
-    <figure class="screen-material__photo"><img src="/img/screen/studio-317.webp" width="1200" height="800" alt="ตัวอย่างเสื้อคอตตอนพับซ้อน ให้เห็นสีและผิวผ้า" loading="lazy"><figcaption>สีบนจอเป็นสีประมาณ ขอดูผ้าจริงได้ก่อนตัดสินใจ</figcaption></figure>
-    <div><h2 class="screen-subtitle">{{pp.fabric.h}}</h2>
-      {{#each screenPage.shirts}}
-      <article class="screen-fit"><h3>{{this.name}}</h3><p>Cotton 100% · {{this.fit}} · คอกลม แขนสั้น{{#if this.add}} · <b>+{{this.add}} บาท/ตัว</b>{{/if}}</p>
-        <ul class="screen-colors" aria-label="สี {{this.name}}">{{#each this.colors}}<li><i style="--swatch:{{this.hex}}" aria-hidden="true"></i>{{this.name}}{{#if this.note}} <small>{{this.note}}</small>{{/if}}</li>{{/each}}</ul></article>
-      {{/each}}
-      <a class="pp-more" href="{{ppNextLine.fabric}}" data-track="line">ขอดูตัวอย่างผ้า <span aria-hidden="true">→</span></a> <a class="pp-more" href="{{url 'guides.fabric'}}">วิธีเลือกผ้า <span aria-hidden="true">→</span></a>
-    </div>
+{{!-- 18 พ.ย. 2026 อาร์ต "ทำเสื้อแยกเป็นสองทรง เอาให้เห็นไปเลย": การ์ดคู่ Premium C32 (ทรงปกติ) · Oversize C20 (ไหล่ตก)
+     ภาพเสื้อ TEAMDEE ที่เจนไว้ (ชุดเดียวกับตารางไซซ์) · ไอคอน 3D ชุด CI เดิม · ข้อมูลจาก prices.json products.screen.shirts · id="fabric" คงไว้ให้ลิงก์เดิม --}}
+<section class="scf" id="options" aria-labelledby="scf-h"><div class="wrap section">
+  <header class="screen-heading"><h2 class="t-display" id="scf-h">{{{hl "เลือกเสื้อสกรีนได้ 2 ทรง" "2 ทรง"}}}</h2><p class="t-lead">Cotton 100% ทั้งสองทรง · กดจุดสีเพื่อดูเสื้อแต่ละสี</p></header>
+  {{!-- 18 พ.ย. 2026 รอบ 3 (อาร์ต "ยังดู slop · cta เยอะไป · ข้อมูลเท่าๆกัน"): แผงเทียบ 2 ทรงแผ่นเดียว เสื้อยืนคู่กันบนฉากเดียว
+       แถวสเปกตรงกันทั้งสองฝั่ง (subgrid) · ไม่มีชิป ไม่มีปุ่มในการ์ด · กดจุดสี = ย้อมเสื้อ (mask + multiply) + โลโก้ TEAMDEE จริงทับอก (screen-size.js initShirtColors) --}}
+  <div class="scf__duo" id="fabric">{{#each screenPage.shirts}}
+    <article class="scf__c scf__c--{{this.id}}" data-scf aria-labelledby="scf-{{this.id}}" style="--c:{{this.colors.[0].hex}}">
+      <div class="scf__stage">
+        <p class="scf__idx" aria-hidden="true">0{{inc @index}}</p>
+        <div class="scf__shirt">
+          <span class="scf__tint" style="-webkit-mask-image:url(/img/screen-size/plain-{{#if (eq this.id 'premium')}}regular{{else}}oversize{{/if}}-690.webp);mask-image:url(/img/screen-size/plain-{{#if (eq this.id 'premium')}}regular{{else}}oversize{{/if}}-690.webp)" aria-hidden="true"></span>
+          <img src="/img/screen-size/plain-{{#if (eq this.id 'premium')}}regular{{else}}oversize{{/if}}-690.webp" width="690" height="802" alt="เสื้อยืด {{this.name}} {{this.fit}} ด้านหน้า สกรีนโลโก้ที่อก" loading="lazy" decoding="async">
+          <span class="scf__logo scf__logo--{{this.id}}" aria-hidden="true">{{> logoStacked class="scf__svg"}}</span>
+        </div>
+      </div>
+      <header class="scf__head"><p class="scf__kick">{{#if (eq this.id 'premium')}}ทรงปกติ · ใส่ได้ทุกงาน{{else}}ไหล่ตก ทรงหลวม · ลุคสตรีท{{/if}}</p><h3 id="scf-{{this.id}}">{{this.name}}</h3></header>
+      <dl class="scf__spec">
+        <div><dt>ผ้า</dt><dd>Cotton 100% {{#if (eq this.id 'premium')}}C32{{else}}C20{{/if}} Comb</dd></div>
+        <div><dt>ทรง</dt><dd>{{this.fit}}</dd></div>
+        <div><dt>ไซซ์</dt><dd>{{#each this.sizes}}{{#if @first}}{{this.size}}{{/if}}{{#if @last}}–{{this.size}}{{/if}}{{/each}} <span>อก {{#each this.sizes}}{{#if @first}}{{this.chest}}{{/if}}{{#if @last}}–{{this.chest}}{{/if}}{{/each}} นิ้ว</span></dd></div>
+        <div><dt>ราคา</dt><dd>{{#if this.add}}+{{this.add}} บาท/ตัว จาก Premium{{else}}ราคาเริ่มต้น{{/if}}</dd></div>
+      </dl>
+      <div class="scf__colors" role="group" aria-label="เลือกสี {{this.name}}">
+        <p class="scf__cname"><span>สี</span> <b data-scf-name>{{this.colors.[0].name}}</b> <small>{{this.colors.length}} สี</small></p>
+        <div class="scf__sw">{{#each this.colors}}<button type="button" class="scf__dot" data-scf-color="{{this.hex}}" data-scf-label="{{this.name}}{{#if this.note}} ({{this.note}}){{/if}}" aria-pressed="{{#if @first}}true{{else}}false{{/if}}" aria-label="สี{{this.name}}{{#if this.note}} {{this.note}}{{/if}}" style="--sw:{{this.hex}}"></button>{{/each}}</div>
+      </div>
+    </article>{{/each}}
   </div>
-</section>
+  <p class="scf__more"><a class="pp-more" href="{{ppNextLine.fabric}}" data-track="line">ขอดูตัวอย่างผ้าจริง <span aria-hidden="true">→</span></a> <a class="pp-more" href="#size">ดูตารางไซซ์ <span aria-hidden="true">→</span></a></p>
+</div></section>
 <section class="screen-print" id="detail"><div class="wrap section">
-  <header class="screen-heading"><span class="eyebrow">ลายของทีม</span><h2 class="t-display">{{pp.detail.h}}</h2><p class="t-lead">ขนาดลาย 5 ขนาด เทียบกรอบบนเสื้อไซซ์ L · ลายเกินกรอบใช้ราคาขนาดถัดไป</p></header>
-  <div class="screen-sizes">
-    {{!-- เส้นเสื้อ + กรอบลาย วาดด้วย SVG (ไม่ใช้ภาพจำลองจากสไลด์) · สัดส่วนกรอบตามซม. บนเสื้อไซซ์ L --}}
-    <svg class="screen-sizes__art" viewBox="0 0 300 320" role="img" aria-label="กรอบขนาดลาย A7 ถึง A3 บนเสื้อ">
-      <path d="M96 22 52 40 14 96l40 24 18-24v204h156V96l18 24 40-24-38-56-44-18c-8 20-30 32-54 32S104 42 96 22Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-      <rect x="90" y="70" width="120" height="160" rx="3" fill="none" stroke="var(--color-orange)" stroke-width="1.6" stroke-dasharray="5 4"/><text x="200" y="224" text-anchor="end">A3</text>
-      <rect x="110" y="78" width="80" height="120" rx="3" fill="none" stroke="var(--color-orange)" stroke-width="1.6" stroke-dasharray="5 4"/><text x="184" y="192" text-anchor="end">A4</text>
-      <rect x="120" y="86" width="60" height="80" rx="3" fill="none" stroke="var(--color-orange)" stroke-width="1.6" stroke-dasharray="5 4"/><text x="174" y="160" text-anchor="end">A5</text>
-      <rect x="130" y="94" width="40" height="60" rx="3" fill="none" stroke="var(--color-orange)" stroke-width="1.6" stroke-dasharray="5 4"/><text x="166" y="148" text-anchor="end">A6</text>
-      <rect x="182" y="70" width="20" height="28" rx="2" fill="var(--color-orange)" fill-opacity=".14" stroke="var(--color-orange)" stroke-width="1.6"/><text x="192" y="64" text-anchor="middle">A7</text>
-    </svg>
-    <div>
-      <ul class="screen-sizes__list">{{#each screenPage.S.sizes}}<li><b>{{this.id}}</b> <span>{{this.cm}} ซม.</span> <small>{{this.use}}</small></li>{{/each}}</ul>
-      <div class="screen-included"><b>รวมสกรีน 1 จุดในราคาเสื้อ</b><span>ลายที่ใหญ่ที่สุดคิดเป็นจุดแรก · จุดที่ 2–3 คิดตามขนาด สูงสุด 3 จุดต่อตัว</span></div>
-      <a class="pp-more" href="{{url 'guides.screen'}}">ดูคู่มือสั่งเสื้อสกรีน <span aria-hidden="true">→</span></a>
+  <header class="screen-heading"><h2 class="t-display">{{{hl pp.detail.h "สกรีน DTF"}}}</h2><p class="t-lead">ขนาดลาย 5 ขนาด เทียบกรอบบนเสื้อไซซ์ L · ลายเกินกรอบใช้ราคาขนาดถัดไป</p></header>
+  {{!-- 18 พ.ย. 2026 อาร์ต "เสื้อสีขาวโทนเดียว ทำกรอบ เอาโลโก้ไปใส่": เวทีเสื้อขาว (ภาพเดียว) + กรอบประตามสัดส่วน ซม. บนเสื้อไซซ์ L + โลโก้ TEAMDEE จริง (SVG)
+       ปุ่ม 5 ขนาดเห็นข้อมูลครบ (ซม. · ตำแหน่ง · ราคาจุดแรกเริ่ม) · กดแล้วกรอบย้าย/ย่อขยาย (src/js/screen-size.js) · ไม่มี JS = เห็น A4 --}}
+  <div class="szx" data-szx>
+    <figure class="szx__stage" data-szx-stage data-size="A4">
+      <img src="/img/screen-size/shirt-white-1200.webp" srcset="/img/screen-size/shirt-white-600.webp 600w, /img/screen-size/shirt-white-1200.webp 1200w" sizes="(min-width:1024px) 460px, 86vw" width="1200" height="1500" alt="เสื้อยืดคอกลมสีขาววางราบ ไซซ์ L ใช้เทียบขนาดลายสกรีน" loading="lazy" decoding="async">
+      <div class="szx__frame" aria-hidden="true">{{> logoStacked class="szx__logo"}}<span class="szx__w" data-szx-w>20 ซม.</span><span class="szx__h" data-szx-h>30 ซม.</span></div>
+      <figcaption class="sr-only" data-szx-say aria-live="polite">ขนาด A4 20 × 30 ซม. บนเสื้อไซซ์ L</figcaption>
+    </figure>
+    <div class="szx__side">
+      <p class="szx__hint">กดเลือกขนาด ดูกรอบลายบนเสื้อจริงไซซ์ L</p>
+      <ul class="szx__picks">{{#each screenPage.sizeCards}}
+        <li><button type="button" class="szx__pick" data-szx-pick="{{this.id}}" data-szx-cm="{{this.cm}}" aria-pressed="{{#if (eq this.id 'A4')}}true{{else}}false{{/if}}"><b>{{this.id}}</b><span class="szx__cm">{{this.cm}} ซม.</span><span class="szx__use">{{this.use}}</span><em>จุดแรกเริ่ม {{this.from}} บาท/ตัว</em></button></li>{{/each}}
+      </ul>
+  <div class="screen-sz__foot">
+    <div class="screen-included"><b>รวมสกรีน 1 จุดในราคาเสื้อ</b><span>ลายที่ใหญ่ที่สุดคิดเป็นจุดแรก · จุดที่ 2–3 คิดตามขนาด สูงสุด 3 จุดต่อตัว</span></div>
+    <a class="pp-more" href="{{url 'guides.screen'}}">ดูคู่มือสั่งเสื้อสกรีน <span aria-hidden="true">→</span></a>
+  </div>
     </div>
   </div>
 </div></section>

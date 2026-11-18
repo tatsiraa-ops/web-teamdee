@@ -1,7 +1,7 @@
 {{!-- ไซซ์เสื้อสกรีน 2 รุ่น (18 พ.ย. 2026 · prices.json products.screen.shirts) · หน่วยนิ้ว วัดเสื้อวางราบ · id="size" ตามสารบัญ --}}
 <section id="size">
   <div class="wrap section">
-    <header class="screen-heading"><span class="eyebrow">ไซซ์</span><h2 class="t-display">{{pp.size.h}}</h2><p class="t-lead">หน่วยเป็นนิ้ว · รอบอก = กว้างอกวางราบ × 2 · เทียบกับเสื้อตัวที่ใส่พอดี</p></header>
+    <header class="screen-heading"><h2 class="t-display">{{{hl pp.size.h "ไซซ์เสื้อสกรีน"}}}</h2><p class="t-lead">หน่วยเป็นนิ้ว · รอบอก = กว้างอกวางราบ × 2 · เทียบกับเสื้อตัวที่ใส่พอดี</p></header>
     <div class="screen-size">{{#each screenPage.shirts}}
       <div class="ptable screen-table" tabindex="0" role="region" aria-label="ไซซ์ {{this.name}} เลื่อนซ้ายขวาได้">
         <table><caption>{{this.name}} · {{this.fit}}</caption>

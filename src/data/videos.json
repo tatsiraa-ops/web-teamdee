@@ -141,7 +141,9 @@
       "date": "2026-06-24",
       "title": "ทำไมทีมต่างๆ เลือกสั่งเสื้อทีมกับทีมดี",
       "summary": "คลิปสั้นเล่าว่าทีมดีดูแลงานเสื้อทีมอย่างไร ตั้งแต่ออกแบบจนผลิตเสร็จ",
-      "places": ["unlisted"],
+      "places": [
+        "unlisted"
+      ],
       "file": null,
       "poster": null,
       "duration": null,
@@ -195,6 +197,146 @@
       "places": [
         "about"
       ]
+    },
+    {
+      "id": "scr-clip-design",
+      "kind": "process",
+      "product": "screen",
+      "title": "จัดไฟล์ลายก่อนพิมพ์ฟิล์ม",
+      "summary": "ทีมดีจัดวางโลโก้ลูกค้าหลายขนาดในไฟล์ ก่อนสั่งพิมพ์ลงฟิล์ม DTF",
+      "date": "2026-11-18",
+      "file": "/img/screen-clip/scr-clip-design.mp4",
+      "poster": "/img/screen-clip/scr-clip-design.webp",
+      "duration": 10,
+      "captions": null,
+      "quotes": [],
+      "consent": true,
+      "music": "ok",
+      "links": {},
+      "places": [
+        "products.screen"
+      ],
+      "source": "คลิปดิบจาก Drive ตัวอย่างสกรีน (อาร์ตอนุญาตใช้ 13 พ.ย. + สั่งใช้ 18 พ.ย. 2026) · ตัดเสียงออก"
+    },
+    {
+      "id": "scr-clip-film",
+      "kind": "process",
+      "product": "screen",
+      "title": "ฟิล์มพิมพ์ลายออกจากเครื่อง",
+      "summary": "ฟิล์ม DTF ที่พิมพ์ลายของลูกค้าหลายออเดอร์ เดินออกจากเครื่องทีละแผ่น",
+      "date": "2026-11-18",
+      "file": "/img/screen-clip/scr-clip-film.mp4",
+      "poster": "/img/screen-clip/scr-clip-film.webp",
+      "duration": 14,
+      "captions": null,
+      "quotes": [],
+      "consent": true,
+      "music": "ok",
+      "links": {},
+      "places": [
+        "products.screen"
+      ],
+      "source": "คลิปดิบจาก Drive ตัวอย่างสกรีน (อาร์ตอนุญาตใช้ 13 พ.ย. + สั่งใช้ 18 พ.ย. 2026) · ตัดเสียงออก"
+    },
+    {
+      "id": "scr-clip-cut",
+      "kind": "process",
+      "product": "screen",
+      "title": "ตัดฟิล์มแยกทีละลาย",
+      "summary": "ตัดฟิล์มที่พิมพ์แล้วแยกเป็นลายต่อลาย ก่อนนำไปวางบนเสื้อ",
+      "date": "2026-11-18",
+      "file": "/img/screen-clip/scr-clip-cut.mp4",
+      "poster": "/img/screen-clip/scr-clip-cut.webp",
+      "duration": 14,
+      "captions": null,
+      "quotes": [],
+      "consent": true,
+      "music": "ok",
+      "links": {},
+      "places": [
+        "products.screen"
+      ],
+      "source": "คลิปดิบจาก Drive ตัวอย่างสกรีน (อาร์ตอนุญาตใช้ 13 พ.ย. + สั่งใช้ 18 พ.ย. 2026) · ตัดเสียงออก"
+    },
+    {
+      "id": "scr-clip-place",
+      "kind": "process",
+      "product": "screen",
+      "title": "วางฟิล์มตามเส้นเลเซอร์",
+      "summary": "วางฟิล์มลายบนเสื้อโปโลสีขาว ให้ตรงตำแหน่งตามเส้นเลเซอร์ที่ตั้งไว้",
+      "date": "2026-11-18",
+      "file": "/img/screen-clip/scr-clip-place.mp4",
+      "poster": "/img/screen-clip/scr-clip-place.webp",
+      "duration": 14,
+      "captions": null,
+      "quotes": [],
+      "consent": true,
+      "music": "ok",
+      "links": {},
+      "places": [
+        "products.screen"
+      ],
+      "source": "คลิปดิบจาก Drive ตัวอย่างสกรีน (อาร์ตอนุญาตใช้ 13 พ.ย. + สั่งใช้ 18 พ.ย. 2026) · ตัดเสียงออก"
+    },
+    {
+      "id": "scr-clip-press",
+      "kind": "process",
+      "product": "screen",
+      "title": "รีดร้อนลงเสื้อ",
+      "summary": "วางฟิล์มโลโก้ใหญ่บนโปโลสีกรม แล้วกดเครื่องรีดร้อนลงบนเสื้อ",
+      "date": "2026-11-18",
+      "file": "/img/screen-clip/scr-clip-press.mp4",
+      "poster": "/img/screen-clip/scr-clip-press.webp",
+      "duration": 12.6,
+      "captions": null,
+      "quotes": [],
+      "consent": true,
+      "music": "ok",
+      "links": {},
+      "places": [
+        "products.screen"
+      ],
+      "source": "คลิปดิบจาก Drive ตัวอย่างสกรีน (อาร์ตอนุญาตใช้ 13 พ.ย. + สั่งใช้ 18 พ.ย. 2026) · ตัดเสียงออก"
+    },
+    {
+      "id": "scr-clip-peel",
+      "kind": "process",
+      "product": "screen",
+      "title": "ลอกฟิล์มออก เห็นลายบนเสื้อ",
+      "summary": "ลอกฟิล์มใสออกหลังรีด เหลือโลโก้สีเต็มติดบนโปโลสีกรม",
+      "date": "2026-11-18",
+      "file": "/img/screen-clip/scr-clip-peel.mp4",
+      "poster": "/img/screen-clip/scr-clip-peel.webp",
+      "duration": 12,
+      "captions": null,
+      "quotes": [],
+      "consent": true,
+      "music": "ok",
+      "links": {},
+      "places": [
+        "products.screen"
+      ],
+      "source": "คลิปดิบจาก Drive ตัวอย่างสกรีน (อาร์ตอนุญาตใช้ 13 พ.ย. + สั่งใช้ 18 พ.ย. 2026) · ตัดเสียงออก"
+    },
+    {
+      "id": "scr-clip-done",
+      "kind": "process",
+      "product": "screen",
+      "title": "เสื้อสกรีนเสร็จทั้งออเดอร์",
+      "summary": "โปโลสีดำสกรีนลายการ์ตูนหลายสี เรียงกันทั้งออเดอร์",
+      "date": "2026-11-18",
+      "file": "/img/screen-clip/scr-clip-done.mp4",
+      "poster": "/img/screen-clip/scr-clip-done.webp",
+      "duration": 12,
+      "captions": null,
+      "quotes": [],
+      "consent": true,
+      "music": "ok",
+      "links": {},
+      "places": [
+        "products.screen"
+      ],
+      "source": "คลิปดิบจาก Drive ตัวอย่างสกรีน (อาร์ตอนุญาตใช้ 13 พ.ย. + สั่งใช้ 18 พ.ย. 2026) · ตัดเสียงออก"
     }
   ]
 }

@@ -19,6 +19,9 @@
 {{#if pp2.proof}}{{> pp2Proof}}{{/if}}
 {{#if pp2.reviews}}{{> pp2Reviews}}{{/if}}
 {{#if pp2.custom}}{{> pp2Custom}}{{/if}}
+{{!-- 18 พ.ย. 2026 หน้าสกรีนโฉมใหม่ (pp2.screen): เสื้อ + ขนาดลาย · ราคา · สกรีนบนเสื้อของคุณ ต่อจากรีวิว (ตำแหน่งเดียวกับส่วนผ้าของพิมพ์ลาย) --}}
+{{#if pp2.screen}}{{> screenShowcase}}
+{{> screenWays}}{{/if}}
 {{!-- 11 พ.ย. หน้างานปัก: ผ้า+สี+ราคาแผงเดียว (pp2PoloFabric) และแบบมาตรฐาน+ตัวเลือก (pp2PoloSpec) แทนส่วนผ้า/ทรงของพิมพ์ลาย --}}
 {{#if pp2.poloFabric}}{{> pp2PoloFabric}}{{else}}{{#if pp2.fabric}}{{> pp2Fabric}}{{/if}}{{/if}}
 {{#if pp2.poloSpec}}{{> pp2PoloSpec}}{{else}}{{#if pp2.types}}{{> pp2Types}}{{/if}}{{/if}}

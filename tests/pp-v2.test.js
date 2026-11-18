@@ -38,7 +38,8 @@ test('/sublimation/ จุดเด่นเสื้อพิมพ์ลาย
 })
 
 test('หน้าสินค้าอื่นยังใช้ hero เดิม', () => {
-  for (const r of ['screen-printing']) /* 11 พ.ย. /embroidery/ ย้ายเป็นโฉมใหม่แล้ว (tests/embroidery-v2.test.js) */ { const m = main(r); assert.doesNotMatch(m, /pp2-hero|pp2-hl/, r); assert.match(m, /class="pp-strip/, `${r}: แถบสรุปยังอยู่`); assert.match(m, /data-toc/, `${r}: สารบัญยังอยู่`) }
+  /* 18 พ.ย. 2026 /screen-printing/ ย้ายเป็นโฉมใหม่แล้ว (tests/screen-v2-1118.test.js) · เหลือหน้าแบบเดิม 3 หน้า */
+  for (const r of ['custom-printed-warmup-shirts', 'custom-oversize-jerseys', 'custom-baseball-shirts']) /* 11 พ.ย. /embroidery/ ย้ายเป็นโฉมใหม่แล้ว (tests/embroidery-v2.test.js) */ { const m = main(r); assert.doesNotMatch(m, /pp2-hero|pp2-hl/, r); assert.match(m, /class="pp-strip/, `${r}: แถบสรุปยังอยู่`); assert.match(m, /data-toc/, `${r}: สารบัญยังอยู่`) }
 })
 
 /* อาร์ต 5 พ.ย. บอร์ด "แบบเสื้อ 3D พิมพ์ลาย" (การ์ดภาพแบบ ref: ภาพเต็ม + ชื่อ + ป้ายส้ม + ปุ่มลูกศร · แถวตามหมวด) · แบบจริงจากคลัง designs.json */

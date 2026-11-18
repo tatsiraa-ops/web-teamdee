@@ -18,39 +18,47 @@ test('title / description', () => {
   assert.match(page.description, /เริ่ม 5 ตัว/); assert.match(page.description, /145–245/)
 })
 
-test('ตารางราคา 3 ตาราง = เมทริกซ์ใน prices.json · ไม่ซ่อนในปุ่มกดเปิด', () => {
-  for (const [id, m] of [['screen-price-own', S.own.first], ['screen-price-extra', S.extra.price], ['screen-price-customer', S.customer.first]]) {
-    const t = table(id)
-    assert.ok(t, id)
-    for (const [size, row] of Object.entries(m)) assert.deepEqual(rowNums(t, size), row, `${id} ${size}`)
-  }
-  assert.doesNotMatch(main.slice(main.indexOf('id="price"'), main.indexOf('id="own-shirt"')), /<details/)
-})
-
-test('ตัวอย่างคำนวณจากตัวคิดราคา (18,000 · 28,800) · ปุ่มไปเครื่องคำนวณสกรีน', () => {
-  const t = text(main)
-  assert.match(t, /225 บาท\/ตัว[^]*18,000 บาท/); assert.match(t, /240 บาท\/ตัว[^]*28,800 บาท/)
+/* 18 พ.ย. 2026 อาร์ต "ลบภาพแรก ภาพสอง และภาพสามเอาราคาออก": หน้าสกรีนไม่โชว์ตารางราคา/จุดเพิ่ม/ตัวอย่าง · ราคาอยู่ที่เครื่องคำนวณ */
+test('การ์ด 2 ทางสั่งสกรีน · ไม่มีตารางราคาบนหน้า · ปุ่มไปเครื่องคำนวณสกรีน', () => {
+  const sec = main.slice(main.indexOf('id="price"'), main.indexOf('id="size"'))
+  assert.equal((sec.match(/<article class="scw__c"/g) || []).length, 2)
+  assert.match(text(sec), /เสื้อทีมดี สกรีนลายของคุณ/); assert.match(text(sec), /ส่งเสื้อของคุณมา ทีมดีสกรีนให้/)
+  assert.doesNotMatch(main, /id="screen-price-(own|extra|customer)"/)
+  assert.doesNotMatch(text(sec), /145–245|18–80|บาท\/จุด\/ตัว/)
   assert.match(main, /href="[^"]*\/calculations\/\?kind=screen"/)
 })
 
-test('สกรีนบนเสื้อของคุณ: ขั้นต่ำ 20 · ผ้าที่รับ/ระวัง/ไม่รับ', () => {
+test('สกรีนบนเสื้อของคุณ: ขั้นต่ำ 20 · ปุ่มส่งรูปป้ายเสื้อ', () => {
   const own = text(main.slice(main.indexOf('id="own-shirt"')))
-  assert.match(own, /ขั้นต่ำ 20 ตัว/); assert.match(own, /ผ้ากันน้ำ/); assert.match(own, /ส่งรูปป้ายเสื้อ/)
+  /* 18 พ.ย. 2026 อาร์ต "ไม่ต้องบอกลูกค้าเยอะ ให้ลูกค้ามาสอบถามเรา": ไม่มีรายการผ้า · ปุ่ม LINE ส่งรูปป้ายเสื้อ */
+  assert.match(own, /ขั้นต่ำ 20 ตัว/); assert.match(own, /ส่งรูปป้ายเสื้อ/)
+  assert.match(main.slice(main.indexOf('id="own-shirt"')), /data-where="screen-own-shirt"/)
 })
 
 test('เสื้อ 2 รุ่น: C32 8 สี (ฟ้า สอบถามสต็อก) + ตารางไซซ์ S–5XL (+20 ตั้งแต่ 2XL) · Oversize +30', () => {
-  const sw = main.match(/<ul class="screen-colors" aria-label="สี Premium Cotton C32 Comb">[\s\S]*?<\/ul>/)[0]
-  assert.equal((sw.match(/<li/g) || []).length, 8); assert.match(text(sw), /ฟ้า สอบถามสต็อก/)
+  /* 18 พ.ย. 2026 การ์ดเสื้อ 2 ทรง: จุดสี = ปุ่มกดลองสี (aria-pressed) */
+  const sw = main.match(/<div class="scf__colors" role="group" aria-label="เลือกสี Premium Cotton C32 Comb">[\s\S]*?<\/div>\s*<\/div>/)[0]
+  assert.equal((sw.match(/<button type="button" class="scf__dot"/g) || []).length, 8); assert.match(sw, /aria-label="สีฟ้า สอบถามสต็อก"/)
   const sizeHtml = main.slice(main.indexOf('id="size"'))
   const size = text(sizeHtml)
-  for (const [s, c, l] of S.shirts[0].sizes) assert.match(sizeHtml, new RegExp(`<th scope="row">${s}</th><td>${c}</td><td>${l}</td>`))
+  /* 18 พ.ย. 2026 ตารางไซซ์โฉมใหม่ (pp2Sizes · เหมือนหน้าปัก): แถวรอบอก/ความยาว ช่องละไซซ์ · Premium = ตาราง sz-adult · Oversize = sz-kids */
+  for (const [id, sh] of [['sz-adult', S.shirts[0]], ['sz-kids', S.shirts[1]]]) {
+    const t = (sizeHtml.match(new RegExp(`<table class="pp2-sz__t[^"]*" id="${id}">[\\s\\S]*?</table>`)) || [''])[0]
+    for (const [s, c, l] of sh.sizes) { assert.match(t, new RegExp(`data-c="${s}" data-in="${c}"`), `${id} ${s} อก`); assert.match(t, new RegExp(`data-c="${s}" data-in="${l}"`), `${id} ${s} ยาว`) }
+  }
   assert.match(size, /2XL ขึ้นไป \+20 บาท\/ตัว/); assert.match(size, /\+30 บาท\/ตัว/)
 })
 
-test('ขนาดลาย 5 ขนาด (วาดเป็นเส้น ไม่ใช้ภาพจำลองจากสไลด์)', () => {
+/* 18 พ.ย. 2026 อาร์ต "เสื้อสีขาวโทนเดียว ทำกรอบ เอาโลโก้ไปใส่": เวทีเสื้อขาว + กรอบตามสัดส่วน + โลโก้ TEAMDEE จริง (SVG) · ปุ่ม 5 ขนาดเห็นข้อมูลครบ */
+test('ขนาดลาย 5 ขนาด: ปุ่มบอก ซม. · ตำแหน่ง · ราคาจุดแรกเริ่ม · เวทีเสื้อขาว + โลโก้จริง', () => {
   const d = main.slice(main.indexOf('id="detail"'), main.indexOf('id="price"'))
-  for (const z of S.sizes) assert.match(text(d), new RegExp(`${z.id} ${z.cm} ซม\\.`))
-  assert.match(d, /<svg[^>]*class="screen-sizes__art"/)
+  const btns = [...d.matchAll(/<button type="button" class="szx__pick"([\s\S]*?)<\/button>/g)].map((m) => m[1])
+  assert.equal(btns.length, S.sizes.length)
+  S.sizes.forEach((z, i) => assert.match(text(btns[i]), new RegExp(`${z.id}.*${z.cm} ซม\\..*${z.use.replace(/[·]/g, '.')}.*จุดแรกเริ่ม ${Math.min(...S.own.first[z.id])} บาท/ตัว`)))
+  assert.equal((d.match(/aria-pressed="true"/g) || []).length, 1)
+  assert.match(d, /data-szx-stage data-size="A4"/)
+  assert.match(d, /shirt-white-1200\.webp/)
+  assert.match(d, /<div class="szx__frame"[^>]*><svg class="szx__logo"/)
 })
 
 test('วันผลิต · มัดจำ 300 + 50% · FAQ ตัวเลขใหม่', () => {

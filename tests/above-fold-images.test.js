@@ -23,8 +23,8 @@ test('แกลเลอรีแบบเสื้อ: 4 รูปแรกข�
     if (imgs.length > 5) assert.match(imgs[5], /loading="lazy"/, s)
   }
 })
-test('/calculations/: รูปการ์ดชนิดเสื้อแถวบนโหลดทันที', { skip }, () => {
-  const imgs = [...page('calculations').matchAll(/<span class="kcard__img"><img\b[^>]*>/g)].map((m) => m[0])
+test('/calculations/: ไอคอนการ์ดงานโหลดทันที (รื้อหน้า 18 พ.ย. 2026 · ไอคอนแทนรูป)', { skip }, () => {
+  const imgs = [...page('calculations').matchAll(/<span class="kcard__ico"><img\b[^>]*>/g)].map((m) => m[0])
   assert.ok(imgs.length >= 4)
   imgs.slice(0, 6).forEach((t, i) => assert.match(t, /loading="eager"/, `การ์ด ${i + 1}`))
 })

@@ -1,0 +1,50 @@
+{{!-- 18 พ.ย. 2026 อาร์ต "ลบ ราคาเสื้อสกรีนขึ้นกับอะไร? + สกรีนบนเสื้อของคุณ ทำใหม่เป็นสองอันดีๆ": การ์ดคู่ 2 ทางสั่งสกรีน (แทน screenPrice + screenCustomer)
+     ซ้าย = เสื้อทีมดี + สกรีนลายคุณ · ขวา = เสื้อของคุณ ทีมดีสกรีนให้ (id="own-shirt") · ภาพเจนจากลายจริง + แถบส้มตัวขาว (แบบการ์ดเบื้องหลัง)
+     ตัวเลขจาก prices.json ผ่าน screenPage (src/build/pages/products.js) · id="price" คงไว้ให้ลิงก์เดิม --}}
+<section class="scw" id="price" aria-labelledby="scw-h"><div class="wrap section">
+  <header class="screen-heading"><h2 class="t-display" id="scw-h">{{{hl "สั่งสกรีนกับทีมดีได้ 2 ทาง" "2 ทาง"}}}</h2><p class="t-lead">ราคารวม VAT 7% · คำนวณราคาตามขนาดลายและจำนวนได้ทันทีในเครื่องคำนวณ</p></header>
+  <div class="scw__grid">
+    <article class="scw__c" aria-labelledby="scw-own">
+      <figure class="scw__ph"><img src="/img/screen-size/way-own-1024.webp" srcset="/img/screen-size/way-own-640.webp 640w, /img/screen-size/way-own-1024.webp 1024w, /img/screen-size/way-own-1440.webp 1440w" sizes="(min-width:1024px) 580px, 92vw" width="1440" height="1080" alt="เสื้อยืดคอตตอนพับเรียง 8 สี ด้านหน้ามีเสื้อสีเทาสกรีนลาย Vespa ด้านหลัง" loading="lazy" decoding="async">
+        <span class="scw__no" aria-hidden="true">01</span>
+        <figcaption class="pp2-pf__band"><h3 class="pp2-pf__t" id="scw-own">เสื้อทีมดี สกรีนลายของคุณ</h3><p class="pp2-pf__s">ได้เสื้อพร้อมลาย จบในที่เดียว</p></figcaption></figure>
+      <ul class="scw__facts">
+        <li><b>{{screenPage.S.minQty}} ตัว</b><span>เริ่มสั่ง</span></li>
+        <li><b>8 สี</b><span>Premium C32 · Oversize ขาว / ดำ</span></li>
+        <li><b>{{screenPage.lead.[0].d}}</b><span>ผลิต {{screenPage.lead.[0].q}}</span></li>
+      </ul>
+      <ul class="scw__ticks">
+        <li>Premium Cotton C32 8 สี ไซซ์ S–5XL · Oversize C20 สีขาว / ดำ</li>
+        <li>{{screenPage.S.freeDesignFrom}} ตัวขึ้นไปออกแบบฟรี ส่งฟรี</li>
+      </ul>
+    </article>
+    <article class="scw__c" id="own-shirt" aria-labelledby="scw-cus">
+      <figure class="scw__ph"><img src="/img/screen-size/way-customer-1024.webp" srcset="/img/screen-size/way-customer-640.webp 640w, /img/screen-size/way-customer-1024.webp 1024w, /img/screen-size/way-customer-1440.webp 1440w" sizes="(min-width:1024px) 580px, 92vw" width="1440" height="1080" alt="มือหยิบเสื้อยืดสีดำของลูกค้าออกจากกล่อง ข้างเครื่องรีดร้อนที่วางฟิล์มลายแมวสีชมพูบนเสื้อ" loading="lazy" decoding="async">
+        <span class="scw__no" aria-hidden="true">02</span>
+        <figcaption class="pp2-pf__band"><h3 class="pp2-pf__t" id="scw-cus">ส่งเสื้อของคุณมา ทีมดีสกรีนให้</h3><p class="pp2-pf__s">คิดเฉพาะค่าสกรีน</p></figcaption></figure>
+      <ul class="scw__facts">
+        <li><b>{{screenPage.S.customer.minQty}} ตัว</b><span>เริ่มสั่ง (ขั้นต่ำ {{screenPage.S.customer.minQty}} ตัว)</span></li>
+        <li><b>คืนเงินเต็ม</b><span>เสื้อเสียหายจากการผลิต</span></li>
+        <li><b>ป้ายเสื้อ</b><span>ส่งรูปให้ดูก่อนส่งเสื้อ</span></li>
+      </ul>
+      <ul class="scw__ticks">
+        <li>ไม่แน่ใจว่าผ้าสกรีนได้ไหม ส่งรูปป้ายเสื้อให้ทีมดีดูก่อน</li>
+        <li>ไฟล์พร้อมพิมพ์ · ลูกค้าจ่ายค่าส่งไปและกลับ</li>
+      </ul>
+    </article>
+  </div>
+
+  {{!-- 18 พ.ย. 2026 อาร์ต "ทำมาดีๆหน่อย" (แผงปุ่ม): 3 ทางเป็นปุ่มชุดเดียวกัน สูงเท่ากัน ไอคอนซ้าย ลูกศรขวา
+       LINE ส่งลาย = ปุ่มหลักเขียว (.cb--p) · คำนวณเอง / มีเสื้ออยู่แล้ว = ปุ่มขอบ (.cb--s) · ไปแชท LINE = ไอคอน LINE วงเขียวตามกติกาทั้งเว็บ
+       ไม่มีป้ายเล็กเหนือหัวข้อ · สิ่งที่ต้องส่ง = รายการติ๊ก (ไม่ใช่ลำดับขั้น) --}}
+  <div class="scw__cta">
+    <div class="scw__cta-copy"><h3>ส่งลายมา ทีมดีคิดราคาให้</h3>
+      <p>เตรียม 3 อย่างนี้ แล้วทักมาทาง LINE</p>
+      <ul><li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>ไฟล์ลายหรือรูปโลโก้</li><li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>รุ่นเสื้อ สี และจำนวน</li><li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>วันที่ต้องใช้เสื้อ</li></ul></div>
+    <div class="scw__cta-act">
+      <a class="cb cb--p cb--2l scw__b" href="{{screenPage.lines.quote}}" data-track="line" data-where="screen-price-cta"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__lbl"><span class="cb__t">ทัก LINE ส่งลายคิดราคา</span><span class="cb__sub" data-float-status><span class="cb__dot" aria-hidden="true"></span><span data-float-status-t>{{site.hours}}</span></span></span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="cb cb--s cb--2l scw__b" href="{{{screenPage.calcHref}}}"><span class="cb__ico scw__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15v2.5M8.5 18h.01M12 18h.01"/></svg></span><span class="cb__lbl"><span class="cb__t">คำนวณราคาเองก่อน</span><span class="cb__sub">เลือกขนาดลาย จำนวน และรุ่นเสื้อ</span></span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="cb cb--s cb--2l scw__b" href="{{screenPage.lines.customer}}" data-track="line" data-where="screen-own-shirt"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__lbl"><span class="cb__t">มีเสื้ออยู่แล้ว</span><span class="cb__sub">ส่งรูปป้ายเสื้อให้ทีมดีดูก่อน</span></span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</div></section>

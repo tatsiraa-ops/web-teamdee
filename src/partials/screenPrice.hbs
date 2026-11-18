@@ -1,6 +1,6 @@
 {{!-- ราคาเสื้อสกรีน DTF (18 พ.ย. 2026 · สไลด์ "ขายงานสกรีน DTF" 17 พ.ย.) · ตารางโชว์ครบ ไม่ซ่อน · ตัวอย่างคำนวณด้วย screen-price.js ตอน build --}}
 <section class="wrap section screen-price" id="price">
-  <header class="screen-heading"><span class="eyebrow">ราคา</span><h2 class="t-display">{{pp.price.h}}</h2><p class="t-lead">ราคาต่อตัวรวม VAT 7% ตามขนาดลายและจำนวน · ขั้นต่ำ {{screenPage.S.minQty}} ตัว</p></header>
+  <header class="screen-heading"><h2 class="t-display">{{{hl pp.price.h "ขึ้นกับอะไร?"}}}</h2><p class="t-lead">ราคาต่อตัวรวม VAT 7% ตามขนาดลายและจำนวน · ขั้นต่ำ {{screenPage.S.minQty}} ตัว</p></header>
   {{> screenTable t=screenPage.own}}
   <div class="screen-how">
     <h3>คิดราคา 3 ขั้น</h3>

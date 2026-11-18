@@ -20,12 +20,16 @@ test('บริการ 2 ทาง · เสื้อ 2 รุ่น · ลา
   assert.match(panel, /name="svc" value="customer"/)
   assert.match(panel, /name="shirt" value="premium" checked/)
   assert.match(panel, /name="shirt" value="oversize"/)
-  const selects = panel.match(/<select[^>]*name="spot"[^>]*>/g) || []
-  assert.equal(selects.length, 3)
-  for (const n of [1, 2, 3]) assert.match(panel, new RegExp(`<label[^>]*for="spot${n}"[^>]*>ลายจุดที่ ${n}`))
-  assert.match(panel, /<select id="spot1" name="spot"[^>]*>(?:(?!<\/select>)[\s\S])*<option value="A4" selected>/)
-  for (const n of [2, 3]) assert.match(panel, new RegExp(`<select id="spot${n}" name="spot"[^>]*>\\s*<option value="">ไม่มี</option>`))
-  assert.match(panel, /<option value="A3"[^>]*>A3 · 30 × 40 ซม\. · เต็มหลัง · เต็มหน้า<\/option>/)
+  /* 18 พ.ย. 2026 รื้อหน้า (อาร์ต "รื้อ uiux ใหม่ทั้งหมด"): ขนาดลายเป็นชิป radio spot1–3 แทน select · จุด 1 เริ่ม A4 · จุด 2–3 เริ่ม "ไม่มี" */
+  assert.doesNotMatch(panel, /<select/)
+  for (const n of [1, 2, 3]) {
+    assert.match(panel, new RegExp(`id="spotH${n}">ลายจุดที่ ${n}`))
+    assert.equal((panel.match(new RegExp(`name="spot${n}" value="A[3-7]"`, 'g')) || []).length, 5, `จุด ${n} มี A7–A3`)
+  }
+  assert.match(panel, /name="spot1" value="A4" checked/)
+  for (const n of [2, 3]) assert.match(panel, new RegExp(`name="spot${n}" value="" checked><b>ไม่มี</b>`))
+  assert.doesNotMatch(panel, /name="spot1" value=""/, 'จุดแรกต้องมีลายเสมอ')
+  assert.match(panel, /aria-label="A3 30 × 40 ซม\. เต็มหลัง · เต็มหน้า"/)
   /* ข้อความในป้ายโดนตัวตัดบรรทัดไทยห่อ (<t-g>) → เทียบหลังตัดแท็ก */
   assert.match((panel.match(/<label for="big">[\s\S]*?<\/label>/) || [''])[0].replace(/<[^>]+>/g, ''), /ไซซ์ 2XL ขึ้นไป/)
   assert.match(panel, /<input id="big" name="big" type="number"[^>]*min="0"/)
@@ -39,7 +43,7 @@ test('ใบประเมินมีแตกรายการ + วัน�
 
 test('calc-page.js ส่งค่าแผงสกรีนเข้า estimate และเติมค่าจากลิงก์', () => {
   assert.match(js, /service: form\.querySelector\('input\[name="svc"\]:checked'\)\?\.value/)
-  assert.match(js, /spots: \[\.\.\.form\.querySelectorAll\('select\[name="spot"\]'\)\]\.map\(\(x\) => x\.value\)\.filter\(Boolean\)/)
+  assert.match(js, /spots: \[1, 2, 3\]\.map\(\(n\) => form\.querySelector\(`input\[name="spot\$\{n\}"\]:checked`\)\?\.value\)\.filter\(Boolean\)/)
   assert.match(js, /tick\('svc', pre\.service\)/)
   assert.match(js, /tick\('shirt', pre\.shirt\)/)
 })

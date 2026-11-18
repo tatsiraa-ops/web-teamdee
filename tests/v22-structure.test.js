@@ -229,13 +229,13 @@ test('คำค้นทุกคำบนการ์ดผังเว็บ v
 /* ลำดับส่วนหน้าสินค้า 6 หน้าตาม v22 (อาร์ตเคาะ 2 พ.ย. 2026 · แทนลำดับ 24 ต.ค. ข้อ 5 และ 26 ต.ค.)
    ที่มา: sections ใน extracted/products.json + H2 ใน PAGE-CONTENT.json */
 /* หน้าโฉมใหม่ที่จบที่ FAQ (pp-v2.json lean · อาร์ต 6 พ.ย. "ลบทิ้งได้หมดยกเว้น footer") · ตรวจที่ tests/pp-v2.test.js */
-const LEAN = new Set(Object.entries(ppV2()).filter(([, v]) => v && v.lean).map(([id]) => ({ print: 'printed', polo: 'polo' })[id]).filter(Boolean))
+const LEAN = new Set(Object.entries(ppV2()).filter(([, v]) => v && v.lean).map(([id]) => ({ print: 'printed', polo: 'polo', screen: 'screen' })[id]).filter(Boolean))
 const PRODUCTS = { polo: '/embroidery/', printed: '/sublimation/', screen: '/screen-printing/', warmup: '/custom-printed-warmup-shirts/', oversize: '/custom-oversize-jerseys/', baseball: '/custom-baseball-shirts/' }
 const raw = JSON.parse(readFileSync(join(root, 'docs/spec/teamdee-v22/extracted/products.json'), 'utf8'))
 /* key ของ wireframe → id ใน HTML · n11 = ส่วน "ตามงานที่ใช้" · quote / contact = ctaBox (id อยู่ที่หัวข้อ) */
-const v2Reviews = new Set(Object.entries(ppV2()).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]))
+const v2Reviews = new Set(Object.entries(ppV2()).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/', screen: '/screen-printing/' })[id]))
 /* ส่วนที่หน้าโฉมใหม่ย้ายขึ้นตามบอร์ด (รีวิว 5 พ.ย. · เนื้อผ้า 6 พ.ย.) */
-const v2Moved = Object.fromEntries(Object.entries(ppV2()).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
+const v2Moved = Object.fromEntries(Object.entries(ppV2()).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/', screen: '/screen-printing/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
 const SECTION_ID = { embroidery: 'detail', n11: 'uses', quote: 'quote-h', contact: 'end-h' }
 
 test('หน้าสินค้า 6 หน้า: id ส่วนเรียงตาม v22 ทุกส่วน', () => {

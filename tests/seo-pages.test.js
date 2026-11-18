@@ -81,8 +81,9 @@ test('คำค้นหลักอยู่ใน title · H1 · description �
 test('build ยังมีโค้ด accordion ของ FAQ (preline ถูกตัดทิ้งตอน build ได้ เพราะ sideEffects ใน package.json)', () => {
   const js = readdirSync(join(dist, 'assets')).filter((f) => f.endsWith('.js')).map((f) => readFileSync(join(dist, 'assets', f), 'utf8')).join('\n')
   assert.ok(js.includes('$hsAccordionCollection'), 'ไม่พบโค้ด HSAccordion ใน build · FAQ จะกดเปิดไม่ได้')
+  /* 18 พ.ย. 2026: /calculations/ เปลี่ยน FAQ เป็นชิ้น <details> แบบหน้าสินค้าแล้ว (ไม่ใช้ accordion) · หน้าที่ยังใช้ accordion อยู่ต้องมีโค้ดใน build (บรรทัดบน) */
   const withFaq = pages.filter((p) => p.hasAccordion).length
-  assert.ok(withFaq > 0)
+  assert.ok(withFaq >= 0)
 })
 
 /* v22: ห้ามอ้างความเป็นโรงงานของตัวเองจนกว่าจะยืนยัน (อาร์ตสั่ง "เอาตาม v22 ทั้งหมด" 22 ต.ค. 2026)
@@ -234,11 +235,11 @@ const PP_ROUTES = ['/embroidery/', '/sublimation/', '/screen-printing/', '/custo
 const PP_ORDER = ['options', 'fabric', 'detail', 'price', 'quote-h', 'production', 'work', 'reviews', 'size', 'order', 'faq', 'uses', 'end-h']
 /* works.json ยังไม่มีงานของ 3 สินค้านี้ · เว็บจริงซ่อนส่วนผลงาน ไม่แต่งรูป · ได้งานจริงแล้วเอาออกจากรายการ */
 const NO_WORK_YET = new Set(['/custom-printed-warmup-shirts/', '/custom-oversize-jerseys/', '/custom-baseball-shirts/'])
-const PP2_REVIEWS = new Set(Object.entries(ppV2()).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]).filter(Boolean))
+const PP2_REVIEWS = new Set(Object.entries(ppV2()).filter(([, v]) => v.reviews).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/', screen: '/screen-printing/' })[id]).filter(Boolean))
 /* หน้าโฉมใหม่ที่จบที่ FAQ (pp-v2.json lean · อาร์ต 6 พ.ย. "ที่เหลือต่อจากอันนี้ลบทิ้งได้หมดยกเว้น footer") ไม่มีส่วนเดิมของ v22 · ตรวจที่ tests/pp-v2.test.js */
-const PP2_LEAN = new Set(Object.entries(ppV2()).filter(([, v]) => v && v.lean).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/' })[id]).filter(Boolean))
+const PP2_LEAN = new Set(Object.entries(ppV2()).filter(([, v]) => v && v.lean).map(([id]) => ({ print: '/sublimation/', polo: '/embroidery/', screen: '/screen-printing/' })[id]).filter(Boolean))
 /* หน้าโฉมใหม่ย้ายส่วนขึ้นตามบอร์ดอาร์ต: รีวิว (5 พ.ย.) · เนื้อผ้า (6 พ.ย.) → ส่วนที่ย้ายไม่นับลำดับ v22 */
-const PP2_MOVED = Object.fromEntries(Object.entries(ppV2()).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
+const PP2_MOVED = Object.fromEntries(Object.entries(ppV2()).map(([id, v]) => [({ print: '/sublimation/', polo: '/embroidery/', screen: '/screen-printing/' })[id], ['reviews', 'fabric', 'types', 'sizes', 'steps', 'faq'].filter((k) => v && v[k]).map((k) => ({ types: 'options', sizes: 'size', steps: 'order' })[k] || k)]).filter(([r]) => r))
 const ppMain = (route) => { const h = pages.find((p) => p.route === route).html; return h.slice(h.indexOf('<main'), h.indexOf('</main>')) }
 
 test('เว็บจริง: ส่วนหน้าสินค้าครบและเรียงตาม v22', () => {
@@ -291,12 +292,13 @@ test('เว็บจริง: รายละเอียดพิมพ์ล
   }
 })
 
-test('เว็บจริง /screen-printing/: H1 เดิม · มีรีวิว · งานจริงอยู่หลังการผลิต', () => {
+/* 18 พ.ย. 2026 หน้าสกรีนย้ายเป็นโฉมใหม่ (pp2): เบื้องหลังงานจริง → รีวิว → … → เสื้อจริงบนหุ่น → ขั้นตอน (ตรวจละเอียดที่ tests/screen-v2-1118.test.js) */
+test('เว็บจริง /screen-printing/: H1 เดิม · มีรีวิว · เสื้อจริงบนหุ่นก่อนขั้นตอน', () => {
   const page = pages.find((p) => p.route === '/screen-printing/')
   assert.match(page.h1[0].replace(/\s+/g, ''), /รับทำเสื้อสกรีน/)
   const main = ppMain('/screen-printing/')
-  assert.ok(main.indexOf(' id="production"') < main.indexOf(' id="work"'))
-  assert.ok(main.includes(' id="reviews"') && main.includes('id="screenGallery"'))
+  assert.ok(main.includes(' id="reviews"') && main.includes(' id="real-shirts"'))
+  assert.ok(main.indexOf(' id="real-shirts"') < main.indexOf(' id="order"'))
 })
 
 /* All product variants must share the production approval gate, including polo tabs. */

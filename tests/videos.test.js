@@ -2,7 +2,7 @@
    คลิปขึ้นเว็บจริงได้เมื่อครบ: ไฟล์ต้นฉบับ รูปปก ความยาว ลูกค้ายินยอม เพลงใช้นอก IG ได้ · ไม่แต่งคำพูดลูกค้า */
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { videoReady, videoSchema, isoDuration, videosFor, videoView } from '../src/js/video-view.js'
 
 const data = JSON.parse(readFileSync(new URL('../src/data/videos.json', import.meta.url), 'utf8'))
@@ -65,17 +65,25 @@ test('โหมดช่องคลิป: มีไฟล์ครบ = เล
   assert.equal(videoSchema({ ...full, file: null, links: fb.links }, 'https://team-dee.com'), null)
 })
 
-test('ข้อมูลคลิปจริง: ไม่มีคลิปไหนพร้อมจนกว่าอาร์ตส่งไฟล์และยืนยัน · ทุกคลิปมีลิงก์ที่โพสต์ (IG/FB) · วันที่ไม่รู้ = null ไม่เดา', () => {
+test('ข้อมูลคลิปจริง: คลิปพร้อมเฉพาะที่อาร์ตส่งไฟล์และยืนยัน · คลิปที่โพสต์แล้วมีลิงก์ (IG/FB) · คลิปไฟล์บนเว็บเราเล่นได้เอง · วันที่ไม่รู้ = null ไม่เดา', () => {
   assert.ok(data.items.length >= 8)
   const ig = /^https:\/\/www\.instagram\.com\/teamdee_\/reel\/[\w-]+\/$/
   const fb = /^https:\/\/www\.facebook\.com\/teamdee\/videos\/\d+\/$/
   for (const v of data.items) {
-    assert.ok(v.links?.ig || v.links?.fb, v.id)
+    /* ทุกคลิปต้องดูได้: มีโพสต์บนเพจ หรือเป็นไฟล์บนเว็บเราที่พร้อมเล่น */
+    assert.ok(v.links?.ig || v.links?.fb || videoReady(v), v.id)
     if (v.links.ig) assert.match(v.links.ig, ig, v.id)
     if (v.links.fb) assert.match(v.links.fb, fb, v.id)
     assert.ok(v.date === null || /^\d{4}-\d{2}-\d{2}$/.test(v.date), v.id)
     assert.ok(v.places?.length, v.id)
   }
-  /* ตอนนี้ยังไม่มีไฟล์ต้นฉบับ → ยังไม่พร้อมทุกคลิป (เทสนี้จะแดงเมื่อเติมไฟล์ครบ ให้แก้เป็นรายการที่พร้อมจริง) */
-  assert.deepEqual(data.items.filter(videoReady).map((v) => v.id), [])
+  /* 18 พ.ย. 2026 อาร์ต "เอาคลิปมาใช้ในส่วนเบื้องหลังด้วย": คลิปดิบงานสกรีน DTF 7 คลิป (Drive ตัวอย่างสกรีน · ตัดเสียง) = พร้อมเล่นบนเว็บ
+     คลิปที่โพสต์ IG/FB ยังไม่มีไฟล์ต้นฉบับ → ยังไม่พร้อม */
+  const ready = data.items.filter(videoReady).map((v) => v.id)
+  assert.deepEqual(ready, ['design', 'film', 'cut', 'place', 'press', 'peel', 'done'].map((k) => `scr-clip-${k}`))
+  for (const id of ready) {
+    const v = data.items.find((x) => x.id === id)
+    for (const f of [v.file, v.poster]) assert.ok(existsSync(new URL(`../public${f}`, import.meta.url)), f)
+    assert.ok(v.duration <= 15, `${id} สั้นไม่เกิน 15 วิ`)
+  }
 })

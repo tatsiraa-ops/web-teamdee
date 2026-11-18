@@ -61,7 +61,8 @@ if (form) {
     options: [...form.querySelectorAll('input[name="opt"]:checked')].map((x) => x.value),
     service: form.querySelector('input[name="svc"]:checked')?.value,
     shirt: form.querySelector('input[name="shirt"]:checked')?.value,
-    spots: [...form.querySelectorAll('select[name="spot"]')].map((x) => x.value).filter(Boolean),
+    /* 18 พ.ย. 2026 รื้อหน้า: ขนาดลายเป็นชิป (radio spot1–3) แทน select · ค่าว่าง = ไม่มี */
+    spots: [1, 2, 3].map((n) => form.querySelector(`input[name="spot${n}"]:checked`)?.value).filter(Boolean),
     big: Math.max(0, Math.floor(Number(bigIn?.value) || 0)),
   })
 
@@ -119,6 +120,9 @@ if (form) {
 
     /* การ์ดสรุป */
     $('sProd').textContent = r.fabric ? `${k.name} · ผ้า${r.fabric.name}` : k.name
+    /* หัวใบประเมิน: ไอคอนงานเดียวกับการ์ดที่เลือก (รื้อใบ 18 พ.ย. 2026) · ใช้ src ของการ์ดเอง path ถูกทั้งต้นแบบและ WordPress */
+    const kimg = form.querySelector('input[name="kind"]:checked')?.closest('.kcard')?.querySelector('img')
+    if (kimg) { const si = $('sKind'); si.srcset = kimg.getAttribute('srcset') || ''; si.src = kimg.getAttribute('src') }
     $('sInc').textContent = k.include || ''
     show($('sInc'), !!k.include)
     show($('sRows'), r.ok)
@@ -212,7 +216,7 @@ if (form) {
 
   /* ค่าจาก URL (ตัวช่วยเลือกหน้าแรก · ลิงก์หน้าสินค้า · ลิงก์ที่แชร์มา) · ไม่เลื่อนจอเอง */
   const pre = readCalcQuery(K, location.search)
-  const tick = (name, v) => { const el = v && form.querySelector(`input[name="${name}"][value="${CSS.escape(v)}"]`); if (el) el.checked = true }
+  const tick = (name, v) => { const el = (typeof v === 'string' || typeof v === 'number') && form.querySelector(`input[name="${name}"][value="${CSS.escape(v)}"]`); if (el) el.checked = true }
   tick('kind', pre.kind)
   tick('fabric', pre.fabric)
   if (pre.qty) qty.value = pre.qty
@@ -222,7 +226,8 @@ if (form) {
   if (pre.service) {
     tick('svc', pre.service)
     tick('shirt', pre.shirt)
-    form.querySelectorAll('select[name="spot"]').forEach((el, i) => { el.value = pre.spots[i] || (i ? '' : el.value) })
+    pre.spots.slice(0, 3).forEach((v, i) => tick(`spot${i + 1}`, v))
+    for (let i = pre.spots.length; i < 3; i++) if (i) tick(`spot${i + 1}`, '') /* ช่องที่ลิงก์ไม่ได้ส่ง = ไม่มี */
     if (bigIn) bigIn.value = pre.big || 0
     qty.value = clamp(typed())
   }

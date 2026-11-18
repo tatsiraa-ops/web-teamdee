@@ -1,6 +1,7 @@
 import { initTypeCollars } from './type-collars.js'
 import { initPoloFabric } from './polo-fabric.js'
 import { initShirtCallouts } from './shirt-callouts.js'
+import { initScreenSize, initEqualSizePicks, initShirtColors } from './screen-size.js'
 import './download-assets.js'
 import '../styles/v22-sections.css'
 /* หน้าสินค้า 6 หน้า · product-page.css (แกลเลอรีลูกค้า · รูปในการ์ด) โหลดใน head ของหน้า */
@@ -27,6 +28,9 @@ initPoloFabric() /* 11 พ.ย. หน้างานปัก: ผ้า + ส�
 /* 16 พ.ย. 2026 หน้างานปัก: ผังเสื้อหน้า-หลังมีเส้นชี้ (ตำแหน่งปัก · รายละเอียดเสื้อ) · ไม่มีการกดเลือกแบบแล้ว (เดิม polo-options.js)
    กดรูปงานปักแต่ละจุด / รูปแบบเสื้อแต่ละแบบ = ป๊อปอัปขาว (lightbox → review-dialog openPhotos) */
 initShirtCallouts()
+initScreenSize() /* 18 พ.ย. 2026 หน้าสกรีน: เลือกขนาดลาย A7–A3 บนเสื้อขาว */
+initEqualSizePicks() /* ตารางไซซ์หน้าสกรีน: สลับรุ่นเสื้อแล้วการ์ดสูงเท่าเดิม */
+initShirtColors() /* การ์ดเสื้อ 2 ทรง: กดสีดูเสื้อ + ปุ่ม LINE ใส่สีที่เลือก */
 initLightbox('#emb-pos', '.sc__item', 'ดูงานปักแต่ละตำแหน่ง')
 for (const k of ['col', 'plk', 'slv', 'pkt', 'cut']) initLightbox(`#ps2-grp-${k}`, 'li', 'ดูรายละเอียดเสื้อแบบใหญ่')
 /* แผงเลือกเสื้อ (196c): กดทรง → บอกคอที่ทำได้ + ราคาทรง */
@@ -37,6 +41,7 @@ initLightbox('#prodGrid', 'figure', 'ดูแบบเสื้อขนาด�
 /* แบบเสื้อ 3D หน้าโฉมใหม่ (pp2Designs.hbs) · ทุกแถวเป็นชุดเดียว ลูกศรเลื่อนข้ามแถวได้ · ปุ่มเลื่อนราง */
 initLightbox('#pp2Designs', 'figure', 'ดูแบบเสื้อขนาดใหญ่')
 initLightbox('#pp2RealGrid', 'figure', 'ดูเสื้อจริงขนาดใหญ่')
+initLightbox('#pp2RealDetail', 'figure', 'ดูงานสกรีนใกล้ๆ')
 /* import แบบคงที่ (5 พ.ย.: dynamic import บน WordPress หา CSS preload ผิดที่ /assets/ → ราง/ปุ่มไม่ขึ้น) */
 document.querySelectorAll('.pp2-dz__rail').forEach((r) => addRailControls(r, 'pp2-dz-ctl'))
 /* การ์ดขั้นตอนเป็นรางบนมือถือ · ปุ่มเลื่อน/ตัวนับซ่อนเองเมื่อเห็นครบ (จอใหญ่เป็นกริด 3×2) */

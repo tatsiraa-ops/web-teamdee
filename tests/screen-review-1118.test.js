@@ -17,8 +17,9 @@ test('หน้าสกรีน: ไม่มีบรรทัดชำระ
   assert.ok(!html.includes(site.payLine), 'site.payLine')
   /* ตัวตัดบรรทัดไทยห่อคำด้วยแท็ก → เทียบหลังตัดแท็ก */
   const how = (html.match(/<details class="nb-how[\s\S]*?<\/details>/) || [''])[0].replace(/<[^>]+>/g, '')
-  assert.ok(how.includes(S.rush), 'S.rush')
-  assert.ok(!how.includes(lead.rush), 'lead.rush')
+  /* โฉมใหม่ (pp2 lean) ไม่มีกล่องวิธีนับวัน · ถ้ามีต้องใช้งานด่วนของสกรีน · ขั้นตอนบนหน้าต้องไม่บอกงานด่วนแบบทั่วไป */
+  if (how) { assert.ok(how.includes(S.rush), 'S.rush'); assert.ok(!how.includes(lead.rush), 'lead.rush') }
+  assert.ok(!html.replace(/<[^>]+>/g, '').includes(lead.rush), 'lead.rush ทั้งหน้า')
 })
 
 test('llms.txt: ชำระเงินและงานด่วนบอกข้อยกเว้นของสกรีน', () => {
@@ -41,6 +42,7 @@ test('ใบสรุป: ราคาต่อตัว × จำนวน + �
 })
 
 test('ช่องเลือกลาย/ไซซ์ใหญ่: ตัวอักษร ≥16px (iOS ไม่ซูม) · ขอบ 2px สีช่องกรอก (คอนทราสต์ 3:1)', () => {
-  const rule = (read('src/styles/page-calculations.css').match(/\.calc-spot select, \.calc-big input \{[^}]*\}/) || [''])[0]
+  /* 18 พ.ย. 2026 รื้อหน้า: ขนาดลายเป็นชิปแล้ว เหลือช่องพิมพ์ไซซ์ใหญ่ช่องเดียว */
+  const rule = (read('src/styles/page-calculations.css').match(/\.calc-big input \{[^}]*\}/) || [''])[0]
   assert.match(rule, /font-size: 16px/); assert.match(rule, /border: 2px solid var\(--color-field\)/)
 })

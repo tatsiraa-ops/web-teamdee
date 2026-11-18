@@ -22,7 +22,7 @@ test('ทุกหน้ากลุ่มลูกค้าใน routes มี
 test('ทุกหน้าสินค้าใน routes มีไฟล์เนื้อหา · v2 มีเฉพาะหน้าที่ทำโฉมใหม่แล้ว', () => {
   for (const id of Object.keys(routes.products)) assert.ok(existsSync(file('product', id)), id)
   assert.deepEqual(Object.keys(productPages()).sort(), Object.keys(routes.products).sort())
-  assert.deepEqual(Object.keys(ppV2()).sort(), ['polo', 'print'])
+  assert.deepEqual(Object.keys(ppV2()).sort(), ['polo', 'print', 'screen']) /* 18 พ.ย. 2026 สกรีนย้ายเป็นโฉมใหม่ */
 })
 
 test('ไฟล์ข้อมูลรวมแบบเดิมเลิกใช้แล้ว (ไม่มีสองที่ให้แก้)', () => {

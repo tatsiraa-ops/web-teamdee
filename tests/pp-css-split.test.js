@@ -10,7 +10,8 @@ import { fileURLToPath } from 'node:url'
 import postcss from 'postcss'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const PAGES = ['custom-baseball-shirts', 'custom-oversize-jerseys', 'custom-printed-warmup-shirts', 'screen-printing']
+/* 18 พ.ย. 2026 /screen-printing/ ย้ายเป็นโฉมใหม่ (pp2) → โหลด product-page.css แล้ว เหลือ 3 หน้า */
+const PAGES = ['custom-baseball-shirts', 'custom-oversize-jerseys', 'custom-printed-warmup-shirts']
 const walk = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : [p] })
 const groups = (sel, fn) => { let out = '', i = 0; while (i < sel.length) { const m = /^:(is|where|not|has)\(/.exec(sel.slice(i)); if (!m) { out += sel[i++]; continue } let d = 0, j = i + m[0].length - 1; for (; j < sel.length; j++) { if (sel[j] === '(') d++; else if (sel[j] === ')' && --d === 0) break } out += fn(m[1], sel.slice(i + m[0].length, j)); i = j + 1 } return out }
 const splitTop = (list) => { const parts = []; let d = 0, cur = ''; for (const ch of list) { if (ch === '(') d++; if (ch === ')') d--; if (ch === ',' && d === 0) { parts.push(cur); cur = '' } else cur += ch } parts.push(cur); return parts }
