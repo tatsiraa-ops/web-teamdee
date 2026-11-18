@@ -51,3 +51,13 @@ test('หัวข้อ H2 มีคำค้น (สกรีนเสื้�
   assert.ok(h2.some((h) => /สกรีนเสื้อ DTF/.test(h)), 'FAQ')
   for (const href of ['/sublimation/', '/embroidery/', '/size-chart/', '/screen-printing-order-guide/', '/corporate/', '/custom-staff-shirts/', '/event/', '/calculations/']) assert.ok(body.includes(`href="${href}`), href)
 })
+
+/* 18 พ.ย. 2026 หลังเช็คมือถือบน staging: อาร์ต "แก้ทั้งสองอย่าง ปิดป๊อปอัปหน้าคำนวณ" */
+test('หน้าคำนวณไม่มีป๊อปอัปโปรโมชัน · การ์ดเสื้อของลูกค้าไม่เขียนขั้นต่ำซ้ำ', () => {
+  const calc = read('wp-theme/teamdee/build/pages/calculations.body.html')
+  assert.doesNotMatch(calc, /class="promo /)
+  assert.match(read('wp-theme/teamdee/build/pages/corporate.body.html'), /class="promo /, 'หน้าอื่นยังมีป๊อปอัป')
+  const own = body.slice(body.indexOf('id="own-shirt"'), body.indexOf('class="scw__cta"'))
+  assert.match(text(own), /20 ตัว ?เริ่มสั่ง/)
+  assert.doesNotMatch(text(own), /ขั้นต่ำ 20 ตัว/)
+})

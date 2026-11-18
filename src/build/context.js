@@ -90,6 +90,8 @@ export function pageContext(pagePath) {
         /* 12 พ.ย. /size-chart/: FAQPage จากคำถามในหน้า (XL / 5XL อกเท่าไหร่ ฯลฯ · คำที่คนค้นจริงใน Search Console) */
         if (at === '/size-chart/') base.sizeLd = (() => { const f = (json('guide-pages.json').size.sections || []).find((x) => x.kind === 'faq'); const s = f && faqSchema(f.items); return s && ldJson(s) })()
         if (at === '/calculations/') base.calcLd = (() => { const s = faqSchema(data.faq.calc); return s && ldJson(s) })()
+        /* 18 พ.ย. 2026 อาร์ต "ปิดป๊อปอัปหน้าคำนวณ": คนกำลังดูยอดรวม ป๊อปอัปขอผ้าตัวอย่างเด้งทับใบประเมินบนมือถือ → หน้านี้ไม่มีป๊อปอัป (เหมือนหน้าสกรีน) */
+        if (at === '/calculations/') base.promos = []
         /* /faq/: FAQPage จากคำถามทุกหมวด (ตัดข้อที่ซ้ำกับ "คำถามสำคัญ" ให้เหลือข้อเดียว) · audit 26 ต.ค. */
         if (at === '/faq/') base.faqLd = (() => {
           const seen = new Set()

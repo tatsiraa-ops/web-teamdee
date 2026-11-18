@@ -77,4 +77,14 @@
   .lc__btns { display: grid; width: 100%; justify-items: center; }
   .lc__go { justify-content: center; width: 100%; }
 }
+/* 18 พ.ย. 2026 ตรวจทั้งเว็บ: ข้อความในจอมือถือ 3D ย่อตามจอ (cqw) เหลือ 7.7–9.9px บนมือถือ → ขั้นต่ำ 12px ทุกข้อความ (ตัวอย่างข้อความที่จะส่งทาง LINE ต้องอ่านออก)
+   จอเล็กขยายภาพมือถือ 180 → 210px ให้ข้อความ 12px ยังอยู่ในฟองแชทพอดี */
+.lc__scr { font-size: max(12px, 5.4cqw); }
+.lc__bar b { font-size: max(12px, 5.6cqw); } .lc__bar small { font-size: max(12px, 4.4cqw); }
+.lc__att figcaption, .lc__field { font-size: max(12px, 4.4cqw); }
+@media (max-width: 767px) {
+  .lc { padding-top: 236px; }
+  .lc__chat { top: -246px; width: 210px; }
+  .lc__card { padding-top: 196px; }
+}
 @media (prefers-reduced-motion: reduce) { .lc__dots i, .lc__live i, .lc__fly { animation: none; } .lc__dots i { opacity: .7; } .lc__go, .lc__go svg { transition: none; } }

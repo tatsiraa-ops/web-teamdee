@@ -247,7 +247,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .dz__o figcaption { padding-top: 5px; font-size: 12.5px; font-weight: 700; line-height: 1.3; text-align: center; color: var(--color-ink-3); }
 .dz__fonts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; }
 .dz__f { display: grid; justify-items: center; gap: 1px; padding: 9px 6px 7px; border-radius: 12px; background: #F6F2EE; font-size: 19px; line-height: 1.25; color: var(--color-ink); white-space: nowrap; overflow: hidden; }
-.dz__f small { font-size: 11.5px; font-style: normal; font-weight: 700; letter-spacing: 0; color: var(--color-ink-3); -webkit-text-stroke: 0; }
+.dz__f small { font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: 0; color: var(--color-ink-3); -webkit-text-stroke: 0; }
 .dz__f--heavy { font-weight: 800; }
 .dz__f--italic { font-weight: 800; font-style: italic; color: #C94F00; }
 .dz__f--outline { font-weight: 800; letter-spacing: .05em; color: transparent; -webkit-text-stroke: 1.4px var(--color-ink); }
@@ -351,7 +351,7 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
   .fx__ph { grid-area: 1 / 1; border-radius: 10px; }
   .fx__art { aspect-ratio: 1; }
   .fx__shirt { right: 6px; bottom: 6px; width: 40px; padding: 2px; border-radius: 8px; }
-  .fx__new { top: 6px; left: 6px; padding: 2px 8px; font-size: 11.5px; }
+  .fx__new { top: 6px; left: 6px; padding: 2px 8px; font-size: 12px; }
   .fx__body { display: contents; }
   .fx__top { grid-area: 1 / 2; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; }
   .fx__more { grid-column: 1 / -1; grid-row: 2; }
@@ -413,12 +413,12 @@ img.dz__ico { display: block; width: 56px; height: 56px; }
 .ctz__n { margin: 0; font-size: 15.5px; font-weight: 900; line-height: 1.3; color: var(--color-ink); }
 .ctz__d { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--color-ink-2); }
 .ctz__x { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; margin-top: auto; padding-top: 8px; } /* ชิดล่างการ์ด ทุกใบแนวเดียวกัน */
-.ctz__x span { padding: 2px 9px; border-radius: 999px; background: #FFF1E6; font-size: 11.5px; font-weight: 800; line-height: 1.45; color: #9A3A00; }
+.ctz__x span { padding: 2px 9px; border-radius: 999px; background: #FFF1E6; font-size: 12px; font-weight: 800; line-height: 1.45; color: #9A3A00; }
 .pp2-col__pkp { display: grid; grid-template-columns: 1fr 1fr; aspect-ratio: 4 / 3; }
 .pp2-col__pkp div { position: relative; overflow: hidden; }
 .pp2-col__pkp div + div { border-left: 2px solid #fff; }
 .pp2-col__pkp img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
-.pp2-col__pkp b { position: absolute; top: 6px; left: 50%; translate: -50% 0; padding: 2px 8px; border-radius: 999px; background: rgb(255 255 255 / .94); font-size: 11.5px; font-weight: 800; white-space: nowrap; color: var(--color-ink); }
+.pp2-col__pkp b { position: absolute; top: 6px; left: 50%; translate: -50% 0; padding: 2px 8px; border-radius: 999px; background: rgb(255 255 255 / .94); font-size: 12px; font-weight: 800; white-space: nowrap; color: var(--color-ink); }
 .pp2-col__ask { justify-content: center; gap: 8px; margin-top: 26px; padding: 16px 14px; background: #FFF8F2; } /* ช่องสุดท้ายแถว 3 · เว้นบนเท่าหัวกลุ่ม (18 + 8) */
 .pp2-col__ask img { width: 40px; height: 40px; }
 .pp2-col__ask p { display: grid; gap: 3px; margin: 0; }
@@ -729,7 +729,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; }
 .dz__ims--c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .dz__ims--c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .dz__c--shape .dz__o img { object-position: 50% 18%; }
-.dz__tag { display: block; width: fit-content; margin: 3px auto 0; padding: 1px 8px; border-radius: 999px; background: #FFF0E4; font-size: 11.5px; font-weight: 800; color: #B44500; }
+.dz__tag { display: block; width: fit-content; margin: 3px auto 0; padding: 1px 8px; border-radius: 999px; background: #FFF0E4; font-size: 12px; font-weight: 800; color: #B44500; }
 .dz__more { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; margin-top: 8px; font-size: 14.5px; font-weight: 800; color: var(--color-ink); text-decoration: underline; text-decoration-color: #FF6C00; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .dz__more:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
 /* ออปชันเสริม · ภาพใหญ่ คำเดียว ราคา (ถ้ามี) · ไม่ต้องกด */
@@ -1090,7 +1090,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; }
   .pf4__hero { height: 175px; }
   .pf4__f b { font-size: 12px; min-width: 0; overflow-wrap: anywhere; }
   .pf4__f b .inline-block { white-space: normal; }
-  .pf4 .pf4__t thead th .pf4__sh { font-size: 10.5px; }
+  .pf4 .pf4__t thead th .pf4__sh { font-size: 12px; }
   .pf4__t td { font-size: 14px; }
 }
 
@@ -1108,7 +1108,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; }
 .pf5 .pf4__hero::after { display: none; }
 .pf5 .pf4__hero img { position: static; width: 100%; height: 224px; object-fit: cover; border-radius: 16px; animation: none; }
 .pf5 .pf4__hero figcaption { position: static; color: #20211e; }
-.pf5 .pf4__hero figcaption > span { margin: 0 0 10px; color: #74716b; font-size: 11px; font-weight: 600; letter-spacing: .09em; }
+.pf5 .pf4__hero figcaption > span { margin: 0 0 10px; color: #6b6862; font-size: 12px; font-weight: 600; letter-spacing: .09em; }
 .pf5 .pf4__hero h3 { color: #20211e; font-size: clamp(24px, 2.2vw, 32px); font-weight: 800; line-height: 1.3; text-shadow: none; }
 .pf5 .pf4__hero p { display: block; margin: 8px 0 0; padding: 0; color: #a84608; font-size: 15px; font-weight: 600; background: none; }
 .pf5 .pf4__hero small { display: block; margin-top: 14px; color: #68635d; font-size: 13px; line-height: 1.6; }
@@ -1162,7 +1162,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; }
 .pf5 .pf4__quote:hover { background: #3d3f36; }
 .pf5 .pf4__ask { gap: 3px; margin: 0; padding: 0; align-items: center; }
 .pf5 .pf4__ask .pp-more { font-size: 14px; }
-.pf5 .pf4__ask small { font-size: 11px; }
+.pf5 .pf4__ask small { font-size: 12.5px; }
 @media (max-width: 1100px) { .pf4.pf5 { grid-template-columns: minmax(0, 1fr); } .pf5__info { min-height: 0; } }
 @media (max-width: 767px) {
  .pf4.pf5 { gap: 20px; }
@@ -1170,9 +1170,9 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; }
  .pf5 .pf4__hero { margin: 14px 14px 0; gap: 16px; grid-template-columns: 42% minmax(0, 1fr); }
  .pf5 .pf4__hero img { height: 174px; border-radius: 12px; }
  .pf5 .pf4__hero h3 { font-size: 23px; }
- .pf5 .pf4__hero figcaption > span { font-size: 9px; margin-bottom: 6px; }
+ .pf5 .pf4__hero figcaption > span { font-size: 12px; margin-bottom: 6px; }
  .pf5 .pf4__hero p { font-size: 13px; margin-top: 5px; }
- .pf5 .pf4__hero small { font-size: 11px; margin-top: 8px; }
+ .pf5 .pf4__hero small { font-size: 12px; margin-top: 8px; }
  .pf5 .pf4__body { padding: 16px 14px; }
  .pf5__uses ul { grid-template-columns: repeat(var(--use-count), minmax(0, 1fr)); gap: 12px; padding: 18px 10px 12px; }
  .pf5__uses li { gap: 8px; font-size: 12px; }
@@ -1185,7 +1185,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; }
  .pf5__terms li:nth-child(odd) { border-left: 0; }
  .pf5__terms img { width: 44px; height: 44px; }
  .pf5__terms strong { font-size: 13px; }
- .pf5__terms span { font-size: 11px; }
+ .pf5__terms span { font-size: 12px; }
  .pf5__color-label { gap: 5px; }
  .pf5__color-picker summary { gap: 10px; }
  .pf5__actions { gap: 12px; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
@@ -1293,7 +1293,7 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; }
 .ps2__selection-copy ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; padding: 0; list-style: none; }
 .ps2__selection-copy ul:empty { display: none; }
 .ps2__selection-copy li { padding: 8px 12px; border-radius: 9px; background: #f8f5f0; }
-.ps2__selection-copy li > span { display: block; margin-bottom: 3px; color: #7a7166; font-size: 11px; }
+.ps2__selection-copy li > span { display: block; margin-bottom: 3px; color: #6f665c; font-size: 12px; }
 .ps2__selection-copy li > strong { display: block; font-size: 13px; font-weight: 650; }
 .ps2__selection-actions { display: grid; justify-items: center; gap: 10px; flex: none; }
 .ps2__ask { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 48px; padding: 12px 20px; border-radius: 999px; background: #25251f; color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; }
@@ -1314,11 +1314,11 @@ body:has(.pp2-hero) #main .pp2-cz .dz__sub { justify-content: center; }
   .ps2__spots { gap: 24px 16px; }
   .ps2__spot-title { gap: 6px; margin-top: 10px; }
   .ps2__spot-title b { font-size: 14px; }
-  .ps2__spn { font-size: 11px; }
+  .ps2__spn { font-size: 12px; }
   .ps2__spot-size { gap: 2px 5px; }
   .ps2__spot-size strong { font-size: 17px; }
-  .ps2__spot-size > span { font-size: 11px; }
-  .ps2__sps { font-size: 11px; }
+  .ps2__spot-size > span { font-size: 12px; }
+  .ps2__sps { font-size: 12px; }
   .ps2__spot--special { padding: 8px; margin: -8px; border-radius: 16px; }
   .ps2__special-ask { font-size: 12px; }
   .ps2__parts { margin-top: 36px; }
@@ -1355,7 +1355,7 @@ a.sc__lab:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4
 .sc.is-placed a.sc__lab:hover b { text-decoration: underline; text-decoration-color: #FF6C00; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .sc.is-placed .sc__item.lb-host:hover .sc__thumb { box-shadow: 0 0 0 2px #FF6C00; }
 .sc.is-placed .sc__dot { width: 14px; height: 14px; margin: -7px 0 0 -7px; border-width: 3px; font-size: 0; box-shadow: 0 1px 4px rgb(0 0 0 / .3); }
-@media (max-width: 559px) { .sc__dot { width: 22px; height: 22px; margin: -11px 0 0 -11px; font-size: 10px; } }
+@media (max-width: 559px) { .sc__dot { width: 24px; height: 24px; margin: -12px 0 0 -12px; font-size: 12px; } }
 
 /* งานปักพิเศษ (เดิมเป็นการ์ดที่ 6) · แถบใต้ผังเสื้อ */
 .ps2__special { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin-top: 14px; padding: 16px 20px; border-radius: 16px; background: #fbf6f0; font-size: 15px; line-height: 1.6; }
