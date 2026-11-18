@@ -7,12 +7,34 @@ import { existsSync } from 'node:fs'
 import { faqSchema, productSchema, ldJson } from '../../../src/js/seo-schema.js'
 import { videosFor, videoView } from '../../../src/js/video-view.js'
 import { productView } from '../../../src/js/product-view.js'
+import { screenQuote } from '../../../src/js/screen-price.js'
 import { lineMessageUrl } from '../../../src/js/use-cta.js'
 import { iconFor, FABRIC_ICONS, USE_ICON } from '../../../src/js/fabric-icons.js'
 import { poolFor, topUpWall } from '../../../src/js/review-pool.js'
 import { fabricRanges, productPrice, heroPrice, priceSummary } from '../../../src/js/prices.js'
 import { sp, root, forWp, json, POLO_CORP_PHOTOS, reviewItems, HERO_PHOTO, REVIEW_PRODUCT, srcsetOf, url, mediaLib, downloadAssetsFor } from '../shared.js'
 import { ppV2, productPages } from '../content.js'
+
+const fmtN = (n) => Number(n).toLocaleString('en-US')
+/** ข้อมูลหน้า /screen-printing/ จากเมทริกซ์ราคาสกรีน DTF */
+function screenPage(S, calcUrl) {
+  const label = ([a, b]) => `${fmtN(a)}–${fmtN(b)}`
+  const tbl = (id, caption, bands, m) => ({ id, caption, head: bands.map(label), rows: S.sizes.map((z) => ({ size: z.id, cm: z.cm, use: z.use, prices: m[z.id].map(fmtN) })) })
+  const ex = (t, o) => { const q = screenQuote(S, o); return { t, unit: fmtN(q.unit), total: fmtN(q.total), lines: q.lines.map((l) => `${l.label.replace(/^เสื้อ [^+]+\+ /, 'เสื้อ + ')} · ${fmtN(l.per)} บาท`) } }
+  return {
+    S,
+    calcHref: `${calcUrl}?kind=screen`,
+    own: tbl('screen-price-own', 'เสื้อ Premium C32 + สกรีน 1 จุด · บาท/ตัว รวม VAT', S.own.bands, S.own.first),
+    extra: tbl('screen-price-extra', 'จุดที่ 2–3 · บาท/จุด/ตัว รวม VAT', S.extra.bands, S.extra.price),
+    customer: tbl('screen-price-customer', 'สกรีนบนเสื้อของคุณ 1 จุด · บาท/ตัว รวม VAT', S.customer.bands, S.customer.first),
+    examples: [
+      ex('80 ตัว · หน้า A4 + หลัง A4', { qty: 80, spots: ['A4', 'A4'] }),
+      ex('120 ตัว · หลัง A3 + อก A7 + แขน A7', { qty: 120, spots: ['A3', 'A7', 'A7'] }),
+    ],
+    lead: S.lead.map(([a, b, d]) => ({ q: `${fmtN(a)}–${fmtN(b)} ตัว`, d })),
+    shirts: S.shirts.map((sh) => ({ ...sh, colors: sh.colors.map(([name, hex, note]) => ({ name, hex, note })), sizes: sh.sizes.map(([size, chest, length]) => ({ size, chest, length, big: !!sh.bigAdd && sh.sizes.findIndex((x) => x[0] === sh.bigFrom) <= sh.sizes.findIndex((x) => x[0] === size) })) })),
+  }
+}
 
 export function productsPage({ data, base, at, page, kind, id, rel, sizeCharts, pagePath }) {
           const item = data.allProducts.find((x) => x.id === id)
@@ -53,8 +75,8 @@ export function productsPage({ data, base, at, page, kind, id, rel, sizeCharts, 
             /* 17 พ.ย. 2026 A5: Product + ช่วงราคา (head.hbs) · พิมพ์ลาย/วอร์ม = ไม่มี */
             offerLd: ((s) => s && ldJson(s))(productSchema(item, json('prices.json'), data.site, at, page?.description)),
             promos: id === 'screen' ? [] : base.promos,
-            screenColors: id === 'screen' ? [{name:'ขาว',hex:'#fafafa'},{name:'ดำ',hex:'#202020'},{name:'กรม',hex:'#242c40'},{name:'เบจ',hex:'#c5b598'},{name:'ครีม',hex:'#eee4cc'},{name:'เทา',hex:'#969892'},{name:'ช็อกโกแลต (น้ำตาล)',hex:'#4d3c30'}] : [],
-            screenExtras: id === 'screen' ? [{size:'7 × 10',price:25},{size:'10 × 15',price:30},{size:'15 × 20',price:35},{size:'20 × 30',price:45},{size:'30 × 40',price:55}] : [],
+            /* 18 พ.ย. 2026 สกรีน DTF: ตาราง ตัวอย่าง เสื้อ วันผลิต สร้างจาก prices.json → products.screen (ไม่พิมพ์ตัวเลขในแม่แบบ) · tests/screen-page-1118.test.js */
+            screenPage: id === 'screen' ? screenPage(json('prices.json').products.screen, url('calculations')) : null,
             pp,
             /* หน้าสินค้าโฉมใหม่ (อาร์ต 5 พ.ย. · pp-v2.json) · ไม่มีคีย์ = hero เดิม */
             pp2: (() => {

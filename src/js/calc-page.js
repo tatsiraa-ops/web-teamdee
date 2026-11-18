@@ -27,6 +27,11 @@ if (form) {
     navigator.share({ title: 'ใบประเมินราคาเบื้องต้น TEAMDEE', text: shareBody, url: shareUrl }).catch(() => {})
   })
   const optStep = $('optStep')
+  /* แผงสกรีน DTF (18 พ.ย. 2026) */
+  const screenSet = form.querySelector('[data-screen]')
+  const shirtSet = form.querySelector('[data-screen-shirt]')
+  const bigBox = form.querySelector('[data-screen-big]')
+  const bigIn = $('big')
   const fabSets = [...form.querySelectorAll('[data-fab-for]')]
   const minus = form.querySelector('[data-q-step="-1"]')
   const chips = [...form.querySelectorAll('[data-q]')]
@@ -41,7 +46,12 @@ if (form) {
   const MAX = Number(qty.max) || 99999
   /* ค่าที่พิมพ์ · ว่าง/ไม่ใช่ตัวเลข = NaN ให้ estimate บอกว่าต่ำกว่าขั้นต่ำ */
   const typed = () => (qty.value.trim() === '' ? NaN : Number(qty.value))
-  const minimum = () => K.kinds.find(k => k.id === form.querySelector('input[name="kind"]:checked').value)?.minQty || K.minQty
+  const svc = () => form.querySelector('input[name="svc"]:checked')?.value || 'own'
+  const minimum = () => {
+    const k = K.kinds.find(k => k.id === form.querySelector('input[name="kind"]:checked').value)
+    if (k?.screen && svc() === 'customer') return k.screen.customer.minQty
+    return k?.minQty || K.minQty
+  }
   const clamp = (n) => Math.min(MAX, Math.max(minimum(), Math.round(Number.isFinite(n) ? n : minimum())))
 
   const state = () => ({
@@ -49,6 +59,10 @@ if (form) {
     fabric: form.querySelector('input[name="fabric"]:checked')?.value,
     qty: typed(),
     options: [...form.querySelectorAll('input[name="opt"]:checked')].map((x) => x.value),
+    service: form.querySelector('input[name="svc"]:checked')?.value,
+    shirt: form.querySelector('input[name="shirt"]:checked')?.value,
+    spots: [...form.querySelectorAll('select[name="spot"]')].map((x) => x.value).filter(Boolean),
+    big: Math.max(0, Math.floor(Number(bigIn?.value) || 0)),
   })
 
   const show = (el, on) => { el.hidden = !on }
@@ -67,6 +81,13 @@ if (form) {
     for (const f of fabSets) { const on = f.dataset.fabFor === k.id; f.hidden = !on; f.disabled = !on }
     optStep.hidden = !k.options
     optStep.disabled = !k.options
+    if (screenSet) {
+      screenSet.hidden = !k.screen
+      screenSet.disabled = !k.screen
+      const own = r.sel?.service !== 'customer'
+      shirtSet.hidden = !own
+      bigBox.hidden = !(own && r.sel?.shirt === 'premium')
+    }
 
     /* ขั้น 2 · ช่วงราคาที่ใช้ · ขั้นต่ำ */
     /* 2 ก้อน ตัดบรรทัดได้เฉพาะระหว่างก้อน (มือถือ) */
@@ -101,20 +122,38 @@ if (form) {
     $('sInc').textContent = k.include || ''
     show($('sInc'), !!k.include)
     show($('sRows'), r.ok)
+    /* สกรีน: แตกรายการ + วันผลิต + แผนชำระ (screen-price.js) · ราคาต่อตัวรวมทุกจุดแล้ว */
+    const sq = r.screen
+    show($('sLines'), !!sq?.ok)
+    show($('sMeta'), !!sq?.ok)
+    show($('sPayLine'), !k.screen)
+    if (sq?.ok) {
+      $('sLines').replaceChildren(...sq.lines.map((l) => {
+        const li = document.createElement('li')
+        li.append(Object.assign(document.createElement('span'), { textContent: l.per === null ? l.label : `${l.label} · ${baht(l.per)} × ${baht(l.amount / l.per)}` }), Object.assign(document.createElement('span'), { textContent: `${baht(l.amount)} บาท` }))
+        return li
+      }))
+      const p = sq.pay
+      $('sMeta').textContent = `ผลิตประมาณ ${sq.lead} หลังยืนยันแบบ · ${p.full ? `ยอดต่ำกว่า ${baht(k.screen.payFullBelow)} บาท จ่ายเต็มตอนสั่งผลิต (รวมมัดจำขึ้นแบบ ${baht(p.deposit)} บาท)` : `มัดจำขึ้นแบบ ${baht(p.deposit)} → สั่งผลิต ${baht(p.atProduction)} → ก่อนส่ง ${baht(p.beforeShip)} บาท`}`
+    }
     if (r.ok) {
       $('sBand').textContent = `ช่วง ${r.band.qty}`
-      $('sBase').textContent = `${baht(r.base)} บาท`
+      $('sBase').textContent = `${baht(k.screen ? r.unit : r.base)} บาท`
       show($('rOpt'), r.opts.length > 0)
       $('sOptNames').textContent = r.opts.map((o) => o.name).join(' · ')
       $('sOpt').textContent = `+${baht(r.add)} บาท`
       $('sQty').textContent = `${baht(r.qty)} ตัว`
+      show($('rExtra'), !!r.extra?.amount)
+      $('sExtraNames').textContent = r.extra?.names || ''
+      $('sExtra').textContent = r.extra?.amount ? `+${baht(r.extra.amount)} บาท` : ''
       $('sTotal').textContent = `${baht(r.total)} บาท`
     }
     const pending = r.belowMin
       ? `สั่งผลิตขั้นต่ำ ${r.minQty} ตัว ใส่จำนวนตั้งแต่ ${r.minQty} ตัวขึ้นไป`
       : r.byDesign
         ? 'เสื้อสกรีนราคาขึ้นกับขนาดลายและจำนวนจุด ทีมดีประเมินให้ · ส่งโลโก้ + ตำแหน่งลาย + จำนวนตัว ทาง LINE'
-        : !r.ok ? `${r.band.qty} ${r.ask}` : ''
+        : !r.ok && k.screen ? (sq.reason === 'aboveMax' ? `เกิน ${baht(k.screen.maxQty)} ตัว ${r.ask}` : sq.reason === 'tooManySpots' ? `เกิน ${k.screen.extra.maxSpots} จุด ${r.ask}` : r.ask)
+          : !r.ok ? `${r.band.qty} ${r.ask}` : ''
     $('sPending').textContent = pending
     show($('sPending'), !!pending)
     /* ประกาศยอดรวมครั้งเดียวหลังหยุดกด 0.5 วิ */
@@ -179,6 +218,14 @@ if (form) {
   if (pre.qty) qty.value = pre.qty
   qty.value = clamp(typed())
   for (const id of pre.options) tick('opt', id)
+  /* แผงสกรีน: บริการ · เสื้อ · ลาย · ไซซ์ใหญ่ จากลิงก์ (?svc=&shirt=&spots=&big=) */
+  if (pre.service) {
+    tick('svc', pre.service)
+    tick('shirt', pre.shirt)
+    form.querySelectorAll('select[name="spot"]').forEach((el, i) => { el.value = pre.spots[i] || (i ? '' : el.value) })
+    if (bigIn) bigIn.value = pre.big || 0
+    qty.value = clamp(typed())
+  }
 
   /* พิมพ์จำนวน: คิดใหม่ทันทีเมื่อเป็นจำนวนที่สั่งได้ · ระหว่างพิมพ์ (เช่น "1" ก่อนจะเป็น "100") ไม่เตือน
      ออกจากช่อง/กด Enter แล้วยังต่ำกว่าขั้นต่ำ → ปรับเป็นขั้นต่ำและบอกเหตุผล */
@@ -190,8 +237,8 @@ if (form) {
   }
   form.addEventListener('change', (e) => {
     /* เปลี่ยนสินค้า: ขั้นต่ำเปลี่ยนตาม · สกรีน 1 ตัว → โปโล ปรับเป็นขั้นต่ำและบอกเหตุผล (2 พ.ย.) */
-    if (e.target.name === 'kind') raised = false
-    if (e.target === qty || e.target.name === 'kind') settle()
+    if (e.target.name === 'kind' || e.target.name === 'svc') raised = false
+    if (e.target === qty || e.target.name === 'kind' || e.target.name === 'svc') settle()
     changed()
   })
   /* ระหว่างพิมพ์ต่ำกว่าขั้นต่ำ: บอก "ขั้นต่ำ" ทันที และทำยอดรวมให้จาง (ลองใช้จริง 30 ต.ค.: พิมพ์ 5 แล้วยอดยังโชว์ 30 ตัวเดิม) */

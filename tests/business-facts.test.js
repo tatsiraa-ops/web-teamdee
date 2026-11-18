@@ -25,13 +25,13 @@ const sources = () => [
 const hits = (re) => sources().flatMap((f) => (readFileSync(f, 'utf8').match(re) || []).map((m) => `${f.slice(root.length + 1)}: ${m}`))
 const texts = (o) => (typeof o === 'string' ? [o] : o && typeof o === 'object' ? Object.values(o).flatMap(texts) : [])
 
-test('สกรีนมีแค่ DFT: ไม่มีบล็อกสกรีน ขนาดบล็อก หรือคิดราคาตามจำนวนบล็อก', () => {
+test('สกรีนมีแค่ DTF (เดิมเรียก DFT): ไม่มีบล็อกสกรีน ขนาดบล็อก หรือคิดราคาตามจำนวนบล็อก', () => {
   assert.deepEqual(hits(/บล็อกสกรีน|ขนาดบล็อก|บล็อกแยก|ต่อบล็อก/g), [])
   /* DFT วิธีเดียว ไม่คิดตามจำนวนสี · ไม่มีค่าเร่ง */
   assert.deepEqual(hits(/เลือกวิธีสกรีน|วิธีสกรีนที่เหมาะ|จำนวนสีและขนาดลาย|ความเร่งของกำหนดส่ง/g), [])
   const lead = read('src/data/lead-times.json')
-  assert.equal(lead.screen.days, '3–14 วัน')
-  assert.match(lead.screen.more, /สเกลงาน.*จุดสกรีน.*ความยากง่าย/)
+  assert.equal(lead.screen.days, '1–7 วัน') /* 18 พ.ย. 2026 สไลด์ "ขายงานสกรีน DTF": 1–50 ตัว 1–2 วัน … 101–300 ตัว 7 วัน */
+  assert.match(lead.screen.more, /1–50 ตัว 1–2 วัน.*101–300 ตัว 7 วัน/)
 })
 
 test('เวลาผลิต: เปิดทำการทุกวัน · นับวันถัดจากวันยืนยันแบบ · งานด่วนไม่มีค่าเร่ง · ไม่เหลือจุดเริ่มนับแบบเก่า', () => {

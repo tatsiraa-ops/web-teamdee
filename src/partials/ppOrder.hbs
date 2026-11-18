@@ -14,7 +14,8 @@
       {{#if pp.order.payment.p.length}}
       <div class="bg-paper border border-line rounded-plate p-6">
         <h3 class="text-[19px]">{{pp.order.payment.h}}</h3>
-        <p class="hp-reply hp-pay">{{site.payLine}}</p>
+        {{!-- สกรีน DTF มีแผนชำระของตัวเอง (มัดจำขึ้นแบบ 300 → 50%) อยู่ในขั้นตอนแล้ว · 18 พ.ย. --}}
+        {{#unless screenPage}}<p class="hp-reply hp-pay">{{site.payLine}}</p>{{/unless}}
         <ul class="mt-3 space-y-2.5">{{#each pp.order.payment.p}}<li class="pp-dot">{{this}}</li>{{/each}}</ul>
       </div>
       {{/if}}
@@ -23,7 +24,7 @@
         <div class="nb__row"><label class="nb__lbl" for="nbDate">ต้องใช้เสื้อวันที่</label><input class="nb__in" id="nbDate" type="date"></div>
         <div class="nb__out" id="nbOut" role="status" aria-live="polite"><p class="nb__hint">เลือกวัน แล้วดูว่าต้องยืนยันแบบภายในวันไหน</p></div>
       </div>
-      {{> nbHow cls="nb-how--order"}}
+      {{> nbHow cls="nb-how--order" rush=screenPage.S.rush}}
     </div>
   </div>
 </section>

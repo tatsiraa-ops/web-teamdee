@@ -98,7 +98,7 @@ test('ไม่มีคำว่าโรงงานบนหน้าเว�
 test('JS ที่หน้าเว็บจริงโหลด ไม่มีข้อความ [วงเล็บ] รอยืนยัน', () => {
   const srcs = new Set(pages.filter((p) => !CMS.has(p.route)).flatMap((p) => [...p.html.matchAll(/<(?:script|link)[^>]+(?:src|href)="\/(assets\/[^"]+\.js)"/g)].map((m) => m[1])))
   assert.ok(srcs.size > 0)
-  const bad = [...srcs].flatMap((f) => (readFileSync(join(dist, f), 'utf8').match(/\[[^\[\]\n]{0,60}[\u0e00-\u0e7f][^\[\]\n]{0,60}\]/g) || []).filter((m) => !m.startsWith('["') && !m.startsWith('[{')).map((m) => `${f}: ${m}`))
+  const bad = [...srcs].flatMap((f) => (readFileSync(join(dist, f), 'utf8').match(/\[[^\[\]\n]{0,60}[\u0e00-\u0e7f][^\[\]\n]{0,60}\]/g) || []).filter((m) => !/^\[["{\d]/.test(m)) /* อาร์เรย์ข้อมูล (สตริง ออบเจกต์ ตัวเลข เช่นช่วงวันผลิต [1,50,"1–2 วัน"]) ไม่ใช่วงเล็บรอยืนยัน */.map((m) => `${f}: ${m}`))
   assert.deepEqual(bad, [])
 })
 

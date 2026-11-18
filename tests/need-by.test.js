@@ -15,7 +15,7 @@ test('ตัวช่วยวันที่: บวกลบวันข้า
   assert.equal(addDays('2027-03-01', -1), '2027-02-28')
   assert.equal(maxDays(lead.print.days), 20)
   assert.equal(maxDays(lead.polo.days), 15)
-  assert.equal(maxDays(lead.screen.days), 14)
+  assert.equal(maxDays(lead.screen.days), 7) /* 18 พ.ย. 2026 สกรีน DTF 1–7 วัน (ไม่เกิน 300 ตัว) */
   assert.equal(maxDays(lead.season), 7, 'ช่วงคิวแน่นใช้ตัวบนของ 5–7 วัน')
   assert.equal(maxDays(lead.rush), 7, 'งานด่วนเร็วสุด 7 วัน')
   assert.equal(thaiDate('2026-11-09'), '9 พ.ย. 2569')
@@ -34,7 +34,7 @@ test('ok: นอกช่วงคิวแน่น วันยืนยัน
   assert.equal(r.approveBy, '2026-03-26')
   assert.equal(r.season, false)
   assert.equal(r.buffer, 0)
-  assert.equal(planNeedBy('2026-04-15', '2026-03-01', lead, 'screen').approveBy, '2026-04-01')
+  assert.equal(planNeedBy('2026-04-15', '2026-03-01', lead, 'screen').approveBy, '2026-04-08')
   assert.equal(planNeedBy('2026-04-15', '2026-03-01', lead, 'polo').approveBy, '2026-03-31')
 })
 

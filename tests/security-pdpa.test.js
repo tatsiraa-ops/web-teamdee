@@ -25,7 +25,7 @@ test('ฟอร์มติดต่อ: maxlength ตรงกับที่�
   for (const id of ['cName', 'cTel', 'cOrg', 'cMail', 'cOrder']) assert.match(contact, new RegExp(`id="${id}"[^>]*maxlength="200"`), id)
   assert.match(contact, /<textarea[^>]*id="cNote"[^>]*maxlength="3000"/)
   assert.match(php, /0, \$long \? 3000 : 200\)/)
-  assert.match(contact, /ขั้นต่ำ 10 ตัว \(เสื้อสกรีนเริ่ม 1 ตัว\)/)
+  assert.match(contact, /ขั้นต่ำ 10 ตัว \(เสื้อสกรีน DTF เริ่ม 5 ตัว\)/)
 })
 
 test('ธีม: security headers ผ่าน send_headers · Reply-To ไม่ต่อชื่อดิบ · หน้าขอบคุณไม่รับ //host', () => {

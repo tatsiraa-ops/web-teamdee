@@ -42,7 +42,8 @@ test('วิธีชำระที่ยืนยันแล้ว (30 ต.�
   const site = JSON.parse(read('src/data/site.json'))
   assert.equal(site.payLine, 'มัดจำ 50% · โอน / PromptPay · บัตร Visa / Mastercard · วางบิลได้')
   assert.match(read('src/partials/ppOrder.hbs'), /<p class="hp-reply hp-pay">\{\{site\.payLine\}\}<\/p>/)
-  assert.match(read('site/calculations/index.html'), /<p class="hp-reply hp-pay">\{\{site\.payLine\}\}<\/p>/)
+  /* 18 พ.ย. สกรีน DTF มัดจำขึ้นแบบ 300 → calc-page.js เปลี่ยนบรรทัดนี้ตอนเลือกสกรีน (id="sPayLine") */
+  assert.match(read('site/calculations/index.html'), /<p class="hp-reply hp-pay" id="sPayLine">\{\{site\.payLine\}\}<\/p>/)
   assert.match(read('src/data/faq.json'), /มัดจำ 50% ก่อนเริ่มผลิตทุกงาน[^"]*โอนเงิน PromptPay/)
 })
 

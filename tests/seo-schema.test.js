@@ -35,7 +35,7 @@ test('A4: openingHoursSpec แปลงหลายช่วง · priceRange �
   ])
   assert.deepEqual(openingHoursSpec(''), [])
   const prices = JSON.parse(readFileSync(new URL('../src/data/prices.json', import.meta.url), 'utf8'))
-  assert.equal(priceRangeOf(prices), '฿170–390 ต่อตัว')
+  assert.equal(priceRangeOf(prices), '฿145–390 ต่อตัว')
   const b = businessSchema({ brand: 'TEAMDEE', baseUrl: 'https://team-dee.com', address: 'x', ogImage: '/a.jpg' }, { priceRange: '฿170–390 ต่อตัว' })
   assert.equal(b.priceRange, '฿170–390 ต่อตัว')
 })
@@ -112,7 +112,10 @@ test('A5: productSchema · ช่วงราคา + ขั้นต่ำจ�
   assert.deepEqual(polo.brand, { '@type': 'Brand', name: 'TEAMDEE' })
   assert.equal(polo.image, 'https://team-dee.com/img/a.jpg')
   assert.deepEqual(polo.offers, { '@type': 'AggregateOffer', priceCurrency: 'THB', lowPrice: 170, highPrice: 390, eligibleQuantity: { '@type': 'QuantitativeValue', minValue: 10, unitText: 'ตัว' }, url: 'https://team-dee.com/embroidery/', seller: { '@id': 'https://team-dee.com/#business' } })
-  assert.equal(productSchema({ id: 'screen', name: 'สกรีน' }, prices, site, '/screen-printing/').offers.eligibleQuantity.minValue, 1)
+  assert.equal(productSchema({ id: 'screen', name: 'สกรีน' }, prices, site, '/screen-printing/').offers.eligibleQuantity.minValue, 5)
+  /* 18 พ.ย. 2026 สกรีน DTF: ช่วงราคา = เสื้อ C32 + สกรีนจุดแรก (145–245) ไม่รวม Oversize/จุดเพิ่ม */
+  const sc = productSchema({ id: 'screen', name: 'สกรีน' }, prices, site, '/screen-printing/').offers
+  assert.equal(sc.lowPrice, 145); assert.equal(sc.highPrice, 245)
   assert.equal(productSchema({ id: 'print', name: 'พิมพ์ลาย' }, prices, site, '/sublimation/'), null)
   assert.equal(productSchema({ id: 'warmup', name: 'วอร์ม' }, prices, site, '/x/'), null)
   assert.equal(polo.aggregateRating, undefined); assert.equal(polo.review, undefined)

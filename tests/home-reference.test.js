@@ -9,8 +9,8 @@ test('FAQ หน้าแรกครบ 11 ข้อ คำถามตาม�
   assert.deepEqual(home.faq.items.map(([q]) => q), source.faq.map(([q]) => q))
   const text = home.faq.items.map(([, a]) => a).join(' ')
   assert.doesNotMatch(text, /แคตตาล็อก|Lot 2/)
-  assert.match(text, /เสื้อสกรีนเริ่มสั่งได้ 1 ตัว/)
-  assert.match(text, /10–15 วัน.*15–20 วัน.*3–14 วัน/)
+  assert.match(text, /เสื้อสกรีน DTF เริ่ม 5 ตัว/) /* 18 พ.ย. 2026 สไลด์สกรีน DTF */
+  assert.match(text, /10–15 วัน.*15–20 วัน.*1–7 วัน/)
   assert.match(text, /รับบัตรเครดิต Visa \/ Mastercard/)
   /* เทียบข้อความ ไม่สนแท็กห่อคำกันตัดบรรทัด (<span class="whitespace-nowrap">) */
   const markup = read('src/partials/homeReference-faq.hbs').replace(/<span class="whitespace-nowrap">([^<]*)<\/span>/g, '$1')

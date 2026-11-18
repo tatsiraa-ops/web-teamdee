@@ -1,0 +1,26 @@
+{{!-- ราคาเสื้อสกรีน DTF (18 พ.ย. 2026 · สไลด์ "ขายงานสกรีน DTF" 17 พ.ย.) · ตารางโชว์ครบ ไม่ซ่อน · ตัวอย่างคำนวณด้วย screen-price.js ตอน build --}}
+<section class="wrap section screen-price" id="price">
+  <header class="screen-heading"><span class="eyebrow">ราคา</span><h2 class="t-display">{{pp.price.h}}</h2><p class="t-lead">ราคาต่อตัวรวม VAT 7% ตามขนาดลายและจำนวน · ขั้นต่ำ {{screenPage.S.minQty}} ตัว</p></header>
+  {{> screenTable t=screenPage.own}}
+  <div class="screen-how">
+    <h3>คิดราคา 3 ขั้น</h3>
+    <ol>
+      <li>ลายที่ใหญ่ที่สุดเป็นจุดแรก ดูราคาเสื้อ + สกรีนจากตารางด้านบน</li>
+      <li>บวกจุดที่ 2–3 ตามขนาด จากตารางจุดเพิ่มด้านล่าง</li>
+      <li>ใช้ช่วงราคาตามจำนวนรวมทั้งออเดอร์ ลายเดียวกันต่างไซซ์หรือต่างสีเสื้อรวมจำนวนได้</li>
+    </ol>
+  </div>
+  {{> screenTable t=screenPage.extra}}
+  <p class="screen-note">สั่ง {{screenPage.S.minQty}}–{{screenPage.S.shipping.upTo}} ตัว ใช้ราคาจุดเพิ่มช่อง {{screenPage.extra.head.[0]}} ตัว · สูงสุด {{screenPage.S.extra.maxSpots}} จุดต่อตัว</p>
+  <div class="screen-examples">{{#each screenPage.examples}}<article class="screen-ex"><h3>ตัวอย่าง {{this.t}}</h3><ul>{{#each this.lines}}<li>{{this}}</li>{{/each}}</ul><p><b>{{this.unit}} บาท/ตัว</b> · รวม {{this.total}} บาท</p></article>{{/each}}</div>
+  <ul class="screen-terms">
+    <li>Oversize C20 +{{screenPage.S.shirts.[1].add}} บาท/ตัว · ไซซ์ {{screenPage.S.shirts.[0].bigFrom}} ขึ้นไป +{{screenPage.S.shirts.[0].bigAdd}} บาท/ตัว</li>
+    <li>{{screenPage.S.minQty}}–{{screenPage.S.shipping.upTo}} ตัว ใช้ไฟล์พร้อมพิมพ์ ค่าส่ง {{screenPage.S.shipping.fee}} บาท · {{screenPage.S.freeDesignFrom}} ตัวขึ้นไป ออกแบบฟรี ส่งฟรี</li>
+    <li>ใส่ชื่อไม่ซ้ำกัน +{{screenPage.S.nameAdd}} บาท/ชื่อ · ลายต่างกันคิดจำนวนแยก</li>
+    <li>เกิน {{screenPage.S.extra.maxSpots}} จุด ตำแหน่งพิเศษ (ข้างลำตัว ชายเสื้อ) ลายใหญ่กว่า A3 หรือเกิน {{screenPage.S.maxQty}} ตัว ทักทีมดีประเมิน ตอบภายใน 1 วัน</li>
+  </ul>
+  <div class="screen-lead"><h3>วันผลิต <span>นับจากยืนยันแบบ + จ่ายมัดจำ · ไม่นับวันอาทิตย์</span></h3>
+    <ul>{{#each screenPage.lead}}<li><b>{{this.q}}</b> {{this.d}}</li>{{/each}}<li><b>{{screenPage.S.leadMore}}</b></li></ul>
+    <p>{{screenPage.S.rush}}</p></div>
+  <div class="screen-price__cta"><a class="btn btn-orange" href="{{{screenPage.calcHref}}}">คำนวณราคาสกรีนของคุณ</a><a class="btn btn-line" href="{{quoteLine}}" data-track="line">ส่งลายให้ทีมดีคิดราคา</a></div>
+</section>

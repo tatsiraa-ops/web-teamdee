@@ -17,7 +17,7 @@ test('ท้ายเว็บทุกหน้า: ประโยค "TEAMDEE
 test('/about-us/ กล่องข้อมูลบริษัท: เริ่มดูแลงาน + ขั้นต่ำ', () => {
   const a = read('site/about-us/index.html')
   assert.match(a, /<div><dt>เริ่มดูแลงานเสื้อทีม<\/dt><dd>ปี \{\{site\.foundedYear\}\}<\/dd><\/div>/)
-  assert.match(a, /<div><dt>สั่งขั้นต่ำ<\/dt><dd>\{\{site\.moq\}\} ตัว \(สกรีน DFT เริ่ม 1 ตัว\) · ราคารวม VAT<\/dd><\/div>/)
+  assert.match(a, /<div><dt>สั่งขั้นต่ำ<\/dt><dd>\{\{site\.moq\}\} ตัว \(สกรีน DTF เริ่ม 5 ตัว\) · ราคารวม VAT<\/dd><\/div>/)
 })
 test('หน้าแกลเลอรีแบบเสื้อ: บรรทัดข้อเท็จจริงใต้คำนำ (ขั้นต่ำ · รวม VAT · ส่งฟรี · ดูแบบ 3D) ไม่มีราคา', () => {
   const g = read('src/partials/galleryPage.hbs')

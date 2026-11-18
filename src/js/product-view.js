@@ -59,6 +59,8 @@ export function productView(pp, real, { forWp, has }) {
   v.price = sec({ ...pri, confirmed: !!real.price, factors, need: need && need.items.length ? need : null, box, table: table(pri.table), notes: strs(pri.notes).filter((n) => !forWp || !/รอข้อมูลจริง|รอราคา/.test(n)) }, factors.length > 0 || !!box)
 
   v.quote = sec({ ...pp.quote }, !!pp.quote.h)
+  /* 18 พ.ย. 2026 สกรีน DTF: สกรีนบนเสื้อของคุณ (screen.json page.ownShirt · screenCustomer.hbs) */
+  v.ownShirt = pp.ownShirt || null
 
   const pro = pp.production
   const proCards = pro.cards.filter((c) => ok(c.h)).map(card)

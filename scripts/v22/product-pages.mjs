@@ -1,5 +1,6 @@
 /* แปลงเนื้อหาหน้าสินค้า 6 หน้าจาก Wireframe v22 (docs/spec/teamdee-v22/extracted/products.json) → src/data/product-pages.json
    รัน: node scripts/v22/product-pages.mjs · ไฟล์ผลลัพธ์แก้มือต่อได้ แต่ถ้ารันใหม่จะทับ
+   18 พ.ย. 2026: หน้าสกรีนเขียนใหม่ตามสไลด์ "ขายงานสกรีน DTF" ใน src/content/product/screen.json (สเปก docs/superpowers/specs/2026-11-18-screen-dtf-pricing-design.md) · ห้ามรันทับ screen
 
    กติกา (PLAN ข้อ 5 · START-HERE v22 ข้อ 5)
    - คำสัญญาที่ v22 ระบุว่ายังต้องยืนยัน (ตัวอย่างผ้าฟรี มัดจำ 50% แจ้งปัญหา 7 วัน รับบัตรเครดิต) → [รอยืนยัน: …]
@@ -191,7 +192,7 @@ for (const [wid, pid] of Object.entries(ID)) {
 const LEAD = JSON.parse(readFileSync(join(root, 'src/data/lead-times.json'), 'utf8'))
 const leadText = (l) => `${l.days} ${LEAD.start}`
 /* ประโยค FAQ: ชื่องานบอก DFT แล้ว ตัวเลขไม่ต้องซ้ำคำ · ชื่อที่ลงท้ายด้วยอักษรละตินเว้นวรรคก่อนคำไทย */
-const faqLead = (l) => `${l.tech}${/[A-Za-z]$/.test(l.tech) ? ' ' : ''}ใช้เวลาผลิตประมาณ ${l.days.replace(/^DFT\s*/, '')} ${LEAD.start} (${LEAD.deposit}) ${LEAD.open} ${LEAD.season} ${LEAD.rush}`
+const faqLead = (l) => `${l.tech}${/[A-Za-z]$/.test(l.tech) ? ' ' : ''}ใช้เวลาผลิตประมาณ ${l.days.replace(/^DTF\s*/, '')} ${LEAD.start} (${LEAD.deposit}) ${LEAD.open} ${LEAD.season} ${LEAD.rush}`
 for (const [pid, page] of Object.entries(out)) {
   const l = LEAD[pid]
   if (!l?.days) continue
@@ -227,12 +228,12 @@ const FAQ = JSON.parse(readFileSync(join(root, 'src/data/faq.json'), 'utf8'))
 const sc = out.screen
 Object.assign(sc.hero, {
   h1: 'รับทำเสื้อสกรีน\nให้ลายของคุณอยู่บนเสื้อที่ใช่',
-  lead: 'เสื้อคอตตอนสำหรับบริษัท ทีมงาน และกิจกรรม เลือก Premium C32 หรือ Oversize C20 พร้อมสกรีน DFT',
-  make: 'ไม่มีขั้นต่ำ · ผลิต 3–14 วัน ตามสเกล จุดสกรีน และความยากง่าย',
+  lead: 'เสื้อคอตตอนสำหรับบริษัท ทีมงาน และกิจกรรม เลือก Premium C32 หรือ Oversize C20 พร้อมสกรีน DTF',
+  make: 'ขั้นต่ำ 5 ตัว · ผลิต 1–7 วัน (ไม่เกิน 300 ตัว)',
 })
 for (const f of sc.hero.facts) {
   if (f.k === 'ขั้นต่ำ') f.v = '1 ตัว'
-  if (/ผลิต/.test(f.k)) f.v = '3–14 วัน ตามสเกลงานและจุดสกรีน'
+  if (/ผลิต/.test(f.k)) f.v = '1–7 วัน (ไม่เกิน 300 ตัว)'
 }
 sc.toc.splice(sc.toc.findIndex((t) => t.key === 'faq'), 0, { t: 'ขั้นตอนสั่ง', key: 'order' })
 sc.price.factorsTitle = 'เลือกทรง จำนวน และจุดที่ต้องการ'
@@ -240,7 +241,7 @@ sc.price.factors = ['ราคาปกติ รวม VAT 7% ทุกไซ�
 sc.order.steps = [
   { h: 'เลือกเสื้อและส่งลาย', p: 'บอกทรง สี จำนวน ขนาดลาย ตำแหน่ง และวันที่ต้องใช้ เพื่อสรุปราคา' },
   { h: 'ออกแบบและยืนยัน', p: 'ออกแบบฟรี ปรับแบบได้ไม่จำกัดก่อนยืนยัน' },
-  { h: 'ผลิตและส่งถึงทีม', p: 'ชำระ 50% ก่อนผลิต ใช้เวลา 3–14 วันตามสเกล จุดสกรีน และความยากง่าย ชำระส่วนที่เหลือก่อนจัดส่ง' },
+  { h: 'ผลิตและส่งถึงทีม', p: 'มัดจำขึ้นแบบ 300 บาท สั่งผลิตจ่าย 50% ผลิต 1–7 วัน (ไม่เกิน 300 ตัว) ส่วนที่เหลือก่อนจัดส่ง' },
 ]
 sc.order.payment.p = [
   'ชำระ 50% ก่อนผลิต และอีก 50% เมื่อผลิตเสร็จก่อนจัดส่ง',

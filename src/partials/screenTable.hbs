@@ -1,0 +1,7 @@
+{{!-- ตารางราคาสกรีน DTF (ขนาดลาย × ช่วงจำนวน) · ข้อมูลจาก screenPage (src/build/pages/products.js) · มือถือเลื่อนข้างในกรอบ --}}
+<div class="ptable screen-table" tabindex="0" role="region" aria-label="{{t.caption}} เลื่อนซ้ายขวาได้">
+  <table id="{{t.id}}"><caption>{{t.caption}}</caption>
+    <thead><tr><th scope="col">ลาย / จำนวน (ตัว)</th>{{#each t.head}}<th scope="col">{{this}}</th>{{/each}}</tr></thead>
+    <tbody>{{#each t.rows}}<tr><th scope="row">{{this.size}} <span>{{this.cm}} ซม.</span></th>{{#each this.prices}}<td>{{this}}</td>{{/each}}</tr>{{/each}}</tbody>
+  </table>
+</div>

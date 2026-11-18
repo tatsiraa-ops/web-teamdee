@@ -20,9 +20,10 @@ test('llms.txt: หัว + ข้อมูลบริษัทจาก site.j
 
 test('llms.txt: เงื่อนไข + ราคาเริ่มต้นจาก prices.json · ไม่มีราคาพิมพ์ลาย', () => {
   assert.match(t, /ขั้นต่ำ 10 ตัว/); assert.match(t, /รวม VAT/); assert.match(t, /มัดจำ 50%/)
+  assert.match(t, /\(สกรีน DTF เริ่ม 5 ตัว\)/); assert.match(t, /สกรีน 2XL ขึ้นไป \+20/); assert.doesNotMatch(t, /DFT|เริ่ม 1 ตัว/)
   assert.match(t, /โปโลปัก[^\n]*จูติ 220[^\n]*ดรายเทค 390/)
-  assert.match(t, /สกรีน DFT[^\n]*เริ่ม 1 ตัว[^\n]*290/)
-  assert.match(t, /สกรีน DFT[^\n]*Premium C32 290 · Oversize C20 320 บาท\/ตัว/, 'ราคาสกรีนบอกว่าเป็นเสื้อรุ่นไหน (code review 17 พ.ย.)')
+  assert.match(t, /สกรีน DTF[^\n]*เริ่ม 5 ตัว[^\n]*220/)
+  assert.match(t, /- สกรีน DTF เริ่ม 5 ตัว: Premium C32 220 · Oversize C20 250 บาท\/ตัว \(5–20 ตัว · รวมสกรีน 1 จุด · ลาย A7–A4\)/, 'ราคาสกรีนบอกว่าเป็นเสื้อรุ่นไหน (code review 17 พ.ย.)')
   assert.match(t, /เบสบอล[^\n]*359/)
   assert.doesNotMatch(t, /279|329/, 'ไม่มีราคาพิมพ์ลาย')
   assert.match(t, /งานปัก 10–15 วัน/); assert.match(t, /งานด่วนเร็วสุด 7 วัน/)

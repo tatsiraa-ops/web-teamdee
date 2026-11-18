@@ -3,7 +3,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
 import { promoTrigger, promoDue } from '../src/js/promo.js'
-import { priceSummary } from '../src/js/prices.js'
+import { priceSummary, bandsOf } from '../src/js/prices.js'
 import { quietFloats } from '../src/js/nudge.js'
 import { HERO_CTA } from '../src/js/mobile-ui.js'
 import { buildSource } from './lib/build-source.js'
@@ -15,10 +15,12 @@ const pages = productPages()
 const uses = usePages()
 const entries = (o) => Object.entries(o).filter(([k]) => k[0] !== '_')
 
-test('สกรีนไม่มีมัดจำออกแบบ (อาร์ตเคาะ 2 พ.ย.) · ยังมัดจำ 50% ก่อนผลิต', () => {
+/* 18 พ.ย. 2026 สไลด์ "ขายงานสกรีน DTF": สกรีนเปลี่ยนเป็นมัดจำขึ้นแบบ 300 (หักคืน) → สั่งผลิตจ่าย 50% → ที่เหลือก่อนส่ง · คำว่า "มัดจำออกแบบ" ยังห้าม */
+test('สกรีนไม่มีมัดจำออกแบบ (อาร์ตเคาะ 2 พ.ย.) · มัดจำขึ้นแบบ 300 + สั่งผลิต 50% (18 พ.ย.)', () => {
   for (const f of ['src/data/prices.json', 'src/data/faq.json']) assert.doesNotMatch(read(f), /มัดจำออกแบบ|มัดจำ 500/, f)
   assert.doesNotMatch(JSON.stringify(productPages()), /มัดจำออกแบบ|มัดจำ 500/, 'src/content/product (เดิม product-pages.json)')
-  assert.match(JSON.stringify(pages.screen.order), /ชำระ 50% ก่อนผลิต/)
+  assert.match(JSON.stringify(pages.screen.order), /มัดจำขึ้นแบบ 300 บาท/)
+  assert.match(JSON.stringify(pages.screen.order), /50%/)
 })
 
 test('ไม่มีข้อความติดลบตัวเอง', () => {
@@ -68,7 +70,8 @@ test('สรุปราคา 3 แถวใต้ hero: เรียงจา�
     assert.equal(s.rows.length, 3, id)
     const n = s.rows.map((r) => Number(r.price.replace(/,/g, '')))
     assert.ok(n[0] >= n[1] && n[1] >= n[2], `${id}: ${n}`)
-    assert.equal(n[0], P.products[id].bands.find((b) => Number.isFinite(b.price[P.products[id].cols[0].id])).price[P.products[id].cols[0].id], id)
+    /* 18 พ.ย. 2026 สกรีน DTF เก็บเป็นเมทริกซ์ → อ่านแถวราคาผ่าน bandsOf เหมือนหน้าเว็บ */
+    assert.equal(n[0], bandsOf(P.products[id]).find((b) => Number.isFinite(b.price[P.products[id].cols[0].id])).price[P.products[id].cols[0].id], id)
   }
   assert.equal(priceSummary(P, 'warmup'), null)
 })

@@ -1,0 +1,11 @@
+{{!-- สกรีนบนเสื้อของคุณ (18 พ.ย. 2026 · อาร์ตเปิดบนเว็บ) · ข้อความ src/content/product/screen.json page.ownShirt · ราคา prices.json customer --}}
+<section class="screen-own" id="own-shirt"><div class="wrap section">
+  <header class="screen-heading"><span class="eyebrow">เสื้อของคุณ</span><h2 class="t-display">{{pp.ownShirt.h}}</h2><p class="t-lead">{{pp.ownShirt.p}}</p></header>
+  {{> screenTable t=screenPage.customer}}
+  <div class="screen-own__fabrics">
+    <div><h3>สกรีนได้</h3><ul>{{#each pp.ownShirt.ok}}<li>{{this}}</li>{{/each}}</ul></div>
+    <div><h3>ได้ แต่มีข้อควรระวัง</h3><ul>{{#each pp.ownShirt.careful}}<li>{{this}}</li>{{/each}}</ul></div>
+    <div><h3>ไม่รับ</h3><ul>{{#each pp.ownShirt.no}}<li>{{this}}</li>{{/each}}</ul></div>
+  </div>
+  <ul class="screen-terms">{{#each pp.ownShirt.notes}}<li>{{this}}</li>{{/each}}</ul>
+</div></section>

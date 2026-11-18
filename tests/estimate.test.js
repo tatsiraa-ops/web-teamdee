@@ -9,13 +9,15 @@ const P = JSON.parse(readFileSync(new URL('../src/data/prices.json', import.meta
 const K = calcKinds(P)
 const at = (kind, qty, more = {}) => estimate(K, { kind, qty, ...more })
 
-test('ขั้น 1 แยกสกรีน Premium/Oversize พร้อมราคาที่ขั้นต่ำของแต่ละสินค้า', () => {
-  assert.deepEqual(K.kinds.map((k) => k.id), ['polo', 'round', 'collar', 'baseball', 'jersey', 'screen', 'screen-oversize'])
-  assert.deepEqual(K.kinds.map((k) => k.name), ['โปโลปัก', 'พิมพ์ลายคอกลม/คอวี', 'พิมพ์ลายคอปก', 'เบสบอล', 'Jersey Oversize', 'สกรีน Premium', 'สกรีน Oversize'])
-  assert.deepEqual(K.kinds.map((k) => k.from ?? null), [220, 279, 329, 359, 359, 290, 320])
+/* 18 พ.ย. 2026 สกรีน DTF: การ์ดเดียว "เสื้อสกรีน DTF" (เลือกเสื้อ/บริการ/ขนาดลายในแผงสกรีน) · ราคาเริ่ม 220 ที่ 5 ตัว */
+test('ขั้น 1 การ์ดสินค้า + ราคาที่ขั้นต่ำของแต่ละสินค้า · สกรีนการ์ดเดียว', () => {
+  assert.deepEqual(K.kinds.map((k) => k.id), ['polo', 'round', 'collar', 'baseball', 'jersey', 'screen'])
+  assert.deepEqual(K.kinds.map((k) => k.name), ['โปโลปัก', 'พิมพ์ลายคอกลม/คอวี', 'พิมพ์ลายคอปก', 'เบสบอล', 'Jersey Oversize', 'เสื้อสกรีน DTF'])
+  assert.deepEqual(K.kinds.map((k) => k.from ?? null), [220, 279, 329, 359, 359, 220])
   const screen = K.kinds.at(-1)
   assert.equal(screen.byDesign, undefined)
-  assert.equal(screen.minQty, 1)
+  assert.equal(screen.minQty, 5)
+  assert.equal(screen.screen, P.products.screen)
   assert.equal(K.minQty, 10)
 })
 
@@ -33,7 +35,7 @@ test('โปโลมีแถวเลือกผ้า: จูติเป็
 })
 
 test('ออปชันใช้กับพิมพ์ลายและโปโล · เบสบอล/Jersey/สกรีนไม่มี (prices.json ไม่ได้ตั้ง options)', () => {
-  assert.deepEqual(K.kinds.map((k) => k.options), [true, true, true, false, false, false, false])
+  assert.deepEqual(K.kinds.map((k) => k.options), [true, true, true, false, false, false])
 })
 
 test('บรรทัดราคาหัวหน้าสร้างจากข้อมูล (calc-06)', () => {
@@ -82,14 +84,23 @@ test('ช่วงที่ยังไม่มีราคา (เบสบอ
   assert.equal(at('jersey', 999).unit, 230)
 })
 
-test('สกรีนใช้ราคาปกติ รวมจุดแรก เริ่ม 1 ตัว และเกินตารางต้องขอราคา', () => {
-  assert.equal(at('screen', 1).total, 290)
-  assert.equal(at('screen', 30).total, 8400)
-  assert.equal(at('screen-oversize', 30).total, 9300)
-  assert.equal(at('screen', 500).unit, 220)
-  assert.equal(at('screen', 501).ok, false)
-  assert.equal(at('screen', 0).belowMin, true)
-  assert.equal(readCalcQuery(K, '?kind=screen&qty=1').qty, 1)
+test('สกรีน DTF: ราคาตามสไลด์ (screen-price.js) · ขั้นต่ำ 5 / เสื้อของคุณ 20 · เกิน 1,000 ทักประเมิน · ลิงก์เดิม', () => {
+  assert.equal(at('screen', 35, { spots: ['A4'], big: 3 }).total, 7410)
+  assert.equal(at('screen', 30, { shirt: 'oversize', spots: ['A7'] }).unit, 220)
+  assert.equal(at('screen', 40, { service: 'customer', spots: ['A4', 'A7'] }).total, 3400)
+  assert.equal(at('screen', 30).unit, 210, 'ไม่ระบุลาย = A4 จุดเดียว')
+  assert.equal(at('screen', 4).belowMin, true)
+  const low = at('screen', 10, { service: 'customer' }); assert.equal(low.belowMin, true); assert.equal(low.minQty, 20)
+  const big = at('screen', 1001); assert.equal(big.ok, false); assert.equal(big.ask, 'ทักทีมดีประเมิน')
+  assert.equal(readCalcQuery(K, '?kind=screen&qty=1').qty, null)
+  assert.deepEqual(readCalcQuery(K, '?kind=screen-oversize&qty=30'), { kind: 'screen', qty: 30, fabric: null, options: [], service: 'own', shirt: 'oversize', spots: ['A4'], big: 0 })
+  assert.equal(readCalcQuery(K, '?kind=screen&svc=customer&qty=10').qty, null)
+  const s = { kind: 'screen', qty: 120, fabric: null, options: [], service: 'own', shirt: 'premium', spots: ['A3', 'A7', 'A7'], big: 4 }
+  assert.equal(calcSearch(K, s), '?kind=screen&qty=120&spots=A3,A7,A7&big=4')
+  assert.deepEqual(readCalcQuery(K, calcSearch(K, s)), s)
+  const c = { kind: 'screen', qty: 40, fabric: null, options: [], service: 'customer', shirt: 'premium', spots: ['A4'], big: 0 }
+  assert.equal(calcSearch(K, c), '?kind=screen&qty=40&svc=customer&spots=A4')
+  assert.equal(calcSearch(K, { ...s, shirt: 'oversize', big: 0 }), '?kind=screen&qty=120&shirt=oversize&spots=A3,A7,A7')
 })
 
 test('ต่ำกว่าขั้นต่ำหรือไม่ใช่จำนวนเต็ม ไม่คิดราคา', () => {
@@ -122,9 +133,12 @@ test('"สั่งเพิ่มอีก N ตัวจะถูกลง" �
 })
 
 test('ไม่มีจำนวนไหนตกสองช่วงหรือไม่มีช่วง ทุกสินค้าที่มีราคา (calc-11)', () => {
-  for (const k of K.kinds.filter((x) => !x.byDesign)) {
+  for (const k of K.kinds.filter((x) => !x.byDesign && !x.screen)) {
     for (let q = 10; q <= 2500; q++) assert.ok(at(k.id, q).band, `${k.id} ${q}`)
   }
+  /* สกรีน DTF: ตารางถึง 1,000 ตัว (สไลด์ 17 พ.ย. 2026) · เกินนั้นทักทีมดีประเมิน (ไม่มีช่วง · มี ask) */
+  for (let q = 5; q <= 1000; q++) assert.ok(at('screen', q).band, `screen ${q}`)
+  assert.equal(at('screen', 1001).band, null); assert.equal(at('screen', 1001).ask, 'ทักทีมดีประเมิน')
 })
 
 test('อ่านค่าจาก URL: kind qty fabric opt · ค่าแปลกทิ้ง · ?band= เดิมใช้ต้นช่วง', () => {
@@ -159,20 +173,29 @@ test('ข้อความ LINE: สินค้า ผ้า จำนวน �
     'ยอดรวม: 7,500 บาท (รวม VAT 7%)',
   ].join('\n'))
   assert.doesNotMatch(t, /ชื่อ|เบอร์|อีเมล|โทร/)
-  const sc = lineText(at('screen', 40))
-  assert.match(sc, /สินค้า: สกรีน/)
-  assert.match(sc, /จำนวน: 40 ตัว/)
-  assert.match(sc, /รวมสกรีน 1 จุด/)
-  assert.match(sc, /ยอดรวม: 11,200 บาท/)
+  assert.equal(lineText(at('screen', 20, { spots: ['A7', 'A3'], big: 2 })), [
+    'ขอราคาเสื้อจากเครื่องคำนวณบนเว็บ',
+    'สินค้า: เสื้อสกรีน DTF · เสื้อ + สกรีน',
+    'เสื้อ: Premium Cotton C32 Comb',
+    'จำนวน: 20 ตัว',
+    'ลายจุดที่ 1: A3 (30 × 40 ซม.)',
+    'ลายจุดที่ 2: A7 (7 × 10 ซม.)',
+    'ไซซ์ 2XL ขึ้นไป: 2 ตัว',
+    'ราคาต่อตัว: 270 บาท',
+    'ค่าส่ง: 50 บาท',
+    'ยอดรวม: 5,490 บาท (รวม VAT 7%)',
+    'ผลิตประมาณ: 1–2 วัน',
+  ].join('\n'))
+  assert.match(lineText(at('screen', 40, { service: 'customer', spots: ['A4'] })), /สินค้า: เสื้อสกรีน DTF · สกรีนบนเสื้อของคุณ\n(?!เสื้อ:)/)
   assert.match(lineText(at('baseball', 1200)), /ราคาต่อตัว: ขอให้ทีมดีประเมิน/)
 })
 
 test('สรุปที่ส่งไปฟอร์ม (?from=) และแถบล่างมือถือ', () => {
   assert.equal(fromText(at('round', 30)), '/calculations/ · พิมพ์ลายคอกลม/คอวี · 30 ตัว · 230 บาท/ตัว · รวม 6,900 บาท')
   assert.equal(fromText(at('polo', 30, { fabric: 'drytech', options: ['pocket'] })), '/calculations/ · โปโลปัก · ผ้าดรายเทค · 30 ตัว · กระเป๋าอก · 410 บาท/ตัว · รวม 12,300 บาท')
-  assert.equal(fromText(at('screen', 30)), '/calculations/ · สกรีน Premium · 30 ตัว · 280 บาท/ตัว · รวม 8,400 บาท')
+  assert.equal(fromText(at('screen', 30, { spots: ['A4'] })), '/calculations/ · เสื้อสกรีน DTF · Premium C32 · 30 ตัว · ลาย A4 · 210 บาท/ตัว · รวม 6,300 บาท')
   assert.deepEqual(barText(at('round', 30)), { main: '6,900 บาท', sub: '230/ตัว · 30 ตัว' })
-  assert.deepEqual(barText(at('screen', 30)), { main: '8,400 บาท', sub: '280/ตัว · 30 ตัว' })
+  assert.deepEqual(barText(at('screen', 30, { spots: ['A4'] })), { main: '6,300 บาท', sub: '210/ตัว · 30 ตัว' })
   assert.deepEqual(barText(at('round', 5)), { main: 'ขั้นต่ำ 10 ตัว', sub: '' })
 })
 
@@ -186,7 +209,12 @@ test('แถบช่วงราคา (รื้อหน้า 26 ต.ค.): 
   assert.equal(polo[0].unit, 390 + 20)
   assert.equal(polo[1].on, true)
   assert.equal(tiers(at('baseball', 30)).at(-1).unit, null)
-  assert.deepEqual(tiers(at('screen', 30)).map(x => x.unit), [290, 280, 260, 240, 220, null])
+  const st = tiers(at('screen', 30, { spots: ['A4'] }))
+  assert.deepEqual(st.map((x) => x.unit), [220, 210, 190, 175, 160, 150])
+  assert.deepEqual(st.map((x) => x.qty), ['5–20 ตัว', '21–50 ตัว', '51–100 ตัว', '101–300 ตัว', '301–500 ตัว', '501–1,000 ตัว'])
+  assert.deepEqual(st.map((x) => x.on), [false, true, false, false, false, false])
+  /* เสื้อของคุณ: ช่วงเริ่ม 20 · A4 + A7 = 60+25 · 50+20 · 45+20 · 40+15 · 35+15 */
+  assert.deepEqual(tiers(at('screen', 40, { service: 'customer', spots: ['A4', 'A7'] })).map((x) => x.unit), [85, 70, 65, 55, 50])
   assert.ok(tiers(at('round', 5)).every((x) => !x.on))
 })
 

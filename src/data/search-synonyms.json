@@ -41,9 +41,9 @@
     },
     {
       "id": "dft",
-      "label": "สกรีน DFT",
+      "label": "สกรีน DTF",
       "triggers": ["dtf", "dft"],
-      "terms": ["dft", "สกรีน"],
+      "terms": ["dtf", "dft", "สกรีน"],
       "pages": ["products.screen", "guides.screen"]
     },
     {

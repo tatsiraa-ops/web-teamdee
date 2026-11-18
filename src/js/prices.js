@@ -2,7 +2,20 @@
    ใช้ทั้งตอน build (vite.config.js) และในเบราว์เซอร์ (เครื่องคำนวณ /calculations/)
    กติกา (audit 2.2): ทุกราคาที่โชว์ต้องบอกจำนวนที่ราคานั้นใช้ได้ · ช่วงจำนวนเป็นตัวเลข ป้ายสร้างจากตัวเลข ไม่พิมพ์เอง */
 
+import { screenFrom } from './screen-price.js'
+
 const fmt = (n) => Number(n).toLocaleString('en-US')
+
+/** แถวราคาตามช่วงจำนวนของสินค้า · สกรีน DTF (18 พ.ย. 2026) เก็บเป็นเมทริกซ์ขนาดลาย × จำนวน (products.screen.own)
+    → แถว "เริ่ม" ของแต่ละช่วง = ลายราคาต่ำสุด สร้างจากเมทริกซ์ ไม่เก็บตัวเลขซ้ำ (tests/prices.test.js bandsOf) */
+export const bandsOf = (p) => {
+  if (!p?.own) return p?.bands
+  const by = Object.fromEntries(p.cols.map((c) => [c.id, screenFrom(p, c.id)]))
+  return p.own.bands.map(([min, max], i) => ({ min, max, price: Object.fromEntries(p.cols.map((c) => [c.id, by[c.id][i]])) }))
+}
+/* สินค้าที่ฟังก์ชันในไฟล์นี้อ่าน: bands มาจาก bandsOf เสมอ */
+const view = (p) => (p?.own ? { ...p, bands: bandsOf(p) } : p)
+const prod = (P, id) => view(P.products[id])
 
 /** ป้ายช่วงจำนวน "10–20" · "1,001–2,000" · "200 ขึ้นไป" */
 export const bandLabel = (b) => (b.max === null ? `${fmt(b.min)} ขึ้นไป` : `${fmt(b.min)}–${fmt(b.max)}`)
@@ -11,7 +24,7 @@ export const qtyText = (b) => (b.max === null ? `${fmt(b.min)} ตัวขึ�
 /** รหัสช่วงในลิงก์เครื่องคำนวณ (?band=) "10-20" · "200+" */
 export const bandId = (b) => (b.max === null ? `${b.min}+` : `${b.min}-${b.max}`)
 /** ช่วงที่จำนวนนี้ตก · ต่ำกว่าขั้นต่ำ = null */
-export const bandFor = (p, qty) => p.bands.find((b) => qty >= b.min && (b.max === null || qty <= b.max)) || null
+export const bandFor = (p, qty) => bandsOf(p).find((b) => qty >= b.min && (b.max === null || qty <= b.max)) || null
 
 const has = (b, col) => b.price[col] !== null && b.price[col] !== undefined
 /* ปลายแพง = ช่วงแรก · ปลายถูก = ช่วงสุดท้ายที่ยังมีราคา (ช่วงที่ต้องทักถามไม่นับ) */
@@ -31,7 +44,7 @@ const optionsLine = (P) => `เพิ่มต่อตัว: ${P.options.map((
 
 /** ลิงก์เครื่องคำนวณพร้อม ?kind= ตรงสินค้า (ตัวแรกของ calc) · สินค้าที่เครื่องคิดเป็นตัวเลขไม่ได้ = null */
 export const calcHref = (P, id, calcUrl) => {
-  const p = P.products[id]
+  const p = prod(P, id)
   return p && p.bands && p.calc?.length ? `${calcUrl}?kind=${p.calc[0].kind}` : null
 }
 
@@ -41,7 +54,7 @@ export const calcHref = (P, id, calcUrl) => {
     kindOf = สินค้า → ?kind= ของเครื่องคำนวณ (home-plan.js ใช้ส่งโปโลไปโปโล ไม่ใช่คอปกพิมพ์ลาย) */
 export const calcPricing = (P) => {
   const pr = P.products.print
-  const sc = P.products.screen
+  const sc = view(P.products.screen)
   const scFrom = sc.bands?.[0]?.price[sc.cols[0].id]
   const note = scFrom ? `ราคาแยกตามช่วงจำนวนของเสื้อสกรีน · ดูการ์ดสกรีนด้านบน (เริ่ม ${fmt(scFrom)} บาท/ตัว)` : 'ประเมินราคาตามแบบ'
   const bands = pr.bands.map((b) => ({ id: bandId(b), label: bandLabel(b), qty: qtyText(b), min: b.min, max: b.max }))
@@ -58,7 +71,9 @@ export const calcPricing = (P) => {
     แต่ละแบบมีช่วงจำนวนของสินค้าตัวเอง (โปโล 10–50 · พิมพ์ลาย 10–20 · เบสบอล 10–20 ...) · from = ราคาต่อตัวที่จำนวนขั้นต่ำ
     โปโลเลือกผ้าได้ · ผ้าที่ราคาเท่ากันทุกช่วงรวมเป็นชิปเดียว (TC · ทรีคอต · ปีเก้) · ตรรกะคิดราคาอยู่ที่ estimate.js */
 export const calcKinds = (P) => {
-  const kinds = Object.entries(P.products).flatMap(([pid, p]) => (p.calc || []).map((c) => {
+  const kinds = Object.entries(P.products).map(([pid, p]) => [pid, view(p)]).flatMap(([pid, p]) => (p.calc || []).map((c) => {
+    /* 18 พ.ย. 2026 สกรีน DTF: การ์ดเดียว · คิดราคาด้วย screen-price.js (บริการ · เสื้อ · ลาย 1–3 จุด · ไซซ์ใหญ่) · ข้อมูลดิบไปกับ kind.screen */
+    if (p.own) return { id: c.kind, name: c.name, product: pid, minQty: p.minQty, include: p.include?.long, options: false, screen: P.products[pid], from: screenFrom(P.products[pid], p.cols[0].id)[0], ask: p.ask }
     if (!p.bands) return { id: c.kind, name: c.name, product: pid, sub: p.byDesign, byDesign: true, options: false }
     const bands = p.bands.map((b) => ({ min: b.min, max: b.max, label: bandLabel(b), qty: qtyText(b), price: b.price }))
     const at10 = (col) => p.bands[0].price[col] ?? null
@@ -86,7 +101,7 @@ export const calcKinds = (P) => {
 
 /** กล่องราคา + ตาราง + หมายเหตุ ของหน้าสินค้า (P3) · สินค้าที่ยังไม่มีตารางราคา = null */
 export const productPrice = (P, id, { calcUrl } = {}) => {
-  const p = P.products[id]
+  const p = prod(P, id)
   if (!p || !p.bands) return null
   const { hi, lo, col } = ends(p)
   const tailLast = p.bands.at(-1) !== lo ? `${qtyText(p.bands.at(-1))} ${p.ask}` : ''
@@ -121,7 +136,7 @@ export const productPrice = (P, id, { calcUrl } = {}) => {
 
 /** สรุปราคา 3 แถวใต้ hero หน้าสินค้า (ตรวจ UI 2 พ.ย.: ตารางจริงอยู่ลึก 6–7 จอ) · คอลัมน์แรกของตาราง · ต้นช่วง กลาง ปลาย · ไม่มีราคา = null */
 export const priceSummary = (P, id) => {
-  const p = P.products[id]
+  const p = prod(P, id)
   if (!p?.bands) return null
   const col = p.cols[0]
   const priced = p.bands.filter((b) => has(b, col.id))
@@ -136,7 +151,7 @@ export const priceSummary = (P, id) => {
     ทุกช่วงมี caption/status บอกจำนวนที่ราคาใช้ได้ + รวม VAT (audit 2.2) */
 /** ผ้าทุกชนิดในตารางราคา + ราคาต่ำสุด–สูงสุดต่อตัว (ส่วนผ้าหน้าโปโลปัก · ไม่ยุบผ้าราคาเท่ากันแบบ calcKinds) */
 export const fabricRanges = (P, id) => {
-  const p = P.products[id]
+  const p = prod(P, id)
   return p.cols.map((c) => {
     const v = p.bands.filter((b) => has(b, c.id)).map((b) => b.price[c.id])
     return { id: c.id, name: c.name, min: Math.min(...v), max: Math.max(...v) }
@@ -145,7 +160,7 @@ export const fabricRanges = (P, id) => {
 
 export const COMPARE_MIN_COLS = 3
 export const bandCompare = (P, id) => {
-  const p = P.products[id]
+  const p = prod(P, id)
   if (!p || !p.bands || p.cols.length < COMPARE_MIN_COLS) return null
   const vat = P.vatIncluded ? ' · รวม VAT 7%' : ''
   const ask = p.ask || 'ทักถามราคา'
@@ -161,7 +176,7 @@ export const bandCompare = (P, id) => {
 
 /** ราคาในการ์ดบริการหน้าแรก (home-02) · v = ตัวเลขหลักพร้อมจำนวน · sub = บรรทัดเล็ก */
 export const priceFact = (P, id) => {
-  const p = P.products[id]
+  const p = prod(P, id)
   if (!p) return null
   if (!p.bands) return { v: p.byDesign || p.askLine }
   const { hi, lo, col } = ends(p)
@@ -173,7 +188,7 @@ export const priceFact = (P, id) => {
     สินค้าที่มีราคา 2 คอลัมน์ (พิมพ์ลาย: คอกลม / คอปก) บอกว่าเลขนี้เป็นของคอไหน และอีกคอเพิ่มเท่าไร */
 export const heroPrice = (P, id) => {
   const f = priceFact(P, id)
-  const p = P.products[id]
+  const p = prod(P, id)
   if (!f || !p.bands || p.box === 'from' || p.cols.length < 2) return f
   const diff = sameDiff(p)
   return { ...f, sub: [p.cols[0].name, f.sub, diff && `${name(p.cols[1])} +${fmt(diff)}`].filter(Boolean).join(' · ') }
@@ -182,7 +197,7 @@ export const heroPrice = (P, id) => {
 /** ราคาบรรทัดเดียว "220 บาท/ตัว (ผ้าจูติ 10–50 ตัว)" · hero หน้ากลุ่มลูกค้า (audit use-03)
     ราคาที่จำนวนน้อยสุด · หลายคอลัมน์บอกผ้า/คอที่ใช้ราคานี้ · สินค้าที่ไม่มีตารางราคา = null */
 export const priceLine = (P, id) => {
-  const p = P.products[id]
+  const p = prod(P, id)
   if (!p || !p.bands) return null
   const { hi, col } = ends(p)
   return `${fmt(hi.price[col])} บาท/ตัว (${p.cols.length > 1 ? `${name(p.cols[0])} ` : ''}${qtyText(hi)})`
@@ -193,7 +208,7 @@ export const priceLine = (P, id) => {
 export const useQuote = (P, cards, leadTimes, { askHref } = {}) => {
   const rows = cards.map((c) => {
     const id = c.to.split('.')[1]
-    const p = P.products[id]
+    const p = prod(P, id)
     const lead = leadTimes[id]?.days || ''
     const base = { id, h: c.h, p: c.p, to: c.to, lead }
     if (!p) return null
@@ -212,6 +227,6 @@ export const useQuote = (P, cards, leadTimes, { askHref } = {}) => {
       tiers, colNames: multi ? cols.map((c) => name(c)) : [basis || 'ราคา'], basis }
   }).filter(Boolean)
   /* วิธีนับวันผลิต (เปิดทุกวัน · เริ่มนับวันถัดจากยืนยันแบบ · ช่วงคิวแน่น · งานด่วน) ใต้ตาราง */
-  return { rows, foot: `ขั้นต่ำ ${P.minQty} ตัว · เสื้อสกรีนเริ่ม 1 ตัว · ราคานี้รวม ${P.included.join(' · ')}`, leadNote: leadTimes.note || '',
-    notes: [`ขั้นต่ำ ${P.minQty} ตัว`, 'เสื้อสกรีนเริ่ม 1 ตัว', ...P.included] }
+  return { rows, foot: `ขั้นต่ำ ${P.minQty} ตัว · เสื้อสกรีนเริ่ม ${P.products.screen.minQty} ตัว · ราคานี้รวม ${P.included.join(' · ')}`, leadNote: leadTimes.note || '',
+    notes: [`ขั้นต่ำ ${P.minQty} ตัว`, `เสื้อสกรีนเริ่ม ${P.products.screen.minQty} ตัว`, ...P.included] }
 }

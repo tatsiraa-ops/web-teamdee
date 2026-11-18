@@ -39,7 +39,8 @@
 {{#unless pp2.fabric}}{{> ppFabric}}{{/unless}}
 {{> ppDetail}}
 {{/if}}
-{{> ppPrice}}
+{{#if (eq item.id 'screen')}}{{> screenPrice}}
+{{> screenCustomer}}{{else}}{{> ppPrice}}{{/if}}
 {{> ppQuote}}
 {{> ppProduction}}
 {{#if (eq item.id 'screen')}}
@@ -50,7 +51,7 @@
 {{/if}}
 {{#unless pp2.reviews}}{{> ppReviews}}{{/unless}}
 {{#unless (eq item.id 'screen')}}{{> ppClips}}{{/unless}}
-{{#unless pp2.sizes}}{{> ppSize}}{{/unless}}
+{{#unless pp2.sizes}}{{#if (eq item.id 'screen')}}{{> screenSize}}{{else}}{{> ppSize}}{{/if}}{{/unless}}
 {{#unless pp2.steps}}{{> ppOrder}}{{/unless}}
 {{#unless pp2.faq}}{{> ppFaq}}{{/unless}}
 {{> ppUses}}

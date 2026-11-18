@@ -5,6 +5,6 @@
     <li>{{leadTimes.open}} · {{leadTimes.start}}</li>
     <li>{{leadTimes.deposit}}</li>
     <li>{{leadTimes.season}}</li>
-    <li>{{leadTimes.rush}}</li>
+    <li>{{#if rush}}{{rush}}{{else}}{{leadTimes.rush}}{{/if}}</li>
   </ul>
 </details>

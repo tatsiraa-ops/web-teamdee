@@ -46,6 +46,28 @@
           </div>
         </fieldset>
         {{/if}}{{/each}}
+        {{!-- 18 พ.ย. 2026 สกรีน DTF (สไลด์ 17 พ.ย.): บริการ · เสื้อ · ลาย 1–3 จุด · ไซซ์ 2XL+ · ตรรกะราคา screen-price.js · tests/calc-screen-1118.test.js --}}
+        {{#each calculator.kinds}}{{#if this.screen}}
+        <fieldset class="calc__sub calc-screen" data-screen hidden disabled>
+          <legend class="calc__sl">สกรีน DTF <span>· {{{ph this.include}}}</span></legend>
+          <div class="calc__chips" role="radiogroup" aria-label="บริการสกรีน">
+            <label class="choice"><input class="sr-only" type="radio" name="svc" value="own" checked>เสื้อ + สกรีน</label>
+            <label class="choice"><input class="sr-only" type="radio" name="svc" value="customer">สกรีนบนเสื้อของคุณ <span class="opacity-70 font-normal">ขั้นต่ำ {{this.screen.customer.minQty}} ตัว</span></label>
+          </div>
+          <div class="calc__chips" role="radiogroup" aria-label="รุ่นเสื้อ" data-screen-shirt>
+            {{#each this.screen.shirts}}<label class="choice"><input class="sr-only" type="radio" name="shirt" value="{{this.id}}"{{#if @first}} checked{{/if}}>{{this.name}} <span class="opacity-70 font-normal tabular-nums">{{#if this.add}}+{{this.add}} บาท/ตัว{{else}}{{this.colors.length}} สี{{/if}}</span></label>{{/each}}
+          </div>
+          <div class="calc-spots">
+            <div class="calc-spot"><label for="spot1">ลายจุดที่ 1</label><select id="spot1" name="spot">{{#each this.screen.sizes}}<option value="{{this.id}}"{{#if (eq this.id 'A4')}} selected{{/if}}>{{this.id}} · {{this.cm}} ซม. · {{this.use}}</option>{{/each}}</select></div>
+            <div class="calc-spot"><label for="spot2">ลายจุดที่ 2 <span>(ถ้ามี)</span></label><select id="spot2" name="spot">
+              <option value="">ไม่มี</option>{{#each this.screen.sizes}}<option value="{{this.id}}">{{this.id}} · {{this.cm}} ซม. · {{this.use}}</option>{{/each}}</select></div>
+            <div class="calc-spot"><label for="spot3">ลายจุดที่ 3 <span>(ถ้ามี)</span></label><select id="spot3" name="spot">
+              <option value="">ไม่มี</option>{{#each this.screen.sizes}}<option value="{{this.id}}">{{this.id}} · {{this.cm}} ซม. · {{this.use}}</option>{{/each}}</select></div>
+          </div>
+          <div class="calc-big" data-screen-big><label for="big">จำนวนตัวไซซ์ {{this.screen.shirts.[0].bigFrom}} ขึ้นไป <span>+{{this.screen.shirts.[0].bigAdd}} บาท/ตัว</span></label><input id="big" name="big" type="number" inputmode="numeric" min="0" max="99999" step="1" value="0"></div>
+          <p class="calc-note" data-screen-end>ลายที่ใหญ่ที่สุดคิดเป็นจุดแรก (ราคาเสื้อ + สกรีน) · จุดที่ 2–3 คิดตามขนาด · เกิน 3 จุด ตำแหน่งพิเศษ หรือแต่ละตัวสกรีนไม่เท่ากัน ทักทีมดีคิดให้</p>
+        </fieldset>
+        {{/if}}{{/each}}
       </fieldset>
 
       <fieldset class="calc__step">
@@ -88,12 +110,15 @@
           <div><dt>ราคาต่อตัว<span id="sBand"></span></dt><dd id="sBase">–</dd></div>
           <div id="rOpt" hidden><dt>ออปชัน<span id="sOptNames"></span></dt><dd id="sOpt"></dd></div>
           <div><dt>× จำนวน</dt><dd id="sQty">–</dd></div>
+          <div id="rExtra" hidden><dt>บวกเพิ่ม<span id="sExtraNames"></span></dt><dd id="sExtra"></dd></div>
           <div class="slip__total"><dt>ยอดรวม<span>{{#if calculator.vatIncluded}}รวม VAT 7% แล้ว{{else}}ยังไม่รวม VAT{{/if}}</span></dt><dd id="sTotal">–</dd></div>
         </dl>
+        <ul class="slip__lines tabular-nums" id="sLines" hidden></ul>
+        <p class="slip__meta" id="sMeta" hidden></p>
         <p class="slip__next" id="sNext" hidden></p>
         <p class="slip__pending" id="sPending" hidden></p>
       </div>
-      <p class="hp-reply hp-pay">{{site.payLine}}</p>
+      <p class="hp-reply hp-pay" id="sPayLine">{{site.payLine}}</p>
       <div class="slip__btns">
         <a class="cb cb--p cb--2l" id="sLine" href="{{site.lineUrl}}" data-track="line" data-where="calc-summary"><span class="cb__ico" aria-hidden="true">{{> icoLine}}</span><span class="cb__lbl"><span class="cb__t" id="sLineText">ส่งใบประเมินนี้ทาง LINE</span><span class="cb__sub" data-float-status><span class="cb__dot" aria-hidden="true"></span><span data-float-status-t>{{site.hours}}</span></span></span><svg width="24" height="24" class="cb__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <div class="slip__alt">

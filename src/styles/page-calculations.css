@@ -158,3 +158,22 @@
 @media (prefers-reduced-motion: reduce) {
   .calc-stale :is(#sTotal, #sQty, [data-bar-live]) { transition: none; }
 }
+
+/* 18 พ.ย. 2026 แผงสกรีน DTF (site/calculations · calc-page.js) */
+.calc-screen { display: grid; gap: 12px; }
+.calc-screen[hidden] { display: none; }
+.calc-spots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 4px; }
+.calc-spot, .calc-big { display: grid; gap: 6px; min-width: 0; }
+.calc-spot label, .calc-big label { font-size: 14px; font-weight: 700; }
+.calc-spot label span, .calc-big label span { font-weight: 400; color: var(--color-ink-3); }
+.calc-spot select, .calc-big input { width: 100%; min-height: 48px; padding: 8px 12px; border: 2px solid var(--color-field); border-radius: 12px; background: var(--color-paper); color: var(--color-ink); font-size: 16px; }
+.calc-spot select:focus-visible, .calc-big input:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+.calc-big { max-width: 320px; }
+.calc-big[hidden], [data-screen-shirt][hidden] { display: none; }
+.calc-note { font-size: 14px; line-height: 1.65; color: var(--color-ink-2); }
+.slip__lines { margin: 10px 0 0; padding: 10px 0 0; border-top: 1px dashed var(--color-line-2); list-style: none; display: grid; gap: 6px; font-size: 14px; }
+.slip__lines li { display: flex; justify-content: space-between; gap: 12px; }
+.slip__lines li span:first-child { color: var(--color-ink-2); }
+.slip__lines li span:last-child { white-space: nowrap; font-weight: 700; }
+.slip__meta { margin-top: 10px; font-size: 14px; line-height: 1.65; color: var(--color-ink-2); }
+@media (max-width: 767px) { .calc-spots { grid-template-columns: minmax(0, 1fr); } .calc-big { max-width: none; } }

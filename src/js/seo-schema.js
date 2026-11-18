@@ -35,10 +35,18 @@ export function openingHoursSpec(s = '') {
     return { '@type': 'OpeningHoursSpecification', dayOfWeek: DAY_KEYS.slice(a, b + 1).map((d) => DAYS[d]), opens: m[3], closes: m[4] }
   }).filter(Boolean)
 }
-/** ช่วงราคาต่อตัวจาก prices.json · ไม่รวมพิมพ์ลาย (อาร์ต 17 พ.ย. 2026 ไม่เปิดราคาพิมพ์ลาย) → "฿170–390 ต่อตัว" */
+/** ราคาต่อตัวทุกตัวของสินค้า · สกรีน DTF (18 พ.ย. 2026) = เสื้อ C32 + สกรีนจุดแรก จากเมทริกซ์ (ไม่รวม Oversize / จุดเพิ่ม / เสื้อของลูกค้า)
+    ขั้นต่ำ = ช่วงจำนวนแรก */
+const offerPrices = (p) => (p.own
+  ? { all: Object.values(p.own.first).flat(), min: p.minQty }
+  : (() => {
+      const bands = (p.bands || []).filter((b) => Object.values(b.price || {}).some((v) => typeof v === 'number'))
+      return { all: bands.flatMap((b) => Object.values(b.price)).filter((v) => typeof v === 'number'), min: bands[0]?.min }
+    })())
+
+/** ช่วงราคาต่อตัวจาก prices.json · ไม่รวมพิมพ์ลาย (อาร์ต 17 พ.ย. 2026 ไม่เปิดราคาพิมพ์ลาย) → "฿145–390 ต่อตัว" */
 export function priceRangeOf(prices, skip = ['print', 'warmup']) {
-  const all = Object.entries(prices.products || {}).filter(([id]) => !skip.includes(id))
-    .flatMap(([, p]) => (p.bands || []).flatMap((b) => Object.values(b.price || {}))).filter((v) => typeof v === 'number')
+  const all = Object.entries(prices.products || {}).filter(([id]) => !skip.includes(id)).flatMap(([, p]) => offerPrices(p).all)
   return all.length ? `฿${Math.min(...all)}–${Math.max(...all)} ต่อตัว` : undefined
 }
 
@@ -48,8 +56,7 @@ export function priceRangeOf(prices, skip = ['print', 'warmup']) {
 export function productSchema(item, prices, site, path, description, skip = ['print']) {
   const p = prices.products?.[item.id]
   if (!p || skip.includes(item.id)) return null
-  const bands = (p.bands || []).filter((b) => Object.values(b.price || {}).some((v) => typeof v === 'number'))
-  const all = bands.flatMap((b) => Object.values(b.price)).filter((v) => typeof v === 'number')
+  const { all, min } = offerPrices(p)
   if (!all.length) return null
   const abs = (x) => site.baseUrl + x
   return {
@@ -59,7 +66,7 @@ export function productSchema(item, prices, site, path, description, skip = ['pr
     ...(description ? { description } : {}),
     ...(item.img ? { image: abs(item.img) } : {}),
     brand: { '@type': 'Brand', name: site.brand },
-    offers: { '@type': 'AggregateOffer', priceCurrency: 'THB', lowPrice: Math.min(...all), highPrice: Math.max(...all), eligibleQuantity: { '@type': 'QuantitativeValue', minValue: bands[0].min, unitText: 'ตัว' }, url: abs(path), seller: { '@id': abs('/#business') } },
+    offers: { '@type': 'AggregateOffer', priceCurrency: 'THB', lowPrice: Math.min(...all), highPrice: Math.max(...all), eligibleQuantity: { '@type': 'QuantitativeValue', minValue: min, unitText: 'ตัว' }, url: abs(path), seller: { '@id': abs('/#business') } },
   }
 }
 

@@ -325,11 +325,11 @@ export const loadData = () => ({
         return { ...c, product: pick(c.id), calcHref: calcHref(prices, c.id, url('calculations')), facts: [
           /* มีตัวเลข = "ราคารวม VAT" · สกรีนที่ประเมินตามแบบ = "ราคา" เฉยๆ */
           { k: price?.sub ? 'ราคารวม VAT' : 'ราคา', v: price?.v || '', sub: price?.sub || '' },
-          /* สกรีนของทีมดีมีแค่ DFT (26 ต.ค.) · คงคำว่า DFT ไว้ให้รู้ว่าเป็นงานแบบไหน */
+          /* สกรีนของทีมดีมีแค่ DTF (26 ต.ค. · ชื่อ DTF ตามสไลด์ 17 พ.ย.) */
           { k: 'ผลิต', v: lead ? lead.days : '' },
           { k: 'ขั้นต่ำ', v: `${prices.products[c.id]?.minQty ?? prices.minQty} ตัว` },
         ].filter((f) => f.v),
-        /* ชิปบนการ์ด (อาร์ตเคาะ 30 ต.ค. "1 ก" · ไม่แตะ hero) · ราคาที่จำนวนน้อยสุด · สกรีนขั้นต่ำ 1 ตัว */
+        /* ชิปบนการ์ด (อาร์ตเคาะ 30 ต.ค. "1 ก" · ไม่แตะ hero) · ราคาที่จำนวนน้อยสุด · สกรีนขั้นต่ำ 5 ตัว (18 พ.ย.) */
         chip: { price: price?.v?.match(/^[\d,]+ บาท\/ตัว/)?.[0] ? `เริ่ม ${price.v.match(/^[\d,]+ บาท\/ตัว/)[0]}` : '', meta: [`ขั้นต่ำ ${prices.products[c.id]?.minQty ?? prices.minQty} ตัว`, lead && `ผลิต ${lead.days}`].filter(Boolean).join(' · ') } }
       }) },
       logoRows: h.logos.show

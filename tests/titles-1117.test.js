@@ -14,7 +14,7 @@ test('title ทุกหน้าที่ index ได้ ≤ 60 ตัวอ�
 test('หน้าขายหลักบอกขั้นต่ำใน title · /size-chart/ มีช่วงไซซ์ · /sublimation/ ไม่มีราคา', () => {
   assert.match(pages['/embroidery/'].title, /เริ่ม 10 ตัว/)
   assert.match(pages['/sublimation/'].title, /เริ่ม 10 ตัว/)
-  assert.match(pages['/screen-printing/'].title, /เริ่ม 1 ตัว/)
+  assert.match(pages['/screen-printing/'].title, /เริ่ม 5 ตัว/) /* 18 พ.ย. 2026 สกรีน DTF */
   /* /size-chart/ ใช้ title เดิมของเว็บจริง (อาร์ต 17 พ.ย. "คงไว้" · tests/legacy-keep-1117.test.js) · ยังมีช่วงไซส์ */
   assert.match(pages['/size-chart/'].title, /S-5XL/)
   assert.doesNotMatch(pages['/sublimation/'].title + pages['/sublimation/'].description, /\d{3} บาท|฿/)
