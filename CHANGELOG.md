@@ -2,6 +2,21 @@
 
 รูปแบบตาม [Keep a Changelog](https://keepachangelog.com/) · เวอร์ชันตาม [SemVer](https://semver.org/) · สร้างจาก conventional commits
 
+## v0.5.0 — 2026-11-18
+
+สกรีน DTF ราคาใหม่ตามสไลด์ขาย 17 พ.ย. (เริ่ม 5 ตัว · ลาย A7–A3 สูงสุด 3 จุด · สกรีนบนเสื้อลูกค้า เริ่ม 20 ตัว) ทั้งเครื่องคำนวณ schema และ llms.txt · หน้า /screen-printing/ ย้ายเป็นโฉมใหม่แบบหน้าพิมพ์ลาย/ปัก พร้อมภาพและคลิปงานสกรีนจริงจากออเดอร์ลูกค้า · รื้อหน้าเครื่องคำนวณราคาใหม่ทั้งหน้า · หน้าสกรีนกระชับขึ้นและปรับ SEO เต็มรอบ
+
+### Features
+
+- **screen:** compact steps grid and full SEO pass for /screen-printing/ (fc169ba)
+- **screen,calc:** screen page on pp2 layout, real-order photos and clips, calculator rebuild (2959135)
+- **screen:** DTF pricing, calculator panel and site-wide copy (cb7521a)
+
+### Notes
+
+- **ต้องอัปโหลดรูปชุดใหม่ (teamdee-images-new-v0.5.0.zip)** ก่อนหรือพร้อมธีม: รูปหน้าสกรีน ไอคอนเครื่องคำนวณ และคลิป mp4 7 คลิปใน img/screen-clip (~6 MB)
+- npm audit: high 4 รายการ (picomatch ReDoS ผ่าน vite/fdir/tinyglobby) อยู่ในเครื่องมือ build เท่านั้น ไม่ได้อยู่ในธีมที่ขึ้นเว็บ · ทางแก้ของ npm คือถอย vite เป็น 6.2.7 (breaking) จึงยังไม่แก้รอบนี้
+
 ## v0.4.11 — 2026-11-17
 
 /collar-styles/ ย้ายจาก Elementor เป็นหน้าคู่มือของธีม: URL title H1 เนื้อหา และรูปคอเสื้อ 12 แบบเหมือนเว็บจริง แต่ฟอนต์และสไตล์ตรงกับทั้งเว็บ · เพิ่ม "ทรงคอเสื้อและปกเสื้อ" ในเมนูคู่มือและบทความ
