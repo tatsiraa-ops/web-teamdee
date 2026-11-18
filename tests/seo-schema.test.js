@@ -122,5 +122,8 @@ test('A5: productSchema · ช่วงราคา + ขั้นต่ำจ�
 })
 test('A5: หน้าสินค้าพิมพ์ productLd ใน head', () => {
   assert.match(readFileSync(new URL('../src/partials/head.hbs', import.meta.url), 'utf8'), /\{\{#if offerLd\}\}<script type="application\/ld\+json">\{\{\{offerLd\}\}\}<\/script>\{\{\/if\}\}/)
-  assert.match(readFileSync(new URL('../src/build/pages/products.js', import.meta.url), 'utf8'), /offerLd: \(\(s\) => s && ldJson\(s\)\)\(productSchema\(item, json\('prices\.json'\), data\.site, at, page\?\.description\)\)/)
+  /* 18 พ.ย. 2026 หน้าสกรีนใช้ screenSchema (Product + Service · tests/screen-seo-1118.test.js) · หน้าอื่นยัง productSchema */
+  const src = readFileSync(new URL('../src/build/pages/products.js', import.meta.url), 'utf8')
+  assert.match(src, /offerLd: \(\(s\) => s && ldJson\(s\)\)\(id === 'screen'/)
+  assert.match(src, /: productSchema\(item, json\('prices\.json'\), data\.site, at, page\?\.description\)\)/)
 })

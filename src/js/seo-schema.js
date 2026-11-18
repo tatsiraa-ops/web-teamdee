@@ -53,7 +53,7 @@ export function priceRangeOf(prices, skip = ['print', 'warmup']) {
 /** หน้าสินค้า: Product + AggregateOffer จาก prices.json (17 พ.ย. 2026 A5)
     ช่วงราคาต่อตัวทุกช่วงจำนวน · ขั้นต่ำ = ช่วงจำนวนแรก · ผู้ขาย = ธุรกิจ /#business
     สินค้าที่ไม่เปิดราคา (พิมพ์ลาย อาร์ต 17 พ.ย. · วอร์มไม่มีราคา) = null · ไม่ใส่ดาวรีวิว (Google ไม่นับรีวิวที่ธุรกิจเก็บเอง) */
-export function productSchema(item, prices, site, path, description, skip = ['print']) {
+export function productSchema(item, prices, site, path, description, skip = ['print'], extra = {}) {
   const p = prices.products?.[item.id]
   if (!p || skip.includes(item.id)) return null
   const { all, min } = offerPrices(p)
@@ -67,7 +67,49 @@ export function productSchema(item, prices, site, path, description, skip = ['pr
     ...(item.img ? { image: abs(item.img) } : {}),
     brand: { '@type': 'Brand', name: site.brand },
     offers: { '@type': 'AggregateOffer', priceCurrency: 'THB', lowPrice: Math.min(...all), highPrice: Math.max(...all), eligibleQuantity: { '@type': 'QuantitativeValue', minValue: min, unitText: 'ตัว' }, url: abs(path), seller: { '@id': abs('/#business') } },
+    ...extra,
   }
+}
+
+/** 18 พ.ย. 2026 SEO รอบ 2 หน้าสกรีน: Product (เสื้อ + สกรีน) + Service (รับสกรีนเสื้อ 2 แบบ) ในก้อนเดียว (@graph)
+    ตัวเลขทั้งหมดจาก prices.json products.screen · ไม่มีดาวรีวิว · tests/screen-seo-1118.test.js */
+export function screenSchema(item, prices, site, path, description, images = []) {
+  const S = prices.products?.screen
+  if (!S) return null
+  const abs = (x) => site.baseUrl + x
+  const prem = S.shirts[0]
+  const product = productSchema(item, prices, site, path, description, [], {
+    name: 'เสื้อสกรีน DTF สั่งทำ',
+    ...(images.length ? { image: images.map(abs) } : {}),
+    category: 'เสื้อยืดสกรีน',
+    material: 'Cotton 100%',
+    color: prem.colors.map((c) => c[0]),
+    additionalProperty: [
+      { '@type': 'PropertyValue', name: 'สั่งขั้นต่ำ', value: `${S.minQty} ตัว` },
+      { '@type': 'PropertyValue', name: 'ขนาดลาย', value: `${S.sizes.map((z) => z.id).join(' ')} สูงสุด ${S.extra.maxSpots} จุดต่อตัว` },
+      { '@type': 'PropertyValue', name: 'รุ่นเสื้อ', value: S.shirts.map((x) => x.name).join(' · ') },
+      { '@type': 'PropertyValue', name: 'ระยะผลิต', value: S.lead.map(([a, b, d]) => `${a}–${b} ตัว ${d}`).join(' · ') },
+    ],
+  })
+  if (!product) return null
+  delete product['@context']
+  /* ราคาต่อตัวเป็นช่วง (ต่ำสุดที่จำนวนมาก · สูงสุดที่ช่วงแรก) ไม่ใช้ราคาเดียวคู่กับขั้นต่ำ (จะเข้าใจว่าสั่งน้อยได้ราคาต่ำสุด) */
+  const range = (m) => { const v = Object.values(m).flat(); return { lowPrice: Math.min(...v), highPrice: Math.max(...v) } }
+  const offer = (name, min, m) => ({ '@type': 'AggregateOffer', name, priceCurrency: 'THB', ...range(m), eligibleQuantity: { '@type': 'QuantitativeValue', minValue: min, unitText: 'ตัว' }, url: abs(path) })
+  const service = {
+    '@type': 'Service',
+    name: 'รับสกรีนเสื้อ DTF',
+    serviceType: 'สกรีนเสื้อ DTF',
+    description,
+    url: abs(path),
+    provider: { '@id': abs('/#business') },
+    areaServed: { '@type': 'Country', name: 'Thailand' },
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'บริการสกรีนเสื้อ DTF', itemListElement: [
+      offer('เสื้อ + สกรีน DTF จุดแรก (บาทต่อตัว รวม VAT)', S.minQty, S.own.first),
+      offer('สกรีน DTF บนเสื้อของลูกค้า จุดแรก (บาทต่อตัว รวม VAT)', S.customer.minQty, S.customer.first),
+    ] },
+  }
+  return { '@context': 'https://schema.org', '@graph': [product, service] }
 }
 
 export function businessSchema(site, extra = {}) {

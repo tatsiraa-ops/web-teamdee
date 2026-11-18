@@ -3,8 +3,8 @@
 /* ข้อมูลของแต่ละหน้า (แยกจาก vite.config.js · 16 พ.ย. 2026 B1e) · pageContext(pagePath) คืนข้อมูลที่เทมเพลตของหน้านั้นใช้
    ส่วนที่ทุกหน้าใช้ร่วม (base) อยู่ที่นี่ · ส่วนเฉพาะประเภทหน้าอยู่ใน src/build/pages/<ประเภท>.js */
 import { resolve } from 'node:path'
-import { existsSync } from 'node:fs'
-import { faqSchema, productSchema, ldJson } from '../../../src/js/seo-schema.js'
+import { existsSync, readFileSync } from 'node:fs'
+import { faqSchema, productSchema, screenSchema, ldJson } from '../../../src/js/seo-schema.js'
 import { videosFor, videoView } from '../../../src/js/video-view.js'
 import { productView } from '../../../src/js/product-view.js'
 import { screenQuote } from '../../../src/js/screen-price.js'
@@ -83,7 +83,9 @@ export function productsPage({ data, base, at, page, kind, id, rel, sizeCharts, 
             ...base,
             item,
             /* 17 พ.ย. 2026 A5: Product + ช่วงราคา (head.hbs) · พิมพ์ลาย/วอร์ม = ไม่มี */
-            offerLd: ((s) => s && ldJson(s))(productSchema(item, json('prices.json'), data.site, at, page?.description)),
+            offerLd: ((s) => s && ldJson(s))(id === 'screen'
+              ? screenSchema(item, json('prices.json'), data.site, at, page?.description || (readFileSync(resolve(root, 'site/screen-printing/index.html'), 'utf8').match(/<meta name="description" content="([^"]+)"/) || [])[1], ['/img/pp-hero/screen-1280.webp', '/img/real-even/screen-1.webp', '/img/real-even/scr-power-back.webp', '/img/real-even/scr-fit-front.webp'])
+              : productSchema(item, json('prices.json'), data.site, at, page?.description)),
             promos: id === 'screen' ? [] : base.promos,
             /* 18 พ.ย. 2026 สกรีน DTF: ตาราง ตัวอย่าง เสื้อ วันผลิต สร้างจาก prices.json → products.screen (ไม่พิมพ์ตัวเลขในแม่แบบ) · tests/screen-page-1118.test.js */
             screenPage: id === 'screen' ? screenPage(json('prices.json').products.screen, url('calculations')) : null,

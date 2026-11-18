@@ -14,7 +14,8 @@ const table = (id) => (main.match(new RegExp(`<table[^>]*id="${id}"[\\s\\S]*?</t
 const rowNums = (t, size) => [...((t.match(new RegExp(`<tr><th scope="row">${size}[\\s\\S]*?</tr>`)) || [''])[0].matchAll(/<td>([\d,]+)<\/td>/g))].map((m) => Number(m[1].replace(',', '')))
 
 test('title / description', () => {
-  assert.equal(page.title, 'รับทำเสื้อสกรีน DTF เริ่ม 5 ตัว ราคารวม VAT | TEAMDEE')
+  /* 18 พ.ย. 2026 SEO รอบ 2 (อาร์ต "ทำ seo แบบสุดๆ"): title ใช้คำค้นหลัก "รับสกรีนเสื้อ" · H1 ยังเป็น "รับทำเสื้อสกรีน" */
+  assert.equal(page.title, 'รับสกรีนเสื้อ ทำเสื้อสกรีน DTF เริ่ม 5 ตัว รวม VAT | TEAMDEE')
   assert.match(page.description, /เริ่ม 5 ตัว/); assert.match(page.description, /145–245/)
 })
 
